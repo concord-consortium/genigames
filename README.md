@@ -1,4 +1,8 @@
+#GeniGames
+
 Initial readme for the GeniGames project.
+
+## Serving the project using Apache
 
 To serve this project locally, you can create a local Apache vhost:
 
@@ -28,3 +32,20 @@ Restart Apache:
     $ sudo apachectl restart
    
 Visit the application at gg.local
+
+## Ruby Gems, Guard and Coffeescript
+
+The project's source code can be found in the src/ directory, and is written in CoffeeScript. The CoffeeScript is then compiled into JavaScript
+and placed into the js/ directory.
+
+Set up Guard to automatically watch for all .coffee files in src/ and compile them into .js files in js/
+
+    rvm use ruby-1.9.2-p290
+    rvm gemset create genigames
+    echo "rvm use ruby-1.9.2-p290@genigames" > .rvmrc
+    cd .
+    
+    gem install bundler
+    bundle install --binstubs
+    
+    bin/guard
