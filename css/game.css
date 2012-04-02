@@ -1,0 +1,59 @@
+#background {
+  background-image: url('../images/background.png');
+  margin-left: auto;
+  margin-right: auto;
+  width: 1000px;
+  height: 750px;
+}
+
+#container {
+  position: absolute;
+}
+
+#breeder {
+  position: absolute;
+  background-image: url('../images/breeder.png');
+  left: 290px;
+  top: 125px;
+  width: 432px;
+  height: 421px;
+}
+
+#breed-button {
+  position: absolute;
+  top: 40px;
+  left: 190px;
+}
+
+#parent-pool {
+  position: absolute;
+  width: 100px;
+  top: 50px;
+}
+
+#offspring-pool {
+  position: absolute;
+  width: 800px;
+  top: 560px;
+  right: -600px;
+  text-align: right;
+}
+
+#mother {
+  position: absolute;
+  left: 20px;
+  top: 73px;
+}
+
+#father {
+  position: absolute;
+  left: 300px;
+  top: 73px;
+}
+
+#child {
+  position: absolute;
+  left: 158px;
+  top: 322px;
+}
+
