@@ -11,7 +11,6 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link rel="shortcut icon" href="/favicon.ico">
   <link rel="stylesheet" href="../css/ember-defaults.css">
   <link rel="stylesheet" href="../css/game.css">
 
@@ -23,8 +22,13 @@
   <script type="text/x-handlebars">
     <div id="background">
       <div id="container"> 
-        <div id="parent-pool">
-          {{#each GG.parentController}}
+        <div id="parent-fathers-pool">
+          {{#each GG.parentController.males}}
+            {{#view GG.DrakeView contentBinding="this" clickToBecomeParent="true" width="120"}}{{/view}}
+          {{/each}}
+        </div>
+        <div id="parent-mothers-pool">
+          {{#each GG.parentController.females}}
             {{#view GG.DrakeView contentBinding="this" clickToBecomeParent="true" width="120"}}{{/view}}
           {{/each}}
         </div>

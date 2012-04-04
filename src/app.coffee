@@ -1,12 +1,22 @@
 window.GG = GG = Ember.Application.create()
 
+GG.Task = Ember.Object.extend
+  visibleAlleles: null
+
 GG.Drake = Ember.Object.extend
   gOrg: null            # organism object created by GWT
   sex: null
+  alleles: null
   imageURL: null
 
 GG.parentController = Ember.ArrayProxy.create
   content: []
+  females: (->
+    females = (drake for drake in @get("content") when drake.sex == 1)
+  ).property("content.@each").cacheable()
+  males: (->
+    males = (drake for drake in @get("content") when drake.sex == 0)
+  ).property("content.@each").cacheable()
   selectedMother: null
   selectedFather: null
 
@@ -43,11 +53,12 @@ GG.DrakeView = Ember.View.extend
 $ ->
   # create initial parents, after waiting half a second for GWT to load
   setTimeout ->
-    for i in [0..3]
-      GenGWT.generateAliveDragonWithSex i%2, (gOrg) ->
+    for i in [0..5]
+      GenGWT.generateAliveDragonWithSex i%2, (gOrg) =>
         drake = GG.Drake.create
           imageURL: gOrg.imageURL
           sex: gOrg.sex
           gOrg: gOrg
-        GG.parentController.pushObject(drake);
-  , 500
+        GG.parentController.pushObject(drake)
+          
+  , 3000
