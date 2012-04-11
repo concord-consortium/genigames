@@ -12,20 +12,23 @@ Add the following to '/etc/hosts'
 
 Add the following to '/etc/apache2/extra/httpd-vhosts.conf':
 
-     <VirtualHost *:80>
-       ServerName gg.local
-       DocumentRoot /path/to/genigames-test-ember
-       <Directory /path/to/genigames-test-ember>
-          AllowOverride all
-          Options -MultiViews
-       </Directory>
-     
-       ProxyPass        /biologica/ http://geniverse.dev.concord.org/biologica/
-       ProxyPassReverse /biologica/ http://geniverse.dev.concord.org/biologica/
-  
-       ProxyPass        /resources/ http://geniverse.dev.concord.org/resources/ retry=1
-       ProxyPassReverse /resources/ http://geniverse.dev.concord.org/resources/  
-     </VirtualHost>
+    <VirtualHost *:80>
+      ServerName gg.local
+      DocumentRoot "/path/to/genigames">
+      <Directory "/path/to/genigames">
+         AllowOverride all
+         Options -MultiViews
+         Order allow,deny
+         Allow from all
+         DirectoryIndex index.html
+      </Directory>
+
+      ProxyPass        /biologica/ http://geniverse.dev.concord.org/biologica/
+      ProxyPassReverse /biologica/ http://geniverse.dev.concord.org/biologica/
+
+      ProxyPass        /resources/ http://geniverse.dev.concord.org/resources/ retry=1
+      ProxyPassReverse /resources/ http://geniverse.dev.concord.org/resources/
+    </VirtualHost>
 
 Restart Apache:
 
