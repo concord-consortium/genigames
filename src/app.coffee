@@ -12,11 +12,11 @@ GG.Drake = Ember.Object.extend
 GG.parentController = Ember.ArrayProxy.create
   content: []
   females: (->
-    females = (drake for drake in @get("content") when drake.sex == 1)
-  ).property("content.@each").cacheable()
+    drake for drake in @get('content') when drake.sex is 1
+  ).property('content.@each').cacheable()
   males: (->
-    males = (drake for drake in @get("content") when drake.sex == 0)
-  ).property("content.@each").cacheable()
+    drake for drake in @get('content') when drake.sex is 0
+  ).property('content.@each').cacheable()
   selectedMother: null
   selectedFather: null
 
@@ -28,14 +28,14 @@ GG.breedingController = Ember.Object.create
   fatherBinding: 'GG.parentController.selectedFather'
   child: null
   breedDrake: ->
-    if this.get('mother') && this.get('father')
+    if @get('mother') && @get('father')
       GenGWT.breedDragon this.get('mother').gOrg, this.get('father').gOrg, (gOrg) ->
         drake = GG.Drake.create
           imageURL: gOrg.imageURL
           sex: gOrg.sex
           gOrg: gOrg
-        GG.breedingController.set('child', drake)
-        GG.offspringController.pushObject(drake)
+        GG.breedingController.set 'child', drake
+        GG.offspringController.pushObject drake
 
 GG.DrakeView = Ember.View.extend
   tagName: 'img'
@@ -44,10 +44,10 @@ GG.DrakeView = Ember.View.extend
   width: 200
   clickToBecomeParent: false
   click: (evt) ->
-    drake = this.get('content')
-    if (this.clickToBecomeParent)
-      whichParent = if (drake.get('sex') == 0) then 'selectedMother' else 'selectedFather'
-      GG.parentController.set(whichParent, drake)
+    drake = @get('content')
+    if (@clickToBecomeParent)
+      whichParent = if drake.get('sex') is 0 then 'selectedMother' else 'selectedFather'
+      GG.parentController.set whichParent, drake
 
 # on load
 $ ->

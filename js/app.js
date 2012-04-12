@@ -17,31 +17,29 @@
   GG.parentController = Ember.ArrayProxy.create({
     content: [],
     females: (function() {
-      var drake, females;
-      return females = (function() {
-        var _i, _len, _ref, _results;
-        _ref = this.get("content");
-        _results = [];
-        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-          drake = _ref[_i];
-          if (drake.sex === 1) _results.push(drake);
+      var drake, _i, _len, _ref, _results;
+      _ref = this.get('content');
+      _results = [];
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        drake = _ref[_i];
+        if (drake.sex === 1) {
+          _results.push(drake);
         }
-        return _results;
-      }).call(this);
-    }).property("content.@each").cacheable(),
+      }
+      return _results;
+    }).property('content.@each').cacheable(),
     males: (function() {
-      var drake, males;
-      return males = (function() {
-        var _i, _len, _ref, _results;
-        _ref = this.get("content");
-        _results = [];
-        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-          drake = _ref[_i];
-          if (drake.sex === 0) _results.push(drake);
+      var drake, _i, _len, _ref, _results;
+      _ref = this.get('content');
+      _results = [];
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        drake = _ref[_i];
+        if (drake.sex === 0) {
+          _results.push(drake);
         }
-        return _results;
-      }).call(this);
-    }).property("content.@each").cacheable(),
+      }
+      return _results;
+    }).property('content.@each').cacheable(),
     selectedMother: null,
     selectedFather: null
   });
@@ -88,10 +86,10 @@
 
   $(function() {
     return setTimeout(function() {
-      var i, _results,
+      var i, _i, _results,
         _this = this;
       _results = [];
-      for (i = 0; i <= 5; i++) {
+      for (i = _i = 0; _i <= 5; i = ++_i) {
         _results.push(GenGWT.generateAliveDragonWithSex(i % 2, function(gOrg) {
           var drake;
           drake = GG.Drake.create({
