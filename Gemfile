@@ -1,4 +1,9 @@
 source "http://rubygems.org"
 
-gem "guard",              "~> 0.10.0"
-gem 'guard-coffeescript', "~> 0.5.4"
+gem "coffee-script"
+
+gem "rack"
+gem "rack-streaming-proxy"
+
+gem "rake-pipeline", :git => "https://github.com/livingsocial/rake-pipeline.git"
+gem "rake-pipeline-web-filters", :git => "https://github.com/wycats/rake-pipeline-web-filters.git"

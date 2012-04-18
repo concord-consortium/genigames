@@ -1,3 +1,7 @@
+minispade.require 'genigames/vendor/jquery-1.6.1.min'
+minispade.require 'genigames/vendor/ember-0.9.5'
+minispade.require 'genigames/vendor/gen-gwt'
+
 window.GG = GG = Ember.Application.create()
 
 GG.Task = Ember.Object.extend
@@ -60,5 +64,5 @@ $ ->
           sex: gOrg.sex
           gOrg: gOrg
         GG.parentController.pushObject(drake)
-          
+
   , 3000

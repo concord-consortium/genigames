@@ -4,3 +4,4 @@ bin/
 .rvmrc
 *.sublime-workspace
 build/
+tmp/
