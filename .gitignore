@@ -3,3 +3,4 @@ bin/
 .bundle/
 .rvmrc
 *.sublime-workspace
+build/
