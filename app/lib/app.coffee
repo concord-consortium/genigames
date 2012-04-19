@@ -19,14 +19,10 @@ GG.Drake = Ember.Object.extend
   imageURL: null
   genotype: (->
     alleleString = @getPath "gOrg.alleles"
-    aArray = alleleString.match(/a:(..*?)[,$]/g).map((x) ->
-      s = x.split(",")[0]
-      return s.substring(2, s.length)
-    )
-    bArray = alleleString.match(/b:(..*?)[,$]/g).map((x) ->
-      s = x.split(",")[0]
-      return s.substring(2, s.length)
-    )
+    aArray = alleleString.match(/a:([^,])*/g).map (short) ->
+      short.match(/[^:]+$/)[0]
+    bArray = alleleString.match(/b:([^,])*/g).map (short) ->
+      short.match(/[^:]+$/)[0]
     return {a: aArray, b: bArray}
   ).property('gOrg').cacheable()
   visibleGenotype: (->
