@@ -20,6 +20,7 @@ input "app" do
     # module loader.
 
     minispade :rewrite_requires => true,
+              :string => true,
               :module_id_generator => proc { |input|
       # The `:module_id_generator` option customizes the name each file
       # gets registered under. Here we're changing a name like this:
