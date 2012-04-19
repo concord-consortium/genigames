@@ -1,17 +1,38 @@
 minispade.require 'genigames/vendor/jquery-1.6.1.min'
 minispade.require 'genigames/vendor/ember-0.9.5'
-minispade.require 'genigames/gen-gwt'
 
 window.GG = GG = Ember.Application.create()
+
+minispade.require 'genigames/gen-gwt'
+minispade.require 'genigames/genetics'
 
 GG.Task = Ember.Object.extend
   visibleAlleles: null
 
+GG.tasksController = Ember.ArrayController.create
+  content: []
+  currentTask: null
+
 GG.Drake = Ember.Object.extend
   gOrg: null            # organism object created by GWT
   sex: null
-  alleles: null
   imageURL: null
+  genotype: (->
+    alleleString = @getPath "gOrg.alleles"
+    aArray = alleleString.match(/a:(..*?)[,$]/g).map((x) ->
+      s = x.split(",")[0]
+      return s.substring(2, s.length)
+    )
+    bArray = alleleString.match(/b:(..*?)[,$]/g).map((x) ->
+      s = x.split(",")[0]
+      return s.substring(2, s.length)
+    )
+    return {a: aArray, b: bArray}
+  ).property('gOrg').cacheable()
+  visibleGenotype: (->
+    visibleAlleles = GG.tasksController.getPath "currentTask.visibleAlleles"
+    return GG.genetics.filterGenotype(@get("genotype"), visibleAlleles)
+  ).property("genotype", "GG.tasksController.currentTask").cacheable()
 
 GG.parentController = Ember.ArrayProxy.create
   content: []
@@ -53,8 +74,22 @@ GG.DrakeView = Ember.View.extend
       whichParent = if drake.get('sex') is 0 then 'selectedMother' else 'selectedFather'
       GG.parentController.set whichParent, drake
 
+GG.AllelesView = Ember.View.extend
+  tagName: 'span'
+  allelesString: (->
+    genotype = @getPath 'content.visibleGenotype'
+    genotype.a.concat(genotype.b).join(",")
+  ).property('content').cacheable()
+
 # on load
 $ ->
+  # create sample task
+  task = GG.Task.create
+    visibleAlleles: ["T"]
+
+  GG.tasksController.pushObject(task);
+  GG.tasksController.set "currentTask", task
+
   # create initial parents, after waiting half a second for GWT to load
   setTimeout ->
     for i in [0..5]
@@ -65,4 +100,4 @@ $ ->
           gOrg: gOrg
         GG.parentController.pushObject(drake)
 
-  , 3000
+  , 2000

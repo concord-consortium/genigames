@@ -59,10 +59,20 @@
   top: 73px;
 }
 
+#mother span {
+  position: relative;
+  left: -60px;
+}
+
 #father {
   position: absolute;
   left: 300px;
   top: 73px;
+}
+
+#father span {
+  position: relative;
+  left: -60px;
 }
 
 #child {
