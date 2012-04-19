@@ -8,7 +8,7 @@ GenGWT = {
     generateDragonWithSex: function(sex, callback) {
         generateDragonWithSex(sex, this.wrapCallback(callback), this.failure);
     },
-    
+
     generateAliveDragonWithSex: function(sex, callback) {
         var wrappedCallback = function (gOrg){
           if (GenGWT.isAlive(gOrg)){
@@ -39,7 +39,7 @@ GenGWT = {
     breedDragon: function(mother, father, callback) {
         breedDragon(mother, father, this.wrapCallback(callback), this.failure);
     },
-    
+
     breedDragons: function(number, mother, father, crossover, callback) {
         breedDragonsWithCrossover(number, mother, father, crossover, this.wrapCallback(callback), this.failure);
     },
@@ -85,7 +85,7 @@ GenGWT = {
     getCharacteristics: function(dragon, callback) {
         getDragonCharacteristics(dragon, callback, this.failure);
     },
-    
+
     wrapCallback: function(callback) {
       function wrappedCallback(gOrg){
         if (GenGWT.orgIsValid(gOrg)){
@@ -98,7 +98,7 @@ GenGWT = {
       }
       return wrappedCallback;
     },
-    
+
     orgIsValid: function(gOrg) {
       if (!!gOrg.size){
         var allAreValid = true;
