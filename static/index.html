@@ -37,11 +37,13 @@
           <div id="mother">
             {{#with GG.breedingController.mother}}
               {{#view GG.DrakeView contentBinding="this" width="100"}}{{/view}}
+              {{#view GG.AllelesView contentBinding="this"}}{{allelesString}}{{/view}}
             {{/with}}
           </div>
           <div id="father">
             {{#with GG.breedingController.father}}
               {{#view GG.DrakeView contentBinding="this" width="100"}}{{/view}}
+              {{#view GG.AllelesView contentBinding="this"}}{{allelesString}}{{/view}}
             {{/with}}
           </div>
           <div id="child">
