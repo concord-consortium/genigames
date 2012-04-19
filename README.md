@@ -32,20 +32,16 @@ Add the following to '/etc/apache2/extra/httpd-vhosts.conf':
 
     <VirtualHost *:80>
       ServerName gg.local
-      DocumentRoot "/path/to/genigames/build">
-      <Directory "/path/to/genigames/build">
-         AllowOverride all
-         Options -MultiViews
-         Order allow,deny
-         Allow from all
-         DirectoryIndex index.html
-      </Directory>
 
       ProxyPass        /biologica/ http://geniverse.dev.concord.org/biologica/
       ProxyPassReverse /biologica/ http://geniverse.dev.concord.org/biologica/
 
       ProxyPass        /resources/ http://geniverse.dev.concord.org/resources/ retry=1
       ProxyPassReverse /resources/ http://geniverse.dev.concord.org/resources/
+
+      # Rackup
+      ProxyPass         / http://127.0.0.1:9292/ retry=1
+      ProxyPassReverse  / http://127.0.0.1:9292/
     </VirtualHost>
 
 Restart Apache:
