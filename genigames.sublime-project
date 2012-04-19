@@ -3,7 +3,8 @@
   [
     {
       "path": ".",
-      "folder_exclude_patterns": [".bundle", "node_modules"]
+      "folder_exclude_patterns": [".bundle", "build", "node_modules", "bin", "tmp"],
+      "file_exclude_patterns": ["*.sublime-workspace"]
     }
   ],
   "settings":
