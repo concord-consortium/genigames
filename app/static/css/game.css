@@ -60,8 +60,10 @@
 }
 
 #mother span {
-  position: relative;
-  left: -60px;
+  position: absolute;
+  left: 40px;
+  top: 90px;
+  color: white;
 }
 
 #father {
@@ -71,8 +73,10 @@
 }
 
 #father span {
-  position: relative;
-  left: -60px;
+  position: absolute;
+  left: 40px;
+  top: 90px;
+  color: white;
 }
 
 #child {
