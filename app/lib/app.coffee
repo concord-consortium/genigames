@@ -1,5 +1,5 @@
-minispade.require 'genigames/vendor/jquery-1.6.1.min'
-minispade.require 'genigames/vendor/ember-0.9.5'
+minispade.require 'genigames/vendor/jquery'
+minispade.require 'genigames/vendor/ember'
 
 window.GG = GG = Ember.Application.create()
 
