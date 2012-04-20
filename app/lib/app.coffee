@@ -5,6 +5,8 @@ window.GG = GG = Ember.Application.create()
 
 minispade.require 'genigames/gen-gwt'
 minispade.require 'genigames/genetics'
+minispade.require 'genigames/templates/main-view'
+
 
 GG.Task = Ember.Object.extend
   visibleAlleles: null
@@ -57,6 +59,9 @@ GG.breedingController = Ember.Object.create
           gOrg: gOrg
         GG.breedingController.set 'child', drake
         GG.offspringController.pushObject drake
+
+GG.MainView = Ember.View.extend
+  templateName: 'main-view'
 
 GG.DrakeView = Ember.View.extend
   tagName: 'img'
