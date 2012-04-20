@@ -35,6 +35,12 @@ GG.Drake = Ember.Object.extend
     GG.genetics.filterGenotype @get('genotype'), visibleGenes
   ).property('genotype', 'GG.tasksController.currentTask').cacheable()
 
+GG.Drake.createFromBiologicaOrganism = (org) ->
+  GG.Drake.create
+    biologicaOrganism: org
+    imageURL         : org.imageURL
+    sex              : org.sex
+
 
 GG.parentController = Ember.ArrayProxy.create
   content       : []
@@ -62,11 +68,7 @@ GG.breedingController = Ember.Object.create
   breedDrake: ->
     if @get('mother') && @get('father')
       GenGWT.breedDragon @getPath('mother.biologicaOrganism'), @getPath('mother.biologicaOrganism'), (org) ->
-        drake = GG.Drake.create
-          biologicaOrganism: org
-          imageURL         : org.imageURL
-          sex              : org.sex
-
+        drake = GG.Drake.createFromBiologicaOrganism org
         GG.breedingController.set 'child', drake
         GG.offspringController.pushObject drake
 
@@ -93,7 +95,6 @@ GG.AllelesView = Ember.View.extend
   tagName: 'span'
   allelesString: (->
     genotype = @getPath 'content.visibleGenotype'
-
     genotype.a.concat(genotype.b).join(',')
   ).property('content').cacheable()
 
@@ -111,8 +112,6 @@ $ ->
   setTimeout ->
     for i in [0..5]
       GenGWT.generateAliveDragonWithSex i%2, (org) ->
-        GG.parentController.pushObject GG.Drake.create
-          biologicaOrganism: org
-          imageURL         : org.imageURL
-          sex              : org.sex
+        GG.parentController.pushObject GG.Drake.createFromBiologicaOrganism org
+
   , 2000
