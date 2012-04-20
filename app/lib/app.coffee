@@ -9,7 +9,7 @@ minispade.require 'genigames/templates/main-view'
 
 
 GG.Task = Ember.Object.extend
-  visibleAlleles: null
+  visibleGenes: null
 
 
 GG.tasksController = Ember.ArrayController.create
@@ -30,9 +30,9 @@ GG.Drake = Ember.Object.extend
   ).property('biologicaOrganism').cacheable()
 
   visibleGenotype: (->
-    visibleAlleles = GG.tasksController.getPath 'currentTask.visibleAlleles'
+    visibleGenes = GG.tasksController.getPath 'currentTask.visibleGenes'
 
-    GG.genetics.filterGenotype @get('genotype'), visibleAlleles
+    GG.genetics.filterGenotype @get('genotype'), visibleGenes
   ).property('genotype', 'GG.tasksController.currentTask').cacheable()
 
 
@@ -102,7 +102,7 @@ GG.AllelesView = Ember.View.extend
 $ ->
   # create sample task
   task = GG.Task.create
-    visibleAlleles: ['T']
+    visibleGenes: ['T']
 
   GG.tasksController.pushObject task
   GG.tasksController.set 'currentTask', task
