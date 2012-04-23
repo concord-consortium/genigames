@@ -10,11 +10,17 @@ GG.DrakeView = Ember.View.extend
 
 
 GG.ParentPoolView = Ember.View.extend
-  children: null
+  contentBinding: 'controller.content'
 
   drakeSelected: (evt) ->
     drake = evt.context
-    GG.parentController.selectParent drake
+    @get('controller').drakeSelected drake
+
+GG.FatherPoolView = GG.ParentPoolView.extend
+  controllerBinding: 'GG.fatherPoolController'
+
+GG.MotherPoolView = GG.ParentPoolView.extend
+  controllerBinding: 'GG.motherPoolController'
 
 
 GG.AllelesView = Ember.View.extend

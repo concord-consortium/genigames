@@ -3,6 +3,9 @@ minispade.require 'genigames/vendor/ember'
 
 window.GG = GG = Ember.Application.create()
 
+GG.MALE   = 0
+GG.FEMALE = 1
+
 minispade.require 'genigames/gen-gwt'
 minispade.require 'genigames/genetics'
 

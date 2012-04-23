@@ -1,16 +1,16 @@
 <div id="background">
   <div id="container">
 
-    {{#view GG.ParentPoolView id="parent-fathers-pool" childrenBinding="GG.parentController.males"}}
-      {{#each children}}
+    {{#view GG.FatherPoolView id="parent-fathers-pool"}}
+      {{#each content}}
         <a href="#" {{action "drakeSelected"}}>
           {{view GG.DrakeView contentBinding="this" width="120"}}
         </a>
       {{/each}}
     {{/view}}
 
-    {{#view GG.ParentPoolView id="parent-mothers-pool" childrenBinding="GG.parentController.females"}}
-      {{#each children}}
+    {{#view GG.MotherPoolView id="parent-mothers-pool"}}
+      {{#each content}}
         <a href="#" {{action "drakeSelected"}}>
           {{view GG.DrakeView contentBinding="this" width="120"}}
         </a>
