@@ -12,7 +12,7 @@ GG.tasksController = Ember.ArrayController.create
       throw "GG.tasksController.setCurrentTask: argument is not a known task"
 
 
-GG.parentController = Ember.ArrayProxy.create
+GG.parentController = Ember.ArrayController.create
   content: []
   selectedMother: null
   selectedFather: null
@@ -34,18 +34,18 @@ GG.parentController = Ember.ArrayProxy.create
     @set 'selectedFather', drake
 
 
-GG.fatherPoolController = Ember.ArrayProxy.create
+GG.fatherPoolController = Ember.ArrayController.create
   contentBinding: 'GG.parentController.males'
   drakeSelected: (drake) ->
     GG.parentController.selectFather drake
 
-GG.motherPoolController = Ember.ArrayProxy.create
+GG.motherPoolController = Ember.ArrayController.create
   contentBinding: 'GG.parentController.females'
   drakeSelected: (drake) ->
     GG.parentController.selectMother drake
 
 
-GG.offspringController = Ember.ArrayProxy.create
+GG.offspringController = Ember.ArrayController.create
   content: []
 
 
