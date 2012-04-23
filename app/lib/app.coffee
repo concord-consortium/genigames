@@ -18,8 +18,8 @@ $ ->
   task = GG.Task.create
     visibleGenes: ['T']
 
-  GG.tasksController.pushObject task
-  GG.tasksController.set 'currentTask', task
+  GG.tasksController.addTask task
+  GG.tasksController.setCurrentTask task
 
   # create initial parents, after waiting half a second for GWT to load
   setTimeout ->

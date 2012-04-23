@@ -2,11 +2,24 @@ GG.tasksController = Ember.ArrayController.create
   content    : []
   currentTask: null
 
+  addTask: (task) ->
+    @get('content').pushObject task
+
+  setCurrentTask: (task) ->
+    if @get('content').indexOf(task) >= 0
+      @set 'currentTask', task
+    else
+      throw "tasksController.setCurrentTask: argument is not a known task"
+
 
 GG.parentController = Ember.ArrayProxy.create
   content       : []
   selectedMother: null
   selectedFather: null
+
+  selectParent: (drake) ->
+    whichParent = if drake.get('sex') is 0 then 'selectedMother' else 'selectedFather'
+    @set whichParent, drake
 
   females: (->
     drake for drake in @get('content') when drake.sex is 1

@@ -13,9 +13,8 @@ GG.ParentPoolView = Ember.View.extend
   children: null
 
   drakeSelected: (evt) ->
-    if drake = evt.context
-      whichParent = if drake.get('sex') is 0 then 'selectedMother' else 'selectedFather'
-      GG.parentController.set whichParent, drake
+    drake = evt.context
+    GG.parentController.selectParent drake
 
 
 GG.AllelesView = Ember.View.extend
