@@ -3,9 +3,7 @@ GG.Task = Ember.Object.extend
 
 
 GG.Drake = Ember.Object.extend
-  # Dependencies on globals should be made explicit via a bindings prologue at the beginning of
-  # an object definition.
-  currentTaskBinding: 'GG.tasksController.currentTask'
+  visibleGenesBinding: 'GG.drakeController.visibleGenes'
 
   biologicaOrganism : null            # organism object created by GWT
   sex               : null
@@ -19,10 +17,8 @@ GG.Drake = Ember.Object.extend
   ).property('biologicaOrganism').cacheable()
 
   visibleGenotype: (->
-    visibleGenes = GG.tasksController.getPath 'currentTask.visibleGenes'
-
-    GG.genetics.filterGenotype @get('genotype'), visibleGenes
-  ).property('genotype', 'currentTask').cacheable()
+    GG.genetics.filterGenotype @get('genotype'), @get('visibleGenes')
+  ).property('genotype', 'visibleGenes').cacheable()
 
 # a helper for creating a GG.Drake from a Biologica/GWT organism object
 GG.Drake.createFromBiologicaOrganism = (org) ->

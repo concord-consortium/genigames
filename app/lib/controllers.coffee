@@ -12,6 +12,10 @@ GG.tasksController = Ember.ArrayController.create
       throw "GG.tasksController.setCurrentTask: argument is not a known task"
 
 
+GG.drakeController = Ember.Object.create
+  visibleGenesBinding: 'GG.tasksController.currentTask.visibleGenes'
+
+
 GG.parentController = Ember.ArrayController.create
   content: []
   selectedMother: null
