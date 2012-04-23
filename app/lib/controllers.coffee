@@ -3,10 +3,10 @@ GG.tasksController = Ember.ArrayController.create
   currentTask: null
 
   addTask: (task) ->
-    @get('content').pushObject task
+    @pushObject task
 
   setCurrentTask: (task) ->
-    if @get('content').indexOf(task) >= 0
+    if @indexOf(task) >= 0
       @set 'currentTask', task
     else
       throw "GG.tasksController.setCurrentTask: argument is not a known task"
