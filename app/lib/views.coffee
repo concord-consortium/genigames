@@ -10,6 +10,7 @@ GG.DrakeView = Ember.View.extend
 
 
 GG.ParentPoolView = Ember.View.extend
+  templateName: 'parent-pool-view'
   contentBinding: 'controller.content'
 
   drakeSelected: (evt) ->

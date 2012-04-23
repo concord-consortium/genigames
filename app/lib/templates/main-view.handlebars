@@ -1,21 +1,9 @@
 <div id="background">
   <div id="container">
 
-    {{#view GG.FatherPoolView id="parent-fathers-pool"}}
-      {{#each content}}
-        <a href="#" {{action "drakeSelected"}}>
-          {{view GG.DrakeView contentBinding="this" width="120"}}
-        </a>
-      {{/each}}
-    {{/view}}
+    {{view GG.FatherPoolView id="parent-fathers-pool"}}
 
-    {{#view GG.MotherPoolView id="parent-mothers-pool"}}
-      {{#each content}}
-        <a href="#" {{action "drakeSelected"}}>
-          {{view GG.DrakeView contentBinding="this" width="120"}}
-        </a>
-      {{/each}}
-    {{/view}}
+    {{view GG.MotherPoolView id="parent-mothers-pool"}}
 
     <div id="breeder">
       <button {{action "breedDrake" target="GG.breedingController"}} id="breed-button">Breed</button>
