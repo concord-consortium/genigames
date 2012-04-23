@@ -29,5 +29,5 @@ GG.AllelesView = Ember.View.extend
 
   allelesString: (->
     genotype = @getPath 'content.visibleGenotype'
-    genotype.a.concat(genotype.b).join(',')
+    genotype.a.concat(genotype.b).join(',') unless !genotype
   ).property('content.visibleGenotype').cacheable()

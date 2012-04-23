@@ -18,14 +18,14 @@ minispade.require 'genigames/templates/main-view'
 
 # on load
 $ ->
-  # create sample task
-  task = GG.Task.create
-    visibleGenes: ['T']
 
-  GG.tasksController.addTask task
-  GG.tasksController.setCurrentTask task
+  # GET /api/game
+  # set the player's task according to the game specification
+  $.getJSON 'api/game', (data) ->
+    task = GG.Task.create data.task
+    GG.tasksController.addTask task
+    GG.tasksController.setCurrentTask task
 
-  # create initial parents, after waiting half a second for GWT to load
   setTimeout ->
     for i in [0..5]
       GenGWT.generateAliveDragonWithSex i%2, (org) ->

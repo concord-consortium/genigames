@@ -17,7 +17,7 @@ GG.Drake = Ember.Object.extend
   ).property('biologicaOrganism').cacheable()
 
   visibleGenotype: (->
-    GG.genetics.filterGenotype @get('genotype'), @get('visibleGenes')
+    GG.genetics.filterGenotype @get('genotype'), @get('visibleGenes') unless !@get('visibleGenes')
   ).property('genotype', 'visibleGenes').cacheable()
 
 # a helper for creating a GG.Drake from a Biologica/GWT organism object
