@@ -8,6 +8,7 @@ GG.tasksController = Ember.ArrayController.create
   setCurrentTask: (task) ->
     if @indexOf(task) >= 0
       @set 'currentTask', task
+      GG.logController.logEvent GG.Events.STARTED_TASK, name: task.get('name')
     else
       throw "GG.tasksController.setCurrentTask: argument is not a known task"
 
@@ -64,3 +65,25 @@ GG.breedingController = Ember.Object.create
         drake = GG.Drake.createFromBiologicaOrganism org
         GG.breedingController.set 'child', drake
         GG.offspringController.pushObject drake
+
+
+GG.logController = Ember.Object.create
+  user: 'test'      # eventually: userBinding: 'GG.userController.content'
+  session: null
+  eventQueue: []
+
+  startNewSession: ->
+    @set('session', @generateGUID())
+    @logEvent GG.Events.STARTED_SESSION
+
+  logEvent: (evt, params) ->
+    @eventQueue.push GG.LogEvent.create
+      user        : @get('user') 
+      session     : @get('session')
+      time        : new Date().getTime()
+      event       : evt
+      parameters  : params
+
+  generateGUID: ->
+    S4 = -> (((1+Math.random())*0x10000)|0).toString(16).substring(1)
+    S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4()

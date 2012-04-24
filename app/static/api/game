@@ -1,6 +1,7 @@
 {
   "version": "1",
   "task": {
+    "name": "Sample Task",
     "visibleGenes": ["T"]
   }
 }

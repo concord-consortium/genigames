@@ -26,3 +26,16 @@ GG.Drake.createFromBiologicaOrganism = (org) ->
     biologicaOrganism: org
     imageURL         : org.imageURL
     sex              : org.sex
+
+GG.LogEvent = Ember.Object.extend
+  user        : null
+  session     : null
+  time        : null
+  event       : null
+  parameters  : null
+
+# not certain how we want to define our event constants. This will do fine for now
+GG.Events =
+  STARTED_SESSION : "Started session"
+  STARTED_TASK    : "Started task"
+  BRED_DRAGON     : "Bred dragon"

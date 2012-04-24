@@ -19,6 +19,8 @@ minispade.require 'genigames/templates/main-view'
 # on load
 $ ->
 
+  GG.logController.startNewSession()
+
   # GET /api/game
   # set the player's task according to the game specification
   $.getJSON 'api/game', (data) ->
