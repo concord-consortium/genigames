@@ -33,10 +33,12 @@ GG.parentController = Ember.ArrayController.create
   selectMother: (drake) ->
     if drake.sex isnt GG.FEMALE then throw "GG.parentController.selectMother: tried to set a non-female as mother"
     @set 'selectedMother', drake
+    GG.logController.logEvent GG.Events.SELECTED_PARENT, alleles: drake.getPath('biologicaOrganism.alleles'), sex: GG.FEMALE
 
   selectFather: (drake) ->
     if drake.sex isnt GG.MALE then throw "GG.parentController.selectMother: tried to set a non-male as father"
     @set 'selectedFather', drake
+    GG.logController.logEvent GG.Events.SELECTED_PARENT, alleles: drake.getPath('biologicaOrganism.alleles'), sex: GG.M
 
 
 GG.fatherPoolController = Ember.ArrayController.create
@@ -61,10 +63,14 @@ GG.breedingController = Ember.Object.create
 
   breedDrake: ->
     if @get('mother') && @get('father')
-      GenGWT.breedDragon @getPath('mother.biologicaOrganism'), @getPath('mother.biologicaOrganism'), (org) ->
+      GenGWT.breedDragon @getPath('mother.biologicaOrganism'), @getPath('father.biologicaOrganism'), (org) =>
         drake = GG.Drake.createFromBiologicaOrganism org
         GG.breedingController.set 'child', drake
         GG.offspringController.pushObject drake
+        GG.logController.logEvent GG.Events.BRED_DRAGON,
+          mother: @getPath('mother.biologicaOrganism.alleles')
+          father: @getPath('father.biologicaOrganism.alleles')
+          offspring: drake.getPath('biologicaOrganism.alleles')
 
 
 GG.logController = Ember.Object.create

@@ -38,4 +38,5 @@ GG.LogEvent = Ember.Object.extend
 GG.Events =
   STARTED_SESSION : "Started session"
   STARTED_TASK    : "Started task"
+  SELECTED_PARENT : "Selected parent"
   BRED_DRAGON     : "Bred dragon"
