@@ -91,7 +91,7 @@ GG.logController = Ember.Object.create
       parameters  : params
 
     # for a quick demo, use window.socket
-    socket.emit 'log', logData if socket?
+    socket?.emit 'log', logData
     console.log logData
 
     @eventQueue.push GG.LogEvent.create logData
