@@ -83,12 +83,19 @@ GG.logController = Ember.Object.create
     @logEvent GG.Events.STARTED_SESSION
 
   logEvent: (evt, params) ->
-    @eventQueue.push GG.LogEvent.create
-      user        : @get('user') 
+    logData =
+      user        : @get('user')
       session     : @get('session')
       time        : new Date().getTime()
       event       : evt
       parameters  : params
+
+    # for a quick demo, use window.socket
+    socket.emit 'log', logData if socket?
+    console.log logData
+
+    @eventQueue.push GG.LogEvent.create logData
+
 
   generateGUID: ->
     S4 = -> (((1+Math.random())*0x10000)|0).toString(16).substring(1)
