@@ -53,26 +53,26 @@
   text-align: right;
 }
 
-#mother {
+#father {
   position: absolute;
   left: 20px;
   top: 73px;
 }
 
-#mother span {
+#father span {
   position: absolute;
   left: 40px;
   top: 90px;
   color: white;
 }
 
-#father {
+#mother {
   position: absolute;
   left: 300px;
   top: 73px;
 }
 
-#father span {
+#mother span {
   position: absolute;
   left: 40px;
   top: 90px;
