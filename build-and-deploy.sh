@@ -15,7 +15,7 @@ case "$1" in
   #   ;;
   dev)
     export SERVER=genigames.dev.concord.org
-    export SERVER_PATH="/var/www/"
+    export SERVER_PATH="/var/www/public/"
     export DEPLOY_BRANCH="deploy-dev"
     ;;
   *)
