@@ -34,3 +34,9 @@ $ ->
         GG.parentController.pushObject GG.Drake.createFromBiologicaOrganism org
 
   , 2000
+
+  # socket.io hello world stuff
+  socket = io.connect "#{location.protocol}//#{location.host}/"
+  socket.on 'news', (data) ->
+    console.log data
+    socket.emit 'my other event', my: 'data'
