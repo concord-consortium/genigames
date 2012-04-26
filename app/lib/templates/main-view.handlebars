@@ -1,35 +1,29 @@
-<div id="background">
-  <div id="container">
+{{view GG.FatherPoolView id="parent-fathers-pool"}}
+{{view GG.MotherPoolView id="parent-mothers-pool"}}
 
-    {{view GG.FatherPoolView id="parent-fathers-pool"}}
-
-    {{view GG.MotherPoolView id="parent-mothers-pool"}}
-
-    <div id="breeder">
-      <button {{action "breedDrake" target="GG.breedingController"}} id="breed-button">Breed</button>
-      <div id="mother">
-        {{#with GG.breedingController.mother}}
-          {{view GG.DrakeView contentBinding="this" width="100"}}
-          {{#view GG.AllelesView contentBinding="this"}}{{allelesString}}{{/view}}
-        {{/with}}
-      </div>
-      <div id="father">
-        {{#with GG.breedingController.father}}
-          {{view GG.DrakeView contentBinding="this" width="100"}}
-          {{#view GG.AllelesView contentBinding="this"}}{{allelesString}}{{/view}}
-        {{/with}}
-      </div>
-      <div id="child">
-        {{#with GG.breedingController.child}}
-          {{view GG.DrakeView contentBinding="this" width="100"}}
-        {{/with}}
-      </div>
-    </div>
-
-    <div id="offspring-pool">
-      {{#each GG.offspringController}}
-        {{#view GG.DrakeView contentBinding="this"}}{{/view}}
-      {{/each}}
-    </div>
+<div id="breeder">
+  <button {{action "breedDrake" target="GG.breedingController"}} id="breed-button">Breed</button>
+  <div id="mother">
+    {{#with GG.breedingController.mother}}
+      {{view GG.DrakeView contentBinding="this" width="100"}}
+      {{#view GG.AllelesView contentBinding="this"}}{{allelesString}}{{/view}}
+    {{/with}}
   </div>
+  <div id="father">
+    {{#with GG.breedingController.father}}
+      {{view GG.DrakeView contentBinding="this" width="100"}}
+      {{#view GG.AllelesView contentBinding="this"}}{{allelesString}}{{/view}}
+    {{/with}}
+  </div>
+  <div id="child">
+    {{#with GG.breedingController.child}}
+      {{view GG.DrakeView contentBinding="this" width="100"}}
+    {{/with}}
+  </div>
+</div>
+
+<div id="offspring-pool">
+  {{#each GG.offspringController}}
+    {{#view GG.DrakeView contentBinding="this"}}{{/view}}
+  {{/each}}
 </div>
