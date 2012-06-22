@@ -12,36 +12,36 @@
 
 #breeder {
   position: absolute;
-  background-image: url('../images/breeder.png');
-  left: 290px;
-  top: 125px;
-  width: 432px;
-  height: 421px;
+  background-image: url('../images/breeder2.png');
+  left: 227px;
+  top: 65px;
+  width: 548px;
+  height: 532px;
 }
 
 #breed-button {
   position: absolute;
-  top: 40px;
-  left: 190px;
+  top: 74px;
+  left: 247px;
 }
 
 #parent-pool {
   position: absolute;
   width: 100px;
-  top: 50px;
+  top: 145px;
 }
 
 #parent-fathers-pool {
   position: absolute;
   width: 100px;
-  top: 50px;
+  top: 145px;
   left: 80px;
 }
 
 #parent-mothers-pool {
   position: absolute;
   width: 100px;
-  top: 50px;
+  top: 145px;
   left: 800px;
 }
 
@@ -55,33 +55,33 @@
 
 #father {
   position: absolute;
-  left: 20px;
-  top: 73px;
+  left: 51px;
+  top: 38px;
 }
 
 #father span {
   position: absolute;
   left: 40px;
-  top: 90px;
+  top: 113px;
   color: white;
 }
 
 #mother {
   position: absolute;
-  left: 300px;
-  top: 73px;
+  left: 345px;
+  top: 38px;
 }
 
 #mother span {
   position: absolute;
   left: 40px;
-  top: 90px;
+  top: 113px;
   color: white;
 }
 
 #child {
   position: absolute;
-  left: 158px;
-  top: 322px;
+  left: 192px;
+  top: 251px;
 }
 
