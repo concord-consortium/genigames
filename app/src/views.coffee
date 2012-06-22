@@ -1,5 +1,5 @@
-GG.MainView = Ember.View.extend
-  templateName: 'main-view'
+GG.BreederView = Ember.View.extend
+  templateName: 'breeder-view'
 
 
 GG.DrakeView = Ember.View.extend
