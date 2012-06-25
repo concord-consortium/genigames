@@ -44,4 +44,4 @@ GG.BreedButtonView = Ember.View.extend
   ).property('mother', 'father')
 
   click: ->
-    GG.breedingController.breedDrake()
+    GG.statemanager.send('breedDrake')

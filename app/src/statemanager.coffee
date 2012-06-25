@@ -22,3 +22,6 @@ GG.statemanager = Ember.StateManager.create
         GG.logController.logEvent GG.Events.SELECTED_PARENT,
           alleles: parent.getPath('biologicaOrganism.alleles')
           sex: parent.get('sex')
+
+      breedDrake: ->
+        GG.breedingController.breedDrake()
