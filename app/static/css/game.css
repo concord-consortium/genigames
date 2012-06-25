@@ -41,18 +41,36 @@
   top: 145px;
 }
 
+#parent-fathers-pool-container {
+  background: top left no-repeat url('../images/parent-pane-left.png');
+  position: absolute;
+  width: 280px;
+  height: 550px;
+  top: 75px;
+  left: -9px;
+}
+
 #parent-fathers-pool {
   position: absolute;
   width: 100px;
-  top: 145px;
-  left: 80px;
+  top: 45px;
+  left: 0px;
+}
+
+#parent-mothers-pool-container {
+  background: top left no-repeat url('../images/parent-pane-right.png');
+  position: absolute;
+  top: 75px;
+  left: 730px;
+  width: 280px;
+  height: 550px;
 }
 
 #parent-mothers-pool {
   position: absolute;
   width: 100px;
-  top: 145px;
-  left: 800px;
+  top: 45px;
+  left: 165px;
 }
 
 #offspring-pool {
