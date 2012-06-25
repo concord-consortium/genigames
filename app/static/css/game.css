@@ -27,8 +27,12 @@
   height: 90px;
 }
 
-#breed-button.active {
+#breed-button.enabled {
   background-image: url('../images/breed-button.png');
+}
+
+#breed-button.enabled:active {
+  background-image: none;
 }
 
 #parent-pool {

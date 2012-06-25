@@ -31,3 +31,17 @@ GG.AllelesView = Ember.View.extend
     genotype = @getPath 'content.visibleGenotype'
     genotype.a.concat(genotype.b).join(',') unless !genotype
   ).property('content.visibleGenotype').cacheable()
+
+GG.BreedButtonView = Ember.View.extend
+  tagName: 'div'
+
+  motherBinding: 'GG.parentController.selectedMother'
+  fatherBinding: 'GG.parentController.selectedFather'
+
+  classNameBindings : ['enabled']
+  enabled: (->
+    !!(this.get('mother') && this.get('father'))
+  ).property('mother', 'father')
+
+  click: ->
+    GG.breedingController.breedDrake()

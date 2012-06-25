@@ -2,7 +2,7 @@
 {{view GG.MotherPoolView id="parent-mothers-pool"}}
 
 <div id="breeder">
-  <div {{action "breedDrake" target="GG.breedingController"}} id="breed-button" class="active"></div>
+  {{view GG.BreedButtonView id="breed-button"}}
   <div id="mother">
     {{#with GG.breedingController.mother}}
       {{view GG.DrakeView contentBinding="this" width="140"}}
