@@ -12,6 +12,7 @@ minispade.require 'genigames/genetics'
 minispade.require 'genigames/models'
 minispade.require 'genigames/controllers'
 minispade.require 'genigames/views'
+minispade.require 'genigames/statemanager'
 
 minispade.require 'genigames/templates/parent-pool-view'
 minispade.require 'genigames/templates/breeder-view'

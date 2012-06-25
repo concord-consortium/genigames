@@ -15,7 +15,7 @@ GG.ParentPoolView = Ember.View.extend
 
   drakeSelected: (evt) ->
     drake = evt.context
-    @get('controller').drakeSelected drake
+    GG.statemanager.send 'parentSelected', drake
 
 GG.FatherPoolView = GG.ParentPoolView.extend
   controllerBinding: 'GG.fatherPoolController'
