@@ -21,8 +21,14 @@
 
 #breed-button {
   position: absolute;
-  top: 74px;
-  left: 247px;
+  top: 43px;
+  left: 228px;
+  width: 93px;
+  height: 90px;
+}
+
+#breed-button.active {
+  background-image: url('../images/breed-button.png');
 }
 
 #parent-pool {
