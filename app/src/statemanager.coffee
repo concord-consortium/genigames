@@ -34,10 +34,12 @@ GG.statemanager = Ember.StateManager.create
         if @get 'mothersExpanded'
           motherContainer.animate({left: 595},{duration: 1000, complete: ->
             motherExpander.css('backgroundPosition','-0px -0px')
+            $('#parent-mothers-pool-container .chromosome-panel').hide()
           })
         else
           motherContainer.animate({left: 721},{duration: 1000, complete: ->
             motherExpander.css('backgroundPosition','-0px -15px')
+            $('#parent-mothers-pool-container .chromosome-panel').show()
           })
 
         @set 'mothersExpanded', !@get 'mothersExpanded'
@@ -50,10 +52,12 @@ GG.statemanager = Ember.StateManager.create
         if @get 'fathersExpanded'
           fatherContainer.animate({left: 135},{duration: 1000, complete: ->
             fatherExpander.css('backgroundPosition','-0px -15px')
+            $('#parent-fathers-pool-container .chromosome-panel').hide()
           })
         else
           fatherContainer.animate({left: 1},{duration: 1000, complete: ->
             fatherExpander.css('backgroundPosition','-0px -0px')
+            $('#parent-fathers-pool-container .chromosome-panel').show()
           })
 
         @set 'fathersExpanded', !@get 'fathersExpanded'
