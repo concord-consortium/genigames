@@ -19,9 +19,17 @@ GG.ParentPoolView = Ember.View.extend
 
 GG.FatherPoolView = GG.ParentPoolView.extend
   controllerBinding: 'GG.fatherPoolController'
+  expanderButton: Ember.View.extend
+    classNames: ['expander']
+    click: ->
+      GG.statemanager.send 'toggleFatherPool'
 
 GG.MotherPoolView = GG.ParentPoolView.extend
   controllerBinding: 'GG.motherPoolController'
+  expanderButton: Ember.View.extend
+    classNames: ['expander']
+    click: ->
+      GG.statemanager.send 'toggleMotherPool'
 
 
 GG.AllelesView = Ember.View.extend

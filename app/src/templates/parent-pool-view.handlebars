@@ -1,5 +1,8 @@
-{{#each content}}
-  <a href="#" {{action "drakeSelected"}}>
-    {{view GG.DrakeView contentBinding="this" width="100"}}
-  </a>
-{{/each}}
+<div class="parent-pool">
+  {{#each content}}
+    <a href="#" {{action "drakeSelected"}}>
+      {{view GG.DrakeView contentBinding="this" width="100"}}
+    </a>
+  {{/each}}
+</div>
+{{view expanderButton}}
