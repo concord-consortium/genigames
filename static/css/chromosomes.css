@@ -1,0 +1,36 @@
+.chromosome-panel {
+  position: absolute;
+  top: 35px;
+  left: 145px;
+  width: 168px;
+  height: 650px;
+  display: none;
+}
+#parent-mothers-pool-container .chromosome-panel {
+  left: 42px;
+}
+
+.chromosome {
+  position: absolute;
+  width: 50px;
+  height: 130px;
+}
+.chromosome.right {
+  left: 57px;
+}
+.chromo-1 {
+  background: top left no-repeat url('../images/chromo-1.png');
+  top: 0px;
+}
+.chromo-2 {
+  background: top left no-repeat url('../images/chromo-2.png');
+  top: 150px;
+}
+.chromo-X {
+  background: top left no-repeat url('../images/chromo-X.png');
+  top: 280px;
+}
+.chromo-Y {
+  background: top left no-repeat url('../images/chromo-Y.png');
+  top: 280px;
+}

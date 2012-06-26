@@ -12,37 +12,78 @@
 
 #breeder {
   position: absolute;
-  background-image: url('../images/breeder.png');
-  left: 290px;
-  top: 125px;
-  width: 432px;
-  height: 421px;
+  background-image: url('../images/breeder2.png');
+  left: 227px;
+  top: 65px;
+  width: 548px;
+  height: 532px;
 }
 
 #breed-button {
   position: absolute;
-  top: 40px;
-  left: 190px;
+  top: 43px;
+  left: 228px;
+  width: 93px;
+  height: 90px;
 }
 
-#parent-pool {
-  position: absolute;
-  width: 100px;
-  top: 50px;
+#breed-button.enabled {
+  background-image: url('../images/breed-button.png');
 }
 
-#parent-fathers-pool {
-  position: absolute;
-  width: 100px;
-  top: 50px;
-  left: 80px;
+#breed-button.enabled:active {
+  background-image: none;
 }
 
-#parent-mothers-pool {
+#parent-fathers-pool-container {
+  background: top left no-repeat url('../images/parent-pane-left.png');
+  position: absolute;
+  width: 277px;
+  height: 550px;
+  top: 75px;
+  left: 135px;
+}
+
+#parent-fathers-pool-container .expander {
+  background: top left no-repeat url('../images/expander-button.png');
+  background-position: 0px -15px;
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  left: 0px;
+  top: 242px;
+}
+
+#parent-fathers-pool-container .parent-pool {
   position: absolute;
   width: 100px;
-  top: 50px;
-  left: 800px;
+  top: 45px;
+  left: 9px;
+}
+
+#parent-mothers-pool-container {
+  background: top right no-repeat url('../images/parent-pane-right.png');
+  position: absolute;
+  top: 75px;
+  left: 595px;
+  width: 277px;
+  height: 550px;
+}
+
+#parent-mothers-pool-container .expander {
+  background: top left no-repeat url('../images/expander-button.png');
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  right: 0px;
+  top: 242px;
+}
+
+#parent-mothers-pool-container .parent-pool {
+  position: absolute;
+  width: 100px;
+  top: 45px;
+  left: 165px;
 }
 
 #offspring-pool {
@@ -55,33 +96,42 @@
 
 #father {
   position: absolute;
-  left: 20px;
-  top: 73px;
+  left: 56px;
+  top: 38px;
 }
 
 #father span {
   position: absolute;
   left: 40px;
-  top: 90px;
+  top: 113px;
   color: white;
 }
 
 #mother {
   position: absolute;
-  left: 300px;
-  top: 73px;
+  left: 345px;
+  top: 38px;
 }
 
 #mother span {
   position: absolute;
   left: 40px;
-  top: 90px;
+  top: 113px;
   color: white;
 }
 
 #child {
   position: absolute;
-  left: 158px;
-  top: 322px;
+  left: 192px;
+  top: 251px;
+}
+
+.male-parents img {
+  -moz-transform: scaleX(-1);
+  -o-transform: scaleX(-1);
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+  filter: FlipH;
+  -ms-filter: "FlipH";
 }
 
