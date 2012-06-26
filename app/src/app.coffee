@@ -16,6 +16,7 @@ minispade.require 'genigames/statemanager'
 
 minispade.require 'genigames/templates/parent-pool-view'
 minispade.require 'genigames/templates/breeder-view'
+minispade.require 'genigames/templates/chromosome-panel'
 
 # on load
 $ ->

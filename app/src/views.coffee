@@ -53,3 +53,6 @@ GG.BreedButtonView = Ember.View.extend
 
   click: ->
     GG.statemanager.send('breedDrake')
+
+GG.ChromosomePanelView = Ember.View.extend
+  templateName: 'chromosome-panel'
