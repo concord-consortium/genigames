@@ -58,7 +58,7 @@
   position: absolute;
   width: 100px;
   top: 45px;
-  left: 3px;
+  left: 9px;
 }
 
 #parent-mothers-pool-container {
@@ -96,7 +96,7 @@
 
 #father {
   position: absolute;
-  left: 51px;
+  left: 56px;
   top: 38px;
 }
 
@@ -124,5 +124,14 @@
   position: absolute;
   left: 192px;
   top: 251px;
+}
+
+.male-parents img {
+  -moz-transform: scaleX(-1);
+  -o-transform: scaleX(-1);
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+  filter: FlipH;
+  -ms-filter: "FlipH";
 }
 

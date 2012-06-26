@@ -1,4 +1,4 @@
-{{view GG.FatherPoolView id="parent-fathers-pool-container"}}
+{{view GG.FatherPoolView class="male-parents" id="parent-fathers-pool-container"}}
 {{view GG.MotherPoolView id="parent-mothers-pool-container"}}
 
 <div id="breeder">
@@ -9,7 +9,7 @@
       {{#view GG.AllelesView contentBinding="this"}}{{allelesString}}{{/view}}
     {{/with}}
   </div>
-  <div id="father">
+  <div id="father" class="male-parents">
     {{#with GG.breedingController.father}}
       {{view GG.DrakeView contentBinding="this" width="140"}}
       {{#view GG.AllelesView contentBinding="this"}}{{allelesString}}{{/view}}
