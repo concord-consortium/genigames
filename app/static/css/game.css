@@ -38,10 +38,10 @@
 #parent-fathers-pool-container {
   background: top left no-repeat url('../images/parent-pane-left.png');
   position: absolute;
-  width: 108px;
+  width: 277px;
   height: 550px;
   top: 75px;
-  left: 159px;
+  left: 135px;
 }
 
 #parent-fathers-pool-container .expander {
@@ -65,8 +65,8 @@
   background: top right no-repeat url('../images/parent-pane-right.png');
   position: absolute;
   top: 75px;
-  left: 735px;
-  width: 108px;
+  left: 595px;
+  width: 277px;
   height: 550px;
 }
 
@@ -83,7 +83,7 @@
   position: absolute;
   width: 100px;
   top: 45px;
-  left: -5px;
+  left: 165px;
 }
 
 #offspring-pool {

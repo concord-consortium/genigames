@@ -32,13 +32,11 @@ GG.statemanager = Ember.StateManager.create
         motherPool = $('#parent-mothers-pool-container .parent-pool')
         motherExpander = $('#parent-mothers-pool-container .expander')
         if @get 'mothersExpanded'
-          motherContainer.animate({width: 108},{duration: 1000})
-          motherPool.animate({left: -5},{duration: 1000, complete: ->
+          motherContainer.animate({left: 595},{duration: 1000, complete: ->
             motherExpander.css('backgroundPosition','-0px -0px')
           })
         else
-          motherContainer.animate({width: 277},{duration: 1000})
-          motherPool.animate({left: 165},{duration: 1000, complete: ->
+          motherContainer.animate({left: 721},{duration: 1000, complete: ->
             motherExpander.css('backgroundPosition','-0px -15px')
           })
 
@@ -50,11 +48,11 @@ GG.statemanager = Ember.StateManager.create
         fatherPool = $('#parent-fathers-pool-container .parent-pool')
         fatherExpander = $('#parent-fathers-pool-container .expander')
         if @get 'fathersExpanded'
-          fatherContainer.animate({width: 108, left: 159},{duration: 1000, complete: ->
+          fatherContainer.animate({left: 135},{duration: 1000, complete: ->
             fatherExpander.css('backgroundPosition','-0px -15px')
           })
         else
-          fatherContainer.animate({width: 280, left: -9},{duration: 1000, complete: ->
+          fatherContainer.animate({left: 1},{duration: 1000, complete: ->
             fatherExpander.css('backgroundPosition','-0px -0px')
           })
 
