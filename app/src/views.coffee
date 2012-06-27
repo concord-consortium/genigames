@@ -65,7 +65,7 @@ GG.ChromoView = Ember.View.extend
   alleles: (->
     res = []
     src = 'chromoView' + @get('chromo') + @get('side') + ".alleles"
-    if content?
+    if (@get 'content')?
       fullGeno = @getPath 'content.visibleGenotype'
       geno = fullGeno[@get 'side']
       res = GG.genetics.filter(geno, @get 'genes')

@@ -1,10 +1,12 @@
-{{view GG.ChromoView chromo="1" side="a" contentBinding="item"}}
-{{view GG.ChromoView chromo="1" side="b" contentBinding="item"}}
-{{view GG.ChromoView chromo="2" side="a" contentBinding="item"}}
-{{view GG.ChromoView chromo="2" side="b" contentBinding="item"}}
-{{view GG.ChromoView chromo="X" side="a" contentBinding="item"}}
-{{#if item.female}}
-  {{view GG.ChromoView chromo="X" side="b" contentBinding="item"}}
-{{else}}
-  {{view GG.ChromoView chromo="Y" side="a" contentBinding="item"}}
-{{/if}}
+{{#with controller.selected}}
+  {{view GG.ChromoView chromo="1" side="a" contentBinding="this"}}
+  {{view GG.ChromoView chromo="1" side="b" contentBinding="this"}}
+  {{view GG.ChromoView chromo="2" side="a" contentBinding="this"}}
+  {{view GG.ChromoView chromo="2" side="b" contentBinding="this"}}
+  {{view GG.ChromoView chromo="X" side="a" contentBinding="this"}}
+  {{#if female}}
+    {{view GG.ChromoView chromo="X" side="b" contentBinding="this"}}
+  {{else}}
+    {{view GG.ChromoView chromo="Y" side="a" contentBinding="this"}}
+  {{/if}}
+{{/with}}

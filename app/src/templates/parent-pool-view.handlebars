@@ -6,7 +6,6 @@
   {{/each}}
 </div>
 {{view expanderButton}}
-
-{{#with controller.selected}}
-  {{view GG.ChromosomePanelView controllerBinding="controller" itemBinding="controller.selected"}}
+{{#with controller}}
+  {{view GG.ChromosomePanelView controllerBinding="this"}}
 {{/with}}
