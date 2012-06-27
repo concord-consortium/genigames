@@ -4,7 +4,6 @@
   left: 145px;
   width: 100px;
   height: 420px;
-  display: none;
 }
 #parent-mothers-pool-container .chromosome-panel {
   left: 42px;
@@ -33,4 +32,19 @@
 .chromo-Y {
   background: top left no-repeat url('../images/chromo-Y.png');
   top: 280px;
+}
+
+.allele {
+  background: top center no-repeat url('../images/allele-bg.png');
+  width: 25px;
+  height: 25px;
+  margin: 5px;
+  text-align: center;
+  color: white;
+  font-weight: bold;
+  padding-top: 4px;
+}
+
+.hidden {
+  display: none;
 }
