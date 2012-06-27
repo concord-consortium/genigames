@@ -42,17 +42,31 @@ GG.genetics =
     'Y' : 'Y',
     '' : ''
 
+  chromosomeGeneMap:
+    '1': ['t','m','w']
+    '2': ['h', 'c', 'fl', 'hl', 'a']
+    'X': ['b', 'd', 'rh']
+
   ###
     Returns true if the allele passed is a member of the gene, where the
     gene is indeicated by an example allele.
     isMemberOfGene("dl", "D") => true
     isMemberOfGene("rh", "D") => false
   ###
-  isMemberOfGene: (allele, exampleOfGene) ->
+  isAlleleOfGene: (allele, exampleOfGene) ->
     for own gene of @geneList
       allelesOfGene = @geneList[gene]
       if ~allelesOfGene.indexOf(allele) && ~allelesOfGene.indexOf(exampleOfGene)
         return true
+    false
+
+  ###
+    Finds the chromosome that a given allele is part of
+  ###
+  findChromosome: (allele) ->
+    for chromosome, genes of @chromosomeGeneMap
+      for gene in genes
+        return chromosome if @isAlleleOfGene(allele, gene)
     false
 
   ###
