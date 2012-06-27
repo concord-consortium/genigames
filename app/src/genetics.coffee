@@ -46,6 +46,7 @@ GG.genetics =
     '1': ['t','m','w']
     '2': ['h', 'c', 'fl', 'hl', 'a']
     'X': ['b', 'd', 'rh']
+    'Y': []
 
   ###
     Returns true if the allele passed is a member of the gene, where the

@@ -7,4 +7,6 @@
 </div>
 {{view expanderButton}}
 
-{{view GG.ChromosomePanelView}}
+{{#with controller.selected}}
+  {{view GG.ChromosomePanelView controllerBinding="controller" itemBinding="controller.selected"}}
+{{/with}}

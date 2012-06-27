@@ -43,14 +43,17 @@ GG.parentController = Ember.ArrayController.create
 
 GG.fatherPoolController = Ember.ArrayController.create
   contentBinding: 'GG.parentController.males'
+  selectedBinding: 'GG.parentController.selectedFather'
+  hidden: true
   drakeSelected: (drake) ->
     GG.parentController.selectFather drake
 
 GG.motherPoolController = Ember.ArrayController.create
   contentBinding: 'GG.parentController.females'
+  selectedBinding: 'GG.parentController.selectedMother'
+  hidden: true
   drakeSelected: (drake) ->
     GG.parentController.selectMother drake
-
 
 GG.offspringController = Ember.ArrayController.create
   content: []

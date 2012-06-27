@@ -54,5 +54,34 @@ GG.BreedButtonView = Ember.View.extend
   click: ->
     GG.statemanager.send('breedDrake')
 
+GG.ChromoView = Ember.View.extend
+  templateName: 'chromosome'
+  content: null
+  chromo: '1'
+  side: 'a'
+  genes: (->
+    GG.genetics.chromosomeGeneMap[@get 'chromo']
+  ).property('chromo')
+  alleles: (->
+    res = []
+    src = 'chromoView' + @get('chromo') + @get('side') + ".alleles"
+    if content?
+      fullGeno = @getPath 'content.visibleGenotype'
+      geno = fullGeno[@get 'side']
+      res = GG.genetics.filter(geno, @get 'genes')
+    return res
+  ).property('chromo','content','side')
+  defaultClass: 'chromosome'
+  chromoName: (->
+    'chromo-'+@get('chromo')
+  ).property('chromo','side')
+  right: (->
+    @get('chromo') == 'Y' or @get('side') == 'b'
+  ).property('chromo','side')
+  classNameBindings: ['defaultClass', 'chromoName', 'right']
+
 GG.ChromosomePanelView = Ember.View.extend
   templateName: 'chromosome-panel'
+  hiddenBinding: '*controller.hidden'
+  defaultClass: 'chromosome-panel'
+  classNameBindings: ['hidden','defaultClass']

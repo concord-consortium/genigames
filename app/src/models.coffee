@@ -20,6 +20,14 @@ GG.Drake = Ember.Object.extend
     GG.genetics.filterGenotype @get('genotype'), @get('visibleGenes') unless !@get('visibleGenes')
   ).property('genotype', 'visibleGenes').cacheable()
 
+  female: (->
+    @get('sex') == GG.FEMALE
+  ).property('sex')
+
+  male: (->
+    @get('sex') == GG.MALE
+  ).property('sex')
+
 # a helper for creating a GG.Drake from a Biologica/GWT organism object
 GG.Drake.createFromBiologicaOrganism = (org) ->
   GG.Drake.create

@@ -1,8 +1,10 @@
-<div class="chromosome-panel">
-  <div class="chromosome chromo-1"></div>
-  <div class="chromosome chromo-1 right"></div>
-  <div class="chromosome chromo-2"></div>
-  <div class="chromosome chromo-2 right"></div>
-  <div class="chromosome chromo-X"></div>
-  <div class="chromosome chromo-Y right"></div>
-</div>
+{{view GG.ChromoView chromo="1" side="a" contentBinding="item"}}
+{{view GG.ChromoView chromo="1" side="b" contentBinding="item"}}
+{{view GG.ChromoView chromo="2" side="a" contentBinding="item"}}
+{{view GG.ChromoView chromo="2" side="b" contentBinding="item"}}
+{{view GG.ChromoView chromo="X" side="a" contentBinding="item"}}
+{{#if item.female}}
+  {{view GG.ChromoView chromo="X" side="b" contentBinding="item"}}
+{{else}}
+  {{view GG.ChromoView chromo="Y" side="a" contentBinding="item"}}
+{{/if}}
