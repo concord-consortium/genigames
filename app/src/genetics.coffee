@@ -50,8 +50,8 @@ GG.genetics =
   ###
     Returns true if the allele passed is a member of the gene, where the
     gene is indeicated by an example allele.
-    isMemberOfGene("dl", "D") => true
-    isMemberOfGene("rh", "D") => false
+    isAlleleOfGene("dl", "D") => true
+    isAlleleOfGene("rh", "D") => false
   ###
   isAlleleOfGene: (allele, exampleOfGene) ->
     for own gene of @geneList
@@ -77,7 +77,7 @@ GG.genetics =
   filter: (alleles, filter) ->
     alleles.filter (allele) =>
       for gene in filter
-        if @isMemberOfGene(allele, gene)
+        if @isAlleleOfGene(allele, gene)
           return true
       false
 
