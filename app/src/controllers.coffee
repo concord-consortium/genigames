@@ -69,9 +69,11 @@ GG.breedingController = Ember.Object.create
     if @get('mother') && @get('father')
       @set 'isBreeding', true
       setTimeout =>
-        @set 'isBreeding', false
         GG.offspringController.pushObject @get 'child'
-      , 1000
+        setTimeout =>
+          @set 'isBreeding', false
+        , 600
+      , 1200
       GenGWT.breedDragon @getPath('mother.biologicaOrganism'), @getPath('father.biologicaOrganism'), (org) =>
         drake = GG.Drake.createFromBiologicaOrganism org
         GG.breedingController.set 'child', drake
