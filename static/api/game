@@ -3,6 +3,6 @@
   "task": {
     "name": "Sample Task",
     "visibleGenes": ["T","W"],
-    "hiddenGenes": ["H","Hl"]
+    "hiddenGenes": ["Hl","Rh"]
   }
 }
