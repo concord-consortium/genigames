@@ -53,7 +53,9 @@ GG.AlleleView = Ember.View.extend
     if @get('hidden') then '?' else @get('value')
   ).property('value','hidden')
   click: ->
-    @set 'hidden', false
+    if @get('hidden')
+      GG.statemanager.send 'incrementCounter'
+      @set 'hidden', false
 
 GG.ChromoView = Ember.View.extend
   templateName: 'chromosome'
@@ -116,6 +118,7 @@ GG.EggView = Ember.View.extend
           $('#egg').animate({rotate: '+=60deg',0}, 0)
             .css({backgroundPosition: '0px -140px'})
     , 700
+
 GG.MoveCounter = Ember.View.extend
   templateName: 'move-counter'
   classNames: ['move-counter']
