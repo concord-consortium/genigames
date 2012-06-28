@@ -67,6 +67,7 @@ GG.ChromoView = Ember.View.extend
     res = []
     if (@get 'content')?
       fullGeno = @getPath 'content.visibleGenotype'
+      fullGeno = if fullGeno? then fullGeno else {a: [], b: []}
       geno = fullGeno[@get 'side']
       res = GG.genetics.filter(geno, @get 'genes')
     return res
@@ -75,6 +76,7 @@ GG.ChromoView = Ember.View.extend
     res = []
     if (@get 'content')?
       fullGeno = @getPath 'content.hiddenGenotype'
+      fullGeno = if fullGeno? then fullGeno else {a: [], b: []}
       geno = fullGeno[@get 'side']
       res = GG.genetics.filter(geno, @get 'genes')
     return res
