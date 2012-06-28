@@ -2,6 +2,7 @@
   "version": "1",
   "task": {
     "name": "Sample Task",
-    "visibleGenes": ["T"]
+    "visibleGenes": ["T","W"],
+    "hiddenGenes": ["H","Hl"]
   }
 }
