@@ -85,6 +85,8 @@ GG.EggView = Ember.View.extend
     @startAnimation() if (!@get 'hidden')
   ).observes('hidden')
   startAnimation: ->
+    $('#egg').css({backgroundPosition: '0px 0px'})
+    $('#egg').animate({rotate: '0deg'}, 0)
     setTimeout ->
       $('#egg').animate({rotate: '+=20deg'}, 50)
         .animate({rotate: '-=20deg'}, 50)
