@@ -62,14 +62,19 @@ GG.offspringController = Ember.ArrayController.create
 GG.breedingController = Ember.Object.create
   motherBinding: 'GG.parentController.selectedMother'
   fatherBinding: 'GG.parentController.selectedFather'
+  isBreeding: false
   child: null
 
   breedDrake: ->
     if @get('mother') && @get('father')
+      @set 'isBreeding', true
+      setTimeout =>
+        @set 'isBreeding', false
+        GG.offspringController.pushObject @get 'child'
+      , 1000
       GenGWT.breedDragon @getPath('mother.biologicaOrganism'), @getPath('father.biologicaOrganism'), (org) =>
         drake = GG.Drake.createFromBiologicaOrganism org
         GG.breedingController.set 'child', drake
-        GG.offspringController.pushObject drake
         GG.logController.logEvent GG.Events.BRED_DRAGON,
           mother: @getPath('mother.biologicaOrganism.alleles')
           father: @getPath('father.biologicaOrganism.alleles')

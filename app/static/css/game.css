@@ -120,10 +120,16 @@
   color: white;
 }
 
-#child {
+#egg-container {
   position: absolute;
-  left: 192px;
+  left: 200px;
   top: 251px;
+}
+
+#egg {
+  background-image: url('../images/egg-sprite.png');
+  width: 150px;
+  height: 150px;
 }
 
 .male-parents img {

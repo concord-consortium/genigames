@@ -76,3 +76,8 @@ GG.ChromosomePanelView = Ember.View.extend
   hiddenBinding: '*controller.hidden'
   defaultClass: 'chromosome-panel'
   classNameBindings: ['hidden','defaultClass']
+
+GG.EggView = Ember.View.extend
+  tagName: 'div'
+  hiddenBinding: Ember.Binding.oneWay('GG.breedingController.isBreeding').not()
+  classNameBindings: ['hidden']

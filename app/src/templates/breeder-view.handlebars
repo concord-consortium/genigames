@@ -13,10 +13,8 @@
       {{view GG.DrakeView contentBinding="this" width="140"}}
     {{/with}}
   </div>
-  <div id="child">
-    {{#with GG.breedingController.child}}
-      {{view GG.DrakeView contentBinding="this" width="140"}}
-    {{/with}}
+  <div id="egg-container">
+    {{view GG.EggView id="egg"}}
   </div>
 </div>
 
