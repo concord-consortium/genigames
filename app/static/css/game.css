@@ -130,6 +130,8 @@
   background-image: url('../images/egg-sprite.png');
   width: 150px;
   height: 150px;
+  background-repeat: no-repeat;
+  background-position: 0px 0px
 }
 
 .male-parents img {

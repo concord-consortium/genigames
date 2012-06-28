@@ -81,3 +81,17 @@ GG.EggView = Ember.View.extend
   tagName: 'div'
   hiddenBinding: Ember.Binding.oneWay('GG.breedingController.isBreeding').not()
   classNameBindings: ['hidden']
+  animationObserver: (->
+    @startAnimation() if (!@get 'hidden')
+  ).observes('hidden')
+  startAnimation: ->
+    setTimeout ->
+      $('#egg').animate({rotate: '+=20deg'}, 50)
+        .animate({rotate: '-=20deg'}, 50)
+        .animate({rotate: '+=20deg'}, 50)
+        .animate({rotate: '-=20deg'}, 50)
+        .animate({rotate: '+=20deg'}, 50)
+        .animate {rotate: '-=60deg'}, 50, ->
+          $('#egg').animate({rotate: '+=60deg',0}, 0)
+            .css({backgroundPosition: '0px -140px'})
+    , 700
