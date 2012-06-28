@@ -1,4 +1,6 @@
 minispade.require 'genigames/vendor/jquery'
+minispade.require 'genigames/vendor/jquery-css-transform'
+minispade.require 'genigames/vendor/jquery-animate-css-rotate-scale'
 minispade.require 'genigames/vendor/ember'
 
 window.GG = GG = Ember.Application.create()
