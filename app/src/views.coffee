@@ -31,15 +31,6 @@ GG.MotherPoolView = GG.ParentPoolView.extend
     click: ->
       GG.statemanager.send 'toggleMotherPool'
 
-
-GG.AllelesView = Ember.View.extend
-  tagName: 'span'
-
-  allelesString: (->
-    genotype = @getPath 'content.visibleGenotype'
-    genotype.a.concat(genotype.b).join(',') unless !genotype
-  ).property('content.visibleGenotype').cacheable()
-
 GG.BreedButtonView = Ember.View.extend
   tagName: 'div'
 
