@@ -4,6 +4,7 @@ GG.Task = Ember.Object.extend
 
 GG.Drake = Ember.Object.extend
   visibleGenesBinding: 'GG.drakeController.visibleGenes'
+  hiddenGenesBinding: 'GG.drakeController.hiddenGenes'
 
   biologicaOrganism : null            # organism object created by GWT
   sex               : null
@@ -19,6 +20,10 @@ GG.Drake = Ember.Object.extend
   visibleGenotype: (->
     GG.genetics.filterGenotype @get('genotype'), @get('visibleGenes') unless !@get('visibleGenes')
   ).property('genotype', 'visibleGenes').cacheable()
+
+  hiddenGenotype: (->
+    GG.genetics.filterGenotype @get('genotype'), @get('hiddenGenes') unless !@get('hiddenGenes')
+  ).property('genotype', 'hiddenGenes').cacheable()
 
   female: (->
     @get('sex') == GG.FEMALE

@@ -1,7 +1,12 @@
 <div class="alleles-container">
-{{#each alleles}}
-  <div class="allele">
-    {{this}}
-  </div>
+{{#each visibleAlleles}}
+  {{#view GG.AlleleView valueBinding="this"}}
+    {{displayValue}}
+  {{/view}}
+{{/each}}
+{{#each hiddenAlleles}}
+  {{#view GG.AlleleView valueBinding="this" hidden="true"}}
+    {{displayValue}}
+  {{/view}}
 {{/each}}
 </div>

@@ -15,6 +15,7 @@ GG.tasksController = Ember.ArrayController.create
 
 GG.drakeController = Ember.Object.create
   visibleGenesBinding: 'GG.tasksController.currentTask.visibleGenes'
+  hiddenGenesBinding: 'GG.tasksController.currentTask.hiddenGenes'
 
 
 GG.parentController = Ember.ArrayController.create
