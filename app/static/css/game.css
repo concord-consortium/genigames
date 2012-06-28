@@ -143,3 +143,32 @@
   -ms-filter: "FlipH";
 }
 
+.move-counter {
+  position: absolute;
+  top: 156px;
+  left: 232px;
+  width: 85px;
+  height: 37px;
+  background: white;
+}
+
+.moveCounterDigit {
+  position: absolute;
+  width: 25px;
+  height: 35px;
+  top: 1px;
+  left: 0px;
+  background: top left no-repeat url('../images/move-counter-sprite.png');
+}
+
+#moveCounterHundreds {
+  left: 3px;
+}
+
+#moveCounterTens {
+  left: 30px;
+}
+
+#moveCounterOnes {
+  left: 57px;
+}

@@ -1,6 +1,7 @@
 minispade.require 'genigames/vendor/jquery'
 minispade.require 'genigames/vendor/jquery-css-transform'
 minispade.require 'genigames/vendor/jquery-animate-css-rotate-scale'
+minispade.require 'genigames/vendor/jquery-bgpos'
 minispade.require 'genigames/vendor/ember'
 
 window.GG = GG = Ember.Application.create()
@@ -20,6 +21,7 @@ minispade.require 'genigames/templates/parent-pool-view'
 minispade.require 'genigames/templates/breeder-view'
 minispade.require 'genigames/templates/chromosome-panel'
 minispade.require 'genigames/templates/chromosome'
+minispade.require 'genigames/templates/move-counter'
 
 # on load
 $ ->

@@ -62,4 +62,9 @@ GG.statemanager = Ember.StateManager.create
 
         @set 'fathersExpanded', !@get 'fathersExpanded'
 
+      incrementCounter: ->
+        GG.moveController.increment()
+
+      resetCounter: ->
+        GG.moveController.reset()
 

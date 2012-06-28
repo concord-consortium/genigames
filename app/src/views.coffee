@@ -116,3 +116,6 @@ GG.EggView = Ember.View.extend
           $('#egg').animate({rotate: '+=60deg',0}, 0)
             .css({backgroundPosition: '0px -140px'})
     , 700
+GG.MoveCounter = Ember.View.extend
+  templateName: 'move-counter'
+  classNames: ['move-counter']

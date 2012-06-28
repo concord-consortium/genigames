@@ -85,6 +85,30 @@ GG.breedingController = Ember.Object.create
           father: @getPath('father.biologicaOrganism.alleles')
           offspring: drake.getPath('biologicaOrganism.alleles')
 
+GG.moveController = Ember.Object.create
+  moves: 0
+  previousMoves: 0
+  increment: ->
+    @set 'previousMoves', @get 'moves'
+    @set 'moves', @get('previousMoves')+1
+  decrement: ->
+    @set 'previousMoves', @get 'moves'
+    @set 'moves', @get('previousMoves')-1
+  reset: ->
+    @set 'previousMoves', 0
+    @set 'moves', 0
+  updateCounter: (->
+    moves = @get 'moves'
+    hundreds = Math.floor(moves / 100) % 10
+    $('#moveCounterHundreds').animate({backgroundPosition: @getPosition(hundreds)}, 200)
+    tens = Math.floor(moves / 10) % 10
+    $('#moveCounterTens').animate({backgroundPosition: @getPosition(tens)}, 200)
+    ones = moves % 10
+    $('#moveCounterOnes').animate({backgroundPosition: @getPosition(ones)}, 200)
+  ).observes('moves')
+  getPosition: (num) ->
+    pos = num * 35
+    "(0px -" + pos + "px)"
 
 GG.logController = Ember.Object.create
   user: 'test'      # eventually: userBinding: 'GG.userController.content'
