@@ -69,6 +69,8 @@ GG.breedingController = Ember.Object.create
     if @get('mother') && @get('father')
       @set 'isBreeding', true
       setTimeout =>
+        if (GG.offspringController.get('length') >= 3)
+          GG.offspringController.removeObject(GG.offspringController.get('firstObject'))
         GG.offspringController.pushObject @get 'child'
         setTimeout =>
           @set 'isBreeding', false
