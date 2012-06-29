@@ -43,6 +43,7 @@ GG.BreedButtonView = Ember.View.extend
   ).property('mother', 'father')
 
   click: ->
+    GG.statemanager.send 'incrementCounter'
     GG.statemanager.send('breedDrake')
 
 GG.AlleleView = Ember.View.extend
