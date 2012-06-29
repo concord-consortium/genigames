@@ -1,4 +1,5 @@
 minispade.require 'genigames/vendor/jquery'
+minispade.require 'genigames/vendor/jquery-ui'
 minispade.require 'genigames/vendor/jquery-css-transform'
 minispade.require 'genigames/vendor/jquery-animate-css-rotate-scale'
 minispade.require 'genigames/vendor/jquery-bgpos'
