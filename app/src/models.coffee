@@ -34,7 +34,7 @@ GG.Drake = Ember.Object.extend
       return vis
     else
       return {a: [], b: []}
-  ).property('genotype', 'visibleGenes', 'revealedAlleles')
+  ).property('genotype', 'visibleGenes', 'revealedAlleles').volatile()
 
   hiddenGenotype: (->
     if @get('hiddenGenes')?
@@ -48,7 +48,7 @@ GG.Drake = Ember.Object.extend
       return hid
     else
       return {a: [], b: []}
-  ).property('genotype', 'hiddenGenes', 'revealedAlleles')
+  ).property('genotype', 'hiddenGenes', 'revealedAlleles').volatile()
 
   markRevealed: (side, allele) ->
     rAlleles = @get 'revealedAlleles'

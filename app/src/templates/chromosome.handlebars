@@ -5,7 +5,7 @@
   {{/view}}
 {{/each}}
 {{#each allele in view.hiddenAlleles }}
-  {{#view GG.AlleleView valueBinding="allele" sideBinding="parentView.side" drakeBinding="parentView.content" hidden="true"}}
+  {{#view GG.AlleleView valueBinding="allele" sideBinding="view.side" drakeBinding="view.content" hidden="true"}}
     {{view.displayValue}}
   {{/view}}
 {{/each}}
