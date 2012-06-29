@@ -1,11 +1,11 @@
 <div class="alleles-container">
-{{#each visibleAlleles}}
-  {{#view GG.AlleleView valueBinding="this"}}
+{{#each allele in visibleAlleles }}
+  {{#view GG.AlleleView valueBinding="allele" }}
     {{displayValue}}
   {{/view}}
 {{/each}}
-{{#each hiddenAlleles}}
-  {{#view GG.AlleleView valueBinding="this" hidden="true"}}
+{{#each allele in hiddenAlleles }}
+  {{#view GG.AlleleView valueBinding="allele" sideBinding="parentView.side" drakeBinding="parentView.content" hidden="true"}}
     {{displayValue}}
   {{/view}}
 {{/each}}

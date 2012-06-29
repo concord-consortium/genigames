@@ -5,10 +5,15 @@ GG.Task = Ember.Object.extend
 GG.Drake = Ember.Object.extend
   visibleGenesBinding: 'GG.drakeController.visibleGenes'
   hiddenGenesBinding: 'GG.drakeController.hiddenGenes'
+  revealedAlleles: null
 
   biologicaOrganism : null            # organism object created by GWT
   sex               : null
   imageURL          : null
+
+  init: ->
+    @_super()
+    @set 'revealedAlleles', {a: [], b: []}
 
   genotype: (->
     alleleString = @getPath 'biologicaOrganism.alleles'
@@ -18,12 +23,38 @@ GG.Drake = Ember.Object.extend
   ).property('biologicaOrganism').cacheable()
 
   visibleGenotype: (->
-    GG.genetics.filterGenotype @get('genotype'), @get('visibleGenes') unless !@get('visibleGenes')
-  ).property('genotype', 'visibleGenes').cacheable()
+    if @get('visibleGenes')?
+      vis = GG.genetics.filterGenotype @get('genotype'), @get('visibleGenes')
+      @get('revealedAlleles').a.forEach( (item, index, enumerable) ->
+        vis.a.push(item) if vis.a.indexOf(item) == -1
+      )
+      @get('revealedAlleles').b.forEach( (item, index, enumerable) ->
+        vis.b.push(item) if vis.b.indexOf(item) == -1
+      )
+      return vis
+    else
+      return {a: [], b: []}
+  ).property('genotype', 'visibleGenes', 'revealedAlleles')
 
   hiddenGenotype: (->
-    GG.genetics.filterGenotype @get('genotype'), @get('hiddenGenes') unless !@get('hiddenGenes')
-  ).property('genotype', 'hiddenGenes').cacheable()
+    if @get('hiddenGenes')?
+      hid = GG.genetics.filterGenotype @get('genotype'), @get('hiddenGenes')
+      @get('revealedAlleles').a.forEach( (item, index, enumerable) ->
+        hid.a.splice(hid.a.indexOf(item), 1) if hid.a.indexOf(item) != -1
+      )
+      @get('revealedAlleles').b.forEach( (item, index, enumerable) ->
+        hid.b.splice(hid.b.indexOf(item), 1) if hid.b.indexOf(item) != -1
+      )
+      return hid
+    else
+      return {a: [], b: []}
+  ).property('genotype', 'hiddenGenes', 'revealedAlleles')
+
+  markRevealed: (side, allele) ->
+    rAlleles = @get 'revealedAlleles'
+    if rAlleles[side].indexOf(allele) == -1
+      rAlleles[side].push(allele)
+      @set 'revealedAlleles', rAlleles
 
   female: (->
     @get('sex') == GG.FEMALE
