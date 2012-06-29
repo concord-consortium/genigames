@@ -68,6 +68,7 @@ GG.breedingController = Ember.Object.create
 
   breedDrake: ->
     if @get('mother') && @get('father')
+      GG.statemanager.send 'incrementCounter'
       @set 'isBreeding', true
       setTimeout =>
         if (GG.offspringController.get('length') >= 3)
