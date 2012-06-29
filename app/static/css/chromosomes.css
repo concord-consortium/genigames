@@ -43,6 +43,11 @@
   color: white;
   font-weight: bold;
   padding-top: 4px;
+  cursor: default;
+}
+
+.allele.revealable {
+  cursor: pointer;
 }
 
 .hidden {

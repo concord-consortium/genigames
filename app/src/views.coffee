@@ -46,7 +46,8 @@ GG.BreedButtonView = Ember.View.extend
     GG.statemanager.send('breedDrake')
 
 GG.AlleleView = Ember.View.extend
-  classNames: ['allele']
+  classNameBindings: ['defaultClassNames', 'hidden:revealable']
+  defaultClassNames: 'allele'
   value: ''
   hidden: false
   displayValue: (->
