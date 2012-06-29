@@ -13,7 +13,9 @@ GG.statemanager = Ember.StateManager.create
 
     showingBreeder: Ember.State.create
       enter: ->
-        # animate machine coming down and wings opening
+        setTimeout ->
+          $('#breeding-apparatus').animate({"top":"0px"},1200,'easeOutBounce')
+        , 1000
 
       parentSelected: (manager, parent) ->
         whichSelection = if parent.get('sex') is GG.FEMALE then 'selectedMother' else 'selectedFather'

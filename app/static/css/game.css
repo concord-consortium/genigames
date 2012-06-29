@@ -10,6 +10,11 @@
   position: absolute;
 }
 
+#breeding-apparatus {
+  position: absolute;
+  top: -650px;
+}
+
 #breeder {
   position: absolute;
   background-image: url('../images/breeder2.png');
