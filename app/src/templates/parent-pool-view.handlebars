@@ -1,11 +1,11 @@
 <div class="parent-pool">
-  {{#each content}}
+  {{#each view.content}}
     <a href="#" {{action "drakeSelected"}}>
       {{view GG.DrakeView contentBinding="this" width="100"}}
     </a>
   {{/each}}
 </div>
-{{view expanderButton}}
-{{#with controller}}
+{{view view.expanderButton}}
+{{#with view.controller}}
   {{view GG.ChromosomePanelView controllerBinding="this"}}
 {{/with}}

@@ -94,7 +94,7 @@ GG.ChromoView = Ember.View.extend
 
 GG.ChromosomePanelView = Ember.View.extend
   templateName: 'chromosome-panel'
-  hiddenBinding: '*controller.hidden'
+  hiddenBinding: 'controller.hidden'
   defaultClass: 'chromosome-panel'
   classNameBindings: ['hidden','defaultClass']
 

@@ -25,11 +25,11 @@ GG.parentController = Ember.ArrayController.create
 
   females: (->
     drake for drake in @get('content') when drake.sex is GG.FEMALE
-  ).property('content.@each').cacheable()
+  ).property('content.@each')
 
   males: (->
     drake for drake in @get('content') when drake.sex is GG.MALE
-  ).property('content.@each').cacheable()
+  ).property('content.@each')
 
   selectMother: (drake) ->
     if drake.sex isnt GG.FEMALE then throw "GG.parentController.selectMother: tried to set a non-female as mother"

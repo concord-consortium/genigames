@@ -20,7 +20,7 @@ GG.Drake = Ember.Object.extend
 
     a: alleleString.match(/a:([^,])*/g).map (short) -> short.match(/[^:]+$/)[0]
     b: alleleString.match(/b:([^,])*/g).map (short) -> short.match(/[^:]+$/)[0]
-  ).property('biologicaOrganism').cacheable()
+  ).property('biologicaOrganism')
 
   visibleGenotype: (->
     if @get('visibleGenes')?
