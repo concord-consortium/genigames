@@ -1,6 +1,7 @@
 GG.Task = Ember.Object.extend
   visibleGenes: null
-
+  npc: null
+  showBubble: false
 
 GG.Drake = Ember.Object.extend
   visibleGenesBinding: 'GG.drakeController.visibleGenes'
@@ -84,3 +85,8 @@ GG.Events =
   STARTED_TASK    : "Started task"
   SELECTED_PARENT : "Selected parent"
   BRED_DRAGON     : "Bred dragon"
+
+GG.TaskNPC = Ember.Object.extend
+  name: null
+  imageURL: null
+  task: null

@@ -1,0 +1,13 @@
+.npc {
+  position: absolute;
+}
+
+.cousin-it {
+  top: 497px;
+  left: 650px;
+}
+
+.cousin-it .bubble {
+  margin-left: 20px;
+}
+

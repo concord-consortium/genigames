@@ -6,16 +6,27 @@ STATES:
 ###
 
 GG.statemanager = Ember.StateManager.create
-  initialState: 'inTask'
+  initialState: 'loading'
+
+  loading: Ember.State.create
+
+  inTown: Ember.State.create
+    enter: ->
+      firstTask = GG.tasksController.get 'firstObject'
+      setTimeout =>
+        firstTask.set('showBubble', true)
+      , 1000
+
+    npcSelected: (manager, task) ->
+      GG.tasksController.npcSelected(task)
+
 
   inTask: Ember.State.create
     initialState: 'showingBreeder'
 
     showingBreeder: Ember.State.create
       enter: ->
-        setTimeout ->
-          $('#breeding-apparatus').animate({"top":"0px"},1200,'easeOutBounce')
-        , 1000
+        $('#breeding-apparatus').animate({"top":"0px"},1200,'easeOutBounce')
 
       parentSelected: (manager, parent) ->
         whichSelection = if parent.get('sex') is GG.FEMALE then 'selectedMother' else 'selectedFather'

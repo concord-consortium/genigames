@@ -123,3 +123,41 @@ GG.EggView = Ember.View.extend
 GG.MoveCounter = Ember.View.extend
   templateName: 'move-counter'
   classNames: ['move-counter']
+
+GG.TownView = Ember.View.extend
+  templateName: 'town'
+  contentBinding: 'GG.tasksController'
+
+  npcSelected: (evt) ->
+    GG.statemanager.send 'npcSelected', evt.context
+
+GG.TaskNPCView = Ember.View.extend
+  tagName            : 'div'
+  classNameBindings  : ['npc', 'npcId']
+  npc                : 'npc'
+  npcId              : (->
+    imageURL = @getPath 'content.npc.imageURL'
+    /([^\.\/]+)[\.]/.exec(imageURL)[1]
+  ).property('src')
+
+GG.NPCView = Ember.View.extend
+  tagName            : 'img'
+  classNames         : ['character']
+  attributeBindings  : ['src']
+  srcBinding         : 'content.npc.imageURL'
+
+GG.NPCBubbleQuestionView = Ember.View.extend
+  tagName            : 'img'
+  classNames         : ['bubble']
+  classNameBindings  : ['hidden']
+  attributeBindings  : ['src']
+  src                : '../images/bubble-question.png'
+  hiddenBinding      : Ember.Binding.oneWay('content.showBubble').not()
+  wasShown           : (->
+    if (!@get 'hidden')
+      setTimeout =>
+        for i in [0..2]
+          @$().animate({top: "-=20px"}, 200, 'easeOutCubic')
+              .animate({top: "+=20px"}, 200, 'easeInCubic')
+      , 200
+  ).observes('hidden')

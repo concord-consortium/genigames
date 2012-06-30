@@ -1,0 +1,10 @@
+<div id="town">
+  {{#each view.content}}
+    <a href="#" {{action "npcSelected"}}>
+      {{#view GG.TaskNPCView contentBinding="this"}}
+          {{view GG.NPCBubbleQuestionView contentBinding="this"}}
+          {{view GG.NPCView contentBinding="this"}}
+      {{/view}}
+    </a>
+  {{/each}}
+</div>

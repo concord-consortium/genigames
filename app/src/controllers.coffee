@@ -12,11 +12,14 @@ GG.tasksController = Ember.ArrayController.create
     else
       throw "GG.tasksController.setCurrentTask: argument is not a known task"
 
+  npcSelected: (task) ->
+    task.set 'showBubble', false
+    @setCurrentTask task
+    GG.statemanager.goToState('inTask')
 
 GG.drakeController = Ember.Object.create
   visibleGenesBinding: 'GG.tasksController.currentTask.visibleGenes'
   hiddenGenesBinding: 'GG.tasksController.currentTask.hiddenGenes'
-
 
 GG.parentController = Ember.ArrayController.create
   content: []
@@ -130,7 +133,6 @@ GG.logController = Ember.Object.create
 
     # for a quick demo, use window.socket
     socket?.emit 'log', logData
-    console.log logData
 
     @eventQueue.push GG.LogEvent.create logData
 
