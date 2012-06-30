@@ -3,6 +3,10 @@
   "task": {
     "name": "Sample Task",
     "visibleGenes": ["T","W"],
-    "hiddenGenes": ["Hl","Rh"]
+    "hiddenGenes": ["Hl","Rh"],
+    "npc": {
+      "name": "Cousin It",
+      "imageURL": "../images/cousin-it.png"
+    }
   }
 }
