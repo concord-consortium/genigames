@@ -8,6 +8,11 @@
 }
 
 .cousin-it .bubble {
+  position: absolute;
   margin-left: 20px;
 }
 
+.cousin-it .character {
+  position: absolute;
+  top: 129px;
+}
