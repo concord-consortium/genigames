@@ -1,3 +1,5 @@
+minispade.require 'genigames/controller-mixins'
+
 GG.tasksController = Ember.ArrayController.create
   content    : []
   currentTask: null
@@ -59,7 +61,8 @@ GG.motherPoolController = Ember.ArrayController.create
   drakeSelected: (drake) ->
     GG.parentController.selectMother drake
 
-GG.offspringController = Ember.ArrayController.create
+GG.offspringController = Ember.ArrayController.create GG.fifoArrayController,
+  maxLength: 3
   content: []
 
 
@@ -74,8 +77,6 @@ GG.breedingController = Ember.Object.create
       GG.statemanager.send 'incrementCounter'
       @set 'isBreeding', true
       setTimeout =>
-        if (GG.offspringController.get('length') >= 3)
-          GG.offspringController.removeObject(GG.offspringController.get('firstObject'))
         GG.offspringController.pushObject @get 'child'
         setTimeout =>
           @set 'isBreeding', false
