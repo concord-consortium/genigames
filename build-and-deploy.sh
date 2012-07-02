@@ -48,6 +48,7 @@ bundle exec rakep build
 echo "Updating deploy branch"
 
 git checkout $DEPLOY_BRANCH
+git pull
 rm -rf static
 cp -r build static
 
