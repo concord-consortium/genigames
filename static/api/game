@@ -3,6 +3,15 @@
   "task": {
     "name": "Sample Task",
     "visibleGenes": ["T","W"],
-    "hiddenGenes": ["Hl","Rh"]
+    "hiddenGenes": ["Hl","Rh"],
+    "npc": {
+      "name": "Cousin It",
+      "imageURL": "../images/cousin-it.png",
+      "speech": {
+        "text": "Hello, drake breeder!<br/><br/>I'm somebody-or-other, the something-or-other.<br/><br/>I have a very important task for you: Breed something!",
+        "accept": "Ok",
+        "decline": "Maybe later"
+      }
+    }
   }
 }
