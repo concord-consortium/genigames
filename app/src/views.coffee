@@ -1,3 +1,5 @@
+minispade.require 'genigames/view-mixins'
+
 GG.BreederView = Ember.View.extend
   templateName: 'breeder-view'
 
@@ -99,26 +101,21 @@ GG.ChromosomePanelView = Ember.View.extend
   defaultClass: 'chromosome-panel'
   classNameBindings: ['hidden','defaultClass']
 
-GG.EggView = Ember.View.extend
+GG.EggView = Ember.View.extend GG.Animation,
   tagName: 'div'
   hiddenBinding: Ember.Binding.oneWay('GG.breedingController.isBreeding').not()
   classNameBindings: ['hidden']
-  animationObserver: (->
-    @startAnimation() if (!@get 'hidden')
-  ).observes('hidden')
-  startAnimation: ->
-    $('#egg').css({backgroundPosition: '0px 0px'})
-    $('#egg').animate({rotate: '0deg'}, 0)
-    setTimeout ->
-      $('#egg').animate({rotate: '+=20deg'}, 50)
-        .animate({rotate: '-=20deg'}, 50)
-        .animate({rotate: '+=20deg'}, 50)
-        .animate({rotate: '-=20deg'}, 50)
-        .animate({rotate: '+=20deg'}, 50)
-        .animate {rotate: '-=60deg'}, 50, ->
-          $('#egg').animate({rotate: '+=60deg',0}, 0)
-            .css({backgroundPosition: '0px -140px'})
-    , 700
+  onShow: ->
+    @$().css({backgroundPosition: '0px 0px'})
+    @animate(properties: {rotate: '0deg'}, delay: 0)
+    @animateSequence
+      sequence:
+        [properties: {rotate: '+=20deg'}, duration: 50,
+         properties: {rotate: '-=20deg'}, duration: 50]
+      delay: 700
+      repeat: 3
+      callback: =>
+        @$().css({backgroundPosition: '0px -140px'})
 
 GG.MoveCounter = Ember.View.extend
   templateName: 'move-counter'
@@ -146,18 +143,17 @@ GG.NPCView = Ember.View.extend
   attributeBindings  : ['src']
   srcBinding         : 'content.npc.imageURL'
 
-GG.NPCBubbleQuestionView = Ember.View.extend
+GG.NPCBubbleQuestionView = Ember.View.extend GG.Animation,
   tagName            : 'img'
   classNames         : ['bubble']
   classNameBindings  : ['hidden']
   attributeBindings  : ['src']
   src                : '../images/bubble-question.png'
   hiddenBinding      : Ember.Binding.oneWay('content.showBubble').not()
-  wasShown           : (->
-    if (!@get 'hidden')
-      setTimeout =>
-        for i in [0..2]
-          @$().animate({top: "-=20px"}, 200, 'easeOutCubic')
-              .animate({top: "+=20px"}, 200, 'easeInCubic')
-      , 200
-  ).observes('hidden')
+  onShow: ->
+    @animateSequence
+      sequence:
+        [properties: {top: "-=20px"}, duration: 200, easing: 'easeOutCubic',
+         properties: {top: "+=20px"}, duration: 200, easing: 'easeInCubic']
+      delay: 200
+      repeat: 2
