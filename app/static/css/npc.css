@@ -16,3 +16,30 @@
   position: absolute;
   top: 129px;
 }
+
+.speech-bubble {
+  position: absolute;
+  left: -250px;
+  bottom: 14px;
+  font-size: 1.2em;
+  width: 225px;
+  background-color: white;
+  padding: 23px;
+  -moz-border-radius: 35px;
+  -webkit-border-radius: 35px;
+  -khtml-border-radius: 35px;
+  border-radius: 35px;
+}
+
+.speech-bubble:after {
+  content:"";
+  position:absolute;
+  bottom:-30px;
+  right:40px;
+  border-width:0 20px 30px 0;
+  border-style:solid;
+  border-color:transparent #fff;
+    /* reduce the damage in FF3.0 */
+    display:block;
+    width:0;
+}
