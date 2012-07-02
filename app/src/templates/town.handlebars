@@ -1,10 +1,16 @@
 <div id="town">
   {{#each view.content}}
-    <a href="#" {{action "npcSelected"}}>
-      {{#view GG.TaskNPCView contentBinding="this"}}
-          {{view GG.NPCBubbleQuestionView contentBinding="this"}}
-          {{view GG.NPCView contentBinding="this"}}
+    {{#view GG.TaskNPCView contentBinding="this"}}
+      <a href="#" {{action "npcSelected"}}>
+        {{view GG.NPCQuestionBubbleView contentBinding="this"}}
+      </a>
+      {{#view GG.NPCSpeechBubbleView contentBinding="this"}}
+        {{view.text}}
+        <br/><br/>
+        <button {{action "accept"}}>{{view.content.npc.speech.accept}}</button>
+        <button {{action "decline"}}>{{view.content.npc.speech.decline}}</button>
       {{/view}}
-    </a>
+      {{view GG.NPCView contentBinding="this"}}
+    {{/view}}
   {{/each}}
 </div>

@@ -125,9 +125,6 @@ GG.TownView = Ember.View.extend
   templateName: 'town'
   contentBinding: 'GG.tasksController'
 
-  npcSelected: (evt) ->
-    GG.statemanager.send 'npcSelected', evt.context
-
 GG.TaskNPCView = Ember.View.extend
   tagName            : 'div'
   classNameBindings  : ['npc', 'npcId']
@@ -136,6 +133,8 @@ GG.TaskNPCView = Ember.View.extend
     imageURL = @getPath 'content.npc.imageURL'
     /([^\.\/]+)[\.]/.exec(imageURL)[1]
   ).property('src')
+  npcSelected: (evt) ->
+    GG.statemanager.send 'npcSelected', evt.context
 
 GG.NPCView = Ember.View.extend
   tagName            : 'img'
@@ -143,13 +142,13 @@ GG.NPCView = Ember.View.extend
   attributeBindings  : ['src']
   srcBinding         : 'content.npc.imageURL'
 
-GG.NPCBubbleQuestionView = Ember.View.extend GG.Animation,
+GG.NPCQuestionBubbleView = Ember.View.extend GG.Animation,
   tagName            : 'img'
   classNames         : ['bubble']
   classNameBindings  : ['hidden']
   attributeBindings  : ['src']
   src                : '../images/bubble-question.png'
-  hiddenBinding      : Ember.Binding.oneWay('content.showBubble').not()
+  hiddenBinding      : Ember.Binding.oneWay('content.showQuestionBubble').not()
   onShow: ->
     @animateSequence
       sequence:
@@ -157,3 +156,16 @@ GG.NPCBubbleQuestionView = Ember.View.extend GG.Animation,
          properties: {top: "+=20px"}, duration: 200, easing: 'easeInCubic']
       delay: 200
       repeat: 2
+
+GG.NPCSpeechBubbleView = Ember.View.extend
+  tagName            : 'div'
+  text               : (->
+    return new Handlebars.SafeString(@getPath 'content.npc.speech.text')
+  ).property('content')
+  classNames         : ['speech-bubble']
+  classNameBindings  : ['hidden']
+  hiddenBinding      : Ember.Binding.oneWay('content.showSpeechBubble').not()
+  accept: ->
+    GG.statemanager.send 'accept', @get 'content'
+  decline: ->
+    GG.statemanager.send 'decline'

@@ -1,7 +1,8 @@
 GG.Task = Ember.Object.extend
   visibleGenes: null
   npc: null
-  showBubble: false
+  showQuestionBubble: false
+  showSpeechBubble: false
 
 GG.Drake = Ember.Object.extend
   visibleGenesBinding: 'GG.drakeController.visibleGenes'

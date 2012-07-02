@@ -11,14 +11,27 @@ GG.statemanager = Ember.StateManager.create
   loading: Ember.State.create
 
   inTown: Ember.State.create
-    enter: ->
-      firstTask = GG.tasksController.get 'firstObject'
-      setTimeout =>
-        firstTask.set('showBubble', true)
-      , 1000
+    initialState: 'npcsWaiting'
 
-    npcSelected: (manager, task) ->
-      GG.tasksController.npcSelected(task)
+    npcsWaiting: Ember.State.create
+      enter: ->
+        task.set('showQuestionBubble', false) for task in GG.tasksController.content
+        task.set('showSpeechBubble', false) for task in GG.tasksController.content
+
+        firstTask = GG.tasksController.get 'firstObject'
+        setTimeout =>
+          firstTask.set('showQuestionBubble', true)
+        , 1000
+
+      npcSelected: (manager, task) ->
+        GG.tasksController.showTaskDescription task
+        GG.statemanager.goToState 'npcShowingTask'
+
+    npcShowingTask: Ember.State.create
+      accept: (manager, task) ->
+        GG.tasksController.taskAccepted task
+      decline: ->
+        GG.statemanager.goToState 'npcsWaiting'
 
 
   inTask: Ember.State.create

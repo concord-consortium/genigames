@@ -14,8 +14,12 @@ GG.tasksController = Ember.ArrayController.create
     else
       throw "GG.tasksController.setCurrentTask: argument is not a known task"
 
-  npcSelected: (task) ->
-    task.set 'showBubble', false
+  showTaskDescription: (task) ->
+    task.set 'showQuestionBubble', false
+    task.set 'showSpeechBubble', true
+
+  taskAccepted: (task) ->
+    task.set 'showSpeechBubble', false
     @setCurrentTask task
     GG.statemanager.goToState('inTask')
 
