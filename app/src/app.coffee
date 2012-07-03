@@ -38,13 +38,6 @@ $ ->
     GG.tasksController.setCurrentTask task
     GG.statemanager.goToState 'inTown'
 
-  setTimeout ->
-    for i in [0..5]
-      GenGWT.generateAliveDragonWithSex i%2, (org) ->
-        GG.parentController.pushObject GG.Drake.createFromBiologicaOrganism org
-
-  , 2000
-
   # socket.io hello world stuff
   socket = window.socket = io.connect "#{location.protocol}//#{location.host}/"
   socket.on 'news', (data) ->

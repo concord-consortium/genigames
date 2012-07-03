@@ -1,5 +1,7 @@
 GG.Task = Ember.Object.extend
   visibleGenes: null
+  hiddenGenes: null
+  initialDrakes: null
   npc: null
   showQuestionBubble: false
   showSpeechBubble: false

@@ -11,6 +11,16 @@ GG.tasksController = Ember.ArrayController.create
     return if task is @currentTask
     if @indexOf(task) >= 0
       @set 'currentTask', task
+      setTimeout ->
+        for femaleAlleles in task.initialDrakes.females
+          GenGWT.generateAliveDragonWithAlleleStringAndSex femaleAlleles, 0, (org) ->
+            GG.parentController.pushObject GG.Drake.createFromBiologicaOrganism org
+
+        for maleAlleles in task.initialDrakes.males
+          GenGWT.generateAliveDragonWithAlleleStringAndSex maleAlleles, 1, (org) ->
+            GG.parentController.pushObject GG.Drake.createFromBiologicaOrganism org
+
+      , 1000
       GG.logController.logEvent GG.Events.STARTED_TASK, name: task.get('name')
     else
       throw "GG.tasksController.setCurrentTask: argument is not a known task"
