@@ -8,6 +8,7 @@ GG.tasksController = Ember.ArrayController.create
     @pushObject task
 
   setCurrentTask: (task) ->
+    return if task is @currentTask
     if @indexOf(task) >= 0
       @set 'currentTask', task
       GG.logController.logEvent GG.Events.STARTED_TASK, name: task.get('name')
