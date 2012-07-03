@@ -93,7 +93,10 @@ GG.ChromoView = Ember.View.extend
   right: (->
     @get('chromo') == 'Y' or @get('side') == 'b'
   ).property('chromo','side')
-  classNameBindings: ['defaultClass', 'chromoName', 'right']
+  parent: (->
+    if @get('side') == 'a' then 'mother' else 'father'
+  ).property('chromo','side')
+  classNameBindings: ['defaultClass', 'chromoName', 'right', 'parent']
 
 GG.ChromosomePanelView = Ember.View.extend
   templateName: 'chromosome-panel'
