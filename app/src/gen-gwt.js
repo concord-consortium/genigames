@@ -36,6 +36,17 @@ GenGWT = {
       }
     },
 
+    generateAliveDragonWithAlleleStringAndSex: function(alleles, sex, callback) {
+      var wrappedCallback = function (gOrg){
+        if (GenGWT.isAlive(gOrg)){
+          callback(gOrg);
+        } else {
+          GenGWT.generateAliveDragonWithAlleleStringAndSex(alleles, sex, callback);
+        }
+      }
+      generateDragonWithAlleleStringAndSex(alleles, sex, wrappedCallback);
+    },
+
     breedDragon: function(mother, father, callback) {
         breedDragon(mother, father, this.wrapCallback(callback), this.failure);
     },
