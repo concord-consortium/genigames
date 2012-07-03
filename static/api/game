@@ -4,6 +4,10 @@
     "name": "Sample Task",
     "visibleGenes": ["T","W"],
     "hiddenGenes": ["Hl","Rh"],
+    "initialDrakes": {
+      "females": ["a:W,b:W", "a:W,b:W", "a:W,b:w"],
+      "males": ["a:W,b:W", "a:W,b:w", "a:W,b:W"]
+    },
     "npc": {
       "name": "Cousin It",
       "imageURL": "../images/cousin-it.png",
