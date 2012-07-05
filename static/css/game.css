@@ -58,6 +58,7 @@
   height: 15px;
   left: 0px;
   top: 242px;
+  cursor: pointer;
 }
 
 #parent-fathers-pool-container .parent-pool {
@@ -65,6 +66,16 @@
   width: 100px;
   top: 45px;
   left: 9px;
+}
+
+#parent-fathers-pool-container .meiosis-button {
+  position: absolute;
+  top: 200px;
+  left: 245px;
+  height: 75px;
+  width: 40px;
+  z-index: 2;
+  cursor: pointer;
 }
 
 #parent-mothers-pool-container {
@@ -83,6 +94,7 @@
   height: 15px;
   right: 0px;
   top: 242px;
+  cursor: pointer;
 }
 
 #parent-mothers-pool-container .parent-pool {
@@ -90,6 +102,16 @@
   width: 100px;
   top: 45px;
   left: 165px;
+}
+
+#parent-mothers-pool-container .meiosis-button {
+  position: absolute;
+  top: 200px;
+  left: 0;
+  height: 75px;
+  width: 40px;
+  z-index: 2;
+  cursor: pointer;
 }
 
 #offspring-pool {
@@ -140,14 +162,16 @@
   background-position: 0px 0px
 }
 
-.male-parents img {
+.male-parents img { /*
+== unflipped for now because in Chrome, these flipped images
+   move around whenever any other element moves over them... ==
   -moz-transform: scaleX(-1);
   -o-transform: scaleX(-1);
   -webkit-transform: scaleX(-1);
   transform: scaleX(-1);
   filter: FlipH;
   -ms-filter: "FlipH";
-}
+*/}
 
 .move-counter {
   position: absolute;

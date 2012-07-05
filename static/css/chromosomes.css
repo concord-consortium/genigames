@@ -18,16 +18,31 @@
   left: 57px;
 }
 .chromo-1 {
-  background: top left no-repeat url('../images/chromo-1.png');
   top: 0px;
 }
+.chromo-1.mother {
+  background: top left no-repeat url('../images/chromo-1-mother.png');
+}
+.chromo-1.father {
+  background: top left no-repeat url('../images/chromo-1-father.png');
+}
 .chromo-2 {
-  background: top left no-repeat url('../images/chromo-2.png');
   top: 150px;
 }
+.chromo-2.mother {
+  background: top left no-repeat url('../images/chromo-2-mother.png');
+}
+.chromo-2.father {
+  background: top left no-repeat url('../images/chromo-2-father.png');
+}
 .chromo-X {
-  background: top left no-repeat url('../images/chromo-X.png');
   top: 280px;
+}
+.chromo-X.mother {
+  background: top left no-repeat url('../images/chromo-X-mother.png');
+}
+.chromo-X.father {
+  background: top left no-repeat url('../images/chromo-X-father.png');
 }
 .chromo-Y {
   background: top left no-repeat url('../images/chromo-Y.png');
@@ -48,4 +63,19 @@
 
 .allele.revealable {
   cursor: pointer;
+}
+
+.cell {
+  background-color: rgba(34, 224, 34, 0.55);
+  border-top: 40px solid transparent;
+  z-index: 1000;
+  height: 450px;
+  width: 250px;
+  top: -20px;
+  left: -50px;
+  position: absolute;
+  -moz-border-radius: 90px;
+  -webkit-border-radius: 90px;
+  -khtml-border-radius: 90px;
+  border-radius: 90px;
 }
