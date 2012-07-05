@@ -33,7 +33,13 @@ $ ->
   # GET /api/game
   # set the player's task according to the game specification
   $.getJSON 'api/game', (data) ->
-    task = GG.Task.create data.task
+    # for now, find the task at the appropriate key of the game spec
+    # this will change
+    if (hash = document.location.hash)
+      taskId = hash.substr(1, hash.length);
+    else
+      taskId = "task"
+    task = GG.Task.create data[taskId]
     GG.tasksController.addTask task
     GG.tasksController.setCurrentTask task
     GG.statemanager.goToState 'inTown'
