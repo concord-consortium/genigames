@@ -89,7 +89,13 @@ GG.statemanager = Ember.StateManager.create
         @set 'fathersExpanded', !@get 'fathersExpanded'
 
       startFatherMeiosis: ->
+        if GG.breedingController.get 'father'
+          GG.animateMeiosis '#parent-fathers-pool-container'
+
       startMotherMeiosis: ->
+        if GG.breedingController.get 'mother'
+          GG.animateMeiosis '#parent-mothers-pool-container'
+
       incrementCounter: ->
         GG.moveController.increment()
 

@@ -1,4 +1,5 @@
 minispade.require 'genigames/view-mixins'
+minispade.require 'genigames/meiosis-animation'
 
 GG.BreederView = Ember.View.extend
   templateName: 'breeder-view'
