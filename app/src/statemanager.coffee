@@ -88,6 +88,8 @@ GG.statemanager = Ember.StateManager.create
 
         @set 'fathersExpanded', !@get 'fathersExpanded'
 
+      startFatherMeiosis: ->
+      startMotherMeiosis: ->
       incrementCounter: ->
         GG.moveController.increment()
 

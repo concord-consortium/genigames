@@ -68,6 +68,16 @@
   left: 9px;
 }
 
+#parent-fathers-pool-container .meiosis-button {
+  position: absolute;
+  top: 200px;
+  left: 245px;
+  height: 75px;
+  width: 40px;
+  z-index: 2;
+  cursor: pointer;
+}
+
 #parent-mothers-pool-container {
   background: top right no-repeat url('../images/parent-pane-right.png');
   position: absolute;
@@ -92,6 +102,16 @@
   width: 100px;
   top: 45px;
   left: 165px;
+}
+
+#parent-mothers-pool-container .meiosis-button {
+  position: absolute;
+  top: 200px;
+  left: 0;
+  height: 75px;
+  width: 40px;
+  z-index: 2;
+  cursor: pointer;
 }
 
 #offspring-pool {
