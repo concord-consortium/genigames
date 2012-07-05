@@ -58,6 +58,7 @@
   height: 15px;
   left: 0px;
   top: 242px;
+  cursor: pointer;
 }
 
 #parent-fathers-pool-container .parent-pool {
@@ -83,6 +84,7 @@
   height: 15px;
   right: 0px;
   top: 242px;
+  cursor: pointer;
 }
 
 #parent-mothers-pool-container .parent-pool {
