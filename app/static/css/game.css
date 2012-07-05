@@ -142,14 +142,16 @@
   background-position: 0px 0px
 }
 
-.male-parents img {
+.male-parents img { /*
+== unflipped for now because in Chrome, these flipped images
+   move around whenever any other element moves over them... ==
   -moz-transform: scaleX(-1);
   -o-transform: scaleX(-1);
   -webkit-transform: scaleX(-1);
   transform: scaleX(-1);
   filter: FlipH;
   -ms-filter: "FlipH";
-}
+*/}
 
 .move-counter {
   position: absolute;
