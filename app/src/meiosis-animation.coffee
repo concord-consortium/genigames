@@ -15,7 +15,7 @@ GG.animateMeiosis = (chromosomeContainerName) ->
   chromosomes.each (i, chromo) ->
     $chromo = $(chromo)
     $chromo.find('.alleles-container').remove()
-    left = $chromo.css("left");
+    left = $chromo.css("left")
     if (left == "auto") then left = 0
     $chromo.css({left: left})
     $chromo.css({left: "+=70px"})
@@ -96,8 +96,8 @@ GG.animateMeiosis = (chromosomeContainerName) ->
             $('.cell').css({backgroundColor: "transparent"})
             container.append($("<div class='cell cell-left cell-top'>").css({top: -19, left: -121, width: 188, height: 260, zIndex: 1}))
             container.append($("<div class='cell cell-right cell-top'>").css({top: -19, left: 78, width: 188, height: 260, zIndex: 1}))
-            container.append($("<div class='cell cell-left cell-bottom'>").css({top: -19, left: -121, width: 188, height: 260, top: 140, zIndex: 1}))
-            container.append($("<div class='cell cell-right cell-bottom'>").css({top: -19, left: 78, width: 188, height: 260, top: 140, zIndex: 1}))
+            container.append($("<div class='cell cell-left cell-bottom'>").css({top: 140, left: -121, width: 188, height: 260, zIndex: 1}))
+            container.append($("<div class='cell cell-right cell-bottom'>").css({top: 140, left: 78, width: 188, height: 260, zIndex: 1}))
             $('.cell-top').animate({height:190}, 800)
             $('.cell-bottom').animate({height:190, top: 210}, 800)
             GG.meiosisIsComplete = true
