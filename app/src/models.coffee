@@ -2,9 +2,20 @@ GG.Task = Ember.Object.extend
   visibleGenes: null
   hiddenGenes: null
   initialDrakes: null
+  targetDrake: null
   npc: null
   showQuestionBubble: false
   showSpeechBubble: false
+  showCompletionBubble: false
+  completed: false
+
+  isComplete: ->
+    # parse required characteristics
+    parsedCharacteristics = @get('targetDrake').split(/\s*,\s*/).map (ch, idx, arr)->
+      ch = ch.toLowerCase()
+      ch.charAt(0).toUpperCase() + ch.slice(1)
+    drake = GG.breedingController.get 'child'
+    drake.hasCharacteristics(parsedCharacteristics)
 
 GG.Drake = Ember.Object.extend
   visibleGenesBinding: 'GG.drakeController.visibleGenes'
@@ -67,6 +78,14 @@ GG.Drake = Ember.Object.extend
   male: (->
     @get('sex') == GG.MALE
   ).property('sex')
+
+  hasCharacteristics: (characteristics) ->
+    gorg = @get 'biologicaOrganism'
+
+    for ch in characteristics
+      has = GenGWT.hasCharacteristic(gorg, ch)
+      return false unless has
+    return true
 
 # a helper for creating a GG.Drake from a Biologica/GWT organism object
 GG.Drake.createFromBiologicaOrganism = (org) ->

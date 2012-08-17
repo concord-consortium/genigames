@@ -181,3 +181,14 @@ GG.NPCSpeechBubbleView = Ember.View.extend
     GG.statemanager.send 'accept', @get 'content'
   decline: ->
     GG.statemanager.send 'decline'
+
+GG.NPCCompletionBubbleView = Ember.View.extend
+  tagName            : 'div'
+  text               : (->
+    return new Handlebars.SafeString(@getPath 'content.npc.speech.completionText')
+  ).property('content')
+  classNames         : ['speech-bubble']
+  classNameBindings  : ['hidden']
+  hiddenBinding      : Ember.Binding.oneWay('content.showCompletionBubble').not()
+  accept: ->
+    GG.tasksController.taskCompleted(@get 'content')

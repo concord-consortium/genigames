@@ -29,10 +29,25 @@ GG.tasksController = Ember.ArrayController.create
     task.set 'showQuestionBubble', false
     task.set 'showSpeechBubble', true
 
+  showTaskCompletion: (task) ->
+    task.set 'showQuestionBubble', false
+    task.set 'showSpeechBubble', false
+    task.set 'showCompletionBubble', true
+
   taskAccepted: (task) ->
     task.set 'showSpeechBubble', false
     @setCurrentTask task
     GG.statemanager.goToState('inTask')
+
+  taskCompleted: (task) ->
+    task.set 'showCompletionBubble', false
+    task.set 'completed', true
+    # @setCurrentTask null
+    GG.statemanager.goToState('inTown')
+
+  isCurrentTaskComplete: ->
+    currentTask = @get 'currentTask'
+    return currentTask.isComplete()
 
 GG.drakeController = Ember.Object.create
   visibleGenesBinding: 'GG.tasksController.currentTask.visibleGenes'
@@ -42,6 +57,11 @@ GG.parentController = Ember.ArrayController.create
   content: []
   selectedMother: null
   selectedFather: null
+
+  reset: ->
+    @set 'selectedMother', null
+    @set 'selectedFather', null
+    @set 'content', []
 
   females: (->
     drake for drake in @get('content') when drake.sex is GG.FEMALE
@@ -95,6 +115,7 @@ GG.breedingController = Ember.Object.create
         GG.offspringController.pushObject @get 'child'
         setTimeout =>
           @set 'isBreeding', false
+          GG.statemanager.send 'checkForTaskCompletion'
         , 600
       , 1200
       GenGWT.breedDragon @getPath('mother.biologicaOrganism'), @getPath('father.biologicaOrganism'), (org) =>

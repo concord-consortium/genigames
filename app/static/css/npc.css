@@ -24,6 +24,7 @@
 
 .speech-bubble {
   position: absolute;
+  z-index: 2;
   left: -250px;
   bottom: 14px;
   font-size: 1.2em;

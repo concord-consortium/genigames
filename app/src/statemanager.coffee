@@ -18,9 +18,15 @@ GG.statemanager = Ember.StateManager.create
         task.set('showQuestionBubble', false) for task in GG.tasksController.content
         task.set('showSpeechBubble', false) for task in GG.tasksController.content
 
-        firstTask = GG.tasksController.get 'firstObject'
+        firstIncompleteTask = null
+        for task in GG.tasksController.content
+          firstIncompleteTask = task unless task.get('completed') or firstIncompleteTask?
+
+        # TODO Go to world view if all tasks are complete?
+        firstIncompleteTask = GG.tasksController.get 'firstObject' unless firstIncompleteTask?
+
         setTimeout =>
-          firstTask.set('showQuestionBubble', true)
+          firstIncompleteTask.set('showQuestionBubble', true)
         , 1000
 
       npcSelected: (manager, task) ->
@@ -38,8 +44,31 @@ GG.statemanager = Ember.StateManager.create
     initialState: 'showingBreeder'
 
     showingBreeder: Ember.State.create
+      initialState: 'working'
+
       enter: ->
         $('#breeding-apparatus').animate({"top":"0px"},1200,'easeOutBounce')
+
+      exit: ->
+        # Reset breeding apparatus
+        # pull in the wings of the apparatus
+        @toggleMotherPool() if @get 'mothersExpanded'
+        @toggleFatherPool() if @get 'fathersExpanded'
+
+        # clear selected parents and parent pools
+        GG.parentController.reset()
+
+        # clear offspring
+        GG.breedingController.set 'child', null
+        GG.offspringController.set 'content', []
+
+        # reset move counter
+        GG.moveController.reset()
+
+        # hide the breeding apparatus
+        setTimeout =>
+          $('#breeding-apparatus').animate({"top":"-850px"},1200,'easeOutBounce')
+        , 1000
 
       parentSelected: (manager, parent) ->
         whichSelection = if parent.get('sex') is GG.FEMALE then 'selectedMother' else 'selectedFather'
@@ -75,15 +104,15 @@ GG.statemanager = Ember.StateManager.create
         fatherContainer = $('#parent-fathers-pool-container')
         fatherPool = $('#parent-fathers-pool-container .parent-pool')
         fatherExpander = $('#parent-fathers-pool-container .expander')
-        if @get 'fathersExpanded'
-          fatherContainer.animate({left: 135},{duration: 1000, complete: ->
-            fatherExpander.css('backgroundPosition','-0px -15px')
-            GG.fatherPoolController.set('hidden', true)
-          })
-        else
+        if not @get 'fathersExpanded'
           fatherContainer.animate({left: 1},{duration: 1000, complete: ->
             fatherExpander.css('backgroundPosition','-0px -0px')
             GG.fatherPoolController.set('hidden', false)
+          })
+        else
+          fatherContainer.animate({left: 135},{duration: 1000, complete: ->
+            fatherExpander.css('backgroundPosition','-0px -15px')
+            GG.fatherPoolController.set('hidden', true)
           })
 
         @set 'fathersExpanded', !@get 'fathersExpanded'
@@ -102,3 +131,12 @@ GG.statemanager = Ember.StateManager.create
       resetCounter: ->
         GG.moveController.reset()
 
+      checkForTaskCompletion: ->
+        if GG.tasksController.isCurrentTaskComplete()
+          GG.statemanager.goToState 'taskCompleted'
+
+      working: Ember.State.create
+      taskCompleted: Ember.State.create
+        enter: ->
+          # TODO Show a congratulations dialog!
+          GG.tasksController.showTaskCompletion(GG.tasksController.get 'currentTask')
