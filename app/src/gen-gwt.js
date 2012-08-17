@@ -16,7 +16,7 @@ GenGWT = {
           } else {
             GenGWT.generateAliveDragonWithSex(sex, callback);
           }
-        }
+        };
         generateDragonWithSex(sex, wrappedCallback, this.failure);
     },
 
@@ -43,7 +43,7 @@ GenGWT = {
         } else {
           GenGWT.generateAliveDragonWithAlleleStringAndSex(alleles, sex, callback);
         }
-      }
+      };
       generateDragonWithAlleleStringAndSex(alleles, sex, wrappedCallback);
     },
 
@@ -120,7 +120,7 @@ GenGWT = {
         }
         return allAreValid;
       }
-      return (!!gOrg.alleles && (!!gOrg.sex || gOrg.sex == 0) && !!gOrg.imageURL);
+      return (!!gOrg.alleles && (!!gOrg.sex || gOrg.sex === 0) && !!gOrg.imageURL);
     },
 
     failure: function(errorMsg) {
@@ -131,6 +131,6 @@ GenGWT = {
 
     isLoaded: function() {
       SC.Logger.log("Checking if loaded. Is:  " + (typeof(generateDragonWithCallback) != "undefined"));
-	    return (typeof(generateDragonWithCallback) != "undefined");
-		}
+      return (typeof(generateDragonWithCallback) != "undefined");
+    }
 };
