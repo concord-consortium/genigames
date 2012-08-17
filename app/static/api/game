@@ -5,6 +5,10 @@
       "name": "Sample Task",
       "visibleGenes": ["T","W"],
       "hiddenGenes": ["Hl","Rh"],
+      "initialDrakes": {
+        "females": ["a:W,b:W","a:W,b:w"],
+        "males": ["a:W,b:W","a:W,b:w"]
+      },
       "npc": {
         "name": "Cousin It",
         "imageURL": "../images/cousin-it.png",
@@ -19,6 +23,10 @@
       "name": "Sample Task2",
       "visibleGenes": ["T","W", "Fl"],
       "hiddenGenes": ["Hl","Rh"],
+      "initialDrakes": {
+        "females": ["a:W,b:W","a:W,b:w"],
+        "males": ["a:W,b:W","a:W,b:w"]
+      },
       "npc": {
         "name": "Cousin It's Brother",
         "imageURL": "../images/cousin-it2.png",
