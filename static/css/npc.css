@@ -7,18 +7,24 @@
   left: 650px;
 }
 
-.cousin-it .bubble {
+.cousin-it2 {
+  top: 497px;
+  left: 450px;
+}
+
+.npc .bubble {
   position: absolute;
   margin-left: 20px;
 }
 
-.cousin-it .character {
+.npc .character {
   position: absolute;
   top: 129px;
 }
 
 .speech-bubble {
   position: absolute;
+  z-index: 2;
   left: -250px;
   bottom: 14px;
   font-size: 1.2em;

@@ -1,39 +1,45 @@
 {
   "version": "1",
-  "task": {
-    "name": "Sample Task",
-    "visibleGenes": ["T","W"],
-    "hiddenGenes": ["Hl","Rh"],
-    "initialDrakes": {
-      "females": ["a:W,b:W", "a:W,b:W", "a:W,b:w"],
-      "males": ["a:W,b:W", "a:W,b:w", "a:W,b:W"]
+  "tasks": [
+    {
+      "name": "Sample Task",
+      "visibleGenes": ["T","W"],
+      "hiddenGenes": ["Hl","Rh"],
+      "initialDrakes": {
+        "females": ["a:W,b:W","a:W,b:w"],
+        "males": ["a:W,b:W","a:W,b:w"]
+      },
+      "targetDrake": "no wings",
+      "npc": {
+        "name": "Cousin It",
+        "imageURL": "../images/cousin-it.png",
+        "speech": {
+          "text": "Hello, drake breeder!<br/><br/>I'm somebody-or-other, the something-or-other.<br/><br/>I have a very important task for you: Breed something!",
+          "completionText": "Good job!<br/><br/>You totally got the drake I needed. Thanks!",
+          "accept": "Ok",
+          "decline": "Maybe later"
+        }
+      }
     },
-    "npc": {
-      "name": "Cousin It",
-      "imageURL": "../images/cousin-it.png",
-      "speech": {
-        "text": "Hello, drake breeder!<br/><br/>I'm somebody-or-other, the something-or-other.<br/><br/>I have a very important task for you: Breed something!",
-        "accept": "Ok",
-        "decline": "Maybe later"
+    {
+      "name": "Sample Task2",
+      "visibleGenes": ["T","W", "Fl"],
+      "hiddenGenes": ["Hl","Rh"],
+      "initialDrakes": {
+        "females": ["a:W,b:W,a:hl","a:W,b:w,a:hl"],
+        "males": ["a:W,b:W,a:hl","a:W,b:w,a:hl"]
+      },
+      "targetDrake": "no wings, no hindlimbs",
+      "npc": {
+        "name": "Cousin It's Brother",
+        "imageURL": "../images/cousin-it2.png",
+        "speech": {
+          "text": "Hello, drake breeder!<br/><br/>I'm Fred, the brother of Cousin It.<br/><br/>I have a very important task for you: Breed something!",
+          "completionText": "Good job!<br/><br/>You totally got the drake I needed. Thanks!",
+          "accept": "Ok",
+          "decline": "Maybe later"
+        }
       }
     }
-  },
-  "task2": {
-    "name": "Sample Task 2",
-    "visibleGenes": ["M"],
-    "hiddenGenes": ["T","W"],
-    "initialDrakes": {
-      "females": ["a:M,b:M", "a:m,b:m"],
-      "males": ["a:M,b:M", "a:m,b:m"]
-    },
-    "npc": {
-      "name": "Cousin It",
-      "imageURL": "../images/cousin-it.png",
-      "speech": {
-        "text": "Hello, drake breeder, this is task 2!<br/><br/>I have a very important task for you: Breed something!",
-        "accept": "Sure!",
-        "decline": "Maybe later"
-      }
-    }
-  }
+  ]
 }
