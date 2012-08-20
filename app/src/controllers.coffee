@@ -25,6 +25,9 @@ GG.tasksController = Ember.ArrayController.create
     else
       throw "GG.tasksController.setCurrentTask: argument is not a known task"
 
+  targetCountBinding: Ember.Binding.oneWay('currentTask.targetCount')
+  matchCountBinding:  Ember.Binding.oneWay('currentTask.matchCount')
+
   showTaskDescription: (task) ->
     task.set 'showQuestionBubble', false
     task.set 'showSpeechBubble', true

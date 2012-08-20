@@ -133,6 +133,15 @@ GG.MoveCounter = Ember.View.extend
   templateName: 'move-counter'
   classNames: ['move-counter']
 
+GG.MatchGoalCounter = Ember.View.extend
+  templateName: 'match-goal-counter'
+  targetCountBinding: Ember.Binding.oneWay('GG.tasksController.targetCount')
+  classNameBindings: ['hidden','defaultClass']
+  defaultClass: 'match-goal-counter'
+  hidden: (->
+    @get('targetCount') <= 1
+  ).property('targetCount')
+
 GG.TownView = Ember.View.extend
   templateName: 'town'
   contentBinding: 'GG.tasksController'

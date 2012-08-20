@@ -3,11 +3,13 @@ GG.Task = Ember.Object.extend
   hiddenGenes: null
   initialDrakes: null
   targetDrake: null
+  targetCount: 1
   npc: null
   showQuestionBubble: false
   showSpeechBubble: false
   showCompletionBubble: false
   completed: false
+  matchCount: 0
 
   isComplete: ->
     # parse required characteristics
@@ -15,7 +17,10 @@ GG.Task = Ember.Object.extend
       ch = ch.toLowerCase()
       ch.charAt(0).toUpperCase() + ch.slice(1)
     drake = GG.breedingController.get 'child'
-    drake.hasCharacteristics(parsedCharacteristics)
+    if drake.hasCharacteristics(parsedCharacteristics)
+      @set 'matchCount', (@get 'matchCount')+1
+      return true if @get('matchCount') >= @get('targetCount')
+    return false
 
 GG.Drake = Ember.Object.extend
   visibleGenesBinding: 'GG.drakeController.visibleGenes'

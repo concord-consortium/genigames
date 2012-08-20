@@ -30,6 +30,7 @@
         "males": ["a:W,b:W,a:hl","a:W,b:w,a:hl"]
       },
       "targetDrake": "no wings, no hindlimbs",
+      "targetCount": 3,
       "npc": {
         "name": "Cousin It's Brother",
         "imageURL": "../images/cousin-it2.png",
