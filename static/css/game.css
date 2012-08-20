@@ -202,3 +202,10 @@
 #moveCounterOnes {
   left: 57px;
 }
+
+.match-goal-counter {
+  position: absolute;
+  left: 490px;
+  top: 500px;
+  width: 100px;
+}
