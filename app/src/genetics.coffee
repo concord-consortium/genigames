@@ -72,15 +72,18 @@ GG.genetics =
 
   ###
     Given an array of alleles and an array of genes, filter the alleles to return only
-    those in the array of genes.
+    those in the array of genes, and return them in the same order as the filter.
     filter(["TK", "m", "W", "dl"], ["T", "D"]) => ["TK", "dl"]
   ###
   filter: (alleles, filter) ->
-    alleles.filter (allele) =>
+    result = []
+    for allele in alleles
       for gene in filter
         if @isAlleleOfGene(allele, gene)
-          return true
-      false
+          result[filter.indexOf(gene)] = allele
+          break
+    result.filter (item)=>
+      item?
 
   filterGenotype: (genotype, filter) ->
     return {a: @filter(genotype.a, filter), b: @filter(genotype.b, filter)}
