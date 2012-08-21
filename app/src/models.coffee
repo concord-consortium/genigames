@@ -88,7 +88,13 @@ GG.Drake = Ember.Object.extend
     gorg = @get 'biologicaOrganism'
 
     for ch in characteristics
-      has = GenGWT.hasCharacteristic(gorg, ch)
+      has = false
+      if ch == "Female"
+        has = @get 'female'
+      else if ch == "Male"
+        has = @get 'male'
+      else
+        has = GenGWT.hasCharacteristic(gorg, ch)
       return false unless has
     return true
 
