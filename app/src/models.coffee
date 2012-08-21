@@ -16,6 +16,7 @@ GG.Task = Ember.Object.extend
     parsedCharacteristics = @get('targetDrake').split(/\s*,\s*/).map (ch, idx, arr)->
       ch = ch.toLowerCase()
       ch.charAt(0).toUpperCase() + ch.slice(1)
+    parsedCharacteristics.unshift("Alive") unless parsedCharacteristics.contains("Alive")
     drake = GG.breedingController.get 'child'
     if drake.hasCharacteristics(parsedCharacteristics)
       @set 'matchCount', (@get 'matchCount')+1
