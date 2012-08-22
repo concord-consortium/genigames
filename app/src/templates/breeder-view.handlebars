@@ -20,9 +20,11 @@
     {{view GG.MoveCounter}}
   </div>
   {{view GG.MatchGoalCounter}}
-  <div id="offspring-pool">
+  {{#view GG.OffspringPoolView id="offspring-pool"}}
     {{#each GG.offspringController}}
-      {{view GG.DrakeView contentBinding="this"}}
+      <a href="#" {{action "drakeSelected"}}>
+        {{view GG.DrakeView contentBinding="this"}}
+      </a>
     {{/each}}
-  </div>
+  {{/view}}
 </div>

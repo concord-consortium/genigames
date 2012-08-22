@@ -78,6 +78,17 @@ GG.statemanager = Ember.StateManager.create
           alleles: parent.getPath('biologicaOrganism.alleles')
           sex: parent.get('sex')
 
+      offspringSelected: (manager, child) ->
+        # TODO If there's not room, what do we do?
+        if GG.parentController.hasRoom child
+          # add it to the parentController, and remove it from the offspringController
+          GG.offspringController.removeObject child
+          GG.parentController.pushObject child
+
+          GG.logController.logEvent GG.Events.SELECTED_OFFSPRING,
+            alleles: child.getPath('biologicaOrganism.alleles')
+            sex: child.get('sex')
+
       breedDrake: ->
         GG.breedingController.breedDrake()
 

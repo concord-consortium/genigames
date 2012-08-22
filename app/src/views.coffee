@@ -42,6 +42,11 @@ GG.MotherPoolView = GG.ParentPoolView.extend
     click: ->
       GG.statemanager.send 'startMotherMeiosis'
 
+GG.OffspringPoolView = Ember.View.extend
+  drakeSelected: (evt) ->
+    drake = evt.context
+    GG.statemanager.send 'offspringSelected', drake
+
 GG.BreedButtonView = Ember.View.extend
   tagName: 'div'
 

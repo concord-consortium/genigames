@@ -118,6 +118,7 @@ GG.Events =
   STARTED_SESSION : "Started session"
   STARTED_TASK    : "Started task"
   SELECTED_PARENT : "Selected parent"
+  SELECTED_OFFSPRING : "Selected offspring"
   BRED_DRAGON     : "Bred dragon"
 
 GG.TaskNPC = Ember.Object.extend

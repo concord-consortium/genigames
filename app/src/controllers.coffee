@@ -58,6 +58,8 @@ GG.drakeController = Ember.Object.create
 
 GG.parentController = Ember.ArrayController.create
   content: []
+  maxMales: 4
+  maxFemales: 4
   selectedMother: null
   selectedFather: null
 
@@ -84,6 +86,11 @@ GG.parentController = Ember.ArrayController.create
     @set 'selectedFather', drake
     GG.logController.logEvent GG.Events.SELECTED_PARENT, alleles: drake.getPath('biologicaOrganism.alleles'), sex: GG.M
 
+  hasRoom: (drake) ->
+    if drake.sex is GG.MALE
+      return @get('males').length < @get 'maxMales'
+    else
+      return @get('females').length < @get 'maxFemales'
 
 GG.fatherPoolController = Ember.ArrayController.create
   contentBinding: 'GG.parentController.males'
@@ -100,7 +107,7 @@ GG.motherPoolController = Ember.ArrayController.create
     GG.parentController.selectMother drake
 
 GG.offspringController = Ember.ArrayController.create GG.fifoArrayController,
-  maxLength: 1
+  maxLength: 3
   content: []
 
 
