@@ -99,6 +99,11 @@ GG.Drake = Ember.Object.extend
       return false unless has
     return true
 
+  allelesString: (->
+    genotype = @get 'visibleGenotype'
+    genotype.a.concat(genotype.b).join(',') unless !genotype
+   ).property('visibleGenotype')
+
 # a helper for creating a GG.Drake from a Biologica/GWT organism object
 GG.Drake.createFromBiologicaOrganism = (org) ->
   GG.Drake.create

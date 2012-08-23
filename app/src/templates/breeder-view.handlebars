@@ -22,9 +22,12 @@
   {{view GG.MatchGoalCounter}}
   {{#view GG.OffspringPoolView id="offspring-pool"}}
     {{#each GG.offspringController}}
-      <a href="#" {{action "drakeSelected"}}>
-        {{view GG.DrakeView contentBinding="this"}}
-      </a>
+      <div class="offspring">
+        <a href="#" {{action "drakeSelected"}}>
+          {{view GG.DrakeView contentBinding="this"}}
+        </a>
+        {{#view Ember.View classNames="alleleString"}}{{allelesString}}{{/view}}
+      </div>
     {{/each}}
   {{/view}}
 </div>

@@ -79,3 +79,16 @@
   -khtml-border-radius: 90px;
   border-radius: 90px;
 }
+
+#offspring-pool .offspring {
+  display: inline-block;
+  position: relative;
+}
+
+.offspring .alleleString {
+  text-align: center;
+  width: 200px;
+  bottom: 15px;
+  position: absolute;
+  color: white;
+}
