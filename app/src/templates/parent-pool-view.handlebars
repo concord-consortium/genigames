@@ -1,8 +1,15 @@
 <div class="parent-pool">
   {{#each view.content}}
-    <a href="#" {{action "drakeSelected"}}>
-      {{view GG.DrakeView contentBinding="this" width="100"}}
-    </a>
+    <div class="parent">
+      <a href="#" {{action "drakeSelected"}}>
+        {{view GG.DrakeView contentBinding="this" width="100"}}
+      </a>
+      {{#if bred}}
+        <a class="removeButton" href="#" {{action "drakeRemoved"}}>
+          <img src="../images/delete.png" />
+        </a>
+      {{/if}}
+    </div>
   {{/each}}
 </div>
 {{view view.expanderButton}}

@@ -130,6 +130,7 @@ GG.breedingController = Ember.Object.create
       , 1200
       GenGWT.breedDragon @getPath('mother.biologicaOrganism'), @getPath('father.biologicaOrganism'), (org) =>
         drake = GG.Drake.createFromBiologicaOrganism org
+        drake.set 'bred', true
         GG.breedingController.set 'child', drake
         GG.logController.logEvent GG.Events.BRED_DRAGON,
           mother: @getPath('mother.biologicaOrganism.alleles')

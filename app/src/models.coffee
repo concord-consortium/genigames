@@ -31,6 +31,7 @@ GG.Drake = Ember.Object.extend
   biologicaOrganism : null            # organism object created by GWT
   sex               : null
   imageURL          : null
+  bred              : false
 
   init: ->
     @_super()
@@ -123,6 +124,7 @@ GG.Events =
   STARTED_SESSION : "Started session"
   STARTED_TASK    : "Started task"
   SELECTED_PARENT : "Selected parent"
+  REMOVED_PARENT  : "Removed parent"
   SELECTED_OFFSPRING : "Selected offspring"
   BRED_DRAGON     : "Bred dragon"
 
