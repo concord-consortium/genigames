@@ -1,8 +1,11 @@
 #sky {
   background: url(../images/sky.jpg);
+  background-repeat: no-repeat;
   overflow: hidden;
   border: 5px solid #402309;
-  height: 600px;
+  height: 650px;
+  width: 1000px;
+  position: absolute;
 }
 
 #world {

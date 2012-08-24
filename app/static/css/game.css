@@ -8,6 +8,11 @@
 
 #container {
   position: absolute;
+  width: 100%;
+}
+
+#container > div {
+  position: relative;
   margin-left: auto;
   margin-right: auto;
   width: 1000px;
