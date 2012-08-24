@@ -10,8 +10,23 @@ GG.statemanager = Ember.StateManager.create
 
   loading: Ember.State.create
 
+  inWorld: Ember.State.create
+    initialState: 'townsWaiting'
+
+    enter: ->
+      GG.universeView.set 'currentView', GG.universeView.get 'world'
+
+    townsWaiting: Ember.State.create
+      townSelected: (manager, town) ->
+        GG.townsController.setCurrentTown(town)
+        GG.statemanager.goToState 'inTown'
+
+
   inTown: Ember.State.create
     initialState: 'npcsWaiting'
+
+    enter: ->
+      GG.universeView.set 'currentView', GG.universeView.get 'town'
 
     npcsWaiting: Ember.State.create
       enter: ->

@@ -1,3 +1,22 @@
+GG.Town = Ember.Object.extend
+  name: "Town"
+  icon: "huts"
+  position: 0
+
+  tasks: []
+  realTasks: []
+  completed: false
+
+  init: ->
+    @_super()
+    tasks = []
+    for ts in @get 'tasks'
+      console.log 'processing task: ', ts
+      task = GG.Task.create ts
+      tasks.pushObject task
+
+    @set('realTasks', tasks)
+
 GG.Task = Ember.Object.extend
   visibleGenes: null
   hiddenGenes: null

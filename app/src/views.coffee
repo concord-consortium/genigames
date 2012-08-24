@@ -1,6 +1,45 @@
 minispade.require 'genigames/view-mixins'
 minispade.require 'genigames/meiosis-animation'
 
+GG.WorldView = Ember.View.extend
+  templateName: 'world'
+  contentBinding: 'GG.townsController'
+
+GG.WorldTownView = Ember.View.extend
+  classNameBindings: ['icon','location']
+  attributeBindings: ['style']
+  location: "location"
+  icon: (->
+    @getPath('content.icon')
+  ).property('content.icon')
+  style: (->
+    # TODO how do we do width and height?
+    width = 120
+    height = 120
+    # calculate the position of the town based on the position
+    # with the center at a,b, r = radius, t = angle:
+    # (a + r cos t, b + r sin t)
+    # add 90 since the equation assumes 0 is on the right of the circle, not top
+    # subtract because the coordinate
+    posRadX = (@getPath('content.position') + 90) * (Math.PI/180)
+    # subtract for Y since the coordinate system is mirrored on the Y-axis
+    posRadY = (@getPath('content.position') - 90) * (Math.PI/180)
+    x = Math.round(350 + (250 * Math.cos(posRadX)) - (width/2))
+    y = Math.round(350 + (250 * Math.sin(posRadY)) - (height/2))
+    return "left: " + x + "px; top: " + y + "px; " + @get('rotation')
+  ).property('content.position')
+  rotation: (->
+    rot = "rotate(-" + @getPath('content.position') + "deg); "
+    return "transform: " + rot +
+      "-ms-transform: " + rot +
+      "-webkit-transform: " + rot +
+      "-o-transform: " + rot +
+      "-moz-transform: " + rot
+  ).property('content.position')
+  click: ->
+    GG.statemanager.send 'townSelected', @get('content')
+
+
 GG.BreederView = Ember.View.extend
   templateName: 'breeder-view'
 

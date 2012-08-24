@@ -1,46 +1,59 @@
 {
   "version": "1",
-  "tasks": [
+  "towns": [
     {
-      "name": "Sample Task",
-      "visibleGenes": ["T","W"],
-      "hiddenGenes": ["Hl","Rh"],
-      "initialDrakes": {
-        "females": ["a:W,b:W","a:W,b:w"],
-        "males": ["a:W,b:W","a:W,b:w"]
-      },
-      "targetDrake": "female, no wings",
-      "npc": {
-        "name": "Cousin It",
-        "imageURL": "../images/cousin-it.png",
-        "speech": {
-          "text": "Hello, drake breeder!<br/><br/>I'm Cousin It.<br/><br/>I have a very important task for you: Breed a female, wingless drake!",
-          "completionText": "Good job!<br/><br/>You totally got the drake I needed. Thanks!",
-          "accept": "Ok",
-          "decline": "Maybe later"
+      "name": "Starter town",
+      "icon": "castle",
+      "position": 0,
+      "tasks": [
+        {
+          "name": "Sample Task",
+          "visibleGenes": ["T","W"],
+          "hiddenGenes": ["Hl","Rh"],
+          "initialDrakes": {
+            "females": ["a:W,b:W","a:W,b:w"],
+            "males": ["a:W,b:W","a:W,b:w"]
+          },
+          "targetDrake": "female, no wings",
+          "npc": {
+            "name": "Cousin It",
+            "imageURL": "../images/cousin-it.png",
+            "speech": {
+              "text": "Hello, drake breeder!<br/><br/>I'm Cousin It.<br/><br/>I have a very important task for you: Breed a female, wingless drake!",
+              "completionText": "Good job!<br/><br/>You totally got the drake I needed. Thanks!",
+              "accept": "Ok",
+              "decline": "Maybe later"
+            }
+          }
+        },
+        {
+          "name": "Sample Task2",
+          "visibleGenes": ["T","W", "Fl"],
+          "hiddenGenes": ["Hl","Rh"],
+          "initialDrakes": {
+            "females": ["a:W,b:W,a:hl","a:W,b:w,a:hl"],
+            "males": ["a:W,b:W,a:hl","a:W,b:w,a:hl"]
+          },
+          "targetDrake": "no wings, no hindlimbs",
+          "targetCount": 3,
+          "npc": {
+            "name": "Cousin It's Brother",
+            "imageURL": "../images/cousin-it2.png",
+            "speech": {
+              "text": "Hello, drake breeder!<br/><br/>I'm Fred, the brother of Cousin It.<br/><br/>I have a very important task for you: Breed a drake with no wings and no hindlimbs!",
+              "completionText": "That's awesome!<br/><br/>You totally got the drake I needed. Thanks!",
+              "accept": "Ok",
+              "decline": "Maybe later"
+            }
+          }
         }
-      }
+      ]
     },
     {
-      "name": "Sample Task2",
-      "visibleGenes": ["T","W", "Fl"],
-      "hiddenGenes": ["Hl","Rh"],
-      "initialDrakes": {
-        "females": ["a:W,b:W,a:hl","a:W,b:w,a:hl"],
-        "males": ["a:W,b:W,a:hl","a:W,b:w,a:hl"]
-      },
-      "targetDrake": "no wings, no hindlimbs",
-      "targetCount": 3,
-      "npc": {
-        "name": "Cousin It's Brother",
-        "imageURL": "../images/cousin-it2.png",
-        "speech": {
-          "text": "Hello, drake breeder!<br/><br/>I'm Fred, the brother of Cousin It.<br/><br/>I have a very important task for you: Breed a drake with no wings and no hindlimbs!",
-          "completionText": "That's awesome!<br/><br/>You totally got the drake I needed. Thanks!",
-          "accept": "Ok",
-          "decline": "Maybe later"
-        }
-      }
+      "name": "Town 2",
+      "icon": "huts",
+      "position": 135,
+      "tasks": []
     }
   ]
 }
