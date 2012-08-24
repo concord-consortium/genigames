@@ -53,7 +53,28 @@
       "name": "Town 2",
       "icon": "huts",
       "position": 135,
-      "tasks": []
+      "tasks": [
+        {
+          "name": "Sample Town2 Task",
+          "visibleGenes": ["T","W"],
+          "hiddenGenes": ["Hl","Rh"],
+          "initialDrakes": {
+            "females": ["a:W,b:W","a:W,b:w"],
+            "males": ["a:W,b:W","a:W,b:w"]
+          },
+          "targetDrake": "male, no wings",
+          "npc": {
+            "name": "Cousin It's Twin",
+            "imageURL": "../images/cousin-it.png",
+            "speech": {
+              "text": "Hello, drake breeder!<br/><br/>I'm Cousin It's Twin.<br/><br/>I have a very important task for you: Breed a male, wingless drake!",
+              "completionText": "Good job!<br/><br/>You totally got the drake I wanted. Thanks!",
+              "accept": "Ok",
+              "decline": "Maybe later"
+            }
+          }
+        }
+      ]
     }
   ]
 }

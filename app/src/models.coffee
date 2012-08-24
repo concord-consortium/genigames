@@ -2,6 +2,16 @@ GG.Town = Ember.Object.extend
   name: "Town"
   icon: "huts"
   position: 0
+  otherTownsBinding: Ember.Binding.oneWay('GG.townsController.content')
+  enabled: (->
+    towns = @get('otherTowns')
+    idx = towns.indexOf(this)
+    if idx is 0
+      return true
+    for i in [0..(idx-1)]
+      return false unless towns[i].get('completed')
+    return true
+  ).property('otherTowns')
 
   tasks: []
   realTasks: []

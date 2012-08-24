@@ -8,7 +8,7 @@ GG.townsController = Ember.ArrayController.create
     @pushObject town
 
   setCurrentTown: (town) ->
-    return if town is @currentTown
+    return if town is @currentTown or not town.get('enabled')
     if @indexOf(town) >= 0
       @set 'currentTown', town
       GG.tasksController.reset()
@@ -17,6 +17,9 @@ GG.townsController = Ember.ArrayController.create
       GG.logController.logEvent GG.Events.ENTERED_TOWN, name: town.get('name')
     else
       throw "GG.townsController.setCurrentTown: argument is not a known town"
+
+  completeCurrentTown: ->
+    @get('currentTown').set('completed', true)
 
 
 GG.tasksController = Ember.ArrayController.create

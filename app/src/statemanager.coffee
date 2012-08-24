@@ -18,8 +18,9 @@ GG.statemanager = Ember.StateManager.create
 
     townsWaiting: Ember.State.create
       townSelected: (manager, town) ->
-        GG.townsController.setCurrentTown(town)
-        GG.statemanager.goToState 'inTown'
+        if town.get('enabled')
+          GG.townsController.setCurrentTown(town)
+          GG.statemanager.goToState 'inTown'
 
 
   inTown: Ember.State.create
@@ -37,12 +38,18 @@ GG.statemanager = Ember.StateManager.create
         for task in GG.tasksController.content
           firstIncompleteTask = task unless task.get('completed') or firstIncompleteTask?
 
-        # TODO Go to world view if all tasks are complete?
-        firstIncompleteTask = GG.tasksController.get 'firstObject' unless firstIncompleteTask?
+        # Go to world view if all tasks are complete?
+        # TODO Add some sort of transition with dialog
+        if firstIncompleteTask?
+          setTimeout =>
+            firstIncompleteTask.set('showQuestionBubble', true)
+          , 1000
+        else
+          GG.townsController.completeCurrentTown()
+          setTimeout =>
+            GG.statemanager.goToState('inWorld')
+          , 1000
 
-        setTimeout =>
-          firstIncompleteTask.set('showQuestionBubble', true)
-        , 1000
 
       npcSelected: (manager, task) ->
         GG.tasksController.showTaskDescription task
