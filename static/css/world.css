@@ -33,7 +33,7 @@
 .location {
   cursor: pointer;
   position: absolute;
-  z-index: 2;
+  z-index: 1;
 }
 
 .huts {
@@ -68,6 +68,7 @@
   position: absolute;
   left: 480px;
   top: 100px;
+  z-index: 2;
   -moz-transform:rotate(-20deg);
   -webkit-transform:rotate(-20deg);
   -o-transform:rotate(-20deg);
@@ -82,6 +83,7 @@
   position: absolute;
   left: 480px;
   top: 100px;
+  z-index: 2;
   -moz-transform: rotate(-20deg) scaleX(-1);
   -o-transform: rotate(-20deg) scaleX(-1);
   -webkit-transform: rotate(-20deg) scaleX(-1);
