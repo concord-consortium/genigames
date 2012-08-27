@@ -15,6 +15,11 @@ GG.statemanager = Ember.StateManager.create
 
     enter: ->
       GG.universeView.set 'currentView', GG.universeView.get 'world'
+      currentTown = GG.townsController.get('currentTown')
+      if currentTown?
+        setTimeout ->
+          $('#world').rotate(currentTown.get('position') + "deg")
+        , 10
 
     townsWaiting: Ember.State.create
       spriteAnimation: null
