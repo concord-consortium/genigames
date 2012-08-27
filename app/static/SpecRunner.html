@@ -1,0 +1,73 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+  "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+  <title>Jasmine Spec Runner</title>
+
+  <link rel="shortcut icon" type="image/png" href="images/jasmine_favicon.png">
+  <link rel="stylesheet" type="text/css" href="css/jasmine.css">
+
+  <link rel="stylesheet" href="css/ember-defaults.css">
+  <link rel="stylesheet" href="css/game.css">
+  <link rel="stylesheet" href="css/chromosomes.css">
+  <link rel="stylesheet" href="css/npc.css">
+  <link rel="stylesheet" href="css/world.css">
+
+  <script type="text/javascript" src="js/spec/support/jasmine.js"></script>
+  <script type="text/javascript" src="js/spec/support/jasmine-html.js"></script>
+
+  <!-- include spec files here... -->
+  <script type="text/javascript" src="js/spec/SpecHelper.js"></script>
+  <script type="text/javascript" src="js/spec/IntegrationSpec.js"></script>
+
+  <script type="text/javascript">
+    (function() {
+      var jasmineEnv = jasmine.getEnv();
+      jasmineEnv.updateInterval = 1000;
+
+      var htmlReporter = new jasmine.HtmlReporter();
+
+      jasmineEnv.addReporter(htmlReporter);
+
+      jasmineEnv.specFilter = function(spec) {
+        return htmlReporter.specFilter(spec);
+      };
+
+      var currentWindowOnload = window.onload;
+
+      window.onload = function() {
+        if (currentWindowOnload) {
+          currentWindowOnload();
+        }
+        execJasmine();
+      };
+
+      function execJasmine() {
+        jasmineEnv.execute();
+      }
+
+    })();
+  </script>
+
+</head>
+
+<body>
+  <div id="container">
+  </div>
+
+  <script type="text/javascript" >
+    ENV = {
+      CP_DEFAULT_CACHEABLE: true,
+      VIEW_PRESERVES_CONTEXT: true
+    };
+  </script>
+
+  <script src="/biologica/geniverse/geniverse.nocache.js" type="text/javascript"></script>
+  <script src="js/minispade.js"></script>
+  <script src="js/app.js"></script>
+
+  <script type="text/javascript">
+    minispade.require('genigames/app');
+  </script>
+</body>
+</html>
