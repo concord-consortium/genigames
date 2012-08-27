@@ -11,7 +11,7 @@ GG.Town = Ember.Object.extend
     for i in [0..(idx-1)]
       return false unless towns[i].get('completed')
     return true
-  ).property('otherTowns.completed')
+  ).property().volatile()
 
   tasks: []
   realTasks: []
