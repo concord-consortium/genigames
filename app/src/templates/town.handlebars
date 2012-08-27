@@ -15,6 +15,7 @@
         <br/><br/>
         <button {{action "accept"}}>{{view.content.npc.speech.accept}}</button>
       {{/view}}
+      {{view GG.NPCHeartBubbleView contentBinding="this"}}
       {{view GG.NPCView contentBinding="this"}}
     {{/view}}
   {{/each}}

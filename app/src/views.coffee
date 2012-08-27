@@ -248,3 +248,11 @@ GG.NPCCompletionBubbleView = Ember.View.extend
   hiddenBinding      : Ember.Binding.oneWay('content.showCompletionBubble').not()
   accept: ->
     GG.tasksController.taskCompleted(@get 'content')
+
+GG.NPCHeartBubbleView = Ember.View.extend
+  tagName            : 'img'
+  classNames         : ['heart-bubble']
+  classNameBindings  : ['hidden']
+  attributeBindings  : ['src']
+  src                : '../images/heart-bubble.png'
+  hiddenBinding      : Ember.Binding.oneWay('content.completed').not()
