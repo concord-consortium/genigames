@@ -1,3 +1,32 @@
+GG.Town = Ember.Object.extend
+  name: "Town"
+  icon: "huts"
+  position: 0
+  otherTownsBinding: Ember.Binding.oneWay('GG.townsController.content')
+  enabled: (->
+    towns = @get('otherTowns')
+    idx = towns.indexOf(this)
+    if idx is 0
+      return true
+    for i in [0..(idx-1)]
+      return false unless towns[i].get('completed')
+    return true
+  ).property().volatile()
+
+  tasks: []
+  realTasks: []
+  completed: false
+
+  init: ->
+    @_super()
+    tasks = []
+    for ts in @get 'tasks'
+      console.log 'processing task: ', ts
+      task = GG.Task.create ts
+      tasks.pushObject task
+
+    @set('realTasks', tasks)
+
 GG.Task = Ember.Object.extend
   visibleGenes: null
   hiddenGenes: null
@@ -132,3 +161,4 @@ GG.TaskNPC = Ember.Object.extend
   name: null
   imageURL: null
   task: null
+  position: null

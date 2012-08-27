@@ -1,8 +1,35 @@
 minispade.require 'genigames/controller-mixins'
 
+GG.townsController = Ember.ArrayController.create
+  content    : []
+  currentTown: null
+
+  addTown: (town) ->
+    @pushObject town
+
+  setCurrentTown: (town) ->
+    return false if town is @currentTown or not town.get('enabled')
+    if @indexOf(town) >= 0
+      @set 'currentTown', town
+      GG.tasksController.reset()
+      for ts in town.get 'realTasks'
+        GG.tasksController.addTask ts
+      GG.logController.logEvent GG.Events.ENTERED_TOWN, name: town.get('name')
+      return true
+    else
+      throw "GG.townsController.setCurrentTown: argument is not a known town"
+
+  completeCurrentTown: ->
+    @get('currentTown').set('completed', true)
+
+
 GG.tasksController = Ember.ArrayController.create
   content    : []
   currentTask: null
+
+  reset: ->
+    @set 'content', []
+    @set 'currentTask', null
 
   addTask: (task) ->
     @pushObject task

@@ -1,0 +1,104 @@
+#sky {
+  background: url(../images/sky.jpg);
+  background-repeat: no-repeat;
+  overflow: hidden;
+  border: 5px solid #402309;
+  height: 650px;
+  width: 1000px;
+  position: absolute;
+}
+
+#world {
+  background: url(../images/world.gif);
+  background-position: 0px 4px;
+  height: 700px;
+  width: 700px;
+  background-repeat: no-repeat;
+  position: absolute;
+  left: 250px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#clouds {
+  background: url(../images/clouds.png);
+  background-position: 0px 0px;
+  height: 700px;
+  width: 700px;
+  background-repeat: no-repeat;
+  position: absolute;
+  left: 250px;
+}
+
+.location {
+  cursor: pointer;
+  position: absolute;
+  z-index: 1;
+}
+
+.huts {
+  background: no-repeat url(../images/huts.gif);
+  height: 90px;
+  width: 120px;
+}
+
+.houses {
+  background: no-repeat url(../images/houses.gif);
+  height: 70px;
+  width: 150px;
+}
+
+.castle {
+  background: no-repeat url(../images/castle.gif);
+  height: 120px;
+  width: 130px;
+}
+
+.world-town {
+  background: no-repeat url(../images/town.gif);
+  height: 110px;
+  width: 170px;
+}
+
+#dragon-right {
+  background: url(../images/drakesprite-small.png);
+  width: 90px;
+  height: 80px;
+  background-repeat: no-repeat;
+  position: absolute;
+  left: 480px;
+  top: 100px;
+  z-index: 2;
+  -moz-transform:rotate(-20deg);
+  -webkit-transform:rotate(-20deg);
+  -o-transform:rotate(-20deg);
+  -ms-transform:rotate(-20deg);
+}
+
+#dragon-left {
+  background: url(../images/drakesprite-small.png);
+  width: 90px;
+  height: 80px;
+  background-repeat: no-repeat;
+  position: absolute;
+  left: 480px;
+  top: 100px;
+  z-index: 2;
+  -moz-transform: rotate(-20deg) scaleX(-1);
+  -o-transform: rotate(-20deg) scaleX(-1);
+  -webkit-transform: rotate(-20deg) scaleX(-1);
+  transform: rotate(-20deg) scaleX(-1);
+  filter: FlipH;
+  -ms-filter: "FlipH";
+}
+
+#message {
+  background: url(../images/click-message.gif);
+  background-size: 100%;
+  width: 200px;
+  height: 100px;
+  background-repeat: no-repeat;
+  position: absolute;
+  left: 810px;
+  top: -50px;
+}

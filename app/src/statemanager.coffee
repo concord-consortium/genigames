@@ -10,8 +10,56 @@ GG.statemanager = Ember.StateManager.create
 
   loading: Ember.State.create
 
+  inWorld: Ember.State.create
+    initialState: 'townsWaiting'
+
+    enter: ->
+      GG.universeView.set 'currentView', GG.universeView.get 'world'
+      currentTown = GG.townsController.get('currentTown')
+      if currentTown?
+        setTimeout ->
+          $('#world').rotate(currentTown.get('position') + "deg")
+        , 10
+
+    townsWaiting: Ember.State.create
+      spriteAnimation: null
+      townSelected: (manager, town) ->
+        if town.get('enabled')
+          prevTown = GG.townsController.get('currentTown')
+          changed = GG.townsController.setCurrentTown(town)
+          navigateTime = 100
+          if changed and prevTown?
+            navigateTime = 4000
+            spriteFrame = 1
+            animateSprite = ->
+              spriteFrame++
+              top = 72 * (spriteFrame % 8)
+              $('.dragon').css('backgroundPosition','-0px -'+top+'px')
+            spriteAnimation = setInterval(animateSprite,50)
+            if (prevTown.get('position') < town.get('position'))
+              $("#dragon-right").attr("id","dragon-left")
+            else
+              $("#dragon-left").attr("id","dragon-right")
+            # dragon take off, spin the world, land if we're not already at that town
+            $('.dragon').animate({left: "-=20px", top: "-=30px"}, {duration: 400, complete: ->
+              $('#world').animate({rotate: town.get('position')}, {duration: navigateTime, complete: ->
+                $('.dragon').animate({left: "+=20px", top: "+=30px"}, {duration: 400, complete: ->
+                  clearInterval(spriteAnimation)
+                  spriteFrame = 1
+                  animateSprite()
+                })
+              })
+            })
+          setTimeout =>
+            GG.statemanager.goToState 'inTown'
+          , navigateTime+1200
+
+
   inTown: Ember.State.create
     initialState: 'npcsWaiting'
+
+    enter: ->
+      GG.universeView.set 'currentView', GG.universeView.get 'town'
 
     npcsWaiting: Ember.State.create
       enter: ->
@@ -22,12 +70,18 @@ GG.statemanager = Ember.StateManager.create
         for task in GG.tasksController.content
           firstIncompleteTask = task unless task.get('completed') or firstIncompleteTask?
 
-        # TODO Go to world view if all tasks are complete?
-        firstIncompleteTask = GG.tasksController.get 'firstObject' unless firstIncompleteTask?
+        # Go to world view if all tasks are complete?
+        # TODO Add some sort of transition with dialog
+        if firstIncompleteTask?
+          setTimeout =>
+            firstIncompleteTask.set('showQuestionBubble', true)
+          , 1000
+        else
+          GG.townsController.completeCurrentTown()
+          setTimeout =>
+            GG.statemanager.goToState('inWorld')
+          , 1000
 
-        setTimeout =>
-          firstIncompleteTask.set('showQuestionBubble', true)
-        , 1000
 
       npcSelected: (manager, task) ->
         GG.tasksController.showTaskDescription task

@@ -1,4 +1,4 @@
-#background {
+#town {
   background-image: url('../images/background.png');
   margin-left: auto;
   margin-right: auto;
@@ -8,6 +8,15 @@
 
 #container {
   position: absolute;
+  width: 100%;
+}
+
+#container > div {
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  width: 1000px;
+  height: 750px;
 }
 
 #breeding-apparatus {

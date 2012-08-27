@@ -2,16 +2,6 @@
   position: absolute;
 }
 
-.cousin-it {
-  top: 497px;
-  left: 650px;
-}
-
-.cousin-it2 {
-  top: 497px;
-  left: 450px;
-}
-
 .npc .bubble {
   position: absolute;
   margin-left: 20px;
@@ -48,4 +38,11 @@
     /* reduce the damage in FF3.0 */
     display:block;
     width:0;
+}
+
+.heart-bubble {
+  position: absolute;
+  z-index: 0;
+  left: 0px;
+  top: 90px;
 }
