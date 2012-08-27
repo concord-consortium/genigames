@@ -39,3 +39,10 @@
     display:block;
     width:0;
 }
+
+.heart-bubble {
+  position: absolute;
+  z-index: 0;
+  left: 0px;
+  top: 90px;
+}
