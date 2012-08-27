@@ -196,12 +196,11 @@ GG.TownView = Ember.View.extend
 
 GG.TaskNPCView = Ember.View.extend
   tagName            : 'div'
-  classNameBindings  : ['npc', 'npcId']
-  npc                : 'npc'
-  npcId              : (->
-    imageURL = @getPath 'content.npc.imageURL'
-    /([^\.\/]+)[\.]/.exec(imageURL)[1]
-  ).property('src')
+  classNames         : 'npc'
+  attributeBindings  : ['style']
+  style: (->
+    "top: " + @getPath('content.npc.position.y') + "px; left: " + @getPath('content.npc.position.x') + "px;"
+  ).property('content.npc.position.x','content.npc.position.y')
   npcSelected: (evt) ->
     GG.statemanager.send 'npcSelected', evt.context
 

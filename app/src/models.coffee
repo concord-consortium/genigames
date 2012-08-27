@@ -161,3 +161,4 @@ GG.TaskNPC = Ember.Object.extend
   name: null
   imageURL: null
   task: null
+  position: null
