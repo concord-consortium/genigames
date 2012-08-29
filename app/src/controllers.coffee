@@ -148,17 +148,13 @@ GG.breedingController = Ember.Object.create
     if @get('mother') && @get('father')
       GG.statemanager.send 'incrementCounter'
       @set 'isBreeding', true
-      setTimeout =>
-        GG.offspringController.pushObject @get 'child'
-        setTimeout =>
-          @set 'isBreeding', false
-          GG.statemanager.send 'checkForTaskCompletion'
-        , 600
-      , 1200
       GenGWT.breedDragon @getPath('mother.biologicaOrganism'), @getPath('father.biologicaOrganism'), (org) =>
         drake = GG.Drake.createFromBiologicaOrganism org
         drake.set 'bred', true
         GG.breedingController.set 'child', drake
+        GG.offspringController.pushObject drake
+        @set 'isBreeding', false
+        GG.statemanager.send 'checkForTaskCompletion'
         GG.logController.logEvent GG.Events.BRED_DRAGON,
           mother: @getPath('mother.biologicaOrganism.alleles')
           father: @getPath('father.biologicaOrganism.alleles')
