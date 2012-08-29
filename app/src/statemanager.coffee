@@ -134,6 +134,8 @@ GG.statemanager = Ember.StateManager.create
 
       parentRemoved: (manager, parent) ->
         whichSelection = if parent.get('sex') is GG.FEMALE then 'selectedMother' else 'selectedFather'
+        if GG.parentController.get(whichSelection) == parent
+          GG.parentController.set whichSelection, null
         GG.parentController.removeObject parent
 
         GG.logController.logEvent GG.Events.REMOVED_PARENT,
@@ -141,11 +143,11 @@ GG.statemanager = Ember.StateManager.create
           sex: parent.get('sex')
 
       offspringSelected: (manager, child) ->
-        # TODO If there's not room, what do we do?
         if GG.parentController.hasRoom child
           # add it to the parentController, and remove it from the offspringController
           GG.offspringController.removeObject child
           GG.parentController.pushObject child
+          GG.moveController.increment()
 
           GG.logController.logEvent GG.Events.SELECTED_OFFSPRING,
             alleles: child.getPath('biologicaOrganism.alleles')
