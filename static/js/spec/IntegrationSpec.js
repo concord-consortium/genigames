@@ -36,6 +36,8 @@
           return $('.castle').click();
         });
       }, function() {
+        expect($('#world').length).toBe(0);
+        expect($('#town').length).toBe(1);
         return expect(GG.townsController.get('currentTown')).toBe(GG.townsController.get('content')[0]);
       });
       runAndWait("Question bubble should be clicked", 200, function() {
@@ -43,6 +45,7 @@
           return $('.npc a img:not(.hidden)').click();
         });
       }, function() {
+        expect($('.npc a img:not(.hidden)').length).toBe(0);
         return expect($('.npc .speech-bubble:not(.hidden)').length).toBe(1);
       });
       runAndWait("Task should be accepted, breeding machine should load", 3000, function() {
@@ -51,6 +54,7 @@
         });
       }, function() {
         expect($('.npc .speech-bubble:not(.hidden)').length).toBe(0);
+        expect($('.heart-bubble:not(.hidden)').length).toBe(0);
         expect($('.npc a img:not(.hidden)').length).toBe(0);
         expect($('#breed-button.enabled').length).toBe(0);
         expect(GG.tasksController.get('currentTask')).toBe(GG.tasksController.get('content')[0]);
@@ -59,7 +63,8 @@
         expect(GG.parentController.get('content').length).toBe(4);
         expect($('#parent-fathers-pool-container .chromosome-panel.hidden').length).toBe(1);
         expect($('#parent-mothers-pool-container .chromosome-panel.hidden').length).toBe(1);
-        return expect(GG.breedingController.get('child')).toBe(null);
+        expect(GG.breedingController.get('child')).toBe(null);
+        return expect(GG.moveController.get('moves')).toBe(0);
       });
       runAndWait("Mother should be selectable", 500, function() {
         return Ember.run(function() {
@@ -152,14 +157,24 @@
       });
       runs(function() {
         flag = false;
-        return GenGWT.generateAliveDragonWithAlleleStringAndSex("a:w,b:w,a:B", GG.FEMALE, function(org) {
+        Ember.run(function() {
+          var ex, _i, _len, _ref, _results;
+          _ref = $('.expander');
+          _results = [];
+          for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+            ex = _ref[_i];
+            _results.push(ex.click());
+          }
+          return _results;
+        });
+        return GenGWT.generateAliveDragonWithAlleleStringAndSex("a:w,b:w,a:D", GG.FEMALE, function(org) {
           var drake;
           drake = GG.Drake.createFromBiologicaOrganism(org);
           Ember.run(function() {
             GG.parentController.pushObject(drake);
             return GG.parentController.selectMother(drake);
           });
-          return GenGWT.generateAliveDragonWithAlleleStringAndSex("a:w,b:w,a:B", GG.MALE, function(org) {
+          return GenGWT.generateAliveDragonWithAlleleStringAndSex("a:w,b:w,a:D", GG.MALE, function(org) {
             drake = GG.Drake.createFromBiologicaOrganism(org);
             Ember.run(function() {
               GG.parentController.pushObject(drake);
@@ -175,11 +190,178 @@
       waitsFor(function() {
         return flag;
       }, "Should (stubbed out) breed the correct drake", 5500);
-      return runAndWait("Click ok to complete the task", 3000, function() {
+      runAndWait("Click ok to complete the task", 3000, function() {
         expect($('.npc .speech-bubble:not(.hidden)').length).toBe(1);
         return $('.npc .speech-bubble:not(.hidden) button:contains("Ok")').click();
       }, function() {
-        return expect(true).toBe(true);
+        expect($('.heart-bubble:not(.hidden)').length).toBe(1);
+        expect($('.npc .speech-bubble:not(.hidden)').length).toBe(0);
+        expect($('.npc a img:not(.hidden)').length).toBe(1);
+        expect($('#breeding-apparatus').css('top')).toBe('-850px');
+        expect($('#parent-fathers-pool-container .chromosome-panel.hidden').length).toBe(1);
+        return expect($('#parent-mothers-pool-container .chromosome-panel.hidden').length).toBe(1);
+      });
+      runAndWait("Question bubble should be clicked", 200, function() {
+        return Ember.run(function() {
+          return $('.npc a img:not(.hidden)').click();
+        });
+      }, function() {
+        expect($('.npc a img:not(.hidden)').length).toBe(0);
+        return expect($('.npc .speech-bubble:not(.hidden)').length).toBe(1);
+      });
+      runAndWait("Task should be rejected", 3000, function() {
+        return Ember.run(function() {
+          return $('.npc .speech-bubble:not(.hidden) button:contains("Maybe later")')[0].click();
+        });
+      }, function() {
+        expect($('.npc .speech-bubble:not(.hidden)').length).toBe(0);
+        return expect($('.npc a img:not(.hidden)').length).toBe(1);
+      });
+      runAndWait("Question bubble should be clicked again", 200, function() {
+        return Ember.run(function() {
+          return $('.npc a img:not(.hidden)').click();
+        });
+      }, function() {
+        expect($('.npc a img:not(.hidden)').length).toBe(0);
+        return expect($('.npc .speech-bubble:not(.hidden)').length).toBe(1);
+      });
+      runAndWait("Task should be accepted, breeding machine should load", 3000, function() {
+        return Ember.run(function() {
+          return $('.npc .speech-bubble:not(.hidden) button:contains("Ok")')[0].click();
+        });
+      }, function() {
+        expect($('.npc .speech-bubble:not(.hidden)').length).toBe(0);
+        expect($('.heart-bubble:not(.hidden)').length).toBe(1);
+        expect($('.npc a img:not(.hidden)').length).toBe(0);
+        expect($('#breed-button.enabled').length).toBe(0);
+        expect(GG.tasksController.get('currentTask')).toBe(GG.tasksController.get('content')[1]);
+        expect(GG.parentController.get('selectedMother')).toBe(null);
+        expect(GG.parentController.get('selectedFather')).toBe(null);
+        expect(GG.parentController.get('content').length).toBe(4);
+        expect($('#parent-fathers-pool-container .chromosome-panel.hidden').length).toBe(1);
+        expect($('#parent-mothers-pool-container .chromosome-panel.hidden').length).toBe(1);
+        expect(GG.breedingController.get('child')).toBe(null);
+        return expect(GG.moveController.get('moves')).toBe(0);
+      });
+      runs(function() {
+        flag = false;
+        return GenGWT.generateAliveDragonWithAlleleStringAndSex("a:w,b:w,a:hl,b:hl,a:D", GG.FEMALE, function(org) {
+          var drake;
+          drake = GG.Drake.createFromBiologicaOrganism(org);
+          Ember.run(function() {
+            GG.parentController.pushObject(drake);
+            return GG.parentController.selectMother(drake);
+          });
+          return GenGWT.generateAliveDragonWithAlleleStringAndSex("a:w,b:w,a:hl,b:hl,a:D", GG.MALE, function(org) {
+            drake = GG.Drake.createFromBiologicaOrganism(org);
+            Ember.run(function() {
+              GG.parentController.pushObject(drake);
+              return GG.parentController.selectFather(drake);
+            });
+            return setTimeout(function() {
+              return flag = true;
+            }, 3000);
+          });
+        });
+      });
+      waitsFor(function() {
+        return flag;
+      }, "Should (stubbed out) set up the correct parents", 5500);
+      runAndWait("Should increment goal counter", 3000, function() {
+        expect($('.match-count').text()).toBe("0");
+        expect($('.target-count').text()).toBe("3");
+        return $('#breed-button').click();
+      }, function() {
+        return expect($('.match-count').text()).toBe("1");
+      });
+      runAndWait("Should increment goal counter again", 3000, function() {
+        expect($('.target-count').text()).toBe("3");
+        return $('#breed-button').click();
+      }, function() {
+        return expect($('.match-count').text()).toBe("2");
+      });
+      runAndWait("Should increment goal counter again and complete task", 3000, function() {
+        expect($('.target-count').text()).toBe("3");
+        return $('#breed-button').click();
+      }, function() {
+        return expect($('.match-count').text()).toBe("3");
+      });
+      runAndWait("Click ok to complete the task", 3000, function() {
+        expect($('.npc .speech-bubble:not(.hidden)').length).toBe(1);
+        return $('.npc .speech-bubble:not(.hidden) button:contains("Ok")').click();
+      }, function() {
+        expect($('#town').length).toBe(0);
+        return expect($('#world').length).toBe(1);
+      });
+      runAndWait("Huts should be clicked", 8000, function() {
+        return Ember.run(function() {
+          return $('.huts').click();
+        });
+      }, function() {
+        expect($('#world').length).toBe(0);
+        expect($('#town').length).toBe(1);
+        return expect(GG.townsController.get('currentTown')).toBe(GG.townsController.get('content')[1]);
+      });
+      runAndWait("Question bubble should be clicked", 200, function() {
+        return Ember.run(function() {
+          return $('.npc a img:not(.hidden)').click();
+        });
+      }, function() {
+        expect($('.npc a img:not(.hidden)').length).toBe(0);
+        return expect($('.npc .speech-bubble:not(.hidden)').length).toBe(1);
+      });
+      runAndWait("Task should be accepted, breeding machine should load", 3000, function() {
+        return Ember.run(function() {
+          return $('.npc .speech-bubble:not(.hidden) button:contains("Ok")')[0].click();
+        });
+      }, function() {
+        expect($('.npc .speech-bubble:not(.hidden)').length).toBe(0);
+        expect($('.heart-bubble:not(.hidden)').length).toBe(0);
+        expect($('.npc a img:not(.hidden)').length).toBe(0);
+        expect($('#breed-button.enabled').length).toBe(0);
+        expect(GG.tasksController.get('currentTask')).toBe(GG.tasksController.get('content')[0]);
+        expect(GG.parentController.get('selectedMother')).toBe(null);
+        expect(GG.parentController.get('selectedFather')).toBe(null);
+        expect(GG.parentController.get('content').length).toBe(4);
+        expect($('#parent-fathers-pool-container .chromosome-panel.hidden').length).toBe(1);
+        expect($('#parent-mothers-pool-container .chromosome-panel.hidden').length).toBe(1);
+        expect(GG.breedingController.get('child')).toBe(null);
+        return expect(GG.moveController.get('moves')).toBe(0);
+      });
+      runs(function() {
+        flag = false;
+        return GenGWT.generateAliveDragonWithAlleleStringAndSex("a:w,b:w,a:D", GG.FEMALE, function(org) {
+          var drake;
+          drake = GG.Drake.createFromBiologicaOrganism(org);
+          Ember.run(function() {
+            GG.parentController.pushObject(drake);
+            return GG.parentController.selectMother(drake);
+          });
+          return GenGWT.generateAliveDragonWithAlleleStringAndSex("a:w,b:w,a:D", GG.MALE, function(org) {
+            drake = GG.Drake.createFromBiologicaOrganism(org);
+            Ember.run(function() {
+              GG.parentController.pushObject(drake);
+              return GG.parentController.selectFather(drake);
+            });
+            return setTimeout(function() {
+              return flag = true;
+            }, 3000);
+          });
+        });
+      });
+      waitsFor(function() {
+        return flag;
+      }, "Should (stubbed out) set up the correct parents", 5500);
+      runAndWait("Should breed and complete the task", 3000, function() {
+        return $('#breed-button').click();
+      }, function() {
+        return expect($('.npc .speech-bubble:not(.hidden)').length).toBe(1);
+      });
+      return runAndWait("Click ok to complete the task", 3000, function() {
+        return $('.npc .speech-bubble:not(.hidden) button:contains("Ok")').click();
+      }, function() {
+        expect($('#town').length).toBe(0);
+        return expect($('#world').length).toBe(1);
       });
     });
   });

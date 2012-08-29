@@ -14,13 +14,13 @@
             "females": ["a:W,b:W","a:W,b:w"],
             "males": ["a:W,b:W","a:W,b:w"]
           },
-          "targetDrake": "female, no wings",
+          "targetDrake": "no wings",
           "npc": {
             "name": "Cousin It",
             "imageURL": "../images/cousin-it.png",
             "position": {"x": 600, "y": 500 },
             "speech": {
-              "text": "Hello, drake breeder!<br/><br/>I'm Cousin It.<br/><br/>I have a very important task for you: Breed a female, wingless drake!",
+              "text": "Hello, drake breeder!<br/><br/>I'm Cousin It.<br/><br/>I have a very important task for you: Breed a wingless drake!",
               "completionText": "Good job!<br/><br/>You totally got the drake I needed. Thanks!",
               "accept": "Ok",
               "decline": "Maybe later"
@@ -64,13 +64,13 @@
             "females": ["a:W,b:W","a:W,b:w"],
             "males": ["a:W,b:W","a:W,b:w"]
           },
-          "targetDrake": "male, no wings",
+          "targetDrake": "no wings",
           "npc": {
             "name": "Cousin It's Twin",
             "imageURL": "../images/cousin-it.png",
             "position": {"x": 300, "y": 500},
             "speech": {
-              "text": "Hello, drake breeder!<br/><br/>I'm Cousin It's Twin.<br/><br/>I have a very important task for you: Breed a male, wingless drake!",
+              "text": "Hello, drake breeder!<br/><br/>I'm Cousin It's Twin.<br/><br/>I have a very important task for you: Breed a wingless drake!",
               "completionText": "Good job!<br/><br/>You totally got the drake I wanted. Thanks!",
               "accept": "Ok",
               "decline": "Maybe later"
