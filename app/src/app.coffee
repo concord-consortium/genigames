@@ -44,7 +44,8 @@ $ ->
 
   # GET /api/game
   # set the player's task according to the game specification
-  $.getJSON 'api/game', (data) ->
+  gamePath = if UNDER_TEST? then 'api/testgame' else 'api/game'
+  $.getJSON gamePath, (data) ->
     for to in data.towns
       town = GG.Town.create to
       GG.townsController.addTown town
