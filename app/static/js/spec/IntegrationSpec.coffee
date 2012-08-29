@@ -23,14 +23,14 @@ describe "Integration", ->
   #   click on the first npc task bubble
   #   accept the task
   #   manipulate the breeding machine
-  #   TODO complete the task
-  #   TODO click on the second npc task bubble
-  #   TODO click maybe later
-  #   TODO click on the second npc task bubble
-  #   TODO accept the task
-  #   TODO complete the task
-  #   TODO click on the second town
-  #   TODO verify tasks are available
+  #   complete the task
+  #   click on the second npc task bubble
+  #   click maybe later
+  #   click on the second npc task bubble
+  #   accept the task
+  #   complete the task
+  #   click on the second town
+  #   verify tasks are available
 
   it "should be able to behave like a student", ->
     @after ->
@@ -46,12 +46,15 @@ describe "Integration", ->
       Ember.run ->
         $('.castle').click()
     , ->
+      expect($('#world').length).toBe(0)
+      expect($('#town').length).toBe(1)
       expect(GG.townsController.get('currentTown')).toBe(GG.townsController.get('content')[0])
 
     runAndWait "Question bubble should be clicked", 200, ->
       Ember.run ->
         $('.npc a img:not(.hidden)').click()
     , ->
+      expect($('.npc a img:not(.hidden)').length).toBe(0)
       expect($('.npc .speech-bubble:not(.hidden)').length).toBe(1)
 
     runAndWait "Task should be accepted, breeding machine should load", 3000, ->
@@ -59,6 +62,7 @@ describe "Integration", ->
         $('.npc .speech-bubble:not(.hidden) button:contains("Ok")')[0].click()
     , ->
       expect($('.npc .speech-bubble:not(.hidden)').length).toBe(0)
+      expect($('.heart-bubble:not(.hidden)').length).toBe(0)
       expect($('.npc a img:not(.hidden)').length).toBe(0)
       expect($('#breed-button.enabled').length).toBe(0)
       expect(GG.tasksController.get('currentTask')).toBe(GG.tasksController.get('content')[0])
@@ -68,6 +72,7 @@ describe "Integration", ->
       expect($('#parent-fathers-pool-container .chromosome-panel.hidden').length).toBe(1)
       expect($('#parent-mothers-pool-container .chromosome-panel.hidden').length).toBe(1)
       expect(GG.breedingController.get('child')).toBe(null)
+      expect(GG.moveController.get('moves')).toBe(0)
 
     runAndWait "Mother should be selectable", 500, ->
       Ember.run ->
@@ -167,13 +172,17 @@ describe "Integration", ->
     # stub this for now
     runs ->
       flag = false
-      # game currently wants wingless. Add B to avoid dead drakes.
-      GenGWT.generateAliveDragonWithAlleleStringAndSex "a:w,b:w,a:B", GG.FEMALE, (org) ->
+      # expand the wings again, so we can verify that they automatically close
+      Ember.run ->
+        for ex in $('.expander')
+          ex.click()
+      # game currently wants wingless. Add D to avoid dead drakes.
+      GenGWT.generateAliveDragonWithAlleleStringAndSex "a:w,b:w,a:D", GG.FEMALE, (org) ->
         drake = GG.Drake.createFromBiologicaOrganism org
         Ember.run ->
           GG.parentController.pushObject drake
           GG.parentController.selectMother drake
-        GenGWT.generateAliveDragonWithAlleleStringAndSex "a:w,b:w,a:B", GG.MALE, (org) ->
+        GenGWT.generateAliveDragonWithAlleleStringAndSex "a:w,b:w,a:D", GG.MALE, (org) ->
           drake = GG.Drake.createFromBiologicaOrganism org
           Ember.run ->
             GG.parentController.pushObject drake
@@ -194,9 +203,175 @@ describe "Integration", ->
       $('.npc .speech-bubble:not(.hidden) button:contains("Ok")').click()
     , ->
       # check for the heart bubble
+      expect($('.heart-bubble:not(.hidden)').length).toBe(1)
       # other NPC bubbles should be closed
+      expect($('.npc .speech-bubble:not(.hidden)').length).toBe(0)
       # the next NPC's question bubble should be showing
+      expect($('.npc a img:not(.hidden)').length).toBe(1)
       # breeder should be gone
+      expect($('#breeding-apparatus').css('top')).toBe('-850px')
       # breeder wings should be closed
+      expect($('#parent-fathers-pool-container .chromosome-panel.hidden').length).toBe(1)
+      expect($('#parent-mothers-pool-container .chromosome-panel.hidden').length).toBe(1)
 
-      expect(true).toBe(true)
+    runAndWait "Question bubble should be clicked", 200, ->
+      Ember.run ->
+        $('.npc a img:not(.hidden)').click()
+    , ->
+      expect($('.npc a img:not(.hidden)').length).toBe(0)
+      expect($('.npc .speech-bubble:not(.hidden)').length).toBe(1)
+
+    runAndWait "Task should be rejected", 3000, ->
+      Ember.run ->
+        $('.npc .speech-bubble:not(.hidden) button:contains("Maybe later")')[0].click()
+    , ->
+      expect($('.npc .speech-bubble:not(.hidden)').length).toBe(0)
+      expect($('.npc a img:not(.hidden)').length).toBe(1)
+
+    runAndWait "Question bubble should be clicked again", 200, ->
+      Ember.run ->
+        $('.npc a img:not(.hidden)').click()
+    , ->
+      expect($('.npc a img:not(.hidden)').length).toBe(0)
+      expect($('.npc .speech-bubble:not(.hidden)').length).toBe(1)
+
+    runAndWait "Task should be accepted, breeding machine should load", 3000, ->
+      Ember.run ->
+        $('.npc .speech-bubble:not(.hidden) button:contains("Ok")')[0].click()
+    , ->
+      expect($('.npc .speech-bubble:not(.hidden)').length).toBe(0)
+      expect($('.heart-bubble:not(.hidden)').length).toBe(1)
+      expect($('.npc a img:not(.hidden)').length).toBe(0)
+      expect($('#breed-button.enabled').length).toBe(0)
+      expect(GG.tasksController.get('currentTask')).toBe(GG.tasksController.get('content')[1])
+      expect(GG.parentController.get('selectedMother')).toBe(null)
+      expect(GG.parentController.get('selectedFather')).toBe(null)
+      expect(GG.parentController.get('content').length).toBe(4)
+      expect($('#parent-fathers-pool-container .chromosome-panel.hidden').length).toBe(1)
+      expect($('#parent-mothers-pool-container .chromosome-panel.hidden').length).toBe(1)
+      expect(GG.breedingController.get('child')).toBe(null)
+      expect(GG.moveController.get('moves')).toBe(0)
+
+    # FIXME Not sure how to repeat an action until we see a certain outcome...
+    # stub this for now
+    runs ->
+      flag = false
+      # game currently wants wingless. Add D to avoid dead drakes.
+      GenGWT.generateAliveDragonWithAlleleStringAndSex "a:w,b:w,a:hl,b:hl,a:D", GG.FEMALE, (org) ->
+        drake = GG.Drake.createFromBiologicaOrganism org
+        Ember.run ->
+          GG.parentController.pushObject drake
+          GG.parentController.selectMother drake
+        GenGWT.generateAliveDragonWithAlleleStringAndSex "a:w,b:w,a:hl,b:hl,a:D", GG.MALE, (org) ->
+          drake = GG.Drake.createFromBiologicaOrganism org
+          Ember.run ->
+            GG.parentController.pushObject drake
+            GG.parentController.selectFather drake
+          setTimeout ->
+            flag = true
+          , 3000
+
+    waitsFor ->
+      flag
+    , "Should (stubbed out) set up the correct parents", 5500
+
+    runAndWait "Should increment goal counter", 3000, ->
+      expect($('.match-count').text()).toBe("0")
+      expect($('.target-count').text()).toBe("3")
+      $('#breed-button').click()
+    , ->
+      expect($('.match-count').text()).toBe("1")
+
+    runAndWait "Should increment goal counter again", 3000, ->
+      expect($('.target-count').text()).toBe("3")
+      $('#breed-button').click()
+    , ->
+      expect($('.match-count').text()).toBe("2")
+
+    runAndWait "Should increment goal counter again and complete task", 3000, ->
+      expect($('.target-count').text()).toBe("3")
+      $('#breed-button').click()
+    , ->
+      expect($('.match-count').text()).toBe("3")
+
+
+    runAndWait "Click ok to complete the task", 3000, ->
+      # the npc's success bubble should be showing
+      expect($('.npc .speech-bubble:not(.hidden)').length).toBe(1)
+      # can click ok
+      $('.npc .speech-bubble:not(.hidden) button:contains("Ok")').click()
+    , ->
+      # town should be gone
+      expect($('#town').length).toBe(0)
+      # world should be showing
+      expect($('#world').length).toBe(1)
+
+    runAndWait "Huts should be clicked", 8000, ->
+      Ember.run ->
+        $('.huts').click()
+    , ->
+      expect($('#world').length).toBe(0)
+      expect($('#town').length).toBe(1)
+      expect(GG.townsController.get('currentTown')).toBe(GG.townsController.get('content')[1])
+
+    runAndWait "Question bubble should be clicked", 200, ->
+      Ember.run ->
+        $('.npc a img:not(.hidden)').click()
+    , ->
+      expect($('.npc a img:not(.hidden)').length).toBe(0)
+      expect($('.npc .speech-bubble:not(.hidden)').length).toBe(1)
+
+    runAndWait "Task should be accepted, breeding machine should load", 3000, ->
+      Ember.run ->
+        $('.npc .speech-bubble:not(.hidden) button:contains("Ok")')[0].click()
+    , ->
+      expect($('.npc .speech-bubble:not(.hidden)').length).toBe(0)
+      expect($('.heart-bubble:not(.hidden)').length).toBe(0)
+      expect($('.npc a img:not(.hidden)').length).toBe(0)
+      expect($('#breed-button.enabled').length).toBe(0)
+      expect(GG.tasksController.get('currentTask')).toBe(GG.tasksController.get('content')[0])
+      expect(GG.parentController.get('selectedMother')).toBe(null)
+      expect(GG.parentController.get('selectedFather')).toBe(null)
+      expect(GG.parentController.get('content').length).toBe(4)
+      expect($('#parent-fathers-pool-container .chromosome-panel.hidden').length).toBe(1)
+      expect($('#parent-mothers-pool-container .chromosome-panel.hidden').length).toBe(1)
+      expect(GG.breedingController.get('child')).toBe(null)
+      expect(GG.moveController.get('moves')).toBe(0)
+
+    # FIXME Not sure how to repeat an action until we see a certain outcome...
+    # stub this for now
+    runs ->
+      flag = false
+      # game currently wants wingless. Add D to avoid dead drakes.
+      GenGWT.generateAliveDragonWithAlleleStringAndSex "a:w,b:w,a:D", GG.FEMALE, (org) ->
+        drake = GG.Drake.createFromBiologicaOrganism org
+        Ember.run ->
+          GG.parentController.pushObject drake
+          GG.parentController.selectMother drake
+        GenGWT.generateAliveDragonWithAlleleStringAndSex "a:w,b:w,a:D", GG.MALE, (org) ->
+          drake = GG.Drake.createFromBiologicaOrganism org
+          Ember.run ->
+            GG.parentController.pushObject drake
+            GG.parentController.selectFather drake
+          setTimeout ->
+            flag = true
+          , 3000
+
+    waitsFor ->
+      flag
+    , "Should (stubbed out) set up the correct parents", 5500
+
+    runAndWait "Should breed and complete the task", 3000, ->
+      $('#breed-button').click()
+    , ->
+      # the npc's success bubble should be showing
+      expect($('.npc .speech-bubble:not(.hidden)').length).toBe(1)
+
+    runAndWait "Click ok to complete the task", 3000, ->
+      # can click ok
+      $('.npc .speech-bubble:not(.hidden) button:contains("Ok")').click()
+    , ->
+      # town should be gone
+      expect($('#town').length).toBe(0)
+      # world should be showing
+      expect($('#world').length).toBe(1)
