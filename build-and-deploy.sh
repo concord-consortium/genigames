@@ -70,7 +70,7 @@ if [[ $? != 0 ]] ; then
 fi
 
 echo "Updating on server"
-ssh deploy@$SERVER "cd $SERVER_PATH; git pull; rm -rf static/portal; ln -s /web/portal/current/public static/portal"
+ssh deploy@$SERVER "cd $SERVER_PATH; git pull"
 
 echo "Switching back to original branch and working directory"
 git checkout $ORIGINAL_BRANCH
