@@ -1,0 +1,15 @@
+#login {
+  text-align: center;
+  width: 700px;
+  height: 700px;
+  position: absolute;
+  top: 250px;
+}
+
+#login div {
+  padding: 3px;
+}
+
+#username, #password {
+  width: 200px;
+}
