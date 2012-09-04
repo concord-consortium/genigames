@@ -13,3 +13,8 @@
 #username, #password {
   width: 200px;
 }
+
+#login-error {
+  color: red;
+  font-weight: bold;
+}
