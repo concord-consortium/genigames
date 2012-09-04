@@ -225,7 +225,7 @@ GG.sessionController = Ember.Object.create
   ).property('user')
 
   checkCCAuthToken: ->
-    $.get @checkTokenUrl, (data) =>
+    $.get(@checkTokenUrl, (data) =>
       @set('loggingIn', false)
       if data.error?
         @set('error', true)
@@ -233,13 +233,16 @@ GG.sessionController = Ember.Object.create
         user = GG.User.create data
         @set('user', user)
         GG.statemanager.goToState 'inWorld'
-    , "json"
+    , "json").error ->
+      @set('error', true)
 
   loginPortal: (username, password)->
     @set('firstTime', false)
-    $.post @loginUrl, {login: username, password: password}, (data) =>
+    $.post(@loginUrl, {login: username, password: password}, (data) =>
       @checkCCAuthToken()
-    , "json"
+    , "json").error ->
+      @set('loggingIn', false)
+      @set('error', true)
 
   logoutPortal: ->
     @set('firstTime', true)
