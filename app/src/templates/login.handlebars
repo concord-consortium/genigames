@@ -1,11 +1,22 @@
 <div id="login">
-  <div>
-    <span id="username">Username:</span>
-    <span id="username-field">{{view Ember.TextField valueBinding="view.username"}}</span>
-  </div>
-  <div>
-    <span id="password">Password:</span>
-    <span id="password-field">{{view Ember.TextField type="password" valueBinding="view.password"}}</span>
-  </div>
-  <input type="submit" value="Login" {{action login}} />
+  {{#if view.loggingIn}}
+    <div>Authorizing... please wait.</div>
+  {{else}}
+    {{#unless view.firstTime}}
+      {{#if view.error}}
+        <div id='login-error'>
+          Invalid username or password. Please try again.
+        </div>
+      {{/if}}
+    {{/unless}}
+    <div>
+      <span id="username">Username:</span>
+      <span id="username-field">{{view Ember.TextField valueBinding="view.username"}}</span>
+    </div>
+    <div>
+      <span id="password">Password:</span>
+      <span id="password-field">{{view Ember.TextField type="password" valueBinding="view.password"}}</span>
+    </div>
+    <input type="submit" value="Login" {{action login}} />
+  {{/if}}
 </div>

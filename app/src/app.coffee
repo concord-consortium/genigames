@@ -51,6 +51,7 @@ $ ->
     for to in data.towns
       town = GG.Town.create to
       GG.townsController.addTown town
+    GG.sessionController.checkCCAuthToken()
     GG.statemanager.goToState 'loggingIn'
 
   # socket.io hello world stuff

@@ -5,9 +5,13 @@ GG.LoginView = Ember.View.extend
   templateName: 'login'
   username: ""
   password: ""
+  loggingInBinding: 'GG.sessionController.loggingIn'
+  errorBinding: 'GG.sessionController.error'
+  firstTimeBinding: 'GG.sessionController.firstTime'
   login: ->
     pw = @get('password')
     @set('password', "")
+    @set('loggingIn', true)
     data = {username: @get('username'), password: pw}
     GG.statemanager.send 'login', data
 

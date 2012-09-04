@@ -217,24 +217,32 @@ GG.sessionController = Ember.Object.create
   loginUrl:      '/portal/remote_login'
   logoutUrl:     '/portal/remote_logout'
   user: null
+  error: false
+  loggingIn: false
+  firstTime: true
   loggedIn: (->
     @get('user') != null
   ).property('user')
 
   checkCCAuthToken: ->
     $.get @checkTokenUrl, (data) =>
-      unless data.error?
+      @set('loggingIn', false)
+      if data.error?
+        @set('error', true)
+      else
         user = GG.User.create data
         @set('user', user)
         GG.statemanager.goToState 'inWorld'
     , "json"
 
   loginPortal: (username, password)->
+    @set('firstTime', false)
     $.post @loginUrl, {login: username, password: password}, (data) =>
       @checkCCAuthToken()
     , "json"
 
   logoutPortal: ->
+    @set('firstTime', true)
     @set('user', null)
     $.getJSON @logoutUrl, (data) ->
       GG.statemanager.goToState 'loggingIn'
