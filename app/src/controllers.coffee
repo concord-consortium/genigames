@@ -211,3 +211,30 @@ GG.logController = Ember.Object.create
   generateGUID: ->
     S4 = -> (((1+Math.random())*0x10000)|0).toString(16).substring(1)
     S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4()
+
+GG.sessionController = Ember.Object.create
+  checkTokenUrl: '/portal/verify_cc_token'
+  loginUrl:      '/portal/remote_login'
+  logoutUrl:     '/portal/remote_logout'
+  user: null
+  loggedIn: (->
+    @get('user') != null
+  ).property('user')
+
+  checkCCAuthToken: ->
+    $.get @checkTokenUrl, (data) =>
+      unless data.error?
+        user = GG.User.create data
+        @set('user', user)
+        GG.statemanager.goToState 'inWorld'
+    , "json"
+
+  loginPortal: (username, password)->
+    $.post @loginUrl, {login: username, password: password}, (data) =>
+      @checkCCAuthToken()
+    , "json"
+
+  logoutPortal: ->
+    @set('user', null)
+    $.getJSON @logoutUrl, (data) ->
+      GG.statemanager.goToState 'loggingIn'

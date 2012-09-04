@@ -1,6 +1,16 @@
 minispade.require 'genigames/view-mixins'
 minispade.require 'genigames/meiosis-animation'
 
+GG.LoginView = Ember.View.extend
+  templateName: 'login'
+  username: ""
+  password: ""
+  login: ->
+    pw = @get('password')
+    @set('password', "")
+    data = {username: @get('username'), password: pw}
+    GG.statemanager.send 'login', data
+
 GG.WorldView = Ember.View.extend
   templateName: 'world'
   contentBinding: 'GG.townsController'

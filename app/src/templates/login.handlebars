@@ -1,0 +1,11 @@
+<div id="login">
+  <div>
+    <span id="username">Username:</span>
+    <span id="username-field">{{view Ember.TextField valueBinding="view.username"}}</span>
+  </div>
+  <div>
+    <span id="password">Password:</span>
+    <span id="password-field">{{view Ember.TextField type="password" valueBinding="view.password"}}</span>
+  </div>
+  <input type="submit" value="Login" {{action login}} />
+</div>

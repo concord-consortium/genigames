@@ -10,6 +10,22 @@ GG.statemanager = Ember.StateManager.create
 
   loading: Ember.State.create
 
+  loggingIn: Ember.State.create
+    enter: ->
+      # show the login form
+      GG.universeView.set 'currentView', GG.universeView.get 'login'
+      if GG.sessionController.get('user')?
+        setTimeout ->
+          GG.statemanager.goToState('inWorld')
+        , 100
+
+    login: (state, data)->
+      GG.sessionController.loginPortal(data.username, data.password)
+
+  loggingOut: Ember.State.create
+    enter: ->
+      GG.sessionController.logoutPortal()
+
   inWorld: Ember.State.create
     initialState: 'townsWaiting'
 

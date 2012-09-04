@@ -5,6 +5,8 @@ require 'rack/streaming_proxy'
 use Rack::StreamingProxy do |request|
   if request.path.start_with?('/biologica/') || request.path.start_with?('/resources/')
     "http://geniverse.dev.concord.org#{request.path}"
+  elsif request.path.start_with?('/portal/')
+    "http://genigames.dev.concord.org#{request.path}"
   end
 end
 

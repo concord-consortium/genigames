@@ -26,6 +26,7 @@ minispade.require 'genigames/templates/chromosome-panel'
 minispade.require 'genigames/templates/chromosome'
 minispade.require 'genigames/templates/move-counter'
 minispade.require 'genigames/templates/match-goal-counter'
+minispade.require 'genigames/templates/login'
 
 # on load
 $ ->
@@ -33,6 +34,7 @@ $ ->
   GG.logController.startNewSession()
 
   GG.universeView = Ember.ContainerView.create
+    login: GG.LoginView.create()
     world: GG.WorldView.create()
     town: Ember.ContainerView.create
       town: GG.TownView
@@ -49,7 +51,7 @@ $ ->
     for to in data.towns
       town = GG.Town.create to
       GG.townsController.addTown town
-    GG.statemanager.goToState 'inWorld'
+    GG.statemanager.goToState 'loggingIn'
 
   # socket.io hello world stuff
   socket = window.socket = io.connect "#{location.protocol}//#{location.host}/"

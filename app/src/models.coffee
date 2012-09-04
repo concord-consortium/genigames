@@ -1,3 +1,10 @@
+GG.User = Ember.Object.extend
+  login: null
+  first: null
+  last: null
+  class_words: []
+  teacher: false
+
 GG.Town = Ember.Object.extend
   name: "Town"
   icon: "huts"
@@ -21,7 +28,6 @@ GG.Town = Ember.Object.extend
     @_super()
     tasks = []
     for ts in @get 'tasks'
-      console.log 'processing task: ', ts
       task = GG.Task.create ts
       tasks.pushObject task
 

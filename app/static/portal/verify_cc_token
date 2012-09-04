@@ -1,0 +1,7 @@
+{
+  "login": "suser",
+  "first": "student",
+  "last": "user",
+  "class_words": ["foobar"],
+  "teacher": false
+}
