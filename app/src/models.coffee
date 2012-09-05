@@ -46,6 +46,19 @@ GG.Task = Ember.Object.extend
   completed: false
   matchCount: 0
 
+  init: ->
+    @_super()
+    prevState = GG.userController.loadState("task", this)
+    for k in Object.keys(prevState)
+      @set(k, prevState[k])
+
+  serialize: ->
+    {completed: @get('completed')}
+
+  triggerSave: (->
+    GG.userController.saveState('task', this)
+  ).observes('completed')
+
   isComplete: ->
     # parse required characteristics
     parsedCharacteristics = @get('targetDrake').split(/\s*,\s*/).map (ch, idx, arr)->

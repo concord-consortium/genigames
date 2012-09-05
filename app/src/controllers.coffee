@@ -212,11 +212,53 @@ GG.logController = Ember.Object.create
     S4 = -> (((1+Math.random())*0x10000)|0).toString(16).substring(1)
     S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4()
 
+GG.userController = Ember.Object.create
+  learnerDataUrl: (->
+    lid = @get('learnerId')
+    if lid?
+      '/portal/dataservice/bucket_loggers/learner/' + lid + '/bucket_contents.bundle'
+    else
+      null
+  ).property('learnerId')
+
+  user: null
+  state: null
+  learnerId: null
+  loaded: false
+  learnerChanged: (->
+    # TODO update learner data
+    console.log 'learner changed: ', @get('learnerId')
+    @set('loaded', false)
+    $.getJSON(@get('learnerDataUrl'), (data) =>
+      @set('state', data)
+      @set('loaded', true)
+    ).error =>
+      @set('state', null)
+      @set('loaded', true)
+  ).observes('learnerId')
+
+  loadState: (type, obj)->
+    allState = @get('state')
+    if allState? and allState[type]? and allState[type][obj.get('name')]?
+      return allState[type][obj.get('name')]
+    else
+      return {}
+
+  saveState: (type, obj)->
+    # FIXME need to use a lock/free mechanism to avoid race conditions
+    allState = @get('state')
+    allState = {} unless allState?
+    allState[type] = {} unless allState[type]
+    allState[type][obj.get('name')] = obj.serialize()
+    @set('state', allState)
+    $.post @get('learnerDataUrl'), JSON.stringify(allState), (data) =>
+      console.log 'state saved'
+
 GG.sessionController = Ember.Object.create
   checkTokenUrl: '/portal/verify_cc_token'
   loginUrl:      '/portal/remote_login'
   logoutUrl:     '/portal/remote_logout'
-  user: null
+  userBinding: 'GG.userController.user'
   error: false
   loggingIn: false
   firstTime: true

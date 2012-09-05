@@ -33,6 +33,21 @@ $ ->
 
   GG.logController.startNewSession()
 
+  # process url query params
+  urlParams = {}
+  finder = ->
+    match = null
+    pl = /\+/g
+    search = /([^&=]+)=?([^&]*)/g
+    decode = (s)->
+      decodeURIComponent(s.replace(pl, " "))
+    query = window.location.search.substring(1)
+
+    while match = search.exec(query)
+      urlParams[decode match[1]] = decode match[2]
+  finder()
+  GG.statemanager.set('params', urlParams)
+
   GG.universeView = Ember.ContainerView.create
     login: GG.LoginView.create()
     world: GG.WorldView.create()
@@ -41,18 +56,10 @@ $ ->
       breeder: GG.BreederView
       childViews: ['town','breeder']
 
-
   GG.universeView.appendTo('#container')
 
-  # GET /api/game
-  # set the player's task according to the game specification
-  gamePath = if UNDER_TEST? then 'api/testgame' else 'api/game'
-  $.getJSON gamePath, (data) ->
-    for to in data.towns
-      town = GG.Town.create to
-      GG.townsController.addTown town
-    GG.sessionController.checkCCAuthToken()
-    GG.statemanager.goToState 'loggingIn'
+  GG.sessionController.checkCCAuthToken()
+  GG.statemanager.goToState 'loggingIn'
 
   # socket.io hello world stuff
   socket = window.socket = io.connect "#{location.protocol}//#{location.host}/"

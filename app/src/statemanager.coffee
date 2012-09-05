@@ -7,6 +7,7 @@ STATES:
 
 GG.statemanager = Ember.StateManager.create
   initialState: 'loading'
+  params: {}
 
   loading: Ember.State.create
 
@@ -30,12 +31,31 @@ GG.statemanager = Ember.StateManager.create
     initialState: 'townsWaiting'
 
     enter: ->
-      GG.universeView.set 'currentView', GG.universeView.get 'world'
-      currentTown = GG.townsController.get('currentTown')
-      if currentTown?
-        setTimeout ->
-          $('#world').rotate(currentTown.get('position') + "deg")
-        , 10
+      # load the game after we log in so that we can create towns and tasks
+      # with the current user's saved state
+      loadGame = ->
+        # GET /api/game
+        # set the player's task according to the game specification
+        gamePath = if UNDER_TEST? then 'api/testgame' else 'api/game'
+        $.getJSON gamePath, (data) ->
+          for to in data.towns
+            town = GG.Town.create to
+            GG.townsController.addTown town
+          GG.universeView.set 'currentView', GG.universeView.get 'world'
+          currentTown = GG.townsController.get('currentTown')
+          if currentTown?
+            setTimeout ->
+              $('#world').rotate(currentTown.get('position') + "deg")
+            , 10
+
+      if GG.statemanager.get('params').learner?
+        obs = ->
+          GG.userController.removeObserver('loaded', obs)
+          loadGame()
+        GG.userController.addObserver('loaded', obs)
+        GG.userController.set('learnerId', GG.statemanager.get('params').learner)
+      else
+        loadGame()
 
     townsWaiting: Ember.State.create
       spriteAnimation: null
