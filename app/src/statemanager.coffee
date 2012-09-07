@@ -13,6 +13,9 @@ GG.statemanager = Ember.StateManager.create
 
   loggingIn: Ember.State.create
     enter: ->
+      #try to log in automatically
+      GG.sessionController.checkCCAuthToken()
+
       # show the login form
       GG.universeView.set 'currentView', GG.universeView.get 'login'
       if GG.sessionController.get('user')?

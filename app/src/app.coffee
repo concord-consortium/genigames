@@ -58,7 +58,6 @@ $ ->
 
   GG.universeView.appendTo('#container')
 
-  GG.sessionController.checkCCAuthToken()
   GG.statemanager.goToState 'loggingIn'
 
   # socket.io hello world stuff
