@@ -274,7 +274,7 @@ GG.sessionController = Ember.Object.create
       else
         user = GG.User.create data
         @set('user', user)
-        GG.statemanager.goToState 'inWorld'
+        GG.statemanager.send 'successfulLogin'
     , "json").error =>
       @set('error', true)
 
