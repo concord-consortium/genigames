@@ -58,7 +58,7 @@ $ ->
 
   GG.universeView.appendTo('#container')
 
-  GG.statemanager.goToState 'loggingIn'
+  GG.statemanager.transitionTo 'loggingIn'
 
   # socket.io hello world stuff
   socket = window.socket = io.connect "#{location.protocol}//#{location.host}/"

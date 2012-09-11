@@ -113,7 +113,7 @@ GG.StateInTask = Ember.State.extend
 
     checkForTaskCompletion: ->
       if GG.tasksController.isCurrentTaskComplete()
-        GG.statemanager.goToState 'taskCompleted'
+        GG.statemanager.transitionTo 'taskCompleted'
 
     working: Ember.State.create
     taskCompleted: Ember.State.create

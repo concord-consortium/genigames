@@ -67,13 +67,13 @@ GG.tasksController = Ember.ArrayController.create
   taskAccepted: (task) ->
     task.set 'showSpeechBubble', false
     @setCurrentTask task
-    GG.statemanager.goToState('inTask')
+    GG.statemanager.transitionTo 'inTask'
 
   taskCompleted: (task) ->
     task.set 'showCompletionBubble', false
     task.set 'completed', true
     # @setCurrentTask null
-    GG.statemanager.goToState('inTown')
+    GG.statemanager.transitionTo 'inTown'
 
   isCurrentTaskComplete: ->
     currentTask = @get 'currentTask'
@@ -290,4 +290,4 @@ GG.sessionController = Ember.Object.create
     @set('firstTime', true)
     @set('user', null)
     $.getJSON @logoutUrl, (data) ->
-      GG.statemanager.goToState 'loggingIn'
+      GG.statemanager.transitionTo 'loggingIn'

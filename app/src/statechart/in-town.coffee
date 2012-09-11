@@ -23,13 +23,13 @@ GG.StateInTown = Ember.State.extend
       else
         GG.townsController.completeCurrentTown()
         setTimeout =>
-          GG.statemanager.goToState('inWorld')
+          GG.statemanager.transitionTo 'inWorld'
         , 1000
 
 
     npcSelected: (manager, task) ->
       GG.tasksController.showTaskDescription task
-      GG.statemanager.goToState 'npcShowingTask'
+      GG.statemanager.transitionTo 'npcShowingTask'
 
   npcShowingTask: Ember.State.create
     accept: (manager, task) ->
