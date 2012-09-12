@@ -5,6 +5,7 @@
       "name": "Starter town",
       "icon": "castle",
       "position": 0,
+      "finalMessage": "You're all done!",
       "tasks": [
         {
           "name": "Sample Task",
