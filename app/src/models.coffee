@@ -9,6 +9,7 @@ GG.Town = Ember.Object.extend
   name: "Town"
   icon: "huts"
   position: 0
+  finalMessage: "Nice work, you've completed all the tasks in this town!"
   otherTownsBinding: Ember.Binding.oneWay('GG.townsController.content')
   enabled: (->
     towns = @get('otherTowns')
@@ -40,11 +41,13 @@ GG.Task = Ember.Object.extend
   targetDrake: null
   targetCount: 1
   npc: null
+  completed: false
+  matchCount: 0
+  # viewmodel properties
   showQuestionBubble: false
   showSpeechBubble: false
   showCompletionBubble: false
-  completed: false
-  matchCount: 0
+  showFinalMessageBubble: false
 
   init: ->
     @_super()

@@ -270,3 +270,16 @@ GG.NPCHeartBubbleView = Ember.View.extend
   attributeBindings  : ['src']
   src                : '../images/heart-bubble.png'
   hidden             : Ember.computed.not('content.completed')
+
+GG.NPCFinalMessageBubbleView = Ember.View.extend
+  tagName            : 'div'
+  text               : (->
+    return new Handlebars.SafeString(GG.townsController.get("currentTown.finalMessage"))
+  ).property('content')
+  classNames         : ['speech-bubble']
+  classNameBindings  : ['hidden']
+  hidden             : Ember.computed.not('content.showFinalMessageBubble')
+  next: ->
+    GG.statemanager.transitionTo 'inWorld.movingDirectlyToNextTown'
+  world: ->
+    GG.statemanager.transitionTo 'inWorld.townsWaiting'

@@ -15,6 +15,12 @@
         <br/><br/>
         <button {{action "accept"}}>{{view.content.npc.speech.accept}}</button>
       {{/view}}
+      {{#view GG.NPCFinalMessageBubbleView contentBinding="this"}}
+        {{view.text}}
+        <br/><br/>
+        <button {{action "next"}}>Go straight to next town</button>
+        <button {{action "world"}}>Go to world view</button>
+      {{/view}}
       {{view GG.NPCHeartBubbleView contentBinding="this"}}
       {{view GG.NPCView contentBinding="this"}}
     {{/view}}

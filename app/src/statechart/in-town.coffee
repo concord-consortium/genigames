@@ -10,7 +10,7 @@ GG.StateInTown = Ember.State.extend
     GG.universeView.set 'currentView', GG.universeView.get 'town'
 
   npcsWaiting: Ember.State.create
-    enter: ->
+    enter: (manager) ->
       task.set('showQuestionBubble', false) for task in GG.tasksController.content
       task.set('showSpeechBubble', false) for task in GG.tasksController.content
 
@@ -27,7 +27,7 @@ GG.StateInTown = Ember.State.extend
       else
         GG.townsController.completeCurrentTown()
         setTimeout =>
-          GG.statemanager.transitionTo 'inWorld'
+          manager.transitionTo 'npcShowingFinalMessage'
         , 1000
 
 
@@ -38,5 +38,10 @@ GG.StateInTown = Ember.State.extend
   npcShowingTask: Ember.State.create
     accept: (manager, task) ->
       GG.tasksController.taskAccepted task
-    decline: ->
+    decline: (manager) ->
       manager.transitionTo 'npcsWaiting'
+
+  npcShowingFinalMessage: Ember.State.create
+    enter: ->
+      lastTask = GG.tasksController.get("lastObject")
+      lastTask.set('showFinalMessageBubble', true)
