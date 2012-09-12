@@ -47,8 +47,8 @@ GG.StateInWorld = Ember.State.extend
 
   townsWaiting: Ember.State.create
     townSelected: (manager, town) ->
-      #if town.get('enabled')
-      manager.send 'navigateToTown', town
+      if town.get('enabled')
+        manager.send 'navigateToTown', town
 
   movingDirectlyToNextTown: Ember.State.create
     enter: (manager) ->
