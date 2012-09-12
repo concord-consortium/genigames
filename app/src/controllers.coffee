@@ -146,7 +146,7 @@ GG.breedingController = Ember.Object.create
 
   breedDrake: ->
     if @get('mother') && @get('father')
-      GG.statemanager.send 'incrementCounter'
+      GG.statemanager.send 'incrementCounter', GG.actionCostsController.getCost 'breedButtonClicked'
       @set 'isBreeding', true
       GenGWT.breedDragon @get('mother.biologicaOrganism'), @get('father.biologicaOrganism'), (org) =>
         drake = GG.Drake.createFromBiologicaOrganism org
@@ -163,12 +163,12 @@ GG.breedingController = Ember.Object.create
 GG.moveController = Ember.Object.create
   moves: 0
   previousMoves: 0
-  increment: ->
+  increment: (amt) ->
     @set 'previousMoves', @get 'moves'
-    @set 'moves', @get('previousMoves')+1
-  decrement: ->
+    @set 'moves', @get('previousMoves')+amt
+  decrement: (amt) ->
     @set 'previousMoves', @get 'moves'
-    @set 'moves', @get('previousMoves')-1
+    @set 'moves', @get('previousMoves')-amt
   reset: ->
     @set 'previousMoves', 0
     @set 'moves', 0

@@ -105,8 +105,8 @@ GG.StateInTask = Ember.State.extend
       if GG.breedingController.get 'mother'
         GG.animateMeiosis '#parent-mothers-pool-container'
 
-    incrementCounter: ->
-      GG.moveController.increment()
+    incrementCounter: (manager, amt = 1) ->
+      GG.moveController.increment(amt)
 
     resetCounter: ->
       GG.moveController.reset()
