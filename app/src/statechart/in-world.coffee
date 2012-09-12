@@ -51,7 +51,9 @@ GG.StateInWorld = Ember.State.extend
         manager.send 'navigateToTown', town
 
   movingDirectlyToNextTown: Ember.State.create
-    enter: (manager) ->
+    # setup is called after we have fully entered the state, so we can call actions
+    # fixme: the animation sitll won't work without the timeout below
+    setup: (manager) ->
       currTown = GG.townsController.get('currentTown')
       towns = currTown.get('otherTowns')
       idx = towns.indexOf(currTown)
