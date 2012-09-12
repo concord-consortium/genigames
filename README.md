@@ -69,6 +69,9 @@ Add the following to '/etc/apache2/extra/httpd-vhosts.conf':
       ProxyPass        /resources/ http://geniverse.dev.concord.org/resources/ retry=1
       ProxyPassReverse /resources/ http://geniverse.dev.concord.org/resources/
 
+      ProxyPass        /couchdb http://geniverse.dev.concord.org/couchdb retry=1
+      ProxyPassReverse /couchdb http://geniverse.dev.concord.org/couchdb
+
       # Rackup
       ProxyPass         / http://127.0.0.1:9292/ retry=1
       ProxyPassReverse  / http://127.0.0.1:9292/

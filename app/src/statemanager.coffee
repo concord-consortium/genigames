@@ -45,7 +45,7 @@ GG.statemanager = Ember.StateManager.create
             GG.townsController.addTown town
           GG.statemanager.goToState('inWorld')
 
-        $.getJSON 'api/actionCosts', (data) ->
+        $.getJSON '/couchdb/genigames/actionCosts', (data) ->
           actionCosts = GG.ActionCosts.create data
           GG.actionCostsController.set 'content', actionCosts
 
