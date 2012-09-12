@@ -128,7 +128,7 @@ GG.AlleleView = Ember.View.extend
   ).property('value','hidden')
   click: ->
     if @get('hidden')
-      GG.statemanager.send 'incrementCounter'
+      GG.statemanager.send 'incrementCounter', GG.actionCostsController.getCost 'alleleRevealed'
       @set 'hidden', false
       if (@get 'drake')? and (@get 'side')?
         @get('drake').markRevealed(@get('side'), @get('value'))
