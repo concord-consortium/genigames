@@ -45,6 +45,10 @@ GG.statemanager = Ember.StateManager.create
             GG.townsController.addTown town
           GG.statemanager.goToState('inWorld')
 
+        $.getJSON 'api/actionCosts', (data) ->
+          actionCosts = GG.ActionCosts.create data
+          GG.actionCostsController.set 'content', actionCosts
+
       if GG.statemanager.get('params').learner?
         obs = ->
           GG.userController.removeObserver('loaded', obs)

@@ -184,3 +184,6 @@ GG.TaskNPC = Ember.Object.extend
   imageURL: null
   task: null
   position: null
+
+GG.ActionCosts = Ember.Object.extend
+  breedButtonClicked: 1

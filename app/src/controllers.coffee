@@ -291,3 +291,7 @@ GG.sessionController = Ember.Object.create
     @set('user', null)
     $.getJSON @logoutUrl, (data) ->
       GG.statemanager.transitionTo 'loggingIn'
+
+GG.actionCostsController = Ember.Object.create
+  getCost: (action) ->
+    @get('content.'+action)
