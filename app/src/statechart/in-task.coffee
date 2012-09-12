@@ -34,7 +34,7 @@ GG.StateInTask = Ember.State.extend
       GG.parentController.set whichSelection, parent
 
       GG.logController.logEvent GG.Events.SELECTED_PARENT,
-        alleles: parent.getPath('biologicaOrganism.alleles')
+        alleles: parent.get('biologicaOrganism.alleles')
         sex: parent.get('sex')
 
     parentRemoved: (manager, parent) ->
@@ -44,7 +44,7 @@ GG.StateInTask = Ember.State.extend
       GG.parentController.removeObject parent
 
       GG.logController.logEvent GG.Events.REMOVED_PARENT,
-        alleles: parent.getPath('biologicaOrganism.alleles')
+        alleles: parent.get('biologicaOrganism.alleles')
         sex: parent.get('sex')
 
     offspringSelected: (manager, child) ->
@@ -55,7 +55,7 @@ GG.StateInTask = Ember.State.extend
         GG.moveController.increment()
 
         GG.logController.logEvent GG.Events.SELECTED_OFFSPRING,
-          alleles: child.getPath('biologicaOrganism.alleles')
+          alleles: child.get('biologicaOrganism.alleles')
           sex: child.get('sex')
 
     breedDrake: ->

@@ -24,7 +24,7 @@ GG.WorldTownView = Ember.View.extend
   attributeBindings: ['style']
   location: "location"
   icon: (->
-    @getPath('content.icon')
+    @get('content.icon')
   ).property('content.icon')
   style: (->
     # TODO how do we do width and height?
@@ -35,15 +35,15 @@ GG.WorldTownView = Ember.View.extend
     # (a + r cos t, b + r sin t)
     # add 90 since the equation assumes 0 is on the right of the circle, not top
     # subtract because the coordinate
-    posRadX = (@getPath('content.position') + 90) * (Math.PI/180)
+    posRadX = (@get('content.position') + 90) * (Math.PI/180)
     # subtract for Y since the coordinate system is mirrored on the Y-axis
-    posRadY = (@getPath('content.position') - 90) * (Math.PI/180)
+    posRadY = (@get('content.position') - 90) * (Math.PI/180)
     x = Math.round(350 + (250 * Math.cos(posRadX)) - (width/2))
     y = Math.round(350 + (250 * Math.sin(posRadY)) - (height/2))
     return "left: " + x + "px; top: " + y + "px; " + @get('rotation')
   ).property('content.position')
   rotation: (->
-    rot = "rotate(-" + @getPath('content.position') + "deg); "
+    rot = "rotate(-" + @get('content.position') + "deg); "
     return "transform: " + rot +
       "-ms-transform: " + rot +
       "-webkit-transform: " + rot +
@@ -144,7 +144,7 @@ GG.ChromoView = Ember.View.extend
   visibleAlleles: (->
     res = []
     if (@get 'content')?
-      fullGeno = @getPath 'content.visibleGenotype'
+      fullGeno = @get 'content.visibleGenotype'
       geno = fullGeno[@get 'side']
       res = GG.genetics.filter(geno, @get 'genes')
     return res
@@ -152,7 +152,7 @@ GG.ChromoView = Ember.View.extend
   hiddenAlleles: (->
     res = []
     if (@get 'content')?
-      fullGeno = @getPath 'content.hiddenGenotype'
+      fullGeno = @get 'content.hiddenGenotype'
       geno = fullGeno[@get 'side']
       res = GG.genetics.filter(geno, @get 'genes')
     return res
@@ -213,7 +213,7 @@ GG.TaskNPCView = Ember.View.extend
   classNames         : 'npc'
   attributeBindings  : ['style']
   style: (->
-    "top: " + @getPath('content.npc.position.y') + "px; left: " + @getPath('content.npc.position.x') + "px;"
+    "top: " + @get('content.npc.position.y') + "px; left: " + @get('content.npc.position.x') + "px;"
   ).property('content.npc.position.x','content.npc.position.y')
   npcSelected: (evt) ->
     GG.statemanager.send 'npcSelected', evt.context
@@ -242,7 +242,7 @@ GG.NPCQuestionBubbleView = Ember.View.extend GG.Animation,
 GG.NPCSpeechBubbleView = Ember.View.extend
   tagName            : 'div'
   text               : (->
-    return new Handlebars.SafeString(@getPath 'content.npc.speech.text')
+    return new Handlebars.SafeString(@get 'content.npc.speech.text')
   ).property('content')
   classNames         : ['speech-bubble']
   classNameBindings  : ['hidden']
@@ -255,7 +255,7 @@ GG.NPCSpeechBubbleView = Ember.View.extend
 GG.NPCCompletionBubbleView = Ember.View.extend
   tagName            : 'div'
   text               : (->
-    return new Handlebars.SafeString(@getPath 'content.npc.speech.completionText')
+    return new Handlebars.SafeString(@get 'content.npc.speech.completionText')
   ).property('content')
   classNames         : ['speech-bubble']
   classNameBindings  : ['hidden']

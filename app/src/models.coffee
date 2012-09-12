@@ -86,7 +86,7 @@ GG.Drake = Ember.Object.extend
     @set 'revealedAlleles', {a: [], b: []}
 
   genotype: (->
-    alleleString = @getPath 'biologicaOrganism.alleles'
+    alleleString = @get 'biologicaOrganism.alleles'
 
     a: alleleString.match(/a:([^,])*/g).map (short) -> short.match(/[^:]+$/)[0]
     b: alleleString.match(/b:([^,])*/g).map (short) -> short.match(/[^:]+$/)[0]

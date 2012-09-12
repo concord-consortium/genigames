@@ -106,12 +106,12 @@ GG.parentController = Ember.ArrayController.create
   selectMother: (drake) ->
     if drake.sex isnt GG.FEMALE then throw "GG.parentController.selectMother: tried to set a non-female as mother"
     @set 'selectedMother', drake
-    GG.logController.logEvent GG.Events.SELECTED_PARENT, alleles: drake.getPath('biologicaOrganism.alleles'), sex: GG.FEMALE
+    GG.logController.logEvent GG.Events.SELECTED_PARENT, alleles: drake.get('biologicaOrganism.alleles'), sex: GG.FEMALE
 
   selectFather: (drake) ->
     if drake.sex isnt GG.MALE then throw "GG.parentController.selectMother: tried to set a non-male as father"
     @set 'selectedFather', drake
-    GG.logController.logEvent GG.Events.SELECTED_PARENT, alleles: drake.getPath('biologicaOrganism.alleles'), sex: GG.M
+    GG.logController.logEvent GG.Events.SELECTED_PARENT, alleles: drake.get('biologicaOrganism.alleles'), sex: GG.M
 
   hasRoom: (drake) ->
     if drake.sex is GG.MALE
@@ -148,7 +148,7 @@ GG.breedingController = Ember.Object.create
     if @get('mother') && @get('father')
       GG.statemanager.send 'incrementCounter'
       @set 'isBreeding', true
-      GenGWT.breedDragon @getPath('mother.biologicaOrganism'), @getPath('father.biologicaOrganism'), (org) =>
+      GenGWT.breedDragon @get('mother.biologicaOrganism'), @get('father.biologicaOrganism'), (org) =>
         drake = GG.Drake.createFromBiologicaOrganism org
         drake.set 'bred', true
         GG.breedingController.set 'child', drake
@@ -156,9 +156,9 @@ GG.breedingController = Ember.Object.create
         @set 'isBreeding', false
         GG.statemanager.send 'checkForTaskCompletion'
         GG.logController.logEvent GG.Events.BRED_DRAGON,
-          mother: @getPath('mother.biologicaOrganism.alleles')
-          father: @getPath('father.biologicaOrganism.alleles')
-          offspring: drake.getPath('biologicaOrganism.alleles')
+          mother: @get('mother.biologicaOrganism.alleles')
+          father: @get('father.biologicaOrganism.alleles')
+          offspring: drake.get('biologicaOrganism.alleles')
 
 GG.moveController = Ember.Object.create
   moves: 0
