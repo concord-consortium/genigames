@@ -177,7 +177,7 @@ GG.ChromosomePanelView = Ember.View.extend
 
 GG.EggView = Ember.View.extend GG.Animation,
   tagName: 'div'
-  hiddenBinding: Ember.Binding.oneWay('GG.breedingController.isBreeding').not()
+  hidden: Ember.computed.not('GG.breedingController.isBreeding')
   classNameBindings: ['hidden']
   onShow: ->
     @$().css({backgroundPosition: '0px 0px'})
@@ -230,7 +230,7 @@ GG.NPCQuestionBubbleView = Ember.View.extend GG.Animation,
   classNameBindings  : ['hidden']
   attributeBindings  : ['src']
   src                : '../images/bubble-question.png'
-  hiddenBinding      : Ember.Binding.oneWay('content.showQuestionBubble').not()
+  hidden             : Ember.computed.not('content.showQuestionBubble')
   onShow: ->
     @animateSequence
       sequence:
@@ -246,7 +246,7 @@ GG.NPCSpeechBubbleView = Ember.View.extend
   ).property('content')
   classNames         : ['speech-bubble']
   classNameBindings  : ['hidden']
-  hiddenBinding      : Ember.Binding.oneWay('content.showSpeechBubble').not()
+  hidden             : Ember.computed.not('content.showSpeechBubble')
   accept: ->
     GG.statemanager.send 'accept', @get 'content'
   decline: ->
@@ -259,7 +259,7 @@ GG.NPCCompletionBubbleView = Ember.View.extend
   ).property('content')
   classNames         : ['speech-bubble']
   classNameBindings  : ['hidden']
-  hiddenBinding      : Ember.Binding.oneWay('content.showCompletionBubble').not()
+  hidden             : Ember.computed.not('content.showCompletionBubble')
   accept: ->
     GG.tasksController.taskCompleted(@get 'content')
 
@@ -269,4 +269,4 @@ GG.NPCHeartBubbleView = Ember.View.extend
   classNameBindings  : ['hidden']
   attributeBindings  : ['src']
   src                : '../images/heart-bubble.png'
-  hiddenBinding      : Ember.Binding.oneWay('content.completed').not()
+  hidden             : Ember.computed.not('content.completed')

@@ -1,7 +1,7 @@
 <div id="town">
   {{#each view.content}}
     {{#view GG.TaskNPCView contentBinding="this"}}
-      <a href="#" {{action "npcSelected"}}>
+      <a href="#" {{action "npcSelected" this}}>
         {{view GG.NPCQuestionBubbleView contentBinding="this"}}
       </a>
       {{#view GG.NPCSpeechBubbleView contentBinding="this"}}

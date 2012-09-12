@@ -15,7 +15,7 @@ GG.statemanager = Ember.StateManager.create
   initialState: 'loading'
   params: {}
 
-  loading: Ember.State.create
+  loading: Ember.State.create({})
 
   loggingIn: Ember.State.create
     enter: ->

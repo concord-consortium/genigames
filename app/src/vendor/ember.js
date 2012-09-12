@@ -1,1 +1,1 @@
-../../vendor/ember-0.9.8.1.js
+../../vendor/ember-1.0.pre.js
