@@ -52,7 +52,7 @@ GG.StateInTask = Ember.State.extend
         # add it to the parentController, and remove it from the offspringController
         GG.offspringController.removeObject child
         GG.parentController.pushObject child
-        GG.moveController.increment()
+        manager.send 'incrementCounter'
 
         GG.logController.logEvent GG.Events.SELECTED_OFFSPRING,
           alleles: child.get('biologicaOrganism.alleles')
@@ -105,7 +105,7 @@ GG.StateInTask = Ember.State.extend
       if GG.breedingController.get 'mother'
         GG.animateMeiosis '#parent-mothers-pool-container'
 
-    incrementCounter: (manager, amt = 1) ->
+    incrementCounter: (manager, amt) ->
       GG.moveController.increment(amt)
 
     resetCounter: ->

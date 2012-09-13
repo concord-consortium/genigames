@@ -163,10 +163,10 @@ GG.breedingController = Ember.Object.create
 GG.moveController = Ember.Object.create
   moves: 0
   previousMoves: 0
-  increment: (amt) ->
+  increment: (amt=1) ->
     @set 'previousMoves', @get 'moves'
     @set 'moves', @get('previousMoves')+amt
-  decrement: (amt) ->
+  decrement: (amt=1) ->
     @set 'previousMoves', @get 'moves'
     @set 'moves', @get('previousMoves')-amt
   reset: ->
