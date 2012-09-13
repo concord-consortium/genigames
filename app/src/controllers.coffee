@@ -8,7 +8,7 @@ GG.townsController = Ember.ArrayController.create
     @pushObject town
 
   setCurrentTown: (town, force=false) ->
-    @completeTownsThrough @indexOf(town) if force
+    @completeTownsThrough @indexOf(town) - 1 if force
     return false if town is @currentTown or not town.get('enabled')
 
     if @indexOf(town) >= 0
