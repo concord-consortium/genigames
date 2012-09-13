@@ -48,8 +48,10 @@ GG.tasksController = Ember.ArrayController.create
   addTask: (task) ->
     @pushObject task
 
-  setCurrentTask: (task) ->
+  setCurrentTask: (task, force=false) ->
+    @completeTasksThrough @indexOf(task) - 1 if force
     return if task is @currentTask
+
     if @indexOf(task) >= 0
       @set 'currentTask', task
       setTimeout ->
@@ -65,6 +67,13 @@ GG.tasksController = Ember.ArrayController.create
       GG.logController.logEvent GG.Events.STARTED_TASK, name: task.get('name')
     else
       throw "GG.tasksController.setCurrentTask: argument is not a known task"
+
+  loadTask: (taskIndex) ->
+    tasks = @get('content')
+    @setCurrentTask(@get('content')[taskIndex], true) if taskIndex < tasks.length
+
+  completeTasksThrough: (n) ->
+    task.set('completed', true) for task, i in @get('content') when i <= n
 
   targetCountBinding: Ember.Binding.oneWay('currentTask.targetCount')
   matchCountBinding:  Ember.Binding.oneWay('currentTask.matchCount')
