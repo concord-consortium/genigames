@@ -7,8 +7,10 @@ GG.townsController = Ember.ArrayController.create
   addTown: (town) ->
     @pushObject town
 
-  setCurrentTown: (town) ->
+  setCurrentTown: (town, force=false) ->
+    @completeTownsThrough @indexOf(town) if force
     return false if town is @currentTown or not town.get('enabled')
+
     if @indexOf(town) >= 0
       @set 'currentTown', town
       GG.tasksController.reset()
@@ -19,9 +21,21 @@ GG.townsController = Ember.ArrayController.create
     else
       throw "GG.townsController.setCurrentTown: argument is not a known town"
 
+  # loads a town by name or number
+  loadTown: (townName) ->
+    if (not isNaN parseInt(townName))
+      town = @get('content')[townName-1]
+    else
+      town = (town for town in @get('content') when town.get('name') == townName)[0]
+
+    @setCurrentTown(town, true) if town?
+
   completeCurrentTown: ->
     @get('currentTown').set('completed', true)
 
+  # 'completeTownsThrough 2' will complete towns 0,1,2
+  completeTownsThrough: (n) ->
+    town.set('completed', true) for town, i in @get('content') when i <= n
 
 GG.tasksController = Ember.ArrayController.create
   content    : []

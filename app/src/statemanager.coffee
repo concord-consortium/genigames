@@ -39,11 +39,19 @@ GG.statemanager = Ember.StateManager.create
         # GET /api/game
         # set the player's task according to the game specification
         gamePath = if UNDER_TEST? then 'api/testgame' else 'api/game'
+
         $.getJSON gamePath, (data) ->
           for to in data.towns
             town = GG.Town.create to
             GG.townsController.addTown town
-          GG.statemanager.goToState('inWorld')
+          # fixme: this should be eventually handled by a router
+          if (taskPath = GG.statemanager.get('params.task'))
+            taskPath = taskPath.split "/"
+            townLoaded = GG.townsController.loadTown taskPath[0]
+            nextState = if townLoaded then 'inTown' else 'inWorld'
+            GG.statemanager.transitionTo nextState
+          else
+            GG.statemanager.transitionTo 'inWorld'
 
         $.getJSON '/couchdb/genigames/actionCosts', (data) ->
           actionCosts = GG.ActionCosts.create data
