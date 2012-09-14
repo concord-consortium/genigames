@@ -74,7 +74,9 @@ GG.tasksController = Ember.ArrayController.create
 
 
   completeCurrentTask: ->
-    @get('currentTask').set 'completed', true
+    task = @get 'currentTask'
+    task.set 'completed', true
+    GG.userController.addReputation task.get 'reputation'
 
   completeTasksThrough: (n) ->
     task.set('completed', true) for task, i in @get('content') when i <= n
@@ -262,6 +264,10 @@ GG.userController = Ember.Object.create
       @set('state', null)
       @set('loaded', true)
   ).observes('learnerId')
+
+  addReputation: (amt) ->
+    user = @get 'user'
+    user.set 'reputation', user.get('reputation') + amt
 
   loadState: (type, obj)->
     allState = @get('state')

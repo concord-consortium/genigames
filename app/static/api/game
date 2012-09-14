@@ -9,6 +9,7 @@
       "tasks": [
         {
           "name": "Sample Task",
+          "reputation": 50,
           "visibleGenes": ["T","W"],
           "hiddenGenes": ["Hl","Rh"],
           "initialDrakes": {
@@ -30,6 +31,7 @@
         },
         {
           "name": "Sample Task2",
+          "reputation": 100,
           "visibleGenes": ["T","W", "Fl"],
           "hiddenGenes": ["Hl","Rh"],
           "initialDrakes": {
