@@ -1,4 +1,14 @@
 <div id="town">
+  <div id="topBar">
+    {{#with GG.userController.user}}
+      <div id="greeting">
+        Hi {{first}}!
+      </div>
+      <div id="reputation">
+        Reputation: {{reputation}}
+      </div>
+    {{/with}}
+  </div>
   {{#each view.content}}
     {{#view GG.TaskNPCView contentBinding="this"}}
       <a href="#" {{action "npcSelected" this}}>
