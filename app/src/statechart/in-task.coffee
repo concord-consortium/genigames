@@ -111,12 +111,12 @@ GG.StateInTask = Ember.State.extend
     resetCounter: ->
       GG.moveController.reset()
 
-    checkForTaskCompletion: ->
+    checkForTaskCompletion: (manager) ->
       if GG.tasksController.isCurrentTaskComplete()
-        GG.statemanager.transitionTo 'taskCompleted'
+        manager.send 'completeTask'
+
+    completeTask: ->
+      GG.tasksController.completeCurrentTask()
+      GG.tasksController.showTaskCompletion()
 
     working: Ember.State.create
-    taskCompleted: Ember.State.create
-      enter: ->
-        # TODO Show a congratulations dialog!
-        GG.tasksController.showTaskCompletion(GG.tasksController.get 'currentTask')

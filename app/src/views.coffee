@@ -261,7 +261,7 @@ GG.NPCCompletionBubbleView = Ember.View.extend
   classNameBindings  : ['hidden']
   hidden             : Ember.computed.not('content.showCompletionBubble')
   accept: ->
-    GG.tasksController.taskCompleted(@get 'content')
+    GG.tasksController.taskFinishedBubbleDismissed()
 
 GG.NPCHeartBubbleView = Ember.View.extend
   tagName            : 'img'

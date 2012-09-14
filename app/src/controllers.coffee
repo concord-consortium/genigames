@@ -72,6 +72,10 @@ GG.tasksController = Ember.ArrayController.create
     tasks = @get('content')
     @setCurrentTask(@get('content')[taskIndex], true) if taskIndex < tasks.length
 
+
+  completeCurrentTask: ->
+    @get('currentTask').set 'completed', true
+
   completeTasksThrough: (n) ->
     task.set('completed', true) for task, i in @get('content') when i <= n
 
@@ -82,7 +86,8 @@ GG.tasksController = Ember.ArrayController.create
     task.set 'showQuestionBubble', false
     task.set 'showSpeechBubble', true
 
-  showTaskCompletion: (task) ->
+  showTaskCompletion: ->
+    task = @get 'currentTask'
     task.set 'showQuestionBubble', false
     task.set 'showSpeechBubble', false
     task.set 'showCompletionBubble', true
@@ -92,10 +97,8 @@ GG.tasksController = Ember.ArrayController.create
     @setCurrentTask task
     GG.statemanager.transitionTo 'inTask'
 
-  taskCompleted: (task) ->
-    task.set 'showCompletionBubble', false
-    task.set 'completed', true
-    # @setCurrentTask null
+  taskFinishedBubbleDismissed: ->
+    @get('currentTask').set 'showCompletionBubble', false
     GG.statemanager.transitionTo 'inTown'
 
   isCurrentTaskComplete: ->
@@ -177,11 +180,11 @@ GG.breedingController = Ember.Object.create
         GG.breedingController.set 'child', drake
         GG.offspringController.pushObject drake
         @set 'isBreeding', false
-        GG.statemanager.send 'checkForTaskCompletion'
         GG.logController.logEvent GG.Events.BRED_DRAGON,
           mother: @get('mother.biologicaOrganism.alleles')
           father: @get('father.biologicaOrganism.alleles')
           offspring: drake.get('biologicaOrganism.alleles')
+        GG.statemanager.send 'checkForTaskCompletion'
 
 GG.moveController = Ember.Object.create
   moves: 0
