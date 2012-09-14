@@ -1,0 +1,18 @@
+#topBar {
+	color: white;
+	font-family: Verdana;
+	font-size: 1.2em;
+}
+
+#greeting {
+	position: absolute;
+	left: 140px;
+	top: 15px;
+	font-size: 1.5em;
+}
+
+#reputation {
+	position: absolute;
+	left: 710px;
+	top: 20px;
+}
