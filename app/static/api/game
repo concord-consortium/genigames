@@ -10,6 +10,7 @@
         {
           "name": "Sample Task",
           "reputation": 50,
+          "cycles": 8,
           "visibleGenes": ["T","W"],
           "hiddenGenes": ["Hl","Rh"],
           "initialDrakes": {

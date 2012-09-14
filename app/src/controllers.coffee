@@ -53,7 +53,9 @@ GG.tasksController = Ember.ArrayController.create
     return if task is @currentTask
 
     if @indexOf(task) >= 0
+      task.set 'cyclesRemaining', task.get 'cycles'
       @set 'currentTask', task
+
       for femaleAlleles in task.initialDrakes.females
         GenGWT.generateAliveDragonWithAlleleStringAndSex femaleAlleles, 0, (org) ->
           GG.parentController.pushObject GG.Drake.createFromBiologicaOrganism org
@@ -61,6 +63,7 @@ GG.tasksController = Ember.ArrayController.create
       for maleAlleles in task.initialDrakes.males
         GenGWT.generateAliveDragonWithAlleleStringAndSex maleAlleles, 1, (org) ->
           GG.parentController.pushObject GG.Drake.createFromBiologicaOrganism org
+
       GG.logController.logEvent GG.Events.STARTED_TASK, name: task.get('name')
     else
       throw "GG.tasksController.setCurrentTask: argument is not a known task"
@@ -171,7 +174,7 @@ GG.breedingController = Ember.Object.create
 
   breedDrake: ->
     if @get('mother') && @get('father')
-      GG.statemanager.send 'incrementCounter', GG.actionCostsController.getCost 'breedButtonClicked'
+      GG.statemanager.send 'decrementCycles', 1
       @set 'isBreeding', true
       GenGWT.breedDragon @get('mother.biologicaOrganism'), @get('father.biologicaOrganism'), (org) =>
         drake = GG.Drake.createFromBiologicaOrganism org
@@ -185,27 +188,24 @@ GG.breedingController = Ember.Object.create
           offspring: drake.get('biologicaOrganism.alleles')
         GG.statemanager.send 'checkForTaskCompletion'
 
-GG.moveController = Ember.Object.create
-  moves: 0
-  previousMoves: 0
+GG.cyclesController = Ember.Object.create
+  cyclesBinding: 'GG.tasksController.currentTask.cyclesRemaining'
   increment: (amt=1) ->
-    @set 'previousMoves', @get 'moves'
-    @set 'moves', @get('previousMoves')+amt
+    @set 'cycles', @get('cycles')+amt
   decrement: (amt=1) ->
-    @set 'previousMoves', @get 'moves'
-    @set 'moves', @get('previousMoves')-amt
+    @set 'cycles', @get('cycles')-amt
   reset: ->
-    @set 'previousMoves', 0
-    @set 'moves', 0
+    GG.tasksController.set 'cycles', GG.tasksController.get 'cycles'
   updateCounter: (->
-    moves = @get 'moves'
-    hundreds = Math.floor(moves / 100) % 10
+    cycles = @get 'cycles'
+    return if cycles < 0
+    hundreds = Math.floor(cycles / 100) % 10
     $('#moveCounterHundreds').animate({backgroundPosition: @getPosition(hundreds)}, 200)
-    tens = Math.floor(moves / 10) % 10
+    tens = Math.floor(cycles / 10) % 10
     $('#moveCounterTens').animate({backgroundPosition: @getPosition(tens)}, 200)
-    ones = moves % 10
+    ones = cycles % 10
     $('#moveCounterOnes').animate({backgroundPosition: @getPosition(ones)}, 200)
-  ).observes('moves')
+  ).observes('cycles')
   getPosition: (num) ->
     pos = num * 35
     "(0px -" + pos + "px)"

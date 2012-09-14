@@ -22,7 +22,7 @@ GG.StateInTask = Ember.State.extend
       GG.offspringController.set 'content', []
 
       # reset move counter
-      GG.moveController.reset()
+      GG.cyclesController.reset()
 
       # hide the breeding apparatus
       setTimeout =>
@@ -52,7 +52,7 @@ GG.StateInTask = Ember.State.extend
         # add it to the parentController, and remove it from the offspringController
         GG.offspringController.removeObject child
         GG.parentController.pushObject child
-        manager.send 'incrementCounter'
+        GG.userController.addReputation -1
 
         GG.logController.logEvent GG.Events.SELECTED_OFFSPRING,
           alleles: child.get('biologicaOrganism.alleles')
@@ -105,11 +105,11 @@ GG.StateInTask = Ember.State.extend
       if GG.breedingController.get 'mother'
         GG.animateMeiosis '#parent-mothers-pool-container'
 
-    incrementCounter: (manager, amt) ->
-      GG.moveController.increment(amt)
+    decrementCycles: (manager, amt) ->
+      GG.cyclesController.decrement(amt)
 
     resetCounter: ->
-      GG.moveController.reset()
+      GG.cyclesController.reset()
 
     checkForTaskCompletion: (manager) ->
       if GG.tasksController.isCurrentTaskComplete()

@@ -45,6 +45,8 @@ GG.Task = Ember.Object.extend
   completed: false
   matchCount: 0
   reputation: 1
+  cycles: 10
+  cyclesRemaining: 0
   # viewmodel properties
   showQuestionBubble: false
   showSpeechBubble: false
