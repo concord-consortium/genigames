@@ -122,9 +122,16 @@ GG.AlleleView = Ember.View.extend
   classNameBindings: ['defaultClassNames', 'hidden:revealable']
   defaultClassNames: 'allele'
   value: ''
+  hiddenValue: (->
+    value = @get 'value'
+    if value is "Tk" then value = "T"
+    if value is "A1" or value is "A2" then value = "A"
+    value = value.charAt(0).toUpperCase() + value.slice(1);
+    value + '?'
+  ).property('value').cacheable()
   hidden: false
   displayValue: (->
-    if @get('hidden') then '?' else @get('value')
+    if @get('hidden') then @get('hiddenValue') else @get('value')
   ).property('value','hidden')
   click: ->
     if @get('hidden')
