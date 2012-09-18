@@ -30,8 +30,14 @@ GG.StateInTask = Ember.State.extend
       , 1000
 
     parentSelected: (manager, parent) ->
-      whichSelection = if parent.get('sex') is GG.FEMALE then 'selectedMother' else 'selectedFather'
+      sex = parent.get('sex')
+      whichSelection = if sex is GG.FEMALE then 'selectedMother' else 'selectedFather'
       GG.parentController.set whichSelection, parent
+
+      if sex is GG.FEMALE and not @mothersExpanded
+        manager.send('toggleMotherPool')
+      else if sex is GG.MALE and not @fathersExpanded
+        manager.send('toggleFatherPool')
 
       GG.logController.logEvent GG.Events.SELECTED_PARENT,
         alleles: parent.get('biologicaOrganism.alleles')
