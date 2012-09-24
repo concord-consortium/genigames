@@ -13,8 +13,6 @@ GG.MALE   = 0
 GG.FEMALE = 1
 GG.imageNameStart = "/resources/drakes/images/"
 
-minispade.require 'genigames/genetics'
-
 minispade.require 'genigames/models'
 minispade.require 'genigames/controllers'
 minispade.require 'genigames/views'
@@ -34,6 +32,8 @@ minispade.require 'genigames/templates/login'
 $ ->
 
   GG.logController.startNewSession()
+
+  GG.Genetics = new BioLogica.Genetics BioLogica.Species.Drake
 
   # process url query params
   urlParams = {}

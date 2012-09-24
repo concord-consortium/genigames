@@ -145,15 +145,20 @@ GG.ChromoView = Ember.View.extend
   content: null
   chromo: '1'
   side: 'a'
+  biologicaChromoName: (->
+    chromo = @get 'chromo'
+    return chromo unless chromo is "X" or chromo is "Y"
+    return "XY"
+  ).property('chromo')
   genes: (->
-    GG.genetics.chromosomeGeneMap[@get 'chromo']
+    GG.Genetics.species.chromosomeGeneMap[@get 'biologicaChromoName']
   ).property('chromo')
   visibleAlleles: (->
     res = []
     if (@get 'content')?
       fullGeno = @get 'content.visibleGenotype'
       geno = fullGeno[@get 'side']
-      res = GG.genetics.filter(geno, @get 'genes')
+      res = GG.Genetics.filter(geno, @get 'genes')
     return res
   ).property('chromo','content','side')
   hiddenAlleles: (->
@@ -161,7 +166,7 @@ GG.ChromoView = Ember.View.extend
     if (@get 'content')?
       fullGeno = @get 'content.hiddenGenotype'
       geno = fullGeno[@get 'side']
-      res = GG.genetics.filter(geno, @get 'genes')
+      res = GG.Genetics.filter(geno, @get 'genes')
     return res
   ).property('chromo','content','side')
   defaultClass: 'chromosome'

@@ -100,9 +100,12 @@ GG.Drake = Ember.Object.extend
     b: alleleString.match(/b:([^,])*/g).map (short) -> short.match(/[^:]+$/)[0]
   ).property('biologicaOrganism')
 
+  filterGenotype: (genotype, filter) ->
+    return {a: GG.Genetics.filter(genotype.a, filter), b: GG.Genetics.filter(genotype.b, filter)}
+
   visibleGenotype: (->
     if @get('visibleGenes')?
-      vis = GG.genetics.filterGenotype @get('genotype'), @get('visibleGenes')
+      vis = @filterGenotype @get('genotype'), @get('visibleGenes')
       @get('revealedAlleles').a.forEach( (item, index, enumerable) ->
         vis.a.push(item) if vis.a.indexOf(item) == -1
       )
@@ -116,7 +119,7 @@ GG.Drake = Ember.Object.extend
 
   hiddenGenotype: (->
     if @get('hiddenGenes')?
-      hid = GG.genetics.filterGenotype @get('genotype'), @get('hiddenGenes')
+      hid = @filterGenotype @get('genotype'), @get('hiddenGenes')
       @get('revealedAlleles').a.forEach( (item, index, enumerable) ->
         hid.a.splice(hid.a.indexOf(item), 1) if hid.a.indexOf(item) != -1
       )
