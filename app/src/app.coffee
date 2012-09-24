@@ -5,13 +5,14 @@ minispade.require 'genigames/vendor/jquery-animate-css-rotate-scale'
 minispade.require 'genigames/vendor/jquery-bgpos'
 minispade.require 'genigames/vendor/handlebars'
 minispade.require 'genigames/vendor/ember'
+minispade.require 'genigames/vendor/biologica'
 
 window.GG = GG = Ember.Application.create()
 
 GG.MALE   = 0
 GG.FEMALE = 1
+GG.imageNameStart = "/resources/drakes/images/"
 
-minispade.require 'genigames/gen-gwt'
 minispade.require 'genigames/genetics'
 
 minispade.require 'genigames/models'

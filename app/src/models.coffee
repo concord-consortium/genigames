@@ -93,7 +93,8 @@ GG.Drake = Ember.Object.extend
     @set 'revealedAlleles', {a: [], b: []}
 
   genotype: (->
-    alleleString = @get 'biologicaOrganism.alleles'
+    alleleString = @get('biologicaOrganism').getAlleleString()
+
 
     a: alleleString.match(/a:([^,])*/g).map (short) -> short.match(/[^:]+$/)[0]
     b: alleleString.match(/b:([^,])*/g).map (short) -> short.match(/[^:]+$/)[0]
@@ -151,7 +152,7 @@ GG.Drake = Ember.Object.extend
       else if ch == "Male"
         has = @get 'male'
       else
-        has = GenGWT.hasCharacteristic(gorg, ch)
+        has = ~gorg.getAllCharacteristics().indexOf ch
       return false unless has
     return true
 
@@ -164,7 +165,7 @@ GG.Drake = Ember.Object.extend
 GG.Drake.createFromBiologicaOrganism = (org) ->
   GG.Drake.create
     biologicaOrganism: org
-    imageURL         : org.imageURL
+    imageURL         : GG.imageNameStart + org.getImageName()
     sex              : org.sex
 
 GG.LogEvent = Ember.Object.extend

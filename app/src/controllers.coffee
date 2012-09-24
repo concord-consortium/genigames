@@ -57,12 +57,12 @@ GG.tasksController = Ember.ArrayController.create
       @set 'currentTask', task
 
       for femaleAlleles in task.initialDrakes.females
-        GenGWT.generateAliveDragonWithAlleleStringAndSex femaleAlleles, 0, (org) ->
-          GG.parentController.pushObject GG.Drake.createFromBiologicaOrganism org
+        org = BioLogica.Organism.createLiveOrganism BioLogica.Species.Drake, femaleAlleles, BioLogica.FEMALE
+        GG.parentController.pushObject GG.Drake.createFromBiologicaOrganism org
 
       for maleAlleles in task.initialDrakes.males
-        GenGWT.generateAliveDragonWithAlleleStringAndSex maleAlleles, 1, (org) ->
-          GG.parentController.pushObject GG.Drake.createFromBiologicaOrganism org
+        org = BioLogica.Organism.createLiveOrganism BioLogica.Species.Drake, maleAlleles, BioLogica.MALE
+        GG.parentController.pushObject GG.Drake.createFromBiologicaOrganism org
 
       GG.logController.logEvent GG.Events.STARTED_TASK, name: task.get('name')
     else
@@ -176,17 +176,17 @@ GG.breedingController = Ember.Object.create
     if @get('mother') && @get('father')
       GG.statemanager.send 'decrementCycles', 1
       @set 'isBreeding', true
-      GenGWT.breedDragon @get('mother.biologicaOrganism'), @get('father.biologicaOrganism'), (org) =>
-        drake = GG.Drake.createFromBiologicaOrganism org
-        drake.set 'bred', true
-        GG.breedingController.set 'child', drake
-        GG.offspringController.pushObject drake
-        @set 'isBreeding', false
-        GG.logController.logEvent GG.Events.BRED_DRAGON,
-          mother: @get('mother.biologicaOrganism.alleles')
-          father: @get('father.biologicaOrganism.alleles')
-          offspring: drake.get('biologicaOrganism.alleles')
-        GG.statemanager.send 'checkForTaskCompletion'
+      org = BioLogica.breed @get('mother.biologicaOrganism'), @get('father.biologicaOrganism')
+      drake = GG.Drake.createFromBiologicaOrganism org
+      drake.set 'bred', true
+      GG.breedingController.set 'child', drake
+      GG.offspringController.pushObject drake
+      @set 'isBreeding', false
+      GG.logController.logEvent GG.Events.BRED_DRAGON,
+        mother: @get('mother.biologicaOrganism.alleles')
+        father: @get('father.biologicaOrganism.alleles')
+        offspring: drake.get('biologicaOrganism.alleles')
+      GG.statemanager.send 'checkForTaskCompletion'
 
 GG.cyclesController = Ember.Object.create
   cyclesBinding: 'GG.tasksController.currentTask.cyclesRemaining'
