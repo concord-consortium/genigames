@@ -57,11 +57,11 @@ GG.tasksController = Ember.ArrayController.create
       @set 'currentTask', task
 
       for femaleAlleles in task.initialDrakes.females
-        org = BioLogica.Organism.createLiveOrganism BioLogica.Species.Drake, femaleAlleles, BioLogica.FEMALE
+        org = BioLogica.Organism.createLiveOrganism GG.DrakeSpecies, femaleAlleles, BioLogica.FEMALE
         GG.parentController.pushObject GG.Drake.createFromBiologicaOrganism org
 
       for maleAlleles in task.initialDrakes.males
-        org = BioLogica.Organism.createLiveOrganism BioLogica.Species.Drake, maleAlleles, BioLogica.MALE
+        org = BioLogica.Organism.createLiveOrganism GG.DrakeSpecies, maleAlleles, BioLogica.MALE
         GG.parentController.pushObject GG.Drake.createFromBiologicaOrganism org
 
       GG.logController.logEvent GG.Events.STARTED_TASK, name: task.get('name')

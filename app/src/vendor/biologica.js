@@ -738,15 +738,15 @@
     return BioLogica.Organism.createFromGametes(mother.species, gamete1, gamete2);
   };
 
-  BioLogica.Species = {};
+  BioLogica.Species = BioLogica.Species || {};
 
-  BioLogica.Species.Drake = {
-    name: "Drake",
+  BioLogica.Species.GGDrake = {
+    name: "GGDrake",
     chromosomeNames: ['1', '2', 'XY'],
     chromosomeGeneMap: {
       '1': ['t', 'm', 'w', 'h'],
-      '2': ['c', 'b', 'fl', 'hl', 'a'],
-      'XY': ['d', 'rh', 'bog']
+      '2': ['c', 'b', 'fl', 's'],
+      'XY': ['d', 'bog', 'fb']
     },
     chromosomesLength: {
       '1': 100000000,
@@ -789,15 +789,10 @@
         start: 80000000,
         length: 122234
       },
-      hindlimbs: {
-        alleles: ['Hl', 'hl'],
-        start: 85000000,
-        length: 6371
-      },
-      armor: {
-        alleles: ['A1', 'A2', 'a'],
+      spikes: {
+        alleles: ['S', 's'],
         start: 90000000,
-        length: 425156
+        length: 6371
       },
       dilute: {
         alleles: ['D', 'd', 'dl'],
@@ -809,10 +804,10 @@
         start: 22000000,
         length: 199642
       },
-      nose: {
-        alleles: ['Rh', 'rh'],
+      firebreathing: {
+        alleles: ['Fb', 'fb'],
         start: 60000000,
-        length: 2950
+        length: 1000
       }
     },
     alleleLabelMap: {
@@ -827,13 +822,10 @@
       'h': 'Horns',
       'C': 'Colored',
       'c': 'Colorless',
-      'Fl': 'Forelimbs',
-      'fl': 'No forelimbs',
-      'Hl': 'Hindlimbs',
-      'hl': 'No hindlimbs',
-      'A1': "'A1' armor",
-      'A2': "'A2' armor",
-      'a': "'a' armor",
+      'Fl': 'Short forelimbs',
+      'fl': 'Long forelimbs',
+      'S': 'Spikes wide',
+      's': 'Spikes narrow',
       'B': 'Black',
       'b': 'Brown',
       'D': 'Full color',
@@ -843,40 +835,41 @@
       'rh': 'No nose spike',
       'Bog': 'Normal metabolism',
       'bog': 'Bog breath',
+      'Fb': 'No fire breathing',
+      'fb': 'Fire breathing',
       'Y': 'Y',
       '': ''
     },
     traitRules: {
-      "armor": {
-        "Five armor": [["A1", "A1"], ["A1", "A2"]],
-        "Three armor": [["A1", "a"], ["A2", "A2"]],
-        "One armor": [["A2", "a"]],
-        "No armor": [["a", "a"]]
-      },
       "tail": {
         "Long tail": [["T", "T"], ["T", "Tk"], ["T", "t"]],
         "Kinked tail": [["Tk", "Tk"], ["Tk", "t"]],
         "Short tail": [["t", "t"]]
       },
-      "forelimbs": {
-        "Forelimbs": [["Fl", "Fl"], ["Fl", "fl"]],
-        "No forelimbs": [["fl", "fl"]]
-      },
-      "hindlimbs": {
-        "Hindlimbs": [["Hl", "Hl"], ["Hl", "hl"]],
-        "No hindlimbs": [["hl", "hl"]]
+      "wings": {
+        "Wings": [["W", "W"], ["W", "w"]],
+        "No wings": [["w", "w"]]
       },
       "horns": {
         "Hornless": [["H", "H"], ["H", "h"]],
         "Horns": [["h", "h"]]
       },
-      "nose spike": {
-        "Nose spike": [["Rh"]],
-        "No nose spike": [["rh", "rh"], ["rh", "Y"]]
+      "forelimbs": {
+        "Short forelimbs": [["Fl", "Fl"], ["Fl", "fl"]],
+        "Long forelimbs": [["fl", "fl"]]
       },
-      "wings": {
-        "Wings": [["W", "W"], ["W", "w"]],
-        "No wings": [["w", "w"]]
+      "spikes": {
+        "Wide spikes": [["S", "S"]],
+        "Medium spikes": [["S", "s"]],
+        "Narrow spikes": [["s", "s"]]
+      },
+      "metabolism": {
+        "Bog breath": [['bog', 'bog'], ['bog', 'Y']],
+        "Normal metabolism": [['Bog', 'Bog'], ['Bog', 'bog'], ['Bog', 'Y']]
+      },
+      "fire breathing": {
+        "No fire breathing": [["Fb"]],
+        "Fire breathing": [["fb", "fb"], ["fb", "Y"]]
       },
       "color": {
         "Frost": [["c", "c"]],
@@ -888,14 +881,6 @@
         "Lava": [["C", "m", "m", "b", "b", "D"]],
         "Ash": [["C", "m", "m", "B", "d", "d"], ["C", "m", "m", "B", "d", "dl"], ["C", "m", "m", "B", "dl", "dl"], ["C", "m", "m", "B", "d", "Y"], ["C", "m", "m", "B", "dl", "Y"]],
         "Sand": [["C", "m", "m", "b", "b", "d", "d"], ["C", "m", "m", "b", "b", "d", "dl"], ["C", "m", "m", "b", "b", "dl", "dl"], ["C", "m", "m", "b", "b", "d", "Y"], ["C", "m", "m", "b", "b", "dl", "Y"]]
-      },
-      "metabolism": {
-        "Bog breath": [['bog', 'bog'], ['bog', 'Y']],
-        "Normal metabolism": [['Bog', 'Bog'], ['Bog', 'bog'], ['Bog', 'Y']]
-      },
-      "liveliness": {
-        "Alive": [["D"], ["d"]],
-        "Dead": [["dl", "dl"], ["dl", "Y"]]
       }
     },
     /*

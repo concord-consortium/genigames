@@ -33,7 +33,8 @@ $ ->
 
   GG.logController.startNewSession()
 
-  GG.Genetics = new BioLogica.Genetics BioLogica.Species.Drake
+  GG.DrakeSpecies = BioLogica.Species.GGDrake
+  GG.Genetics = new BioLogica.Genetics GG.DrakeSpecies
 
   # process url query params
   urlParams = {}
