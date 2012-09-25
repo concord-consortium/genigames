@@ -196,6 +196,9 @@ GG.cyclesController = Ember.Object.create
     @set 'cycles', @get('cycles')-amt
   reset: ->
     GG.tasksController.set 'cycles', GG.tasksController.get 'cycles'
+    setTimeout =>
+      @updateCounter()
+    , 1000
   updateCounter: (->
     cycles = @get 'cycles'
     return if cycles < 0
