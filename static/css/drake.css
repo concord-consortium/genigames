@@ -1,0 +1,97 @@
+.drake {
+	position: relative;
+	top: 0;
+	left: 0;
+	overflow: hidden;
+	width: 160px;
+	height: 160px;
+}
+
+.parent-pool .drake {
+	width: 100px;
+	height: 100px;
+}
+
+.drake img {
+	width: 100%;
+	position: absolute;
+	left: 0px;
+}
+
+.drake img.trait-absent {
+	left: 100%;
+}
+
+.drake-fire {
+	top: 0px;
+}
+
+.drake-m-horns {
+	top: -100%;
+}
+
+.drake-m-nohorns {
+	top: -200%;
+}
+
+.drake-f-horns {
+	top: -300%;
+}
+
+.drake-f-nohorns {
+	top: -400%;
+}
+
+.drake-thin-spikes {
+	top: -500%;
+}
+
+.drake-medium-spikes {
+	top: -600%;
+}
+
+.drake-wide-spikes {
+	top: -700%
+}
+
+.drake-wings {
+	top: -800%
+}
+
+.drake-long-forelimbs {
+	top: -900%
+}
+
+.drake-short-forelimbs {
+	top: -1000%
+}
+
+.drake-legs {
+	top: -1100%
+}
+
+.drake-body {
+	top: -1200%
+}
+
+.drake-long-tail {
+	top: -1300%
+}
+
+.drake-kinked-tail {
+	top: -1400%
+}
+
+.drake-short-tail {
+	top: -1500%
+}
+
+.flip {
+	-moz-transform: scaleX(-1);
+	-o-transform: scaleX(-1);
+	-webkit-transform: scaleX(-1);
+	transform: scaleX(-1);
+	filter: FlipH;
+	-ms-filter: "FlipH";
+}
+
