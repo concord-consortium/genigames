@@ -6,7 +6,7 @@ GG.StateInTask = Ember.State.extend
     initialState: 'working'
 
     enter: ->
-      $('#breeding-apparatus').animate({"top":"0px"},1200,'easeOutBounce')
+      $('#breeding-apparatus').animate({"left":"0px"},1200,'easeOutCubic')
       GG.cyclesController.reset()
 
     exit: ->
@@ -14,7 +14,7 @@ GG.StateInTask = Ember.State.extend
       GG.breedingController.set 'child', null
       GG.offspringController.set 'content', []
 
-      $('#breeding-apparatus').animate({"top":"-850px"},1200,'easeOutBounce')
+      $('#breeding-apparatus').animate({"left":"3000px"},1200,'easeInCubic')
       setTimeout =>
         # hide the breeding apparatus
         # clear selected parents and parent pools

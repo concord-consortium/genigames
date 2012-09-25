@@ -121,25 +121,9 @@ GG.ParentPoolView = Ember.View.extend
 
 GG.FatherPoolView = GG.ParentPoolView.extend
   controllerBinding: 'GG.fatherPoolController'
-  expanderButton: Ember.View.extend
-    classNames: ['expander']
-    click: ->
-      GG.statemanager.send 'toggleFatherPool'
-  meiosisButton: Ember.View.extend
-    classNames: ['meiosis-button']
-    click: ->
-      GG.statemanager.send 'startFatherMeiosis'
 
 GG.MotherPoolView = GG.ParentPoolView.extend
   controllerBinding: 'GG.motherPoolController'
-  expanderButton: Ember.View.extend
-    classNames: ['expander']
-    click: ->
-      GG.statemanager.send 'toggleMotherPool'
-  meiosisButton: Ember.View.extend
-    classNames: ['meiosis-button']
-    click: ->
-      GG.statemanager.send 'startMotherMeiosis'
 
 GG.OffspringPoolView = Ember.View.extend
   drakeSelected: (evt) ->

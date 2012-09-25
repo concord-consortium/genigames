@@ -3,13 +3,13 @@
 	top: 0;
 	left: 0;
 	overflow: hidden;
-	width: 160px;
-	height: 160px;
+	width: 180px;
+	height: 180px;
 }
 
 .parent-pool .drake {
-	width: 100px;
-	height: 100px;
+	width: 130px;
+	height: 130px;
 }
 
 .drake img {
