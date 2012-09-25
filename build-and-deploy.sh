@@ -52,7 +52,7 @@ git pull
 rm -rf static
 cp -r build static
 
-git add static
+git add -A static
 git commit -m "$COMMIT"
 
 git diff --exit-code > /dev/null && git diff --staged --exit-code > /dev/null
