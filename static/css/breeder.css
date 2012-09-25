@@ -1,0 +1,163 @@
+
+#breeding-apparatus {
+  position: absolute;
+  top: 0px;
+  left: 3000px;
+}
+
+#breeder {
+  position: absolute;
+  background-image: url('../images/mock_02-01.png');
+  left: 0px;
+  top: 50px;
+  width: 1040px;
+  height: 552px;
+  opacity: 0.9;
+}
+
+#breed-button {
+  position: absolute;
+  top: 274px;
+  left: 909px;
+  width: 93px;
+  height: 90px;
+}
+
+#breed-button.enabled {
+  cursor: pointer;
+}
+
+#breed-button.enabled:active {
+  background-image: none;
+}
+
+.parent {
+  position: relative;
+  display: inline-block;
+}
+
+#parent-fathers-pool-container {
+  position: absolute;
+  width: 800px;
+  height: 150px;
+  top: 120px;
+  left: 50px;
+}
+
+#parent-mothers-pool-container {
+  position: absolute;
+  top: 250px;
+  width: 800px;
+  height: 150px;
+  left: 50px;
+}
+
+#offspring-pool .offspring {
+  display: inline-block;
+  position: relative;
+}
+
+.offspring .alleleString {
+  text-align: center;
+  width: 200px;
+  bottom: 15px;
+  position: absolute;
+  color: white;
+}
+
+.removeButton {
+  display: none;
+}
+
+.parent-pool .parent:hover .removeButton {
+  display: inline;
+  position: absolute;
+  left: 10px;
+  bottom: 15px;
+  z-index: 2;
+}
+
+#offspring-pool {
+  position: absolute;
+  width: 800px;
+  top: 583px;
+  right: -600px;
+  text-align: right;
+}
+
+#father {
+  position: absolute;
+  left: 575px;
+  top: 109px;
+}
+
+#father span {
+  position: absolute;
+  left: 40px;
+  top: 113px;
+  color: white;
+}
+
+#mother {
+  position: absolute;
+  left: 575px;
+  top: 356px;
+}
+
+#mother span {
+  position: absolute;
+  left: 40px;
+  top: 113px;
+  color: white;
+}
+
+#egg-container {
+  position: absolute;
+  left: 200px;
+  top: 251px;
+}
+
+#egg {
+  background-image: url('../images/egg-sprite.png');
+  width: 150px;
+  height: 150px;
+  background-repeat: no-repeat;
+  background-position: 0px 0px
+}
+
+.move-counter {
+  position: absolute;
+  top: 304px;
+  left: 740px;
+  width: 85px;
+  height: 37px;
+  background: white;
+}
+
+.moveCounterDigit {
+  position: absolute;
+  width: 25px;
+  height: 35px;
+  top: 1px;
+  left: 0px;
+  background: top left no-repeat url('../images/move-counter-sprite.png');
+}
+
+#moveCounterHundreds {
+  left: 3px;
+}
+
+#moveCounterTens {
+  left: 30px;
+}
+
+#moveCounterOnes {
+  left: 57px;
+}
+
+.match-goal-counter {
+  position: absolute;
+  left: 490px;
+  top: 500px;
+  width: 100px;
+}
