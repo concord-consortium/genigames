@@ -59,11 +59,53 @@ GG.BreederView = Ember.View.extend
 
 
 GG.DrakeView = Ember.View.extend
-  tagName            : 'img'
-  attributeBindings  : ['src', 'width']
-  srcBinding         : 'content.imageURL'
-  width              : 200
-
+  templateName       : 'drake'
+  drakeImage         : '../images/drakes/green-static.png'
+  width              : "200px"
+  org : (->
+    @get('content.biologicaOrganism')
+  ).property().cacheable()
+  tail : (->
+    tail = @get('org').getCharacteristic "tail"
+    if tail is "Long tail"
+      'drake-long-tail'
+    else if tail is "Kinked tail"
+      'drake-kinked-tail'
+    else 'drake-short-tail'
+  ).property()
+  forelimbs : (->
+    forelimbs = @get('org').getCharacteristic "forelimbs"
+    if forelimbs is "Long forelimbs"
+      'drake-long-forelimbs'
+    else 'drake-short-forelimbs'
+  ).property()
+  wings : (->
+    wings = @get('org').getCharacteristic "wings"
+    if wings is "Wings"
+      'drake-wings'
+    else 'trait-absent'
+  ).property()
+  spikes : (->
+    spikes = @get('org').getCharacteristic "spikes"
+    if spikes is "Wide spikes"
+      'drake-wide-spikes'
+    else if spikes is "Medium spikes"
+      'drake-medium-spikes'
+    else 'drake-thin-spikes'
+  ).property()
+  head : (->
+    sex = if @get('content.sex') is GG.FEMALE then "f" else "m"
+    horns = @get('org').getCharacteristic "horns"
+    if horns is "Horns"
+      'drake-'+sex+'-horns'
+    else 'drake-'+sex+'-nohorns'
+  ).property()
+  fire : (->
+    fire = @get('org').getCharacteristic "fire breathing"
+    if fire is "Fire breathing"
+      'drake-fire'
+    else 'trait-absent'
+  ).property()
 
 GG.ParentPoolView = Ember.View.extend
   templateName: 'parent-pool-view'

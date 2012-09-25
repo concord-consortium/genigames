@@ -2,7 +2,7 @@
   {{#each view.content}}
     <div class="parent">
       <a href="#" {{action "drakeSelected" this}}>
-        {{view GG.DrakeView contentBinding="this" width="100"}}
+        {{view GG.DrakeView contentBinding="this"}}
       </a>
       {{#if bred}}
         <a class="removeButton" href="#" {{action "drakeRemoved" this}}>

@@ -27,6 +27,7 @@ minispade.require 'genigames/templates/chromosome'
 minispade.require 'genigames/templates/move-counter'
 minispade.require 'genigames/templates/match-goal-counter'
 minispade.require 'genigames/templates/login'
+minispade.require 'genigames/templates/drake'
 
 # on load
 $ ->
