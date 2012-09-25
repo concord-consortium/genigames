@@ -746,7 +746,7 @@
     chromosomeGeneMap: {
       '1': ['t', 'm', 'w', 'h'],
       '2': ['c', 'b', 'fl', 's'],
-      'XY': ['d', 'bog', 'fb']
+      'XY': ['d', 'fb']
     },
     chromosomesLength: {
       '1': 100000000,
@@ -799,11 +799,6 @@
         start: 20000000,
         length: 152673
       },
-      bogbreath: {
-        alleles: ['Bog', 'bog'],
-        start: 22000000,
-        length: 199642
-      },
       firebreathing: {
         alleles: ['Fb', 'fb'],
         start: 60000000,
@@ -833,8 +828,6 @@
       'dl': 'dl',
       'Rh': 'Nose spike',
       'rh': 'No nose spike',
-      'Bog': 'Normal metabolism',
-      'bog': 'Bog breath',
       'Fb': 'No fire breathing',
       'fb': 'Fire breathing',
       'Y': 'Y',
@@ -863,10 +856,6 @@
         "Medium spikes": [["S", "s"]],
         "Narrow spikes": [["s", "s"]]
       },
-      "metabolism": {
-        "Bog breath": [['bog', 'bog'], ['bog', 'Y']],
-        "Normal metabolism": [['Bog', 'Bog'], ['Bog', 'bog'], ['Bog', 'Y']]
-      },
       "fire breathing": {
         "No fire breathing": [["Fb"]],
         "Fire breathing": [["fb", "fb"], ["fb", "Y"]]
@@ -884,83 +873,15 @@
       }
     },
     /*
-        Gets the image name based on the organism's characteristics.
-        Requires the BioLogica.js library, and for org to be a BioLogica.js organism
+        GGDrakes are pieced together by sprites
     */
 
-    getImageName: function(org) {
-      var filename, limbs, trait, traitColor;
-      trait = function(trait) {
-        return org.getCharacteristic(trait);
-      };
-      if (trait("liveliness") === "Dead") {
-        return "dead-drake.png";
-      }
-      filename = "";
-      traitColor = trait("color");
-      if (traitColor === "Silver") {
-        traitColor = "Argent";
-      } else if (traitColor === "Lava") {
-        traitColor = "Earth";
-      } else if (traitColor === "Ash") {
-        traitColor = "Dust";
-      }
-      filename += traitColor.toLowerCase().substring(0, 2) + "_";
-      filename += org.sex === BioLogica.FEMALE ? "f_" : "m_";
-      filename += trait("wings") === "Wings" ? "wing_" : "noWing_";
-      limbs = "";
-      if (trait("forelimbs") === "Forelimbs") {
-        if (trait("hindlimbs") === "Hindlimbs") {
-          limbs = "allLimb_";
-        } else {
-          limbs = "fore_";
-        }
-      } else if (trait("hindlimbs") === "Hindlimbs") {
-        limbs = "hind_";
-      } else {
-        limbs = "noLimb_";
-      }
-      filename += limbs;
-      filename += (function() {
-        switch (trait("armor")) {
-          case "Five armor":
-            return "a5_";
-          case "Three armor":
-            return "a3_";
-          case "One armor":
-            return "a1_";
-          default:
-            return "a0_";
-        }
-      })();
-      filename += (function() {
-        switch (trait("tail")) {
-          case "Long tail":
-            return "flair_";
-          case "Kinked tail":
-            return "kink_";
-          default:
-            return "short_";
-        }
-      })();
-      filename += trait("horns") === "Horns" ? "horn_" : "noHorn_";
-      filename += trait("nose spike") === "Nose spike" ? "rostral_" : "noRostral_";
-      filename += trait("metabolism") === "Bog breath" ? "bogbreath" : "healthy";
-      return filename += ".png";
-    },
+    getImageName: function(org) {},
     /*
+        GGDrakes have no lethal characteristics
     */
 
-    makeAlive: function(org) {
-      var chromsome, replacementAllele, xChromoName;
-      if (org.getCharacteristic("liveliness") === "Dead") {
-        xChromoName = org.sex === BioLogica.MALE ? "x" : ExtMath.flip() ? "x1" : "x2";
-        chromsome = org.getGenotype().chromosomes["XY"][xChromoName];
-        replacementAllele = ExtMath.flip() ? "D" : "d";
-        org.getGenotype().replaceAllele(chromsome, "dl", replacementAllele);
-        return org.resetPhenotype();
-      }
-    }
+    makeAlive: function(org) {}
   };
 
 }).call(this);
