@@ -34,6 +34,8 @@ GG.StateInTask = Ember.State.extend
     checkForTaskCompletion: (manager) ->
       if GG.tasksController.isCurrentTaskComplete()
         manager.send 'completeTask'
+      else
+        GG.tasksController.showTaskNonCompletion()
 
     completeTask: ->
       GG.tasksController.completeCurrentTask()
@@ -103,3 +105,9 @@ GG.StateInTask = Ember.State.extend
 
       breedDrake: ->
         GG.breedingController.breedDrake()
+
+      submitOffspring: (manager) ->
+        manager.send 'checkForTaskCompletion'
+
+      freeOffspring: ->
+        GG.offspringController.set 'content', null

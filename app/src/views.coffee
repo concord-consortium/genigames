@@ -233,6 +233,24 @@ GG.EggView = Ember.View.extend GG.Animation,
       callback: =>
         @$().css({backgroundPosition: '0px -140px'})
 
+GG.OffspringUseButtonView = Ember.View.extend
+  tagName: 'div'
+  classNames : 'offspring-buttons-use'
+  click: ->
+    GG.statemanager.send('submitOffspring')
+
+GG.OffspringSaveButtonView = Ember.View.extend
+  tagName: 'div'
+  classNames : 'offspring-buttons-save'
+  click: ->
+    GG.statemanager.send('saveOffspring')
+
+GG.OffspringFreeButtonView = Ember.View.extend
+  tagName: 'div'
+  classNames : 'offspring-buttons-free'
+  click: ->
+    GG.statemanager.send('freeOffspring')
+
 GG.MoveCounter = Ember.View.extend
   templateName: 'move-counter'
   classNames: ['move-counter']
@@ -304,6 +322,15 @@ GG.NPCCompletionBubbleView = Ember.View.extend
   hidden             : Ember.computed.not('content.showCompletionBubble')
   accept: ->
     GG.tasksController.taskFinishedBubbleDismissed()
+
+GG.NPCNonCompletionBubbleView = Ember.View.extend
+  tagName            : 'div'
+  text               : "That's not the drake you're looking for!"
+  classNames         : ['speech-bubble']
+  classNameBindings  : ['hidden']
+  hidden             : Ember.computed.not('content.showNonCompletionBubble')
+  accept: ->
+    GG.tasksController.nonCompletionBubbleDismissed()
 
 GG.NPCHeartBubbleView = Ember.View.extend
   tagName            : 'img'

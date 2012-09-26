@@ -25,6 +25,11 @@
         <br/><br/>
         <button {{action "accept"}}>{{view.content.npc.speech.accept}}</button>
       {{/view}}
+      {{#view GG.NPCNonCompletionBubbleView contentBinding="this"}}
+        {{view.text}}
+        <br/><br/>
+        <button {{action "accept"}}>Ok</button>
+      {{/view}}
       {{#view GG.NPCFinalMessageBubbleView contentBinding="this"}}
         {{view.text}}
         <br/><br/>

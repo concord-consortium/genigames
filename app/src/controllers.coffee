@@ -94,6 +94,13 @@ GG.tasksController = Ember.ArrayController.create
     task.set 'showSpeechBubble', false
     task.set 'showCompletionBubble', true
 
+  showTaskNonCompletion: ->
+    task = @get 'currentTask'
+    task.set 'showNonCompletionBubble', true
+
+  nonCompletionBubbleDismissed: ->
+    @get('currentTask').set 'showNonCompletionBubble', false
+
   taskAccepted: (task) ->
     task.set 'showSpeechBubble', false
     @setCurrentTask task
@@ -189,7 +196,6 @@ GG.breedingController = Ember.Object.create
         mother: @get('mother.biologicaOrganism.alleles')
         father: @get('father.biologicaOrganism.alleles')
         offspring: drake.get('biologicaOrganism.alleles')
-      GG.statemanager.send 'checkForTaskCompletion'
 
 GG.cyclesController = Ember.Object.create
   cyclesBinding: 'GG.tasksController.currentTask.cyclesRemaining'

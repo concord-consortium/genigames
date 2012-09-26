@@ -51,6 +51,7 @@ GG.Task = Ember.Object.extend
   showQuestionBubble: false
   showSpeechBubble: false
   showCompletionBubble: false
+  showNonCompletionBubble: false
   showFinalMessageBubble: false
 
   init: ->

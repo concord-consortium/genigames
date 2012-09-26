@@ -28,6 +28,11 @@
           {{#with GG.offspringController}}
             {{view GG.ChromosomePanelView controllerBinding="this"}}
           {{/with}}
+          <div id="offspring-buttons">
+            {{view GG.OffspringUseButtonView}}
+            {{view GG.OffspringSaveButtonView}}
+            {{view GG.OffspringFreeButtonView}}
+          </div>
         </div>
       {{/with}}
     {{/view}}
