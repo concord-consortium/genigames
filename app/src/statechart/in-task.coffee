@@ -14,7 +14,7 @@ GG.StateInTask = Ember.State.extend
     exit: ->
       # clear offspring
       GG.breedingController.set 'child', null
-      GG.offspringController.set 'content', []
+      GG.offspringController.set 'content', null
 
       $("#breeder").animate({left: 0},400,"easeOutCubic")
       $('#breed-controls').animate({left: 742},400,'easeOutCubic')
@@ -73,7 +73,7 @@ GG.StateInTask = Ember.State.extend
       offspringSelected: (manager, child) ->
         if GG.parentController.hasRoom child
           # add it to the parentController, and remove it from the offspringController
-          GG.offspringController.removeObject child
+          GG.offspringController.set 'content', null
           GG.parentController.pushObject child
           GG.userController.addReputation -1
 

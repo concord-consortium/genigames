@@ -161,9 +161,12 @@ GG.motherPoolController = Ember.ArrayController.create
   drakeSelected: (drake) ->
     GG.parentController.selectMother drake
 
-GG.offspringController = Ember.ArrayController.create GG.fifoArrayController,
-  maxLength: 1
-  content: []
+# Fixme: This needs to be rethrought now that we will always only
+# have one offspring. Maybe it can just be replaced by breedingController.child
+GG.offspringController = Ember.Object.create
+  content: null
+  hidden: false
+  selectedBinding: 'content'
 
 
 GG.breedingController = Ember.Object.create
@@ -180,7 +183,7 @@ GG.breedingController = Ember.Object.create
       drake = GG.Drake.createFromBiologicaOrganism org
       drake.set 'bred', true
       GG.breedingController.set 'child', drake
-      GG.offspringController.pushObject drake
+      GG.offspringController.set 'content', drake
       @set 'isBreeding', false
       GG.logController.logEvent GG.Events.BRED_DRAGON,
         mother: @get('mother.biologicaOrganism.alleles')

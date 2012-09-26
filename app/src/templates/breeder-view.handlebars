@@ -20,14 +20,16 @@
       {{view GG.EggView id="egg"}}
     </div>
     {{#view GG.OffspringPoolView id="offspring-pool"}}
-      {{#each GG.offspringController}}
+      {{#with GG.offspringController.content}}
         <div class="offspring">
           <a href="#" {{action "drakeSelected" this}}>
             {{view GG.DrakeView contentBinding="this"}}
           </a>
-          {{#view Ember.View classNames="alleleString"}}{{allelesString}}{{/view}}
+          {{#with GG.offspringController}}
+            {{view GG.ChromosomePanelView controllerBinding="this"}}
+          {{/with}}
         </div>
-      {{/each}}
+      {{/with}}
     {{/view}}
   </div>
   <div id="breed-top-bar"></div>

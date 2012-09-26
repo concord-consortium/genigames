@@ -8,6 +8,10 @@
 #parent-mothers-pool-container .chromosome-panel {
   top: 135px;
 }
+#offspring-pool .chromosome-panel {
+  top: 65px;
+  left: 300px;
+}
 
 .chromosome {
   position: absolute;
