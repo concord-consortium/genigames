@@ -1,12 +1,12 @@
 .chromosome-panel {
   position: absolute;
-  top: 30px;
-  left: 745px;
-  width: 255px;
+  top: 15px;
+  left: 740px;
+  width: 265px;
   height: 125px;
 }
 #parent-mothers-pool-container .chromosome-panel {
-  top: 140px;
+  top: 135px;
 }
 
 .chromosome {
@@ -21,22 +21,22 @@
   background: top left no-repeat url('../images/female-chromo.png');
 }
 .chromosome {
-  top: 19px;
+  top: 20px;
 }
 .chromosome.right {
-  padding-left: 30px;
+  padding-left: 31px;
 }
 .chromo-1 {
-  left: 32px;
+  left: 36px;
 }
 .chromo-2 {
-  left: 105px;
+  left: 115px;
 }
 .chromo-X {
-  left: 178px;
+  left: 193px;
 }
 .chromo-Y {
-  left: 178px;
+  left: 193px;
   padding-left: 30px;
 }
 
