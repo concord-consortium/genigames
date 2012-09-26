@@ -1,12 +1,12 @@
 .chromosome-panel {
   position: absolute;
-  top: 35px;
-  left: 145px;
-  width: 100px;
-  height: 420px;
+  top: 30px;
+  left: 745px;
+  width: 255px;
+  height: 125px;
 }
 #parent-mothers-pool-container .chromosome-panel {
-  left: 42px;
+  top: 140px;
 }
 
 .chromosome {
@@ -14,46 +14,36 @@
   width: 50px;
   height: 130px;
 }
+.male-chromosome {
+  background: top left no-repeat url('../images/male-chromo.png');
+}
+.female-chromosome {
+  background: top left no-repeat url('../images/female-chromo.png');
+}
+.chromosome {
+  top: 19px;
+}
 .chromosome.right {
-  left: 57px;
+  padding-left: 30px;
 }
 .chromo-1 {
-  top: 0px;
-}
-.chromo-1.mother {
-  background: top left no-repeat url('../images/chromo-1-mother.png');
-}
-.chromo-1.father {
-  background: top left no-repeat url('../images/chromo-1-father.png');
+  left: 32px;
 }
 .chromo-2 {
-  top: 150px;
-}
-.chromo-2.mother {
-  background: top left no-repeat url('../images/chromo-2-mother.png');
-}
-.chromo-2.father {
-  background: top left no-repeat url('../images/chromo-2-father.png');
+  left: 105px;
 }
 .chromo-X {
-  top: 280px;
-}
-.chromo-X.mother {
-  background: top left no-repeat url('../images/chromo-X-mother.png');
-}
-.chromo-X.father {
-  background: top left no-repeat url('../images/chromo-X-father.png');
+  left: 178px;
 }
 .chromo-Y {
-  background: top left no-repeat url('../images/chromo-Y.png');
-  top: 280px;
+  left: 178px;
+  padding-left: 30px;
 }
 
 .allele {
   background: top center no-repeat url('../images/allele-bg.png');
   width: 25px;
   height: 25px;
-  margin: 5px;
   text-align: center;
   color: white;
   font-weight: bold;
