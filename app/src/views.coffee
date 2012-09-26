@@ -211,7 +211,11 @@ GG.ChromosomePanelView = Ember.View.extend
   templateName: 'chromosome-panel'
   hiddenBinding: 'controller.hidden'
   defaultClass: 'chromosome-panel'
-  classNameBindings: ['hidden','defaultClass']
+  chromosomeClass: (->
+    if @get('controller.selected.sex') is GG.FEMALE then 'female-chromosome'
+    else 'male-chromosome'
+  ).property('controller.selected').cacheable()
+  classNameBindings: ['hidden','defaultClass', 'chromosomeClass']
 
 GG.EggView = Ember.View.extend GG.Animation,
   tagName: 'div'
