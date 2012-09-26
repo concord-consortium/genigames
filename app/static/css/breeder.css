@@ -8,6 +8,15 @@
   height: 900px;
 }
 
+#breed-top-bar {
+  position: absolute;
+  background: top left no-repeat url('../images/breed-top-bar.png');
+  left: 0px;
+  top: 50px;
+  width: 1040px;
+  height: 152px;
+}
+
 #breeder {
   position: absolute;
   background: top left no-repeat url('../images/mock_02-01.png');
