@@ -162,7 +162,7 @@ GG.motherPoolController = Ember.ArrayController.create
     GG.parentController.selectMother drake
 
 GG.offspringController = Ember.ArrayController.create GG.fifoArrayController,
-  maxLength: 3
+  maxLength: 1
   content: []
 
 
