@@ -251,6 +251,12 @@ GG.OffspringFreeButtonView = Ember.View.extend
   click: ->
     GG.statemanager.send('freeOffspring')
 
+GG.SelectParentsButtonView = Ember.View.extend
+  tagName: 'div'
+  classNames : 'select-parents'
+  click: ->
+    GG.statemanager.send('selectParents')
+
 GG.MoveCounter = Ember.View.extend
   templateName: 'move-counter'
   classNames: ['move-counter']

@@ -43,6 +43,15 @@ GG.StateInTask = Ember.State.extend
 
     parentSelect: Ember.State.create
 
+      setup: ->
+        GG.offspringController.set 'content', null
+        $('#breed-controls').animate({left: 742},600,'easeOutCubic')
+        $("#breeder").animate({left: 0},800,"easeOutCubic")
+        setTimeout ->
+          GG.motherPoolController.set('hidden', !GG.motherPoolController.selected)
+          GG.fatherPoolController.set('hidden', !GG.fatherPoolController.selected)
+        , 600
+
       parentSelected: (manager, parent) ->
         sex = parent.get('sex')
         whichSelection = if sex is GG.FEMALE then 'selectedMother' else 'selectedFather'
@@ -72,17 +81,6 @@ GG.StateInTask = Ember.State.extend
         if GG.motherPoolController.get('selected') && GG.fatherPoolController.get('selected')
           manager.transitionTo 'breeding'
 
-      offspringSelected: (manager, child) ->
-        if GG.parentController.hasRoom child
-          # add it to the parentController, and remove it from the offspringController
-          GG.offspringController.set 'content', null
-          GG.parentController.pushObject child
-          GG.userController.addReputation -1
-
-          GG.logController.logEvent GG.Events.SELECTED_OFFSPRING,
-            alleles: child.get('biologicaOrganism.alleles')
-            sex: child.get('sex')
-
       startFatherMeiosis: ->
         if GG.breedingController.get 'father'
           GG.animateMeiosis '#parent-fathers-pool-container'
@@ -111,3 +109,19 @@ GG.StateInTask = Ember.State.extend
 
       freeOffspring: ->
         GG.offspringController.set 'content', null
+
+      saveOffspring: (manager) ->
+        #offspringSelected: (manager, child) ->
+        child = GG.offspringController.get 'content'
+        if GG.parentController.hasRoom child
+          # add it to the parentController, and remove it from the offspringController
+          GG.offspringController.set 'content', null
+          GG.parentController.pushObject child
+          GG.userController.addReputation -1
+
+          GG.logController.logEvent GG.Events.SELECTED_OFFSPRING,
+            alleles: child.get('biologicaOrganism.alleles')
+            sex: child.get('sex')
+
+      selectParents: (manager) ->
+        manager.transitionTo 'parentSelect'
