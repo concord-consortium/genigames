@@ -38,6 +38,12 @@
     {{/view}}
   </div>
   <div id="breed-top-bar">
+    {{#view GG.BreedTitleView}}
+      {{view.text}}
+    {{/view}}
+    {{#view GG.TaskDescriptionView}}
+      {{view.text}}
+    {{/view}}
     {{view GG.SelectParentsButtonView}}
   </div>
   {{view GG.MatchGoalCounter}}

@@ -17,6 +17,31 @@
   height: 152px;
 }
 
+.breed-title {
+  position: relative;
+  float: left;
+  font-size: 2.1em;
+  top: 58px;
+  left: 16px;
+}
+
+.task-description {
+  position: absolute;
+  top: 51px;
+  left: 249px;
+  width: 623px;
+}
+
+.select-parents {
+  position: relative;
+  top: 10px;
+  left: 777px;
+  width: 140px;
+  height: 39px;
+  float: left;
+  cursor: pointer;
+}
+
 #breeder {
   position: absolute;
   background: top left no-repeat url('../images/mock_02-01.png');
@@ -88,8 +113,9 @@
 
 #offspring-buttons {
   background: top left no-repeat url('../images/offspring-buttons.png');
-  top: 100px;
-  left: -5px;
+  position: absolute;
+  top: 230px;
+  left: -35px;
   width: 370px;
   height: 40px;
 }
@@ -115,16 +141,6 @@
 .offspring-buttons-free {
   top: 3px;
   left: 27px;
-}
-
-.select-parents {
-  position: relative;
-  top: 10px;
-  left: 885px;
-  width: 140px;
-  height: 39px;
-  float: left;
-  cursor: pointer;
 }
 
 .removeButton {

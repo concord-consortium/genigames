@@ -251,6 +251,26 @@ GG.OffspringFreeButtonView = Ember.View.extend
   click: ->
     GG.statemanager.send('freeOffspring')
 
+GG.BreedTitleView = Ember.View.extend
+  tagName: 'div'
+  classNames: 'breed-title'
+  text: (->
+    # not sure if it's ok the query the statemanager like this....
+    if GG.statemanager.get('currentState.name') is "parentSelect"
+      "Parent selection"
+    else "Breeding"
+  ).property('GG.statemanager.currentState')
+
+GG.TaskDescriptionView = Ember.View.extend
+  tagName: 'div'
+  classNames: 'task-description'
+  currentTaskBinding: 'GG.tasksController.currentTask'
+  text: (->
+    text = @get 'currentTask.npc.speech.text'
+    if text then text.replace /(<([^>]+)>)/ig, " "
+    else ""
+  ).property('currentTask').cacheable()
+
 GG.SelectParentsButtonView = Ember.View.extend
   tagName: 'div'
   classNames : 'select-parents'
