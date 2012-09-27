@@ -8,6 +8,9 @@
         Reputation: {{reputation}}
       </div>
     {{/with}}
+    <div id="level">
+      {{GG.townsController.currentTown.name}} {{GG.tasksController.currentLevelId}}
+    </div>
   </div>
   {{#each view.content}}
     {{#view GG.TaskNPCView contentBinding="this"}}

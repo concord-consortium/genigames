@@ -81,6 +81,12 @@ GG.tasksController = Ember.ArrayController.create
   completeTasksThrough: (n) ->
     task.set('completed', true) for task, i in @get('content') when i <= n
 
+  currentLevelId: (->
+    task = @get 'currentTask'
+    if task then " - "+ (@indexOf(task) + 1)
+    else ""
+  ).property('currentTask')
+
   targetCountBinding: Ember.Binding.oneWay('currentTask.targetCount')
   matchCountBinding:  Ember.Binding.oneWay('currentTask.matchCount')
 

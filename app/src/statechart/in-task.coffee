@@ -8,7 +8,7 @@ GG.StateInTask = Ember.State.extend
     breedType: 'direct'  # direct/meiosis
 
     enter: ->
-      $('#breeding-apparatus').animate({"left":"0px"},1200,'easeOutCubic')
+      $('#breeding-apparatus').animate({"left":"-17px"},1200,'easeOutCubic')
       GG.cyclesController.reset()
 
     exit: ->
