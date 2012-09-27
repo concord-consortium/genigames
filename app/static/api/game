@@ -11,8 +11,8 @@
           "name": "Sample Task",
           "reputation": 50,
           "cycles": 8,
-          "visibleGenes": ["T","W","H","Fl","S","Fb"],
-          "hiddenGenes": ["Bog"],
+          "visibleGenes": ["H","Fl","S","Fb"],
+          "hiddenGenes": ["T","W"],
           "initialDrakes": {
             "females": ["a:W,b:W","a:W,b:w"],
             "males": ["a:W,b:W","a:W,b:w"]
