@@ -1,18 +1,29 @@
 #topBar {
+	background-color: rgb(150,150,150);
 	color: white;
 	font-family: Verdana;
 	font-size: 1.2em;
+	height: 59px;
+	width: 1034px;
+	left: -15px;
+	position: relative;
 }
 
 #greeting {
 	position: absolute;
-	left: 140px;
+	left: 55px;
 	top: 15px;
 	font-size: 1.5em;
 }
 
 #reputation {
 	position: absolute;
-	left: 710px;
+	left: 230px;
 	top: 20px;
+}
+
+#level {
+	position: absolute;
+	top: 20px;
+	left: 400px;
 }
