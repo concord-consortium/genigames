@@ -117,6 +117,16 @@
   left: 27px;
 }
 
+.select-parents {
+  position: relative;
+  top: 10px;
+  left: 885px;
+  width: 140px;
+  height: 39px;
+  float: left;
+  cursor: pointer;
+}
+
 .removeButton {
   display: none;
 }
