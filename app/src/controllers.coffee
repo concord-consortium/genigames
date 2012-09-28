@@ -87,6 +87,14 @@ GG.tasksController = Ember.ArrayController.create
     else ""
   ).property('currentTask')
 
+  currentTargetTraits: (->
+    target = @get 'currentTask.targetDrake'
+    if target
+      target = target.replace(/, ?/g,"</li><li>")
+      new Handlebars.SafeString "<ul><li>" + target + "</li></ul>"
+    else ""
+  ).property('currentTask')
+
   targetCountBinding: Ember.Binding.oneWay('currentTask.targetCount')
   matchCountBinding:  Ember.Binding.oneWay('currentTask.matchCount')
 
