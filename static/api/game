@@ -21,7 +21,7 @@
           "npc": {
             "name": "Cousin It",
             "imageURL": "../images/cousin-it.png",
-            "position": {"x": 600, "y": 500 },
+            "position": {"x": 600, "y": 345 },
             "speech": {
               "text": "Hello, drake breeder!<br/><br/>I'm Cousin It.<br/><br/>I have a very important task for you: Breed a female, wingless drake!",
               "completionText": "Good job!<br/><br/>You totally got the drake I needed. Thanks!",
@@ -44,7 +44,7 @@
           "npc": {
             "name": "Cousin It's Brother",
             "imageURL": "../images/cousin-it.png",
-            "position": {"x": 200, "y": 500},
+            "position": {"x": 200, "y": 345},
             "speech": {
               "text": "Hello, drake breeder!<br/><br/>I'm Fred, the brother of Cousin It.<br/><br/>I have a very important task for you: Breed a drake with no wings and no hindlimbs!",
               "completionText": "That's awesome!<br/><br/>You totally got the drake I needed. Thanks!",
