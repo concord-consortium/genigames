@@ -59,6 +59,7 @@
   left: 742px;
   width: 268px;
   height: 101px;
+  z-index: 2;
 }
 
 #breed-button {
@@ -75,6 +76,21 @@
 
 #breed-button.enabled:active {
   background-image: none;
+}
+
+#target {
+  position: absolute;
+  top: 284px;
+  left: 615px;
+  width: 124px;
+  height: 83px;
+  font-weight: bold;
+}
+
+#target-traits {
+  position: relative;
+  left: 10px;
+  top: 5px;
 }
 
 .parent {
