@@ -23,16 +23,6 @@
         <button {{action "accept"}}>{{view.content.npc.speech.accept}}</button>
         <button {{action "decline"}}>{{view.content.npc.speech.decline}}</button>
       {{/view}}
-      {{#view GG.NPCCompletionBubbleView contentBinding="this"}}
-        {{view.text}}
-        <br/><br/>
-        <button {{action "accept"}}>{{view.content.npc.speech.accept}}</button>
-      {{/view}}
-      {{#view GG.NPCNonCompletionBubbleView contentBinding="this"}}
-        {{view.text}}
-        <br/><br/>
-        <button {{action "accept"}}>Ok</button>
-      {{/view}}
       {{#view GG.NPCFinalMessageBubbleView contentBinding="this"}}
         {{view.text}}
         <br/><br/>
@@ -42,5 +32,15 @@
       {{view GG.NPCHeartBubbleView contentBinding="this"}}
       {{view GG.NPCView contentBinding="this"}}
     {{/view}}
+    {{#view GG.NPCCompletionBubbleView contentBinding="this"}}
+        {{view.text}}
+        <br/><br/>
+        <button {{action "accept"}}>{{view.content.npc.speech.accept}}</button>
+      {{/view}}
+      {{#view GG.NPCNonCompletionBubbleView contentBinding="this"}}
+        {{view.text}}
+        <br/><br/>
+        <button {{action "accept"}}>Ok</button>
+      {{/view}}
   {{/each}}
 </div>

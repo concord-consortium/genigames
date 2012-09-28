@@ -40,6 +40,22 @@
     width:0;
 }
 
+.speech-bubble-no-npc {
+  position: absolute;
+  z-index: 2;
+  left: 340px;
+  top: 134px;
+  font-size: 1.2em;
+  width: 225px;
+  background-color: rgb(251, 252, 225);
+  padding: 23px;
+  -moz-border-radius: 35px;
+  -webkit-border-radius: 35px;
+  -khtml-border-radius: 35px;
+  border-radius: 35px;
+  border: black solid 2px;
+}
+
 .heart-bubble {
   position: absolute;
   z-index: 0;

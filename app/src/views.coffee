@@ -351,7 +351,7 @@ GG.NPCCompletionBubbleView = Ember.View.extend
   text               : (->
     return new Handlebars.SafeString(@get 'content.npc.speech.completionText')
   ).property('content')
-  classNames         : ['speech-bubble']
+  classNames         : ['speech-bubble-no-npc']
   classNameBindings  : ['hidden']
   hidden             : Ember.computed.not('content.showCompletionBubble')
   accept: ->
@@ -360,7 +360,7 @@ GG.NPCCompletionBubbleView = Ember.View.extend
 GG.NPCNonCompletionBubbleView = Ember.View.extend
   tagName            : 'div'
   text               : "That's not the drake you're looking for!"
-  classNames         : ['speech-bubble']
+  classNames         : ['speech-bubble-no-npc']
   classNameBindings  : ['hidden']
   hidden             : Ember.computed.not('content.showNonCompletionBubble')
   accept: ->
