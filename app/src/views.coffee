@@ -60,7 +60,12 @@ GG.BreederView = Ember.View.extend
 
 GG.DrakeView = Ember.View.extend
   templateName       : 'drake'
-  drakeImage         : '../images/drakes/green-static.png'
+  drakeImage         : (->
+    color = @get('org').getCharacteristic 'color'
+    if color is "Gray"
+      '../images/drakes/gray-static.png'
+    else '../images/drakes/green-static.png'
+  ).property()
   width              : "200px"
   org : (->
     @get('content.biologicaOrganism')
@@ -94,11 +99,14 @@ GG.DrakeView = Ember.View.extend
     else 'drake-thin-spikes'
   ).property()
   head : (->
-    sex = if @get('content.sex') is GG.FEMALE then "f" else "m"
+    sex = if @get('content.sex') is GG.FEMALE then "female" else "male"
+    'drake-'+sex
+  ).property()
+  horns : (->
     horns = @get('org').getCharacteristic "horns"
     if horns is "Horns"
-      'drake-'+sex+'-horns'
-    else 'drake-'+sex+'-nohorns'
+      'drake-horns'
+    else 'trait-absent'
   ).property()
   fire : (->
     fire = @get('org').getCharacteristic "fire breathing"
