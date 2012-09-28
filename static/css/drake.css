@@ -31,64 +31,56 @@
 	top: 0px;
 }
 
-.drake-m-horns {
+.drake-horns {
 	top: -100%;
 }
 
-.drake-m-nohorns {
+.drake-male {
 	top: -200%;
 }
 
-.drake-f-horns {
+.drake-female {
 	top: -300%;
 }
 
-.drake-f-nohorns {
+.drake-thin-spikes {
 	top: -400%;
 }
 
-.drake-thin-spikes {
+.drake-medium-spikes {
 	top: -500%;
 }
 
-.drake-medium-spikes {
-	top: -600%;
-}
-
 .drake-wide-spikes {
-	top: -700%
+	top: -600%
 }
 
 .drake-wings {
-	top: -800%
+	top: -700%
 }
 
 .drake-long-forelimbs {
-	top: -900%
+	top: -800%
 }
 
 .drake-short-forelimbs {
-	top: -1000%
-}
-
-.drake-legs {
-	top: -1100%
+	top: -900%
 }
 
 .drake-body {
-	top: -1200%
+	top: -1000%
 }
 
 .drake-long-tail {
-	top: -1300%
+	top: -1100%
 }
 
 .drake-kinked-tail {
-	top: -1400%
+	top: -1200%
 }
 
 .drake-short-tail {
-	top: -1500%
+	top: -1300%
 }
 
 .flip {
