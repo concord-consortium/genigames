@@ -17,14 +17,14 @@
 	height: 240px;
 }
 
-.drake img {
-	width: 100%;
+.drake-img {
+	width: 1500%;
 	position: absolute;
 	left: 0px;
 }
 
-.drake img.trait-absent {
-	left: 100%;
+.drake-img.trait-absent {
+	top: 100%;
 }
 
 .drake-fire {
