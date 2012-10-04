@@ -63,8 +63,8 @@ GG.DrakeView = Ember.View.extend
   drakeImage         : (->
     color = @get('org').getCharacteristic 'color'
     if color is "Gray"
-      '../images/drakes/gray-static.png'
-    else '../images/drakes/green-static.png'
+      '../images/drakes/gray-headturn.png'
+    else '../images/drakes/green-headturn.png'
   ).property()
   width              : "200px"
   org : (->
@@ -114,6 +114,25 @@ GG.DrakeView = Ember.View.extend
       'drake-fire'
     else 'trait-absent'
   ).property()
+  didInsertElement: ->
+    @setNextIdleInterval()
+  setNextIdleInterval: ->
+    nextTime = 3000 + Math.random() * 25000
+    setTimeout =>
+      @idleAnimation()
+    , nextTime
+  idleAnimation: ->
+    i=0
+    @idle = setInterval =>
+      if !@$('img')
+        return
+      @$('.drake-img').css({left:"-"+(i*100)+"%"})
+      i++
+      if i > 15
+        @$('.drake-img').css({left:"0%"})
+        clearInterval @idle
+        @setNextIdleInterval()
+    , 100
 
 GG.ParentPoolView = Ember.View.extend
   templateName: 'parent-pool-view'
