@@ -23,7 +23,7 @@
             "imageURL": "../images/cousin-it.png",
             "position": {"x": 600, "y": 345 },
             "speech": {
-              "text": "Hello, drake breeder!<br/><br/>I'm Cousin It.<br/><br/>I have a very important task for you: Breed a female, wingless drake!",
+              "text": ["Hello, drake breeder!<br/><br/>I'm Cousin It.<br/><br/>I have a very important task for you: Breed a female, wingless drake!","Remember: <ul><li>Female</li><li>Wingless</li></ul> Got it?"],
               "completionText": "Good job!<br/><br/>You totally got the drake I needed. Thanks!",
               "accept": "Ok",
               "decline": "Maybe later"
@@ -46,7 +46,7 @@
             "imageURL": "../images/cousin-it.png",
             "position": {"x": 200, "y": 345},
             "speech": {
-              "text": "Hello, drake breeder!<br/><br/>I'm Fred, the brother of Cousin It.<br/><br/>I have a very important task for you: Breed a drake with no wings and no hindlimbs!",
+              "text": ["Hello, drake breeder!<br/><br/>I'm Fred, the brother of Cousin It.<br/><br/>I have a very important task for you: Breed a drake with no wings and no hindlimbs!"],
               "completionText": "That's awesome!<br/><br/>You totally got the drake I needed. Thanks!",
               "accept": "Ok",
               "decline": "Maybe later"
@@ -74,7 +74,7 @@
             "imageURL": "../images/cousin-it.png",
             "position": {"x": 300, "y": 500},
             "speech": {
-              "text": "Hello, drake breeder!<br/><br/>I'm Cousin It's Twin.<br/><br/>I have a very important task for you: Breed a male, wingless drake!",
+              "text": ["Hello, drake breeder!<br/><br/>I'm Cousin It's Twin.","I have a very important task for you!","Breed a male, wingless drake!"],
               "completionText": "Good job!<br/><br/>You totally got the drake I wanted. Thanks!",
               "accept": "Ok",
               "decline": "Maybe later"

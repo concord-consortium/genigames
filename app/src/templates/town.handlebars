@@ -20,8 +20,12 @@
       {{#view GG.NPCSpeechBubbleView contentBinding="this"}}
         {{view.text}}
         <br/><br/>
-        <button {{action "accept"}}>{{view.content.npc.speech.accept}}</button>
-        <button {{action "decline"}}>{{view.content.npc.speech.decline}}</button>
+        {{#if view.isLastText}}
+          <button {{action "accept"}}>{{view.content.npc.speech.accept}}</button>
+          <button {{action "decline"}}>{{view.content.npc.speech.decline}}</button>
+        {{else}}
+          <button {{action "next"}}>Continue</button>
+        {{/if}}
       {{/view}}
       {{#view GG.NPCFinalMessageBubbleView contentBinding="this"}}
         {{view.text}}

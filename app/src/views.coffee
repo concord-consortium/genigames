@@ -274,9 +274,15 @@ GG.TaskDescriptionView = Ember.View.extend
   classNames: 'task-description'
   currentTaskBinding: 'GG.tasksController.currentTask'
   text: (->
-    text = @get 'currentTask.npc.speech.text'
-    if text then text.replace /(<([^>]+)>)/ig, " "
-    else ""
+    authoredText = @get 'currentTask.npc.speech.text'
+    text = ""
+    if authoredText
+      # FIXME This results in some pretty ugly text...
+      text = authoredText.reduce((prev, item, idx, arr)->
+        return prev + " " + item
+      )
+      text = text.replace(/(<([^>]+)>)/ig, " ")
+    return text
   ).property('currentTask').cacheable()
 
 GG.SelectParentsButtonView = Ember.View.extend
@@ -335,15 +341,32 @@ GG.NPCQuestionBubbleView = Ember.View.extend GG.Animation,
 
 GG.NPCSpeechBubbleView = Ember.View.extend
   tagName            : 'div'
-  text               : (->
-    return new Handlebars.SafeString(@get 'content.npc.speech.text')
-  ).property('content')
   classNames         : ['speech-bubble']
   classNameBindings  : ['hidden']
   hidden             : Ember.computed.not('content.showSpeechBubble')
+  textIdx            : 0
+  lastTextIdx        : 0
+  init               : ->
+    @_super()
+    @resetTextIdx()
+  text               : (->
+    authoredText = @get 'content.npc.speech.text'
+    return new Handlebars.SafeString(authoredText[@get 'textIdx'])
+  ).property('content','textIdx')
+  isLastText: (->
+    return @get('textIdx') >= @get('lastTextIdx')
+  ).property('textIdx','lastTextIdx')
+  resetTextIdx: (->
+    @set 'textIdx', 0
+    authoredText = @get 'content.npc.speech.text'
+    @set 'lastTextIdx', (authoredText.length - 1)
+  ).observes('content')
+  next: ->
+    @set('textIdx', @get('textIdx') + 1)
   accept: ->
     GG.statemanager.send 'accept', @get 'content'
   decline: ->
+    @resetTextIdx()
     GG.statemanager.send 'decline'
 
 GG.NPCCompletionBubbleView = Ember.View.extend
