@@ -35,6 +35,17 @@ GG.Town = Ember.Object.extend
 
     @set('realTasks', tasks)
 
+    prevState = GG.userController.loadState("town", this)
+    for k in Object.keys(prevState)
+      @set(k, prevState[k])
+
+  serialize: ->
+    {completed: @get('completed')}
+
+  triggerSave: (->
+    GG.userController.saveState('town', this)
+  ).observes('completed')
+
 GG.Task = Ember.Object.extend
   visibleGenes: null
   hiddenGenes: null
