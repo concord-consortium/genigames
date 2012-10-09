@@ -6,6 +6,25 @@ GG.User = Ember.Object.extend
   teacher: false
   reputation: 0
 
+  name: (->
+    return @get('first') + " " + @get('last')
+  ).property('first', 'last')
+
+  # User object gets created *before* we load the learner data,
+  # so we have to manually trigger restoring the user state
+  restoreState: ->
+    prevState = GG.userController.loadState("user", this)
+    console.log("restoring user state", prevState)
+    for k in Object.keys(prevState)
+      @set(k, prevState[k])
+
+  serialize: ->
+    {reputation: @get('reputation')}
+
+  triggerSave: (->
+    GG.userController.saveState('user', this)
+  ).observes('reputation')
+
 GG.Town = Ember.Object.extend
   name: "Town"
   icon: "huts"

@@ -289,6 +289,7 @@ GG.userController = Ember.Object.create
     @set('loaded', false)
     $.getJSON(@get('learnerDataUrl'), (data) =>
       @set('state', data)
+      @get('user').restoreState()
       @set('loaded', true)
     ).error =>
       @set('state', null)
