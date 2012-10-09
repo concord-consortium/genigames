@@ -28,6 +28,7 @@ minispade.require 'genigames/templates/move-counter'
 minispade.require 'genigames/templates/match-goal-counter'
 minispade.require 'genigames/templates/login'
 minispade.require 'genigames/templates/drake'
+minispade.require 'genigames/templates/choose-class'
 
 # on load
 $ ->
@@ -54,6 +55,7 @@ $ ->
 
   GG.universeView = Ember.ContainerView.create
     login: GG.LoginView.create()
+    chooseClass: GG.ChooseClassView.create()
     world: GG.WorldView.create()
     town: Ember.ContainerView.create
       town: GG.TownView

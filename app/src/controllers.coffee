@@ -320,6 +320,17 @@ GG.sessionController = Ember.Object.create
   loggedIn: (->
     @get('user') != null
   ).property('user')
+  classesWithLearners: (->
+    found = []
+    classes = @get('user.classes')
+    if classes? and classes.length > 0
+      for i in [0..(classes.length)]
+        cl = classes[i]
+        if cl? and cl.learner? and cl.learner > 0
+          cl.label = cl.name + " (" + cl.teacher + ")"
+          found.push(cl)
+    return found
+  ).property('user')
 
   checkCCAuthToken: ->
     $.get(@checkTokenUrl, (data) =>

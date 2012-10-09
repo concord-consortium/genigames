@@ -15,6 +15,13 @@ GG.LoginView = Ember.View.extend
     data = {username: @get('username'), password: pw}
     GG.statemanager.send 'login', data
 
+GG.ChooseClassView = Ember.View.extend
+  templateName: 'choose-class'
+  optionsBinding: 'GG.sessionController.classesWithLearners'
+  learner: null
+  choose: ->
+    GG.statemanager.send 'chooseLearner', @get('learner')
+
 GG.WorldView = Ember.View.extend
   templateName: 'world'
   contentBinding: 'GG.townsController'

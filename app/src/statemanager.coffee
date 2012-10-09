@@ -33,6 +33,32 @@ GG.statemanager = Ember.StateManager.create
       GG.sessionController.loginPortal(data.username, data.password)
 
     successfulLogin: ->
+      if GG.statemanager.get('params').learner?
+        # TODO We should probably enforce that the learner passed in via params
+        # is one of the learners the portal returns as part of the cc auth token data
+        GG.userController.set('learnerId', GG.statemanager.get('params').learner)
+      else
+        # find the learners listed in the response
+        data = GG.sessionController.get('user')
+        found = GG.sessionController.get('classesWithLearners')
+        if found.length > 1
+          # if multiple, display a selection dialog
+          GG.universeView.set 'currentView', GG.universeView.get 'chooseClass'
+          return
+        else if found.length == 1
+          # if one, use that learner
+          GG.userController.set('learnerId', found[0].learner)
+        else
+          # if none, set GG.userController.loaded = true
+          GG.userController.set('loaded', true)
+
+      GG.statemanager.send 'load'
+
+    chooseLearner: (state, learner)->
+      GG.userController.set('learnerId', learner)
+      GG.statemanager.send 'load'
+
+    load: ->
       # load the game after we log in so that we can create towns and tasks
       # with the current user's saved state
       loadGame = ->
@@ -58,14 +84,14 @@ GG.statemanager = Ember.StateManager.create
           actionCosts = GG.ActionCosts.create data
           GG.actionCostsController.set 'content', actionCosts
 
-      if GG.statemanager.get('params').learner?
-        obs = ->
-          GG.userController.removeObserver('loaded', obs)
-          loadGame()
-        GG.userController.addObserver('loaded', obs)
-        GG.userController.set('learnerId', GG.statemanager.get('params').learner)
-      else
+      if GG.userController.get('loaded')
         loadGame()
+      else
+        obs = ->
+          if GG.userController.get('loaded')
+            GG.userController.removeObserver('loaded', obs)
+            loadGame()
+        GG.userController.addObserver('loaded', obs)
 
   loggingOut: Ember.State.create
     enter: ->

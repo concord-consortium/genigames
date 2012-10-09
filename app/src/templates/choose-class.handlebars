@@ -1,0 +1,11 @@
+<div id="choose-class">
+    <div>Choose your current class:</div>
+    <div>
+      {{view Ember.Select
+        contentBinding="view.options"
+        optionLabelPath="content.label"
+        optionValuePath="content.learner"
+        valueBinding="view.learner"}}
+    </div>
+    <input type="submit" value="Choose this class" {{action choose}} />
+</div>
