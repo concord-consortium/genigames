@@ -7,6 +7,13 @@ GG.townsController = Ember.ArrayController.create
   addTown: (town) ->
     @pushObject town
 
+  firstIncompleteTown: (->
+    towns = @get('content')
+    for i in [0..(towns.length)]
+      t = towns[i]
+      return t unless t.get('completed')
+  ).property('content')
+
   setCurrentTown: (town, force=false) ->
     @completeTownsThrough @indexOf(town) - 1 if force
     return false if town is @currentTown or not town.get('enabled')
