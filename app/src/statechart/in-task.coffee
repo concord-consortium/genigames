@@ -32,10 +32,17 @@ GG.StateInTask = Ember.State.extend
       GG.cyclesController.reset()
 
     checkForTaskCompletion: (manager) ->
+      child = GG.offspringController.get 'content'
+      success = false
       if GG.tasksController.isCurrentTaskComplete()
         manager.send 'completeTask'
+        success = true
       else
         GG.tasksController.showTaskNonCompletion()
+      GG.logController.logEvent GG.Events.SUBMITTED_OFFSPRING,
+        alleles: child.get('biologicaOrganism.alleles')
+        sex: child.get('sex')
+        success: success
 
     completeTask: ->
       GG.tasksController.completeCurrentTask()
@@ -108,7 +115,11 @@ GG.StateInTask = Ember.State.extend
         manager.send 'checkForTaskCompletion'
 
       freeOffspring: ->
+        child = GG.offspringController.get 'content'
         GG.offspringController.set 'content', null
+        GG.logController.logEvent GG.Events.FREED_OFFSPRING,
+          alleles: child.get('biologicaOrganism.alleles')
+          sex: child.get('sex')
 
       saveOffspring: (manager) ->
         #offspringSelected: (manager, child) ->
@@ -119,7 +130,7 @@ GG.StateInTask = Ember.State.extend
           GG.parentController.pushObject child
           GG.userController.addReputation -1
 
-          GG.logController.logEvent GG.Events.SELECTED_OFFSPRING,
+          GG.logController.logEvent GG.Events.KEPT_OFFSPRING,
             alleles: child.get('biologicaOrganism.alleles')
             sex: child.get('sex')
 

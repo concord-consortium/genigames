@@ -38,11 +38,14 @@ GG.townsController = Ember.ArrayController.create
     @setCurrentTown(town, true) if town?
 
   completeCurrentTown: ->
-    @get('currentTown').set('completed', true)
+    town = @get('currentTown')
+    town.set('completed', true)
+    GG.logController.logEvent GG.Events.COMPLETED_TOWN, name: town.get('name')
 
   # 'completeTownsThrough 2' will complete towns 0,1,2
   completeTownsThrough: (n) ->
     town.set('completed', true) for town, i in @get('content') when i <= n
+    GG.logController.logEvent GG.Events.COMPLETED_TOWN, name: ("Towns through #" + n)
 
 GG.tasksController = Ember.ArrayController.create
   content    : []
@@ -84,9 +87,11 @@ GG.tasksController = Ember.ArrayController.create
     task = @get 'currentTask'
     task.set 'completed', true
     GG.userController.addReputation task.get 'reputation'
+    GG.logController.logEvent GG.Events.COMPLETED_TASK, name: task.get('name')
 
   completeTasksThrough: (n) ->
     task.set('completed', true) for task, i in @get('content') when i <= n
+    GG.logController.logEvent GG.Events.COMPLETED_TASK, name: ("Tasks through #" + n)
 
   currentLevelId: (->
     task = @get 'currentTask'
@@ -167,7 +172,7 @@ GG.parentController = Ember.ArrayController.create
   selectFather: (drake) ->
     if drake.sex isnt GG.MALE then throw "GG.parentController.selectMother: tried to set a non-male as father"
     @set 'selectedFather', drake
-    GG.logController.logEvent GG.Events.SELECTED_PARENT, alleles: drake.get('biologicaOrganism.alleles'), sex: GG.M
+    GG.logController.logEvent GG.Events.SELECTED_PARENT, alleles: drake.get('biologicaOrganism.alleles'), sex: GG.MALE
 
   hasRoom: (drake) ->
     if drake.sex is GG.MALE
@@ -244,7 +249,6 @@ GG.cyclesController = Ember.Object.create
     "(0px -" + pos + "px)"
 
 GG.logController = Ember.Object.create
-  user: 'test'      # eventually: userBinding: 'GG.userController.content'
   session: null
   eventQueue: []
 
@@ -254,14 +258,13 @@ GG.logController = Ember.Object.create
 
   logEvent: (evt, params) ->
     logData =
-      user        : @get('user')
       session     : @get('session')
       time        : new Date().getTime()
       event       : evt
       parameters  : params
 
     # for a quick demo, use window.socket
-    socket?.emit 'log', logData
+    # socket?.emit 'log', logData
 
     @eventQueue.push GG.LogEvent.create logData
 
@@ -299,6 +302,7 @@ GG.userController = Ember.Object.create
   addReputation: (amt) ->
     user = @get 'user'
     user.set 'reputation', user.get('reputation') + amt
+    GG.logController.logEvent GG.Events.REPUTATION_CHANGED, amount: amt, result: user.get('reputation')
 
   loadState: (type, obj)->
     allState = @get('state')

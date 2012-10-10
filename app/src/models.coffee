@@ -210,12 +210,26 @@ GG.LogEvent = Ember.Object.extend
 
 # not certain how we want to define our event constants. This will do fine for now
 GG.Events =
+  # Session events
   STARTED_SESSION : "Started session"
+
+  # Town events
+  ENTERED_TOWN    : "Entered town"
+  COMPLETED_TOWN  : "Completed town"
+
+  # Task events
   STARTED_TASK    : "Started task"
+  COMPLETED_TASK  : "Completed task"
+  REPUTATION_CHANGED : "Reputation changed"
+
+  # Breeding events
   SELECTED_PARENT : "Selected parent"
   REMOVED_PARENT  : "Removed parent"
-  SELECTED_OFFSPRING : "Selected offspring"
   BRED_DRAGON     : "Bred dragon"
+  KEPT_OFFSPRING  : "Kept offspring"
+  FREED_OFFSPRING : "Freed offspring"
+  SUBMITTED_OFFSPRING : "Submitted offspring"
+  REVEALED_ALLELE : "Revealed allele"
 
 GG.TaskNPC = Ember.Object.extend
   name: null
