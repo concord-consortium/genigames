@@ -18,3 +18,16 @@
   color: red;
   font-weight: bold;
 }
+
+#choose-class {
+  text-align: center;
+  width: 700px;
+  height: 700px;
+  position: absolute;
+  top: 250px;
+}
+
+#choose-class div {
+  padding: 3px;
+}
+
