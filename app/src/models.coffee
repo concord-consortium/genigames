@@ -201,13 +201,6 @@ GG.Drake.createFromBiologicaOrganism = (org) ->
     imageURL         : GG.imageNameStart + org.getImageName()
     sex              : org.sex
 
-GG.LogEvent = Ember.Object.extend
-  user        : null
-  session     : null
-  time        : null
-  event       : null
-  parameters  : null
-
 # not certain how we want to define our event constants. This will do fine for now
 GG.Events =
   # Session events

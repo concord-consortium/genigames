@@ -248,31 +248,6 @@ GG.cyclesController = Ember.Object.create
     pos = num * 35
     "(0px -" + pos + "px)"
 
-GG.logController = Ember.Object.create
-  session: null
-  eventQueue: []
-
-  startNewSession: ->
-    @set('session', @generateGUID())
-    @logEvent GG.Events.STARTED_SESSION
-
-  logEvent: (evt, params) ->
-    logData =
-      session     : @get('session')
-      time        : new Date().getTime()
-      event       : evt
-      parameters  : params
-
-    # for a quick demo, use window.socket
-    # socket?.emit 'log', logData
-
-    @eventQueue.push GG.LogEvent.create logData
-
-
-  generateGUID: ->
-    S4 = -> (((1+Math.random())*0x10000)|0).toString(16).substring(1)
-    S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4()
-
 GG.userController = Ember.Object.create
   learnerDataUrl: (->
     lid = @get('learnerId')
@@ -320,6 +295,68 @@ GG.userController = Ember.Object.create
     @set('state', allState)
     $.post @get('learnerDataUrl'), JSON.stringify(allState), (data) =>
       console.log 'state saved'
+
+GG.logController = Ember.Object.create
+  learnerIdBinding: 'GG.userController.learnerId'
+  learnerLogUrl: (->
+    lid = @get('learnerId')
+    if lid?
+      '/portal/dataservice/bucket_loggers/learner/' + lid + '/bucket_log_items.bundle'
+    else
+      null
+  ).property('learnerId')
+
+  learnerLogUrlChanged: (->
+    if @get('learnerLogUrl')?
+      @processEventQueue()
+  ).observes('learnerLogUrl')
+
+  session: null
+  eventQueue: []
+  eventQueueInProgress: []
+
+  startNewSession: ->
+    @set('session', @generateGUID())
+    @logEvent GG.Events.STARTED_SESSION
+    @startEventQueuePolling()
+
+  startEventQueuePolling: ->
+    setInterval =>
+      @processEventQueue() unless @eventQueueInProgress.length > 0
+    , 10000
+
+  processEventQueue: ->
+    if @get('learnerLogUrl')?
+      @eventQueueInProgress = @eventQueue.slice(0)
+      @eventQueue = []
+      while @eventQueueInProgress.length > 0
+        evt = @eventQueueInProgress.shift()
+        @persistEvent(evt)
+
+  logEvent: (evt, params) ->
+    logData =
+      session     : @get('session')
+      time        : new Date().getTime()
+      event       : evt
+      parameters  : params
+
+    # for a quick demo, use window.socket
+    # socket?.emit 'log', logData
+    @persistEvent logData
+
+  persistEvent: (evt)->
+    if @get('learnerLogUrl')?
+      $.post(@get('learnerLogUrl'), JSON.stringify(evt), (data)->
+        console.log 'log event saved'
+      ).error =>
+        console.log 'log event save failed!'
+        @eventQueue.push evt
+    else
+      @eventQueue.push evt
+
+  generateGUID: ->
+    S4 = -> (((1+Math.random())*0x10000)|0).toString(16).substring(1)
+    S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4()
 
 GG.sessionController = Ember.Object.create
   checkTokenUrl: '/portal/verify_cc_token'
