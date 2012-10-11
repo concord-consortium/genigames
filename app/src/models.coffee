@@ -5,6 +5,7 @@ GG.User = Ember.Object.extend
   class_words: []
   teacher: false
   reputation: 0
+  skipSave: false
 
   name: (->
     return @get('first') + " " + @get('last')
@@ -15,14 +16,16 @@ GG.User = Ember.Object.extend
   restoreState: ->
     prevState = GG.userController.loadState("user", this)
     console.log("restoring user state", prevState)
+    @set 'skipSave', true
     for k in Object.keys(prevState)
       @set(k, prevState[k])
+    @set 'skipSave', false
 
   serialize: ->
     {reputation: @get('reputation')}
 
   triggerSave: (->
-    GG.userController.saveState('user', this)
+    GG.userController.saveState('user', this) unless @get 'skipSave'
   ).observes('reputation')
 
 GG.Town = Ember.Object.extend
@@ -44,6 +47,7 @@ GG.Town = Ember.Object.extend
   tasks: []
   realTasks: []
   completed: false
+  skipSave: false
 
   init: ->
     @_super()
@@ -55,14 +59,16 @@ GG.Town = Ember.Object.extend
     @set('realTasks', tasks)
 
     prevState = GG.userController.loadState("town", this)
+    @set 'skipSave', true
     for k in Object.keys(prevState)
       @set(k, prevState[k])
+    @set 'skipSave', false
 
   serialize: ->
     {completed: @get('completed')}
 
   triggerSave: (->
-    GG.userController.saveState('town', this)
+    GG.userController.saveState('town', this) unless @get 'skipSave'
   ).observes('completed')
 
 GG.Task = Ember.Object.extend
@@ -83,18 +89,21 @@ GG.Task = Ember.Object.extend
   showCompletionBubble: false
   showNonCompletionBubble: false
   showFinalMessageBubble: false
+  skipSave: false
 
   init: ->
     @_super()
     prevState = GG.userController.loadState("task", this)
+    @set 'skipSave', true
     for k in Object.keys(prevState)
       @set(k, prevState[k])
+    @set 'skipSave', false
 
   serialize: ->
     {completed: @get('completed')}
 
   triggerSave: (->
-    GG.userController.saveState('task', this)
+    GG.userController.saveState('task', this) unless @get 'skipSave'
   ).observes('completed')
 
   isComplete: ->
