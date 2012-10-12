@@ -39,7 +39,7 @@ GG.Town = Ember.Object.extend
     idx = towns.indexOf(this)
     if idx is 0
       return true
-    for i in [0..(idx-1)]
+    for i in [0...idx]
       return false unless towns[i].get('completed')
     return true
   ).property().volatile()

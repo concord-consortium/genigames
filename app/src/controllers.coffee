@@ -9,7 +9,7 @@ GG.townsController = Ember.ArrayController.create
 
   firstIncompleteTown: (->
     towns = @get('content')
-    for i in [0..(towns.length)]
+    for i in [0...(towns.length)]
       t = towns[i]
       return t unless t.get('completed')
   ).property('content')
@@ -373,7 +373,7 @@ GG.sessionController = Ember.Object.create
     found = []
     classes = @get('user.classes')
     if classes? and classes.length > 0
-      for i in [0..(classes.length)]
+      for i in [0...(classes.length)]
         cl = classes[i]
         if cl? and cl.learner? and cl.learner > 0
           cl.label = cl.name + " (" + cl.teacher + ")"
