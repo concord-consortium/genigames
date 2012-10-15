@@ -293,8 +293,9 @@ GG.userController = Ember.Object.create
     allState[type] = {} unless allState[type]
     allState[type][obj.get('name')] = obj.serialize()
     @set('state', allState)
-    $.post @get('learnerDataUrl'), JSON.stringify(allState), (data) =>
-      console.log 'state saved'
+    if @get('learnerDataUrl')?
+      $.post @get('learnerDataUrl'), JSON.stringify(allState), (data) =>
+        console.log 'state saved'
 
 GG.logController = Ember.Object.create
   learnerIdBinding: 'GG.userController.learnerId'
