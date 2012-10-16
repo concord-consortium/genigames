@@ -29,6 +29,7 @@ minispade.require 'genigames/templates/match-goal-counter'
 minispade.require 'genigames/templates/login'
 minispade.require 'genigames/templates/drake'
 minispade.require 'genigames/templates/choose-class'
+minispade.require 'genigames/templates/meiosis'
 
 # on load
 $ ->

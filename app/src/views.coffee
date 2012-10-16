@@ -187,6 +187,29 @@ GG.ChromoView = Ember.View.extend
   content: null
   chromo: '1'
   side: 'a'
+  sister: null
+  gametes: null
+  gamete: (->
+    if @get('gametes')?
+      cell = (if @get('side') == 'a' then 0 else 1) + (if @get('sister') == "1" then 0 else 2)
+      chromo = @get('chromo')
+      chromo = if chromo == "X" or chromo == "Y" then "XY" else chromo
+      return @get('gametes').cells[cell][chromo].alleles
+    else
+      return null
+  ).property('chromo','side','sister','gametes')
+  visibleGamete: (->
+    res = null
+    if @get('gamete')?
+      res = GG.Genetics.filter(@get('gamete'), GG.drakeController.get('visibleGenes'))
+    return res
+  ).property('gamete')
+  hiddenGamete: (->
+    res = null
+    if @get('gamete')?
+      res = GG.Genetics.filter(@get('gamete'), GG.drakeController.get('hiddenGenes'))
+    return res
+  ).property('gamete')
   biologicaChromoName: (->
     chromo = @get 'chromo'
     return chromo unless chromo is "X" or chromo is "Y"
@@ -197,31 +220,47 @@ GG.ChromoView = Ember.View.extend
   ).property('chromo')
   visibleAlleles: (->
     res = []
-    if (@get 'content')?
-      fullGeno = @get 'content.visibleGenotype'
-      geno = fullGeno[@get 'side']
+    if (@get 'content')? or (@get 'visibleGamete')?
+      geno = null
+      if (@get 'visibleGamete')?
+        geno = @get 'visibleGamete'
+      else
+        fullGeno = @get 'content.visibleGenotype'
+        geno = fullGeno[@get 'side']
       res = GG.Genetics.filter(geno, @get 'genes')
     return res
-  ).property('chromo','content','side')
+  ).property('chromo','content','side','visibleGamete')
   hiddenAlleles: (->
     res = []
-    if (@get 'content')?
-      fullGeno = @get 'content.hiddenGenotype'
-      geno = fullGeno[@get 'side']
+    if (@get 'content')? or (@get 'hiddenGamete')?
+      geno = null
+      if (@get 'hiddenGamete')
+        geno = @get 'hiddenGamete'
+      else
+        fullGeno = @get 'content.hiddenGenotype'
+        geno = fullGeno[@get 'side']
       res = GG.Genetics.filter(geno, @get 'genes')
     return res
-  ).property('chromo','content','side')
+  ).property('chromo','content','side','hiddenGamete')
   defaultClass: 'chromosome'
   chromoName: (->
     'chromo-'+@get('chromo')
   ).property('chromo','side')
   right: (->
-    @get('chromo') == 'Y' or @get('side') == 'b'
+    if @get('chromo') == 'Y' or @get('side') == 'b' then "right" else "left"
   ).property('chromo','side')
   parent: (->
     if @get('side') == 'a' then 'mother' else 'father'
   ).property('chromo','side')
-  classNameBindings: ['defaultClass', 'chromoName', 'right', 'parent']
+  sisterClass: (->
+    if (@get 'sister')?
+      return "sister-" + @get('sister')
+    else
+      return ""
+  ).property('sister')
+  hidden: false
+  classNames: ['chromosome']
+  classNameBindings: ['chromoName', 'right', 'parent', 'sisterClass', 'hidden']
 
 GG.ChromosomePanelView = Ember.View.extend
   templateName: 'chromosome-panel'
@@ -417,3 +456,36 @@ GG.NPCFinalMessageBubbleView = Ember.View.extend
     GG.statemanager.transitionTo 'inWorld.movingDirectlyToNextTown'
   world: ->
     GG.statemanager.transitionTo 'inWorld.townsWaiting'
+
+GG.MeiosisView = Ember.View.extend
+  templateName: 'meiosis'
+  tagName: 'div'
+  content: null
+  classNames: ['meiosis']
+  classNameBindings: ['motherFather']
+  motherFather: (->
+    if @get('content.sex') == GG.MALE then "father" else "mother"
+  ).property('content')
+  gametes: null
+  sistersHidden: true
+  animate: ->
+    console.log "animating"
+    GG.animateMeiosis(".meiosis." + @get('motherFather'), this)
+  crossOver: ->
+    console.log "crossing over"
+    @set 'gametes', @get('content.biologicaOrganism').createGametesWithCrossInfo(4)[0]
+  randomGameteNumber: (->
+    ExtMath.randomInt(4)
+  ).property('gametes')
+  chosenGamete: (->
+    return @get('gametes').cells[@get('randomGameteNumber')]
+  ).property('gametes','randomGameteNumber')
+  chosenGameteAlleles: (->
+    chosen = @get('chosenGamete')
+    side = if @get('content.sex') == GG.MALE then 'b' else 'a'
+    alleles = ""
+    for c in ['1','2','XY']
+      alleles += side + ":" + chosen[c].reduce (prev, item) ->
+        return prev + "," + side + ":" + item
+    return alleles
+  ).property('chosenGamete')
