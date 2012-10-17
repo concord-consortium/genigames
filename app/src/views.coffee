@@ -181,6 +181,8 @@ GG.AlleleView = Ember.View.extend
       if (@get 'drake')? and (@get 'side')?
         @get('drake').markRevealed(@get('side'), @get('value'))
       GG.logController.logEvent GG.Events.REVEALED_ALLELE, allele: @get('value'), side: @get('side'), drake: { alleles: @get('drake.biologicaOrganism.alleles'), sex: @get('drake.sex') }
+  triggerHighlight: ->
+    console.log("highlighting: " + @get('displayValue'))
 
 GG.ChromoView = Ember.View.extend
   templateName: 'chromosome'
@@ -220,6 +222,8 @@ GG.ChromoView = Ember.View.extend
   genes: (->
     GG.Genetics.species.chromosomeGeneMap[@get 'biologicaChromoName']
   ).property('chromo')
+  highlightAlleleChanges: false
+  lastVisibleAlleles: []
   visibleAlleles: (->
     res = []
     if (@get 'content')? or (@get 'visibleGamete')?
@@ -229,6 +233,8 @@ GG.ChromoView = Ember.View.extend
         fullGeno = @get 'content.visibleGenotype'
         geno = fullGeno[@get 'side']
         res = GG.Genetics.filter(geno, @get 'genes')
+    @highlightChanges(res)
+    @set('lastVisibleAlleles', res)
     return res
   ).property('chromo','content','side','visibleGamete')
   hiddenAlleles: (->
@@ -242,6 +248,30 @@ GG.ChromoView = Ember.View.extend
         res = GG.Genetics.filter(geno, @get 'genes')
     return res
   ).property('chromo','content','side','hiddenGamete')
+  highlightChanges: (newAlleles)->
+    if @get('highlightAlleleChanges')
+      oldAlleles = @get('lastVisibleAlleles')
+      return if oldAlleles.length == 0
+      changes = newAlleles.filter (item) ->
+        return !oldAlleles.contains(item)
+      setTimeout =>
+        # chromo = '.' + @get('chromoName') + '.' + @get('parent') + '.' + @get('right')
+        # chromo += '.' + @get('sister') if @get('sister').length > 0
+        chromo = '#' + @get('elementId')
+        for i in [0...changes.length]
+          change = changes[i]
+          selector = chromo + ' .allele:contains("' + change + '")'
+          flash = (n)->
+            return if n <= 0
+            $(selector).animate({opacity: 0.2},250)
+            setTimeout ->
+              $(selector).animate({opacity: 1.0},250)
+              setTimeout ->
+                flash(n-1)
+              , 250
+            , 250
+          flash(4)
+      , 50
   defaultClass: 'chromosome'
   chromoName: (->
     'chromo-'+@get('chromo')

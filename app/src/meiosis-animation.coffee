@@ -141,8 +141,8 @@ GG.animateMeiosis = (chromosomeContainerName, parentView, callback) ->
           , 2200
         , 700
       , 1500
-    , 500
-  , 500
+    , 2500
+  , 1000
 
 ###
   Again, not in the right place, add a click handler to remove animation from screen
