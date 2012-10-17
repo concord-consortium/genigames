@@ -47,8 +47,7 @@
 }
 
 .meiosis .allele {
-  left: 4px;
-  position: absolute;
+  margin-left: 4px;
 }
 
 .meiosis .chromo-1 {
