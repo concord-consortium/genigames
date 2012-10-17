@@ -67,16 +67,16 @@ GG.animateMeiosis = (chromosomeContainerName, parentView, callback) ->
         container.find('.cell').remove()
         container.append($("<div class='cell cell-top'>").css({height: 200, width: 450, zIndex: -3}))
         container.append($("<div class='cell cell-bottom'>").css({height: 200, width: 450, zIndex: -3}))
-        $('.cell-top').animate({height: 65, top: -5, width: 390}, 800, 'easeInOutQuad')
-        $('.cell-bottom').animate({height: 65, top: 102, width: 390}, 800, 'easeInOutQuad')
+        container.find('.cell-top').animate({height: 65, top: -5, width: 390}, 800, 'easeInOutQuad')
+        container.find('.cell-bottom').animate({height: 65, top: 102, width: 390}, 800, 'easeInOutQuad')
       , 400
 
       # line up sister chromatids along center line (Metaphase II)
       setTimeout ->
         chromos.find('.chromo-2').animate({left: "-=60px"}, 500, 'easeInOutQuad')
         chromos.find('.chromo-X, .chromo-Y').animate({left: "-=120px"}, 500, 'easeInOutQuad')
-        $('.cell-top').animate({width: 300}, 500, 'easeInOutQuad')
-        $('.cell-bottom').animate({width: 300}, 500, 'easeInOutQuad')
+        container.find('.cell-top').animate({width: 300}, 500, 'easeInOutQuad')
+        container.find('.cell-bottom').animate({width: 300}, 500, 'easeInOutQuad')
         # move sisters apart to divide cell again (Anaphase II + Telophase II)
         setTimeout ->
           chromos.find('.chromo-1.sister-1').animate({left: 10}, 2200, 'easeInOutQuad')
@@ -97,7 +97,7 @@ GG.animateMeiosis = (chromosomeContainerName, parentView, callback) ->
             container.find('.cell-right').animate({width:145, left: 158}, 800, 'easeInOutQuad')
 
             # TODO eventually let students choose
-            # $('.cell').click (evt)->
+            # container.find('.cell').click (evt)->
             #   console.log("cell click complete", evt)
             # enlarge the chosen gamete
             # and make the rest disappear
