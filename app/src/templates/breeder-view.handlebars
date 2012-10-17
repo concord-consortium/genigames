@@ -25,6 +25,14 @@
     <div id="egg-container">
       {{view GG.EggView id="egg"}}
     </div>
+    <div id="meiosis-container" class="hidden">
+      {{#with GG.breedingController.father}}
+        {{view GG.MeiosisView contentBinding="this"}}
+      {{/with}}
+      {{#with GG.breedingController.mother}}
+        {{view GG.MeiosisView contentBinding="this"}}
+      {{/with}}
+    </div>
     {{#view GG.OffspringPoolView id="offspring-pool"}}
       {{#with GG.offspringController.content}}
         <div class="offspring">

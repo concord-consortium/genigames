@@ -1,11 +1,20 @@
+#meiosis-container {
+  position: absolute;
+  left: 800px;
+  top: 108px;
+  width: 760px;
+  height: 435px;
+  z-inde
+}
+
 .cell {
-  background-color: rgba(34, 224, 34, 0.55);
+  background-color: rgba(223, 223, 223, 0.55);
   border-top: 40px solid transparent;
   z-index: -4;
-  height: 150px;
-  width: 350px;
-  top: -20px;
-  left: -50px;
+  height: 120px;
+  width: 300px;
+  top: -10px;
+  left: 10px;
   position: absolute;
   -moz-border-radius: 90px;
   -webkit-border-radius: 90px;
@@ -13,25 +22,33 @@
   border-radius: 90px;
 }
 
-.chromos {
-  z-index: 1000;
-  height: 150px;
-  width: 350px;
-  top: -20px;
-  left: -50px;
-  position: absolute;
-}
-
 .meiosis.father {
   position: absolute;
   top: 0px;
-  width: 1000px;
+  left: 0px;
+  width: 760px;
+  height: 217px;
+  z-index: 2;
 }
 
 .meiosis.mother {
   position: absolute;
-  top: 300px;
-  width: 1000px;
+  top: 218px;
+  left: 0px;
+  width: 760px;
+  height: 217px;
+  z-index: 2;
+}
+
+.meiosis .chromosome-panel {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+}
+
+.meiosis .allele {
+  left: 4px;
+  position: absolute;
 }
 
 .meiosis .chromo-1 {

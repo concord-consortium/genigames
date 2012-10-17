@@ -209,10 +209,14 @@ GG.breedingController = Ember.Object.create
   child: null
 
   breedDrake: ->
-    if @get('mother') && @get('father')
+    if (@get('mother') && @get('father')) || GG.meiosisController.get('chosenAlleles')?
       GG.statemanager.send 'decrementCycles', 1
       @set 'isBreeding', true
-      org = BioLogica.breed @get('mother.biologicaOrganism'), @get('father.biologicaOrganism')
+      org = null
+      if GG.meiosisController.get('chosenAlleles')?
+        org = BioLogica.Organism.createOrganism(GG.DrakeSpecies, GG.meiosisController.get('chosenAlleles'), GG.meiosisController.get('chosenSex'))
+      else
+        org = BioLogica.breed @get('mother.biologicaOrganism'), @get('father.biologicaOrganism')
       drake = GG.Drake.createFromBiologicaOrganism org
       drake.set 'bred', true
       GG.breedingController.set 'child', drake
@@ -411,3 +415,22 @@ GG.sessionController = Ember.Object.create
 GG.actionCostsController = Ember.Object.create
   getCost: (action) ->
     @get('content.'+action)
+
+GG.meiosisController = Ember.Object.create
+  motherView: null
+  fatherView: null
+  chosenMotherAllelesBinding: 'motherView.chosenGameteAlleles'
+  chosenFatherAllelesBinding: 'fatherView.chosenGameteAlleles'
+  chosenSexBinding: 'fatherView.chosenSex'
+  chosenAlleles: (->
+    return @get('chosenMotherAlleles') + "," + @get('chosenFatherAlleles')
+  ).property('chosenMotherAlleles','chosenFatherAlleles')
+  animate: (callback)->
+    if @get('motherView')? and @get('fatherView')?
+      @get('motherView').animate()
+      @get('fatherView').animate(callback)
+  resetAnimation: ->
+    if @get('motherView')? and @get('fatherView')?
+      @get('motherView').resetAnimation()
+      @get('fatherView').resetAnimation()
+

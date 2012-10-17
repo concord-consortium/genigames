@@ -461,6 +461,13 @@ GG.MeiosisView = Ember.View.extend
   templateName: 'meiosis'
   tagName: 'div'
   content: null
+  init: ->
+    @_super()
+    if @get('content')?
+      @contentChanged()
+  contentChanged: (->
+    GG.meiosisController.set(@get('motherFather') + "View", this)
+  ).observes('content')
   classNames: ['meiosis']
   classNameBindings: ['motherFather']
   motherFather: (->
@@ -468,24 +475,31 @@ GG.MeiosisView = Ember.View.extend
   ).property('content')
   gametes: null
   sistersHidden: true
-  animate: ->
-    console.log "animating"
-    GG.animateMeiosis(".meiosis." + @get('motherFather'), this)
+  animate: (callback)->
+    GG.animateMeiosis(".meiosis." + @get('motherFather'), this, callback)
+  resetAnimation: (callback)->
+    GG.resetAnimation(".meiosis." + @get('motherFather'), this, callback)
   crossOver: ->
-    console.log "crossing over"
     @set 'gametes', @get('content.biologicaOrganism').createGametesWithCrossInfo(4)[0]
   randomGameteNumber: (->
     ExtMath.randomInt(4)
   ).property('gametes')
+  chosenSex: (->
+    if @get('content.sex') == GG.MALE and @get('randomGameteNumber') % 2 == 1 then GG.MALE else GG.FEMALE
+  ).property('gametes','randomGameteNumber')
   chosenGamete: (->
+    return null unless @get('gametes')?
     return @get('gametes').cells[@get('randomGameteNumber')]
   ).property('gametes','randomGameteNumber')
   chosenGameteAlleles: (->
     chosen = @get('chosenGamete')
+    return "" unless chosen?
     side = if @get('content.sex') == GG.MALE then 'b' else 'a'
     alleles = ""
     for c in ['1','2','XY']
-      alleles += side + ":" + chosen[c].reduce (prev, item) ->
-        return prev + "," + side + ":" + item
-    return alleles
+      chromoAlleles = chosen[c].alleles
+      if chromoAlleles? and chromoAlleles.length > 0
+        alleles += "," + side + ":" + chromoAlleles.reduce (prev, item) ->
+          return prev + "," + side + ":" + item
+    return alleles.slice(1)
   ).property('chosenGamete')
