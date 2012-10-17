@@ -188,6 +188,8 @@ GG.ChromoView = Ember.View.extend
   chromo: '1'
   side: 'a'
   sister: null
+  hiddenGenesBinding: 'GG.drakeController.hiddenGenes'
+  visibleGenesBinding: 'GG.drakeController.visibleGenes'
   gametes: null
   gamete: (->
     if @get('gametes')?
@@ -201,15 +203,15 @@ GG.ChromoView = Ember.View.extend
   visibleGamete: (->
     res = null
     if @get('gamete')?
-      res = GG.Genetics.filter(@get('gamete'), GG.drakeController.get('visibleGenes'))
+      res = GG.Genetics.filter(@get('gamete'), @get('visibleGenes'))
     return res
-  ).property('gamete')
+  ).property('gamete', 'visibleGenes')
   hiddenGamete: (->
     res = null
     if @get('gamete')?
-      res = GG.Genetics.filter(@get('gamete'), GG.drakeController.get('hiddenGenes'))
+      res = GG.Genetics.filter(@get('gamete'), @get('hiddenGenes'))
     return res
-  ).property('gamete')
+  ).property('gamete', 'hiddenGenes')
   biologicaChromoName: (->
     chromo = @get 'chromo'
     return chromo unless chromo is "X" or chromo is "Y"
@@ -221,25 +223,23 @@ GG.ChromoView = Ember.View.extend
   visibleAlleles: (->
     res = []
     if (@get 'content')? or (@get 'visibleGamete')?
-      geno = null
       if (@get 'visibleGamete')?
-        geno = @get 'visibleGamete'
+        res = @get 'visibleGamete'
       else
         fullGeno = @get 'content.visibleGenotype'
         geno = fullGeno[@get 'side']
-      res = GG.Genetics.filter(geno, @get 'genes')
+        res = GG.Genetics.filter(geno, @get 'genes')
     return res
   ).property('chromo','content','side','visibleGamete')
   hiddenAlleles: (->
     res = []
     if (@get 'content')? or (@get 'hiddenGamete')?
-      geno = null
       if (@get 'hiddenGamete')
-        geno = @get 'hiddenGamete'
+        res = @get 'hiddenGamete'
       else
         fullGeno = @get 'content.hiddenGenotype'
         geno = fullGeno[@get 'side']
-      res = GG.Genetics.filter(geno, @get 'genes')
+        res = GG.Genetics.filter(geno, @get 'genes')
     return res
   ).property('chromo','content','side','hiddenGamete')
   defaultClass: 'chromosome'
