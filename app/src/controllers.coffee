@@ -427,8 +427,8 @@ GG.meiosisController = Ember.Object.create
   ).property('chosenMotherAlleles','chosenFatherAlleles')
   animate: (callback)->
     if @get('motherView')? and @get('fatherView')?
-      @get('motherView').animate()
-      @get('fatherView').animate(callback)
+      @get('fatherView').animate =>
+        @get('motherView').animate(callback)
   resetAnimation: ->
     if @get('motherView')? and @get('fatherView')?
       @get('motherView').resetAnimation()
