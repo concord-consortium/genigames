@@ -15,7 +15,7 @@
 
 .chromosome {
   position: absolute;
-  width: 29px;
+  width: 35px;
   height: 130px;
 }
 .male-chromosome {
@@ -28,7 +28,7 @@
   top: 20px;
 }
 .chromosome.right {
-  padding-left: 31px;
+  margin-left: 31px;
 }
 .chromo-1 {
   left: 36px;
@@ -57,19 +57,4 @@
 
 .allele.revealable {
   cursor: pointer;
-}
-
-.cell {
-  background-color: rgba(34, 224, 34, 0.55);
-  border-top: 40px solid transparent;
-  z-index: 1000;
-  height: 450px;
-  width: 250px;
-  top: -20px;
-  left: -50px;
-  position: absolute;
-  -moz-border-radius: 90px;
-  -webkit-border-radius: 90px;
-  -khtml-border-radius: 90px;
-  border-radius: 90px;
 }
