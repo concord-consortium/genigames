@@ -506,9 +506,9 @@ GG.MeiosisView = Ember.View.extend
   gametes: null
   sistersHidden: true
   animate: (callback)->
-    GG.animateMeiosis(".meiosis." + @get('motherFather'), this, callback)
+    GG.MeiosisAnimation.animate(".meiosis." + @get('motherFather'), this, callback)
   resetAnimation: (callback)->
-    GG.resetAnimation(".meiosis." + @get('motherFather'), this, callback)
+    GG.MeiosisAnimation.reset(".meiosis." + @get('motherFather'), this, callback)
   crossOver: ->
     @set 'gametes', @get('content.biologicaOrganism').createGametesWithCrossInfo(4)[0]
   randomGameteNumber: (->
