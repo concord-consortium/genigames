@@ -27,21 +27,26 @@
 .chromosome {
   top: 20px;
 }
-.chromosome.right {
-  margin-left: 31px;
-}
-.chromo-1 {
+.chromo-1.left {
   left: 36px;
 }
-.chromo-2 {
+.chromo-1.right {
+  left: 67px;
+}
+.chromo-2.left {
   left: 115px;
 }
-.chromo-X {
+.chromo-2.right {
+  left: 146px;
+}
+.chromo-X.left {
   left: 193px;
 }
+.chromo-X.right {
+  left: 224px;
+}
 .chromo-Y {
-  left: 193px;
-  padding-left: 30px;
+  left: 224px;
 }
 
 .allele {
