@@ -428,7 +428,8 @@ GG.meiosisController = Ember.Object.create
   animate: (callback)->
     if @get('motherView')? and @get('fatherView')?
       @get('fatherView').animate =>
-        @get('motherView').animate(callback)
+        @get('motherView').animate =>
+          GG.MeiosisAnimation.mergeChosenGametes("#" + @get('fatherView.elementId'), "#" + @get('motherView.elementId'), callback)
   resetAnimation: ->
     if @get('motherView')? and @get('fatherView')?
       @get('motherView').resetAnimation()

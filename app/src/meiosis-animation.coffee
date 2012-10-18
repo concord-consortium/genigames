@@ -3,7 +3,7 @@ GG.MeiosisAnimation = Ember.Object.create
     chromosomeContainerName: e.g. '#parent-fathers-pool-container'
   ###
   reset: (chromosomeContainerName) ->
-    mainContainer = $("#{chromosomeContainerName}")
+    mainContainer = $(chromosomeContainerName)
     mainContainer.find(".chromosome").css({opacity: 1, width: "", height: "", top: "", left: ""})
     mainContainer.find(".chromosome").show()
     mainContainer.find(".cell:not(.mainCell)").remove()
@@ -145,7 +145,7 @@ GG.MeiosisAnimation = Ember.Object.create
     leftShift = (if right then "+=" else "-=" ) + "88px"
     topShift = (if down then "+=" else "-=" ) + "55px"
     setTimeout ->
-      args.chromos.find(chosenChromos).animate({left: leftShift, top: topShift}, 2000, 'easeInOutQuad')
+      args.chromos.find(chosenChromos).animate({left: leftShift, top: 50}, 2000, 'easeInOutQuad')
       args.chromos.find(".chromosome:not(" + chosenChromos + ")").animate({opacity: 0}, 1500)
       args.container.find(chosenCell).animate({top: 50, left: 73}, 2000, 'easeInOutQuad')
       args.container.find(".cell:not(.mainCell):not(" + chosenCell + ")").animate({opacity: 0}, 1500)
@@ -158,3 +158,35 @@ GG.MeiosisAnimation = Ember.Object.create
           args.callback()
         , 3000
     , 1000
+
+  mergeChosenGametes: (fatherContainerName, motherContainerName, callback)->
+    console.log("merging: " + fatherContainerName + " " + motherContainerName)
+    fatherContainer = $(fatherContainerName)
+    motherContainer = $(motherContainerName)
+
+    # at this point, the animation should be complete, so the chosen gametes will
+    # be centered in the MeiosisView area. We need to move them toward each other,
+    # and then combine them into a single cell arranged like the normal chromosome
+    # panel view.
+    # TODO
+
+    # move the father cell down, mother cell up; expand the cells
+    fatherContainer.find('.cell:not(.mainCell)').animate({top: "+=88px", left: "-=15px", width: 300, height: 120}, 1000, 'easeInOutQuad')
+    motherContainer.find('.cell:not(.mainCell)').animate({top: "-=129px", left: "-=15px", width: 300, height: 120}, 1000, 'easeInOutQuad')
+
+    # move the father chromos down, mothers up, and reposition
+    fatherContainer.find('.chromo-1').animate({top: 163, left: "+=32px"}, 1000, 'easeInOutQuad')
+    fatherContainer.find('.chromo-2').animate({top: 163, left: "+=75px"}, 1000, 'easeInOutQuad')
+    fatherContainer.find('.chromo-X,.chromo-Y').animate({top: 163, left: "+=118px"}, 1000, 'easeInOutQuad')
+
+    motherContainer.find('.chromo-1').animate({top: -55}, 1000, 'easeInOutQuad')
+    motherContainer.find('.chromo-2').animate({top: -55, left: "+=45px"}, 1000, 'easeInOutQuad')
+    motherContainer.find('.chromo-X').animate({top: -55, left: "+=90px"}, 1000, 'easeInOutQuad')
+
+    setTimeout ->
+      motherContainer.find('.cell:not(.mainCell)').hide()
+    , 1000
+
+    setTimeout ->
+      callback()
+    , 1500
