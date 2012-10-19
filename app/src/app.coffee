@@ -31,6 +31,12 @@ minispade.require 'genigames/templates/drake'
 minispade.require 'genigames/templates/choose-class'
 minispade.require 'genigames/templates/meiosis'
 
+# works similar to :contains(), but requires the whole content
+# (whitespace removed from beginning and end) to match
+# not just part
+$.expr[":"].onlyContains = (obj, index, meta, stack)->
+  return (obj.textContent || obj.innerText || $(obj).text() || "").replace(/^\s+/, '').replace(/\s+$/,'') is meta[3]
+
 # on load
 $ ->
 

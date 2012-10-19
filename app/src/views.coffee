@@ -293,7 +293,7 @@ GG.ChromoView = Ember.View.extend
       chromo = '#' + @get('elementId')
       for i in [0...changes.length]
         change = GG.drakeController.alleleOverride(changes[i])
-        selector = chromo + ' .allele:contains("' + change + '")'
+        selector = chromo + ' .allele:onlyContains("' + change + '")'
         flash = (n)->
           return if n <= 0
           $(selector).animate({opacity: 0.2},250)
