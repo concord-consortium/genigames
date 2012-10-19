@@ -215,27 +215,39 @@ GG.ChromoView = Ember.View.extend
   hiddenGenesBinding: 'GG.drakeController.hiddenGenes'
   visibleGenesBinding: 'GG.drakeController.visibleGenes'
   gametes: null
+  futureGametes: null
   gamete: (->
-    if @get('gametes')?
+    return @_getGameteFromGametes('gametes')
+  ).property('chromo','side','sister','gametes')
+  futureGamete: (->
+    return @_getGameteFromGametes('futureGametes')
+  ).property('chromo','side','sister','futureGametes')
+  _getGameteFromGametes: (prop)->
+    if @get(prop)?
       cell = (if @get('side') == 'a' then 0 else 1) + (if @get('sister') == "1" then 0 else 2)
       chromo = @get('chromo')
       chromo = if chromo == "X" or chromo == "Y" then "XY" else chromo
-      return @get('gametes').cells[cell][chromo].alleles
+      return @get(prop).cells[cell][chromo].alleles
     else
       return null
-  ).property('chromo','side','sister','gametes')
   visibleGamete: (->
-    res = null
-    if @get('gamete')?
-      res = GG.Genetics.filter(@get('gamete'), @get('visibleGenes'))
-    return res
+    @_filterGamete('gamete',false)
   ).property('gamete', 'visibleGenes')
   hiddenGamete: (->
-    res = null
-    if @get('gamete')?
-      res = GG.Genetics.filter(@get('gamete'), @get('hiddenGenes'))
-    return res
+    @_filterGamete('gamete',true)
   ).property('gamete', 'hiddenGenes')
+  futureVisibleGamete: (->
+    @_filterGamete('futureGamete',false)
+  ).property('futureGamete', 'visibleGenes')
+  futureHiddenGamete: (->
+    @_filterGamete('futureGamete',true)
+  ).property('futureGamete', 'hiddenGenes')
+  _filterGamete: (prop, hidden)->
+    res = null
+    if @get(prop)?
+      genes = if hidden then 'hiddenGenes' else 'visibleGenes'
+      res = GG.Genetics.filter(@get(prop), @get(genes))
+    return res
   biologicaChromoName: (->
     chromo = @get 'chromo'
     return chromo unless chromo is "X" or chromo is "Y"
@@ -245,55 +257,69 @@ GG.ChromoView = Ember.View.extend
     GG.Genetics.species.chromosomeGeneMap[@get 'biologicaChromoName']
   ).property('chromo')
   highlightAlleleChanges: false
-  lastVisibleAlleles: []
+  highlightAlleleChangesAfter: false
   visibleAlleles: (->
-    res = []
-    if (@get 'content')? or (@get 'visibleGamete')?
-      if (@get 'visibleGamete')?
-        res = @get 'visibleGamete'
-      else
-        fullGeno = @get 'content.visibleGenotype'
-        geno = fullGeno[@get 'side']
-        res = GG.Genetics.filter(geno, @get 'genes')
-    @highlightChanges(res)
-    @set('lastVisibleAlleles', res)
+    res = @_getAlleles(false, false)
+    if @get 'highlightAlleleChangesAfter'
+      @highlightChanges(res,@get('lastVisibleAlleles'))
+      @set('lastVisibleAlleles', res)
     return res
   ).property('chromo','content','side','visibleGamete')
   hiddenAlleles: (->
+    return @_getAlleles(true, false)
+  ).property('chromo','content','side','hiddenGamete')
+  futureVisibleAlleles: (->
+    res = @_getAlleles(false, true)
+    if @get 'highlightAlleleChanges'
+      @highlightChanges(@get('visibleAlleles'),res)
+      @set('lastVisibleAlleles', res)
+    return res
+  ).property('chromo','content','side','futureVisibleGamete')
+  futureHiddenAlleles: (->
+    return @_getAlleles(true, true)
+  ).property('chromo','content','side','futureHiddenGamete')
+  _getAlleles: (hidden, future)->
+    gamete = if hidden then 'hiddenGamete' else 'visibleGamete'
+    gamete = ('future ' + gamete).camelize()
     res = []
-    if (@get 'content')? or (@get 'hiddenGamete')?
-      if (@get 'hiddenGamete')
-        res = @get 'hiddenGamete'
+    if (@get 'content')? or (@get gamete)?
+      if (@get gamete)?
+        res = @get gamete
       else
-        fullGeno = @get 'content.hiddenGenotype'
+        prop = if hidden then 'content.hiddenGenotype' else 'content.visibleGenotype'
+        fullGeno = @get prop
         geno = fullGeno[@get 'side']
         res = GG.Genetics.filter(geno, @get 'genes')
     return res
-  ).property('chromo','content','side','hiddenGamete')
-  highlightChanges: (newAlleles)->
-    if @get('highlightAlleleChanges')
-      oldAlleles = @get('lastVisibleAlleles')
-      return if oldAlleles.length == 0
-      changes = newAlleles.filter (item) ->
-        return !oldAlleles.contains(item)
-      setTimeout =>
-        # chromo = '.' + @get('chromoName') + '.' + @get('parent') + '.' + @get('right')
-        # chromo += '.' + @get('sister') if @get('sister').length > 0
-        chromo = '#' + @get('elementId')
-        for i in [0...changes.length]
-          change = changes[i]
-          selector = chromo + ' .allele:contains("' + change + '")'
-          flash = (n)->
-            return if n <= 0
-            $(selector).animate({opacity: 0.2},250)
+  futureVisibleGameteChanged: (->
+    @get 'futureVisibleAlleles'
+    setTimeout =>
+      @set('gametes', (@get 'futureGametes'))
+    , (500 * @get('numberOfHighlights'))
+  ).observes('futureVisibleGamete')
+  numberOfHighlights: 4
+  highlightChanges: (newAlleles, oldAlleles)->
+    return if oldAlleles.length == 0
+    changes = newAlleles.filter (item) ->
+      return !oldAlleles.contains(item)
+    setTimeout =>
+      # chromo = '.' + @get('chromoName') + '.' + @get('parent') + '.' + @get('right')
+      # chromo += '.' + @get('sister') if @get('sister').length > 0
+      chromo = '#' + @get('elementId')
+      for i in [0...changes.length]
+        change = changes[i]
+        selector = chromo + ' .allele:contains("' + change + '")'
+        flash = (n)->
+          return if n <= 0
+          $(selector).animate({opacity: 0.2},250)
+          setTimeout ->
+            $(selector).animate({opacity: 1.0},250)
             setTimeout ->
-              $(selector).animate({opacity: 1.0},250)
-              setTimeout ->
-                flash(n-1)
-              , 250
+              flash(n-1)
             , 250
-          flash(4)
-      , 50
+          , 250
+        flash(@get 'numberOfHighlights')
+    , 50
   defaultClass: 'chromosome'
   chromoName: (->
     'chromo-'+@get('chromo')
