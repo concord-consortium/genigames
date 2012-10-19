@@ -209,10 +209,30 @@ GG.ChromoView = Ember.View.extend
   ).property('chromo','side','sister','futureGametes')
   _getGameteFromGametes: (prop)->
     if @get(prop)?
-      cell = (if @get('side') == 'a' then 0 else 1) + (if @get('sister') == "1" then 0 else 2)
       chromo = @get('chromo')
       chromo = if chromo == "X" or chromo == "Y" then "XY" else chromo
-      return @get(prop).cells[cell][chromo].alleles
+      cells = @get(prop).cells
+      if @get('side') is 'x1'
+        # find the first 2 x sides
+        allX = cells.filter (item)->
+          item[chromo].side is 'x'
+        xIdx = if @get('sister') is "1" then 0 else 1
+        return allX[xIdx][chromo].alleles
+      else if @get('side') is 'x2'
+        # find the second 2 x sides
+        allX = cells.filter (item)->
+          item[chromo].side is 'x'
+        xIdx = if @get('sister') is "1" then 2 else 3
+        return allX[xIdx][chromo].alleles
+      else if @get('side') is 'y'
+        # find the first 2 x sides
+        allY = cells.filter (item)->
+          item[chromo].side is 'y'
+        yIdx = if @get('sister') is "1" then 0 else 1
+        return allY[yIdx][chromo].alleles
+      else
+        cellNum = (if @get('side') == 'b' then 0 else 2) + (if @get('sister') == "1" then 0 else 1)
+        return cells[cellNum][chromo].alleles
     else
       return null
   visibleGamete: (->
@@ -273,7 +293,12 @@ GG.ChromoView = Ember.View.extend
       else
         prop = if hidden then 'content.hiddenGenotype' else 'content.visibleGenotype'
         fullGeno = @get prop
-        geno = fullGeno[@get 'side']
+        side = @get 'side'
+        if ['x2','y'].contains(side)
+          side = 'b'
+        else if side is 'x1'
+          side = 'a'
+        geno = fullGeno[side]
         res = GG.Genetics.filter(geno, @get 'genes')
     return res
   futureVisibleGameteChanged: (->
@@ -311,10 +336,10 @@ GG.ChromoView = Ember.View.extend
     'chromo-'+@get('chromo')
   ).property('chromo','side')
   right: (->
-    if @get('chromo') == 'Y' or @get('side') == 'b' then "right" else "left"
+    if @get('chromo') == 'Y' or ['b','y','x2'].contains(@get('side')) then "right" else "left"
   ).property('chromo','side')
   parent: (->
-    if @get('side') == 'a' then 'mother' else 'father'
+    if ['a','x1'].contains(@get('side')) then 'mother' else 'father'
   ).property('chromo','side')
   sisterClass: (->
     if (@get 'sister')?
@@ -544,12 +569,47 @@ GG.MeiosisView = Ember.View.extend
   resetAnimation: (callback)->
     GG.MeiosisAnimation.reset(".meiosis." + @get('motherFather'), this, callback)
   crossOver: ->
-    @set 'gametes', @get('content.biologicaOrganism').createGametesWithCrossInfo(4)[0]
+    newGametes = @get('content.biologicaOrganism').createGametesWithCrossInfo(4)[0]
+    mf = if @get('content.sex') == GG.MALE then "male" else "female"
+    console.log "crossed over", mf, newGametes
+    @set 'gametes', newGametes
   randomGameteNumber: (->
     ExtMath.randomInt(4)
   ).property('gametes')
+  randomGameteAnimationCell: (->
+    # cells are arranged: 0 2
+    #                     1 3
+    # where 0 and 2 are always first and second female gamete
+    # and 1 and 3 are either first and second male gamete or third and fourth female gamete
+    num = @get 'randomGameteNumber'
+    gametes = @get 'gametes'
+    m = 0
+    f = 0
+    animCell = 0
+    gametes.cells.forEach (item, idx)->
+      if idx is num
+        if item.XY.side is 'x'
+          if f is 0
+            animCell = 0
+          else if f is 1
+            animCell = 2
+          else if f is 2
+            animCell = 1
+          else
+            animCell = 3
+        else if item.XY.side is 'y'
+          if m is 0
+            animCell = 1
+          else
+            animCell = 3
+      if item.XY.side is 'x'
+        f++
+      else
+        m++
+    return animCell
+  ).property('gametes','randomGameteNumber')
   chosenSex: (->
-    if @get('content.sex') == GG.MALE and @get('randomGameteNumber') % 2 == 1 then GG.MALE else GG.FEMALE
+    if @get('content.sex') == GG.MALE and @get('chosenGamete')? and @get('chosenGamete').XY.side is 'y' then GG.MALE else GG.FEMALE
   ).property('gametes','randomGameteNumber')
   chosenGamete: (->
     return null unless @get('gametes')?

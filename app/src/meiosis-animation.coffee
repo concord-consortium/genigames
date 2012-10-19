@@ -118,7 +118,7 @@ GG.MeiosisAnimation = Ember.Object.create
     #   console.log("cell click complete", evt)
     # enlarge the chosen gamete
     # and make the rest disappear
-    gamete = args.parentView.get('randomGameteNumber')
+    gamete = args.parentView.get('randomGameteAnimationCell')
     chosenChromos = ""
     chosenCell = ""
     down = true
