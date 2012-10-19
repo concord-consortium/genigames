@@ -70,3 +70,11 @@
 .allele.revealable {
   cursor: pointer;
 }
+
+.dominant {
+  color: yellow;
+}
+
+.recessive {
+  color: blue;
+}
