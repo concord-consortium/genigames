@@ -160,7 +160,7 @@ GG.BreedButtonView = Ember.View.extend
     GG.statemanager.send('breedDrake')
 
 GG.AlleleView = Ember.View.extend
-  classNameBindings: ['defaultClassNames', 'hidden:revealable']
+  classNameBindings: ['defaultClassNames', 'hidden:revealable', 'dominant']
   defaultClassNames: 'allele'
   value: ''
   hiddenValue: (->
@@ -171,9 +171,33 @@ GG.AlleleView = Ember.View.extend
     value + '?'
   ).property('value').cacheable()
   hidden: false
+  dominant: (->
+    ending = @get('displayValue').slice(-1)
+    if ending is "1"
+      return "dominant"
+    else if ending is "2"
+      return "recessive"
+    else
+      return ""
+  ).property('displayValue')
+  # Temporary overrides for some alleles, so we can test
+  # whether or not it's an easier way to display them.
+  valueOverride: (->
+    v = @get 'value'
+    if v is "M"
+      return "M1"
+    else if v is "m"
+      return "M2"
+    else if v is "W"
+      return "W1"
+    else if v is "w"
+      return "W2"
+    else
+      return v
+  ).property('value')
   displayValue: (->
-    if @get('hidden') then @get('hiddenValue') else @get('value')
-  ).property('value','hidden')
+    if @get('hidden') then @get('hiddenValue') else @get('valueOverride')
+  ).property('valueOverride','hidden')
   click: ->
     if @get('hidden')
       GG.userController.addReputation -GG.actionCostsController.getCost 'alleleRevealed'
