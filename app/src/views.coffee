@@ -282,7 +282,7 @@ GG.ChromoView = Ember.View.extend
       @set('gametes', (@get 'futureGametes'))
     , (500 * @get('numberOfHighlights'))
   ).observes('futureVisibleGamete')
-  numberOfHighlights: 4
+  numberOfHighlights: 3
   highlightChanges: (newAlleles, oldAlleles)->
     return if oldAlleles.length == 0
     changes = newAlleles.filter (item) ->
