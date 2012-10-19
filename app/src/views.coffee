@@ -180,24 +180,9 @@ GG.AlleleView = Ember.View.extend
     else
       return ""
   ).property('displayValue')
-  # Temporary overrides for some alleles, so we can test
-  # whether or not it's an easier way to display them.
-  valueOverride: (->
-    v = @get 'value'
-    if v is "M"
-      return "M1"
-    else if v is "m"
-      return "M2"
-    else if v is "W"
-      return "W1"
-    else if v is "w"
-      return "W2"
-    else
-      return v
-  ).property('value')
   displayValue: (->
-    if @get('hidden') then @get('hiddenValue') else @get('valueOverride')
-  ).property('valueOverride','hidden')
+    if @get('hidden') then @get('hiddenValue') else GG.drakeController.alleleOverride(@get('value'))
+  ).property('value','hidden')
   click: ->
     if @get('hidden')
       GG.userController.addReputation -GG.actionCostsController.getCost 'alleleRevealed'
@@ -307,7 +292,7 @@ GG.ChromoView = Ember.View.extend
       # chromo += '.' + @get('sister') if @get('sister').length > 0
       chromo = '#' + @get('elementId')
       for i in [0...changes.length]
-        change = changes[i]
+        change = GG.drakeController.alleleOverride(changes[i])
         selector = chromo + ' .allele:contains("' + change + '")'
         flash = (n)->
           return if n <= 0

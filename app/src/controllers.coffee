@@ -143,6 +143,19 @@ GG.tasksController = Ember.ArrayController.create
 GG.drakeController = Ember.Object.create
   visibleGenesBinding: 'GG.tasksController.currentTask.visibleGenes'
   hiddenGenesBinding: 'GG.tasksController.currentTask.hiddenGenes'
+  # Temporary overrides for some alleles, so we can test
+  # whether or not it's an easier way to display them.
+  alleleOverride: (v)->
+    if v is "M"
+      return "M1"
+    else if v is "m"
+      return "M2"
+    else if v is "W"
+      return "W1"
+    else if v is "w"
+      return "W2"
+    else
+      return v
 
 GG.parentController = Ember.ArrayController.create
   content: []
