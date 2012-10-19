@@ -291,20 +291,21 @@ GG.ChromoView = Ember.View.extend
       # chromo = '.' + @get('chromoName') + '.' + @get('parent') + '.' + @get('right')
       # chromo += '.' + @get('sister') if @get('sister').length > 0
       chromo = '#' + @get('elementId')
+      num = @get 'numberOfHighlights'
       for i in [0...changes.length]
         change = GG.drakeController.alleleOverride(changes[i])
-        selector = chromo + ' .allele:onlyContains("' + change + '")'
-        flash = (n)->
-          return if n <= 0
-          $(selector).animate({opacity: 0.2},250)
-          setTimeout ->
-            $(selector).animate({opacity: 1.0},250)
-            setTimeout ->
-              flash(n-1)
-            , 250
-          , 250
-        flash(@get 'numberOfHighlights')
+        sel = chromo + ' .allele:onlyContains("' + change + '")'
+        @_flash(num, sel)
     , 50
+  _flash: (n, selector)->
+    return if n <= 0
+    $(selector).animate({opacity: 0.2},250)
+    setTimeout =>
+      $(selector).animate({opacity: 1.0},250)
+      setTimeout =>
+        @_flash(n-1, selector)
+      , 250
+    , 250
   defaultClass: 'chromosome'
   chromoName: (->
     'chromo-'+@get('chromo')
