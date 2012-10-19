@@ -181,8 +181,6 @@ GG.AlleleView = Ember.View.extend
       if (@get 'drake')? and (@get 'side')?
         @get('drake').markRevealed(@get('side'), @get('value'))
       GG.logController.logEvent GG.Events.REVEALED_ALLELE, allele: @get('value'), side: @get('side'), drake: { alleles: @get('drake.biologicaOrganism.alleles'), sex: @get('drake.sex') }
-  triggerHighlight: ->
-    console.log("highlighting: " + @get('displayValue'))
 
 GG.ChromoView = Ember.View.extend
   templateName: 'chromosome'
