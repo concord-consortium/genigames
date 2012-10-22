@@ -199,6 +199,7 @@ GG.ChromoView = Ember.View.extend
   hiddenGenesBinding: 'GG.drakeController.hiddenGenes'
   visibleGenesBinding: 'GG.drakeController.visibleGenes'
   revealedContentAllelesIdxBinding: 'content.revealedIdx'
+  revealedAlleles: null
   gametes: null
   futureGametes: null
   gamete: (->
@@ -215,24 +216,24 @@ GG.ChromoView = Ember.View.extend
       if @get('side') is 'x1'
         # find the first 2 x sides
         allX = cells.filter (item)->
-          item[chromo].side is 'x'
+          ['x','x1','x2'].contains(item[chromo].side)
         xIdx = if @get('sister') is "1" then 0 else 1
-        return allX[xIdx][chromo].alleles
+        return allX[xIdx][chromo]
       else if @get('side') is 'x2'
         # find the second 2 x sides
         allX = cells.filter (item)->
-          item[chromo].side is 'x'
+          ['x','x1','x2'].contains(item[chromo].side)
         xIdx = if @get('sister') is "1" then 2 else 3
-        return allX[xIdx][chromo].alleles
+        return allX[xIdx][chromo]
       else if @get('side') is 'y'
         # find the first 2 x sides
         allY = cells.filter (item)->
           item[chromo].side is 'y'
         yIdx = if @get('sister') is "1" then 0 else 1
-        return allY[yIdx][chromo].alleles
+        return allY[yIdx][chromo]
       else
         cellNum = (if @get('side') == 'b' then 0 else 2) + (if @get('sister') == "1" then 0 else 1)
-        return cells[cellNum][chromo].alleles
+        return cells[cellNum][chromo]
     else
       return null
   visibleGamete: (->
@@ -249,9 +250,17 @@ GG.ChromoView = Ember.View.extend
   ).property('futureGamete', 'hiddenGenes')
   _filterGamete: (prop, hidden)->
     res = null
-    if @get(prop)?
+    if @get(prop)?.alleles
+      gamete = @get(prop)
       genes = if hidden then 'hiddenGenes' else 'visibleGenes'
-      res = GG.Genetics.filter(@get(prop), @get(genes))
+      res = GG.Genetics.filter(gamete.alleles, @get(genes))
+      # Now add or subtract the revealed alleles from the result
+      if gamete.revealed?
+        if hidden
+          res = res.filter (item)->
+            return !gamete.revealed.contains(item)
+        else
+          res = res.concat(gamete.revealed).uniq().compact()
     return res
   biologicaChromoName: (->
     chromo = @get 'chromo'
@@ -301,7 +310,7 @@ GG.ChromoView = Ember.View.extend
   ).property('chromo','content','side','futureHiddenGamete','revealedAlleles','revealedContentAllelesIdx')
   _getAlleles: (hidden, future)->
     gamete = if hidden then 'hiddenGamete' else 'visibleGamete'
-    gamete = ('future ' + gamete).camelize()
+    gamete = ('future ' + gamete).camelize() if future
     res = []
     if (@get 'content')? or (@get gamete)?
       if (@get gamete)?
@@ -587,6 +596,29 @@ GG.MeiosisView = Ember.View.extend
   crossOver: ->
     newGametes = @get('content.biologicaOrganism').createGametesWithCrossInfo(4)[0]
     mf = if @get('content.sex') == GG.MALE then "male" else "female"
+
+    # Transfer revealed status to new gametes...
+    revealed = @get('content.revealedAlleles')
+    normalizedSide = (s)->
+      if ['x','x1','a'].contains(s)
+        return 'a'
+      else if ['y','x2','b'].contains(s)
+        return 'b'
+    for side of revealed
+      alleles = revealed[side]
+      continue if alleles.length == 0
+      nSide = normalizedSide(side)
+      for i in [0...newGametes.cells.length]
+        gamete = newGametes.cells[i]
+        for c in ["1","2","XY"]
+          chromo = gamete[c]
+          for j in [0...alleles.length]
+            allele = alleles[j]
+            idx = chromo.alleles.indexOf(allele)
+            if idx != -1 and normalizedSide(chromo.allelesWithSides[idx].side) is nSide
+              chromo.revealed ?= []
+              chromo.revealed.push allele
+
     console.log "crossed over", mf, newGametes
     @set 'gametes', newGametes
   randomGameteNumber: (->
