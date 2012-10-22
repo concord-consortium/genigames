@@ -121,6 +121,7 @@ GG.Drake = Ember.Object.extend
   visibleGenesBinding: 'GG.drakeController.visibleGenes'
   hiddenGenesBinding: 'GG.drakeController.hiddenGenes'
   revealedAlleles: null
+  revealedIdx: 0
 
   biologicaOrganism : null            # organism object created by GWT
   sex               : null
@@ -175,6 +176,7 @@ GG.Drake = Ember.Object.extend
     if rAlleles[side].indexOf(allele) == -1
       rAlleles[side].push(allele)
       @set 'revealedAlleles', rAlleles
+      @set 'revealedIdx', @get('revealedIdx')+1
 
   female: (->
     @get('sex') == GG.FEMALE

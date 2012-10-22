@@ -186,7 +186,6 @@ GG.AlleleView = Ember.View.extend
   click: ->
     if @get('hidden')
       GG.userController.addReputation -GG.actionCostsController.getCost 'alleleRevealed'
-      @set 'hidden', false
       if (@get 'drake')? and (@get 'side')?
         @get('drake').markRevealed(@get('side'), @get('value'))
       GG.logController.logEvent GG.Events.REVEALED_ALLELE, allele: @get('value'), side: @get('side'), drake: { alleles: @get('drake.biologicaOrganism.alleles'), sex: @get('drake.sex') }
@@ -199,6 +198,7 @@ GG.ChromoView = Ember.View.extend
   sister: null
   hiddenGenesBinding: 'GG.drakeController.hiddenGenes'
   visibleGenesBinding: 'GG.drakeController.visibleGenes'
+  revealedContentAllelesIdxBinding: 'content.revealedIdx'
   gametes: null
   futureGametes: null
   gamete: (->
@@ -269,10 +269,10 @@ GG.ChromoView = Ember.View.extend
       @highlightChanges(res,@get('lastVisibleAlleles'))
       @set('lastVisibleAlleles', res)
     return res
-  ).property('chromo','content','side','visibleGamete')
+  ).property('chromo','content','side','visibleGamete','revealedAlleles','revealedContentAllelesIdx')
   hiddenAlleles: (->
     return @_getAlleles(true, false)
-  ).property('chromo','content','side','hiddenGamete')
+  ).property('chromo','content','side','hiddenGamete','revealedAlleles','revealedContentAllelesIdx')
   alleles: (->
     vis = @get('visibleAlleles').map (item)->
       {allele: item, visible: true}
@@ -295,10 +295,10 @@ GG.ChromoView = Ember.View.extend
       @highlightChanges(@get('visibleAlleles'),res)
       @set('lastVisibleAlleles', res)
     return res
-  ).property('chromo','content','side','futureVisibleGamete')
+  ).property('chromo','content','side','futureVisibleGamete','revealedAlleles','revealedContentAllelesIdx')
   futureHiddenAlleles: (->
     return @_getAlleles(true, true)
-  ).property('chromo','content','side','futureHiddenGamete')
+  ).property('chromo','content','side','futureHiddenGamete','revealedAlleles','revealedContentAllelesIdx')
   _getAlleles: (hidden, future)->
     gamete = if hidden then 'hiddenGamete' else 'visibleGamete'
     gamete = ('future ' + gamete).camelize()
