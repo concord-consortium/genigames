@@ -290,12 +290,10 @@ GG.ChromoView = Ember.View.extend
 
     bioChromo = @get('content.biologicaOrganism').genetics.genotype.chromosomes["1"]["a"]
     alleles = vis.concat(hid)
-    console.log("pre-sort: ", alleles)
     alleles = alleles.sort (a,b)=>
       p1 = bioChromo.getAllelesPosition(a.allele)
       p2 = bioChromo.getAllelesPosition(b.allele)
       if p1 > p2 then 1 else -1
-    console.log("post-sort: ", alleles)
     return alleles
   ).property('visibleAlleles','hiddenAlleles')
   futureVisibleAlleles: (->

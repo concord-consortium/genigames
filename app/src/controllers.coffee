@@ -232,6 +232,11 @@ GG.breedingController = Ember.Object.create
         org = BioLogica.breed @get('mother.biologicaOrganism'), @get('father.biologicaOrganism')
       drake = GG.Drake.createFromBiologicaOrganism org
       drake.set 'bred', true
+      if GG.meiosisController.get('chosenAlleles')?
+        revealed = GG.meiosisController.get('chosenRevealedAlleles')
+        for r in [0...revealed.length]
+          rev = revealed[r]
+          drake.markRevealed(rev.side, rev.allele)
       GG.breedingController.set 'child', drake
       GG.offspringController.set 'content', drake
       @set 'isBreeding', false
@@ -434,10 +439,27 @@ GG.meiosisController = Ember.Object.create
   fatherView: null
   chosenMotherAllelesBinding: 'motherView.chosenGameteAlleles'
   chosenFatherAllelesBinding: 'fatherView.chosenGameteAlleles'
+  chosenMotherGameteBinding: 'motherView.chosenGamete'
+  chosenFatherGameteBinding: 'fatherView.chosenGamete'
   chosenSexBinding: 'fatherView.chosenSex'
   chosenAlleles: (->
     return @get('chosenMotherAlleles') + "," + @get('chosenFatherAlleles')
   ).property('chosenMotherAlleles','chosenFatherAlleles')
+  chosenRevealedAlleles: (->
+    femGam = @get 'chosenMotherGamete'
+    maleGam = @get 'chosenFatherGamete'
+
+    res = []
+    for own ch of maleGam
+      rev = maleGam[ch].revealed || []
+      for i in [0...rev.length]
+        res.push {allele: rev[i], side: 'b'}
+    for own ch of femGam
+      rev = femGam[ch].revealed || []
+      for i in [0...rev.length]
+        res.push {allele: rev[i], side: 'a'}
+    return res
+  ).property('chosenMotherGamete','chosenFatherGamete')
   animate: (callback)->
     if @get('motherView')? and @get('fatherView')?
       @get('fatherView').animate =>
