@@ -617,7 +617,6 @@ GG.MeiosisView = Ember.View.extend
               chromo.revealed ?= []
               chromo.revealed.push allele
 
-    console.log "crossed over", mf, newGametes
     @set 'gametes', newGametes
   randomGameteNumber: (->
     ExtMath.randomInt(4)
