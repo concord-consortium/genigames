@@ -694,9 +694,9 @@ GG.ObstacleCourseView = Ember.View.extend
     # drake characteristics.
     $('.obstacle-course .obstacles').animate({left: "-=1300px"}, 5000, 'linear')
     $('.obstacle-course .background').animate({left: "-=300px"}, 5000, 'linear')
-    $('.obstacle-course .drake').animate({left: "+=318px"}, 5000, 'linear')
+    $('.obstacle-course .drake-container').animate({left: "+=318px"}, 5000, 'linear')
   reset: ->
     $('.obstacle-course .obstacles').css({left: ""})
     $('.obstacle-course .background').css({left: ""})
-    $('.obstacle-course .drake').css({left: ""})
+    $('.obstacle-course .drake-container').css({left: ""})
 

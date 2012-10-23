@@ -36,7 +36,7 @@
   z-index: 2;
 }
 
-.obstacle-course .drake {
+.obstacle-course .drake-container {
   z-index: 10;
   position: absolute;
   top: -50px;

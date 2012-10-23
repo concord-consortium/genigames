@@ -1,7 +1,9 @@
 <div class="course">
-  {{#if view.drake}}
-    {{view GG.DrakeView contentBinding="view.drake"}}
-  {{/if}}
+  <div class="drake-container">
+    {{#if view.drake}}
+      {{view GG.DrakeView contentBinding="view.drake"}}
+    {{/if}}
+  </div>
   <div class="background"></div>
   <div class="obstacles">
     <div class="obstacle ducks"></div>
