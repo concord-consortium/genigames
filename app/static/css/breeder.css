@@ -116,6 +116,14 @@
   overflow: auto;
 }
 
+#parent-pool-divider {
+  top: 320px;
+  height: 2px;
+  width: 495px;
+  left: 18px;
+  position: absolute;
+  background-color: #787878;
+
 #father-chromosome {
   position: absolute;
   top: 130px;
