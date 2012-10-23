@@ -159,8 +159,8 @@ GG.drakeController = Ember.Object.create
 
 GG.parentController = Ember.ArrayController.create
   content: []
-  maxMales: 4
-  maxFemales: 4
+  maxMales: 40
+  maxFemales: 40
   selectedMother: null
   selectedFather: null
 
