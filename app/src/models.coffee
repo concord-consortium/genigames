@@ -83,6 +83,7 @@ GG.Task = Ember.Object.extend
   reputation: 1
   cycles: 10
   cyclesRemaining: 0
+  obstacleCourse: null
   # viewmodel properties
   showQuestionBubble: false
   showSpeechBubble: false

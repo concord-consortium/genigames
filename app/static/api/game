@@ -51,6 +51,9 @@
               "accept": "Ok",
               "decline": "Maybe later"
             }
+          },
+          "obstacleCourse": {
+            "obstacles": ["ducks","sheep","rain","desk"]
           }
         }
       ]
