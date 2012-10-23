@@ -72,17 +72,17 @@ GG.StateInTask = Ember.State.extend
           sex: parent.get('sex')
 
       parentRemoved: (manager, parent) ->
-        whichSelection = if parent.get('sex') is GG.FEMALE then 'selectedMother' else 'selectedFather'
+        sex = parent.get('sex')
+        whichSelection = if sex is GG.FEMALE then 'selectedMother' else 'selectedFather'
         if GG.parentController.get(whichSelection) == parent
           GG.parentController.set whichSelection, null
+          controller = if sex is GG.FEMALE then GG.motherPoolController else GG.fatherPoolController
+          controller.set('hidden', true)
         GG.parentController.removeObject parent
-
-        controller = if sex is GG.FEMALE then GG.motherPoolController else GG.fatherPoolController
-        controller.set('hidden', true)
 
         GG.logController.logEvent GG.Events.REMOVED_PARENT,
           alleles: parent.get('biologicaOrganism.alleles')
-          sex: parent.get('sex')
+          sex: sex
 
       breedDrake: (manager) ->
         if GG.motherPoolController.get('selected') && GG.fatherPoolController.get('selected')
