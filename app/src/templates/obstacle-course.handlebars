@@ -6,13 +6,9 @@
   </div>
   <div class="background"></div>
   <div class="obstacles">
-    <div class="obstacle ducks"></div>
-    <div class="obstacle desk"></div>
-    <div class="obstacle sheep"></div>
-    <div class="obstacle rain"></div>
-    <div class="obstacle rain"></div>
-    <div class="obstacle ducks"></div>
-    <div class="obstacle desk"></div>
+    {{#each obstacle in view.obstacles}}
+      {{view GG.ObstacleView typeBinding="obstacle"}}
+    {{/each}}
   </div>
 </div>
 <div class="controls">
