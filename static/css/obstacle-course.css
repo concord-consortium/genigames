@@ -1,0 +1,76 @@
+.obstacle-course {
+  position: absolute;
+  width: 500px;
+  height: 100px;
+  left: 300px;
+  top: 200px;
+  z-index: 0;
+}
+.obstacle-course .course {
+  position: absolute;
+  width: 500px;
+  height: 100px;
+  left: 0px;
+  top: 0px;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.obstacle-course .controls {
+  position: absolute;
+  top: 40px;
+  left: -100px;
+  width: 100px;
+  height: 20px;
+  text-align: center;
+  z-index: 10;
+}
+
+.obstacle-course .background {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 800px;
+  height: 100px;
+  background: top left no-repeat url('../images/obstacle-course/town-1-bg.png');
+  z-index: 2;
+}
+
+.obstacle-course .drake {
+  z-index: 10;
+  position: absolute;
+  top: -50px;
+  left: 0px;
+  overflow: visible;
+}
+
+.obstacle-course .obstacles {
+  position: absolute;
+  left: 200px;
+  top: 0px;
+  width: 2000px;
+  z-index: 3;
+}
+
+.obstacle-course .obstacles .obstacle {
+  display: inline-block;
+  width: 200px;
+  height: 100px;
+  z-index: 4;
+}
+
+.obstacle.ducks {
+  background: top left no-repeat url('../images/obstacle-course/obstacle-ducks.png');
+}
+
+.obstacle.desk {
+  background: top left no-repeat url('../images/obstacle-course/obstacle-desk.png');
+}
+
+.obstacle.sheep {
+  background: top left no-repeat url('../images/obstacle-course/obstacle-sheep.png');
+}
+
+.obstacle.rain {
+  background: top left no-repeat url('../images/obstacle-course/obstacle-rain.png');
+}
