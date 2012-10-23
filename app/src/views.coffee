@@ -213,27 +213,31 @@ GG.ChromoView = Ember.View.extend
       chromo = @get('chromo')
       chromo = if chromo == "X" or chromo == "Y" then "XY" else chromo
       cells = @get(prop).cells
+      allX = cells.filter (item)->
+        ['x','x1','x2'].contains(item["XY"].side)
+      allY = cells.filter (item)->
+        item["XY"].side is 'y'
       if @get('side') is 'x1'
         # find the first 2 x sides
-        allX = cells.filter (item)->
-          ['x','x1','x2'].contains(item[chromo].side)
         xIdx = if @get('sister') is "1" then 0 else 1
         return allX[xIdx][chromo]
       else if @get('side') is 'x2'
         # find the second 2 x sides
-        allX = cells.filter (item)->
-          ['x','x1','x2'].contains(item[chromo].side)
         xIdx = if @get('sister') is "1" then 2 else 3
         return allX[xIdx][chromo]
       else if @get('side') is 'y'
-        # find the first 2 x sides
-        allY = cells.filter (item)->
-          item[chromo].side is 'y'
+        # find the first 2 y sides
         yIdx = if @get('sister') is "1" then 0 else 1
         return allY[yIdx][chromo]
       else
-        cellNum = (if @get('side') == 'b' then 0 else 2) + (if @get('sister') == "1" then 0 else 1)
-        return cells[cellNum][chromo]
+        sisterIdx = if @get('sister') == "1" then 0 else 1
+        if @get('side') is 'b'
+          if allY.length > 0
+            return allY[sisterIdx][chromo]
+          else
+            return allX[sisterIdx+2][chromo]
+        else
+          return allX[sisterIdx][chromo]
     else
       return null
   visibleGamete: (->
@@ -633,7 +637,7 @@ GG.MeiosisView = Ember.View.extend
     animCell = 0
     gametes.cells.forEach (item, idx)->
       if idx is num
-        if item.XY.side is 'x'
+        if ['x','x1','x2'].contains(item.XY.side)
           if f is 0
             animCell = 0
           else if f is 1
@@ -647,7 +651,7 @@ GG.MeiosisView = Ember.View.extend
             animCell = 1
           else
             animCell = 3
-      if item.XY.side is 'x'
+      if ['x','x1','x2'].contains(item.XY.side)
         f++
       else
         m++
