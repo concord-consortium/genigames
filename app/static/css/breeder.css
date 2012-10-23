@@ -100,18 +100,34 @@
 
 #parent-fathers-pool-container {
   position: absolute;
-  width: 800px;
+  width: 490px;
   height: 150px;
-  top: 120px;
-  left: 50px;
+  top: 115px;
+  left: 20px;
 }
 
 #parent-mothers-pool-container {
   position: absolute;
-  top: 250px;
-  width: 800px;
+  top: 265px;
+  width: 490px;
   height: 150px;
-  left: 50px;
+  left: 20px;
+}
+
+#father-chromosome {
+  position: absolute;
+  top: 130px;
+  left: 800px;
+  height: 265px;
+  width: 125px;
+}
+
+#mother-chromosome {
+  position: absolute;
+  top: 385px;
+  left: 800px;
+  height: 265px;
+  width: 125px;
 }
 
 #offspring-pool .offspring {

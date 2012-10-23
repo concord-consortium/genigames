@@ -11,9 +11,19 @@
         {{view GG.DrakeView contentBinding="this"}}
       {{/with}}
     </div>
+    <div id="mother-chromosome">
+      {{#with GG.motherPoolController}}
+        {{view GG.ChromosomePanelView controllerBinding="this"}}
+      {{/with}}
+    </div>
     <div id="father">
       {{#with GG.breedingController.father}}
         {{view GG.DrakeView contentBinding="this"}}
+      {{/with}}
+    </div>
+    <div id="father-chromosome">
+      {{#with GG.fatherPoolController}}
+        {{view GG.ChromosomePanelView controllerBinding="this"}}
       {{/with}}
     </div>
     <div id="target">
