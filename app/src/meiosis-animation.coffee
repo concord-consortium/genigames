@@ -46,7 +46,7 @@ GG.MeiosisAnimation = Ember.Object.create
       # divide cell first time (Anaphase I + Telophase I)
       setTimeout =>
         @divide(args)
-      , @scale(2000)
+      , 2000
     , @scale(500)
 
   separateChromatids: (args)->
