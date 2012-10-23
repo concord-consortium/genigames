@@ -676,3 +676,27 @@ GG.MeiosisView = Ember.View.extend
           return prev + "," + side + ":" + item
     return alleles.slice(1)
   ).property('chosenGamete')
+
+GG.ObstacleCourseView = Ember.View.extend
+  templateName: 'obstacle-course'
+  tagName: 'div'
+  classNames: ['obstacle-course']
+  course: null
+  drake: null
+  init: ->
+    @_super()
+    if not @get('drake')?
+      drake = GG.Drake.createFromBiologicaOrganism(BioLogica.Organism.createLiveOrganism(GG.DrakeSpecies, "", BioLogica.MALE))
+      @set('drake', drake)
+  start: ->
+    # TODO We might want to write our own easing function to replace 'linear', which
+    # could speed up/slow down the progress over various obstacles depending on
+    # drake characteristics.
+    $('.obstacle-course .obstacles').animate({left: "-=1300px"}, 5000, 'linear')
+    $('.obstacle-course .background').animate({left: "-=300px"}, 5000, 'linear')
+    $('.obstacle-course .drake').animate({left: "+=318px"}, 5000, 'linear')
+  reset: ->
+    $('.obstacle-course .obstacles').css({left: ""})
+    $('.obstacle-course .background').css({left: ""})
+    $('.obstacle-course .drake').css({left: ""})
+

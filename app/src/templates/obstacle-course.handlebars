@@ -1,0 +1,19 @@
+<div class="course">
+  {{#if view.drake}}
+    {{view GG.DrakeView contentBinding="view.drake"}}
+  {{/if}}
+  <div class="background"></div>
+  <div class="obstacles">
+    <div class="obstacle ducks"></div>
+    <div class="obstacle desk"></div>
+    <div class="obstacle sheep"></div>
+    <div class="obstacle rain"></div>
+    <div class="obstacle rain"></div>
+    <div class="obstacle ducks"></div>
+    <div class="obstacle desk"></div>
+  </div>
+</div>
+<div class="controls">
+  <a href="#" {{action "start" view}}>Start</a>
+  <a href="#" {{action "reset" view}}>Reset</a>
+</div>
