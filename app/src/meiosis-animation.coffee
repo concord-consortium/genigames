@@ -1,4 +1,9 @@
 GG.MeiosisAnimation = Ember.Object.create
+  timeScale: 1
+
+  scale: (baseTime)->
+    return baseTime * @get('timeScale')
+
   ###
     chromosomeContainerName: e.g. '#parent-fathers-pool-container'
   ###
@@ -41,10 +46,11 @@ GG.MeiosisAnimation = Ember.Object.create
       # divide cell first time (Anaphase I + Telophase I)
       setTimeout =>
         @divide(args)
-      , 2000
-    , 500
+      , @scale(2000)
+    , @scale(500)
 
   separateChromatids: (args)->
+    t = @scale(400)
     # separate chromatids
     i = -1
     offset = 16
@@ -53,64 +59,68 @@ GG.MeiosisAnimation = Ember.Object.create
       for side in ['.left','.right']
         for sis in ['.sister-1','.sister-2']
           i++
-          args.chromos.find(ch + sis + side).animate({left: i*30 + offset}, 400, 'easeInOutQuad')
-    args.chromos.find('.chromo-Y.sister-1.right').animate({left: 376}, 400, 'easeInOutQuad')
-    args.chromos.find('.chromo-Y.sister-2.right').animate({left: 406}, 400, 'easeInOutQuad')
-    args.cell.animate({width: 450}, 400, 'easeInOutQuad')
+          args.chromos.find(ch + sis + side).animate({left: i*30 + offset}, t, 'easeInOutQuad')
+    args.chromos.find('.chromo-Y.sister-1.right').animate({left: 376}, t, 'easeInOutQuad')
+    args.chromos.find('.chromo-Y.sister-2.right').animate({left: 406}, t, 'easeInOutQuad')
+    args.cell.animate({width: 450}, t, 'easeInOutQuad')
 
   divide: (args)->
     # move homologous pairs apart
     # line up sister chromatids along center line (Metaphase II)
-    args.chromos.find('.chromo-1.right').animate({top: "+=85px", left: "-=60px"}, 400, 'easeInOutQuad')
-    args.chromos.find('.chromo-1.left').animate({top: "-=20px"}, 400, 'easeInOutQuad')
+    t = @scale(400)
+    args.chromos.find('.chromo-1.right').animate({top: "+=85px", left: "-=60px"}, t, 'easeInOutQuad')
+    args.chromos.find('.chromo-1.left').animate({top: "-=20px"}, t, 'easeInOutQuad')
 
-    args.chromos.find('.chromo-2.right').animate({top: "+=85px", left: "-=120px"}, 400, 'easeInOutQuad')
-    args.chromos.find('.chromo-2.left').animate({top: "-=20px", left: "-=60px"}, 400, 'easeInOutQuad')
-    args.chromos.find('.chromo-X.right, .chromo-Y.right').animate({top: "+=85px", left: "-=180px"}, 400, 'easeInOutQuad')
-    args.chromos.find('.chromo-X.left').animate({top: "-=20px", left: "-=120px"}, 400, 'easeInOutQuad')
+    args.chromos.find('.chromo-2.right').animate({top: "+=85px", left: "-=120px"}, t, 'easeInOutQuad')
+    args.chromos.find('.chromo-2.left').animate({top: "-=20px", left: "-=60px"}, t, 'easeInOutQuad')
+    args.chromos.find('.chromo-X.right, .chromo-Y.right').animate({top: "+=85px", left: "-=180px"}, t, 'easeInOutQuad')
+    args.chromos.find('.chromo-X.left').animate({top: "-=20px", left: "-=120px"}, t, 'easeInOutQuad')
 
     # widen cell
-    args.cell.animate({height: 200, width: 300}, 400, 'easeInOutQuad')
+    args.cell.animate({height: 200, width: 300}, t, 'easeInOutQuad')
     #divide cell
     setTimeout =>
       @splitCell(args)
-    , 400
+    , t
 
     setTimeout =>
       @separateToGametes(args)
-    , 700
+    , 1.75*t
 
   splitCell: (args)->
+    t = @scale(300)
     args.container.find('.mainCell').hide()
     args.container.append($("<div class='cell cell-top'>").css({height: 200, width: 300, zIndex: -3}))
     args.container.append($("<div class='cell cell-bottom'>").css({height: 200, width: 300, zIndex: -3}))
-    args.container.find('.cell-top').animate({height: 65, top: -5, width: 300}, 300, 'easeInOutQuad')
-    args.container.find('.cell-bottom').animate({height: 65, top: 102, width: 300}, 300, 'easeInOutQuad')
+    args.container.find('.cell-top').animate({height: 65, top: -5, width: 300}, t, 'easeInOutQuad')
+    args.container.find('.cell-bottom').animate({height: 65, top: 102, width: 300}, t, 'easeInOutQuad')
 
   separateToGametes: (args)->
+    t = @scale(1000)
     # move sisters apart to divide cell again (Anaphase II + Telophase II)
-    args.chromos.find('.chromo-1.sister-1').animate({left: 10}, 1000, 'easeInOutQuad')
-    args.chromos.find('.chromo-2.sister-1').animate({left: 41}, 1000, 'easeInOutQuad')
-    args.chromos.find('.chromo-X.sister-1,.chromo-Y.sister-1').animate({left: 72}, 1000, 'easeInOutQuad')
+    args.chromos.find('.chromo-1.sister-1').animate({left: 10}, t, 'easeInOutQuad')
+    args.chromos.find('.chromo-2.sister-1').animate({left: 41}, t, 'easeInOutQuad')
+    args.chromos.find('.chromo-X.sister-1,.chromo-Y.sister-1').animate({left: 72}, t, 'easeInOutQuad')
 
-    args.chromos.find('.chromo-1.sister-2').animate({left:"+=120px"}, 1000, 'easeInOutQuad')
-    args.chromos.find('.chromo-2.sister-2').animate({left:"+=73px"}, 1000, 'easeInOutQuad')
-    args.chromos.find('.chromo-X.sister-2,.chromo-Y.sister-2').animate({left:"+=26px"}, 1000, 'easeInOutQuad')
+    args.chromos.find('.chromo-1.sister-2').animate({left:"+=120px"}, t, 'easeInOutQuad')
+    args.chromos.find('.chromo-2.sister-2').animate({left:"+=73px"}, t, 'easeInOutQuad')
+    args.chromos.find('.chromo-X.sister-2,.chromo-Y.sister-2').animate({left:"+=26px"}, t, 'easeInOutQuad')
     #divide cell
     @divideCell(args)
 
   divideCell: (args)->
+    t = @scale(1000)
     args.container.find('.cell:not(.mainCell)').remove()
     args.container.append($("<div class='cell cell-left cell-top'>").css({top: -5, height: 65, zIndex: -2}))
     args.container.append($("<div class='cell cell-right cell-top'>").css({top: -5, height: 65, zIndex: -2}))
     args.container.append($("<div class='cell cell-left cell-bottom'>").css({top: 100, height: 65, zIndex: -2}))
     args.container.append($("<div class='cell cell-right cell-bottom'>").css({top: 100, height: 65, zIndex: -2}))
-    args.container.find('.cell-left').animate({width:145, left: -15}, 1000, 'easeInOutQuad')
-    args.container.find('.cell-right').animate({width:145, left: 158}, 1000, 'easeInOutQuad')
+    args.container.find('.cell-left').animate({width:145, left: -15}, t, 'easeInOutQuad')
+    args.container.find('.cell-right').animate({width:145, left: 158}, t, 'easeInOutQuad')
 
     setTimeout =>
       @chooseGamete(args)
-    , 1000
+    , t
 
   chooseGamete: (args)->
     # TODO eventually let students choose
@@ -141,18 +151,21 @@ GG.MeiosisAnimation = Ember.Object.create
       right = false
     leftShift = (if right then "+=" else "-=" ) + "88px"
     topShift = (if down then "+=" else "-=" ) + "55px"
-    args.chromos.find(chosenChromos).animate({left: leftShift, top: 50}, 1000, 'easeInOutQuad')
-    args.chromos.find(".chromosome:not(" + chosenChromos + ")").animate({opacity: 0}, 700)
-    args.container.find(chosenCell).animate({top: 50, left: 73}, 1000, 'easeInOutQuad')
-    args.container.find(".cell:not(.mainCell):not(" + chosenCell + ")").animate({opacity: 0}, 700)
+
+    t = @scale(1000)
+
+    args.chromos.find(chosenChromos).animate({left: leftShift, top: 50}, t, 'easeInOutQuad')
+    args.chromos.find(".chromosome:not(" + chosenChromos + ")").animate({opacity: 0}, 0.7*t)
+    args.container.find(chosenCell).animate({top: 50, left: 73}, t, 'easeInOutQuad')
+    args.container.find(".cell:not(.mainCell):not(" + chosenCell + ")").animate({opacity: 0}, 0.7*t)
     setTimeout ->
       args.chromos.find(".chromosome:not(" + chosenChromos + ")").hide()
       args.container.find(".cell:not(.mainCell):not(" + chosenCell + ")").remove()
-    , 700
+    , 0.7*t
     if args.callback?
       setTimeout ->
         args.callback()
-      , 1100
+      , 1.1*t
 
   mergeChosenGametes: (fatherContainerName, motherContainerName, callback)->
     fatherContainer = $(fatherContainerName)
@@ -164,23 +177,24 @@ GG.MeiosisAnimation = Ember.Object.create
     # panel view.
     # TODO
 
+    t = @scale(600)
     # move the father cell down, mother cell up; expand the cells
-    fatherContainer.find('.cell:not(.mainCell)').animate({top: "+=88px", left: "-=15px", width: 300, height: 120}, 600, 'easeInOutQuad')
-    motherContainer.find('.cell:not(.mainCell)').animate({top: "-=129px", left: "-=15px", width: 300, height: 120}, 600, 'easeInOutQuad')
+    fatherContainer.find('.cell:not(.mainCell)').animate({top: "+=88px", left: "-=15px", width: 300, height: 120}, t, 'easeInOutQuad')
+    motherContainer.find('.cell:not(.mainCell)').animate({top: "-=129px", left: "-=15px", width: 300, height: 120}, t, 'easeInOutQuad')
 
     # move the father chromos down, mothers up, and reposition
-    fatherContainer.find('.chromo-1').animate({top: 163, left: "+=32px"}, 600, 'easeInOutQuad')
-    fatherContainer.find('.chromo-2').animate({top: 163, left: "+=75px"}, 600, 'easeInOutQuad')
-    fatherContainer.find('.chromo-X,.chromo-Y').animate({top: 163, left: "+=118px"}, 600, 'easeInOutQuad')
+    fatherContainer.find('.chromo-1').animate({top: 163, left: "+=32px"}, t, 'easeInOutQuad')
+    fatherContainer.find('.chromo-2').animate({top: 163, left: "+=75px"}, t, 'easeInOutQuad')
+    fatherContainer.find('.chromo-X,.chromo-Y').animate({top: 163, left: "+=118px"}, t, 'easeInOutQuad')
 
-    motherContainer.find('.chromo-1').animate({top: -55}, 600, 'easeInOutQuad')
-    motherContainer.find('.chromo-2').animate({top: -55, left: "+=45px"}, 600, 'easeInOutQuad')
-    motherContainer.find('.chromo-X').animate({top: -55, left: "+=90px"}, 600, 'easeInOutQuad')
+    motherContainer.find('.chromo-1').animate({top: -55}, t, 'easeInOutQuad')
+    motherContainer.find('.chromo-2').animate({top: -55, left: "+=45px"}, t, 'easeInOutQuad')
+    motherContainer.find('.chromo-X').animate({top: -55, left: "+=90px"}, t, 'easeInOutQuad')
 
     setTimeout ->
       motherContainer.find('.cell:not(.mainCell)').hide()
-    , 600
+    , t
 
     setTimeout ->
       callback()
-    , 1000
+    , 1.5*t
