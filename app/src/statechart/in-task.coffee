@@ -105,10 +105,10 @@ GG.StateInTask = Ember.State.extend
         setTimeout ->
           GG.motherPoolController.set('hidden', true)
           GG.fatherPoolController.set('hidden', true)
-        , 1000
+        , 600
         setTimeout ->
           manager.send 'animate'
-        , 1200
+        , 800
 
       animate: (manager)->
         $('#meiosis-container').removeClass('hidden')
@@ -120,11 +120,13 @@ GG.StateInTask = Ember.State.extend
 
     breeding: Ember.State.create
       setup: (manager) ->
-        $('#offspring-pool').show()
-        $('#meiosis-container').addClass('hidden')
         setTimeout ->
           manager.send 'breedDrakeInternal'
         , 200
+        setTimeout ->
+          $('#offspring-pool').show()
+          $('#meiosis-container').addClass('hidden')
+        , 400
 
       breedDrake: (manager)->
         manager.transitionTo 'animatingMeiosis'
