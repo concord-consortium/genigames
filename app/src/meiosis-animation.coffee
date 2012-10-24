@@ -67,7 +67,7 @@ GG.MeiosisAnimation = Ember.Object.create
   divide: (args)->
     # move homologous pairs apart
     # line up sister chromatids along center line (Metaphase II)
-    t = @scale(400)
+    t = @scale(800)
     args.chromos.find('.chromo-1.right').animate({top: "+=85px", left: "-=60px"}, t, 'easeInOutQuad')
     args.chromos.find('.chromo-1.left').animate({top: "-=20px"}, t, 'easeInOutQuad')
 
@@ -96,7 +96,7 @@ GG.MeiosisAnimation = Ember.Object.create
     args.container.find('.cell-bottom').animate({height: 65, top: 102, width: 300}, t, 'easeInOutQuad')
 
   separateToGametes: (args)->
-    t = @scale(1000)
+    t = @scale(2000)
     # move sisters apart to divide cell again (Anaphase II + Telophase II)
     args.chromos.find('.chromo-1.sister-1').animate({left: 10}, t, 'easeInOutQuad')
     args.chromos.find('.chromo-2.sister-1').animate({left: 41}, t, 'easeInOutQuad')
@@ -109,7 +109,7 @@ GG.MeiosisAnimation = Ember.Object.create
     @divideCell(args)
 
   divideCell: (args)->
-    t = @scale(1000)
+    t = @scale(2000)
     args.container.find('.cell:not(.mainCell)').remove()
     args.container.append($("<div class='cell cell-left cell-top'>").css({top: -5, height: 65, zIndex: -2}))
     args.container.append($("<div class='cell cell-right cell-top'>").css({top: -5, height: 65, zIndex: -2}))
