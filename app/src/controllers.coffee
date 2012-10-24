@@ -134,7 +134,10 @@ GG.tasksController = Ember.ArrayController.create
 
   taskFinishedBubbleDismissed: ->
     @get('currentTask').set 'showCompletionBubble', false
-    GG.statemanager.transitionTo 'inTown'
+    if @get('currentTask.obstacleCourse')?
+      GG.statemanager.transitionTo 'obstacleCourse'
+    else
+      GG.statemanager.transitionTo 'inTown'
 
   isCurrentTaskComplete: ->
     currentTask = @get 'currentTask'
@@ -470,3 +473,8 @@ GG.meiosisController = Ember.Object.create
       @get('motherView').resetAnimation()
       @get('fatherView').resetAnimation()
 
+GG.obstacleCourseController = Ember.Object.create
+  courseBinding: 'GG.tasksController.currentTask.obstacleCourse'
+  obstaclesBinding: 'course.obstacles'
+  drakeBinding: 'GG.offspringController.content'
+  hidden: true

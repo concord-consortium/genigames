@@ -159,3 +159,14 @@ GG.StateInTask = Ember.State.extend
 
       selectParents: (manager) ->
         manager.transitionTo 'parentSelect'
+
+    obstacleCourse: Ember.State.create
+      enter: (manager)->
+        GG.obstacleCourseController.set('hidden', false)
+        $('#breeder').hide()
+        $('#breed-top-bar').hide()
+
+      exit: (manager)->
+        GG.obstacleCourseController.set('hidden', true)
+        $('#breeder').show()
+        $('#breed-top-bar').show()

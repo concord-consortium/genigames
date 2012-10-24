@@ -682,15 +682,10 @@ GG.ObstacleCourseView = Ember.View.extend
   templateName: 'obstacle-course'
   tagName: 'div'
   classNames: ['obstacle-course']
-  obstacles: null
-  drake: null
-  init: ->
-    @_super()
-    if not @get('drake')?
-      drake = GG.Drake.createFromBiologicaOrganism(BioLogica.Organism.createLiveOrganism(GG.DrakeSpecies, "", BioLogica.MALE))
-      @set('drake', drake)
-    if not @get('obstacles')
-      @set('obstacles', ["ducks","desk","sheep","rain","ducks","rain","sheep"])
+  classNameBindings: ['hidden']
+  obstaclesBinding: 'GG.obstacleCourseController.obstacles'
+  drakeBinding: 'GG.obstacleCourseController.drake'
+  hiddenBinding: 'GG.obstacleCourseController.hidden'
   start: ->
     # TODO We might want to write our own easing function to replace 'linear', which
     # could speed up/slow down the progress over various obstacles depending on
@@ -702,6 +697,8 @@ GG.ObstacleCourseView = Ember.View.extend
     $('.obstacle-course .obstacles').css({left: ""})
     $('.obstacle-course .background').css({left: ""})
     $('.obstacle-course .drake-container').css({left: ""})
+  done: ->
+    GG.statemanager.transitionTo 'inTown'
 
 GG.ObstacleView = Ember.View.extend
   tagName: 'div'

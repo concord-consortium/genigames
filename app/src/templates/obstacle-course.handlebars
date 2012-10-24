@@ -1,8 +1,8 @@
 <div class="course">
   <div class="drake-container">
-    {{#if view.drake}}
-      {{view GG.DrakeView contentBinding="view.drake"}}
-    {{/if}}
+    {{#with view.drake}}
+      {{view GG.DrakeView contentBinding="this"}}
+    {{/with}}
   </div>
   <div class="background"></div>
   <div class="obstacles">
@@ -14,4 +14,5 @@
 <div class="controls">
   <a href="#" {{action "start" view}}>Start</a>
   <a href="#" {{action "reset" view}}>Reset</a>
+  <a href="#" {{action "done" view}}>Done</a>
 </div>
