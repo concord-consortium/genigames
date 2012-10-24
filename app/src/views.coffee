@@ -595,6 +595,7 @@ GG.MeiosisView = Ember.View.extend
     GG.MeiosisAnimation.animate(".meiosis." + @get('motherFather'), this, callback)
   resetAnimation: (callback)->
     GG.MeiosisAnimation.reset(".meiosis." + @get('motherFather'), this, callback)
+    @set('gametes', null)
   crossOver: ->
     newGametes = @get('content.biologicaOrganism').createGametesWithCrossInfo(4)[0]
     mf = if @get('content.sex') == GG.MALE then "male" else "female"
