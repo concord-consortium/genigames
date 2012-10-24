@@ -1,26 +1,27 @@
 .obstacle-course {
   position: absolute;
-  width: 500px;
-  height: 100px;
-  left: 300px;
-  top: 200px;
+  width: 1100px;
+  height: 600px;
+  left: 0px;
+  top: 60px;
   z-index: 0;
+  background-color: white;
 }
 .obstacle-course .course {
   position: absolute;
   width: 500px;
   height: 100px;
-  left: 0px;
-  top: 0px;
+  left: 300px;
+  top: 250px;
   overflow: hidden;
   z-index: 1;
 }
 
 .obstacle-course .controls {
   position: absolute;
-  top: 40px;
-  left: -100px;
-  width: 100px;
+  top: 290px;
+  left: 150px;
+  width: 150px;
   height: 20px;
   text-align: center;
   z-index: 10;
