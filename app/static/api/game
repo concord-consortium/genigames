@@ -20,8 +20,8 @@
           "targetDrake": "female, no wings",
           "npc": {
             "name": "Cousin It",
-            "imageURL": "../images/cousin-it.png",
-            "position": {"x": 600, "y": 345 },
+            "imageURL": "../images/npc1_bookkeeper1.png",
+            "position": {"x": 540, "y": 345 },
             "speech": {
               "text": ["Hello, drake breeder!<br/><br/>I'm Cousin It.<br/><br/>I have a very important task for you: Breed a female, wingless drake!","Remember: <ul><li>Female</li><li>Wingless</li></ul> Got it?"],
               "completionText": "Good job!<br/><br/>You totally got the drake I needed. Thanks!",
@@ -43,8 +43,8 @@
           "targetCount": 3,
           "npc": {
             "name": "Cousin It's Brother",
-            "imageURL": "../images/cousin-it.png",
-            "position": {"x": 200, "y": 345},
+            "imageURL": "../images/npc2_alchemist1.png",
+            "position": {"x": 260, "y": 305},
             "speech": {
               "text": ["Hello, drake breeder!<br/><br/>I'm Fred, the brother of Cousin It.<br/><br/>I have a very important task for you: Breed a drake with no wings and no hindlimbs!"],
               "completionText": "That's awesome!<br/><br/>You totally got the drake I needed. Thanks!",
