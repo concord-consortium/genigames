@@ -8,15 +8,16 @@ if [ -x $1 ]; then
 fi
 
 case "$1" in
-  # production)
-  # export SERVER=genigames.concord.org
-  # export SERVER_PATH="/var/www/"
-  # export DEPLOY_BRANCH="deploy-production"
-  #   ;;
+  heroku)
+    export DEPLOY_TYPE=heroku
+    export DEPLOY_BRANCH="heroku-dev"
+    ;;
   dev)
+    export DEPLOY_TYPE=ssh_git
     export SERVER=genigames.dev.concord.org
     export SERVER_PATH="/var/www/public/"
     export DEPLOY_BRANCH="deploy-dev"
+    export PUSH_REFSPEC="$DEPLOY_BRANCH"
     ;;
   *)
     echo "Invalid server!"
@@ -33,7 +34,7 @@ fi
 
 export COMMIT=`git log -1 --format=%H`
 export ORIGINAL_DIR=`pwd`
-export ORIGINAL_BRANCH=`git status -sb -uno | cut -d" " -f2`
+export ORIGINAL_BRANCH=`git symbolic-ref HEAD 2>/dev/null | cut -d"/" -f 3`
 
 echo "changing to toplevel directory"
 cd $(git rev-parse --show-toplevel)
@@ -48,7 +49,7 @@ bundle exec rakep build
 echo "Updating deploy branch"
 
 git checkout $DEPLOY_BRANCH
-git pull
+git pull origin $DEPLOY_BRANCH
 rm -rf static
 cp -r build static
 
@@ -70,7 +71,18 @@ if [[ $? != 0 ]] ; then
 fi
 
 echo "Updating on server"
-ssh deploy@$SERVER "cd $SERVER_PATH; git pull"
+case "$DEPLOY_TYPE" in
+  heroku)
+    git push heroku $DEPLOY_BRANCH:master
+    ;;
+  ssh_git)
+    ssh deploy@$SERVER "cd $SERVER_PATH; git pull"
+    ;;
+  *)
+    echo "Invalid deploy type: $DEPLOY_TYPE"
+    exit 1
+    ;;
+esac
 
 echo "Switching back to original branch and working directory"
 git checkout $ORIGINAL_BRANCH
