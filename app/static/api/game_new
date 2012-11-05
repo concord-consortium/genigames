@@ -1,0 +1,509 @@
+{
+   "_id": "game1",
+   "_rev": "141-e298cd39535d520dc2deb0d045e9bf5a",
+   "gameSpec": {
+       "version": "1",
+       "towns": [
+           {
+               "name": "Lullen",
+               "icon": "castle",
+               "finalMessage": "Great job! You finished all our tasks.",
+               "position": 0,
+               "tasks": [
+                   {
+                       "name": "Task 1",
+                       "reputation": 50,
+                       "cycles": 5,
+                       "npc": {
+                           "name": "Cousin It",
+                           "imageURL": "../images/cousin-it.png",
+                           "position": {
+                               "x": 550,
+                               "y": 365
+                           },
+                           "speech": {
+                               "text": [
+                                   "Hello there! You must be the new breeder I've heard about!",
+                                   "I'm Rose Abelin, the Breeding and Training center’s nurse--pleased to meet you! Let me help you get familiar with how our Breeding and Training Center works.",
+                                   "Please breed a drake with wings!"
+                               ],
+                               "completionText": "Nice work! You picked up on all of that really fast. Sibyl was hoping for some help with breeding. Why not find her and see if there’s anything you can do?",
+                               "accept": "OK",
+                               "decline": "Maybe later"
+                           }
+                       },
+                       "initialDrakes": {
+                           "males": [
+                               "a:W,b:W,a:m,b:m"
+                           ],
+                           "females": [
+                               "a:W,b:W,a:m,b:m"
+                           ]
+                       },
+                       "visibleGenes": [
+                           "W",
+                           "M"
+                       ],
+                       "hiddenGenes": [
+                           "Hl"
+                       ],
+                       "targetDrake": "wings",
+                       "obstacleCourse": {
+                           "obstacles": [
+                               "sheep",
+                               "ducks",
+                               "rain",
+                               "desk",
+                               "sheep",
+                               "rain",
+                               "ducks"
+                           ]
+                       }
+                   },
+                   {
+                       "name": "Task 2",
+                       "reputation": 50,
+                       "cycles": 8,
+                       "npc": {
+                           "name": "Fred",
+                           "imageURL": "../images/cousin-it.png",
+                           "position": {
+                               "x": 450,
+                               "y": 385
+                           },
+                           "speech": {
+                               "text": [
+                                   "Hello, drake breeder, I'm Sybil!",
+                                   "I have a very important task for you: Breed a wingless drake!"
+                               ],
+                               "completionText": "Good job!<br/><br/>You totally got the drake I needed. Thanks!",
+                               "accept": "Sure!",
+                               "decline": "Maybe later"
+                           }
+                       },
+                       "visibleGenes": [
+                           "W",
+                           "M"
+                       ],
+                       "hiddenGenes": [
+                       ],
+                       "initialDrakes": {
+                           "males": [
+                               "a:w,b:W,a:m,b:m"
+                           ],
+                           "females": [
+                               "a:W,b:w,a:m,b:m"
+                           ]
+                       },
+                       "targetDrake": "no wings"
+                   },
+                   {
+                       "name": "Task 3",
+                       "reputation": 50,
+                       "cycles": 12,
+                       "npc": {
+                           "name": "Fred",
+                           "imageURL": "../images/cousin-it.png",
+                           "position": {
+                               "x": 750,
+                               "y": 345
+                           },
+                           "speech": {
+                               "text": [
+                                   "Hello, drake breeder, this is task 3!<br/><br/>I heard you can breed a wingless drake. But all of my drakes have wings! Can you manage it? Please breed a wingless drake."
+                               ],
+                               "completionText": "Good job!<br/><br/>You got the drake I needed. Thanks!",
+                               "accept": "Sure!",
+                               "decline": "Maybe later"
+                           }
+                       },
+                       "visibleGenes": [
+                       ],
+                       "hiddenGenes": [
+                           "W"
+                       ],
+                       "initialDrakes": {
+                           "males": [
+                               "a:W,b:w,a:m,b:m",
+                               "a:W,b:W,a:m,b:m"
+                           ],
+                           "females": [
+                               "a:W,b:W,a:m,b:m",
+                               "a:W,b:w,a:m,b:m"
+                           ]
+                       },
+                       "targetDrake": "no wings"
+                   },
+                   {
+                       "name": "Task 4",
+                       "reputation": 50,
+                       "cycles": 5,
+                       "npc": {
+                           "name": "Derf",
+                           "imageURL": "../images/cousin-it.png",
+                           "position": {
+                               "x": 350,
+                               "y": 350
+                           },
+                           "speech": {
+                               "text": [
+                                   "Hello, drake breeder, this is Task 4 in Lullen!!<br/><br/>I love the color gray. Some people say it's not a color, but don't you believe it! Gray is GRAYYYT-- get it?? ;-) Please breed a gray drake for me."
+                               ],
+                               "completionText": "Good job!<br/><br/>You got the drake I need. Thanks!",
+                               "accept": "Sure!",
+                               "decline": "Maybe later"
+                           }
+                       },
+                       "visibleGenes": [
+                           "M"
+                       ],
+                       "hiddenGenes": [
+                       ],
+                       "initialDrakes": {
+                           "males": [
+                               "a:M,b:M"
+                           ],
+                           "females": [
+                               "a:m,b:m"
+                           ]
+                       },
+                       "targetDrake": "gray"
+                   },
+                   {
+                       "name": "Task 5",
+                       "reputation": 50,
+                       "cycles": 10,
+                       "npc": {
+                           "name": "Derf",
+                           "imageURL": "../images/cousin-it.png",
+                           "position": {
+                               "x": 250,
+                               "y": 370
+                           },
+                           "speech": {
+                               "text": [
+                                   "Hello, drake breeder. This is the 5th task.<br/><br/>Please breed a green drake for me."
+                               ],
+                               "completionText": "Good job!<br/><br/>You got the drake I needed. Thanks!",
+                               "accept": "Sure!",
+                               "decline": "Maybe later"
+                           }
+                       },
+                       "visibleGenes": [
+                       ],
+                       "hiddenGenes": [
+                           "M"
+                       ],
+                       "initialDrakes": {
+                           "males": [
+                               "a:M,b:M"
+                           ],
+                           "females": [
+                               "a:M,b:m"
+                           ]
+                       },
+                       "targetDrake": "green"
+                   },
+                   {
+                       "name": "Task 6",
+                       "reputation": 50,
+                       "cycles": 15,
+                       "npc": {
+                           "name": "Derf",
+                           "imageURL": "../images/cousin-it.png",
+                           "position": {
+                               "x": 650,
+                               "y": 350
+                           },
+                           "speech": {
+                               "text": [
+                                   "Hello, drake breeder. This is task 6.<br/><br/> This is a tough one. I need a drake with two different traits! Please breed a winged, green drake for me."
+                               ],
+                               "completionText": "Good job!<br/><br/>You got the drake I needed. Thanks!",
+                               "accept": "Sure!",
+                               "decline": "Maybe later"
+                           }
+                       },
+                       "visibleGenes": [
+                           "M"
+                       ],
+                       "hiddenGenes": [
+                           "W"
+                       ],
+                       "initialDrakes": {
+                           "males": [
+                               "a:W,a:M,b:w,b:M",
+                               "a:w,a:M,b:W,b:m"
+                           ],
+                           "females": [
+                               "a:W,a:M,b:w,b:M",
+                               "a:w,a:M,b:w,b:M"
+                           ]
+                       },
+                       "targetDrake": "green, wings"
+                   }
+               ]
+           },
+           {
+               "name": "Angeral",
+               "icon": "huts",
+               "position": 270,
+               "tasks": [
+                   {
+                       "name": "Town 2 Task 1",
+                       "reputation": 50,
+                       "cycles": 15,
+                       "npc": {
+                           "name": "Cousin Its Twin",
+                           "imageURL": "../images/cousin-it.png",
+                           "position": {
+                               "x": 550,
+                               "y": 340
+                           },
+                           "speech": {
+                               "text": [
+                                   "Hello, drake breeder!<br/><br/>Breed a drake with horns!"
+                               ],
+                               "completionText": "Good job!<br/><br/>You totally got the drake I needed. Thanks!",
+                               "accept": "OK",
+                               "decline": "Maybe later"
+                           }
+                       },
+                       "initialDrakes": {
+                           "males": [
+                               "a:h,b:h,a:m,b:m"
+                           ],
+                           "females": [
+                               "a:H,b:H,a:m,b:m"
+                           ]
+                       },
+                       "visibleGenes": [
+                           "H"
+                       ],
+                       "hiddenGenes": [
+                       ],
+                       "targetDrake": "horns"
+                   },
+                   {
+                       "name": "Angeral Task 2",
+                       "reputation": 50,
+                       "cycles": 15,
+                       "npc": {
+                           "name": "Joe",
+                           "imageURL": "../images/cousin-it.png",
+                           "position": {
+                               "x": 500,
+                               "y": 340
+                           },
+                           "speech": {
+                               "text": [
+                                   "Hello, drake breeder!<br/><br/>None of my drakes has horns, but I want a drake with horns to protect my garden gnomes. Please breed a drake with horns!"
+                               ],
+                               "completionText": "Good job!<br/><br/>You totally got the drake I needed. Thanks!",
+                               "accept": "OK",
+                               "decline": "Maybe later"
+                           }
+                       },
+                       "initialDrakes": {
+                           "males": [
+                               "a:H,b:H,a:m,b:m",
+                               "a:H,b:H"
+                           ],
+                           "females": [
+                               "a:H,b:H,a:m,b:m",
+                               "a:h,b:H"
+                           ]
+                       },
+                       "visibleGenes": [
+                           "H"
+                       ],
+                       "hiddenGenes": [
+                       ],
+                       "targetDrake": "horns"
+                   },
+                   {
+                       "name": "Angeral Task 3",
+                       "reputation": 50,
+                       "cycles": 25,
+                       "npc": {
+                           "name": "JoeII",
+                           "imageURL": "../images/cousin-it.png",
+                           "position": {
+                               "x": 650,
+                               "y": 370
+                           },
+                           "speech": {
+                               "text": [
+                                   "Hello, drake breeder!<br/><br/>I have one flying drake but I need more, to keep the mosquito population down. And I think drakes with horns look cool, so...please breed a drake with horns and wings!"
+                               ],
+                               "completionText": "Good job!<br/><br/>You totally got the drake I needed. Thanks!",
+                               "accept": "OK",
+                               "decline": "Maybe later"
+                           }
+                       },
+                       "initialDrakes": {
+                           "males": [
+                               "a:H,b:H,a:W,b:w",
+                               "a:H,b:h,a:w,b:w"
+                           ],
+                           "females": [
+                               "a:H,b:h,a:w,b:w",
+                               "a:H,b:h,a:w,b:w"
+                           ]
+                       },
+                       "visibleGenes": [
+                           "H"
+                       ],
+                       "hiddenGenes": [
+                           "W"
+                       ],
+                       "targetDrake": "horns, wings"
+                   },
+                   {
+                       "name": "Angeral Task 4",
+                       "reputation": 50,
+                       "cycles": 5,
+                       "npc": {
+                           "name": "JoeII",
+                           "imageURL": "../images/cousin-it.png",
+                           "position": {
+                               "x": 650,
+                               "y": 370
+                           },
+                           "speech": {
+                               "text": [
+                                   "Hello, drake breeder!<br/><br/>Breed a drake that breathes fire !"
+                               ],
+                               "completionText": "Good job!<br/><br/>You totally got the drake I needed. Thanks!",
+                               "accept": "OK",
+                               "decline": "Maybe later"
+                           }
+                       },
+                       "initialDrakes": {
+                           "males": [
+                               "a:Fb,a:m,b:m"
+                           ],
+                           "females": [
+                               "a:fb,b:fb,a:m,b:m"
+                           ]
+                       },
+                       "visibleGenes": [
+                           "Fb"
+                       ],
+                       "hiddenGenes": [
+                       ],
+                       "targetDrake": "fire breathing"
+                   },
+                   {
+                       "name": "Angeral Task 5",
+                       "reputation": 50,
+                       "cycles": 12,
+                       "npc": {
+                           "name": "Grumpy",
+                           "imageURL": "../images/cousin-it.png",
+                           "position": {
+                               "x": 620,
+                               "y": 360
+                           },
+                           "speech": {
+                               "text": [
+                                   "Hello, drake breeder!<br/><br/>I have a female fire breather, but I cannot seem to get any female fire breathing offspring. Can you help me? Please breed a FEMALE drake that breathes fire!"
+                               ],
+                               "completionText": "Good job!<br/><br/>You totally got the drake I needed. Thanks!",
+                               "accept": "OK",
+                               "decline": "Maybe later"
+                           }
+                       },
+                       "initialDrakes": {
+                           "males": [
+                               "a:Fb,a:m,b:m"
+                           ],
+                           "females": [
+                               "a:fb,b:fb,a:m,b:m"
+                           ]
+                       },
+                       "visibleGenes": [
+                           "Fb"
+                       ],
+                       "hiddenGenes": [
+                       ],
+                       "targetDrake": "female, fire breathing"
+                   },
+                   {
+                       "name": "Angeral Task 6",
+                       "reputation": 50,
+                       "cycles": 12,
+                       "npc": {
+                           "name": "Sleepy",
+                           "imageURL": "../images/cousin-it.png",
+                           "position": {
+                               "x": 620,
+                               "y": 360
+                           },
+                           "speech": {
+                               "text": [
+                                   "Hello, drake breeder!<br/><br/>Breed a MALE that does NOT breathe fire !"
+                               ],
+                               "completionText": "Good job!<br/><br/>You totally got the drake I needed. Thanks!",
+                               "accept": "OK",
+                               "decline": "Maybe later"
+                           }
+                       },
+                       "initialDrakes": {
+                           "males": [
+                               "a:Fb,a:m,b:m"
+                           ],
+                           "females": [
+                               "a:fb,b:fb,a:m,b:m"
+                           ]
+                       },
+                       "visibleGenes": [
+                       ],
+                       "hiddenGenes": [
+                           "Fb"
+                       ],
+                       "targetDrake": "male, no fire breathing"
+                   },
+                   {
+                       "name": "Angeral Task 7",
+                       "reputation": 50,
+                       "cycles": 12,
+                       "npc": {
+                           "name": "Sneezy",
+                           "imageURL": "../images/cousin-it.png",
+                           "position": {
+                               "x": 620,
+                               "y": 360
+                           },
+                           "speech": {
+                               "text": [
+                                   "Hello, drake breeder!<br/><br/>Please breed a fire-breather with horns!"
+                               ],
+                               "completionText": "Good job!<br/><br/>You totally got the drake I needed. Thanks!",
+                               "accept": "OK",
+                               "decline": "Maybe later"
+                           }
+                       },
+                       "initialDrakes": {
+                           "males": [
+                               "a:H,b:H,a:fb,a:m,b:m,a:W,b:W",
+                               "a:H,b:H,a:Fb,a:m,b:m,a:W,b:W"
+                           ],
+                           "females": [
+                               "a:H,b:h,a:fb,b:fb,a:m,b:m,a:W,b:W",
+                               "a:H,b:H,a:fb,b:fb,a:m,b:m,a:W,b:W"
+                           ]
+                       },
+                       "visibleGenes": [
+                       ],
+                       "hiddenGenes": [
+                           "Fb",
+                           "H"
+                       ],
+                       "targetDrake": "horns, fire breathing"
+                   }
+               ]
+           }
+       ]
+   }
+}
