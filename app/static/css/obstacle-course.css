@@ -1,26 +1,26 @@
 .obstacle-course {
   position: absolute;
   width: 1100px;
-  height: 600px;
+  height: 660px;
   left: 0px;
-  top: 60px;
+  top: 0px;
   z-index: 0;
   background-color: white;
 }
 .obstacle-course .course {
   position: absolute;
-  width: 500px;
-  height: 100px;
-  left: 300px;
-  top: 250px;
+  width: 1010px; /*500px;*/
+  height: 630px; /*100px;*/
+  left: 0px; /*300px;*/
+  top: 30px; /*250px;*/
   overflow: hidden;
   z-index: 1;
 }
 
 .obstacle-course .controls {
   position: absolute;
-  top: 290px;
-  left: 150px;
+  top: 20px;
+  left: 50px;
   width: 150px;
   height: 20px;
   text-align: center;
@@ -30,17 +30,17 @@
 .obstacle-course .background {
   position: absolute;
   left: 0px;
-  top: 0px;
-  width: 800px;
-  height: 100px;
-  background: top left no-repeat url('../images/obstacle-course/town-1-bg.png');
+  top: 30px;
+  width: 1010px;
+  height: 630px;
+  background: top left no-repeat url('../images/obstacle-course/repeatbg_town01.jpg');
   z-index: 2;
 }
 
 .obstacle-course .drake-container {
   z-index: 10;
   position: absolute;
-  top: -50px;
+  top: 440px;
   left: 0px;
   overflow: visible;
 }
