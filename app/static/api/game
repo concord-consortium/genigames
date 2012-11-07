@@ -16,8 +16,8 @@
                "name": "Cousin It",
                "imageURL": "../images/npc1_bookkeeper1.png",
                "position": {
-                   "x": 550,
-                   "y": 365
+                   "x": 540,
+                   "y": 345
                },
                "speech": {
                    "text": [
@@ -48,13 +48,7 @@
            "targetDrake": "wings",
            "obstacleCourse": {
                "obstacles": [
-                   "sheep",
-                   "ducks",
-                   "rain",
-                   "desk",
-                   "sheep",
-                   "rain",
-                   "ducks"
+                   "desk"
                ]
            }
         },

@@ -9,9 +9,9 @@
 }
 .obstacle-course .course {
   position: absolute;
-  width: 1010px; /*500px;*/
-  height: 630px; /*100px;*/
-  left: 0px; /*300px;*/
+  width: 630px; /*500px;*/
+  height: 600px; /*100px;*/
+  left: 60px; /*300px;*/
   top: 30px; /*250px;*/
   overflow: hidden;
   z-index: 1;
@@ -31,8 +31,8 @@
   position: absolute;
   left: 0px;
   top: 30px;
-  width: 1010px;
-  height: 630px;
+  width: 918px;
+  height: 300px;
   background: top left no-repeat url('../images/obstacle-course/repeatbg_town01.jpg');
   z-index: 2;
 }
@@ -40,7 +40,7 @@
 .obstacle-course .drake-container {
   z-index: 10;
   position: absolute;
-  top: 440px;
+  top: 160px;
   left: 0px;
   overflow: visible;
 }
@@ -48,7 +48,7 @@
 .obstacle-course .obstacles {
   position: absolute;
   left: 200px;
-  top: 0px;
+  top: 200px;
   width: 2000px;
   z-index: 3;
 }
