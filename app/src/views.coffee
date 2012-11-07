@@ -35,8 +35,15 @@ GG.WorldTownView = Ember.View.extend
   ).property('content.icon')
   style: (->
     # TODO how do we do width and height?
-    width = 120
-    height = 120
+    width = 175
+    height = 125
+    a = 356
+    b = 356
+    r = 253
+    # adjust the radius to be a little bigger because the center of the town icons cannot be in the edge of the world
+    # instead, each town icon image should have the "bottom" exactly at 15 pixels higher than the bottom of the image 
+    r = r + (height/2)
+    r = r - 15
     # calculate the position of the town based on the position
     # with the center at a,b, r = radius, t = angle:
     # (a + r cos t, b + r sin t)
@@ -45,8 +52,8 @@ GG.WorldTownView = Ember.View.extend
     posRadX = (@get('content.position') + 90) * (Math.PI/180)
     # subtract for Y since the coordinate system is mirrored on the Y-axis
     posRadY = (@get('content.position') - 90) * (Math.PI/180)
-    x = Math.round(350 + (250 * Math.cos(posRadX)) - (width/2))
-    y = Math.round(350 + (250 * Math.sin(posRadY)) - (height/2))
+    x = Math.round(a + (r * Math.cos(posRadX)) - (width/2))
+    y = Math.round(b + (r * Math.sin(posRadY)) - (height/2))
     return "left: " + x + "px; top: " + y + "px; " + @get('rotation')
   ).property('content.position')
   rotation: (->

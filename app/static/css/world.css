@@ -1,17 +1,17 @@
 #sky {
-  background: url(../images/sky.jpg);
+  background: url(../images/world01.jpg);
   background-repeat: no-repeat;
   overflow: hidden;
   border: 5px solid #402309;
-  height: 650px;
-  width: 1000px;
+  height: 660px;
+  width: 1010px;
   position: absolute;
 }
 
 #world {
-  background: url(../images/world.gif);
+/*  background: url(../images/world.gif);*/
   background-position: 0px 4px;
-  height: 700px;
+  height: 660px;
   width: 700px;
   background-repeat: no-repeat;
   position: absolute;
@@ -21,7 +21,7 @@
 }
 
 #clouds {
-  background: url(../images/clouds.png);
+/*  background: url(../images/clouds.png);*/
   background-position: 0px 0px;
   height: 700px;
   width: 700px;
@@ -37,25 +37,42 @@
 }
 
 .huts {
-  background: no-repeat url(../images/huts.gif);
+/*  background: no-repeat url(../images/huts.gif);*/
   height: 90px;
   width: 120px;
 }
 
 .houses {
-  background: no-repeat url(../images/houses.gif);
+/*  background: no-repeat url(../images/houses.gif);*/
   height: 70px;
   width: 150px;
 }
 
-.castle {
-  background: no-repeat url(../images/castle.gif);
-  height: 120px;
-  width: 130px;
+.townIcon1 {
+  background: no-repeat url(../images/townIcon1.png);
+  width: 175px;
+  height: 125px;
+}
+
+.townIcon2 {
+  background: no-repeat url(../images/townIcon2.png);
+  width: 175px;
+  height: 125px;
+}
+.townIcon3 {
+  background: no-repeat url(../images/townIcon3.png);
+  width: 175px;
+  height: 125px;
+}
+
+.townIcon4 {
+  background: no-repeat url(../images/townIcon4.png);
+  width: 175px;
+  height: 125px;
 }
 
 .world-town {
-  background: no-repeat url(../images/town.gif);
+/*  background: no-repeat url(../images/town.gif);*/
   height: 110px;
   width: 170px;
 }
