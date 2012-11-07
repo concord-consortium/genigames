@@ -9,7 +9,7 @@
 }
 .obstacle-course .course {
   position: absolute;
-  width: 630px; /*500px;*/
+  width: 620px; /*500px;*/
   height: 600px; /*100px;*/
   left: 60px; /*300px;*/
   top: 30px; /*250px;*/
