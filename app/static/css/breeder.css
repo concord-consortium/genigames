@@ -173,18 +173,19 @@
 
 .offspring-buttons-use {
   top: 3px;
-  left: 7px;
+  left: 20px;
 }
 
 .offspring-buttons-save {
   top: 3px;
-  left: 18px;
+  left: 3px;
 }
 
+/*
 .offspring-buttons-free {
   top: 3px;
   left: 27px;
-}
+}*/
 
 .removeButton {
   display: none;
