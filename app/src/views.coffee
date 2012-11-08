@@ -697,9 +697,9 @@ GG.ObstacleCourseView = Ember.View.extend
     # TODO We might want to write our own easing function to replace 'linear', which
     # could speed up/slow down the progress over various obstacles depending on
     # drake characteristics.
-    $('.obstacle-course .obstacles').animate({left: "-=1300px"}, 5000, 'linear')
-    $('.obstacle-course .background').animate({left: "-=300px"}, 5000, 'linear')
-    $('.obstacle-course .drake-container').animate({left: "+=318px"}, 5000, 'linear')
+    $('.obstacle-course .obstacles').animate({left: "-=400px"}, 10000, 'linear')
+    $('.obstacle-course .background').animate({left: "-=400px"}, 10000, 'linear')
+    $('.obstacle-course .drake-container').animate({left: "+=800px"}, 10000, 'linear')
   reset: ->
     $('.obstacle-course .obstacles').css({left: ""})
     $('.obstacle-course .background').css({left: ""})
