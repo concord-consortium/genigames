@@ -159,13 +159,13 @@
   position: absolute;
   top: 230px;
   left: -35px;
-  width: 370px;
-  height: 40px;
+  width: 352px;
+  height: 42px;
 }
 
 #offspring-buttons>div {
   position: relative;
-  width: 110px;
+  width: 170px;
   height: 35px;
   float: left;
   cursor: pointer;
@@ -173,12 +173,12 @@
 
 .offspring-buttons-use {
   top: 3px;
-  left: 7px;
+  left: 9px;
 }
 
 .offspring-buttons-save {
   top: 3px;
-  left: 18px;
+  left: 3px;
 }
 
 /*
