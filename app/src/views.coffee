@@ -41,7 +41,7 @@ GG.WorldTownView = Ember.View.extend
     b = 356
     r = 253
     # adjust the radius to be a little bigger because the center of the town icons cannot be in the edge of the world
-    # instead, each town icon image should have the "bottom" exactly at 15 pixels higher than the bottom of the image 
+    # instead, each town icon image should have the "bottom" exactly at 15 pixels higher than the bottom of the image
     r = r + (height/2)
     r = r - 15
     # calculate the position of the town based on the position
@@ -77,7 +77,7 @@ GG.DrakeView = Ember.View.extend
   drakeImage         : (->
     color = @get('org').getCharacteristic 'color'
     if color is "Gray"
-      '../images/drakes/gray-static.png'
+      '../images/drakes/greenMetallic-static.png'
     else '../images/drakes/green-static.png'
   ).property()
   width              : "200px"
@@ -126,6 +126,12 @@ GG.DrakeView = Ember.View.extend
     fire = @get('org').getCharacteristic "fire breathing"
     if fire is "Fire breathing"
       'drake-fire'
+    else 'trait-absent'
+  ).property()
+  maleSpots : (->
+    sex = if @get('content.sex') is GG.FEMALE then "female" else "male"
+    if sex is "male"
+      'drake-male-spots'
     else 'trait-absent'
   ).property()
 
