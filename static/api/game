@@ -51,32 +51,6 @@
                    "desk"
                ]
            }
-        },
-        {
-          "name": "Sample Task2",
-          "reputation": 100,
-          "visibleGenes": ["T","W", "Fl"],
-          "hiddenGenes": ["Hl","Rh"],
-          "initialDrakes": {
-            "females": ["a:W,b:W,a:hl","a:W,b:w,a:hl"],
-            "males": ["a:W,b:W,a:hl","a:W,b:w,a:hl"]
-          },
-          "targetDrake": "no wings, no hindlimbs",
-          "targetCount": 3,
-          "npc": {
-            "name": "Cousin It's Brother",
-            "imageURL": "../images/npc2_alchemist1.png",
-            "position": {"x": 260, "y": 305},
-            "speech": {
-              "text": ["Hello, drake breeder!<br/><br/>I'm Fred, the brother of Cousin It.<br/><br/>I have a very important task for you: Breed a drake with no wings and no hindlimbs!"],
-              "completionText": "That's awesome!<br/><br/>You totally got the drake I needed. Thanks!",
-              "accept": "Ok",
-              "decline": "Maybe later"
-            }
-          },
-          "obstacleCourse": {
-            "obstacles": ["ducks","sheep","rain","desk"]
-          }
         }
       ]
     },
