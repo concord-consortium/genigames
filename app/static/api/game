@@ -48,7 +48,8 @@
            "targetDrake": "wings",
            "obstacleCourse": {
                "obstacles": [
-                   "desk"
+                   "tree",
+                   "pond"
                ]
            }
         }

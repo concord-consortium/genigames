@@ -9,9 +9,9 @@
 }
 .obstacle-course .course {
   position: absolute;
-  width: 620px; /*500px;*/
+  width: 1000px; /*500px;*/
   height: 600px; /*100px;*/
-  left: 60px; /*300px;*/
+  left: 10px; /*300px;*/
   top: 30px; /*250px;*/
   overflow: hidden;
   z-index: 1;
@@ -31,7 +31,7 @@
   position: absolute;
   left: 0px;
   top: 30px;
-  width: 918px;
+  width: 2020px;
   height: 300px;
   background: top left no-repeat url('../images/obstacle-course/repeatbg_town01.jpg');
   z-index: 2;
@@ -48,30 +48,48 @@
 .obstacle-course .obstacles {
   position: absolute;
   left: 200px;
-  top: 200px;
+  top: 85px;
   width: 2000px;
   z-index: 3;
 }
 
 .obstacle-course .obstacles .obstacle {
   display: inline-block;
-  width: 200px;
-  height: 100px;
   z-index: 4;
 }
 
 .obstacle.ducks {
   background: top left no-repeat url('../images/obstacle-course/obstacle-ducks.png');
+  width: 200px;
+  height: 100px;
 }
 
 .obstacle.desk {
   background: top left no-repeat url('../images/obstacle-course/obstacle-desk.png');
+  width: 200px;
+  height: 100px;
 }
 
 .obstacle.sheep {
   background: top left no-repeat url('../images/obstacle-course/obstacle-sheep.png');
+  width: 200px;
+  height: 100px;
 }
 
 .obstacle.rain {
   background: top left no-repeat url('../images/obstacle-course/obstacle-rain.png');
+  width: 200px;
+  height: 100px;
+}
+
+.obstacle.tree {
+  background: top left no-repeat url('../images/obstacle-course/tree01.png');
+  width: 150px;
+  height: 183px;
+}
+
+.obstacle.pond {
+  background: top left no-repeat url('../images/obstacle-course/pond01.png');
+  width: 200px;
+  height: 84px;
 }
