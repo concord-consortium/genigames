@@ -77,6 +77,12 @@ GG.DrakeView = Ember.View.extend
   drakeImage         : (->
     color = @get('org').getCharacteristic 'color'
     if color is "Gray"
+      '../images/drakes/greenMetallic-static.png'
+    else '../images/drakes/green-static.png'
+  ).property()
+  drakeIdleImage     : (->
+    color = @get('org').getCharacteristic 'color'
+    if color is "Gray"
       '../images/drakes/greenMetallic-headturn.png'
     else '../images/drakes/green-headturn.png'
   ).property()
@@ -135,7 +141,13 @@ GG.DrakeView = Ember.View.extend
     else 'trait-absent'
   ).property()
   didInsertElement: ->
-    @setNextIdleInterval()
+    # Wait for the animation images to load, then move it in place and start it up
+    layer = '#' + @get('elementId')
+    console.log("layer: ", layer)
+    $(layer + ' .drake-idle-img').imagesLoaded =>
+      $(layer + ' .static').css({left: 4000})
+      $(layer + ' .idle').css({left: 0})
+      @setNextIdleInterval()
   setNextIdleInterval: ->
     nextTime = 3000 + Math.random() * 25000
     setTimeout =>
@@ -146,10 +158,10 @@ GG.DrakeView = Ember.View.extend
     @idle = setInterval =>
       if !@$('img')
         return
-      @$('.drake-img').css({left:"-"+(i*100)+"%"})
+      @$('.drake-idle-img').css({left:"-"+(i*100)+"%"})
       i++
       if i > 15
-        @$('.drake-img').css({left:"0%"})
+        @$('.drake-idle-img').css({left:"0%"})
         clearInterval @idle
         @setNextIdleInterval()
     , 100

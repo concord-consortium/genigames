@@ -7,23 +7,23 @@
 	height: 180px;
 }
 
-.parent-pool .drake {
+.parent-pool .drake, .parent-pool .drake .idle, .parent-pool .drake .static {
 	width: 130px;
 	height: 130px;
 }
 
-.offspring .drake {
+.offspring .drake, .offspring .drake .idle, .offspring .drake .static {
 	width: 240px;
 	height: 240px;
 }
 
-.drake-img {
+.drake-img, .drake-idle-img {
 	width: 1500%;
 	position: absolute;
 	left: 0px;
 }
 
-.drake-img.trait-absent {
+.drake-img.trait-absent, .drake-idle-img.trait-absent {
 	top: 100%;
 }
 
@@ -96,3 +96,14 @@
 	-ms-filter: "FlipH";
 }
 
+.drake.static {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+
+.drake .idle {
+  position: absolute;
+  top: 0px;
+  left: 4000px;
+}
