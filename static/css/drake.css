@@ -3,6 +3,9 @@
 	top: 0;
 	left: 0;
 	overflow: hidden;
+}
+
+.drake, .drake .idle, .drake .static {
 	width: 180px;
 	height: 180px;
 }
@@ -96,7 +99,7 @@
 	-ms-filter: "FlipH";
 }
 
-.drake.static {
+.drake .static {
   position: absolute;
   top: 0px;
   left: 0px;
