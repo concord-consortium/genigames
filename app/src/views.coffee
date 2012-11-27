@@ -481,14 +481,13 @@ GG.TaskDescriptionView = Ember.View.extend
   classNames: 'task-description'
   currentTaskBinding: 'GG.tasksController.currentTask'
   text: (->
-    authoredText = @get 'currentTask.npc.speech.text'
-    text = ""
-    if authoredText
-      # FIXME This results in some pretty ugly text...
-      text = authoredText.reduce((prev, item, idx, arr)->
+    text = @get('currentTask.npc.speech.shortText') || @get('currentTask.npc.speech.text') || ""
+    if typeof(text) == 'object'
+      # This results in some pretty ugly text...
+      # but we only use this if shortText isn't defined.
+      text = text.reduce (prev, item, idx, arr)->
         return prev + " " + item
-      )
-      text = text.replace(/(<([^>]+)>)/ig, " ")
+    text = text.replace(/(<([^>]+)>)/ig, " ")
     return text
   ).property('currentTask').cacheable()
 
