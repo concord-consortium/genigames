@@ -1,15 +1,9 @@
-{
-  "version": "1",
-  "towns": [
-    {
-      "name": "Starter town",
-      "icon": "townIcon1",
-      "position": 0,
-      "background" : "town01.jpg",
-      "finalMessage": "You're all done!",
-      "tasks": [
-        {
-           "name": "Task 1",
+{"total_rows":9,"offset":0,"rows":[
+  {
+    "id": "Town 1 Task 1",
+    "key": "task",
+    "value": {
+           "name": "Town 1 Task 1",
            "reputation": 50,
            "cycles": 5,
            "npc": {
@@ -53,15 +47,12 @@
                ]
            }
         }
-      ]
-    },
-    {
-      "name": "Town 2",
-      "icon": "townIcon2",
-      "position": 270,
-      "tasks": [
-        {
-          "name": "Sample Town2 Task",
+  },
+  {
+    "id": "Town 2 Task 1",
+    "key": "task",
+    "value": {
+          "name": "Town 2 Task 1",
           "visibleGenes": ["T","W"],
           "hiddenGenes": ["Hl","Rh"],
           "initialDrakes": {
@@ -81,15 +72,12 @@
             }
           }
         }
-      ]
-    },
-    {
-      "name": "Town 3",
-      "icon": "townIcon3",
-      "position": 148,
-      "tasks": [
-        {
-          "name": "Sample Town3 Task",
+  },
+  {
+    "id": "Town 3 Task 1",
+    "key": "task",
+    "value": {
+          "name": "Town 3 Task 1",
           "visibleGenes": ["T","W"],
           "hiddenGenes": ["Hl","Rh"],
           "initialDrakes": {
@@ -109,14 +97,11 @@
             }
           }
         }
-      ]
-    },
-    {
-      "name": "Town 4",
-      "icon": "townIcon4",
-      "position": 75,
-      "tasks": [
-        {
+  },
+  {
+    "id": "Town 4 Task 1",
+    "key": "task",
+    "value": {
           "name": "Sample Town4 Task",
           "visibleGenes": ["T","W"],
           "hiddenGenes": ["Hl","Rh"],
@@ -137,7 +122,56 @@
             }
           }
         }
-      ]
+  },
+  {
+    "id": "Town 1",
+    "key": "town",
+    "value": {
+      "name": "Town 1",
+      "icon": "townIcon1",
+      "position": 0,
+      "background" : "town01.jpg",
+      "finalMessage": "You're all done!",
+      "tasks": [ "Town 1 Task 1" ]
     }
-  ]
-}
+  },
+  {
+    "id": "Town 2",
+    "key": "town",
+    "value": {
+      "name": "Town 2",
+      "icon": "townIcon2",
+      "position": 270,
+      "tasks": [ "Town 2 Task 1" ]
+    }
+  },
+  {
+    "id": "Town 3",
+    "key": "town",
+    "value": {
+      "name": "Town 3",
+      "icon": "townIcon3",
+      "position": 148,
+      "tasks": [ "Town 3 Task 1" ]
+    }
+  },
+  {
+    "id": "Town 4",
+    "key": "town",
+    "value": {
+      "name": "Town 4",
+      "icon": "townIcon4",
+      "position": 75,
+      "tasks": [ "Town 4 Task 1" ]
+    }
+  },
+  {
+    "id": "game",
+    "key": "world",
+    "value": {
+      "version": "1",
+      "towns": [ "Town 1", "Town 2", "Town 3", "Town 4" ]
+    }
+  }
+]}
+
