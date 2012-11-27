@@ -164,7 +164,7 @@ GG.DrakeView = Ember.View.extend
         @$('.drake-idle-img').css({left:"0%"})
         clearInterval @idle
         @setNextIdleInterval()
-    , 100
+    , 83  # ~ 12 fps
 
 GG.ParentPoolView = Ember.View.extend
   templateName: 'parent-pool-view'
