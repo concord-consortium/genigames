@@ -67,7 +67,36 @@ GG.statemanager = Ember.StateManager.create
         gamePath = if UNDER_TEST? then 'api/testgame' else 'api/game'
 
         $.getJSON gamePath, (data) ->
-          for to in data.towns
+          console.log("Loading game data")
+          # re-construct the data into heirarchical format, since
+          # couchdb doesn't make that easy to do before delivering it
+          items = {
+            'task': {},
+            'town': {},
+            'world': {}
+          }
+          for item in data.rows
+            console.log("processing item: ", item.key, item.id, item.value)
+            items[item.key][item.id] = item.value
+
+          # now embed tasks into towns
+          for own t of items.town
+            console.log("processing town: ", t)
+            children = []
+            for ta in items.town[t].tasks
+              children.push(items.task[ta])
+            items.town[t].tasks = children
+
+          for own wo of items.world
+            console.log("processing world: ", wo)
+            children = []
+            for tow in items.world[wo].towns
+              children.push(items.town[tow])
+            items.world[wo].towns = children
+
+          # TODO Instead of just using the "game" world, perhaps we can
+          # have some way to set this externally?
+          for to in items.world.game.towns
             town = GG.Town.create to
             GG.townsController.addTown town
           # fixme: this should be eventually handled by a router
