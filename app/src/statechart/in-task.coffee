@@ -127,6 +127,13 @@ GG.StateInTask = Ember.State.extend
           manager.send 'animate'
         , 200
 
+      selectParents: (manager) ->
+        GG.meiosisController.resetAnimation()
+        $('#meiosis-container').addClass('hidden')
+        setTimeout ->
+          manager.transitionTo 'parentSelect'
+        , 200
+
     breeding: Ember.State.create
       setup: (manager) ->
         setTimeout ->
