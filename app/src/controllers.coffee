@@ -408,14 +408,15 @@ GG.sessionController = Ember.Object.create
 
   checkCCAuthToken: ->
     $.get(@checkTokenUrl, (data) =>
-      @set('loggingIn', false)
       if data.error?
         @set('error', true)
+        @set('loggingIn', false)
       else
         user = GG.User.create data
         @set('user', user)
         GG.statemanager.send 'successfulLogin'
     , "json").error =>
+      @set('loggingIn', false)
       @set('error', true)
 
   loginPortal: (username, password)->
@@ -429,6 +430,7 @@ GG.sessionController = Ember.Object.create
   logoutPortal: ->
     @set('firstTime', true)
     @set('user', null)
+    @set('loggingIn', false)
     $.getJSON @logoutUrl, (data) ->
       GG.statemanager.transitionTo 'loggingIn'
 
