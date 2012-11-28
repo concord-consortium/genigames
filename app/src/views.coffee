@@ -145,7 +145,7 @@ GG.DrakeView = Ember.View.extend
     layer = '#' + @get('elementId')
     console.log("layer: ", layer)
     $(layer + ' .drake-idle-img').imagesLoaded =>
-      $(layer + ' .static').css({left: 4000})
+      $(layer + ' .static').css({left: 400})
       $(layer + ' .idle').css({left: 0})
       @setNextIdleInterval()
   setNextIdleInterval: ->
