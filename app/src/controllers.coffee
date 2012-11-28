@@ -226,7 +226,6 @@ GG.breedingController = Ember.Object.create
 
   breedDrake: ->
     if (@get('mother') && @get('father')) || GG.meiosisController.get('chosenAlleles')?
-      GG.statemanager.send 'decrementCycles', 1
       @set 'isBreeding', true
       org = null
       if GG.meiosisController.get('chosenAlleles')?

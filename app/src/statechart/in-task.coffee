@@ -111,6 +111,7 @@ GG.StateInTask = Ember.State.extend
         , 800
 
       animate: (manager)->
+        manager.send 'decrementCycles', 1
         $('#meiosis-container').removeClass('hidden')
         GG.meiosisController.animate ->
           setTimeout ->
