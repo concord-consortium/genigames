@@ -118,6 +118,14 @@ GG.StateInTask = Ember.State.extend
           , 500
           manager.transitionTo 'breeding'
 
+      breedDrake: (manager)->
+        # If the breed button gets clicked while we're animating,
+        # reset the animation and go again
+        GG.meiosisController.resetAnimation()
+        setTimeout ->
+          manager.send 'animate'
+        , 200
+
     breeding: Ember.State.create
       setup: (manager) ->
         setTimeout ->

@@ -1,28 +1,39 @@
 GG.MeiosisAnimation = Ember.Object.create
   timeScale: 1
+  animation: 0
 
   scale: (baseTime)->
     return baseTime * @get('timeScale')
 
+  # if we've reset between when this was registered and when it's to be
+  # executed, don't execute it
+  registerTimeout: (delay, callback)->
+    registeredAnimation = @get 'animation'
+    setTimeout =>
+      currentAnimation = @get 'animation'
+      if currentAnimation == registeredAnimation
+        callback.call()
+    , delay
+
   ###
     chromosomeContainerName: e.g. '#parent-fathers-pool-container'
   ###
-  reset: (chromosomeContainerName) ->
-    mainContainer = $(chromosomeContainerName)
-    mainContainer.find(".chromosome").css({opacity: 1, width: "", height: "", top: "", left: ""})
-    mainContainer.find(".chromosome").show()
-    mainContainer.find(".cell:not(.mainCell)").remove()
-    mainContainer.find(".mainCell").css({opacity: 1, width: "", height: "", top: "", left: ""}).show()
+  reset: (chromosomeContainerName, parentView) ->
+    @set('animation', @get('animation')+1)
+    parentView.rerender()
 
   animate: (chromosomeContainerName, parentView, callback) ->
-    args = {parentView: parentView, callback: callback}
+    args = {
+      parentView: parentView,
+      callback: callback
+    }
+
     args.mainContainer = $("#{chromosomeContainerName}")
-    args.container = args.mainContainer.find('.chromosome-panel.meiosis')
-    args.cell = args.container.find('.cell')
-    args.chromos = args.mainContainer.find('.chromosome-panel:not(.meiosis)')
+    args.container = args.mainContainer.find('.chromosome-panel')
+    args.cell = args.container.find('.mainCell')
 
     # duplicate each chromosome into sister chromatids (prophase I)
-    args.chromos.find('.sister-1,.sister-2').each (i, chromo) ->
+    args.container.find('.sister-1,.sister-2').each (i, chromo) ->
       $chromo = $(chromo)
        #$chromo.find('.alleles-container').remove()
       left = $chromo.css("left")
@@ -30,24 +41,22 @@ GG.MeiosisAnimation = Ember.Object.create
       $chromo.css({left: left})
       # $chromo.css({left: "+=30px"})
 
-    args.chromos.find('.sister-2').removeClass('hidden')
+    args.container.find('.sister-2').removeClass('hidden')
 
     @separateChromatids(args)
 
     # flip chromo-2 order (independent assortment) (note, this is Metaphase I and should be after crossover)
-    # chromos.find('.chromo-2:not(.right)').animate({left: "+=47px"}, 200)
-    # chromos.find('.chromo-2.right').animate({left: "-=47px"}, 200)
-    # chromos.find('.chromo-2.right').removeClass("right").addClass("tempNotRight")
-    # chromos.find('.chromo-2:not(.tempNotRight)').addClass("right")
-    # chromos.find('.chromo-2.tempNotRight').removeClass("tempNotRight")
-    setTimeout =>
+    # container.find('.chromo-2:not(.right)').animate({left: "+=47px"}, 200)
+    # container.find('.chromo-2.right').animate({left: "-=47px"}, 200)
+    # container.find('.chromo-2.right').removeClass("right").addClass("tempNotRight")
+    # container.find('.chromo-2:not(.tempNotRight)').addClass("right")
+    # container.find('.chromo-2.tempNotRight').removeClass("tempNotRight")
+    @registerTimeout @scale(500), =>
       args.parentView.crossOver()
 
       # divide cell first time (Anaphase I + Telophase I)
-      setTimeout =>
+      @registerTimeout 2000, =>
         @divide(args)
-      , 2000
-    , @scale(500)
 
   separateChromatids: (args)->
     t = @scale(400)
@@ -59,37 +68,35 @@ GG.MeiosisAnimation = Ember.Object.create
       for side in ['.left','.right']
         for sis in ['.sister-1','.sister-2']
           i++
-          args.chromos.find(ch + sis + side).animate({left: i*30 + offset}, t, 'easeInOutQuad')
-    args.chromos.find('.chromo-Y.sister-1.right').animate({left: 376}, t, 'easeInOutQuad')
-    args.chromos.find('.chromo-Y.sister-2.right').animate({left: 406}, t, 'easeInOutQuad')
+          args.container.find(ch + sis + side).animate({left: i*30 + offset}, t, 'easeInOutQuad')
+    args.container.find('.chromo-Y.sister-1.right').animate({left: 376}, t, 'easeInOutQuad')
+    args.container.find('.chromo-Y.sister-2.right').animate({left: 406}, t, 'easeInOutQuad')
     args.cell.animate({width: 450}, t, 'easeInOutQuad')
 
   divide: (args)->
     # move homologous pairs apart
     # line up sister chromatids along center line (Metaphase II)
     t = @scale(800)
-    args.chromos.find('.chromo-1.right').animate({top: "+=85px", left: "-=60px"}, t, 'easeInOutQuad')
-    args.chromos.find('.chromo-1.left').animate({top: "-=20px"}, t, 'easeInOutQuad')
+    args.container.find('.chromo-1.right').animate({top: "+=85px", left: "-=60px"}, t, 'easeInOutQuad')
+    args.container.find('.chromo-1.left').animate({top: "-=20px"}, t, 'easeInOutQuad')
 
-    args.chromos.find('.chromo-2.right').animate({top: "+=85px", left: "-=120px"}, t, 'easeInOutQuad')
-    args.chromos.find('.chromo-2.left').animate({top: "-=20px", left: "-=60px"}, t, 'easeInOutQuad')
-    args.chromos.find('.chromo-X.right, .chromo-Y.right').animate({top: "+=85px", left: "-=180px"}, t, 'easeInOutQuad')
-    args.chromos.find('.chromo-X.left').animate({top: "-=20px", left: "-=120px"}, t, 'easeInOutQuad')
+    args.container.find('.chromo-2.right').animate({top: "+=85px", left: "-=120px"}, t, 'easeInOutQuad')
+    args.container.find('.chromo-2.left').animate({top: "-=20px", left: "-=60px"}, t, 'easeInOutQuad')
+    args.container.find('.chromo-X.right, .chromo-Y.right').animate({top: "+=85px", left: "-=180px"}, t, 'easeInOutQuad')
+    args.container.find('.chromo-X.left').animate({top: "-=20px", left: "-=120px"}, t, 'easeInOutQuad')
 
     # widen cell
     args.cell.animate({height: 200, width: 300}, t, 'easeInOutQuad')
     #divide cell
-    setTimeout =>
+    @registerTimeout t, =>
       @splitCell(args)
-    , t
 
-    setTimeout =>
+    @registerTimeout 1.75*t, =>
       @separateToGametes(args)
-    , 1.75*t
 
   splitCell: (args)->
     t = @scale(300)
-    args.container.find('.mainCell').hide()
+    args.container.find('.mainCell').remove()
     args.container.append($("<div class='cell cell-top'>").css({height: 200, width: 300, zIndex: -3}))
     args.container.append($("<div class='cell cell-bottom'>").css({height: 200, width: 300, zIndex: -3}))
     args.container.find('.cell-top').animate({height: 65, top: -5, width: 300}, t, 'easeInOutQuad')
@@ -98,19 +105,19 @@ GG.MeiosisAnimation = Ember.Object.create
   separateToGametes: (args)->
     t = @scale(2000)
     # move sisters apart to divide cell again (Anaphase II + Telophase II)
-    args.chromos.find('.chromo-1.sister-1').animate({left: 10}, t, 'easeInOutQuad')
-    args.chromos.find('.chromo-2.sister-1').animate({left: 41}, t, 'easeInOutQuad')
-    args.chromos.find('.chromo-X.sister-1,.chromo-Y.sister-1').animate({left: 72}, t, 'easeInOutQuad')
+    args.container.find('.chromo-1.sister-1').animate({left: 10}, t, 'easeInOutQuad')
+    args.container.find('.chromo-2.sister-1').animate({left: 41}, t, 'easeInOutQuad')
+    args.container.find('.chromo-X.sister-1,.chromo-Y.sister-1').animate({left: 72}, t, 'easeInOutQuad')
 
-    args.chromos.find('.chromo-1.sister-2').animate({left:"+=120px"}, t, 'easeInOutQuad')
-    args.chromos.find('.chromo-2.sister-2').animate({left:"+=73px"}, t, 'easeInOutQuad')
-    args.chromos.find('.chromo-X.sister-2,.chromo-Y.sister-2').animate({left:"+=26px"}, t, 'easeInOutQuad')
+    args.container.find('.chromo-1.sister-2').animate({left:"+=120px"}, t, 'easeInOutQuad')
+    args.container.find('.chromo-2.sister-2').animate({left:"+=73px"}, t, 'easeInOutQuad')
+    args.container.find('.chromo-X.sister-2,.chromo-Y.sister-2').animate({left:"+=26px"}, t, 'easeInOutQuad')
     #divide cell
     @divideCell(args)
 
   divideCell: (args)->
     t = @scale(2000)
-    args.container.find('.cell:not(.mainCell)').remove()
+    args.container.find('.cell').remove()
     args.container.append($("<div class='cell cell-left cell-top'>").css({top: -5, height: 65, zIndex: -2}))
     args.container.append($("<div class='cell cell-right cell-top'>").css({top: -5, height: 65, zIndex: -2}))
     args.container.append($("<div class='cell cell-left cell-bottom'>").css({top: 100, height: 65, zIndex: -2}))
@@ -118,9 +125,8 @@ GG.MeiosisAnimation = Ember.Object.create
     args.container.find('.cell-left').animate({width:145, left: -15}, t, 'easeInOutQuad')
     args.container.find('.cell-right').animate({width:145, left: 158}, t, 'easeInOutQuad')
 
-    setTimeout =>
+    @registerTimeout t, =>
       @chooseGamete(args)
-    , t
 
   chooseGamete: (args)->
     # TODO eventually let students choose
@@ -154,18 +160,16 @@ GG.MeiosisAnimation = Ember.Object.create
 
     t = @scale(1000)
 
-    args.chromos.find(chosenChromos).animate({left: leftShift, top: 50}, t, 'easeInOutQuad')
-    args.chromos.find(".chromosome:not(" + chosenChromos + ")").animate({opacity: 0}, 0.7*t)
+    args.container.find(chosenChromos).animate({left: leftShift, top: 50}, t, 'easeInOutQuad')
+    args.container.find(".chromosome:not(" + chosenChromos + ")").animate({opacity: 0}, 0.7*t)
     args.container.find(chosenCell).animate({top: 50, left: 73}, t, 'easeInOutQuad')
     args.container.find(".cell:not(.mainCell):not(" + chosenCell + ")").animate({opacity: 0}, 0.7*t)
-    setTimeout ->
-      args.chromos.find(".chromosome:not(" + chosenChromos + ")").hide()
+    @registerTimeout 0.7*t, ->
+      args.container.find(".chromosome:not(" + chosenChromos + ")").hide()
       args.container.find(".cell:not(.mainCell):not(" + chosenCell + ")").remove()
-    , 0.7*t
     if args.callback?
-      setTimeout ->
+      @registerTimeout 1.1*t, ->
         args.callback()
-      , 1.1*t
 
   mergeChosenGametes: (fatherContainerName, motherContainerName, callback)->
     fatherContainer = $(fatherContainerName)
@@ -191,10 +195,8 @@ GG.MeiosisAnimation = Ember.Object.create
     motherContainer.find('.chromo-2').animate({top: -55, left: "+=45px"}, t, 'easeInOutQuad')
     motherContainer.find('.chromo-X').animate({top: -55, left: "+=90px"}, t, 'easeInOutQuad')
 
-    setTimeout ->
-      motherContainer.find('.cell:not(.mainCell)').hide()
-    , t
+    @registerTimeout t, ->
+      motherContainer.find('.cell').remove()
 
-    setTimeout ->
+    @registerTimeout 1.5*t, ->
       callback()
-    , 1.5*t

@@ -375,7 +375,8 @@ GG.ChromoView = Ember.View.extend
   futureVisibleGameteChanged: (->
     @get 'futureVisibleAlleles'
     setTimeout =>
-      @set('gametes', (@get 'futureGametes'))
+      if !@get('isDestroyed')
+        @set('gametes', (@get 'futureGametes'))
     , (500 * @get('numberOfHighlights'))
   ).observes('futureVisibleGamete')
   numberOfHighlights: 3
@@ -636,8 +637,8 @@ GG.MeiosisView = Ember.View.extend
   sistersHidden: true
   animate: (callback)->
     GG.MeiosisAnimation.animate(".meiosis." + @get('motherFather'), this, callback)
-  resetAnimation: (callback)->
-    GG.MeiosisAnimation.reset(".meiosis." + @get('motherFather'), this, callback)
+  resetAnimation: ()->
+    GG.MeiosisAnimation.reset(".meiosis." + @get('motherFather'), this)
     @set('gametes', null)
   crossOver: ->
     newGametes = @get('content.biologicaOrganism').createGametesWithCrossInfo(4)[0]
