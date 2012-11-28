@@ -19,7 +19,7 @@
 .drake .idle {
   position: absolute;
   top: 0px;
-  left: 4000px;
+  left: 400px;
 }
 
 .parent-pool .drake, .parent-pool .drake .idle, .parent-pool .drake .static {
