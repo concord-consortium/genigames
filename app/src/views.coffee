@@ -558,7 +558,9 @@ GG.NPCSpeechBubbleView = Ember.View.extend
     @resetTextIdx()
   text               : (->
     authoredText = @get 'content.npc.speech.text'
-    return new Handlebars.SafeString(authoredText[@get 'textIdx'])
+    currentText = authoredText[@get 'textIdx']
+    currentText = currentText.replace(/\[(.*?)\]/g, "") # rm button text
+    return new Handlebars.SafeString(currentText)
   ).property('content','textIdx')
   isLastText: (->
     return @get('textIdx') >= @get('lastTextIdx')
@@ -568,6 +570,14 @@ GG.NPCSpeechBubbleView = Ember.View.extend
     authoredText = @get 'content.npc.speech.text'
     @set 'lastTextIdx', (authoredText.length - 1)
   ).observes('content')
+  continueButtonText: (->
+    authoredText = @get 'content.npc.speech.text'
+    currentText = authoredText[@get 'textIdx']
+    buttonText = /\[(.*?)\]/g.exec(currentText)
+    if (buttonText)
+      return buttonText[1]
+    return "Continue"
+  ).property('content','textIdx')
   next: ->
     @set('textIdx', @get('textIdx') + 1)
   accept: ->
