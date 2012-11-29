@@ -15,8 +15,8 @@
                },
                "speech": {
                    "text": [
-                       "Hello there! You must be the new breeder I've heard about!",
-                       "I'm Rose Abelin, the Breeding and Training center’s nurse--pleased to meet you! Let me help you get familiar with how our Breeding and Training Center works.",
+                       "Hello there! You must be the new breeder I've heard about! [Yup!]",
+                       "I'm Rose Abelin, the Breeding and Training center’s nurse--pleased to meet you! Let me help you get familiar with how our Breeding and Training Center works. [Sounds good]",
                        "Please breed a drake with wings!"
                    ],
                    "completionText": "Nice work! You picked up on all of that really fast. Sibyl was hoping for some help with breeding. Why not find her and see if there’s anything you can do?",
