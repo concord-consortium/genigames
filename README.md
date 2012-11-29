@@ -47,24 +47,30 @@ branch if desired.
 ## Serving the project using Apache
 
 To serve this project locally, you can create a local Apache vhosts to proxy the needed resources.
-The server at `http://gg.local/` is for proxying the development server provided by rake-pipeline.
-The server at `http://gg-build.local` is for viewing and verifying the latest statically-built
-version compiled by rake-pipeline.
+In order to allow the portal's login cookie to be set correctly, the local server name should end
+with '.concord.org' (this will work fine, as the hosts file will be consulted first).
+
+The server at `http://gg.local.concord.org/` is for proxying the development server provided by
+rake-pipeline. The server at `http://gg-build.local.concord.org` is for viewing and verifying the
+latest statically-built version compiled by rake-pipeline.
 
 Add the following to `/etc/hosts`:
 
-    127.0.0.1       gg.local
-    127.0.0.1       gg-static.local
+    127.0.0.1       gg.local.concord.org
+    127.0.0.1       gg-static.local.concord.org
 
 (Remember to use real tabs to separate the IP address and the name.)
 
 Add the following to '/etc/apache2/extra/httpd-vhosts.conf':
 
     <VirtualHost *:80>
-      ServerName gg.local
+      ServerName gg.local.concord.org
 
       ProxyPass        /biologica/ http://geniverse.dev.concord.org/biologica/
       ProxyPassReverse /biologica/ http://geniverse.dev.concord.org/biologica/
+
+      ProxyPass        /portal/ http://geniverse.dev.concord.org/portal/
+      ProxyPassReverse /portal/ http://geniverse.dev.concord.org/portal/
 
       ProxyPass        /resources/ http://geniverse.dev.concord.org/resources/ retry=1
       ProxyPassReverse /resources/ http://geniverse.dev.concord.org/resources/
@@ -78,7 +84,7 @@ Add the following to '/etc/apache2/extra/httpd-vhosts.conf':
     </VirtualHost>
 
     <VirtualHost *:80>
-      ServerName gg-static.local
+      ServerName gg-static.local.concord.org
 
       DocumentRoot "/path/to/build/folder"
       <Directory "/path/to/build/folder">
@@ -91,6 +97,9 @@ Add the following to '/etc/apache2/extra/httpd-vhosts.conf':
 
       ProxyPass        /biologica/ http://geniverse.dev.concord.org/biologica/
       ProxyPassReverse /biologica/ http://geniverse.dev.concord.org/biologica/
+
+      ProxyPass        /portal/ http://geniverse.dev.concord.org/portal/
+      ProxyPassReverse /portal/ http://geniverse.dev.concord.org/portal/
 
       ProxyPass        /resources/ http://geniverse.dev.concord.org/resources/ retry=1
       ProxyPassReverse /resources/ http://geniverse.dev.concord.org/resources/
