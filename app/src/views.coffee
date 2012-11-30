@@ -99,11 +99,11 @@ GG.DrakeView = Ember.View.extend
       'drake-kinked-tail'
     else 'drake-short-tail'
   ).property()
-  forelimbs : (->
-    forelimbs = @get('org').getCharacteristic "forelimbs"
-    if forelimbs is "Long forelimbs"
-      'drake-long-forelimbs'
-    else 'drake-short-forelimbs'
+  armor : (->
+    armor = @get('org').getCharacteristic "armor"
+    if armor is "Armor"
+      'drake-armor'
+    else 'drake-no-armor'
   ).property()
   wings : (->
     wings = @get('org').getCharacteristic "wings"
@@ -125,9 +125,9 @@ GG.DrakeView = Ember.View.extend
   ).property()
   horns : (->
     horns = @get('org').getCharacteristic "horns"
-    if horns is "Horns"
-      'drake-horns'
-    else 'trait-absent'
+    if horns is "Forward horns"
+      'drake-forward-horns'
+    else 'drake-reverse-horns'
   ).property()
   fire : (->
     fire = @get('org').getCharacteristic "fire breathing"

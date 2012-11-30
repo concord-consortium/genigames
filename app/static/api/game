@@ -56,8 +56,8 @@
           "visibleGenes": ["T","W"],
           "hiddenGenes": ["Hl","Rh"],
           "initialDrakes": {
-            "females": ["a:W,b:W","a:W,b:w"],
-            "males": ["a:W,b:W","a:W,b:w"]
+            "females": ["a:W,b:W,a:H","a:W,b:w,a:h,b:h"],
+            "males": ["a:W,b:W,a:A","a:W,b:w,a:a,b:a"]
           },
           "targetDrake": "male, no wings",
           "npc": {
