@@ -5,8 +5,6 @@ GG.StateInTask = Ember.State.extend
   showingBreeder: Ember.State.create
     initialState: 'parentSelect'
 
-    breedType: 'direct'  # direct/meiosis
-
     enter: ->
       $('#breeding-apparatus').animate({"left":"-17px"},1200,'easeOutCubic')
       GG.cyclesController.reset()
@@ -43,6 +41,12 @@ GG.StateInTask = Ember.State.extend
         alleles: child.get('biologicaOrganism.alleles')
         sex: child.get('sex')
         success: success
+
+    toggleBreedType: ->
+      if GG.breedingController.get('breedType') is GG.BREED_DIRECT
+        GG.breedingController.set 'breedType', GG.BREED_MEIOSIS
+      else
+        GG.breedingController.set 'breedType', GG.BREED_DIRECT
 
     completeTask: ->
       GG.tasksController.completeCurrentTask()

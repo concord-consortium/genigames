@@ -1,5 +1,9 @@
 minispade.require 'genigames/controller-mixins'
 
+## Static variables ##
+GG.BREED_DIRECT  = "direct"
+GG.BREED_MEIOSIS = "meiosis"
+
 GG.townsController = Ember.ArrayController.create
   content    : []
   currentTown: null
@@ -222,6 +226,9 @@ GG.breedingController = Ember.Object.create
   motherBinding: 'GG.parentController.selectedMother'
   fatherBinding: 'GG.parentController.selectedFather'
   isBreeding: false
+
+  breedType: GG.BREED_DIRECT
+
   child: null
 
   breedDrake: ->
