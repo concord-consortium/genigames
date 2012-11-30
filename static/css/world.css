@@ -31,9 +31,11 @@
 }
 
 .location {
-  cursor: pointer;
   position: absolute;
   z-index: 1;
+}
+.location.enabled {
+  cursor: pointer;
 }
 
 .huts {
