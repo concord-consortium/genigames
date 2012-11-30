@@ -1,20 +1,20 @@
 <div class="chromosome-panel">
-  {{view GG.ChromoView chromo="1" side="b" sister="1" futureGametesBinding="view.gametes" contentBinding="view.content" highlightAlleleChanges="true"}}
-  {{view GG.ChromoView chromo="1" side="b" sister="2" futureGametesBinding="view.gametes" contentBinding="view.content" highlightAlleleChanges="true" hiddenBinding="view.sistersHidden"}}
-  {{view GG.ChromoView chromo="1" side="a" sister="1" futureGametesBinding="view.gametes" contentBinding="view.content" highlightAlleleChanges="true"}}
-  {{view GG.ChromoView chromo="1" side="a" sister="2" futureGametesBinding="view.gametes" contentBinding="view.content" highlightAlleleChanges="true" hiddenBinding="view.sistersHidden"}}
-  {{view GG.ChromoView chromo="2" side="b" sister="1" futureGametesBinding="view.gametes" contentBinding="view.content" highlightAlleleChanges="true"}}
-  {{view GG.ChromoView chromo="2" side="b" sister="2" futureGametesBinding="view.gametes" contentBinding="view.content" highlightAlleleChanges="true" hiddenBinding="view.sistersHidden"}}
-  {{view GG.ChromoView chromo="2" side="a" sister="1" futureGametesBinding="view.gametes" contentBinding="view.content" highlightAlleleChanges="true"}}
-  {{view GG.ChromoView chromo="2" side="a" sister="2" futureGametesBinding="view.gametes" contentBinding="view.content" highlightAlleleChanges="true" hiddenBinding="view.sistersHidden"}}
+  {{view GG.ChromoView chromo="1" side="b" sister="1" gametesBinding="view.gametes" useGameteBinding="view.useGametes" contentBinding="view.content"}}
+  {{view GG.ChromoView chromo="1" side="b" sister="2" gametesBinding="view.gametes" useGameteBinding="view.useGametes" contentBinding="view.content" hiddenBinding="view.sistersHidden"}}
+  {{view GG.ChromoView chromo="1" side="a" sister="1" gametesBinding="view.gametes" useGameteBinding="view.useGametes" contentBinding="view.content"}}
+  {{view GG.ChromoView chromo="1" side="a" sister="2" gametesBinding="view.gametes" useGameteBinding="view.useGametes" contentBinding="view.content" hiddenBinding="view.sistersHidden"}}
+  {{view GG.ChromoView chromo="2" side="b" sister="1" gametesBinding="view.gametes" useGameteBinding="view.useGametes" contentBinding="view.content"}}
+  {{view GG.ChromoView chromo="2" side="b" sister="2" gametesBinding="view.gametes" useGameteBinding="view.useGametes" contentBinding="view.content" hiddenBinding="view.sistersHidden"}}
+  {{view GG.ChromoView chromo="2" side="a" sister="1" gametesBinding="view.gametes" useGameteBinding="view.useGametes" contentBinding="view.content"}}
+  {{view GG.ChromoView chromo="2" side="a" sister="2" gametesBinding="view.gametes" useGameteBinding="view.useGametes" contentBinding="view.content" hiddenBinding="view.sistersHidden"}}
   {{#if female}}
-    {{view GG.ChromoView chromo="X" side="x2" sister="1" futureGametesBinding="view.gametes" contentBinding="view.content" highlightAlleleChanges="true"}}
-    {{view GG.ChromoView chromo="X" side="x2" sister="2" futureGametesBinding="view.gametes" contentBinding="view.content" highlightAlleleChanges="true" hiddenBinding="view.sistersHidden"}}
+    {{view GG.ChromoView chromo="X" side="x2" sister="1" gametesBinding="view.gametes" useGameteBinding="view.useGametes" contentBinding="view.content"}}
+    {{view GG.ChromoView chromo="X" side="x2" sister="2" gametesBinding="view.gametes" useGameteBinding="view.useGametes" contentBinding="view.content" hiddenBinding="view.sistersHidden"}}
   {{else}}
-    {{view GG.ChromoView chromo="Y" side="y" sister="1" futureGametesBinding="view.gametes" contentBinding="view.content" highlightAlleleChanges="true"}}
-    {{view GG.ChromoView chromo="Y" side="y" sister="2" futureGametesBinding="view.gametes" contentBinding="view.content" highlightAlleleChanges="true" hiddenBinding="view.sistersHidden"}}
+    {{view GG.ChromoView chromo="Y" side="y" sister="1" gametesBinding="view.gametes" useGameteBinding="view.useGametes" contentBinding="view.content"}}
+    {{view GG.ChromoView chromo="Y" side="y" sister="2" gametesBinding="view.gametes" useGameteBinding="view.useGametes" contentBinding="view.content" hiddenBinding="view.sistersHidden"}}
   {{/if}}
-  {{view GG.ChromoView chromo="X" side="x1" sister="1" futureGametesBinding="view.gametes" contentBinding="view.content" highlightAlleleChanges="true"}}
-  {{view GG.ChromoView chromo="X" side="x1" sister="2" futureGametesBinding="view.gametes" contentBinding="view.content" highlightAlleleChanges="true" hiddenBinding="view.sistersHidden"}}
+  {{view GG.ChromoView chromo="X" side="x1" sister="1" gametesBinding="view.gametes" useGameteBinding="view.useGametes" contentBinding="view.content"}}
+  {{view GG.ChromoView chromo="X" side="x1" sister="2" gametesBinding="view.gametes" useGameteBinding="view.useGametes" contentBinding="view.content" hiddenBinding="view.sistersHidden"}}
   <div class="cell mainCell"></div>
 </div>

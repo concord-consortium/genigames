@@ -65,6 +65,8 @@
   font-weight: bold;
   padding-top: 4px;
   cursor: default;
+  position: relative; /* For the allele crossover animation */
+  z-index: 10;
 }
 
 .allele.revealable {
@@ -77,4 +79,16 @@
 
 .recessive {
   color: blue;
+}
+
+.chromosome.cell0 {
+}
+
+.chromosome.cell1 {
+}
+
+.chromosome.cell2 {
+}
+
+.chromosome.cell3 {
 }

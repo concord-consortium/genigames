@@ -144,7 +144,6 @@ GG.DrakeView = Ember.View.extend
   didInsertElement: ->
     # Wait for the animation images to load, then move it in place and start it up
     layer = '#' + @get('elementId')
-    console.log("layer: ", layer)
     $(layer + ' .drake-idle-img').imagesLoaded =>
       $(layer + ' .static').css({left: 400})
       $(layer + ' .idle').css({left: 0})
@@ -211,14 +210,14 @@ GG.MeiosisButtonView = Ember.View.extend
 
 
 GG.AlleleView = Ember.View.extend
-  classNameBindings: ['defaultClassNames', 'hidden:revealable', 'dominant']
+  classNameBindings: ['defaultClassNames', 'hidden:revealable', 'dominant', 'gene']
   defaultClassNames: 'allele'
   value: ''
   hiddenValue: (->
     value = @get 'value'
     if value is "Tk" then value = "T"
     if value is "A1" or value is "A2" then value = "A"
-    value = value.charAt(0).toUpperCase() + value.slice(1);
+    value = value.charAt(0).toUpperCase() + value.slice(1)
     value + '?'
   ).property('value').cacheable()
   hidden: false
@@ -231,6 +230,12 @@ GG.AlleleView = Ember.View.extend
     else
       return ""
   ).property('displayValue')
+  gene: (->
+    if @get('value')?
+      return BioLogica.Genetics.getGeneOfAllele(GG.DrakeSpecies, @get('value'))
+    else
+      return ''
+  ).property('value')
   displayValue: (->
     if @get('hidden') then @get('hiddenValue') else GG.drakeController.alleleOverride(@get('value'))
   ).property('value','hidden')
@@ -252,57 +257,41 @@ GG.ChromoView = Ember.View.extend
   revealedContentAllelesIdxBinding: 'content.revealedIdx'
   revealedAlleles: null
   gametes: null
-  futureGametes: null
-  gamete: (->
-    return @_getGameteFromGametes('gametes')
-  ).property('chromo','side','sister','gametes')
-  futureGamete: (->
-    return @_getGameteFromGametes('futureGametes')
-  ).property('chromo','side','sister','futureGametes')
-  _getGameteFromGametes: (prop)->
-    if @get(prop)?
+  useGamete: false
+  cellNum: (->
+    if @get('gametes')?
+      endInfo = @get('gametes').endCellInfo
+
       chromo = @get('chromo')
       chromo = if chromo == "X" or chromo == "Y" then "XY" else chromo
-      cells = @get(prop).cells
-      allX = cells.filter (item)->
-        ['x','x1','x2'].contains(item["XY"].side)
-      allY = cells.filter (item)->
-        item["XY"].side is 'y'
-      if @get('side') is 'x1'
-        # find the first 2 x sides
-        xIdx = if @get('sister') is "1" then 0 else 1
-        return allX[xIdx][chromo]
-      else if @get('side') is 'x2'
-        # find the second 2 x sides
-        xIdx = if @get('sister') is "1" then 2 else 3
-        return allX[xIdx][chromo]
-      else if @get('side') is 'y'
-        # find the first 2 y sides
-        yIdx = if @get('sister') is "1" then 0 else 1
-        return allY[yIdx][chromo]
+
+      if ['x2','y','b'].contains(@get('side'))
+        realSide = 'b'
       else
-        sisterIdx = if @get('sister') == "1" then 0 else 1
-        if @get('side') is 'b'
-          if allY.length > 0
-            return allY[sisterIdx][chromo]
-          else
-            return allX[sisterIdx+2][chromo]
-        else
-          return allX[sisterIdx][chromo]
+        realSide = 'a'
+
+      realSide += @get('sister')
+      cellNum = endInfo[chromo][realSide]
+    else
+      cellNum = -1
+
+    return cellNum
+  ).property('chromo','side','sister','gametes')
+  gamete: (->
+    if @get('cellNum') != -1
+      cell = @get('gametes').cells[@get('cellNum')]
+      chromo = @get 'chromo'
+      chromo = if chromo == 'X' or chromo == 'Y' then 'XY' else chromo
+      return cell[chromo]
     else
       return null
+  ).property('gametes','chromo','cellNum')
   visibleGamete: (->
     @_filterGamete('gamete',false)
   ).property('gamete', 'visibleGenes')
   hiddenGamete: (->
     @_filterGamete('gamete',true)
   ).property('gamete', 'hiddenGenes')
-  futureVisibleGamete: (->
-    @_filterGamete('futureGamete',false)
-  ).property('futureGamete', 'visibleGenes')
-  futureHiddenGamete: (->
-    @_filterGamete('futureGamete',true)
-  ).property('futureGamete', 'hiddenGenes')
   _filterGamete: (prop, hidden)->
     res = null
     if @get(prop)?.alleles
@@ -325,18 +314,12 @@ GG.ChromoView = Ember.View.extend
   genes: (->
     GG.Genetics.species.chromosomeGeneMap[@get 'biologicaChromoName']
   ).property('chromo')
-  highlightAlleleChanges: false
-  highlightAlleleChangesAfter: false
   visibleAlleles: (->
-    res = @_getAlleles(false, false)
-    if @get 'highlightAlleleChangesAfter'
-      @highlightChanges(res,@get('lastVisibleAlleles'))
-      @set('lastVisibleAlleles', res)
-    return res
-  ).property('chromo','content','side','visibleGamete','revealedAlleles','revealedContentAllelesIdx')
+    return @_getAlleles(false)
+  ).property('chromo','content','side','visibleGamete','revealedAlleles','revealedContentAllelesIdx','useGamete')
   hiddenAlleles: (->
-    return @_getAlleles(true, false)
-  ).property('chromo','content','side','hiddenGamete','revealedAlleles','revealedContentAllelesIdx')
+    return @_getAlleles(true)
+  ).property('chromo','content','side','hiddenGamete','revealedAlleles','revealedContentAllelesIdx','useGamete')
   alleles: (->
     vis = @get('visibleAlleles').map (item)->
       {allele: item, visible: true}
@@ -351,22 +334,11 @@ GG.ChromoView = Ember.View.extend
       if p1 > p2 then 1 else -1
     return alleles
   ).property('visibleAlleles','hiddenAlleles')
-  futureVisibleAlleles: (->
-    res = @_getAlleles(false, true)
-    if @get 'highlightAlleleChanges'
-      @highlightChanges(@get('visibleAlleles'),res)
-      @set('lastVisibleAlleles', res)
-    return res
-  ).property('chromo','content','side','futureVisibleGamete','revealedAlleles','revealedContentAllelesIdx')
-  futureHiddenAlleles: (->
-    return @_getAlleles(true, true)
-  ).property('chromo','content','side','futureHiddenGamete','revealedAlleles','revealedContentAllelesIdx')
-  _getAlleles: (hidden, future)->
+  _getAlleles: (hidden)->
     gamete = if hidden then 'hiddenGamete' else 'visibleGamete'
-    gamete = ('future ' + gamete).camelize() if future
     res = []
     if (@get 'content')? or (@get gamete)?
-      if (@get gamete)?
+      if @get('useGamete') && (@get gamete)?
         res = @get gamete
       else
         prop = if hidden then 'content.hiddenGenotype' else 'content.visibleGenotype'
@@ -379,37 +351,6 @@ GG.ChromoView = Ember.View.extend
         geno = fullGeno[side]
         res = GG.Genetics.filter(geno, @get 'genes')
     return res
-  futureVisibleGameteChanged: (->
-    @get 'futureVisibleAlleles'
-    setTimeout =>
-      if !@get('isDestroyed')
-        @set('gametes', (@get 'futureGametes'))
-    , (500 * @get('numberOfHighlights'))
-  ).observes('futureVisibleGamete')
-  numberOfHighlights: 3
-  highlightChanges: (newAlleles, oldAlleles)->
-    return if oldAlleles.length == 0
-    changes = newAlleles.filter (item) ->
-      return !oldAlleles.contains(item)
-    setTimeout =>
-      # chromo = '.' + @get('chromoName') + '.' + @get('parent') + '.' + @get('right')
-      # chromo += '.' + @get('sister') if @get('sister').length > 0
-      chromo = '#' + @get('elementId')
-      num = @get 'numberOfHighlights'
-      for i in [0...changes.length]
-        change = GG.drakeController.alleleOverride(changes[i])
-        sel = chromo + ' .allele:onlyContains("' + change + '")'
-        @_flash(num, sel)
-    , 50
-  _flash: (n, selector)->
-    return if n <= 0
-    $(selector).animate({opacity: 0.2},250)
-    setTimeout =>
-      $(selector).animate({opacity: 1.0},250)
-      setTimeout =>
-        @_flash(n-1, selector)
-      , 250
-    , 250
   defaultClass: 'chromosome'
   chromoName: (->
     'chromo-'+@get('chromo')
@@ -426,9 +367,16 @@ GG.ChromoView = Ember.View.extend
     else
       return ""
   ).property('sister')
+  cell: (->
+    cellNum = @get('cellNum')
+    if cellNum == -1
+      return ''
+    else
+      return 'cell' + cellNum
+  ).property('cellNum')
   hidden: false
   classNames: ['chromosome']
-  classNameBindings: ['chromoName', 'right', 'parent', 'sisterClass', 'hidden']
+  classNameBindings: ['chromoName', 'right', 'parent', 'sisterClass', 'hidden', 'cell']
 
 GG.ChromosomePanelView = Ember.View.extend
   templateName: 'chromosome-panel'
@@ -644,6 +592,8 @@ GG.MeiosisView = Ember.View.extend
       @contentChanged()
   contentChanged: (->
     GG.meiosisController.set(@get('motherFather') + "View", this)
+
+    @_createGametes()
   ).observes('content')
   classNames: ['meiosis']
   classNameBindings: ['motherFather']
@@ -651,15 +601,15 @@ GG.MeiosisView = Ember.View.extend
     if @get('content.sex') == GG.MALE then "father" else "mother"
   ).property('content')
   gametes: null
-  sistersHidden: true
-  animate: (callback)->
-    GG.MeiosisAnimation.animate(".meiosis." + @get('motherFather'), this, callback)
-  resetAnimation: ()->
-    GG.MeiosisAnimation.reset(".meiosis." + @get('motherFather'), this)
-    @set('gametes', null)
-  crossOver: ->
+  useGametes: false
+  rerender: ->
+    @_super()
+    setTimeout =>
+      @set('useGametes', false)
+      @_createGametes()
+    , 200
+  _createGametes: ->
     newGametes = @get('content.biologicaOrganism').createGametesWithCrossInfo(4)[0]
-    mf = if @get('content.sex') == GG.MALE then "male" else "female"
 
     # Transfer revealed status to new gametes...
     revealed = @get('content.revealedAlleles')
@@ -682,43 +632,78 @@ GG.MeiosisView = Ember.View.extend
             if idx != -1 and normalizedSide(chromo.allelesWithSides[idx].side) is nSide
               chromo.revealed ?= []
               chromo.revealed.push allele
-
     @set 'gametes', newGametes
+  sistersHidden: true
+  animate: (callback)->
+    GG.MeiosisAnimation.animate(".meiosis." + @get('motherFather'), this, callback)
+  resetAnimation: ()->
+    GG.MeiosisAnimation.reset(".meiosis." + @get('motherFather'), this)
+    @set('gametes', null)
+  crossOver: ->
+    newGametes = @get('gametes')
+    # Move the allele circles, then reset them back and set the gametes at the same time
+    cells = newGametes.cells
+
+    # moves is a data structure that outlines what is moving from where to where
+    # {
+    #   "gene": {[to]: [from], [to]: [from], ...}
+    # }
+    moves = {}
+    for own chr,crosses of newGametes.crossInfo
+      continue unless crosses?
+      for c in [0...crosses.length]
+        cross = crosses[c]
+        startingAlleles = cross.crossedAlleles
+        if startingAlleles?
+          for a in [0...startingAlleles.length]
+            sAllele = startingAlleles[a][0]
+            gene = BioLogica.Genetics.getGeneOfAllele(GG.DrakeSpecies, sAllele)
+            moves[gene] ?= {}
+            end = moves[gene][cross.start_cell]
+            end = cross.start_cell unless end?
+            start = moves[gene][cross.end_cell]
+            start = cross.end_cell unless start?
+            moves[gene][cross.end_cell] = end
+            moves[gene][cross.start_cell] = start
+
+    animationQueue = []
+    selectorBase = "#" + @get('elementId')
+    for own gene,swaps of moves
+      for own dest,source of swaps
+        sourceSelector = selectorBase + " .cell" + source + " .allele." + gene
+        destSelector = selectorBase + " .cell" + dest + " .allele." + gene
+
+        s = $(sourceSelector)
+        d = $(destSelector)
+
+        sOffset = s.offset()
+        dOffset = d.offset()
+        continue unless sOffset? and dOffset?
+
+        dx = dOffset.left - sOffset.left
+        dy = dOffset.top - dOffset.top
+
+        leftShift = (if dx > 0 then "+=" else "-=") + Math.abs(dx) + "px"
+        topShift = (if dy > 0 then "+=" else "-=") + Math.abs(dy) + "px"
+
+        animationQueue.push {source: sourceSelector, anim: {top: dy, left: dx}}
+
+    for i in [0...animationQueue.length]
+      anim = animationQueue[i]
+      $(anim.source).animate(anim.anim, 1500, 'easeInOutQuad')
+
+    setTimeout =>
+      @set('useGametes', true)
+      # ensure this fires *right after* the bindings and ui update to help ensure
+      # we don't get any allele value flickering.
+      Ember.run.next this, =>
+        for i in [0...animationQueue.length]
+          anim = animationQueue[i]
+          $(anim.source).css({left: '', top: ''})
+    , 1550
   randomGameteNumber: (->
     ExtMath.randomInt(4)
   ).property('gametes')
-  randomGameteAnimationCell: (->
-    # cells are arranged: 0 2
-    #                     1 3
-    # where 0 and 2 are always first and second female gamete
-    # and 1 and 3 are either first and second male gamete or third and fourth female gamete
-    num = @get 'randomGameteNumber'
-    gametes = @get 'gametes'
-    m = 0
-    f = 0
-    animCell = 0
-    gametes.cells.forEach (item, idx)->
-      if idx is num
-        if ['x','x1','x2'].contains(item.XY.side)
-          if f is 0
-            animCell = 0
-          else if f is 1
-            animCell = 2
-          else if f is 2
-            animCell = 1
-          else
-            animCell = 3
-        else if item.XY.side is 'y'
-          if m is 0
-            animCell = 1
-          else
-            animCell = 3
-      if ['x','x1','x2'].contains(item.XY.side)
-        f++
-      else
-        m++
-    return animCell
-  ).property('gametes','randomGameteNumber')
   chosenSex: (->
     if @get('content.sex') == GG.MALE and @get('chosenGamete')? and @get('chosenGamete').XY.side is 'y' then GG.MALE else GG.FEMALE
   ).property('gametes','randomGameteNumber')

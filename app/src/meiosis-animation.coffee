@@ -77,13 +77,20 @@ GG.MeiosisAnimation = Ember.Object.create
     # move homologous pairs apart
     # line up sister chromatids along center line (Metaphase II)
     t = @scale(800)
-    args.container.find('.chromo-1.right').animate({top: "+=85px", left: "-=60px"}, t, 'easeInOutQuad')
-    args.container.find('.chromo-1.left').animate({top: "-=20px"}, t, 'easeInOutQuad')
+    args.container.find('.chromo-1.cell0').animate({top: 0, left: 36}, t, 'easeInOutQuad')
+    args.container.find('.chromo-1.cell2').animate({top: 0, left: 66}, t, 'easeInOutQuad')
+    args.container.find('.chromo-1.cell1').animate({top: 105, left: 36}, t, 'easeInOutQuad')
+    args.container.find('.chromo-1.cell3').animate({top: 105, left: 66}, t, 'easeInOutQuad')
 
-    args.container.find('.chromo-2.right').animate({top: "+=85px", left: "-=120px"}, t, 'easeInOutQuad')
-    args.container.find('.chromo-2.left').animate({top: "-=20px", left: "-=60px"}, t, 'easeInOutQuad')
-    args.container.find('.chromo-X.right, .chromo-Y.right').animate({top: "+=85px", left: "-=180px"}, t, 'easeInOutQuad')
-    args.container.find('.chromo-X.left').animate({top: "-=20px", left: "-=120px"}, t, 'easeInOutQuad')
+    args.container.find('.chromo-2.cell0').animate({top: 0, left: 116}, t, 'easeInOutQuad')
+    args.container.find('.chromo-2.cell2').animate({top: 0, left: 146}, t, 'easeInOutQuad')
+    args.container.find('.chromo-2.cell1').animate({top: 105, left: 116}, t, 'easeInOutQuad')
+    args.container.find('.chromo-2.cell3').animate({top: 105, left: 146}, t, 'easeInOutQuad')
+
+    args.container.find('.chromo-X.cell0, .chromo-Y.cell0').animate({top: 0, left: 196}, t, 'easeInOutQuad')
+    args.container.find('.chromo-X.cell2, .chromo-Y.cell2').animate({top: 0, left: 226}, t, 'easeInOutQuad')
+    args.container.find('.chromo-X.cell1, .chromo-Y.cell1').animate({top: 105, left: 196}, t, 'easeInOutQuad')
+    args.container.find('.chromo-X.cell3, .chromo-Y.cell3').animate({top: 105, left: 226}, t, 'easeInOutQuad')
 
     # widen cell
     args.cell.animate({height: 200, width: 300}, t, 'easeInOutQuad')
@@ -105,13 +112,14 @@ GG.MeiosisAnimation = Ember.Object.create
   separateToGametes: (args)->
     t = @scale(2000)
     # move sisters apart to divide cell again (Anaphase II + Telophase II)
-    args.container.find('.chromo-1.sister-1').animate({left: 10}, t, 'easeInOutQuad')
-    args.container.find('.chromo-2.sister-1').animate({left: 41}, t, 'easeInOutQuad')
-    args.container.find('.chromo-X.sister-1,.chromo-Y.sister-1').animate({left: 72}, t, 'easeInOutQuad')
+    args.container.find('.chromo-1.cell0,.chromo-1.cell1').animate({left: 10}, t, 'easeInOutQuad')
+    args.container.find('.chromo-2.cell0,.chromo-2.cell1').animate({left: 41}, t, 'easeInOutQuad')
+    args.container.find('.chromo-X.cell0,.chromo-X.cell1,.chromo-Y.cell0,.chromo-Y.cell1').animate({left: 72}, t, 'easeInOutQuad')
 
-    args.container.find('.chromo-1.sister-2').animate({left:"+=120px"}, t, 'easeInOutQuad')
-    args.container.find('.chromo-2.sister-2').animate({left:"+=73px"}, t, 'easeInOutQuad')
-    args.container.find('.chromo-X.sister-2,.chromo-Y.sister-2').animate({left:"+=26px"}, t, 'easeInOutQuad')
+    args.container.find('.chromo-1.cell2,.chromo-1.cell3').animate({left: 186}, t, 'easeInOutQuad')
+    args.container.find('.chromo-2.cell2,.chromo-2.cell3').animate({left: 217}, t, 'easeInOutQuad')
+    args.container.find('.chromo-X.cell2,.chromo-X.cell3,.chromo-Y.cell2,.chromo-Y.cell3').animate({left: 248}, t, 'easeInOutQuad')
+
     #divide cell
     @divideCell(args)
 
@@ -134,27 +142,24 @@ GG.MeiosisAnimation = Ember.Object.create
     #   console.log("cell click complete", evt)
     # enlarge the chosen gamete
     # and make the rest disappear
-    gamete = args.parentView.get('randomGameteAnimationCell')
+    gamete = args.parentView.get('randomGameteNumber')
     chosenChromos = ""
     chosenCell = ""
     down = true
     right = true
     if gamete == 0
-      chosenChromos = ".left.sister-1"
       chosenCell = ".cell-left.cell-top"
     else if gamete == 1
-      chosenChromos = ".right.sister-1"
       chosenCell = ".cell-left.cell-bottom"
       down = false
     else if gamete == 2
-      chosenChromos = ".left.sister-2"
       chosenCell = ".cell-right.cell-top"
       right = false
     else if gamete == 3
-      chosenChromos = ".right.sister-2"
       chosenCell = ".cell-right.cell-bottom"
       down = false
       right = false
+    chosenChromos = ".cell" + gamete
     leftShift = (if right then "+=" else "-=" ) + "88px"
     topShift = (if down then "+=" else "-=" ) + "55px"
 
