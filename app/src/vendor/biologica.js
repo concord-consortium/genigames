@@ -86,16 +86,28 @@
   BioLogica.Chromosome = (function() {
 
     function Chromosome(species, chromosome, side, alleles) {
-      var al, i, s, _i, _ref,
+      var al, i, s, seenGenes, _i, _ref,
         _this = this;
       this.species = species;
       this.chromosome = chromosome;
+      seenGenes = [];
       this.alleles = alleles.sort(function(a, b) {
         if (_this.getAllelesPosition(a) > _this.getAllelesPosition(b)) {
           return 1;
         } else {
           return -1;
         }
+      }).filter(function(item) {
+        var gene;
+        gene = _this.getGeneOfAllele(item);
+        if (seenGenes.indexOf(gene) !== -1) {
+          if (typeof console !== "undefined" && console !== null) {
+            console.warn("Duplicate allele found: " + item);
+          }
+          return false;
+        }
+        seenGenes.push(gene);
+        return true;
       });
       if (typeof side === "object") {
         this.side = side[0];
@@ -1070,7 +1082,7 @@
     chromosomeNames: ['1', '2', 'XY'],
     chromosomeGeneMap: {
       '1': ['t', 'm', 'w', 'h'],
-      '2': ['c', 'b', 'fl', 's'],
+      '2': ['c', 'b', 'a', 's'],
       'XY': ['d', 'fb']
     },
     chromosomesLength: {
@@ -1109,8 +1121,8 @@
         start: 25000000,
         length: 17596
       },
-      forelimbs: {
-        alleles: ['Fl', 'fl'],
+      armor: {
+        alleles: ['A', 'a'],
         start: 80000000,
         length: 122234
       },
@@ -1142,8 +1154,8 @@
       'h': 'Horns',
       'C': 'Colored',
       'c': 'Colorless',
-      'Fl': 'Short forelimbs',
-      'fl': 'Long forelimbs',
+      'A': 'No armor',
+      'a': 'Armor',
       'S': 'Spikes wide',
       's': 'Spikes narrow',
       'B': 'Black',
@@ -1169,12 +1181,12 @@
         "No wings": [["w", "w"]]
       },
       "horns": {
-        "Hornless": [["H", "H"], ["H", "h"]],
-        "Horns": [["h", "h"]]
+        "Reverse horns": [["H", "H"], ["H", "h"]],
+        "Forward horns": [["h", "h"]]
       },
-      "forelimbs": {
-        "Short forelimbs": [["Fl", "Fl"], ["Fl", "fl"]],
-        "Long forelimbs": [["fl", "fl"]]
+      "armor": {
+        "No armor": [["A", "A"], ["A", "a"]],
+        "Armor": [["a", "a"]]
       },
       "spikes": {
         "Wide spikes": [["S", "S"]],
