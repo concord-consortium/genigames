@@ -53,7 +53,11 @@
 	top: 0px;
 }
 
-.drake-horns {
+.drake-reverse-horns {
+	top: -100%;
+}
+
+.drake-forward-horns {
 	top: -200%;
 }
 
@@ -81,11 +85,11 @@
 	top: -800%
 }
 
-.drake-long-forelimbs {
+.drake-armor {
 	top: -900%
 }
 
-.drake-short-forelimbs {
+.drake-no-armor {
 	top: -1000%
 }
 
