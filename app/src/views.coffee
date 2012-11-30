@@ -204,6 +204,12 @@ GG.BreedButtonView = Ember.View.extend
   click: ->
     GG.statemanager.send('breedDrake')
 
+GG.MeiosisButtonView = Ember.View.extend
+  tagName: 'div'
+  click: ->
+    GG.statemanager.send('toggleBreedType')
+
+
 GG.AlleleView = Ember.View.extend
   classNameBindings: ['defaultClassNames', 'hidden:revealable', 'dominant']
   defaultClassNames: 'allele'

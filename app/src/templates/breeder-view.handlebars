@@ -3,7 +3,8 @@
     {{view GG.FatherPoolView class="male-parents" id="parent-fathers-pool-container"}}
     <div id="parent-pool-divider"></div>
     {{view GG.MotherPoolView id="parent-mothers-pool-container"}}
-    <div id="breed-controls">
+    <div id="breed-controls" {{bindAttr class="GG.breedingController.breedType"}}>
+      {{view GG.MeiosisButtonView id="meiosis-button"}}
       {{view GG.BreedButtonView id="breed-button"}}
       {{view GG.MoveCounter}}
     </div>

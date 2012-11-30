@@ -54,12 +54,27 @@
 
 #breed-controls {
   position: absolute;
-  background-image: url('../images/breed-controls.png');
   top: 268px;
   left: 742px;
   width: 268px;
   height: 101px;
   z-index: 2;
+}
+
+#breed-controls.direct {
+  background-image: url('../images/breed-controls-meiosis-off.png');
+}
+
+#breed-controls.meiosis {
+  background-image: url('../images/breed-controls-meiosis-on.png');
+}
+
+#meiosis-button {
+  position: absolute;
+  top: 23px;
+  left: 94px;
+  width: 59px;
+  height: 59px;
 }
 
 #breed-button {
