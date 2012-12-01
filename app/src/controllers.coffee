@@ -1,8 +1,8 @@
 minispade.require 'genigames/controller-mixins'
 
 ## Static variables ##
-GG.BREED_DIRECT  = "direct"
-GG.BREED_MEIOSIS = "meiosis"
+GG.BREED_AUTOMATED  = "automated"
+GG.BREED_CONTROLLED = "controlled"
 
 GG.townsController = Ember.ArrayController.create
   content    : []
@@ -227,7 +227,7 @@ GG.breedingController = Ember.Object.create
   fatherBinding: 'GG.parentController.selectedFather'
   isBreeding: false
 
-  breedType: GG.BREED_DIRECT
+  breedType: GG.BREED_AUTOMATED
 
   child: null
 
@@ -448,6 +448,8 @@ GG.actionCostsController = Ember.Object.create
 GG.meiosisController = Ember.Object.create
   motherView: null
   fatherView: null
+  motherGameteNumberBinding: 'motherView.randomGameteNumberOverride'
+  fatherGameteNumberBinding: 'fatherView.randomGameteNumberOverride'
   chosenMotherAllelesBinding: 'motherView.chosenGameteAlleles'
   chosenFatherAllelesBinding: 'fatherView.chosenGameteAlleles'
   chosenMotherGameteBinding: 'motherView.chosenGamete'
@@ -480,6 +482,66 @@ GG.meiosisController = Ember.Object.create
     if @get('motherView')? and @get('fatherView')?
       @get('motherView').resetAnimation()
       @get('fatherView').resetAnimation()
+      @set('selectedChromosomes', { father: {}, mother: {}})
+  selectedChromosomes: { father: {}, mother: {}}
+  deselectChromosome: (chromoView) ->
+    selected = @get('selectedChromosomes')
+    source = if chromoView.get('content.sex') == GG.MALE then "father" else "mother"
+    chromo = chromoView.get('chromo')
+    chromo = "XY" if chromo is "X" or chromo is "Y"
+    chromoView.set('selected', false)
+    selected[source][chromo] = null
+
+    clearNum = true
+    for own chrom,view of selected[source]
+      clearNum = false if view?
+
+    if clearNum
+      gameteNumberProp = if source is "father" then 'fatherGameteNumber' else 'motherGameteNumber'
+      @set(gameteNumberProp, -1)
+
+    # TODO We should probably revert any cell num swaps that happened on selection, so the user can't
+    # cheat by selecting and then deselecting and having them move to the same gamete anyway
+
+  selectChromosome: (chromoView) ->
+    selected = @get('selectedChromosomes')
+    source = if chromoView.get('content.sex') == GG.MALE then "father" else "mother"
+    chromo = chromoView.get('chromo')
+    chromo = "XY" if chromo is "X" or chromo is "Y"
+    if selected[source][chromo]?
+      selected[source][chromo].set('selected', false)
+    selected[source][chromo] = chromoView
+    gameteNumberProp = if source is "father" then 'fatherGameteNumber' else 'motherGameteNumber'
+    destGameteNum = @get(gameteNumberProp)
+    sourceGameteNum = chromoView.get('cellNum')
+    if destGameteNum == -1
+      @set(gameteNumberProp, sourceGameteNum)
+    else
+      # if the selected chromosome is *not* in the to-be-selected gamete, move it into it
+      if sourceGameteNum != destGameteNum
+        Ember.run =>
+          # get the gametes
+          gametes = if source is "father" then @get('fatherView.gametes') else @get('motherView.gametes')
+          # swap the source chromo and the destination chromo
+          destChromo = gametes.cells[destGameteNum][chromo]
+          gametes.cells[destGameteNum][chromo] = gametes.cells[sourceGameteNum][chromo]
+          gametes.cells[sourceGameteNum][chromo] = destChromo
+          # swap the endCellInfo numbers
+          destRealSide = ''
+          sourceRealSide = ''
+          for own side,num of gametes.endCellInfo[chromo]
+            sourceRealSide = side if num == sourceGameteNum
+            destRealSide = side if num == destGameteNum
+          console.log("Swapping endCellInfo: " + sourceRealSide + "  " + gametes.endCellInfo[chromo][sourceRealSide] + " => " + destGameteNum +
+                                            ", " + destRealSide + "  " + gametes.endCellInfo[chromo][destRealSide] + " => " + sourceGameteNum)
+          gametes.endCellInfo[chromo][sourceRealSide] = destGameteNum
+          gametes.endCellInfo[chromo][destRealSide] = sourceGameteNum
+          if source is "father"
+            @set('fatherView.gametes', $.extend(true, {}, gametes))
+            @get('fatherView').notifyPropertyChange('gametes')
+          else
+            @set('motherView.gametes', $.extend(true, {}, gametes))
+            @get('motherView').notifyPropertyChange('gametes')
 
 GG.obstacleCourseController = Ember.Object.create
   courseBinding: 'GG.tasksController.currentTask.obstacleCourse'

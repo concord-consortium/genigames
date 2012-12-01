@@ -43,10 +43,10 @@ GG.StateInTask = Ember.State.extend
         success: success
 
     toggleBreedType: ->
-      if GG.breedingController.get('breedType') is GG.BREED_DIRECT
-        GG.breedingController.set 'breedType', GG.BREED_MEIOSIS
+      if GG.breedingController.get('breedType') is GG.BREED_AUTOMATED
+        GG.breedingController.set 'breedType', GG.BREED_CONTROLLED
       else
-        GG.breedingController.set 'breedType', GG.BREED_DIRECT
+        GG.breedingController.set 'breedType', GG.BREED_AUTOMATED
 
     completeTask: ->
       GG.tasksController.completeCurrentTask()
@@ -122,6 +122,27 @@ GG.StateInTask = Ember.State.extend
             GG.meiosisController.resetAnimation()
           , 500
           manager.transitionTo 'breeding'
+
+      doneSelectingChromatids: (manager, parent) ->
+        callback = @get('selectingChromatidsCallback')
+        if callback?
+          $('#' + parent.get('elementId') + " .chromatidSelectionView").addClass('hidden')
+          callback.call()
+        else
+          console.log("no callback specified for doneSelectingChromatids!")
+
+      selectingChromatidsCallback: null
+      selectingChromatidsSelector: ''
+      selectingChromatids: (manager, context) ->
+        @set('selectingChromatidsCallback', context.callback)
+        selector = '#' + context.elementId + ' .chromatidSelectionView'
+        @set('selectingChromatidsSelector', selector)
+        $(selector).removeClass('hidden')
+
+      deselectedChromosome: (manager, chromoView)->
+        GG.meiosisController.deselectChromosome(chromoView)
+      selectedChromosome: (manager, chromoView)->
+        GG.meiosisController.selectChromosome(chromoView)
 
       breedDrake: (manager)->
         # If the breed button gets clicked while we're animating,

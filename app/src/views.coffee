@@ -252,12 +252,24 @@ GG.ChromoView = Ember.View.extend
   chromo: '1'
   side: 'a'
   sister: null
+  selectable: false
+  selected: false
   hiddenGenesBinding: 'GG.drakeController.hiddenGenes'
   visibleGenesBinding: 'GG.drakeController.visibleGenes'
   revealedContentAllelesIdxBinding: 'content.revealedIdx'
   revealedAlleles: null
   gametes: null
   useGamete: false
+  realSide: (->
+    realSide = ''
+    if ['x2','y','b'].contains(@get('side'))
+      realSide = 'b'
+    else
+      realSide = 'a'
+
+    realSide += @get('sister')
+    return realSide
+  ).property('sister','side')
   cellNum: (->
     if @get('gametes')?
       endInfo = @get('gametes').endCellInfo
@@ -265,18 +277,12 @@ GG.ChromoView = Ember.View.extend
       chromo = @get('chromo')
       chromo = if chromo == "X" or chromo == "Y" then "XY" else chromo
 
-      if ['x2','y','b'].contains(@get('side'))
-        realSide = 'b'
-      else
-        realSide = 'a'
-
-      realSide += @get('sister')
-      cellNum = endInfo[chromo][realSide]
+      cellNum = endInfo[chromo][@get 'realSide']
     else
       cellNum = -1
 
     return cellNum
-  ).property('chromo','side','sister','gametes')
+  ).property('chromo','realSide','gametes')
   gamete: (->
     if @get('cellNum') != -1
       cell = @get('gametes').cells[@get('cellNum')]
@@ -351,6 +357,15 @@ GG.ChromoView = Ember.View.extend
         geno = fullGeno[side]
         res = GG.Genetics.filter(geno, @get 'genes')
     return res
+  click: ->
+    if @get('selectable')
+      # toggle selected
+      if @get('selected')
+        @set('selected', false)
+        GG.statemanager.send 'deselectedChromosome', this
+      else
+        @set('selected', true)
+        GG.statemanager.send 'selectedChromosome', this
   defaultClass: 'chromosome'
   chromoName: (->
     'chromo-'+@get('chromo')
@@ -376,7 +391,7 @@ GG.ChromoView = Ember.View.extend
   ).property('cellNum')
   hidden: false
   classNames: ['chromosome']
-  classNameBindings: ['chromoName', 'right', 'parent', 'sisterClass', 'hidden', 'cell']
+  classNameBindings: ['chromoName', 'right', 'parent', 'sisterClass', 'hidden', 'cell', 'selectable', 'selected']
 
 GG.ChromosomePanelView = Ember.View.extend
   templateName: 'chromosome-panel'
@@ -607,6 +622,8 @@ GG.MeiosisView = Ember.View.extend
     setTimeout =>
       @set('useGametes', false)
       @_createGametes()
+      console.log("Setting new controller view: " + @get('motherFather'), _this)
+      GG.meiosisController.set(@get('motherFather') + "View", _this)
     , 200
   _createGametes: ->
     newGametes = @get('content.biologicaOrganism').createGametesWithCrossInfo(4)[0]
@@ -701,9 +718,21 @@ GG.MeiosisView = Ember.View.extend
           anim = animationQueue[i]
           $(anim.source).css({left: '', top: ''})
     , 1550
+  chromosomesSelectable: false
+  selectingChromatids: (callback)->
+    @set('chromosomesSelectable', true)
+    GG.statemanager.send 'selectingChromatids', {elementId: @get('elementId'), callback: callback}
+  doneSelectingChromatids: ->
+    @set('chromosomesSelectable', false)
+    GG.statemanager.send 'doneSelectingChromatids', this
+  randomGameteNumberOverride: -1
   randomGameteNumber: (->
-    ExtMath.randomInt(4)
-  ).property('gametes')
+    override = @get('randomGameteNumberOverride')
+    if override == -1
+      return ExtMath.randomInt(4)
+    else
+      return override
+  ).property('gametes', 'randomGameteNumberOverride')
   chosenSex: (->
     if @get('content.sex') == GG.MALE and @get('chosenGamete')? and @get('chosenGamete').XY.side is 'y' then GG.MALE else GG.FEMALE
   ).property('gametes','randomGameteNumber')
