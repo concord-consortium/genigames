@@ -123,6 +123,21 @@ GG.StateInTask = Ember.State.extend
           , 500
           manager.transitionTo 'breeding'
 
+      selectingCrossoverCallback: null
+      doneSelectingCrossover: (manager, parent) ->
+        callback = @get('selectingCrossoverCallback')
+        if callback?
+          $('#' + parent.get('elementId') + " .crossoverSelection").addClass('hidden')
+          callback.call()
+        else
+          console.log("no callback specified for doneSelectingCrossover!")
+
+      selectingCrossover: (manager, context) ->
+        @set('selectingCrossoverCallback', context.callback)
+        selector = '#' + context.elementId + ' .crossoverSelection'
+        $(selector).removeClass('hidden')
+
+      selectingChromatidsCallback: null
       doneSelectingChromatids: (manager, parent) ->
         callback = @get('selectingChromatidsCallback')
         if callback?
@@ -131,12 +146,9 @@ GG.StateInTask = Ember.State.extend
         else
           console.log("no callback specified for doneSelectingChromatids!")
 
-      selectingChromatidsCallback: null
-      selectingChromatidsSelector: ''
       selectingChromatids: (manager, context) ->
         @set('selectingChromatidsCallback', context.callback)
         selector = '#' + context.elementId + ' .chromatidSelection'
-        @set('selectingChromatidsSelector', selector)
         $(selector).removeClass('hidden')
 
       deselectedChromosome: (manager, chromoView)->

@@ -783,6 +783,7 @@ GG.MeiosisView = Ember.View.extend
         $(selectorBase + " .allele").css({"z-index": ''})
     , 1550
   allelesClickable: false
+  crossoverSelectable: false
   chromosomesSelectable: false
   selectingChromatids: (callback)->
     @set('chromosomesSelectable', true)
@@ -790,6 +791,12 @@ GG.MeiosisView = Ember.View.extend
   doneSelectingChromatids: ->
     @set('chromosomesSelectable', false)
     GG.statemanager.send 'doneSelectingChromatids', this
+  selectingCrossover: (callback)->
+    @set('crossoverSelectable', true)
+    GG.statemanager.send 'selectingCrossover', {elementId: @get('elementId'), callback: callback}
+  doneSelectingCrossover: ->
+    @set('crossoverSelectable', false)
+    GG.statemanager.send 'doneSelectingCrossover', this
   randomGameteNumberOverride: -1
   randomGameteNumber: (->
     override = @get('randomGameteNumberOverride')

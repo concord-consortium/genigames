@@ -52,15 +52,15 @@ GG.MeiosisAnimation = Ember.Object.create
     # container.find('.chromo-2:not(.tempNotRight)').addClass("right")
     # container.find('.chromo-2.tempNotRight').removeClass("tempNotRight")
     @registerTimeout @scale(500), =>
-      args.parentView.crossOver()
-
-      # divide cell first time (Anaphase I + Telophase I)
-      @registerTimeout 2000, =>
-        if GG.breedingController.get('breedType') == GG.BREED_CONTROLLED
-          # wait for user to select chromosomes for final allele
+      if GG.breedingController.get('breedType') == GG.BREED_CONTROLLED
+        args.parentView.selectingCrossover =>
           args.parentView.selectingChromatids =>
             @divide(args)
-        else
+      else
+        args.parentView.crossOver()
+
+        # divide cell first time (Anaphase I + Telophase I)
+        @registerTimeout 2000, =>
           @divide(args)
 
   separateChromatids: (args)->
