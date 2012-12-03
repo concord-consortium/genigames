@@ -45,6 +45,14 @@
   top: 0px;
 }
 
+.chromosome.selectable:hover {
+  border: 1px solid yellow;
+}
+
+.chromosome.selected {
+  border: 1px solid blue;
+}
+
 .meiosis .allele {
   margin-left: 4px;
 }
@@ -64,3 +72,16 @@
 .meiosis .chromo-Y {
   background: top left no-repeat url('../images/chromo-short.png');
 }
+
+.chromosome.cell0 {
+}
+
+.chromosome.cell1 {
+}
+
+.chromosome.cell2 {
+}
+
+.chromosome.cell3 {
+}
+

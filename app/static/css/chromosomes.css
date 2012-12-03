@@ -20,14 +20,6 @@
   height: 130px;
 }
 
-.chromosome.selectable:hover {
-  border: 1px solid yellow;
-}
-
-.chromosome.selected {
-  border: 1px solid blue;
-}
-
 #offspring-pool .male-chromosome {
   background: top left no-repeat url('../images/male-chromo-right.png');
 }
@@ -90,14 +82,3 @@
   color: blue;
 }
 
-.chromosome.cell0 {
-}
-
-.chromosome.cell1 {
-}
-
-.chromosome.cell2 {
-}
-
-.chromosome.cell3 {
-}
