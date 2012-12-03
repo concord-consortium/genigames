@@ -126,7 +126,7 @@ GG.StateInTask = Ember.State.extend
       doneSelectingChromatids: (manager, parent) ->
         callback = @get('selectingChromatidsCallback')
         if callback?
-          $('#' + parent.get('elementId') + " .chromatidSelectionView").addClass('hidden')
+          $('#' + parent.get('elementId') + " .chromatidSelection").addClass('hidden')
           callback.call()
         else
           console.log("no callback specified for doneSelectingChromatids!")
@@ -135,7 +135,7 @@ GG.StateInTask = Ember.State.extend
       selectingChromatidsSelector: ''
       selectingChromatids: (manager, context) ->
         @set('selectingChromatidsCallback', context.callback)
-        selector = '#' + context.elementId + ' .chromatidSelectionView'
+        selector = '#' + context.elementId + ' .chromatidSelection'
         @set('selectingChromatidsSelector', selector)
         $(selector).removeClass('hidden')
 

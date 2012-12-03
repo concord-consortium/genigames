@@ -86,7 +86,7 @@
 .chromosome.cell3 {
 }
 
-.chromatidSelectionView {
+.meiosisControlView {
   position: absolute;
   top: 0px;
   left: 470px;
@@ -97,12 +97,12 @@
   box-shadow: 5px 5px 5px 1px gray;
 }
 
-.chromatidSelectionView button {
+.meiosisControlView button {
   position: absolute;
   bottom: 5px;
   right: 5px;
 }
 
-.chromatidSelectionView p {
+.meiosisControlView p {
   padding: 5px;
 }
