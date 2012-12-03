@@ -210,7 +210,7 @@ GG.MeiosisButtonView = Ember.View.extend
 
 
 GG.AlleleView = Ember.View.extend
-  classNameBindings: ['defaultClassNames', 'hidden:revealable', 'dominant', 'gene']
+  classNameBindings: ['defaultClassNames', 'revealable', 'dominant', 'gene']
   defaultClassNames: 'allele'
   value: ''
   hiddenValue: (->
@@ -220,7 +220,11 @@ GG.AlleleView = Ember.View.extend
     value = value.charAt(0).toUpperCase() + value.slice(1)
     value + '?'
   ).property('value').cacheable()
+  clickable: true
   hidden: false
+  revealable: (->
+    return @get('hidden') and @get('clickable')
+  ).property('hidden','clickable')
   dominant: (->
     ending = @get('displayValue').slice(-1)
     if ending is "1"
@@ -239,12 +243,6 @@ GG.AlleleView = Ember.View.extend
   displayValue: (->
     if @get('hidden') then @get('hiddenValue') else GG.drakeController.alleleOverride(@get('value'))
   ).property('value','hidden')
-  click: ->
-    if @get('hidden')
-      GG.userController.addReputation -GG.actionCostsController.getCost 'alleleRevealed'
-      if (@get 'drake')? and (@get 'side')?
-        @get('drake').markRevealed(@get('side'), @get('value'))
-      GG.logController.logEvent GG.Events.REVEALED_ALLELE, allele: @get('value'), side: @get('side'), drake: { alleles: @get('drake.biologicaOrganism.alleles'), sex: @get('drake.sex') }
 
 GG.ChromoView = Ember.View.extend
   templateName: 'chromosome'
@@ -367,6 +365,16 @@ GG.ChromoView = Ember.View.extend
       else
         @set('selected', true)
         GG.statemanager.send 'selectedChromosome', this
+  allelesClickable: true
+  alleleClicked: (event) ->
+    if @get('allelesClickable')
+      allele = event.context
+      if !allele.visible
+        GG.userController.addReputation -GG.actionCostsController.getCost 'alleleRevealed'
+        if (@get 'content')? and (@get 'side')?
+          console.log("Marking revealed: " + allele.allele)
+          @get('content').markRevealed(@get('side'), allele.allele)
+        GG.logController.logEvent GG.Events.REVEALED_ALLELE, allele: allele.allele, side: @get('side'), drake: { alleles: @get('content.biologicaOrganism.alleles'), sex: @get('content.sex') }
   defaultClass: 'chromosome'
   chromoName: (->
     'chromo-'+@get('chromo')
@@ -727,6 +735,7 @@ GG.MeiosisView = Ember.View.extend
         # put the alleles back at their default level, so they slide under/over
         $(selectorBase + " .allele").css({"z-index": ''})
     , 1550
+  allelesClickable: false
   chromosomesSelectable: false
   selectingChromatids: (callback)->
     @set('chromosomesSelectable', true)

@@ -5,8 +5,8 @@
       {{view.displayValue}}
     {{/view}}
   {{else}}
-    {{#view GG.AlleleView valueBinding="allele.allele" sideBinding="view.side" drakeBinding="view.content" hidden="true"}}
-      {{view.displayValue}}
+    {{#view GG.AlleleView valueBinding="allele.allele" hidden="true" clickableBinding="view.allelesClickable"}}
+      <span {{action alleleClicked allele target="view.parentView"}} >{{view.displayValue}}</span>
     {{/view}}
   {{/if}}
 {{/each}}
