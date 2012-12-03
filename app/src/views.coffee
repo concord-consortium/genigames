@@ -302,8 +302,9 @@ GG.ChromoView = Ember.View.extend
     res = null
     if @get(prop)?.alleles
       gamete = @get(prop)
-      genes = if hidden then 'hiddenGenes' else 'visibleGenes'
-      res = GG.Genetics.filter(gamete.alleles, @get(genes))
+      genesProp = if hidden then 'hiddenGenes' else 'visibleGenes'
+      genes = @get(genesProp) || []
+      res = GG.Genetics.filter(gamete.alleles, genes)
       # Now add or subtract the revealed alleles from the result
       if gamete.revealed?
         if hidden
