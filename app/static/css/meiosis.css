@@ -46,6 +46,7 @@
 }
 
 .meiosis .allele {
+  position: relative; /* For the allele crossover animation */
   margin-left: 4px;
 }
 

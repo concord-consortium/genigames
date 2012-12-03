@@ -66,8 +66,6 @@
   font-weight: bold;
   padding-top: 4px;
   cursor: default;
-  position: relative; /* For the allele crossover animation */
-  z-index: 10;
 }
 
 .allele.revealable {

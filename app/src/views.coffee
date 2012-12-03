@@ -706,6 +706,8 @@ GG.MeiosisView = Ember.View.extend
 
         animationQueue.push {source: sourceSelector, anim: {top: dy, left: dx}}
 
+    # temporarily put alleles on top, so we don't see them sliding under other chromosomes
+    $(selectorBase + " .allele").css({"z-index": 10})
     for i in [0...animationQueue.length]
       anim = animationQueue[i]
       $(anim.source).animate(anim.anim, 1500, 'easeInOutQuad')
@@ -718,6 +720,8 @@ GG.MeiosisView = Ember.View.extend
         for i in [0...animationQueue.length]
           anim = animationQueue[i]
           $(anim.source).css({left: '', top: ''})
+        # put the alleles back at their default level, so they slide under/over
+        $(selectorBase + " .allele").css({"z-index": ''})
     , 1550
   chromosomesSelectable: false
   selectingChromatids: (callback)->
