@@ -243,6 +243,20 @@ GG.AlleleView = Ember.View.extend
   displayValue: (->
     if @get('hidden') then @get('hiddenValue') else GG.drakeController.alleleOverride(@get('value'))
   ).property('value','hidden')
+  attributeBindings: ['title']
+  title: (->
+    if @get 'hidden'
+      cost = GG.actionCostsController.getCost 'alleleRevealed'
+      return "Reveal hidden allele.<br/><br/>Cost: #{cost} rep points."
+    else
+      if qtip = @get 'qtip'
+        qtip.destroy()
+      return ""
+  ).property('hidden')
+  didInsertElement: ->
+    @_super()
+    if @get('hidden')
+      @set 'qtip', @$().qtip GG.QTipDefaults
 
 GG.ChromoView = Ember.View.extend
   templateName: 'chromosome'
@@ -798,3 +812,18 @@ GG.ObstacleView = Ember.View.extend
   classNames: ['obstacle']
   classNameBindings: ['type']
   type: "ducks"
+
+GG.QTipDefaults =
+  show: 'mouseover'
+  hide: 'mouseout click'
+  position:
+    corner:
+     target: 'bottomRight'
+     tooltip: 'topLeft'
+  style:
+    border:
+     width: 1
+     radius: 8
+    tip: 'topLeft'
+    color: '#333'
+    name: 'cream'
