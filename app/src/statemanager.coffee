@@ -67,7 +67,6 @@ GG.statemanager = Ember.StateManager.create
         gamePath = if UNDER_TEST? then 'api/testgame' else 'api/game'
 
         $.getJSON gamePath, (data) ->
-          console.log("Loading game data")
           # re-construct the data into heirarchical format, since
           # couchdb doesn't make that easy to do before delivering it
           items = {
@@ -76,19 +75,16 @@ GG.statemanager = Ember.StateManager.create
             'world': {}
           }
           for item in data.rows
-            console.log("processing item: ", item.key, item.id, item.value)
             items[item.key][item.id] = item.value
 
           # now embed tasks into towns
           for own t of items.town
-            console.log("processing town: ", t)
             children = []
             for ta in items.town[t].tasks
               children.push(items.task[ta])
             items.town[t].tasks = children
 
           for own wo of items.world
-            console.log("processing world: ", wo)
             children = []
             for tow in items.world[wo].towns
               children.push(items.town[tow])

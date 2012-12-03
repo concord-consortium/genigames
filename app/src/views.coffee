@@ -623,7 +623,6 @@ GG.MeiosisView = Ember.View.extend
     setTimeout =>
       @set('useGametes', false)
       @_createGametes()
-      console.log("Setting new controller view: " + @get('motherFather'), _this)
       GG.meiosisController.set(@get('motherFather') + "View", _this)
     , 200
   _createGametes: ->
