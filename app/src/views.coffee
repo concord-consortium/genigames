@@ -627,14 +627,23 @@ GG.MeiosisView = Ember.View.extend
     , 200
   _createGametes: ->
     newGametes = @get('content.biologicaOrganism').createGametesWithCrossInfo(4)[0]
+    @set 'gametes', newGametes
+  sistersHidden: true
+  animate: (callback)->
+    GG.MeiosisAnimation.animate(".meiosis." + @get('motherFather'), this, callback)
 
-    # Transfer revealed status to new gametes...
+    # Transfer revealed status to new gametes... We can't do this earlier
+    # because the meiosis view is created when the user selects the drake
+    # and still has an opportunity to interact and reveal alleles before
+    # the animation starts.
+    newGametes = @get 'gametes'
     revealed = @get('content.revealedAlleles')
     normalizedSide = (s)->
       if ['x','x1','a'].contains(s)
         return 'a'
       else if ['y','x2','b'].contains(s)
         return 'b'
+    console.log("Transferring revealed status")
     for side of revealed
       alleles = revealed[side]
       continue if alleles.length == 0
@@ -649,10 +658,6 @@ GG.MeiosisView = Ember.View.extend
             if idx != -1 and normalizedSide(chromo.allelesWithSides[idx].side) is nSide
               chromo.revealed ?= []
               chromo.revealed.push allele
-    @set 'gametes', newGametes
-  sistersHidden: true
-  animate: (callback)->
-    GG.MeiosisAnimation.animate(".meiosis." + @get('motherFather'), this, callback)
   resetAnimation: ()->
     GG.MeiosisAnimation.reset(".meiosis." + @get('motherFather'), this)
     @set('gametes', null)
