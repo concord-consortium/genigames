@@ -46,21 +46,63 @@
 }
 
 .meiosis .allele {
+  position: relative; /* For the allele crossover animation */
   margin-left: 4px;
 }
 
-.meiosis .chromo-1 {
+.meiosis .chromosome.selectable:not(.chromo-Y):hover {
+  background: top left no-repeat url('../images/chromo-full-hover.png');
+}
+
+.meiosis .chromosome.selected:not(.chromo-Y) {
+  background: top left no-repeat url('../images/chromo-full-selected.png');
+}
+
+.meiosis .chromosome.selectable.chromo-Y:hover {
+  background: top left no-repeat url('../images/chromo-short-hover.png');
+}
+
+.meiosis .chromosome.selected.chromo-Y {
+  background: top left no-repeat url('../images/chromo-short-selected.png');
+}
+
+.meiosis .chromosome:not(.chromo-Y) {
   background: top left no-repeat url('../images/chromo-full.png');
 }
 
-.meiosis .chromo-2 {
-  background: top left no-repeat url('../images/chromo-full.png');
-}
-
-.meiosis .chromo-X {
-  background: top left no-repeat url('../images/chromo-full.png');
-}
-
-.meiosis .chromo-Y {
+.meiosis .chromosome.chromo-Y {
   background: top left no-repeat url('../images/chromo-short.png');
+}
+
+.chromosome.cell0 {
+}
+
+.chromosome.cell1 {
+}
+
+.chromosome.cell2 {
+}
+
+.chromosome.cell3 {
+}
+
+.chromatidSelectionView {
+  position: absolute;
+  top: 0px;
+  left: 470px;
+  width: 275px;
+  height: 140px;
+  border: 1px solid black;
+  border-radius: 10px;
+  box-shadow: 5px 5px 5px 1px gray;
+}
+
+.chromatidSelectionView button {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+}
+
+.chromatidSelectionView p {
+  padding: 5px;
 }

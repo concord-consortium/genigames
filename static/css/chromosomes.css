@@ -19,6 +19,7 @@
   width: 35px;
   height: 130px;
 }
+
 #offspring-pool .male-chromosome {
   background: top left no-repeat url('../images/male-chromo-right.png');
 }
@@ -65,8 +66,6 @@
   font-weight: bold;
   padding-top: 4px;
   cursor: default;
-  position: relative; /* For the allele crossover animation */
-  z-index: 10;
 }
 
 .allele.revealable {
@@ -81,14 +80,3 @@
   color: blue;
 }
 
-.chromosome.cell0 {
-}
-
-.chromosome.cell1 {
-}
-
-.chromosome.cell2 {
-}
-
-.chromosome.cell3 {
-}
