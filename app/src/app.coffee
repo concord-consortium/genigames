@@ -39,6 +39,13 @@ minispade.require 'genigames/templates/obstacle-course'
 $.expr[":"].onlyContains = (obj, index, meta, stack)->
   return (obj.textContent || obj.innerText || $(obj).text() || "").replace(/^\s+/, '').replace(/\s+$/,'') is meta[3]
 
+Ember.Handlebars.registerHelper 'meiosisDefaults', (path, options) ->
+  options.hash.gametesBinding = "view.gametes"
+  options.hash.useGameteBinding = "view.useGametes"
+  options.hash.contentBinding = "view.content"
+  options.hash.selectableBinding = "view.chromosomesSelectable"
+  return Ember.Handlebars.helpers.view(path, options)
+
 # on load
 $ ->
 
