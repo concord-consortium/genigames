@@ -384,11 +384,13 @@ GG.ChromoView = Ember.View.extend
     if @get('allelesClickable')
       allele = event.context
       if !allele.visible
+        @get('content').markRevealed(@get('side'), allele.allele)
         GG.userController.addReputation -GG.actionCostsController.getCost 'alleleRevealed'
-        if (@get 'content')? and (@get 'side')?
-          console.log("Marking revealed: " + allele.allele)
-          @get('content').markRevealed(@get('side'), allele.allele)
-        GG.logController.logEvent GG.Events.REVEALED_ALLELE, allele: allele.allele, side: @get('side'), drake: { alleles: @get('content.biologicaOrganism.alleles'), sex: @get('content.sex') }
+        GG.logController.logEvent GG.Events.REVEALED_ALLELE
+          allele: allele.allele
+          side: @get('side')
+          drake: { alleles: @get('content.biologicaOrganism.alleles')
+          sex: @get('content.sex') }
   defaultClass: 'chromosome'
   chromoName: (->
     'chromo-'+@get('chromo')
