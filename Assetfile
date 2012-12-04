@@ -13,6 +13,11 @@ input "app" do
     coffee_script
   end
 
+  # Compile Stylus to CSS
+  match "**/*.styl" do
+    stylus
+  end
+
   # Merge all CSS files (inc compiled styl) into genimages.css
   match "**/*.css" do
     concat "css/genigames.css"

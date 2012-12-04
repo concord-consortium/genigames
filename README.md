@@ -111,6 +111,12 @@ Restart Apache:
 
 ## Program structure
 
-The project's source code can be found in the `app/` directory, and is written in CoffeeScript. The
+The project's source code can be found in the `app/src` directory, and is written in CoffeeScript. The
 CoffeeScript is then compiled into JavaScript, concatenated, and placed into the file
 `build/js/app.js`.
+
+The project's stylesheets can be found in the `app/style` directory, and are written in Stylus. They
+are then compiled into CSS, concatenated, and placed into the file `build/css/genigames.css`.
+
+Note that regular .css files can also go into the /style directory, and will be concatenated with
+everything else. Note also that vanilla CSS can be mixed in freely inside .styl files.
