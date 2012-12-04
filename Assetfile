@@ -13,6 +13,11 @@ input "app" do
     coffee_script
   end
 
+  # Merge all CSS files (inc compiled styl) into genimages.css
+  match "**/*.css" do
+    concat "css/genigames.css"
+  end
+
   # now run filters on the combined javascript
   match "src/**/*.js" do
     # The minispade helper wraps each JS file in some code to
