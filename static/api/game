@@ -56,14 +56,14 @@
           "visibleGenes": ["T","W"],
           "hiddenGenes": ["Hl","Rh"],
           "initialDrakes": {
-            "females": ["a:W,b:W,a:H","a:W,b:w,a:h,b:h"],
-            "males": ["a:W,b:W,a:A","a:W,b:w,a:a,b:a"]
+            "females": ["","","","","",""],
+            "males": ["","","","","",""]
           },
           "targetDrake": "male, no wings",
           "npc": {
             "name": "Cousin It's Twin",
             "imageURL": "../images/cousin-it.png",
-            "position": {"x": 300, "y": 500},
+            "position": {"x": 300, "y": 345},
             "speech": {
               "text": ["Hello, drake breeder!<br/><br/>I'm Cousin It's Twin.","I have a very important task for you!","Breed a male, wingless drake!"],
               "completionText": "Good job!<br/><br/>You totally got the drake I wanted. Thanks!",
