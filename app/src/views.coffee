@@ -75,18 +75,16 @@ GG.BreederView = Ember.View.extend
 
 GG.DrakeView = Ember.View.extend
   templateName       : 'drake'
+  drakeImageName     : (->
+    color = @get('org').getCharacteristic 'color'
+    GG.getFileName(color, "png")
+  ).property()
   drakeImage         : (->
-    color = @get('org').getCharacteristic 'color'
-    if color is "Gray"
-      '../images/drakes/greenMetallic-static.png'
-    else '../images/drakes/green-static.png'
-  ).property()
+    '../images/drakes/' + @get 'drakeImageName'
+  ).property('drakeImage')
   drakeIdleImage     : (->
-    color = @get('org').getCharacteristic 'color'
-    if color is "Gray"
-      '../images/drakes/greenMetallic-headturn.png'
-    else '../images/drakes/green-headturn.png'
-  ).property()
+    '../images/drakes/headturn/' + @get 'drakeImageName'
+  ).property('drakeImage')
   width              : "200px"
   org : (->
     @get('content.biologicaOrganism')
@@ -165,6 +163,13 @@ GG.DrakeView = Ember.View.extend
         clearInterval @idle
         @setNextIdleInterval()
     , 83  # ~ 12 fps
+
+# getFileName("Shiny red", "png") -> "shinyRed.png"
+GG.getFileName = (str, ext) ->
+  str = str.replace(/(?:^\w|[A-Z]|\b\w)/g, (letter, index) ->
+    if index == 0 then letter.toLowerCase() else letter.toUpperCase()
+  ).replace(/\s+/g, '')
+  str + "." + ext
 
 GG.ParentPoolView = Ember.View.extend
   templateName: 'parent-pool-view'
