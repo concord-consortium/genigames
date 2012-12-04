@@ -120,3 +120,8 @@ are then compiled into CSS, concatenated, and placed into the file `build/css/ge
 
 Note that regular .css files can also go into the /style directory, and will be concatenated with
 everything else. Note also that vanilla CSS can be mixed in freely inside .styl files.
+
+## Sublime settings
+
+A Stylus syntax highlighter for Sublime (and TextMate, AFAIK) can be found at
+  https://raw.github.com/Wizek/stylus/master/editors/Stylus.tmbundle/Syntaxes/Stylus.tmLanguage
