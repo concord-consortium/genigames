@@ -152,19 +152,43 @@ GG.DrakeView = Ember.View.extend
     nextTime = 3000 + Math.random() * 15000
     setTimeout =>
       @idleAnimation()
+      @setNextIdleInterval()
     , nextTime
   idleAnimation: ->
-    i=0
-    @idle = setInterval =>
-      if !@$('img')
+    if !@$('img')
+      return
+    GG.animateDrake @$('.drake-idle-img')
+
+# Here we create one single animation timer, and add new images
+# to an array so we can animate multiple drakes at once without
+# creating a separate timer for each
+GG.animateDrake = ($img) ->
+  GG.drakeAnimationList.push $img
+  GG.drakeAnimationPositions.push 0
+  GG.drakeAnimationLengths.push 15  # for the moment we assume animations are 15 frames
+  if !GG.drakeAnimationTimer
+    GG.drakeAnimationTimer = setInterval =>
+      i = GG.drakeAnimationList.length
+      if i is 0
+        clearInterval GG.drakeAnimationTimer
+        GG.drakeAnimationTimer = null
         return
-      @$('.drake-idle-img').css({left:"-"+(i*100)+"%"})
-      i++
-      if i > 15
-        @$('.drake-idle-img').css({left:"0%"})
-        clearInterval @idle
-        @setNextIdleInterval()
+      while (i--)
+        pos = GG.drakeAnimationPositions[i] = GG.drakeAnimationPositions[i] + 1
+        if pos >= GG.drakeAnimationLengths[i]
+          GG.drakeAnimationList[i].css({left:"0%"})
+          GG.drakeAnimationList.splice(i, 1)
+          GG.drakeAnimationPositions.splice(i, 1)
+          GG.drakeAnimationLengths.splice(i, 1)
+        else
+          GG.drakeAnimationList[i].css({left:"-"+(pos*100)+"%"})
     , 83  # ~ 12 fps
+
+GG.drakeAnimationList = []
+GG.drakeAnimationPositions = []
+GG.drakeAnimationLengths = []
+
+GG.drakeAnimationTimer = null
 
 # getFileName("Shiny red", "png") -> "shinyRed.png"
 GG.getFileName = (str, ext) ->
