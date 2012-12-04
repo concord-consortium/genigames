@@ -532,8 +532,6 @@ GG.meiosisController = Ember.Object.create
           for own side,num of gametes.endCellInfo[chromo]
             sourceRealSide = side if num == sourceGameteNum
             destRealSide = side if num == destGameteNum
-          console.log("Swapping endCellInfo: " + sourceRealSide + "  " + gametes.endCellInfo[chromo][sourceRealSide] + " => " + destGameteNum +
-                                            ", " + destRealSide + "  " + gametes.endCellInfo[chromo][destRealSide] + " => " + sourceGameteNum)
           gametes.endCellInfo[chromo][sourceRealSide] = destGameteNum
           gametes.endCellInfo[chromo][destRealSide] = sourceGameteNum
           if source is "father"
@@ -542,6 +540,68 @@ GG.meiosisController = Ember.Object.create
           else
             @set('motherView.gametes', $.extend(true, {}, gametes))
             @get('motherView').notifyPropertyChange('gametes')
+  selectedCrossover: null
+  selectCrossover: (context)->
+    # get the gene for this allele
+    gene = BioLogica.Genetics.getGeneOfAllele(GG.DrakeSpecies, context.allele)
+    context.gene = gene
+    if @get('selectedCrossover')?
+      sourceCross = @get('selectedCrossover')
+      destCross = context
+      source = if sourceCross.chromoView.get('content.sex') == GG.MALE then "father" else "mother"
+      if sourceCross.gene.name == destCross.gene.name and sourceCross.chromoView.get('side') != destCross.chromoView.get('side')
+        # cross these two
+        # get all genes after this one
+        genesToSwap = [gene]
+        allelesToSwap = [{gene: sourceCross.gene, source: sourceCross.allele, dest: destCross.allele}]
+        for allele in sourceCross.chromoView.get('alleles')
+          alGene = BioLogica.Genetics.getGeneOfAllele(GG.DrakeSpecies, allele.allele)
+          if alGene.start > sourceCross.gene.start
+            genesToSwap.push(alGene)
+            allelesToSwap.push({gene: alGene, source: allele.allele})
+
+        for allele in destCross.chromoView.get('alleles')
+          alGene = BioLogica.Genetics.getGeneOfAllele(GG.DrakeSpecies, allele.allele)
+          if alGene.start > sourceCross.gene.start
+            allelesToSwap.map (item)->
+              if item.gene.name == alGene.name
+                item.dest = allele.allele
+              return item
+
+        # swap them visually
+        sourceCell = sourceCross.chromoView.get('cellNum')
+        destCell = destCross.chromoView.get('cellNum')
+        moves = {}
+        for swapGene in genesToSwap
+          moves[swapGene.name] ?= {}
+          moves[swapGene.name][sourceCell] = destCell
+          moves[swapGene.name][destCell] = sourceCell
+
+        meiosisView = @get(source + 'View')
+        meiosisView.animateMoves moves, =>
+          # swap them in the gametes.cells
+          gametes = meiosisView.get('gametes')
+          chromo = sourceCross.chromoView.get('chromo')
+
+          for swapAlleles in allelesToSwap
+            alleles = gametes.cells[sourceCell][chromo].alleles.without(swapAlleles.source)
+            alleles.push(swapAlleles.dest)
+            gametes.cells[sourceCell][chromo].alleles = alleles
+
+            alleles = gametes.cells[destCell][chromo].alleles.without(swapAlleles.dest)
+            alleles.push(swapAlleles.source)
+            gametes.cells[destCell][chromo].alleles = alleles
+
+          meiosisView.set('gametes', $.extend(true, {}, gametes))
+          meiosisView.notifyPropertyChange('gametes')
+          # clear the saved cross point
+          @set('selectedCrossover', null)
+      else
+        console.log("invalid second cross point!")
+    else
+      @set('selectedCrossover', context)
+      # TODO Highlight the valid second choices
+
 
 GG.obstacleCourseController = Ember.Object.create
   courseBinding: 'GG.tasksController.currentTask.obstacleCourse'

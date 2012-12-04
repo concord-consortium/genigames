@@ -267,7 +267,7 @@ GG.AlleleView = Ember.View.extend
   ).property('displayValue')
   gene: (->
     if @get('value')?
-      return BioLogica.Genetics.getGeneOfAllele(GG.DrakeSpecies, @get('value'))
+      return BioLogica.Genetics.getGeneOfAllele(GG.DrakeSpecies, @get('value')).name
     else
       return ''
   ).property('value')
@@ -295,6 +295,7 @@ GG.ChromoView = Ember.View.extend
   chromo: '1'
   side: 'a'
   sister: null
+  crossoverSelectable: false
   selectable: false
   selected: false
   hiddenGenesBinding: 'GG.drakeController.hiddenGenes'
@@ -371,17 +372,15 @@ GG.ChromoView = Ember.View.extend
     return @_getAlleles(true)
   ).property('chromo','content','side','hiddenGamete','revealedAlleles','revealedContentAllelesIdx','useGamete')
   alleles: (->
-    vis = @get('visibleAlleles').map (item)->
-      {allele: item, visible: true}
-    hid = @get('hiddenAlleles').map (item)->
-      {allele: item, visible: false}
-
     bioChromo = @get('content.biologicaOrganism').genetics.genotype.chromosomes["1"]["a"]
+    vis = @get('visibleAlleles').map (item)->
+      {allele: item, visible: true, position: bioChromo.getAllelesPosition(item)}
+    hid = @get('hiddenAlleles').map (item)->
+      {allele: item, visible: false, position: bioChromo.getAllelesPosition(item)}
+
     alleles = vis.concat(hid)
     alleles = alleles.sort (a,b)=>
-      p1 = bioChromo.getAllelesPosition(a.allele)
-      p2 = bioChromo.getAllelesPosition(b.allele)
-      if p1 > p2 then 1 else -1
+      if a.position > b.position then 1 else -1
     return alleles
   ).property('visibleAlleles','hiddenAlleles')
   _getAlleles: (hidden)->
@@ -410,6 +409,8 @@ GG.ChromoView = Ember.View.extend
       else
         @set('selected', true)
         GG.statemanager.send 'selectedChromosome', this
+  crossoverPointClicked: (event) ->
+    GG.statemanager.send 'selectedCrossover', {chromoView: this, allele: event.context}
   allelesClickable: true
   alleleClicked: (event) ->
     if @get('allelesClickable')
@@ -677,28 +678,27 @@ GG.MeiosisView = Ember.View.extend
     @_super()
     setTimeout =>
       @set('useGametes', false)
-      @_createGametes()
       GG.meiosisController.set(@get('motherFather') + "View", _this)
     , 200
   _createGametes: ->
-    newGametes = @get('content.biologicaOrganism').createGametesWithCrossInfo(4)[0]
+    doCrossover = if GG.breedingController.get('breedType') == GG.BREED_CONTROLLED then false else true
+    newGametes = @get('content.biologicaOrganism').createGametesWithCrossInfo(4, doCrossover)[0]
     @set 'gametes', newGametes
+    return newGametes
   sistersHidden: true
   animate: (callback)->
-    GG.MeiosisAnimation.animate(".meiosis." + @get('motherFather'), this, callback)
+    newGametes = @_createGametes()
 
     # Transfer revealed status to new gametes... We can't do this earlier
     # because the meiosis view is created when the user selects the drake
     # and still has an opportunity to interact and reveal alleles before
     # the animation starts.
-    newGametes = @get 'gametes'
     revealed = @get('content.revealedAlleles')
     normalizedSide = (s)->
       if ['x','x1','a'].contains(s)
         return 'a'
       else if ['y','x2','b'].contains(s)
         return 'b'
-    console.log("Transferring revealed status")
     for side of revealed
       alleles = revealed[side]
       continue if alleles.length == 0
@@ -713,6 +713,8 @@ GG.MeiosisView = Ember.View.extend
             if idx != -1 and normalizedSide(chromo.allelesWithSides[idx].side) is nSide
               chromo.revealed ?= []
               chromo.revealed.push allele
+
+    GG.MeiosisAnimation.animate(".meiosis." + @get('motherFather'), this, callback)
   resetAnimation: ()->
     GG.MeiosisAnimation.reset(".meiosis." + @get('motherFather'), this)
     @set('gametes', null)
@@ -734,7 +736,7 @@ GG.MeiosisView = Ember.View.extend
         if startingAlleles?
           for a in [0...startingAlleles.length]
             sAllele = startingAlleles[a][0]
-            gene = BioLogica.Genetics.getGeneOfAllele(GG.DrakeSpecies, sAllele)
+            gene = BioLogica.Genetics.getGeneOfAllele(GG.DrakeSpecies, sAllele).name
             moves[gene] ?= {}
             end = moves[gene][cross.start_cell]
             end = cross.start_cell unless end?
@@ -742,7 +744,10 @@ GG.MeiosisView = Ember.View.extend
             start = cross.end_cell unless start?
             moves[gene][cross.end_cell] = end
             moves[gene][cross.start_cell] = start
+    @animateMoves moves, =>
+      @set('useGametes', true)
 
+  animateMoves: (moves, callback)->
     animationQueue = []
     selectorBase = "#" + @get('elementId')
     for own gene,swaps of moves
@@ -772,15 +777,13 @@ GG.MeiosisView = Ember.View.extend
       $(anim.source).animate(anim.anim, 1500, 'easeInOutQuad')
 
     setTimeout =>
-      @set('useGametes', true)
-      # ensure this fires *right after* the bindings and ui update to help ensure
-      # we don't get any allele value flickering.
+      callback()
       Ember.run.next this, =>
         for i in [0...animationQueue.length]
           anim = animationQueue[i]
           $(anim.source).css({left: '', top: ''})
-        # put the alleles back at their default level, so they slide under/over
-        $(selectorBase + " .allele").css({"z-index": ''})
+      # put the alleles back at their default level, so they slide under/over
+      $("#" + @get('elementId') + " .allele").css({"z-index": ''})
     , 1550
   allelesClickable: false
   crossoverSelectable: false
@@ -793,6 +796,7 @@ GG.MeiosisView = Ember.View.extend
     GG.statemanager.send 'doneSelectingChromatids', this
   selectingCrossover: (callback)->
     @set('crossoverSelectable', true)
+    @set('useGametes', true)
     GG.statemanager.send 'selectingCrossover', {elementId: @get('elementId'), callback: callback}
   doneSelectingCrossover: ->
     @set('crossoverSelectable', false)

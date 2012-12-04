@@ -46,6 +46,7 @@ Ember.Handlebars.registerHelper 'meiosisDefaults', (path, options) ->
   options.hash.contentBinding = "view.content"
   options.hash.allelesClickableBinding = "view.allelesClickable"
   options.hash.selectableBinding = "view.chromosomesSelectable"
+  options.hash.crossoverSelectableBinding = "view.crossoverSelectable"
   return Ember.Handlebars.helpers.view(path, options)
 
 # on load

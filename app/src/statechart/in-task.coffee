@@ -126,8 +126,9 @@ GG.StateInTask = Ember.State.extend
       selectingCrossoverCallback: null
       doneSelectingCrossover: (manager, parent) ->
         callback = @get('selectingCrossoverCallback')
+        $('#' + parent.get('elementId') + " .crossoverSelection").addClass('hidden')
+        $('#' + parent.get('elementId') + " .crossoverPoint").removeClass('clickable')
         if callback?
-          $('#' + parent.get('elementId') + " .crossoverSelection").addClass('hidden')
           callback.call()
         else
           console.log("no callback specified for doneSelectingCrossover!")
@@ -136,6 +137,8 @@ GG.StateInTask = Ember.State.extend
         @set('selectingCrossoverCallback', context.callback)
         selector = '#' + context.elementId + ' .crossoverSelection'
         $(selector).removeClass('hidden')
+        selector = '#' + context.elementId + ' .crossoverPoint'
+        $(selector).addClass('clickable')
 
       selectingChromatidsCallback: null
       doneSelectingChromatids: (manager, parent) ->
@@ -155,6 +158,9 @@ GG.StateInTask = Ember.State.extend
         GG.meiosisController.deselectChromosome(chromoView)
       selectedChromosome: (manager, chromoView)->
         GG.meiosisController.selectChromosome(chromoView)
+
+      selectedCrossover: (manager, context)->
+        GG.meiosisController.selectCrossover(context)
 
       breedDrake: (manager)->
         # If the breed button gets clicked while we're animating,

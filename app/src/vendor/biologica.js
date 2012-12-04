@@ -136,7 +136,8 @@
     };
 
     Chromosome.prototype.getGeneOfAllele = function(allele) {
-      return BioLogica.Genetics.getGeneOfAllele(this.species, allele);
+      var _ref;
+      return (_ref = BioLogica.Genetics.getGeneOfAllele(this.species, allele)) != null ? _ref.name : void 0;
     };
 
     Chromosome.prototype.getAllelesPosition = function(allele) {
@@ -644,7 +645,9 @@
       if (!__hasProp.call(_ref, geneName)) continue;
       gene = _ref[geneName];
       if (~gene.alleles.indexOf(allele)) {
-        return geneName;
+        return $.extend(true, {
+          name: geneName
+        }, gene);
       }
     }
   };
@@ -755,14 +758,17 @@
       }
     };
 
-    Organism.prototype.createGametesWithCrossInfo = function(n) {
+    Organism.prototype.createGametesWithCrossInfo = function(n, performCrossover) {
       var gametes, i, _i, _ref;
+      if (performCrossover == null) {
+        performCrossover = true;
+      }
       gametes = [];
       for (i = _i = 0, _ref = Math.floor(n / 4); 0 <= _ref ? _i < _ref : _i > _ref; i = 0 <= _ref ? ++_i : --_i) {
-        gametes = gametes.concat(this.genetics.performMeiosis(true));
+        gametes = gametes.concat(this.genetics.performMeiosis(performCrossover));
       }
       if (n % 4 !== 0) {
-        gametes = gametes.concat(this.genetics.performMeiosis(true));
+        gametes = gametes.concat(this.genetics.performMeiosis(performCrossover));
       }
       return gametes;
     };

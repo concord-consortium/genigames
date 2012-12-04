@@ -1,5 +1,6 @@
 <div class="alleles-container">
 {{#each allele in view.alleles }}
+  <div class="crossoverPoint" {{action "crossoverPointClicked" allele.allele}}></div>
   {{#if allele.visible}}
     {{#view GG.AlleleView valueBinding="allele.allele" }}
       {{view.displayValue}}

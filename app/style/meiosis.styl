@@ -44,6 +44,9 @@
   position: relative
   margin-left: 4px
 
+.meiosis .chromosome.selectable
+  cursor: pointer
+
 .meiosis .chromosome.selectable:not(.chromo-Y):hover
   background: top left no-repeat url('../images/chromo-full-hover.png')
 
@@ -82,3 +85,12 @@
   h3
     padding: 5px
 
+.crossoverPoint
+  height: 3px
+  width: 30px
+  &.clickable
+    cursor: pointer
+    &:hover
+      background-color: yellow
+  &.selected
+    background-color: green
