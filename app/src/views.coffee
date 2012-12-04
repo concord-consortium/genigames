@@ -141,13 +141,15 @@ GG.DrakeView = Ember.View.extend
   ).property()
   didInsertElement: ->
     # Wait for the animation images to load, then move it in place and start it up
-    layer = '#' + @get('elementId')
-    $(layer + ' .drake-idle-img').imagesLoaded =>
-      $(layer + ' .static').css({left: 400})
-      $(layer + ' .idle').css({left: 0})
-      @setNextIdleInterval()
+    setTimeout =>
+      layer = '#' + @get('elementId')
+      $(layer + ' .drake-idle-img').imagesLoaded =>
+        $(layer + ' .static').css({left: 400})
+        $(layer + ' .idle').css({left: 0})
+        @setNextIdleInterval()
+    , 6000
   setNextIdleInterval: ->
-    nextTime = 3000 + Math.random() * 25000
+    nextTime = 3000 + Math.random() * 15000
     setTimeout =>
       @idleAnimation()
     , nextTime
