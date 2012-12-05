@@ -597,9 +597,13 @@ GG.meiosisController = Ember.Object.create
           # clear the saved cross point
           @set('selectedCrossover', null)
           Ember.run.next ->
-            selector = '#' + meiosisView.get('elementId') + ' .crossoverPoint'
+            parentSelector = '#' + meiosisView.get('elementId')
+            selector = parentSelector + ' .crossoverPoint'
             $(selector).addClass('clickable')
             $(selector).removeClass('hidden')
+            if $(parentSelector + " .crossoverSelection .step3").hasClass('hidden')
+              $(parentSelector + " .crossoverSelection .step2").addClass('hidden')
+              $(parentSelector + " .crossoverSelection .step3").removeClass('hidden')
       else
         console.log("invalid second cross point!")
     else
@@ -613,6 +617,9 @@ GG.meiosisController = Ember.Object.create
       points2 = parentSelector + ' .' + leftRight + ' .crossoverPoint.' + gene.name
       $(points).removeClass('clickable')
       $(points2).removeClass('clickable')
+      if $(parentSelector + " .crossoverSelection .step3").hasClass('hidden')
+        $(parentSelector + " .crossoverSelection .step1").addClass('hidden')
+        $(parentSelector + " .crossoverSelection .step2").removeClass('hidden')
 
 
 GG.obstacleCourseController = Ember.Object.create

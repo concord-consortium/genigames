@@ -19,8 +19,17 @@
   <div class="cell mainCell"></div>
   <div class="meiosisControlView crossoverSelection hidden">
     <h3>Crossing Over</h3>
-    <p>If you would like to control where the various chromosomes cross over, select those points now.</p>
-    <p>Click continue when you are done.</p>
+    <div class="step1">
+      <p>Select one of the dashed boxes as one of your points of crossing over.</p>
+      <p>Click continue if you want to skip crossing over.</p>
+    </div>
+    <div class="step2 hidden">
+      <p>Now select one of the remaining dashed boxes as the second of your points of crossing over.</p>
+    </div>
+    <div class="step3 hidden">
+      <p>Congratulations! You've now moved alleles between chromatids.</p>
+      <p>Repeat the process as desired, or click Continue to move on.</p>
+    </div>
     <button {{action "doneSelectingCrossover"}}>Continue</button>
   </div>
   <div class="meiosisControlView chromatidSelection hidden">
