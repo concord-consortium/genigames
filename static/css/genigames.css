@@ -976,6 +976,13 @@ a:hover {
 .meiosisControlView h3 {
   padding: 5px;
 }
+.meiosisControlView .cost {
+  position: absolute;
+  bottom: 5px;
+  left: 5px;
+  width: 190px;
+  font-weight: bold;
+}
 .crossoverPoint {
   height: 4px;
   width: 30px;
