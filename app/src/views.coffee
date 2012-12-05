@@ -236,6 +236,14 @@ GG.BreedButtonView = Ember.View.extend
 
 GG.MeiosisButtonView = Ember.View.extend
   tagName: 'div'
+  attributeBindings: ['title']
+  title: (->
+    cost = GG.actionCostsController.getCost 'meiosisControlEnabled'
+    return "Enable manual control of meiosis.<br/><br/>Cost: #{cost} rep points."
+  ).property()
+  didInsertElement: ->
+    @_super()
+    @set 'qtip', @$().qtip GG.QTipDefaults
   click: ->
     GG.statemanager.send('toggleBreedType')
 
