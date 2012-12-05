@@ -476,6 +476,7 @@ GG.meiosisController = Ember.Object.create
   toggleBreedType: ->
     if GG.breedingController.get('breedType') is GG.BREED_AUTOMATED
       GG.breedingController.set 'breedType', GG.BREED_CONTROLLED
+      GG.userController.addReputation -GG.actionCostsController.getCost 'meiosisControlEnabled'
     else
       GG.breedingController.set 'breedType', GG.BREED_AUTOMATED
   animate: (callback)->
