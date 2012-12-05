@@ -14,12 +14,12 @@ input "app" do
   end
 
   # Compile Stylus to CSS
-  match "**/*.styl" do
+  match "style/*.styl" do
     stylus
   end
 
   # Merge all CSS files (inc compiled styl) into genimages.css
-  match "**/*.css" do
+  match "style/*.css" do
     concat "css/genigames.css"
   end
 
@@ -57,7 +57,7 @@ input "app" do
     # off the `static/` prefix, so `app/static/index.html` ends up
     # in `public/index.html`.
     concat do |input|
-      input.sub(/static\//, '')
+      input.sub(/static\/(nongame-)?/, '')
     end
   end
 end
