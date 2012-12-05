@@ -1,33 +1,26 @@
+@import 'app/style/mixins/position'
+
 #container
-  position: absolute
-  width: 100%
+  absolute: width 100%
   overflow: hidden
+  > div
+    relative: width 1000px height 750px
+    margin-left: auto
+    margin-right: auto
+
+town-style(img)
+  background: top left no-repeat url(img)
+  margin-left: auto
+  margin-right: auto
+  width: 1010px
+  height: 660px
 
 #town
-  background: top left no-repeat url('../images/town01.jpg')
-  margin-left: auto
-  margin-right: auto
-  width: 1010px
-  height: 660px
+  town-style: '../images/town01.jpg'
 
 #town1
-  background: top left no-repeat url('../images/town01.jpg')
-  margin-left: auto
-  margin-right: auto
-  width: 1010px
-  height: 660px
+  town-style: '../images/town01.jpg'
 
 #town2
-  background: top left no-repeat url('../images/town02.jpg')
-  margin-left: auto
-  margin-right: auto
-  width: 1010px
-  height: 660px
-
-#container > div
-  position: relative
-  margin-left: auto
-  margin-right: auto
-  width: 1000px
-  height: 750px
+  town-style: '../images/town02a.jpg'
 

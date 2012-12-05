@@ -1,22 +1,12 @@
+@import 'app/style/mixins/position'
+
 .drake
-  position: relative
-  top: 0
-  left: 0
+  relative: top left width 180px height 180px
   overflow: hidden
-
-.drake, .drake .idle, .drake .static
-  width: 180px
-  height: 180px
-
-.drake .static
-  position: absolute
-  top: 0px
-  left: 0px
-
-.drake .idle
-  position: absolute
-  top: 0px
-  left: 400px
+  .static
+    absolute: top left width 180px height 180px
+  .idle
+    absolute: top left 400px width 180px height 180px
 
 .parent-pool .drake, .parent-pool .drake .idle, .parent-pool .drake .static
   width: 130px
@@ -33,8 +23,7 @@
   width: 1500%
 
 .drake-img, .drake-idle-img
-  position: absolute
-  left: 0px
+  absolute: left
 
 .drake-img.trait-absent, .drake-idle-img.trait-absent
   top: 100%

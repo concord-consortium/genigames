@@ -1,12 +1,19 @@
-#login
-  text-align: center
-  width: 700px
-  height: 700px
-  position: absolute
-  top: 250px
+@import 'app/style/mixins/position'
 
-#login div
-  padding: 3px
+login-style()
+  absolute: top 250px width 700px height 701px
+  text-align: center
+
+
+#login
+  login-style()
+  div
+    padding: 3px
+
+#choose-class
+  login-style()
+  div
+    padding: 3px
 
 #username, #password
   width: 200px
@@ -14,14 +21,3 @@
 #login-error
   color: red
   font-weight: bold
-
-#choose-class
-  text-align: center
-  width: 700px
-  height: 700px
-  position: absolute
-  top: 250px
-
-#choose-class div
-  padding: 3px
-

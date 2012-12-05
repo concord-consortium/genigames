@@ -1,28 +1,23 @@
+@import 'app/style/mixins/position'
+
 .chromosome-panel
-  position: absolute
-  top: 0px
-  left: 0px
-  width: 265px
-  height: 125px
+  absolute: top left width 265px height 125px
 
 #parent-mothers-pool-container .chromosome-panel
   top: 135px
 
-#offspring-pool .chromosome-panel
-  top: 65px
-  left: -300px
-  width: 280px
+#offspring-pool
+  .chromosome-panel
+    top: 65px
+    left: -300px
+    width: 280px
+  .male-chromosome
+    background: top left no-repeat url('../images/male-chromo-right.png')
+  .female-chromosome
+    background: top left no-repeat url('../images/female-chromo-right.png')
 
 .chromosome
-  position: absolute
-  width: 35px
-  height: 130px
-
-#offspring-pool .male-chromosome
-  background: top left no-repeat url('../images/male-chromo-right.png')
-
-#offspring-pool .female-chromosome
-  background: top left no-repeat url('../images/female-chromo-right.png')
+  absolute: top 20px width 35px height 130px
 
 .male-chromosome
   background: top left no-repeat url('../images/male-chromo.png')
@@ -30,26 +25,23 @@
 .female-chromosome
   background: top left no-repeat url('../images/female-chromo.png')
 
-.chromosome
-  top: 20px
+.chromo-1
+  &.left
+    left: 36px
+  &.right
+    left: 67px
 
-.chromo-1.left
-  left: 36px
+.chromo-2
+  &.left
+    left: 115px
+  &.right
+    left: 146px
 
-.chromo-1.right
-  left: 67px
-
-.chromo-2.left
-  left: 115px
-
-.chromo-2.right
-  left: 146px
-
-.chromo-X.left
-  left: 193px
-
-.chromo-X.right
-  left: 224px
+.chromo-X
+  &.left
+    left: 193px
+  &.right
+    left: 224px
 
 .chromo-Y
   left: 224px
@@ -63,9 +55,8 @@
   font-weight: bold
   padding-top: 4px
   cursor: default
-
-.allele.revealable span
-  cursor: pointer
+  &.revealable span
+    cursor: pointer
 
 .dominant
   color: yellow
