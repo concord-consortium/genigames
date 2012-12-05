@@ -505,6 +505,8 @@ GG.meiosisController = Ember.Object.create
     if clearNum
       gameteNumberProp = if source is "father" then 'fatherGameteNumber' else 'motherGameteNumber'
       @set(gameteNumberProp, -1)
+      # Refund the reputation that was charged to select this chromosome
+      GG.userController.addReputation GG.actionCostsController.getCost 'chromosomeSelected'
 
     # TODO We should probably revert any cell num swaps that happened on selection, so the user can't
     # cheat by selecting and then deselecting and having them move to the same gamete anyway
@@ -516,6 +518,9 @@ GG.meiosisController = Ember.Object.create
     chromo = "XY" if chromo is "X" or chromo is "Y"
     if selected[source][chromo]?
       selected[source][chromo].set('selected', false)
+    else
+      # There was no previously selected chromosome, so charge rep points
+      GG.userController.addReputation -GG.actionCostsController.getCost 'chromosomeSelected'
     selected[source][chromo] = chromoView
     gameteNumberProp = if source is "father" then 'fatherGameteNumber' else 'motherGameteNumber'
     destGameteNum = @get(gameteNumberProp)
@@ -555,6 +560,7 @@ GG.meiosisController = Ember.Object.create
     if @get('selectedCrossover')?
       sourceCross = @get('selectedCrossover')
       if sourceCross.gene.name == destCross.gene.name and sourceCross.chromoView.get('side') != destCross.chromoView.get('side')
+        GG.userController.addReputation -GG.actionCostsController.getCost 'crossoverMade'
         # cross these two
         $('#' + destCross.chromoView.get('elementId') + ' .crossoverPoint.' + gene.name).removeClass('clickable').addClass('selected')
         # get all genes after this one
