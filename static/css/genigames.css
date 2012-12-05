@@ -1,25 +1,25 @@
 #breeding-apparatus {
   position: absolute;
+  top: 0;
   left: 3000px;
-  top: 0px;
-  overflow: hidden;
   width: 1300px;
   height: 900px;
+  overflow: hidden;
 }
 #breed-top-bar {
   position: absolute;
-  background: top left no-repeat url("../images/breed-top-bar.png");
-  left: 0px;
   top: 50px;
+  left: 0;
   width: 1040px;
   height: 152px;
+  background: top left no-repeat url("../images/breed-top-bar.png");
 }
 .breed-title {
   position: relative;
-  float: left;
-  font-size: 2.1em;
   top: 58px;
   left: 16px;
+  float: left;
+  font-size: 2.1em;
 }
 .task-description {
   position: absolute;
@@ -38,12 +38,12 @@
 }
 #breeder {
   position: absolute;
-  background: top left no-repeat url("../images/mock_02-01.png");
-  background-color: #fff;
-  left: 0px;
   top: 50px;
+  left: 0;
   width: 2040px;
   height: 612px;
+  background: top left no-repeat url("../images/mock_02-01.png");
+  background-color: #fff;
 }
 #breed-controls {
   position: absolute;
@@ -90,8 +90,8 @@
 }
 #target-traits {
   position: relative;
-  left: 10px;
   top: 5px;
+  left: 10px;
 }
 .parent {
   position: relative;
@@ -99,60 +99,60 @@
 }
 #parent-fathers-pool-container {
   position: absolute;
-  width: 490px;
-  height: 205px;
   top: 115px;
   left: 20px;
+  width: 490px;
+  height: 205px;
   overflow: auto;
 }
 #parent-mothers-pool-container {
   position: absolute;
   top: 322px;
+  left: 20px;
   width: 490px;
   height: 205px;
-  left: 20px;
   overflow: auto;
 }
 #parent-pool-divider {
-  top: 320px;
-  height: 2px;
-  width: 495px;
-  left: 18px;
   position: absolute;
+  top: 320px;
+  left: 18px;
+  width: 495px;
+  height: 2px;
   background-color: #787878;
 }
 #father-chromosome {
   position: absolute;
   top: 130px;
   left: 800px;
-  height: 265px;
   width: 125px;
+  height: 265px;
 }
 #mother-chromosome {
   position: absolute;
   top: 385px;
   left: 800px;
-  height: 265px;
   width: 125px;
+  height: 265px;
 }
 #offspring-pool .offspring {
   display: inline-block;
   position: relative;
 }
 .offspring .alleleString {
-  text-align: center;
-  width: 200px;
-  bottom: 15px;
   position: absolute;
+  bottom: 15px;
+  width: 200px;
+  text-align: center;
   color: #fff;
 }
 #offspring-buttons {
-  background: top left no-repeat url("../images/offspring-buttons.png");
   position: absolute;
   top: 230px;
   left: -35px;
   width: 352px;
   height: 42px;
+  background: top left no-repeat url("../images/offspring-buttons.png");
 }
 #offspring-buttons>div {
   position: relative;
@@ -173,45 +173,45 @@
   display: none;
 }
 .parent-pool .parent:hover .removeButton {
-  display: inline;
   position: absolute;
   left: 10px;
   bottom: 15px;
+  display: inline;
   z-index: 2;
 }
 #offspring-pool {
   position: absolute;
-  width: 150px;
   top: 195px;
   left: 1135px;
+  width: 150px;
   text-align: right;
 }
 #father {
   position: absolute;
-  left: 575px;
   top: 95px;
+  left: 575px;
 }
 #father span {
   position: absolute;
-  left: 40px;
   top: 113px;
+  left: 40px;
   color: #fff;
 }
 #mother {
   position: absolute;
-  left: 575px;
   top: 342px;
+  left: 575px;
 }
 #mother span {
   position: absolute;
-  left: 40px;
   top: 113px;
+  left: 40px;
   color: #fff;
 }
 #egg-container {
   position: absolute;
-  left: 200px;
   top: 251px;
+  left: 200px;
 }
 #egg {
   background-image: url("../images/egg-sprite.png");
@@ -230,10 +230,10 @@
 }
 .moveCounterDigit {
   position: absolute;
+  top: 1px;
+  left: 0;
   width: 25px;
   height: 35px;
-  top: 1px;
-  left: 0px;
   background: top left no-repeat url("../images/move-counter-sprite.png");
 }
 #moveCounterHundreds {
@@ -247,14 +247,14 @@
 }
 .match-goal-counter {
   position: absolute;
-  left: 490px;
   top: 500px;
+  left: 490px;
   width: 100px;
 }
 .chromosome-panel {
   position: absolute;
-  top: 0px;
-  left: 0px;
+  top: 0;
+  left: 0;
   width: 265px;
   height: 125px;
 }
@@ -266,25 +266,23 @@
   left: -300px;
   width: 280px;
 }
-.chromosome {
-  position: absolute;
-  width: 35px;
-  height: 130px;
-}
 #offspring-pool .male-chromosome {
   background: top left no-repeat url("../images/male-chromo-right.png");
 }
 #offspring-pool .female-chromosome {
   background: top left no-repeat url("../images/female-chromo-right.png");
 }
+.chromosome {
+  position: absolute;
+  top: 20px;
+  width: 35px;
+  height: 130px;
+}
 .male-chromosome {
   background: top left no-repeat url("../images/male-chromo.png");
 }
 .female-chromosome {
   background: top left no-repeat url("../images/female-chromo.png");
-}
-.chromosome {
-  top: 20px;
 }
 .chromo-1.left {
   left: 36px;
@@ -330,23 +328,23 @@
   position: relative;
   top: 0;
   left: 0;
+  width: 180px;
+  height: 180px;
   overflow: hidden;
 }
-.drake,
-.drake .idle,
 .drake .static {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 180px;
   height: 180px;
 }
-.drake .static {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-}
 .drake .idle {
   position: absolute;
-  top: 0px;
+  top: 0;
   left: 400px;
+  width: 180px;
+  height: 180px;
 }
 .parent-pool .drake,
 .parent-pool .drake .idle,
@@ -369,7 +367,7 @@
 .drake-img,
 .drake-idle-img {
   position: absolute;
-  left: 0px;
+  left: 0;
 }
 .drake-img.trait-absent,
 .drake-idle-img.trait-absent {
@@ -833,6 +831,13 @@ a:hover {
   width: 100%;
   overflow: hidden;
 }
+#container > div {
+  position: relative;
+  width: 1000px;
+  height: 750px;
+  margin-left: auto;
+  margin-right: auto;
+}
 #town {
   background: top left no-repeat url("../images/town01.jpg");
   margin-left: auto;
@@ -848,27 +853,30 @@ a:hover {
   height: 660px;
 }
 #town2 {
-  background: top left no-repeat url("../images/town02.jpg");
+  background: top left no-repeat url("../images/town02a.jpg");
   margin-left: auto;
   margin-right: auto;
   width: 1010px;
   height: 660px;
 }
-#container > div {
-  position: relative;
-  margin-left: auto;
-  margin-right: auto;
-  width: 1000px;
-  height: 750px;
-}
 #login {
-  text-align: center;
-  width: 700px;
-  height: 700px;
   position: absolute;
   top: 250px;
+  width: 700px;
+  height: 701px;
+  text-align: center;
 }
 #login div {
+  padding: 3px;
+}
+#choose-class {
+  position: absolute;
+  top: 250px;
+  width: 700px;
+  height: 701px;
+  text-align: center;
+}
+#choose-class div {
   padding: 3px;
 }
 #username,
@@ -879,16 +887,6 @@ a:hover {
   color: #f00;
   font-weight: bold;
 }
-#choose-class {
-  text-align: center;
-  width: 700px;
-  height: 700px;
-  position: absolute;
-  top: 250px;
-}
-#choose-class div {
-  padding: 3px;
-}
 #meiosis-container {
   position: absolute;
   left: 800px;
@@ -897,59 +895,39 @@ a:hover {
   height: 435px;
 }
 .cell {
+  position: absolute;
+  left: 10px;
+  top: -10px;
+  width: 300px;
+  height: 120px;
   background-color: rgba(223,223,223,0.55);
   border-top: 40px solid transparent;
   z-index: -4;
-  height: 120px;
-  width: 300px;
-  top: -10px;
-  left: 10px;
-  position: absolute;
-  -moz-border-radius: 90px;
   -webkit-border-radius: 90px;
-  -khtml-border-radius: 90px;
+  -moz-border-radius: 90px;
   border-radius: 90px;
 }
-.meiosis.father {
+.meiosis.father,
+.meiosis.mother {
   position: absolute;
-  top: 0px;
-  left: 0px;
+  top: 0;
+  left: 0;
   width: 760px;
   height: 217px;
   z-index: 2;
 }
 .meiosis.mother {
-  position: absolute;
   top: 218px;
-  left: 0px;
-  width: 760px;
-  height: 217px;
-  z-index: 2;
 }
 .meiosis .chromosome-panel {
   position: absolute;
-  left: 0px;
-  top: 0px;
+  top: 0;
+  left: 0;
 }
 .meiosis .allele {
   position: relative;
-  margin-left: 4px;
   height: 22px;
-}
-.meiosis .chromosome.selectable {
-  cursor: pointer;
-}
-.meiosis .chromosome.selectable:not(.chromo-Y):hover {
-  background: top left no-repeat url("../images/chromo-full-hover.png");
-}
-.meiosis .chromosome.selected:not(.chromo-Y) {
-  background: top left no-repeat url("../images/chromo-full-selected.png");
-}
-.meiosis .chromosome.selectable.chromo-Y:hover {
-  background: top left no-repeat url("../images/chromo-short-hover.png");
-}
-.meiosis .chromosome.selected.chromo-Y {
-  background: top left no-repeat url("../images/chromo-short-selected.png");
+  margin-left: 4px;
 }
 .meiosis .chromosome:not(.chromo-Y) {
   background: top left no-repeat url("../images/chromo-full.png");
@@ -957,13 +935,30 @@ a:hover {
 .meiosis .chromosome.chromo-Y {
   background: top left no-repeat url("../images/chromo-short.png");
 }
+.meiosis .chromosome.selectable {
+  cursor: pointer;
+}
+.meiosis .chromosome.selectable:not(.selected):not(.chromo-Y):hover {
+  background: top left no-repeat url("../images/chromo-full-hover.png");
+}
+.meiosis .chromosome.selectable:not(.selected).chromo-Y:hover {
+  background: top left no-repeat url("../images/chromo-short-hover.png");
+}
+.meiosis .chromosome.selected:not(.chromo-Y) {
+  background: top left no-repeat url("../images/chromo-full-selected.png");
+}
+.meiosis .chromosome.selected.chromo-Y {
+  background: top left no-repeat url("../images/chromo-short-selected.png");
+}
 .meiosisControlView {
   position: absolute;
-  top: 0px;
+  top: 0;
   left: 470px;
   width: 275px;
   height: 140px;
   border: 1px solid #000;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
   border-radius: 10px;
   box-shadow: 5px 5px 5px 1px #808080;
 }
@@ -978,8 +973,8 @@ a:hover {
 }
 .meiosisControlView .cost {
   position: absolute;
-  bottom: 5px;
   left: 5px;
+  bottom: 5px;
   width: 190px;
   font-weight: bold;
 }
@@ -1002,82 +997,81 @@ a:hover {
 .npc {
   position: absolute;
 }
-.npc .bubble {
-  position: absolute;
-  margin-left: 20px;
-}
 .npc .character {
   position: absolute;
   top: 129px;
 }
+.npc .bubble {
+  position: absolute;
+  margin-left: 20px;
+}
 .speech-bubble {
   position: absolute;
-  z-index: 2;
   left: -250px;
   bottom: 14px;
+  z-index: 2;
   font-size: 1.2em;
   width: 225px;
   background-color: #fbfce1;
   padding: 23px;
-  -moz-border-radius: 35px;
   -webkit-border-radius: 35px;
-  -khtml-border-radius: 35px;
+  -moz-border-radius: 35px;
   border-radius: 35px;
 }
 .speech-bubble:after {
+  position: absolute;
+  right: 40px;
+  bottom: -30px;
+  width: 0;
   content: "";
   position: absolute;
-  bottom: -30px;
-  right: 40px;
   border-width: 0 20px 30px 0;
   border-style: solid;
   border-color: transparent #fbfce1;
   display: block;
-  width: 0;
 }
 .speech-bubble-no-npc {
   position: absolute;
-  z-index: 2;
   left: 340px;
   top: 134px;
-  font-size: 1.2em;
   width: 225px;
+  z-index: 2;
+  font-size: 1.2em;
   background-color: #fbfce1;
   padding: 23px;
-  -moz-border-radius: 35px;
   -webkit-border-radius: 35px;
-  -khtml-border-radius: 35px;
+  -moz-border-radius: 35px;
   border-radius: 35px;
   border: #000 solid 2px;
 }
 .heart-bubble {
   position: absolute;
-  z-index: 0;
-  left: 0px;
+  left: 0;
   top: 90px;
+  z-index: 0;
 }
 .obstacle-course {
   position: absolute;
+  left: 0;
+  top: 60px;
   width: 1100px;
   height: 660px;
-  left: 0px;
-  top: 60px;
   z-index: 0;
   background-color: #fff;
 }
 .obstacle-course .course {
   position: absolute;
-  width: 1000px;
-  height: 600px;
   left: 10px;
   top: 30px;
+  width: 1000px;
+  height: 600px;
   overflow: hidden;
   z-index: 1;
 }
 .obstacle-course .controls {
   position: absolute;
-  top: 20px;
   left: 50px;
+  top: 20px;
   width: 150px;
   height: 20px;
   text-align: center;
@@ -1085,7 +1079,7 @@ a:hover {
 }
 .obstacle-course .background {
   position: absolute;
-  left: 0px;
+  left: 0;
   top: 30px;
   width: 2020px;
   height: 300px;
@@ -1093,10 +1087,10 @@ a:hover {
   z-index: 2;
 }
 .obstacle-course .drake-container {
-  z-index: 10;
   position: absolute;
+  left: 0;
   top: 160px;
-  left: 0px;
+  z-index: 10;
   overflow: visible;
 }
 .obstacle-course .obstacles {
@@ -1110,45 +1104,45 @@ a:hover {
   display: inline-block;
   z-index: 4;
 }
-.obstacle.ducks {
+.obstacle-course .obstacles .obstacle.ducks {
   background: top left no-repeat url("../images/obstacle-course/obstacle-ducks.png");
   width: 200px;
   height: 100px;
 }
-.obstacle.desk {
+.obstacle-course .obstacles .obstacle.desk {
   background: top left no-repeat url("../images/obstacle-course/obstacle-desk.png");
   width: 200px;
   height: 100px;
 }
-.obstacle.sheep {
+.obstacle-course .obstacles .obstacle.sheep {
   background: top left no-repeat url("../images/obstacle-course/obstacle-sheep.png");
   width: 200px;
   height: 100px;
 }
-.obstacle.rain {
+.obstacle-course .obstacles .obstacle.rain {
   background: top left no-repeat url("../images/obstacle-course/obstacle-rain.png");
   width: 200px;
   height: 100px;
 }
-.obstacle.tree {
+.obstacle-course .obstacles .obstacle.tree {
   background: top left no-repeat url("../images/obstacle-course/tree01.png");
   width: 150px;
   height: 183px;
 }
-.obstacle.pond {
+.obstacle-course .obstacles .obstacle.pond {
   background: top left no-repeat url("../images/obstacle-course/pond01.png");
   width: 200px;
   height: 84px;
 }
 #topBar {
+  position: relative;
+  left: -15px;
+  width: 1034px;
+  height: 59px;
   background-color: #969696;
   color: #fff;
   font-family: Verdana;
   font-size: 1.2em;
-  height: 59px;
-  width: 1034px;
-  left: -15px;
-  position: relative;
 }
 #greeting {
   position: absolute;
@@ -1163,41 +1157,41 @@ a:hover {
 }
 #level {
   position: absolute;
-  top: 20px;
   left: 400px;
+  top: 20px;
 }
 #sky {
+  position: absolute;
+  width: 1010px;
+  height: 660px;
   background: url("../images/world01.jpg");
   background-repeat: no-repeat;
   overflow: hidden;
   border: 5px solid #402309;
-  height: 660px;
-  width: 1010px;
-  position: absolute;
 }
 #world {
-  background-position: 0px 4px;
-  height: 712px;
-  width: 712px;
-  background-repeat: no-repeat;
   position: absolute;
   left: 250px;
+  width: 712px;
+  height: 712px;
+  background-position: 0px 4px;
+  background-repeat: no-repeat;
   margin-left: auto;
   margin-right: auto;
 }
 #clouds {
-  background-position: 0px 0px;
-  height: 700px;
-  width: 700px;
-  background-repeat: no-repeat;
   position: absolute;
   left: 250px;
+  width: 700px;
+  height: 700px;
+  background-position: 0px 0px;
+  background-repeat: no-repeat;
 }
 .location {
   position: absolute;
   z-index: 1;
 }
-.location.enabled {
+.location .enabled {
   cursor: pointer;
 }
 .huts {
