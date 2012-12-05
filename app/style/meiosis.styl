@@ -34,10 +34,11 @@
 
   &.selectable
     cursor: pointer
-    &:not(.chromo-Y):hover
-      background: top left no-repeat url('../images/chromo-full-hover.png')
-    &.chromo-Y:hover
-      background: top left no-repeat url('../images/chromo-short-hover.png')
+    &:not(.selected)
+      &:not(.chromo-Y):hover
+        background: top left no-repeat url('../images/chromo-full-hover.png')
+      &.chromo-Y:hover
+        background: top left no-repeat url('../images/chromo-short-hover.png')
 
   &.selected
     &:not(.chromo-Y)
