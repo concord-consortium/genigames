@@ -42,12 +42,6 @@ GG.StateInTask = Ember.State.extend
         sex: child.get('sex')
         success: success
 
-    toggleBreedType: ->
-      if GG.breedingController.get('breedType') is GG.BREED_AUTOMATED
-        GG.breedingController.set 'breedType', GG.BREED_CONTROLLED
-      else
-        GG.breedingController.set 'breedType', GG.BREED_AUTOMATED
-
     completeTask: ->
       GG.tasksController.completeCurrentTask()
       GG.tasksController.showTaskCompletion()
@@ -99,6 +93,9 @@ GG.StateInTask = Ember.State.extend
       startMotherMeiosis: ->
         if GG.breedingController.get 'mother'
           GG.animateMeiosis '#parent-mothers-pool-container'
+
+      toggleBreedType: ->
+        GG.meiosisController.toggleBreedType()
 
     animatingMeiosis: Ember.State.create
       setup: (manager)->
@@ -223,6 +220,9 @@ GG.StateInTask = Ember.State.extend
 
       selectParents: (manager) ->
         manager.transitionTo 'parentSelect'
+
+      toggleBreedType: ->
+        GG.meiosisController.toggleBreedType()
 
     obstacleCourse: Ember.State.create
       enter: (manager)->

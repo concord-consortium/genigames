@@ -473,6 +473,11 @@ GG.meiosisController = Ember.Object.create
         res.push {allele: rev[i], side: 'a'}
     return res
   ).property('chosenMotherGamete','chosenFatherGamete')
+  toggleBreedType: ->
+    if GG.breedingController.get('breedType') is GG.BREED_AUTOMATED
+      GG.breedingController.set 'breedType', GG.BREED_CONTROLLED
+    else
+      GG.breedingController.set 'breedType', GG.BREED_AUTOMATED
   animate: (callback)->
     if @get('motherView')? and @get('fatherView')?
       @get('fatherView').animate =>
