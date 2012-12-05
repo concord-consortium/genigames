@@ -1,0 +1,48 @@
+// helper
+
+-pos(type, args)
+  i = 0
+  position: unquote(type)
+  {args[i]}: args[i + 1] is a 'unit' ? args[i += 1] : 0
+  if args[i += 1]
+   {args[i]}: args[i + 1] is a 'unit' ? args[i += 1] : 0
+  if args[i += 1]
+   {args[i]}: args[i + 1] is a 'unit' ? args[i += 1] : 0
+  if args[i += 1]
+   {args[i]}: args[i + 1] is a 'unit' ? args[i += 1] : 0
+
+/*
+ * Absolute position
+ *
+ * Synopsis:
+ *
+ *   absolute: <pos> [n] <pos> [n]
+ *
+ * Examples:
+ *
+ *     absolute: top left
+ *     absolute: bottom right
+ *     absolute: top 5px left
+ *     absolute: top left 5px
+ *     absolute: top 5px left 5px
+ *     absolute: top 5px left 5px width 5px
+ *     absolute: top left width 5px height 5px
+ *
+ */
+
+absolute()
+  -pos('absolute', arguments)
+
+/*
+ * Fixed position
+ */
+
+fixed()
+  -pos('fixed', arguments)
+
+/*
+ * Relative position
+ */
+
+relative()
+  -pos('relative', arguments)
