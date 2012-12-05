@@ -557,6 +557,8 @@ GG.meiosisController = Ember.Object.create
     gene = BioLogica.Genetics.getGeneOfAllele(GG.DrakeSpecies, destCross.allele)
     destCross.gene = gene
     source = if destCross.chromoView.get('content.sex') == GG.MALE then "father" else "mother"
+    meiosisView = @get(source + 'View')
+    parentSelector = '#' + meiosisView.get('elementId')
     if @get('selectedCrossover')?
       sourceCross = @get('selectedCrossover')
       if sourceCross.gene.name == destCross.gene.name and sourceCross.chromoView.get('side') != destCross.chromoView.get('side')
@@ -589,7 +591,6 @@ GG.meiosisController = Ember.Object.create
           moves[swapGene.name][sourceCell] = destCell
           moves[swapGene.name][destCell] = sourceCell
 
-        meiosisView = @get(source + 'View')
         meiosisView.animateMoves moves, =>
           # swap them in the gametes.cells
           gametes = meiosisView.get('gametes')
@@ -606,16 +607,19 @@ GG.meiosisController = Ember.Object.create
 
           meiosisView.set('gametes', $.extend(true, {}, gametes))
           meiosisView.notifyPropertyChange('gametes')
-          # clear the saved cross point
-          @set('selectedCrossover', null)
-          Ember.run.next ->
-            parentSelector = '#' + meiosisView.get('elementId')
-            selector = parentSelector + ' .crossoverPoint'
-            $(selector).addClass('clickable')
-            $(selector).removeClass('hidden')
-            if $(parentSelector + " .crossoverSelection .step3").hasClass('hidden')
-              $(parentSelector + " .crossoverSelection .step2").addClass('hidden')
-              $(parentSelector + " .crossoverSelection .step3").removeClass('hidden')
+
+          # update the step-by-step directions
+          if $(parentSelector + " .crossoverSelection .step3").hasClass('hidden')
+            $(parentSelector + " .crossoverSelection .step2").addClass('hidden')
+            $(parentSelector + " .crossoverSelection .step3").removeClass('hidden')
+
+          @clearCrossPoints(meiosisView)
+      else if sourceCross.chromoView == destCross.chromoView
+        # deselect this cross point
+        @clearCrossPoints(meiosisView)
+        if $(parentSelector + " .crossoverSelection .step3").hasClass('hidden')
+          $(parentSelector + " .crossoverSelection .step2").addClass('hidden')
+          $(parentSelector + " .crossoverSelection .step1").removeClass('hidden')
       else
         console.log("invalid second cross point!")
     else
@@ -624,7 +628,6 @@ GG.meiosisController = Ember.Object.create
       $('#' + destCross.chromoView.get('elementId') + ' .crossoverPoint.' + gene.name).removeClass('clickable').addClass('selected')
       # Highlight the valid second choices, by removing 'clickable' on invalid ones
       leftRight = destCross.chromoView.get('right')
-      parentSelector = '#' + @get(source + 'View.elementId')
       points = parentSelector + ' .crossoverPoint:not(.' + gene.name + ')'
       points2 = parentSelector + ' .' + leftRight + ' .crossoverPoint.' + gene.name
       $(points).removeClass('clickable')
@@ -633,6 +636,15 @@ GG.meiosisController = Ember.Object.create
         $(parentSelector + " .crossoverSelection .step1").addClass('hidden')
         $(parentSelector + " .crossoverSelection .step2").removeClass('hidden')
 
+  clearCrossPoints: (meiosisView)->
+    # clear the saved cross point
+    @set('selectedCrossover', null)
+    Ember.run.next ->
+      parentSelector = '#' + meiosisView.get('elementId')
+      selector = parentSelector + ' .crossoverPoint'
+      $(selector).addClass('clickable')
+      $(selector).removeClass('hidden')
+      $(selector).removeClass('selected')
 
 GG.obstacleCourseController = Ember.Object.create
   courseBinding: 'GG.tasksController.currentTask.obstacleCourse'
