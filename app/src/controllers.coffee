@@ -541,16 +541,16 @@ GG.meiosisController = Ember.Object.create
             @set('motherView.gametes', $.extend(true, {}, gametes))
             @get('motherView').notifyPropertyChange('gametes')
   selectedCrossover: null
-  selectCrossover: (context)->
+  selectCrossover: (destCross)->
     # get the gene for this allele
-    gene = BioLogica.Genetics.getGeneOfAllele(GG.DrakeSpecies, context.allele)
-    context.gene = gene
+    gene = BioLogica.Genetics.getGeneOfAllele(GG.DrakeSpecies, destCross.allele)
+    destCross.gene = gene
+    source = if destCross.chromoView.get('content.sex') == GG.MALE then "father" else "mother"
     if @get('selectedCrossover')?
       sourceCross = @get('selectedCrossover')
-      destCross = context
-      source = if sourceCross.chromoView.get('content.sex') == GG.MALE then "father" else "mother"
       if sourceCross.gene.name == destCross.gene.name and sourceCross.chromoView.get('side') != destCross.chromoView.get('side')
         # cross these two
+        $('#' + destCross.chromoView.get('elementId') + ' .crossoverPoint.' + gene.name).removeClass('clickable').addClass('selected')
         # get all genes after this one
         genesToSwap = [gene]
         allelesToSwap = [{gene: sourceCross.gene, source: sourceCross.allele, dest: destCross.allele}]
@@ -596,11 +596,23 @@ GG.meiosisController = Ember.Object.create
           meiosisView.notifyPropertyChange('gametes')
           # clear the saved cross point
           @set('selectedCrossover', null)
+          Ember.run.next ->
+            selector = '#' + meiosisView.get('elementId') + ' .crossoverPoint'
+            $(selector).addClass('clickable')
+            $(selector).removeClass('hidden')
       else
         console.log("invalid second cross point!")
     else
-      @set('selectedCrossover', context)
-      # TODO Highlight the valid second choices
+      @set('selectedCrossover', destCross)
+      # mark this one as selected
+      $('#' + destCross.chromoView.get('elementId') + ' .crossoverPoint.' + gene.name).removeClass('clickable').addClass('selected')
+      # Highlight the valid second choices, by removing 'clickable' on invalid ones
+      leftRight = destCross.chromoView.get('right')
+      parentSelector = '#' + @get(source + 'View.elementId')
+      points = parentSelector + ' .crossoverPoint:not(.' + gene.name + ')'
+      points2 = parentSelector + ' .' + leftRight + ' .crossoverPoint.' + gene.name
+      $(points).removeClass('clickable')
+      $(points2).removeClass('clickable')
 
 
 GG.obstacleCourseController = Ember.Object.create

@@ -409,8 +409,6 @@ GG.ChromoView = Ember.View.extend
       else
         @set('selected', true)
         GG.statemanager.send 'selectedChromosome', this
-  crossoverPointClicked: (event) ->
-    GG.statemanager.send 'selectedCrossover', {chromoView: this, allele: event.context}
   allelesClickable: true
   alleleClicked: (event) ->
     if @get('allelesClickable')
@@ -459,6 +457,18 @@ GG.ChromosomePanelView = Ember.View.extend
     else 'male-chromosome'
   ).property('controller.selected').cacheable()
   classNameBindings: ['hidden','defaultClass', 'chromosomeClass']
+
+GG.CrossoverPointView = Ember.View.extend
+  tagName: 'div'
+  classNames: ['crossoverPoint','hidden']
+  classNameBindings: ['gene']
+  allele: null
+  chromoView: null
+  gene: (->
+    return BioLogica.Genetics.getGeneOfAllele(GG.DrakeSpecies, @get('allele'))?.name
+  ).property('allele')
+  click: ->
+    GG.statemanager.send 'selectedCrossover', {chromoView: @get('chromoView'), allele: @get('allele')}
 
 GG.EggView = Ember.View.extend GG.Animation,
   tagName: 'div'

@@ -43,6 +43,7 @@
 .meiosis .allele
   position: relative
   margin-left: 4px
+  height: 22px
 
 .meiosis .chromosome.selectable
   cursor: pointer
@@ -86,10 +87,13 @@
     padding: 5px
 
 .crossoverPoint
-  height: 3px
+  height: 4px
   width: 30px
+  margin: 1px
   &.clickable
     cursor: pointer
+    border: 1px dotted black
+    margin: 0px
     &:hover
       background-color: yellow
   &.selected

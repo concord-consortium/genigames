@@ -128,6 +128,7 @@ GG.StateInTask = Ember.State.extend
         callback = @get('selectingCrossoverCallback')
         $('#' + parent.get('elementId') + " .crossoverSelection").addClass('hidden')
         $('#' + parent.get('elementId') + " .crossoverPoint").removeClass('clickable')
+        $('#' + parent.get('elementId') + " .crossoverPoint").addClass('hidden')
         if callback?
           callback.call()
         else
@@ -138,7 +139,11 @@ GG.StateInTask = Ember.State.extend
         selector = '#' + context.elementId + ' .crossoverSelection'
         $(selector).removeClass('hidden')
         selector = '#' + context.elementId + ' .crossoverPoint'
-        $(selector).addClass('clickable')
+        Ember.run.next ->
+          # do this in the next run loop, since earlier we switched from using the drake
+          # to using gametes, so the views need time to adjust themselves
+          $(selector).addClass('clickable')
+          $(selector).removeClass('hidden')
 
       selectingChromatidsCallback: null
       doneSelectingChromatids: (manager, parent) ->
