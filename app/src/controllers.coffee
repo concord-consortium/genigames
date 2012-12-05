@@ -498,6 +498,9 @@ GG.meiosisController = Ember.Object.create
     chromoView.set('selected', false)
     selected[source][chromo] = null
 
+    # Refund the reputation that was charged to select this chromosome
+    GG.userController.addReputation GG.actionCostsController.getCost 'chromosomeSelected'
+
     clearNum = true
     for own chrom,view of selected[source]
       clearNum = false if view?
@@ -505,8 +508,6 @@ GG.meiosisController = Ember.Object.create
     if clearNum
       gameteNumberProp = if source is "father" then 'fatherGameteNumber' else 'motherGameteNumber'
       @set(gameteNumberProp, -1)
-      # Refund the reputation that was charged to select this chromosome
-      GG.userController.addReputation GG.actionCostsController.getCost 'chromosomeSelected'
 
     # TODO We should probably revert any cell num swaps that happened on selection, so the user can't
     # cheat by selecting and then deselecting and having them move to the same gamete anyway
