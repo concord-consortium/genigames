@@ -443,7 +443,7 @@ GG.sessionController = Ember.Object.create
 
 GG.actionCostsController = Ember.Object.create
   getCost: (action) ->
-    @get('content.'+action)
+    @get('content.'+action) || 0
 
 GG.meiosisController = Ember.Object.create
   motherView: null
