@@ -1,3 +1,7 @@
 {
-	"breedButtonClicked": 2
+  "alleleRevealed": 3,
+  "breedButtonClicked": 2,
+  "meiosisControlEnabled": 5,
+  "crossoverMade": 10,
+  "chromosomeSelected": 10
 }
