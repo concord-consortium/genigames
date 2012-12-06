@@ -859,6 +859,27 @@ a:hover {
   width: 1010px;
   height: 660px;
 }
+.logout {
+  background-color: #bbb;
+  color: #fff;
+  position: absolute;
+  width: 70px;
+  height: 20px;
+  border-radius: 10px;
+  box-shadow: 2px 2px 1px 1px #808080;
+  text-align: center;
+  z-index: 2;
+}
+.logout div {
+  position: relative;
+  top: 1px;
+}
+.logout:hover {
+  cursor: pointer;
+}
+.logout:active {
+  box-shadow: 1px 1px 1px 1px #808080;
+}
 #login {
   position: absolute;
   top: 250px;
@@ -1144,6 +1165,17 @@ a:hover {
   font-family: Verdana;
   font-size: 1.2em;
 }
+#topBar .logout {
+  position: absolute;
+  right: 55px;
+  top: 15px;
+  width: 75px;
+  height: 25px;
+}
+#topBar .logout div {
+  position: relative;
+  top: 3px;
+}
 #greeting {
   position: absolute;
   left: 55px;
@@ -1168,6 +1200,11 @@ a:hover {
   background-repeat: no-repeat;
   overflow: hidden;
   border: 5px solid #402309;
+}
+#sky .logout {
+  position: absolute;
+  top: 10px;
+  left: 10px;
 }
 #world {
   position: absolute;
