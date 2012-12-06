@@ -3,12 +3,7 @@ GG.StateInTown = Ember.State.extend
   initialState: 'npcsWaiting'
 
   enter: ->
-    GG.universeView.set 'town', Ember.ContainerView.create
-      town: GG.TownView
-      breeder: GG.BreederView
-      childViews: ['town','breeder']
-    if GG.universeView.get('currentView.town') is undefined
-      GG.universeView.set 'currentView', GG.universeView.get 'town'
+    GG.universeView.setCurrentView 'town'
 
   npcsWaiting: Ember.State.create
     enter: (manager) ->

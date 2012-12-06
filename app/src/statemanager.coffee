@@ -24,7 +24,7 @@ GG.statemanager = Ember.StateManager.create
       GG.sessionController.checkCCAuthToken()
 
       # show the login form
-      GG.universeView.set 'currentView', GG.universeView.get 'login'
+      GG.universeView.setCurrentView 'login'
       if GG.sessionController.get('user')?
         setTimeout ->
           GG.statemanager.send 'successfulLogin'
@@ -45,7 +45,7 @@ GG.statemanager = Ember.StateManager.create
         found = GG.sessionController.get('classesWithLearners')
         if found.length > 1
           # if multiple, display a selection dialog
-          GG.universeView.set 'currentView', GG.universeView.get 'chooseClass'
+          GG.universeView.setCurrentView 'chooseClass'
           return
         else if found.length == 1
           # if one, use that learner

@@ -3,8 +3,7 @@ GG.StateInWorld = Ember.State.extend
   initialState: 'townsWaiting'
 
   enter: ->
-    GG.universeView.set 'world', GG.WorldView.create()
-    GG.universeView.set 'currentView', GG.universeView.get 'world'
+    GG.universeView.setCurrentView 'world'
     currentTown = GG.townsController.get('currentTown')
     if currentTown?
       setTimeout ->

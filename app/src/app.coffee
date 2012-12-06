@@ -73,14 +73,21 @@ $ ->
   GG.statemanager.set('params', urlParams)
 
   GG.universeView = Ember.ContainerView.create
-    login: GG.LoginView.create()
-    chooseClass: GG.ChooseClassView.create()
-    world: GG.WorldView.create()
-    course: GG.ObstacleCourseView.create()
-    town: Ember.ContainerView.create
+    login: GG.LoginView.extend({})
+    chooseClass: GG.ChooseClassView.extend({})
+    world: GG.WorldView.extend({})
+    course: GG.ObstacleCourseView.extend({})
+    town: Ember.ContainerView.extend
       town: GG.TownView
       breeder: GG.BreederView
       childViews: ['town','breeder']
+    setCurrentView: (view)->
+      templ = @get(view)
+      if templ?
+        real = templ.create()
+        @set('currentView', real)
+      else
+        console.error("Failed to transition to universe view: " + view)
 
   GG.universeView.appendTo('#container')
 
