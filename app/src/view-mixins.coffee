@@ -66,9 +66,9 @@ GG.PointsToolTip = Ember.Mixin.create
 
   toggleToolTip: (->
     if @get 'showToolTip'
-      @set 'qtip', @$().qtip GG.QTipDefaults
-    else if @get 'qtip'
-      qtip.destroy()
+      @$().qtip GG.QTipDefaults
+    else
+      @$().qtip 'destroy'
   ).observes('showToolTip')
 
   didInsertElement: ->
