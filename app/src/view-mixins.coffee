@@ -45,3 +45,47 @@ GG.Animation = Ember.Mixin.create
 
   ### Some view-specific animations below, to keep the view code cleaner
 
+  ###
+
+GG.PointsToolTip = Ember.Mixin.create
+
+  showToolTip: true
+  toolTipText: null
+  costPropertyName: null
+
+  attributeBindings: ['title']
+
+  title: (->
+    if not @get 'showToolTip'
+      return ""
+
+    costPropertyName = @get 'costPropertyName'
+    cost = GG.actionCostsController.getCost costPropertyName
+    return @get('toolTipText') + "<br/><br/>Cost: #{cost} rep points."
+  ).property('showToolTip', 'costPropertyName', 'toolTipText')
+
+  toggleToolTip: (->
+    if @get 'showToolTip'
+      @set 'qtip', @$().qtip GG.QTipDefaults
+    else if @get 'qtip'
+      qtip.destroy()
+  ).observes('showToolTip')
+
+  didInsertElement: ->
+    @_super()
+    @toggleToolTip()
+
+GG.QTipDefaults =
+  show: 'mouseover'
+  hide: 'mouseout click'
+  position:
+    corner:
+     target: 'bottomRight'
+     tooltip: 'topLeft'
+  style:
+    border:
+     width: 1
+     radius: 8
+    tip: 'topLeft'
+    color: '#333'
+    name: 'cream'

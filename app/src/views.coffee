@@ -234,21 +234,14 @@ GG.BreedButtonView = Ember.View.extend
   click: ->
     GG.statemanager.send('breedDrake')
 
-GG.MeiosisButtonView = Ember.View.extend
+GG.MeiosisButtonView = Ember.View.extend GG.PointsToolTip,
   tagName: 'div'
-  attributeBindings: ['title']
-  title: (->
-    cost = GG.actionCostsController.getCost 'meiosisControlEnabled'
-    return "Enable manual control of meiosis.<br/><br/>Cost: #{cost} rep points."
-  ).property()
-  didInsertElement: ->
-    @_super()
-    @set 'qtip', @$().qtip GG.QTipDefaults
+  toolTipText: "Enable manual control of meiosis."
+  costPropertyName: 'meiosisControlEnabled'
   click: ->
     GG.statemanager.send('toggleBreedType')
 
-
-GG.AlleleView = Ember.View.extend
+GG.AlleleView = Ember.View.extend GG.PointsToolTip,
   classNameBindings: ['defaultClassNames', 'revealable', 'dominant', 'gene']
   defaultClassNames: 'allele'
   value: ''
@@ -282,20 +275,10 @@ GG.AlleleView = Ember.View.extend
   displayValue: (->
     if @get('hidden') then @get('hiddenValue') else GG.drakeController.alleleOverride(@get('value'))
   ).property('value','hidden')
-  attributeBindings: ['title']
-  title: (->
-    if @get 'hidden'
-      cost = GG.actionCostsController.getCost 'alleleRevealed'
-      return "Reveal hidden allele.<br/><br/>Cost: #{cost} rep points."
-    else
-      if qtip = @get 'qtip'
-        qtip.destroy()
-      return ""
-  ).property('hidden')
-  didInsertElement: ->
-    @_super()
-    if @get('hidden')
-      @set 'qtip', @$().qtip GG.QTipDefaults
+
+  showToolTipBinding: 'hidden'
+  toolTipText: "Reveal hidden allele."
+  costPropertyName: 'alleleRevealed'
 
 GG.ChromoView = Ember.View.extend
   templateName: 'chromosome'
@@ -875,17 +858,4 @@ GG.ObstacleView = Ember.View.extend
   classNameBindings: ['type']
   type: "ducks"
 
-GG.QTipDefaults =
-  show: 'mouseover'
-  hide: 'mouseout click'
-  position:
-    corner:
-     target: 'bottomRight'
-     tooltip: 'topLeft'
-  style:
-    border:
-     width: 1
-     radius: 8
-    tip: 'topLeft'
-    color: '#333'
-    name: 'cream'
+
