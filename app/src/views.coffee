@@ -244,7 +244,7 @@ GG.MeiosisButtonView = Ember.View.extend GG.PointsToolTip,
 GG.AlleleView = Ember.View.extend GG.PointsToolTip,
   classNameBindings: ['defaultClassNames', 'revealable', 'dominant', 'gene']
   defaultClassNames: 'allele'
-  value: ''
+  valueBinding: 'content.allele'
   hiddenValue: (->
     value = @get 'value'
     if value is "Tk" then value = "T"
@@ -253,7 +253,7 @@ GG.AlleleView = Ember.View.extend GG.PointsToolTip,
     value + '?'
   ).property('value').cacheable()
   clickable: true
-  hidden: false
+  hidden: Ember.computed.not('content.visible')
   revealable: (->
     return @get('hidden') and @get('clickable')
   ).property('hidden','clickable')
@@ -276,7 +276,7 @@ GG.AlleleView = Ember.View.extend GG.PointsToolTip,
     if @get('hidden') then @get('hiddenValue') else GG.drakeController.alleleOverride(@get('value'))
   ).property('value','hidden')
 
-  showToolTipBinding: 'hidden'
+  showToolTipBinding: 'revealable'
   toolTipText: "Reveal hidden allele."
   costPropertyName: 'alleleRevealed'
 

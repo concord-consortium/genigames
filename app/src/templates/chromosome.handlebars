@@ -1,14 +1,8 @@
 <div class="alleles-container">
 {{#each allele in view.alleles }}
   {{view GG.CrossoverPointView chromoViewBinding="view" alleleBinding="allele.allele" }}
-  {{#if allele.visible}}
-    {{#view GG.AlleleView valueBinding="allele.allele" }}
-      {{view.displayValue}}
-    {{/view}}
-  {{else}}
-    {{#view GG.AlleleView valueBinding="allele.allele" hidden="true" clickableBinding="view.allelesClickable"}}
-      <span {{action alleleClicked allele target="view.parentView"}} >{{view.displayValue}}</span>
-    {{/view}}
-  {{/if}}
+  {{#view GG.AlleleView contentBinding="allele" clickableBinding="view.allelesClickable"}}
+    <span {{action alleleClicked allele target="view.parentView"}} >{{view.displayValue}}</span>
+  {{/view}}
 {{/each}}
 </div>
