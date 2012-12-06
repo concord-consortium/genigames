@@ -99,7 +99,7 @@ GG.tasksController = Ember.ArrayController.create
 
   currentLevelId: (->
     task = @get 'currentTask'
-    if task then " - "+ (@indexOf(task) + 1)
+    if task then ": " + task.get 'name'
     else ""
   ).property('currentTask')
 

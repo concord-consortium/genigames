@@ -72,6 +72,7 @@ GG.Town = Ember.Object.extend
   ).observes('completed')
 
 GG.Task = Ember.Object.extend
+  name: null
   visibleGenes: null
   hiddenGenes: null
   initialDrakes: null
