@@ -20,6 +20,7 @@ GG.statemanager = Ember.StateManager.create
   loggingIn: Ember.State.create
     enter: ->
       #try to log in automatically
+      GG.sessionController.set('loggingIn', true)
       GG.sessionController.checkCCAuthToken()
 
       # show the login form
@@ -30,6 +31,7 @@ GG.statemanager = Ember.StateManager.create
         , 100
 
     login: (state, data)->
+      GG.sessionController.set('loggingIn', true)
       GG.sessionController.loginPortal(data.username, data.password)
 
     successfulLogin: ->
