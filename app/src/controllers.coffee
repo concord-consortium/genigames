@@ -394,7 +394,8 @@ GG.sessionController = Ember.Object.create
   checkTokenUrl: '/portal/verify_cc_token'
   loginUrl:      '/portal/remote_login'
   logoutUrl:     '/portal/remote_logout'
-  userBinding: 'GG.userController.user'
+  userBinding:   'GG.userController.user'
+  loadedBinding: 'GG.userController.loaded'
   error: false
   loggingIn: false
   firstTime: true
@@ -437,8 +438,11 @@ GG.sessionController = Ember.Object.create
   logoutPortal: ->
     @set('firstTime', true)
     @set('user', null)
+    @set('loaded', false)
     @set('loggingIn', false)
-    $.getJSON @logoutUrl, (data) ->
+    GG.tasksController.set('content',[])
+    GG.townsController.set('content',[])
+    $.post @logoutUrl, {}, (data) ->
       GG.statemanager.transitionTo 'loggingIn'
 
 GG.actionCostsController = Ember.Object.create

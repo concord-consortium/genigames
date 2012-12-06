@@ -11,6 +11,7 @@
     <div id="level">
       {{GG.townsController.currentTown.name}} {{GG.tasksController.currentLevelId}}
     </div>
+    {{view GG.LogoutButton}}
   </div>
   {{#each view.content}}
     {{#view GG.TaskNPCView contentBinding="this"}}

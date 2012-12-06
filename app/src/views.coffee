@@ -14,6 +14,13 @@ GG.LoginView = Ember.View.extend
     data = {username: @get('username'), password: pw}
     GG.statemanager.send 'login', data
 
+GG.LogoutButton = Ember.View.extend
+  tagName: 'div'
+  classNames: 'logout'
+  template: Ember.Handlebars.compile('<div>Logout</div>')
+  click: ->
+    GG.statemanager.transitionTo 'loggingOut'
+
 GG.ChooseClassView = Ember.View.extend
   templateName: 'choose-class'
   optionsBinding: 'GG.sessionController.classesWithLearners'
