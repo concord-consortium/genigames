@@ -1,0 +1,19 @@
+// These are assets that we'd like to pre-load,
+// but are referenced directly by the app and not
+// via css, so the pre-loader doesn't find them
+// by default.
+
+// MAKE SURE THESE DON'T ACTUALLY MATCH!
+
+.needs-caching
+  for color in 'albino' 'blue' 'green' 'purple' 'red' 'shinyBlue' 'shinyGreen' 'shinyPurple' 'shinyRed'
+    &.drake-{color}
+      background: url('../images/drakes/' + color + '.png')
+  &.bubbles
+    &.heart
+      background: url('../images/heart-bubble.png')
+    &.question
+      background: url('../images/bubble-question.png')
+  &.misc
+    &.delete
+      background: url('../images/delete.png')
