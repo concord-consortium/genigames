@@ -175,7 +175,7 @@ GG.DrakeView = Ember.View.extend
 # to an array so we can animate multiple drakes at once without
 # creating a separate timer for each
 GG.animateDrake = ($img) ->
-  if GG.drakeAnimationList.length > 3 then return
+  if GG.drakeAnimationList.length > 2 then return
 
   GG.drakeAnimationList.push $img
   GG.drakeAnimationPositions.push 0
