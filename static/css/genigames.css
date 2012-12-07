@@ -34,6 +34,15 @@
 .needs-caching.misc.delete {
   background: url("../images/delete.png");
 }
+.needs-caching.npc.npc1.bookkeeper1 {
+  background: url("../images/npc1_bookkeeper1.png");
+}
+.needs-caching.npc.npc2.alchemist1 {
+  background: url("../images/npc2_alchemist1.png");
+}
+.needs-caching.npc.npc2.alchemist2 {
+  background: url("../images/npc2_alchemist2.png");
+}
 #breeding-apparatus {
   position: absolute;
   top: 0;
