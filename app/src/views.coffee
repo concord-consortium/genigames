@@ -147,13 +147,19 @@ GG.DrakeView = Ember.View.extend
   ).property()
   didInsertElement: ->
     # Wait for the animation images to load, then move it in place and start it up
-    setTimeout =>
+    swapImage = =>
+      GG.breedingController.removeObserver 'isShowingBreeder', swapImage
       layer = '#' + @get('elementId')
       $(layer + ' .drake-idle-img').imagesLoaded =>
         $(layer + ' .static').css({left: 400})
         $(layer + ' .idle').css({left: 0})
         @setNextIdleInterval()
-    , 6000
+
+    if GG.breedingController.get 'isShowingBreeder'
+      swapImage()
+    else
+      GG.breedingController.addObserver 'isShowingBreeder', swapImage
+
   setNextIdleInterval: ->
     nextTime = 3000 + Math.random() * 15000
     setTimeout =>

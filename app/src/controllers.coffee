@@ -227,6 +227,7 @@ GG.offspringController = Ember.Object.create
 GG.breedingController = Ember.Object.create
   motherBinding: 'GG.parentController.selectedMother'
   fatherBinding: 'GG.parentController.selectedFather'
+  isShowingBreeder: false
   isBreeding: false
 
   breedType: GG.BREED_AUTOMATED
