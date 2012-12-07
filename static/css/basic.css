@@ -1,0 +1,12 @@
+/* This should be the absolute minimum css needed to style
+ * the loading text in the static index.html
+ *
+ * We want this to download lightning-fast.
+ */
+#loading {
+  position: absolute;
+  top: 250px;
+  width: 100%;
+  height: 30px;
+  text-align: center;
+}
