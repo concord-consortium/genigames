@@ -101,7 +101,7 @@ GG.statemanager = Ember.StateManager.create
           if (taskPath = GG.statemanager.get('params.task'))
             taskPath = taskPath.split "/"
             townLoaded = GG.townsController.loadTown taskPath[0]
-            GG.tasksController.loadTask parseInt(taskPath[1])-1 if not isNaN parseInt(taskPath[1])
+            GG.tasksController.setNextAvailableTask parseInt(taskPath[1])-1 if not isNaN parseInt(taskPath[1])
             nextState = if townLoaded then 'inTown' else 'inWorld'
             GG.statemanager.transitionTo nextState
           else

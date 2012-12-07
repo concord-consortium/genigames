@@ -63,8 +63,7 @@ GG.tasksController = Ember.ArrayController.create
   addTask: (task) ->
     @pushObject task
 
-  setCurrentTask: (task, force=false) ->
-    @completeTasksThrough @indexOf(task) - 1 if force
+  setCurrentTask: (task) ->
     return if task is @currentTask
 
     if @indexOf(task) >= 0
@@ -83,10 +82,9 @@ GG.tasksController = Ember.ArrayController.create
     else
       throw "GG.tasksController.setCurrentTask: argument is not a known task"
 
-  loadTask: (taskIndex) ->
+  setNextAvailableTask: (taskIndex) ->
     tasks = @get('content')
-    @setCurrentTask(@get('content')[taskIndex], true) if taskIndex < tasks.length
-
+    @completeTasksThrough taskIndex - 1 if taskIndex < tasks.length
 
   completeCurrentTask: ->
     task = @get 'currentTask'
