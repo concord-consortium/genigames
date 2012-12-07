@@ -77,7 +77,7 @@ GG.WorldTownView = Ember.View.extend
 
 GG.BreederView = Ember.View.extend
   templateName: 'breeder-view'
-
+  breedTypeBinding: 'GG.breedingController.breedType'
 
 GG.DrakeView = Ember.View.extend
   templateName       : 'drake'

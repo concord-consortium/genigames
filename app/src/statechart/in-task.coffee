@@ -8,6 +8,7 @@ GG.StateInTask = Ember.State.extend
     enter: ->
       $('#breeding-apparatus').animate({"left":"-17px"},1200,'easeOutCubic')
       GG.cyclesController.reset()
+      GG.breedingController.set 'breedType', GG.BREED_AUTOMATED
 
     exit: ->
       # clear offspring
