@@ -1,3 +1,39 @@
+.needs-caching.drake-albino {
+  background: url("../images/drakes/albino.png");
+}
+.needs-caching.drake-blue {
+  background: url("../images/drakes/blue.png");
+}
+.needs-caching.drake-green {
+  background: url("../images/drakes/green.png");
+}
+.needs-caching.drake-purple {
+  background: url("../images/drakes/purple.png");
+}
+.needs-caching.drake-red {
+  background: url("../images/drakes/red.png");
+}
+.needs-caching.drake-shinyBlue {
+  background: url("../images/drakes/shinyBlue.png");
+}
+.needs-caching.drake-shinyGreen {
+  background: url("../images/drakes/shinyGreen.png");
+}
+.needs-caching.drake-shinyPurple {
+  background: url("../images/drakes/shinyPurple.png");
+}
+.needs-caching.drake-shinyRed {
+  background: url("../images/drakes/shinyRed.png");
+}
+.needs-caching.bubbles.heart {
+  background: url("../images/heart-bubble.png");
+}
+.needs-caching.bubbles.question {
+  background: url("../images/bubble-question.png");
+}
+.needs-caching.misc.delete {
+  background: url("../images/delete.png");
+}
 #breeding-apparatus {
   position: absolute;
   top: 0;
