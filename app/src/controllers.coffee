@@ -54,7 +54,6 @@ GG.townsController = Ember.ArrayController.create
 GG.tasksController = Ember.ArrayController.create
   content    : []
   currentTask: null
-  upcomingTask: null
 
   reset: ->
     @set 'content', []
@@ -64,7 +63,7 @@ GG.tasksController = Ember.ArrayController.create
     @pushObject task
 
   setCurrentTask: (task) ->
-    return if task is @currentTask
+    return if task is @get 'currentTask'
 
     if @indexOf(task) >= 0
       task.set 'cyclesRemaining', task.get 'cycles'
@@ -86,6 +85,10 @@ GG.tasksController = Ember.ArrayController.create
     tasks = @get('content')
     @completeTasksThrough taskIndex - 1 if taskIndex < tasks.length
 
+  clearCurrentTask: ->
+    @set 'currentTask', null
+    GG.parentController.clear()
+
   completeCurrentTask: ->
     task = @get 'currentTask'
     task.set 'completed', true
@@ -97,10 +100,10 @@ GG.tasksController = Ember.ArrayController.create
     GG.logController.logEvent GG.Events.COMPLETED_TASK, name: ("Tasks through #" + n)
 
   currentLevelId: (->
-    task = @get('currentTask') or @get('upcomingTask')
+    task = @get('currentTask')
     if task then ": " + task.get 'name'
     else ""
-  ).property('currentTask', 'upcomingTask')
+  ).property('currentTask')
 
   currentTargetTraits: (->
     target = @get 'currentTask.targetDrake'
@@ -114,7 +117,7 @@ GG.tasksController = Ember.ArrayController.create
   matchCountBinding:  Ember.Binding.oneWay('currentTask.matchCount')
 
   showTaskDescription: (task) ->
-    @set 'upcomingTask', task
+    @setCurrentTask task
     task.set 'showQuestionBubble', false
     task.set 'showSpeechBubble', true
 
@@ -133,7 +136,6 @@ GG.tasksController = Ember.ArrayController.create
 
   taskAccepted: (task) ->
     task.set 'showSpeechBubble', false
-    @setCurrentTask task
     GG.statemanager.transitionTo 'inTask'
 
   taskFinishedBubbleDismissed: ->
