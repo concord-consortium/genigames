@@ -19,6 +19,16 @@ GG.statemanager = Ember.StateManager.create
 
   loggingIn: Ember.State.create
     enter: ->
+      unless GG.sessionController.get('preloadingComplete')
+        assets = Assets.preloadCssImages
+          statusTextEl: "#loadingStatus"
+          showImageName: false
+          onComplete: ->
+            $('#loadingStatus').html("Loading complete.")
+            GG.sessionController.set('preloadingComplete', true)
+        # for asset in assets
+        #   console.log("pre-loading: " + asset)
+
       #try to log in automatically
       GG.sessionController.set('loggingIn', true)
       GG.sessionController.checkCCAuthToken()
@@ -34,7 +44,19 @@ GG.statemanager = Ember.StateManager.create
       GG.sessionController.set('loggingIn', true)
       GG.sessionController.loginPortal(data.username, data.password)
 
-    successfulLogin: ->
+    successfulLogin: (manager)->
+      if GG.sessionController.get('preloadingComplete')
+        manager.send 'preloadedSuccessfulLogin'
+      else
+        console.log("waiting for preload to finish")
+        GG.sessionController.set('waitingForPreload', true)
+        GG.sessionController.addObserver 'preloadingComplete', ->
+          GG.sessionController.removeObserver 'preloadingComplete', this
+          manager.send 'preloadedSuccessfulLogin'
+
+    preloadedSuccessfulLogin: ->
+      Ember.run.next ->
+        GG.sessionController.set('waitingForPreload', false)
       if GG.statemanager.get('params').learner?
         # TODO We should probably enforce that the learner passed in via params
         # is one of the learners the portal returns as part of the cc auth token data

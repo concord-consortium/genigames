@@ -1,6 +1,11 @@
 <div id="login">
+  <div id="loadingStatus"></div>
   {{#if view.loggingIn}}
-    <div>Logging in... please wait.</div>
+    {{#if view.waitingForPreload}}
+      <div>Logged in! Waiting to finish pre-loading assets...</div>
+    {{else}}
+      <div>Logging in... please wait.</div>
+    {{/if}}
   {{else}}
     {{#unless view.firstTime}}
       {{#if view.error}}

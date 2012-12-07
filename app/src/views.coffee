@@ -8,6 +8,7 @@ GG.LoginView = Ember.View.extend
   loggingInBinding: 'GG.sessionController.loggingIn'
   errorBinding: 'GG.sessionController.error'
   firstTimeBinding: 'GG.sessionController.firstTime'
+  waitingForPreloadBinding: 'GG.sessionController.waitingForPreload'
   login: ->
     pw = @get('password')
     @set('password', "")

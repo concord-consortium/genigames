@@ -402,6 +402,8 @@ GG.sessionController = Ember.Object.create
   error: false
   loggingIn: false
   firstTime: true
+  preloadingComplete: false
+  waitingForPreload: false
   loggedIn: (->
     @get('user') != null
   ).property('user')

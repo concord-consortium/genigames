@@ -8,6 +8,7 @@ minispade.require 'genigames/vendor/jquery-qtip'
 minispade.require 'genigames/vendor/handlebars'
 minispade.require 'genigames/vendor/ember'
 minispade.require 'genigames/vendor/biologica'
+minispade.require 'genigames/vendor/jquery-preload-css-images'
 
 window.GG = GG = Ember.Application.create()
 
