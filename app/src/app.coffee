@@ -89,6 +89,7 @@ $ ->
       else
         console.error("Failed to transition to universe view: " + view)
 
+  $("#loading").remove()
   GG.universeView.appendTo('#container')
 
   GG.statemanager.transitionTo 'loggingIn'

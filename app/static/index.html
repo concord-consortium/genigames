@@ -11,13 +11,16 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link rel="stylesheet" href="css/genigames.css">
+  <link rel="stylesheet" href="css/basic.css">
 
   <!--[if lt IE 9]>
   <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
   <![endif]-->
 </head>
 <body>
+  <div id="loading">
+    Loading application...
+  </div>
 
   <div id="container">
   </div>
@@ -27,6 +30,16 @@
       CP_DEFAULT_CACHEABLE: true,
       VIEW_PRESERVES_CONTEXT: true
     };
+
+    // load the full css now instead of in the <head>
+    // because this way we don't have to wait for it to
+    // fully download before the page is rendered.
+    var html_doc = document.getElementsByTagName('head')[0];
+    css = document.createElement('link');
+    css.setAttribute('rel', 'stylesheet');
+    css.setAttribute('type', 'text/css');
+    css.setAttribute('href', "css/genigames.css");
+    html_doc.appendChild(css);
   </script>
 
   <script src="/socket.io/socket.io.js"></script>
