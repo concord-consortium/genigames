@@ -19,6 +19,20 @@ case "$1" in
     export DEPLOY_BRANCH="deploy-dev"
     export PUSH_REFSPEC="$DEPLOY_BRANCH"
     ;;
+  staging)
+    export DEPLOY_TYPE=ssh_git
+    export SERVER=genigames.staging.concord.org
+    export SERVER_PATH="/var/www/public/"
+    export DEPLOY_BRANCH="deploy-staging"
+    export PUSH_REFSPEC="$DEPLOY_BRANCH"
+    ;;
+  production)
+    export DEPLOY_TYPE=ssh_git
+    export SERVER=genigames.concord.org
+    export SERVER_PATH="/var/www/public/"
+    export DEPLOY_BRANCH="deploy-production"
+    export PUSH_REFSPEC="$DEPLOY_BRANCH"
+    ;;
   *)
     echo "Invalid server!"
     exit 1
