@@ -226,8 +226,9 @@ GG.OffspringPoolView = Ember.View.extend
     drake = evt.context
     GG.statemanager.send 'offspringSelected', drake
 
-GG.BreedButtonView = Ember.View.extend
+GG.BreedButtonView = Ember.View.extend GG.PointsToolTip,
   tagName: 'div'
+  toolTipText: "Produce an offspring drake from the current parents"
 
   motherBinding: 'GG.parentController.selectedMother'
   fatherBinding: 'GG.parentController.selectedFather'
@@ -486,14 +487,16 @@ GG.EggView = Ember.View.extend GG.Animation,
       callback: =>
         @$().css({backgroundPosition: '0px -140px'})
 
-GG.OffspringUseButtonView = Ember.View.extend
+GG.OffspringUseButtonView = Ember.View.extend GG.PointsToolTip,
   tagName: 'div'
+  toolTipText: "Submit the current drake as the solution to this task"
   classNames : 'offspring-buttons-use'
   click: ->
     GG.statemanager.send('submitOffspring')
 
-GG.OffspringSaveButtonView = Ember.View.extend
+GG.OffspringSaveButtonView = Ember.View.extend GG.PointsToolTip,
   tagName: 'div'
+  toolTipText: "Use this drake as a parent"
   classNames : 'offspring-buttons-save'
   click: ->
     GG.statemanager.send('saveOffspring')

@@ -61,7 +61,8 @@ GG.PointsToolTip = Ember.Mixin.create
 
     costPropertyName = @get 'costPropertyName'
     cost = GG.actionCostsController.getCost costPropertyName
-    return @get('toolTipText') + "<br/><br/>Cost: #{cost} rep points."
+    costStr = if cost then "<br/><br/>Cost: #{cost} rep points." else ""
+    return @get('toolTipText') + costStr
   ).property('showToolTip', 'costPropertyName', 'toolTipText')
 
   toggleToolTip: (->
@@ -81,7 +82,7 @@ GG.QTipDefaults =
   hide: 'mouseout click'
   position:
     corner:
-     target: 'bottomRight'
+     target: 'bottomMiddle'
      tooltip: 'topLeft'
   style:
     border:
