@@ -1193,3 +1193,126 @@ a:hover {
   left: 400px;
   top: 20px;
 }
+#sky {
+  position: absolute;
+  width: 1010px;
+  height: 660px;
+  background: url("../images/world01.jpg");
+  background-repeat: no-repeat;
+  overflow: hidden;
+  border: 5px solid #402309;
+}
+#sky .logout {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+#world {
+  position: absolute;
+  left: 250px;
+  width: 712px;
+  height: 712px;
+  background-position: 0px 4px;
+  background-repeat: no-repeat;
+  margin-left: auto;
+  margin-right: auto;
+}
+#clouds {
+  position: absolute;
+  left: 250px;
+  width: 700px;
+  height: 700px;
+  background-position: 0px 0px;
+  background-repeat: no-repeat;
+}
+.location {
+  position: absolute;
+  z-index: 1;
+}
+.location .enabled {
+  cursor: pointer;
+}
+.huts {
+  height: 90px;
+  width: 120px;
+}
+.houses {
+  height: 70px;
+  width: 150px;
+}
+.townIcon1 {
+  background: no-repeat url("../images/townIcon1-disabled.png");
+  width: 175px;
+  height: 125px;
+}
+.townIcon1.enabled {
+  background: no-repeat url("../images/townIcon1.png");
+}
+.townIcon2 {
+  background: no-repeat url("../images/townIcon2-disabled.png");
+  width: 175px;
+  height: 125px;
+}
+.townIcon2.enabled {
+  background: no-repeat url("../images/townIcon2.png");
+}
+.townIcon3 {
+  background: no-repeat url("../images/townIcon3-disabled.png");
+  width: 175px;
+  height: 125px;
+}
+.townIcon3.enabled {
+  background: no-repeat url("../images/townIcon3.png");
+}
+.townIcon4 {
+  background: no-repeat url("../images/townIcon4-disabled.png");
+  width: 175px;
+  height: 125px;
+}
+.townIcon4.enabled {
+  background: no-repeat url("../images/townIcon4.png");
+}
+.world-town {
+  height: 110px;
+  width: 170px;
+}
+#dragon-right {
+  background: url("../images/drakesprite-small.png");
+  width: 90px;
+  height: 80px;
+  background-repeat: no-repeat;
+  position: absolute;
+  left: 480px;
+  top: 100px;
+  z-index: 2;
+  -moz-transform: rotate(-20deg);
+  -webkit-transform: rotate(-20deg);
+  -o-transform: rotate(-20deg);
+  -ms-transform: rotate(-20deg);
+}
+#dragon-left {
+  background: url("../images/drakesprite-small.png");
+  width: 90px;
+  height: 80px;
+  background-repeat: no-repeat;
+  position: absolute;
+  left: 480px;
+  top: 100px;
+  z-index: 2;
+  -moz-transform: rotate(-20deg) scaleX(-1);
+  -o-transform: rotate(-20deg) scaleX(-1);
+  -webkit-transform: rotate(-20deg) scaleX(-1);
+  transform: rotate(-20deg) scaleX(-1);
+  filter: FlipH;
+  -ms-filter: "FlipH";
+}
+#message {
+  background: url("../images/click-message.gif");
+  background-size: 100%;
+  width: 200px;
+  height: 100px;
+  background-repeat: no-repeat;
+  position: absolute;
+  left: 810px;
+  top: -50px;
+}
