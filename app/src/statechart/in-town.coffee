@@ -7,6 +7,8 @@ GG.StateInTown = Ember.State.extend
 
   npcsWaiting: Ember.State.create
     enter: (manager) ->
+      GG.tasksController.set 'upcomingTask', null
+      GG.tasksController.set 'currentTask', null
       task.set('showQuestionBubble', false) for task in GG.tasksController.content
       task.set('showSpeechBubble', false) for task in GG.tasksController.content
 

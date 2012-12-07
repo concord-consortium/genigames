@@ -54,6 +54,7 @@ GG.townsController = Ember.ArrayController.create
 GG.tasksController = Ember.ArrayController.create
   content    : []
   currentTask: null
+  upcomingTask: null
 
   reset: ->
     @set 'content', []
@@ -98,10 +99,10 @@ GG.tasksController = Ember.ArrayController.create
     GG.logController.logEvent GG.Events.COMPLETED_TASK, name: ("Tasks through #" + n)
 
   currentLevelId: (->
-    task = @get 'currentTask'
+    task = @get('currentTask') or @get('upcomingTask')
     if task then ": " + task.get 'name'
     else ""
-  ).property('currentTask')
+  ).property('currentTask', 'upcomingTask')
 
   currentTargetTraits: (->
     target = @get 'currentTask.targetDrake'
@@ -115,6 +116,7 @@ GG.tasksController = Ember.ArrayController.create
   matchCountBinding:  Ember.Binding.oneWay('currentTask.matchCount')
 
   showTaskDescription: (task) ->
+    @set 'upcomingTask', task
     task.set 'showQuestionBubble', false
     task.set 'showSpeechBubble', true
 
