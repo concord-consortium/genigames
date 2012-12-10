@@ -99,6 +99,11 @@ GG.Task = Ember.Object.extend
     @set 'skipSave', true
     for k in Object.keys(prevState)
       @set(k, prevState[k])
+    if @get "obstacleCourse.obstacles"
+      obstacles = []
+      for obs in @get "obstacleCourse.obstacles"
+        obstacles.push GG.Obstacle.create obs
+      @set "obstacleCourse.obstacles", obstacles
     @set 'skipSave', false
 
   serialize: ->
@@ -245,3 +250,8 @@ GG.TaskNPC = Ember.Object.extend
 
 GG.ActionCosts = Ember.Object.extend
   breedButtonClicked: 1
+
+GG.Obstacle = Ember.Object.extend
+  obstace: null
+  positionX: 0
+  positionY: 0

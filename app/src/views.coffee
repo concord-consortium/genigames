@@ -879,6 +879,10 @@ GG.ObstacleView = Ember.View.extend
   tagName: 'div'
   classNames: ['obstacle']
   classNameBindings: ['type']
-  type: "ducks"
+  attributeBindings  : ['style']
+  style: (->
+    "top: " + @get('content.positionY') + "px; left: " + @get('content.positionX') + "px;"
+  ).property('content.positionY','content.positionX')
+  typeBinding: "content.obstacle"
 
 
