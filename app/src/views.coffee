@@ -282,6 +282,8 @@ GG.AlleleView = Ember.View.extend GG.PointsToolTip,
       return "dominant"
     else if ending is "2"
       return "recessive"
+    else if ending is "3"
+      return "recessive3"
     else
       return ""
   ).property('displayValue')
@@ -292,7 +294,7 @@ GG.AlleleView = Ember.View.extend GG.PointsToolTip,
       return ''
   ).property('value')
   displayValue: (->
-    if @get('hidden') then @get('hiddenValue') else GG.drakeController.alleleOverride(@get('value'))
+    if @get('hidden') then @get('hiddenValue') else @get('value')
   ).property('value','hidden')
 
   showToolTipBinding: 'revealable'

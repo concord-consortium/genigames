@@ -1097,12 +1097,12 @@
   BioLogica.Species = BioLogica.Species || {};
 
   BioLogica.Species.GGDrake = {
-    name: "GGDrake",
+    name: 'GGDrake',
     chromosomeNames: ['1', '2', 'XY'],
     chromosomeGeneMap: {
-      '1': ['t', 'm', 'w', 'h'],
-      '2': ['c', 'g', 'a', 's'],
-      'XY': ['d', 'f']
+      '1': ['T3', 'M2', 'W2', 'H2'],
+      '2': ['C2', 'G2', 'A2', 'S2'],
+      'XY': ['D2', 'F2']
     },
     chromosomesLength: {
       '1': 100000000,
@@ -1111,118 +1111,118 @@
     },
     geneList: {
       tail: {
-        alleles: ['T', 'Tk', 't'],
+        alleles: ['T1', 'T2', 'T3'],
         start: 10000000,
         length: 10584
       },
       metallic: {
-        alleles: ['M', 'm'],
+        alleles: ['M1', 'M2'],
         start: 20000000,
         length: 259610
       },
       wings: {
-        alleles: ['W', 'w'],
+        alleles: ['W1', 'W2'],
         start: 70000000,
         length: 9094
       },
       horns: {
-        alleles: ['H', 'h'],
+        alleles: ['H1', 'H2'],
         start: 85000000,
         length: 19421
       },
       color: {
-        alleles: ['C', 'c'],
+        alleles: ['C1', 'C2'],
         start: 15000000,
         length: 64572
       },
       green: {
-        alleles: ['G', 'g'],
+        alleles: ['G1', 'G2'],
         start: 25000000,
         length: 17596
       },
       armor: {
-        alleles: ['A', 'a'],
+        alleles: ['A1', 'A2'],
         start: 80000000,
         length: 122234
       },
       spikes: {
-        alleles: ['S', 's'],
+        alleles: ['S1', 'S2'],
         start: 90000000,
         length: 6371
       },
       dilute: {
-        alleles: ['D', 'd'],
+        alleles: ['D1', 'D2'],
         start: 20000000,
         length: 152673
       },
       firebreathing: {
-        alleles: ['F', 'f'],
+        alleles: ['F1', 'F2'],
         start: 60000000,
         length: 1000
       }
     },
     alleleLabelMap: {
-      'T': 'Long tail',
-      'Tk': 'Kinked tail',
-      't': 'Short tail',
-      'M': 'Metallic',
-      'm': 'Nonmetallic',
-      'W': 'Wings',
-      'w': 'No wings',
-      'H': 'No horns',
-      'h': 'Horns',
-      'C': 'Colored',
-      'c': 'Colorless',
-      'A': 'No armor',
-      'a': 'Armor',
-      'S': 'Spikes wide',
-      's': 'Spikes narrow',
-      'G': 'Green',
-      'g': 'Purple',
-      'D': 'Full color',
-      'd': 'Dilute color',
-      'F': 'No fire breathing',
-      'f': 'Fire breathing',
+      'T1': 'Long tail',
+      'T2': 'Kinked tail',
+      'T3': 'Short tail',
+      'M1': 'Metallic',
+      'M2': 'Nonmetallic',
+      'W1': 'Wings',
+      'W2': 'No wings',
+      'H1': 'No horns',
+      'H2': 'Horns',
+      'C1': 'Colored',
+      'C2': 'Colorless',
+      'A1': 'No armor',
+      'A2': 'Armor',
+      'S1': 'Spikes wide',
+      'S2': 'Spikes narrow',
+      'G1': 'Green',
+      'G2': 'Purple',
+      'D1': 'Full color',
+      'D2': 'Dilute color',
+      'F1': 'No fire breathing',
+      'F2': 'Fire breathing',
       'Y': 'Y',
       '': ''
     },
     traitRules: {
-      "tail": {
-        "Long tail": [["T", "T"], ["T", "Tk"], ["T", "t"]],
-        "Kinked tail": [["Tk", "Tk"], ["Tk", "t"]],
-        "Short tail": [["t", "t"]]
+      'tail': {
+        'Long tail': [['T1', 'T1'], ['T1', 'T2'], ['T1', 'T3']],
+        'Kinked tail': [['T2', 'T2'], ['T2', 'T3']],
+        'Short tail': [['T3', 'T3']]
       },
-      "wings": {
-        "Wings": [["W", "W"], ["W", "w"]],
-        "No wings": [["w", "w"]]
+      'wings': {
+        'Wings': [['W1', 'W1'], ['W1', 'W2']],
+        'No wings': [['W2', 'W2']]
       },
-      "horns": {
-        "Reverse horns": [["H", "H"], ["H", "h"]],
-        "Forward horns": [["h", "h"]]
+      'horns': {
+        'Reverse horns': [['H1', 'H1'], ['H1', 'H2']],
+        'Forward horns': [['H2', 'H2']]
       },
-      "armor": {
-        "No armor": [["A", "A"], ["A", "a"]],
-        "Armor": [["a", "a"]]
+      'armor': {
+        'No armor': [['A1', 'A1'], ['A1', 'A2']],
+        'Armor': [['A2', 'A2']]
       },
-      "spikes": {
-        "Wide spikes": [["S", "S"]],
-        "Medium spikes": [["S", "s"]],
-        "Narrow spikes": [["s", "s"]]
+      'spikes': {
+        'Wide spikes': [['S1', 'S1']],
+        'Medium spikes': [['S1', 'S2']],
+        'Narrow spikes': [['S2', 'S2']]
       },
-      "fire breathing": {
-        "No fire breathing": [["F"]],
-        "Fire breathing": [["f", "f"], ["f", "Y"]]
+      'fire breathing': {
+        'No fire breathing': [['F1']],
+        'Fire breathing': [['F2', 'F2'], ['F2', 'Y']]
       },
-      "color": {
-        "Shiny green": [["C", "G", "M", "D"]],
-        "Shiny blue": [["C", "G", "M", "d", "d"], ["C", "G", "M", "d", "Y"]],
-        "Green": [["C", "G", "m", "m", "D"]],
-        "Blue": [["C", "G", "m", "m", "d", "d"], ["C", "G", "m", "m", "d", "Y"]],
-        "Shiny purple": [["C", "g", "g", "M", "D"]],
-        "Shiny red": [["C", "g", "g", "M", "d", "d"], ["C", "g", "g", "M", "d", "Y"]],
-        "Purple": [["C", "g", "g", "m", "m", "D"]],
-        "Red": [["C", "g", "g", "m", "m", "d", "d"], ["C", "g", "g", "m", "m", "d", "Y"]],
-        "Albino": [["c", "c"]]
+      'color': {
+        'Shiny green': [['C1', 'G1', 'M1', 'D1']],
+        'Shiny blue': [['C1', 'G1', 'M1', 'D2', 'D2'], ['C1', 'G1', 'M1', 'D2', 'Y']],
+        'Green': [['C1', 'G1', 'M2', 'M2', 'D1']],
+        'Blue': [['C1', 'G1', 'M2', 'M2', 'D2', 'D2'], ['C1', 'G1', 'M2', 'M2', 'D2', 'Y']],
+        'Shiny purple': [['C1', 'G2', 'G2', 'M1', 'D1']],
+        'Shiny red': [['C1', 'G2', 'G2', 'M1', 'D2', 'D2'], ['C1', 'G2', 'G2', 'M1', 'D2', 'Y']],
+        'Purple': [['C1', 'G2', 'G2', 'M2', 'M2', 'D1']],
+        'Red': [['C1', 'G2', 'G2', 'M2', 'M2', 'D2', 'D2'], ['C1', 'G2', 'G2', 'M2', 'M2', 'D2', 'Y']],
+        'Albino': [['C2', 'C2']]
       }
     },
     /*
