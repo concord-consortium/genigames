@@ -150,13 +150,39 @@ GG.DrakeView = Ember.View.extend
     # Wait for the animation images to load, then move it in place and start it up
     swapImage = =>
       GG.breedingController.removeObserver 'isShowingBreeder', swapImage
-      layer = '#' + @get('elementId')
-      $(layer + ' .drake-idle-img').imagesLoaded =>
-        requestAnimationFrame =>
-          $(layer + ' .idle').css({left: 0})
-          requestAnimationFrame =>
-            $(layer + ' .static').remove()
-            @setNextIdleInterval()
+      idleImg = new Image()
+      idleImg.src = @get('drakeIdleImage')
+
+      onComplete = =>
+        setTimeout =>
+          layer = '#' + @get('elementId')
+          tagStart = '<img src="' + idleImg.src + '" class="drake-idle-img '
+          tagEnd = '"></img>'
+          $(layer + " .drake").append $(
+            '<div class="idle">' +
+            tagStart + @get('tail') + tagEnd +
+            tagStart + 'drake-body' + tagEnd +
+            tagStart + @get('maleSpots') + tagEnd +
+            tagStart + @get('armor') + tagEnd +
+            tagStart + @get('wings') + tagEnd +
+            tagStart + @get('spikes') + tagEnd +
+            tagStart + @get('head') + tagEnd +
+            tagStart + @get('horns') + tagEnd +
+            tagStart + @get('fire') + tagEnd +
+            '</div>'
+          )
+          $(layer + ' .drake-idle-img').imagesLoaded =>
+            requestAnimationFrame =>
+              $(layer + ' .idle').css({left: 0})
+              requestAnimationFrame =>
+                $(layer + ' .static').remove()
+                @setNextIdleInterval()
+        , 2000
+
+      if !idleImg.complete
+        $(idleImg).bind('error load onreadystatechange', onComplete)
+      else
+        onComplete()
 
     if GG.breedingController.get 'isShowingBreeder'
       swapImage()
