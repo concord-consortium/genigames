@@ -47,7 +47,7 @@
   position: absolute;
   top: 0;
   left: 3000px;
-  width: 1300px;
+  width: 960px;
   height: 900px;
   overflow: hidden;
 }
@@ -971,7 +971,7 @@ a:hover {
 }
 #meiosis-container {
   position: absolute;
-  left: 800px;
+  left: 700px;
   top: 25px;
   width: 760px;
   height: 435px;
@@ -1183,6 +1183,9 @@ a:hover {
   z-index: 3;
 }
 .obstacle-course .obstacles .obstacle {
+  position: absolute;
+  left: 0;
+  top: 0;
   display: inline-block;
   z-index: 4;
 }
