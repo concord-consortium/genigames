@@ -1,18 +1,18 @@
-<div id="town" {{bindAttr class="GG.townsController.currentTown.background"}}>
-  <div id="topBar">
-    {{#with GG.userController.user}}
-      <div id="greeting">
-        Hi {{first}}!
-      </div>
-      <div id="reputation">
-        Reputation: {{reputation}}
-      </div>
-    {{/with}}
-    <div id="level">
-      {{GG.townsController.currentTown.name}} {{GG.tasksController.currentLevelId}}
+<div id="topBar">
+  {{#with GG.userController.user}}
+    <div id="greeting">
+      Hi {{first}}!
     </div>
-    {{view GG.LogoutButton}}
+    <div id="reputation">
+      Reputation: {{reputation}}
+    </div>
+  {{/with}}
+  <div id="level">
+    {{GG.townsController.currentTown.name}} {{GG.tasksController.currentLevelId}}
   </div>
+  {{view GG.LogoutButton}}
+</div>
+<div id="town" {{bindAttr class="GG.townsController.currentTown.background"}}>
   {{#each view.content}}
     {{#view GG.TaskNPCView contentBinding="this"}}
       <a href="#" {{action "npcSelected" this}}>
