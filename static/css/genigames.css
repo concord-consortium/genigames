@@ -51,13 +51,22 @@
   height: 900px;
   overflow: hidden;
 }
+#breeding-background {
+  position: absolute;
+  top: 60px;
+  left: 0;
+  width: 1300px;
+  height: 900px;
+  background: top left no-repeat url("../images/background_meiosis.jpg");
+  background-color: #fff;
+  overflow: hidden;
+}
 #breed-top-bar {
   position: absolute;
-  top: 50px;
+  top: 0px;
   left: 0;
   width: 1040px;
   height: 152px;
-  background: top left no-repeat url("../images/breed-top-bar.png");
 }
 .breed-title {
   position: relative;
@@ -68,9 +77,9 @@
 }
 .task-description {
   position: absolute;
-  top: 51px;
-  left: 249px;
-  width: 623px;
+  top: 28px;
+  left: 32px;
+  width: 770px;
 }
 .select-parents {
   position: relative;
@@ -83,17 +92,16 @@
 }
 #breeder {
   position: absolute;
-  top: 50px;
+  top: 110px;
   left: 0;
   width: 2040px;
   height: 612px;
-  background: top left no-repeat url("../images/mock_02-01.png");
-  background-color: #fff;
+  background: top left no-repeat url("../images/breeding_panels.png");
 }
 #breed-controls {
   position: absolute;
-  top: 268px;
-  left: 742px;
+  top: 165px;
+  left: 650px;
   width: 268px;
   height: 101px;
   background-image: url("../images/breed-controls.png");
@@ -145,7 +153,7 @@
 }
 #parent-fathers-pool-container {
   position: absolute;
-  top: 115px;
+  top: 0px;
   left: 20px;
   width: 490px;
   height: 205px;
@@ -153,7 +161,7 @@
 }
 #parent-mothers-pool-container {
   position: absolute;
-  top: 322px;
+  top: 193px;
   left: 20px;
   width: 490px;
   height: 205px;
@@ -161,23 +169,23 @@
 }
 #parent-pool-divider {
   position: absolute;
-  top: 320px;
-  left: 18px;
-  width: 495px;
+  top: 217px;
+  left: 22px;
+  width: 430px;
   height: 2px;
   background-color: #787878;
 }
 #father-chromosome {
   position: absolute;
-  top: 130px;
-  left: 800px;
+  top: 20px;
+  left: 680px;
   width: 125px;
   height: 265px;
 }
 #mother-chromosome {
   position: absolute;
-  top: 385px;
-  left: 800px;
+  top: 285px;
+  left: 680px;
   width: 125px;
   height: 265px;
 }
@@ -227,15 +235,15 @@
 }
 #offspring-pool {
   position: absolute;
-  top: 195px;
-  left: 1135px;
+  top: 10px;
+  left: 1030px;
   width: 150px;
   text-align: right;
 }
 #father {
   position: absolute;
-  top: 95px;
-  left: 575px;
+  top: -15px;
+  left: 500px;
 }
 #father span {
   position: absolute;
@@ -245,8 +253,8 @@
 }
 #mother {
   position: absolute;
-  top: 342px;
-  left: 575px;
+  top: 242px;
+  left: 500px;
 }
 #mother span {
   position: absolute;
@@ -964,7 +972,7 @@ a:hover {
 #meiosis-container {
   position: absolute;
   left: 800px;
-  top: 108px;
+  top: 25px;
   width: 760px;
   height: 435px;
 }
