@@ -907,8 +907,8 @@ a:hover {
 #town {
   margin-left: auto;
   margin-right: auto;
-  width: 1010px;
-  height: 660px;
+  width: 960px;
+  height: 560px;
 }
 .castle {
   background: top left no-repeat url("../images/town01.jpg");
