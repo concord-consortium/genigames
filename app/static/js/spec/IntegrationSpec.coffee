@@ -40,7 +40,7 @@ describe "A student", ->
   #   verify tasks are available
 
   it "should start with zero reputation", ->
-    runAndWait "Pause", 1000, ->
+    runAndWait "Pause", 5000, ->
       console.log 'waiting for load'
     , ->
       expect(GG.userController.get('user.reputation')).toBe(0)
@@ -48,14 +48,14 @@ describe "A student", ->
   it "should be able to click on the first town", ->
     expect(GG.townsController.get('currentTown')).toBe(null)
     expect($('#world').length).toBe(1)
-    expect($('.castle').length).toBe(1)
+    expect($('.townIcon1').length).toBe(1)
 
     runAndWait "Castle should be clicked", 3000, ->
       Ember.run ->
-        $('.castle').click()
+        $('.townIcon1').click()
     , ->
       expect($('#world').length).toBe(0)
-      expect($('.castle').length).toBe(0)
+      expect($('.townIcon1').length).toBe(0)
       expect($('#town').length).toBe(1)
       expect(GG.townsController.get('currentTown')).toBe(GG.townsController.get('content')[0])
 
@@ -86,14 +86,14 @@ describe "A student", ->
       expect(GG.parentController.get('selectedMother')).toBe(null)
       expect(GG.parentController.get('selectedFather')).toBe(null)
       expect(GG.parentController.get('content').length).toBe(4)
-      expect($('#parent-fathers-pool-container .chromosome-panel.hidden').length).toBe(1)
-      expect($('#parent-mothers-pool-container .chromosome-panel.hidden').length).toBe(1)
+      expect($('#father-chromosome .chromosome-panel.hidden').length).toBe(1)
+      expect($('#mother-chromosome .chromosome-panel.hidden').length).toBe(1)
       expect(GG.breedingController.get('child')).toBe(null)
       expect(GG.cyclesController.get('cycles')).toBe(10)
 
   it "should not see chromosome panels", ->
-    expect($('#parent-fathers-pool-container .chromosome-panel.hidden').length).toBe(1)
-    expect($('#parent-mothers-pool-container .chromosome-panel.hidden').length).toBe(1)
+    expect($('#father-chromosome .chromosome-panel.hidden').length).toBe(1)
+    expect($('#mother-chromosome .chromosome-panel.hidden').length).toBe(1)
 
   it "should see a disabled breed button", ->
     expect($('#breed-button:not(.enabled)').length).toBe(1)
@@ -118,14 +118,16 @@ describe "A student", ->
       expect($('#breed-button.enabled').length).toBe(1)
 
   it "should see chromosome panels", ->
-    expect($('#parent-fathers-pool-container .chromosome-panel:not(.hidden)').length).toBe(1)
-    expect($('#parent-mothers-pool-container .chromosome-panel:not(.hidden)').length).toBe(1)
+    expect($('#father-chromosome .chromosome-panel:not(.hidden)').length).toBe(1)
+    expect($('#mother-chromosome .chromosome-panel:not(.hidden)').length).toBe(1)
 
   it "should see an enabled breed button", ->
     expect($('#breed-button.enabled').length).toBe(1)
 
   it "should be able to breed the two parents and get an offspring", ->
-    runAndWait "Breeding should be successful", 2000, ->
+    # speed up the breeding, so the test doesn't take so long
+    GG.MeiosisAnimation.set('timeScale', 0.2)
+    runAndWait "Breeding should be successful", 9000, ->
       Ember.run ->
         $('#breed-button.enabled')[0].click()
     , ->
@@ -136,7 +138,7 @@ describe "A student", ->
     expect(GG.cyclesController.get('cycles')).toBe(9)
 
   it "should be able to breed again and decrease cycles to 8", ->
-    runAndWait "Breed", 2000, ->
+    runAndWait "Breed", 9000, ->
       Ember.run ->
         $('#breed-button.enabled')[0].click()
     , ->
@@ -161,7 +163,7 @@ describe "A student", ->
     runAndWait "Go back to select parents", 800, ->
       $('.select-parents').click()
     , ->
-      runAndWait "Offspring can be used to breed", 2000, ->
+      runAndWait "Offspring can be used to breed", 11000, ->
         console.log vars.offspringSex
         pool = if vars.offspringSex == GG.MALE then "#parent-fathers-pool-container" else "#parent-mothers-pool-container"
         console.log pool
