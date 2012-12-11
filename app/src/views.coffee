@@ -92,6 +92,7 @@ GG.DrakeView = Ember.View.extend
   drakeIdleImage     : (->
     '../images/drakes/headturn/' + @get 'drakeImageName'
   ).property('drakeImage')
+  showIdle           : false
   width              : "200px"
   org : (->
     @get('content.biologicaOrganism')
@@ -156,27 +157,14 @@ GG.DrakeView = Ember.View.extend
       onComplete = =>
         setTimeout =>
           layer = '#' + @get('elementId')
-          tagStart = '<img src="' + idleImg.src + '" class="drake-idle-img '
-          tagEnd = '"></img>'
-          $(layer + " .drake").append $(
-            '<div class="idle">' +
-            tagStart + @get('tail') + tagEnd +
-            tagStart + 'drake-body' + tagEnd +
-            tagStart + @get('maleSpots') + tagEnd +
-            tagStart + @get('armor') + tagEnd +
-            tagStart + @get('wings') + tagEnd +
-            tagStart + @get('spikes') + tagEnd +
-            tagStart + @get('head') + tagEnd +
-            tagStart + @get('horns') + tagEnd +
-            tagStart + @get('fire') + tagEnd +
-            '</div>'
-          )
-          $(layer + ' .drake-idle-img').imagesLoaded =>
-            requestAnimationFrame =>
-              $(layer + ' .idle').css({left: 0})
-              requestAnimationFrame =>
-                $(layer + ' .static').remove()
-                @setNextIdleInterval()
+          @set('showIdle', true)
+          Ember.run.next =>
+            $(layer + ' .drake-idle-img').imagesLoaded =>
+              setTimeout =>
+                requestAnimationFrame =>
+                  $(layer + ' .static').remove()
+                  @setNextIdleInterval()
+              , 2000  # this timeout is a hack to remove the blink between showing the static and idle images on FF
         , 2000
 
       if !idleImg.complete
