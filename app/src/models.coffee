@@ -31,6 +31,7 @@ GG.User = Ember.Object.extend
 GG.Town = Ember.Object.extend
   name: "Town"
   icon: "huts"
+  background: "castle"
   position: 0
   finalMessage: "Nice work, you've completed all the tasks in this town!"
   otherTownsBinding: Ember.Binding.oneWay('GG.townsController.content')
