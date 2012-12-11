@@ -92,12 +92,13 @@
 }
 .select-parents {
   position: relative;
-  top: 10px;
-  left: 777px;
-  width: 140px;
-  height: 39px;
+  top: 60px;
+  left: 812px;
+  width: 126px;
+  height: 40px;
   float: left;
   cursor: pointer;
+  background: url("../images/new_parents_button.png");
 }
 #breeder {
   position: absolute;
