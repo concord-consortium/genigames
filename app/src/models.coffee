@@ -255,7 +255,8 @@ GG.ObstacleCourse = Ember.Object.extend
     if obstacles = @get "obstacles"
       obstacleObjs = []
       for obs in obstacles
-        obstacleObjs.push GG.Obstacle.create obs
+        if typeof obs is "object"
+          obstacleObjs.push GG.Obstacle.create obs
       @set "obstacles", obstacleObjs
 
 GG.Obstacle = Ember.Object.extend
