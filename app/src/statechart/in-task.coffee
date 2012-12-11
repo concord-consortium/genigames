@@ -17,7 +17,7 @@ GG.StateInTask = Ember.State.extend
       GG.offspringController.set 'content', null
 
       $("#breeder").animate({left: 0},400,"easeOutCubic")
-      $('#breed-controls').animate({left: 742},400,'easeOutCubic')
+      $('#breed-controls').animate({left: 650},400,'easeOutCubic')
       $('#breeding-apparatus').animate({"left":"3000px"},1200,'easeInCubic')
       setTimeout =>
         # hide the breeding apparatus
@@ -52,7 +52,7 @@ GG.StateInTask = Ember.State.extend
 
       setup: ->
         GG.offspringController.set 'content', null
-        $('#breed-controls').animate({left: 742},600,'easeOutCubic')
+        $('#breed-controls').animate({left: 650},600,'easeOutCubic')
         $("#breeder").animate({left: 0},800,"easeOutCubic")
         setTimeout ->
           GG.motherPoolController.set('hidden', !GG.motherPoolController.selected)

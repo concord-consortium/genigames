@@ -1,77 +1,79 @@
 <div id="breeding-apparatus">
-  <div id="breeder">
-    {{view GG.FatherPoolView class="male-parents" id="parent-fathers-pool-container"}}
-    <div id="parent-pool-divider"></div>
-    {{view GG.MotherPoolView id="parent-mothers-pool-container"}}
-    <div id="breed-controls" {{bindAttr class="view.breedType"}}>
-      {{view GG.MeiosisButtonView id="meiosis-button"}}
-      {{view GG.BreedButtonView id="breed-button"}}
-      {{view GG.MoveCounter}}
+  <div id="breeding-background">
+    <div id="breed-top-bar">
+      {{#view GG.BreedTitleView}}
+        {{view.text}}
+      {{/view}}
+      {{#view GG.TaskDescriptionView}}
+        {{view.text}}
+      {{/view}}
+      {{view GG.SelectParentsButtonView}}
     </div>
-    <div id="mother">
-      {{#with GG.breedingController.mother}}
-        {{view GG.DrakeView contentBinding="this"}}
-      {{/with}}
-    </div>
-    <div id="mother-chromosome">
-      {{#with GG.motherPoolController}}
-        {{view GG.ChromosomePanelView controllerBinding="this"}}
-      {{/with}}
-    </div>
-    <div id="father">
-      {{#with GG.breedingController.father}}
-        {{view GG.DrakeView contentBinding="this"}}
-      {{/with}}
-    </div>
-    <div id="father-chromosome">
-      {{#with GG.fatherPoolController}}
-        {{view GG.ChromosomePanelView controllerBinding="this"}}
-      {{/with}}
-    </div>
-    <div id="target">
-      Target Drake:
-        <div id="target-traits">
-          {{GG.tasksController.currentTargetTraits}}
-        </div>
-    </div>
-    <div id="egg-container">
-      {{view GG.EggView id="egg"}}
-    </div>
-    <div id="meiosis-container" class="hidden">
-      {{#with GG.breedingController.father}}
-        {{view GG.MeiosisView contentBinding="this"}}
-      {{/with}}
-      {{#with GG.breedingController.mother}}
-        {{view GG.MeiosisView contentBinding="this"}}
-      {{/with}}
-    </div>
-    {{#view GG.OffspringPoolView id="offspring-pool"}}
-      {{#with GG.offspringController.content}}
-        <div class="offspring">
-          <a href="#" {{action "drakeSelected" this}}>
-            {{view GG.DrakeView contentBinding="this"}}
-          </a>
-          {{#with GG.offspringController}}
-            {{view GG.ChromosomePanelView controllerBinding="this"}}
-          {{/with}}
-          <div id="offspring-buttons">
-            {{view GG.OffspringSaveButtonView}}
-            {{view GG.OffspringUseButtonView}}
-<!--            {{view GG.OffspringFreeButtonView}}  -->
+    <div id="breeder">
+      {{view GG.FatherPoolView class="male-parents" id="parent-fathers-pool-container"}}
+      <div id="parent-pool-divider"></div>
+      {{view GG.MotherPoolView id="parent-mothers-pool-container"}}
+      <div id="breed-controls" {{bindAttr class="view.breedType"}}>
+        {{view GG.MeiosisButtonView id="meiosis-button"}}
+        {{view GG.BreedButtonView id="breed-button"}}
+        {{view GG.MoveCounter}}
+      </div>
+      <div id="mother">
+        {{#with GG.breedingController.mother}}
+          {{view GG.DrakeView contentBinding="this"}}
+        {{/with}}
+      </div>
+      <div id="mother-chromosome">
+        {{#with GG.motherPoolController}}
+          {{view GG.ChromosomePanelView controllerBinding="this"}}
+        {{/with}}
+      </div>
+      <div id="father">
+        {{#with GG.breedingController.father}}
+          {{view GG.DrakeView contentBinding="this"}}
+        {{/with}}
+      </div>
+      <div id="father-chromosome">
+        {{#with GG.fatherPoolController}}
+          {{view GG.ChromosomePanelView controllerBinding="this"}}
+        {{/with}}
+      </div>
+      <div id="target">
+        Target Drake:
+          <div id="target-traits">
+            {{GG.tasksController.currentTargetTraits}}
           </div>
-        </div>
-      {{/with}}
-    {{/view}}
+      </div>
+      <div id="egg-container">
+        {{view GG.EggView id="egg"}}
+      </div>
+      <div id="meiosis-container" class="hidden">
+        {{#with GG.breedingController.father}}
+          {{view GG.MeiosisView contentBinding="this"}}
+        {{/with}}
+        {{#with GG.breedingController.mother}}
+          {{view GG.MeiosisView contentBinding="this"}}
+        {{/with}}
+      </div>
+      {{#view GG.OffspringPoolView id="offspring-pool"}}
+        {{#with GG.offspringController.content}}
+          <div class="offspring">
+            <a href="#" {{action "drakeSelected" this}}>
+              {{view GG.DrakeView contentBinding="this"}}
+            </a>
+            {{#with GG.offspringController}}
+              {{view GG.ChromosomePanelView controllerBinding="this"}}
+            {{/with}}
+            <div id="offspring-buttons">
+              {{view GG.OffspringSaveButtonView}}
+              {{view GG.OffspringUseButtonView}}
+  <!--            {{view GG.OffspringFreeButtonView}}  -->
+            </div>
+          </div>
+        {{/with}}
+      {{/view}}
+    </div>
+    {{view GG.MatchGoalCounter}}
+    {{view GG.ObstacleCourseView}}
   </div>
-  <div id="breed-top-bar">
-    {{#view GG.BreedTitleView}}
-      {{view.text}}
-    {{/view}}
-    {{#view GG.TaskDescriptionView}}
-      {{view.text}}
-    {{/view}}
-    {{view GG.SelectParentsButtonView}}
-  </div>
-  {{view GG.MatchGoalCounter}}
-  {{view GG.ObstacleCourseView}}
 </div>

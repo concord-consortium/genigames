@@ -521,12 +521,12 @@ GG.OffspringFreeButtonView = Ember.View.extend
 GG.BreedTitleView = Ember.View.extend
   tagName: 'div'
   classNames: 'breed-title'
-  text: (->
+  #text: (->
     # not sure if it's ok the query the statemanager like this....
-    if GG.statemanager.get('currentState.name') is "parentSelect"
-      "Parent selection"
-    else "Breeding"
-  ).property('GG.statemanager.currentState')
+    #if GG.statemanager.get('currentState.name') is "parentSelect"
+    #  "Parent selection"
+    #else "Breeding"
+  #).property('GG.statemanager.currentState')
 
 GG.TaskDescriptionView = Ember.View.extend
   tagName: 'div'

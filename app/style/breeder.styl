@@ -4,9 +4,14 @@
   absolute: top left 3000px width 1300px height 900px
   overflow: hidden
 
+#breeding-background
+  absolute: top 60px left width 1300px height 900px
+  background: top left no-repeat url('../images/background_meiosis.jpg')
+  background-color: white
+  overflow: hidden
+
 #breed-top-bar
-  absolute: top 50px left width 1040px height 152px
-  background: top left no-repeat url('../images/breed-top-bar.png')
+  absolute: top 0px left width 1040px height 152px
 
 .breed-title
   relative: top 58px left 16px
@@ -14,7 +19,7 @@
   font-size: 2.1em
 
 .task-description
-  absolute: top 51px left 249px width 623px
+  absolute: top 28px left 32px width 770px
 
 .select-parents
   relative: top 10px left 777px width 140px height 39px
@@ -22,12 +27,11 @@
   cursor: pointer
 
 #breeder
-  absolute: top 50px left width 2040px height 612px
-  background: top left no-repeat url('../images/mock_02-01.png')
-  background-color: white
+  absolute: top 110px left width 2040px height 612px
+  background: top left no-repeat url('../images/breeding_panels.png')
 
 #breed-controls
-  absolute: top 268px left 742px width 268px height 101px
+  absolute: top 165px left 650px width 268px height 101px
   background-image: url('../images/breed-controls.png')
   z-index: 2
   &.automated
@@ -62,23 +66,23 @@ parent-pool-container(toppx)
   overflow: auto
 
 #parent-fathers-pool-container
-  parent-pool-container(115px)
+  parent-pool-container(0px)
 
 #parent-mothers-pool-container
-  parent-pool-container(322px)
+  parent-pool-container(193px)
 
 #parent-pool-divider
-  absolute: top 320px left 18px width 495px height 2px
+  absolute: top 217px left 22px width 430px height 2px
   background-color: #787878
 
 chromosome(toppx)
-  absolute: top toppx left 800px width 125px height 265px
+  absolute: top toppx left 680px width 125px height 265px
 
 #father-chromosome
-  chromosome(130px)
+  chromosome(20px)
 
 #mother-chromosome
-  chromosome(385px)
+  chromosome(285px)
 
 #offspring-pool .offspring
   display: inline-block
@@ -114,17 +118,17 @@ chromosome(toppx)
   z-index: 2
 
 #offspring-pool
-  absolute: top 195px left 1135px width 150px
+  absolute: top 10px left 1030px width 150px
   text-align: right
 
 #father
-  absolute: top 95px left 575px
+  absolute: top -15px left 500px
   span
     absolute: top 113px left 40px
     color: white
 
 #mother
-  absolute: top 342px left 575px
+  absolute: top 242px left 500px
   span
     absolute: top 113px left 40px
     color: white
