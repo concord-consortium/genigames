@@ -879,7 +879,7 @@ GG.ObstacleCourseView = Ember.View.extend
     $('.obstacle-course .obstacles').animate({left: "-=400px"}, 10000, 'linear')
     $('.obstacle-course .background').animate({left: "-=400px"}, 10000, 'linear')
   reset: ->
-    $('.obstacle-course .obstacles').css({left: "0"})
+    $('.obstacle-course .obstacles').css({left: "200px"})
     $('.obstacle-course .background').css({left: "0"})
     $('.obstacle-course .drake-container').css({left: "0"})
   done: ->
