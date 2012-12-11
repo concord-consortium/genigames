@@ -188,7 +188,7 @@ GG.animateDrake = ($img) ->
     setTimeout =>
       if GG.drakeAnimationList.length > 0
         # queue up the next frame
-        requestAnimationFrame draw
+        requestAnimationFrame draw, $img
       else
         GG.drakeAnimationRunning = false
 
@@ -210,7 +210,7 @@ GG.animateDrake = ($img) ->
 
   if !GG.drakeAnimationRunning
     GG.drakeAnimationRunning = true
-    draw()
+    requestAnimationFrame draw, $img
 
 GG.drakeAnimationList = []
 GG.drakeAnimationPositions = []
