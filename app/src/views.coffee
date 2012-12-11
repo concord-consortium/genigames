@@ -152,9 +152,10 @@ GG.DrakeView = Ember.View.extend
       GG.breedingController.removeObserver 'isShowingBreeder', swapImage
       layer = '#' + @get('elementId')
       $(layer + ' .drake-idle-img').imagesLoaded =>
-        $(layer + ' .static').css({left: 400})
-        $(layer + ' .idle').css({left: 0})
-        @setNextIdleInterval()
+        requestAnimationFrame =>
+          $(layer + ' .static').remove()
+          $(layer + ' .idle').css({left: 0})
+          @setNextIdleInterval()
 
     if GG.breedingController.get 'isShowingBreeder'
       swapImage()
