@@ -16,6 +16,7 @@ GG.MALE   = 0
 GG.FEMALE = 1
 GG.imageNameStart = "/resources/drakes/images/"
 
+minispade.require 'genigames/helpers'
 minispade.require 'genigames/models'
 minispade.require 'genigames/controllers'
 minispade.require 'genigames/views'

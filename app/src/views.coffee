@@ -181,8 +181,15 @@ GG.animateDrake = ($img) ->
   GG.drakeAnimationList.push $img
   GG.drakeAnimationPositions.push 0
   GG.drakeAnimationLengths.push 15  # for the moment we assume animations are 15 frames
-  if !GG.drakeAnimationTimer
-    GG.drakeAnimationTimer = setInterval =>
+
+  draw = ->
+    setTimeout =>
+      if GG.drakeAnimationList.length > 0
+        # queue up the next frame
+        requestAnimationFrame draw
+      else
+        GG.drakeAnimationRunning = false
+
       i = GG.drakeAnimationList.length
       if i is 0
         clearInterval GG.drakeAnimationTimer
@@ -199,11 +206,15 @@ GG.animateDrake = ($img) ->
           GG.drakeAnimationList[i].css({left:"-"+(pos*100)+"%"})
     , 83  # ~ 12 fps
 
+  if !GG.drakeAnimationRunning
+    GG.drakeAnimationRunning = true
+    draw()
+
 GG.drakeAnimationList = []
 GG.drakeAnimationPositions = []
 GG.drakeAnimationLengths = []
 
-GG.drakeAnimationTimer = null
+GG.drakeAnimationRunning = false
 
 # getFileName("Shiny red", "png") -> "shinyRed.png"
 GG.getFileName = (str, ext) ->
