@@ -858,20 +858,30 @@ GG.ObstacleCourseView = Ember.View.extend
   tagName: 'div'
   classNames: ['obstacle-course']
   classNameBindings: ['hidden']
+  courseBinding: 'GG.obstacleCourseController.course'
   obstaclesBinding: 'GG.obstacleCourseController.obstacles'
   drakeBinding: 'GG.obstacleCourseController.drake'
   hiddenBinding: 'GG.obstacleCourseController.hidden'
   start: ->
-    # TODO We might want to write our own easing function to replace 'linear', which
-    # could speed up/slow down the progress over various obstacles depending on
-    # drake characteristics.
+    $drake = $('.obstacle-course .drake-container')
+    if path = @get 'course.path'
+      segments = path.split " "
+      for point in segments
+        [x,y] = point.split ","
+        console.log "going to "+x+","+y
+        $drake.animate
+          left: x+"px",
+          top:  y+"px",
+          10000/segments.length,
+          'linear'
+    else
+      $drake.animate({left: "+=800px"}, 10000, 'linear')
     $('.obstacle-course .obstacles').animate({left: "-=400px"}, 10000, 'linear')
     $('.obstacle-course .background').animate({left: "-=400px"}, 10000, 'linear')
-    $('.obstacle-course .drake-container').animate({left: "+=800px"}, 10000, 'linear')
   reset: ->
-    $('.obstacle-course .obstacles').css({left: ""})
-    $('.obstacle-course .background').css({left: ""})
-    $('.obstacle-course .drake-container').css({left: ""})
+    $('.obstacle-course .obstacles').css({left: "0"})
+    $('.obstacle-course .background').css({left: "0"})
+    $('.obstacle-course .drake-container').css({left: "0"})
   done: ->
     GG.statemanager.transitionTo 'inTown'
 

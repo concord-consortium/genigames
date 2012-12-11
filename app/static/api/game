@@ -41,6 +41,7 @@
            ],
            "targetDrake": "wings",
            "obstacleCourse": {
+              "path": "50,50 100,-50 500,190, 800,160",
                "obstacles": [
                   {
                    "obstacle": "tree",
