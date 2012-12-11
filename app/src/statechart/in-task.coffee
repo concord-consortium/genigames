@@ -6,7 +6,7 @@ GG.StateInTask = Ember.State.extend
     initialState: 'parentSelect'
 
     enter: ->
-      $('#breeding-apparatus').animate {"left":"-17px"},1200,'easeOutCubic', ->
+      $('#breeding-apparatus').animate {"left":"0"},1200,'easeOutCubic', ->
         GG.breedingController.set 'isShowingBreeder', true
       GG.cyclesController.reset()
       GG.breedingController.set 'breedType', GG.BREED_AUTOMATED
