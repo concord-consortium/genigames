@@ -25,6 +25,24 @@
 .needs-caching.drake-shinyRed {
   background: url("../images/drakes/shinyRed.png");
 }
+.needs-caching.npc-npc1_bookkeeper1 {
+  background: url("../images/npc1_bookkeeper1.png");
+}
+.needs-caching.npc-npc1_bookkeeper1_left {
+  background: url("../images/npc1_bookkeeper1_left.png");
+}
+.needs-caching.npc-npc2_alchemist1 {
+  background: url("../images/npc2_alchemist1.png");
+}
+.needs-caching.npc-npc2_alchemist1_right {
+  background: url("../images/npc2_alchemist1_right.png");
+}
+.needs-caching.npc-npc2_alchemist2 {
+  background: url("../images/npc2_alchemist2.png");
+}
+.needs-caching.npc-npc2_alchemist2_right {
+  background: url("../images/npc2_alchemist2_right.png");
+}
 .needs-caching.bubbles.heart {
   background: url("../images/heart-bubble.png");
 }
@@ -33,15 +51,6 @@
 }
 .needs-caching.misc.delete {
   background: url("../images/delete.png");
-}
-.needs-caching.npc.npc1.bookkeeper1 {
-  background: url("../images/npc1_bookkeeper1.png");
-}
-.needs-caching.npc.npc2.alchemist1 {
-  background: url("../images/npc2_alchemist1.png");
-}
-.needs-caching.npc.npc2.alchemist2 {
-  background: url("../images/npc2_alchemist2.png");
 }
 #breeding-apparatus {
   position: absolute;
