@@ -266,10 +266,7 @@ GG.AlleleView = Ember.View.extend GG.PointsToolTip,
   valueBinding: 'content.allele'
   hiddenValue: (->
     value = @get 'value'
-    if value is "Tk" then value = "T"
-    if value is "A1" or value is "A2" then value = "A"
-    value = value.charAt(0).toUpperCase() + value.slice(1)
-    value + '?'
+    value.charAt(0) + "?"
   ).property('value').cacheable()
   clickable: true
   hidden: Ember.computed.not('content.visible')
