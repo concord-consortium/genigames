@@ -152,9 +152,11 @@ GG.DrakeView = Ember.View.extend
       GG.breedingController.removeObserver 'isShowingBreeder', swapImage
       layer = '#' + @get('elementId')
       $(layer + ' .drake-idle-img').imagesLoaded =>
-        $(layer + ' .static').css({left: 400})
-        $(layer + ' .idle').css({left: 0})
-        @setNextIdleInterval()
+        requestAnimationFrame =>
+          $(layer + ' .idle').css({left: 0})
+          requestAnimationFrame =>
+            $(layer + ' .static').remove()
+            @setNextIdleInterval()
 
     if GG.breedingController.get 'isShowingBreeder'
       swapImage()
@@ -181,8 +183,15 @@ GG.animateDrake = ($img) ->
   GG.drakeAnimationList.push $img
   GG.drakeAnimationPositions.push 0
   GG.drakeAnimationLengths.push 15  # for the moment we assume animations are 15 frames
-  if !GG.drakeAnimationTimer
-    GG.drakeAnimationTimer = setInterval =>
+
+  draw = ->
+    setTimeout =>
+      if GG.drakeAnimationList.length > 0
+        # queue up the next frame
+        requestAnimationFrame draw
+      else
+        GG.drakeAnimationRunning = false
+
       i = GG.drakeAnimationList.length
       if i is 0
         clearInterval GG.drakeAnimationTimer
@@ -199,11 +208,15 @@ GG.animateDrake = ($img) ->
           GG.drakeAnimationList[i].css({left:"-"+(pos*100)+"%"})
     , 83  # ~ 12 fps
 
+  if !GG.drakeAnimationRunning
+    GG.drakeAnimationRunning = true
+    draw()
+
 GG.drakeAnimationList = []
 GG.drakeAnimationPositions = []
 GG.drakeAnimationLengths = []
 
-GG.drakeAnimationTimer = null
+GG.drakeAnimationRunning = false
 
 # getFileName("Shiny red", "png") -> "shinyRed.png"
 GG.getFileName = (str, ext) ->
@@ -266,10 +279,7 @@ GG.AlleleView = Ember.View.extend GG.PointsToolTip,
   valueBinding: 'content.allele'
   hiddenValue: (->
     value = @get 'value'
-    if value is "Tk" then value = "T"
-    if value is "A1" or value is "A2" then value = "A"
-    value = value.charAt(0).toUpperCase() + value.slice(1)
-    value + '?'
+    value.charAt(0) + "?"
   ).property('value').cacheable()
   clickable: true
   hidden: Ember.computed.not('content.visible')
@@ -428,7 +438,7 @@ GG.ChromoView = Ember.View.extend
       if !allele.visible
         @get('content').markRevealed(@get('side'), allele.allele)
         GG.userController.addReputation -GG.actionCostsController.getCost 'alleleRevealed'
-        GG.logController.logEvent GG.Events.REVEALED_ALLELE
+        GG.logController.logEvent GG.Events.REVEALED_ALLELE,
           allele: allele.allele
           side: @get('side')
           drake: { alleles: @get('content.biologicaOrganism.alleles')
@@ -858,20 +868,30 @@ GG.ObstacleCourseView = Ember.View.extend
   tagName: 'div'
   classNames: ['obstacle-course']
   classNameBindings: ['hidden']
+  courseBinding: 'GG.obstacleCourseController.course'
   obstaclesBinding: 'GG.obstacleCourseController.obstacles'
   drakeBinding: 'GG.obstacleCourseController.drake'
   hiddenBinding: 'GG.obstacleCourseController.hidden'
   start: ->
-    # TODO We might want to write our own easing function to replace 'linear', which
-    # could speed up/slow down the progress over various obstacles depending on
-    # drake characteristics.
+    $drake = $('.obstacle-course .drake-container')
+    if path = @get 'course.path'
+      segments = path.split " "
+      for point in segments
+        [x,y] = point.split ","
+        console.log "going to "+x+","+y
+        $drake.animate
+          left: x+"px",
+          top:  y+"px",
+          10000/segments.length,
+          'linear'
+    else
+      $drake.animate({left: "+=800px"}, 10000, 'linear')
     $('.obstacle-course .obstacles').animate({left: "-=400px"}, 10000, 'linear')
     $('.obstacle-course .background').animate({left: "-=400px"}, 10000, 'linear')
-    $('.obstacle-course .drake-container').animate({left: "+=800px"}, 10000, 'linear')
   reset: ->
-    $('.obstacle-course .obstacles').css({left: ""})
-    $('.obstacle-course .background').css({left: ""})
-    $('.obstacle-course .drake-container').css({left: ""})
+    $('.obstacle-course .obstacles').css({left: "200px"})
+    $('.obstacle-course .background').css({left: "0"})
+    $('.obstacle-course .drake-container').css({left: "0"})
   done: ->
     GG.statemanager.transitionTo 'inTown'
 
@@ -879,6 +899,10 @@ GG.ObstacleView = Ember.View.extend
   tagName: 'div'
   classNames: ['obstacle']
   classNameBindings: ['type']
-  type: "ducks"
+  attributeBindings  : ['style']
+  style: (->
+    "top: " + @get('content.positionY') + "px; left: " + @get('content.positionX') + "px;"
+  ).property('content.positionY','content.positionX')
+  typeBinding: "content.obstacle"
 
 

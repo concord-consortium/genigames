@@ -31,6 +31,7 @@ GG.User = Ember.Object.extend
 GG.Town = Ember.Object.extend
   name: "Town"
   icon: "huts"
+  background: "castle"
   position: 0
   finalMessage: "Nice work, you've completed all the tasks in this town!"
   otherTownsBinding: Ember.Binding.oneWay('GG.townsController.content')
@@ -99,6 +100,8 @@ GG.Task = Ember.Object.extend
     @set 'skipSave', true
     for k in Object.keys(prevState)
       @set(k, prevState[k])
+    if course = @get "obstacleCourse"
+      @set "obstacleCourse", GG.ObstacleCourse.create course
     @set 'skipSave', false
 
   serialize: ->
@@ -245,3 +248,19 @@ GG.TaskNPC = Ember.Object.extend
 
 GG.ActionCosts = Ember.Object.extend
   breedButtonClicked: 1
+
+GG.ObstacleCourse = Ember.Object.extend
+  obstacles: null
+  path: null
+  init: ->
+    if obstacles = @get "obstacles"
+      obstacleObjs = []
+      for obs in obstacles
+        if typeof obs is "object"
+          obstacleObjs.push GG.Obstacle.create obs
+      @set "obstacles", obstacleObjs
+
+GG.Obstacle = Ember.Object.extend
+  obstace: null
+  positionX: 0
+  positionY: 0

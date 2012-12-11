@@ -41,9 +41,23 @@
            ],
            "targetDrake": "wings",
            "obstacleCourse": {
+              "path": "50,50 100,-50 500,190, 800,160",
                "obstacles": [
-                   "tree",
-                   "pond"
+                  {
+                   "obstacle": "tree",
+                   "positionX": 100,
+                   "positionY": 50
+                  },
+                  {
+                   "obstacle": "pond",
+                   "positionX": 400,
+                   "positionY": 150
+                  },
+                  {
+                   "obstacle": "tree",
+                   "positionX": 750,
+                   "positionY": 0
+                  }
                ]
            }
         }
@@ -130,7 +144,7 @@
       "name": "Town 1",
       "icon": "townIcon1",
       "position": 0,
-      "background" : "town01.jpg",
+      "background" : "huts",
       "finalMessage": "You're all done!",
       "tasks": [ "Town 1 Task 1" ]
     }
