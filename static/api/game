@@ -144,7 +144,7 @@
       "name": "Town 1",
       "icon": "townIcon1",
       "position": 0,
-      "background" : "town01.jpg",
+      "background" : "huts",
       "finalMessage": "You're all done!",
       "tasks": [ "Town 1 Task 1" ]
     }

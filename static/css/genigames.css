@@ -896,25 +896,19 @@ a:hover {
   margin-right: auto;
 }
 #town {
-  background: top left no-repeat url("../images/town01.jpg");
   margin-left: auto;
   margin-right: auto;
   width: 1010px;
   height: 660px;
 }
-#town1 {
+.castle {
   background: top left no-repeat url("../images/town01.jpg");
-  margin-left: auto;
-  margin-right: auto;
-  width: 1010px;
-  height: 660px;
 }
-#town2 {
-  background: top left no-repeat url("../images/town02a.jpg");
-  margin-left: auto;
-  margin-right: auto;
-  width: 1010px;
-  height: 660px;
+.village {
+  background: top left no-repeat url("../images/town02.jpg");
+}
+.huts {
+  background: top left no-repeat url("../images/town03.jpg");
 }
 .logout {
   background-color: #bbb;
