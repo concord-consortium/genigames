@@ -9,6 +9,9 @@
   for color in 'albino' 'blue' 'green' 'purple' 'red' 'shinyBlue' 'shinyGreen' 'shinyPurple' 'shinyRed'
     &.drake-{color}
       background: url('../images/drakes/' + color + '.png')
+  for npc in 'npc1_bookkeeper1' 'npc1_bookkeeper1_left' 'npc2_alchemist1' 'npc2_alchemist1_right' 'npc2_alchemist2' 'npc2_alchemist2_right'
+    &.npc-{npc}
+      background: url('../images/' + npc + '.png')
   &.bubbles
     &.heart
       background: url('../images/heart-bubble.png')
@@ -17,12 +20,3 @@
   &.misc
     &.delete
       background: url('../images/delete.png')
-  &.npc
-    &.npc1
-      &.bookkeeper1
-        background: url('../images/npc1_bookkeeper1.png')
-    &.npc2
-      &.alchemist1
-        background: url('../images/npc2_alchemist1.png')
-      &.alchemist2
-        background: url('../images/npc2_alchemist2.png')
