@@ -97,10 +97,12 @@ GG.StateInTask = Ember.State.extend
           GG.animateMeiosis '#parent-mothers-pool-container'
 
       toggleBreedType: ->
-        GG.meiosisController.toggleBreedType()
+        GG.breedingController.toggleBreedType()
 
     animatingMeiosis: Ember.State.create
       setup: (manager)->
+        if GG.breedingController.get('breedType') is GG.BREED_CONTROLLED
+          GG.userController.addReputation -GG.actionCostsController.getCost 'meiosisControlEnabled'
         # hide the offspring pool
         $('#breed-controls').animate({left: 525},400,'easeOutCubic')
         $("#breeder").animate({left: -522},500,"easeOutCubic")
@@ -224,7 +226,7 @@ GG.StateInTask = Ember.State.extend
         manager.transitionTo 'parentSelect'
 
       toggleBreedType: ->
-        GG.meiosisController.toggleBreedType()
+        GG.breedingController.toggleBreedType()
 
     obstacleCourse: Ember.State.create
       enter: (manager)->
