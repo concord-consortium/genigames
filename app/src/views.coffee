@@ -425,7 +425,7 @@ GG.ChromoView = Ember.View.extend
       if !allele.visible
         @get('content').markRevealed(@get('side'), allele.allele)
         GG.userController.addReputation -GG.actionCostsController.getCost 'alleleRevealed'
-        GG.logController.logEvent GG.Events.REVEALED_ALLELE
+        GG.logController.logEvent GG.Events.REVEALED_ALLELE,
           allele: allele.allele
           side: @get('side')
           drake: { alleles: @get('content.biologicaOrganism.alleles')
