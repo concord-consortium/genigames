@@ -92,6 +92,7 @@ GG.DrakeView = Ember.View.extend
   drakeIdleImage     : (->
     '../images/drakes/headturn/' + @get 'drakeImageName'
   ).property('drakeImage')
+  showIdle           : false
   width              : "200px"
   org : (->
     @get('content.biologicaOrganism')
@@ -150,13 +151,26 @@ GG.DrakeView = Ember.View.extend
     # Wait for the animation images to load, then move it in place and start it up
     swapImage = =>
       GG.breedingController.removeObserver 'isShowingBreeder', swapImage
-      layer = '#' + @get('elementId')
-      $(layer + ' .drake-idle-img').imagesLoaded =>
-        requestAnimationFrame =>
-          $(layer + ' .idle').css({left: 0})
-          requestAnimationFrame =>
-            $(layer + ' .static').remove()
-            @setNextIdleInterval()
+      idleImg = new Image()
+      idleImg.src = @get('drakeIdleImage')
+
+      onComplete = =>
+        setTimeout =>
+          layer = '#' + @get('elementId')
+          @set('showIdle', true)
+          Ember.run.next =>
+            $(layer + ' .drake-idle-img').imagesLoaded =>
+              setTimeout =>
+                requestAnimationFrame =>
+                  $(layer + ' .static').remove()
+                  @setNextIdleInterval()
+              , 2000  # this timeout is a hack to remove the blink between showing the static and idle images on FF
+        , 2000
+
+      if !idleImg.complete
+        $(idleImg).bind('error load onreadystatechange', onComplete)
+      else
+        onComplete()
 
     if GG.breedingController.get 'isShowingBreeder'
       swapImage()
