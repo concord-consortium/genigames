@@ -45,11 +45,17 @@
   cursor: pointer
 
 #breed-button
-  absolute: top 5px left 167px width 93px height 90px
+  absolute: top 6px left 170px width 86px height 89px
+  background: top left no-repeat url('../images/breed-button.png')
+  background-position-y: -262px
   &.enabled
+    background-position-y: 2px
     cursor: pointer
     &:active
-      background-image: none
+      background-position-y: -175px
+      cursor: pointer
+  &.no-more-breeds
+    background-position-y: -86px
 
 #target
   absolute: top 170px left 508px width 124px height 83px

@@ -266,21 +266,24 @@ GG.BreedButtonView = Ember.View.extend GG.PointsToolTip,
   tagName: 'div'
   toolTipText: (->
     tip = "Produce an offspring drake from the current parents"
-    if (GG.cyclesController.get('cycles') <= 0)
+    if @get 'noMoreBreeds'
       tip += ". Because you are out of breeding cycles, this will cost you reputation!"
     tip
-  ).property('GG.cyclesController.cycles')
+  ).property('noMoreBreeds')
   costPropertyName: (->
-    if (GG.cyclesController.get('cycles') <= 0) then 'meiosisControlEnabled' else ' '
-  ).property('GG.cyclesController.cycles')
+    if @get 'noMoreBreeds' then 'extraBreedCycle' else ' '
+  ).property('noMoreBreeds')
 
   motherBinding: 'GG.parentController.selectedMother'
   fatherBinding: 'GG.parentController.selectedFather'
 
-  classNameBindings : ['enabled']
+  classNameBindings : ['enabled', 'noMoreBreeds']
   enabled: (->
     !!(this.get('mother') && this.get('father'))
   ).property('mother', 'father')
+  noMoreBreeds: (->
+    GG.cyclesController.get('cycles') <= 0
+  ).property('GG.cyclesController.cycles')
 
   click: ->
     GG.statemanager.send('breedDrake')
