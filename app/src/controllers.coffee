@@ -254,7 +254,9 @@ GG.cyclesController = Ember.Object.create
   increment: (amt=1) ->
     @set 'cycles', @get('cycles')+amt
   decrement: (amt=1) ->
-    @set 'cycles', @get('cycles')-amt
+    cycles = @get 'cycles'
+    return if cycles <= 0
+    @set 'cycles', cycles-amt
   reset: ->
     GG.tasksController.set 'cycles', GG.tasksController.get 'cycles'
     setTimeout =>
