@@ -53,9 +53,9 @@ GG.PointsToolTip = Ember.Mixin.create
   toolTipText: null
   costPropertyName: null
 
-  attributeBindings: ['title']
+  attributeBindings: ['tooltip']
 
-  title: (->
+  tooltip: (->
     if not @get 'showToolTip'
       return ""
 
@@ -66,12 +66,16 @@ GG.PointsToolTip = Ember.Mixin.create
   ).property('showToolTip', 'costPropertyName', 'toolTipText')
 
   toggleToolTip: (->
-    if @get 'showToolTip'
-      @set 'qtip', @$().qtip GG.QTipDefaults
+    if @get('showToolTip') and @get('tooltip')
+      @$().qtip 'destroy' if @get 'qtip'
+
+      params = GG.QTipDefaults
+      params.content = @get 'tooltip'
+      @set 'qtip', @$().qtip params
     else if @get 'qtip'
       @$().qtip 'destroy'
       @set 'qtip', null
-  ).observes('showToolTip')
+  ).observes('showToolTip', 'tooltip')
 
   didInsertElement: ->
     @_super()
