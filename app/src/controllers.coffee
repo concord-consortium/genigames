@@ -225,6 +225,7 @@ GG.breedingController = Ember.Object.create
       GG.breedingController.set 'breedType', GG.BREED_AUTOMATED
 
   child: null
+  childSavedToParents: false
 
   breedDrake: ->
     if (@get('mother') && @get('father')) || GG.meiosisController.get('chosenAlleles')?

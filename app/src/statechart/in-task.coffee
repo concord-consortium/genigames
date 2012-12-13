@@ -119,6 +119,7 @@ GG.StateInTask = Ember.State.extend
 
       animate: (manager)->
         manager.send 'decrementCycles', 1
+        GG.breedingController.set 'childSavedToParents', false
         $('#meiosis-container').removeClass('hidden')
         GG.meiosisController.animate ->
           setTimeout ->
@@ -212,11 +213,10 @@ GG.StateInTask = Ember.State.extend
           sex: child.get('sex')
 
       saveOffspring: (manager) ->
-        #offspringSelected: (manager, child) ->
+        return if GG.breedingController.get 'childSavedToParents'
         child = GG.offspringController.get 'content'
         if GG.parentController.hasRoom child
-          # add it to the parentController, and remove it from the offspringController
-          GG.offspringController.set 'content', null
+          GG.breedingController.set 'childSavedToParents', true
           GG.parentController.pushObject child
           GG.userController.addReputation -1
 

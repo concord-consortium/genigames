@@ -549,9 +549,17 @@ GG.OffspringUseButtonView = Ember.View.extend GG.PointsToolTip,
 
 GG.OffspringSaveButtonView = Ember.View.extend GG.PointsToolTip,
   tagName: 'div'
-  toolTipText: "Use this drake as a parent"
+  toolTipText: (->
+    if !GG.breedingController.get 'childSavedToParents'
+      "Use this drake as a parent"
+    else
+      "Already saved this drake! Press the Back button to select parents."
+  ).property('GG.breedingController.childSavedToParents')
   classNames : 'offspring-buttons-save'
+  classNameBindings: ['disabled']
+  disabledBinding: 'GG.breedingController.childSavedToParents'
   click: ->
+    @set 'disabled', true
     GG.statemanager.send('saveOffspring')
 
 GG.BreedTitleView = Ember.View.extend
