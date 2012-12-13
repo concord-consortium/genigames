@@ -90,23 +90,13 @@
   left: 32px;
   width: 770px;
 }
-.select-parents {
-  position: relative;
-  top: 60px;
-  left: 812px;
-  width: 126px;
-  height: 40px;
-  float: left;
-  cursor: pointer;
-  background: url("../images/new_parents_button.png");
-}
 #breeder {
   position: absolute;
   top: 110px;
   left: 0;
   width: 2040px;
   height: 612px;
-  background: top left no-repeat url("../images/breeding_panels.png");
+  background: top left no-repeat url("../images/breeding-panels-left.png");
 }
 #breed-controls {
   position: absolute;
@@ -133,24 +123,32 @@
 }
 #breed-button {
   position: absolute;
-  top: 5px;
-  left: 167px;
-  width: 93px;
-  height: 90px;
+  top: 6px;
+  left: 170px;
+  width: 86px;
+  height: 89px;
+  background: top left no-repeat url("../images/breed-button.png");
+  background-position-y: -262px;
 }
 #breed-button.enabled {
+  background-position-y: 2px;
   cursor: pointer;
 }
 #breed-button.enabled:active {
-  background-image: none;
+  background-position-y: -175px;
+  cursor: pointer;
+}
+#breed-button.no-more-breeds {
+  background-position-y: -86px;
 }
 #target {
   position: absolute;
-  top: 284px;
-  left: 615px;
+  top: 170px;
+  left: 508px;
   width: 124px;
   height: 83px;
-  font-weight: bold;
+  font-family: Monaco, Consolas, "Lucida Console", monospace;
+  color: #bbb;
 }
 #target-traits {
   position: relative;
@@ -176,14 +174,6 @@
   width: 490px;
   height: 205px;
   overflow: auto;
-}
-#parent-pool-divider {
-  position: absolute;
-  top: 217px;
-  left: 22px;
-  width: 430px;
-  height: 2px;
-  background-color: #787878;
 }
 #father-chromosome {
   position: absolute;
@@ -213,25 +203,46 @@
 #offspring-buttons {
   position: absolute;
   top: 230px;
-  left: -35px;
-  width: 352px;
+  left: -45px;
+  width: 390px;
   height: 42px;
-  background: top left no-repeat url("../images/offspring-buttons.png");
 }
 #offspring-buttons>div {
   position: relative;
-  width: 170px;
-  height: 35px;
+  top: 3px;
+  width: 129px;
+  height: 40px;
   float: left;
   cursor: pointer;
 }
+.offspring-buttons-back {
+  background: top left no-repeat url("../images/button-back.png");
+}
+.offspring-buttons-back:active {
+  background-position-y: 97%;
+}
 .offspring-buttons-use {
-  top: 3px;
-  left: 9px;
+  background: top left no-repeat url("../images/finish-button.png");
+}
+.offspring-buttons-use:active {
+  background-position-y: 97%;
 }
 .offspring-buttons-save {
-  top: 3px;
-  left: 3px;
+  background: top left no-repeat url("../images/use-as-parent-button.png");
+}
+.offspring-buttons-save:active {
+  background-position-y: 99%;
+}
+.offspring-buttons-save.disabled {
+  background-position-y: 49%;
+}
+#parent-available-message {
+  position: absolute;
+  left: 2px;
+  bottom: 10px;
+  width: 275px;
+  text-align: left;
+  color: #bbb;
 }
 .removeButton {
   display: none;
@@ -252,8 +263,8 @@
 }
 #father {
   position: absolute;
-  top: -15px;
-  left: 500px;
+  top: -19px;
+  left: 490px;
 }
 #father span {
   position: absolute;
@@ -263,8 +274,8 @@
 }
 #mother {
   position: absolute;
-  top: 242px;
-  left: 500px;
+  top: 239px;
+  left: 490px;
 }
 #mother span {
   position: absolute;
@@ -409,7 +420,7 @@
 .drake .idle {
   position: absolute;
   top: 0;
-  left: 400px;
+  left: 0;
   width: 180px;
   height: 180px;
 }
@@ -975,7 +986,7 @@ a:hover {
 }
 #meiosis-container {
   position: absolute;
-  left: 700px;
+  left: 770px;
   top: 25px;
   width: 760px;
   height: 435px;

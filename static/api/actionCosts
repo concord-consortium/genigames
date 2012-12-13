@@ -3,5 +3,6 @@
   "breedButtonClicked": 2,
   "meiosisControlEnabled": 5,
   "crossoverMade": 10,
-  "chromosomeSelected": 10
+  "chromosomeSelected": 10,
+  "extraBreedCycle": 5
 }
