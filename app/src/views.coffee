@@ -264,7 +264,15 @@ GG.OffspringPoolView = Ember.View.extend
 
 GG.BreedButtonView = Ember.View.extend GG.PointsToolTip,
   tagName: 'div'
-  toolTipText: "Produce an offspring drake from the current parents"
+  toolTipText: (->
+    tip = "Produce an offspring drake from the current parents"
+    if (GG.cyclesController.get('cycles') <= 0)
+      tip += ". Because you are out of breeding cycles, this will cost you reputation!"
+    tip
+  ).property('GG.cyclesController.cycles')
+  costPropertyName: (->
+    if (GG.cyclesController.get('cycles') <= 0) then 'meiosisControlEnabled' else ' '
+  ).property('GG.cyclesController.cycles')
 
   motherBinding: 'GG.parentController.selectedMother'
   fatherBinding: 'GG.parentController.selectedFather'
