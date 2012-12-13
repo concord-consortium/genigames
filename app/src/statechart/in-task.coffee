@@ -101,6 +101,8 @@ GG.StateInTask = Ember.State.extend
 
     animatingMeiosis: Ember.State.create
       setup: (manager)->
+        if GG.cyclesController.get('cycles') <= 0
+          GG.userController.addReputation -GG.actionCostsController.getCost 'extraBreedCycle'
         if GG.breedingController.get('breedType') is GG.BREED_CONTROLLED
           GG.userController.addReputation -GG.actionCostsController.getCost 'meiosisControlEnabled'
         # hide the offspring pool
