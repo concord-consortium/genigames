@@ -107,7 +107,7 @@ GG.StateInTask = Ember.State.extend
           GG.userController.addReputation -GG.actionCostsController.getCost 'meiosisControlEnabled'
         # hide the offspring pool
         $('#breed-controls').animate({left: 525},400,'easeOutCubic')
-        $("#breeder").animate({left: -522},500,"easeOutCubic")
+        $("#breeder").animate({left: -459},500,"easeOutCubic")
         $('#offspring-pool').hide()
         setTimeout ->
           GG.motherPoolController.set('hidden', true)
