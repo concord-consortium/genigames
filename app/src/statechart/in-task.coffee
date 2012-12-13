@@ -52,6 +52,7 @@ GG.StateInTask = Ember.State.extend
 
       setup: ->
         GG.offspringController.set 'content', null
+        $('#target').show()
         $('#breed-controls').animate({left: 650},600,'easeOutCubic')
         $("#breeder").animate({left: 0},800,"easeOutCubic")
         setTimeout ->
@@ -106,7 +107,8 @@ GG.StateInTask = Ember.State.extend
         if GG.breedingController.get('breedType') is GG.BREED_CONTROLLED
           GG.userController.addReputation -GG.actionCostsController.getCost 'meiosisControlEnabled'
         # hide the offspring pool
-        $('#breed-controls').animate({left: 525},400,'easeOutCubic')
+        $('#target').hide()
+        $('#breed-controls').animate({left: 489},400,'easeOutCubic')
         $("#breeder").animate({left: -459},500,"easeOutCubic")
         $('#offspring-pool').hide()
         setTimeout ->
