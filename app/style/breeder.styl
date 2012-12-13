@@ -21,12 +21,6 @@
 .task-description
   absolute: top 28px left 32px width 770px
 
-.select-parents
-  relative: top 60px left 812px width 126px height 40px
-  float: left
-  cursor: pointer
-  background: url('../images/new_parents_button.png')
-
 #breeder
   absolute: top 110px left width 2040px height 612px
   background: top left no-repeat url('../images/breeding-panels-left.png')
@@ -98,20 +92,26 @@ chromosome(toppx)
   color: white
 
 #offspring-buttons
-  absolute: top 230px left -35px width 352px height 42px
-  background: top left no-repeat url('../images/offspring-buttons.png')
+  absolute: top 230px left -45px width 390px height 42px
   &>div
-    relative: width 170px height 35px
+    relative: top 3px width 129px height 40px
     float: left
     cursor: pointer
 
+.offspring-buttons-back
+  background: top left no-repeat url('../images/button-back.png')
+  &:active
+    background-position-y: 97%;
+
 .offspring-buttons-use
-  top: 3px
-  left: 9px
+  background: top left no-repeat url('../images/finish-button.png')
+  &:active
+    background-position-y: 97%;
 
 .offspring-buttons-save
-  top: 3px
-  left: 3px
+  background: top left no-repeat url('../images/use_as_parent_button.png')
+  &:active
+    background-position-y: 97%;
 
 .removeButton
   display: none

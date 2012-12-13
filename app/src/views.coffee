@@ -533,6 +533,13 @@ GG.EggView = Ember.View.extend GG.Animation,
       callback: =>
         @$().css({backgroundPosition: '0px -140px'})
 
+GG.OffspringBackButtonView = Ember.View.extend GG.PointsToolTip,
+  tagName: 'div'
+  toolTipText: "Pick new parents"
+  classNames : 'offspring-buttons-back'
+  click: ->
+    GG.statemanager.send('selectParents')
+
 GG.OffspringUseButtonView = Ember.View.extend GG.PointsToolTip,
   tagName: 'div'
   toolTipText: "Submit the current drake as the solution to this task"
@@ -546,12 +553,6 @@ GG.OffspringSaveButtonView = Ember.View.extend GG.PointsToolTip,
   classNames : 'offspring-buttons-save'
   click: ->
     GG.statemanager.send('saveOffspring')
-
-GG.OffspringFreeButtonView = Ember.View.extend
-  tagName: 'div'
-  classNames : 'offspring-buttons-free'
-  click: ->
-    GG.statemanager.send('freeOffspring')
 
 GG.BreedTitleView = Ember.View.extend
   tagName: 'div'
@@ -577,12 +578,6 @@ GG.TaskDescriptionView = Ember.View.extend
     text = text.replace(/(<([^>]+)>)/ig, " ")
     return text
   ).property('currentTask').cacheable()
-
-GG.SelectParentsButtonView = Ember.View.extend
-  tagName: 'div'
-  classNames : 'select-parents'
-  click: ->
-    GG.statemanager.send('selectParents')
 
 GG.MoveCounter = Ember.View.extend
   templateName: 'move-counter'

@@ -7,7 +7,6 @@
       {{#view GG.TaskDescriptionView}}
         {{view.text}}
       {{/view}}
-      {{view GG.SelectParentsButtonView}}
     </div>
     <div id="breeder">
       {{view GG.FatherPoolView class="male-parents" id="parent-fathers-pool-container"}}
@@ -64,9 +63,9 @@
               {{view GG.ChromosomePanelView controllerBinding="this"}}
             {{/with}}
             <div id="offspring-buttons">
+              {{view GG.OffspringBackButtonView}}
               {{view GG.OffspringSaveButtonView}}
               {{view GG.OffspringUseButtonView}}
-  <!--            {{view GG.OffspringFreeButtonView}}  -->
             </div>
           </div>
         {{/with}}
