@@ -1056,8 +1056,8 @@ a:hover {
   position: absolute;
   top: 0;
   left: 470px;
-  width: 275px;
-  height: 140px;
+  width: 174px;
+  height: 182px;
   border: 1px solid #000;
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
@@ -1076,7 +1076,7 @@ a:hover {
 .meiosisControlView .cost {
   position: absolute;
   left: 5px;
-  bottom: 5px;
+  bottom: 25px;
   width: 190px;
   font-weight: bold;
 }
