@@ -274,7 +274,7 @@ GG.cyclesController = Ember.Object.create
     $('#moveCounterOnes').animate({backgroundPosition: @getPosition(ones)}, 200)
   ).observes('cycles')
   getPosition: (num) ->
-    pos = num * 35
+    pos = num * 26
     "(0px -" + pos + "px)"
 
 GG.userController = Ember.Object.create
