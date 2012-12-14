@@ -106,21 +106,15 @@ GG.DrakeView = Ember.View.extend
   ).property()
   shine : (->
     color = @get('org').getCharacteristic('color')
-    if ~color.indexOf "Shiny"
-      'drake-shiny'
-    else 'trait-absent'
+    ~color.indexOf "Shiny"
   ).property()
   armor : (->
     armor = @get('org').getCharacteristic "armor"
-    if armor is "Armor"
-      'drake-armor'
-    else 'trait-absent'
+    armor is "Armor"
   ).property()
   wings : (->
     wings = @get('org').getCharacteristic "wings"
-    if wings is "Wings"
-      'drake-wings'
-    else 'trait-absent'
+    wings is "Wings"
   ).property()
   spikes : (->
     spikes = @get('org').getCharacteristic "spikes"
@@ -128,7 +122,7 @@ GG.DrakeView = Ember.View.extend
       'drake-wide-spikes'
     else if spikes is "Medium spikes"
       'drake-medium-spikes'
-    else 'trait-absent'
+    else false
   ).property()
   head : (->
     sex = if @get('content.sex') is GG.FEMALE then "female" else "male"
@@ -142,15 +136,7 @@ GG.DrakeView = Ember.View.extend
   ).property()
   fire : (->
     fire = @get('org').getCharacteristic "fire breathing"
-    if fire is "Fire breathing"
-      'drake-fire'
-    else 'trait-absent'
-  ).property()
-  maleSpots : (->
-    sex = if @get('content.sex') is GG.FEMALE then "female" else "male"
-    if sex is "male"
-      'drake-male-spots'
-    else 'trait-absent'
+    fire is "Fire breathing"
   ).property()
   didInsertElement: ->
     # Wait for the animation images to load, then move it in place and start it up
