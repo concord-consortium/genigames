@@ -190,20 +190,20 @@
   height: 265px;
 }
 #offspring-pool .offspring {
-  display: inline-block;
   position: relative;
+  width: 464px;
+  height: 386px;
+  left: -76px;
+  background: top left no-repeat url("../images/offspring-panel.png");
+  display: inline-block;
 }
-.offspring .alleleString {
-  position: absolute;
-  bottom: 15px;
-  width: 200px;
-  text-align: center;
-  color: #fff;
+.offspring .drake {
+  left: 94px;
 }
 #offspring-buttons {
   position: absolute;
-  top: 230px;
-  left: -45px;
+  top: 297px;
+  left: 29px;
   width: 390px;
   height: 42px;
 }
@@ -238,11 +238,11 @@
 }
 #parent-available-message {
   position: absolute;
-  left: 2px;
-  bottom: 10px;
+  left: 96px;
+  bottom: 140px;
   width: 275px;
   text-align: left;
-  color: #bbb;
+  color: #333;
 }
 .removeButton {
   display: none;
@@ -336,8 +336,8 @@
   top: 135px;
 }
 #offspring-pool .chromosome-panel {
-  top: 65px;
-  left: -300px;
+  top: 30px;
+  left: -350px;
   width: 280px;
 }
 #offspring-pool .male-chromosome {
