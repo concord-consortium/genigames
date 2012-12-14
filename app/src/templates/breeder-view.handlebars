@@ -58,22 +58,26 @@
           {{#with GG.offspringController}}
             {{view GG.ChromosomePanelView controllerBinding="this"}}
           {{/with}}
-          <div class="offspring">
-            <a href="#" {{action "drakeSelected" this}}>
-              {{view GG.DrakeView contentBinding="this"}}
-            </a>
-            <div id="offspring-buttons">
-              {{view GG.OffspringBackButtonView}}
-              {{view GG.OffspringSaveButtonView}}
-              {{view GG.OffspringUseButtonView}}
-            </div>
-            {{#if GG.breedingController.childSavedToParents}}
-              <div id="parent-available-message">
-                This drake can now be selected as a parent
-              </div>
-            {{/if}}
-          </div>
         {{/with}}
+        <div id="offspring-panel">
+          {{#with GG.offspringController.content}}
+            <div class="offspring">
+              <a href="#" {{action "drakeSelected" this}}>
+                {{view GG.DrakeView contentBinding="this"}}
+              </a>
+              <div id="offspring-buttons">
+                {{view GG.OffspringBackButtonView}}
+                {{view GG.OffspringSaveButtonView}}
+                {{view GG.OffspringUseButtonView}}
+              </div>
+              {{#if GG.breedingController.childSavedToParents}}
+                <div id="parent-available-message">
+                  This drake can now be selected as a parent
+                </div>
+              {{/if}}
+            </div>
+          {{/with}}
+        </div>
       {{/view}}
     </div>
     {{view GG.MatchGoalCounter}}

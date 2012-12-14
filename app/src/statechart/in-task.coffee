@@ -110,7 +110,7 @@ GG.StateInTask = Ember.State.extend
         $('#target').hide()
         $('#breed-controls').animate({left: 489},400,'easeOutCubic')
         $("#breeder").animate({left: -459},500,"easeOutCubic")
-        $('#offspring-pool').hide()
+        $("#offspring-panel").animate({left: 400},500,"easeOutCubic")
         setTimeout ->
           GG.motherPoolController.set('hidden', true)
           GG.fatherPoolController.set('hidden', true)
@@ -123,6 +123,7 @@ GG.StateInTask = Ember.State.extend
         manager.send 'decrementCycles', 1
         GG.breedingController.set 'childSavedToParents', false
         $('#meiosis-container').removeClass('hidden')
+        $("#offspring-pool .chromosome-panel").hide()
         GG.meiosisController.animate ->
           setTimeout ->
             GG.meiosisController.resetAnimation()
@@ -194,7 +195,6 @@ GG.StateInTask = Ember.State.extend
           manager.send 'breedDrakeInternal'
         , 200
         setTimeout ->
-          $('#offspring-pool').show()
           $('#meiosis-container').addClass('hidden')
         , 400
 
@@ -203,6 +203,10 @@ GG.StateInTask = Ember.State.extend
 
       breedDrakeInternal: ->
         GG.breedingController.breedDrake()
+
+      showOffspring: ->
+        $("#offspring-pool .chromosome-panel").show()
+        $('#offspring-panel').animate({left: -76},300,"easeOutCubic")
 
       submitOffspring: (manager) ->
         manager.send 'checkForTaskCompletion'

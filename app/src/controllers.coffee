@@ -244,6 +244,8 @@ GG.breedingController = Ember.Object.create
           drake.markRevealed(rev.side, rev.allele)
       GG.breedingController.set 'child', drake
       GG.offspringController.set 'content', drake
+      Ember.run.next ->
+        GG.statemanager.send 'showOffspring'
       @set 'isBreeding', false
       GG.logController.logEvent GG.Events.BRED_DRAGON,
         mother: @get('mother.biologicaOrganism.alleles')
