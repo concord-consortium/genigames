@@ -564,7 +564,6 @@ GG.OffspringSaveButtonView = Ember.View.extend GG.PointsToolTip,
 
 GG.TaskDescriptionView = Ember.View.extend
   tagName: 'div'
-  classNames: 'task-description'
   currentTaskBinding: 'GG.tasksController.currentTask'
   text: (->
     text = @get('currentTask.npc.speech.shortText') || @get('currentTask.npc.speech.text') || ""
