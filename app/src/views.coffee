@@ -83,8 +83,7 @@ GG.BreederView = Ember.View.extend
 GG.DrakeView = Ember.View.extend
   templateName       : 'drake'
   drakeImageName     : (->
-    color = @get('org').getCharacteristic 'color'
-    GG.getFileName(color, "png")
+    @get('org').getCharacteristic('color').replace("Shiny ","") + ".png"
   ).property()
   drakeImage         : (->
     '../images/drakes/' + @get 'drakeImageName'
@@ -97,19 +96,25 @@ GG.DrakeView = Ember.View.extend
   org : (->
     @get('content.biologicaOrganism')
   ).property().cacheable()
-  tail : (->
+  body : (->
     tail = @get('org').getCharacteristic "tail"
     if tail is "Long tail"
-      'drake-long-tail'
+      'drake-body-long-tail'
     else if tail is "Kinked tail"
-      'drake-kinked-tail'
-    else 'drake-short-tail'
+      'drake-body-kinked-tail'
+    else 'drake-body-short-tail'
+  ).property()
+  shine : (->
+    color = @get('org').getCharacteristic('color')
+    if ~color.indexOf "Shiny"
+      'drake-shiny'
+    else 'trait-absent'
   ).property()
   armor : (->
     armor = @get('org').getCharacteristic "armor"
     if armor is "Armor"
       'drake-armor'
-    else 'drake-no-armor'
+    else 'trait-absent'
   ).property()
   wings : (->
     wings = @get('org').getCharacteristic "wings"
@@ -123,7 +128,7 @@ GG.DrakeView = Ember.View.extend
       'drake-wide-spikes'
     else if spikes is "Medium spikes"
       'drake-medium-spikes'
-    else 'drake-thin-spikes'
+    else 'trait-absent'
   ).property()
   head : (->
     sex = if @get('content.sex') is GG.FEMALE then "female" else "male"
@@ -231,13 +236,6 @@ GG.drakeAnimationPositions = []
 GG.drakeAnimationLengths = []
 
 GG.drakeAnimationRunning = false
-
-# getFileName("Shiny red", "png") -> "shinyRed.png"
-GG.getFileName = (str, ext) ->
-  str = str.replace(/(?:^\w|[A-Z]|\b\w)/g, (letter, index) ->
-    if index == 0 then letter.toLowerCase() else letter.toUpperCase()
-  ).replace(/\s+/g, '')
-  str + "." + ext
 
 GG.ParentPoolView = Ember.View.extend
   templateName: 'parent-pool-view'
