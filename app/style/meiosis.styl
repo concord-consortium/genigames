@@ -26,26 +26,6 @@
   relative: height 22px
   margin-left: 4px
 
-.meiosis .chromosome
-  &:not(.chromo-Y)
-    background: top left no-repeat url('../images/chromo-full.png')
-  &.chromo-Y
-    background: top left no-repeat url('../images/chromo-short.png')
-
-  &.selectable
-    cursor: pointer
-    &:not(.selected)
-      &:not(.chromo-Y):hover
-        background: top left no-repeat url('../images/chromo-full-hover.png')
-      &.chromo-Y:hover
-        background: top left no-repeat url('../images/chromo-short-hover.png')
-
-  &.selected
-    &:not(.chromo-Y)
-      background: top left no-repeat url('../images/chromo-full-selected.png')
-    &.chromo-Y
-      background: top left no-repeat url('../images/chromo-short-selected.png')
-
 .meiosisControlView
   absolute: top left 470px width 174px height 182px
   background-color: white

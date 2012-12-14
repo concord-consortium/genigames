@@ -11,45 +11,62 @@
     top: 30px
     left: -350px
     width: 280px
-  .male-chromosome
-    background: top left no-repeat url('../images/male-chromo-right.png')
-  .female-chromosome
-    background: top left no-repeat url('../images/female-chromo-right.png')
 
 .chromosome
-  absolute: top 20px width 35px height 130px
-
-.male-chromosome
-  background: top left no-repeat url('../images/male-chromo.png')
-
-.female-chromosome
-  background: top left no-repeat url('../images/female-chromo.png')
+  absolute: top 10px width 35px height 130px
 
 .chromo-1
   &.left
     left: 36px
   &.right
-    left: 67px
+    left: 70px
 
 .chromo-2
   &.left
     left: 115px
   &.right
-    left: 146px
+    left: 149px
 
 .chromo-X
   &.left
     left: 193px
   &.right
-    left: 224px
+    left: 227px
 
 .chromo-Y
-  left: 224px
+  left: 227px
+
+.chromosome
+  &:not(.chromo-Y)
+    background: top left no-repeat url('../images/chromosome-long.png')
+    height: 113px
+  &.chromo-Y
+    background: top left no-repeat url('../images/chromosome-short.png')
+    height: 83px
+
+  &.selectable
+    cursor: pointer
+    &:not(.selected)
+      &:not(.chromo-Y):hover
+        background-position-y: -111px
+      &.chromo-Y:hover
+        background-position-y: -83px
+
+  &.selected
+    &:not(.chromo-Y)
+      background-position-y: -222px
+    &.chromo-Y
+      background-position-y: -168px
+
+.alleles-container
+  relative: left 4px top 6px
+.meiosis .alleles-container
+  relative: left 0
 
 .allele
   background: top center no-repeat url('../images/allele-bg.png')
   width: 25px
-  height: 25px
+  height: 22px
   text-align: center
   color: white
   font-weight: bold
