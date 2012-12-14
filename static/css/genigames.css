@@ -481,10 +481,6 @@
   position: absolute;
   left: 0;
 }
-.drake-img.trait-absent,
-.drake-idle-img.trait-absent {
-  top: 100%;
-}
 .drake-fire {
   top: 0px;
 }
@@ -500,38 +496,29 @@
 .drake-female {
   top: -400%;
 }
-.drake-thin-spikes {
+.drake-wings {
   top: -500%;
 }
-.drake-medium-spikes {
+.drake-armor {
   top: -600%;
 }
 .drake-wide-spikes {
   top: -700%;
 }
-.drake-wings {
+.drake-medium-spikes {
   top: -800%;
 }
-.drake-armor {
+.drake-shiny {
   top: -900%;
 }
-.drake-no-armor {
+.drake-body-long-tail {
   top: -1000%;
 }
-.drake-male-spots {
+.drake-body-kinked-tail {
   top: -1100%;
 }
-.drake-body {
+.drake-body-short-tail {
   top: -1200%;
-}
-.drake-long-tail {
-  top: -1300%;
-}
-.drake-kinked-tail {
-  top: -1400%;
-}
-.drake-short-tail {
-  top: -1500%;
 }
 .flip {
   -moz-transform: scaleX(-1);
@@ -1099,12 +1086,13 @@ a:hover {
   cursor: pointer;
   border: 1px dotted #000;
   margin: 0px;
+  background-color: rgba(255,255,153,0.5);
 }
 .crossoverPoint.clickable:hover {
-  background-color: #ff0;
+  background-color: #ffff96;
 }
 .crossoverPoint.selected {
-  background-color: #008000;
+  background-color: #ff0;
 }
 .npc {
   position: absolute;
