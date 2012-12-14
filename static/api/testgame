@@ -4,17 +4,17 @@
     "key": "task",
     "value": {
           "name": "Town 1 Task 1",
-          "visibleGenes": ["T","W"],
-          "hiddenGenes": ["Hl","Rh"],
+          "visibleGenes": ["T1","W1"],
+          "hiddenGenes": ["H1","G1"],
           "initialDrakes": {
-            "females": ["a:W,b:W","a:W,b:w"],
-            "males": ["a:W,b:W","a:W,b:w"]
+            "females": ["a:W1,b:W1","a:W1,b:W2"],
+            "males": ["a:W1,b:W1","a:W1,b:W2"]
           },
           "targetDrake": "no wings",
           "npc": {
             "name": "Cousin It",
             "imageURL": "../images/cousin-it.png",
-            "position": {"x": 600, "y": 500 },
+            "position": {"x": 600, "y": 410 },
             "speech": {
               "text": ["Hello, drake breeder!<br/><br/>I'm Cousin It.<br/><br/>I have a very important task for you: Breed a wingless drake!"],
               "completionText": "Good job!<br/><br/>You totally got the drake I needed. Thanks!",
@@ -29,18 +29,18 @@
     "key": "task",
     "value": {
           "name": "Town 1 Task 2",
-          "visibleGenes": ["T","W", "Fl"],
-          "hiddenGenes": ["Hl","Rh"],
+          "visibleGenes": ["T1","W1", "F1"],
+          "hiddenGenes": ["H1","G1"],
           "initialDrakes": {
-            "females": ["a:W,b:W,a:hl","a:W,b:w,a:hl"],
-            "males": ["a:W,b:W,a:hl","a:W,b:w,a:hl"]
+            "females": ["a:W1,b:W1,a:G2","a:W1,b:W2,a:G2"],
+            "males": ["a:W1,b:W1,a:G2","a:W1,b:W2,a:G2"]
           },
           "targetDrake": "no wings, no hindlimbs",
           "targetCount": 3,
           "npc": {
             "name": "Cousin It's Brother",
             "imageURL": "../images/cousin-it.png",
-            "position": {"x": 200, "y": 500},
+            "position": {"x": 200, "y": 400},
             "speech": {
               "text": ["Hello, drake breeder!<br/><br/>I'm Fred, the brother of Cousin It.","I have a very important task for you: Breed a drake with no wings and no hindlimbs!"],
               "completionText": "That's awesome!<br/><br/>You totally got the drake I needed. Thanks!",
@@ -55,17 +55,17 @@
     "key": "task",
     "value": {
           "name": "Town 2 Task 1",
-          "visibleGenes": ["T","W"],
-          "hiddenGenes": ["Hl","Rh"],
+          "visibleGenes": ["T1","W1"],
+          "hiddenGenes": ["H1","G1"],
           "initialDrakes": {
-            "females": ["a:W,b:W","a:W,b:w"],
-            "males": ["a:W,b:W","a:W,b:w"]
+            "females": ["a:W1,b:W1","a:W1,b:W2"],
+            "males": ["a:W1,b:W1","a:W1,b:W2"]
           },
           "targetDrake": "no wings",
           "npc": {
             "name": "Cousin It's Twin",
             "imageURL": "../images/cousin-it.png",
-            "position": {"x": 300, "y": 500},
+            "position": {"x": 300, "y": 390},
             "speech": {
               "text": ["Hello, drake breeder!<br/><br/>I'm Cousin It's Twin.<br/><br/>I have a very important task for you: Breed a wingless drake!"],
               "completionText": "Good job!<br/><br/>You totally got the drake I wanted. Thanks!",

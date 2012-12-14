@@ -26,24 +26,38 @@
            },
            "initialDrakes": {
                "males": [
-                   "a:W,b:W,a:m,b:m"
+                   "a:W1,b:W1,a:M2,b:M2"
                ],
                "females": [
-                   "a:W,b:W,a:m,b:m"
+                   "a:W1,b:W1,a:M2,b:M2"
                ]
            },
            "visibleGenes": [
-               "W",
-               "M"
+               "W1",
+               "M1"
            ],
            "hiddenGenes": [
-               "Hl"
+               "H1"
            ],
            "targetDrake": "wings",
            "obstacleCourse": {
+              "path": "50,50 100,-50 500,190, 800,160",
                "obstacles": [
-                   "tree",
-                   "pond"
+                  {
+                   "obstacle": "tree",
+                   "positionX": 100,
+                   "positionY": 50
+                  },
+                  {
+                   "obstacle": "pond",
+                   "positionX": 400,
+                   "positionY": 150
+                  },
+                  {
+                   "obstacle": "tree",
+                   "positionX": 750,
+                   "positionY": 0
+                  }
                ]
            }
         }
@@ -53,11 +67,11 @@
     "key": "task",
     "value": {
           "name": "Town 2 Task 1",
-          "visibleGenes": ["T","W"],
-          "hiddenGenes": ["Hl","Rh"],
+          "visibleGenes": ["T1","W1"],
+          "hiddenGenes": ["H1","G1"],
           "initialDrakes": {
-            "females": ["","","","","",""],
-            "males": ["","","","","",""]
+            "females": ["a:W1"],
+            "males": ["a:W2"]
           },
           "targetDrake": "male, no wings",
           "npc": {
@@ -78,11 +92,11 @@
     "key": "task",
     "value": {
           "name": "Town 3 Task 1",
-          "visibleGenes": ["T","W"],
-          "hiddenGenes": ["Hl","Rh"],
+          "visibleGenes": ["T1","W1"],
+          "hiddenGenes": ["H1","G1"],
           "initialDrakes": {
-            "females": ["a:W,b:W","a:W,b:w"],
-            "males": ["a:W,b:W","a:W,b:w"]
+            "females": ["a:W1,b:W1","a:W1,b:W2"],
+            "males": ["a:W1,b:W1","a:W1,b:W2"]
           },
           "targetDrake": "male, no wings",
           "npc": {
@@ -103,11 +117,11 @@
     "key": "task",
     "value": {
           "name": "Sample Town4 Task",
-          "visibleGenes": ["T","W"],
-          "hiddenGenes": ["Hl","Rh"],
+          "visibleGenes": ["T1","W1"],
+          "hiddenGenes": ["H1","G1"],
           "initialDrakes": {
-            "females": ["a:W,b:W","a:W,b:w"],
-            "males": ["a:W,b:W","a:W,b:w"]
+            "females": ["a:W1,b:W1","a:W1,b:W2"],
+            "males": ["a:W1,b:W1","a:W1,b:W2"]
           },
           "targetDrake": "male, no wings",
           "npc": {
@@ -130,7 +144,7 @@
       "name": "Town 1",
       "icon": "townIcon1",
       "position": 0,
-      "background" : "town01.jpg",
+      "background" : "huts",
       "finalMessage": "You're all done!",
       "tasks": [ "Town 1 Task 1" ]
     }
