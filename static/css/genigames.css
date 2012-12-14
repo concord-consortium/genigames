@@ -297,28 +297,27 @@
 }
 .move-counter {
   position: absolute;
-  top: 35px;
-  left: -1px;
-  width: 85px;
-  height: 37px;
-  background: #fff;
+  top: 23px;
+  left: 8px;
+  width: 75px;
+  height: 28px;
 }
 .moveCounterDigit {
   position: absolute;
   top: 1px;
   left: 0;
-  width: 25px;
-  height: 35px;
+  width: 19px;
+  height: 26px;
   background: top left no-repeat url("../images/move-counter-sprite.png");
 }
 #moveCounterHundreds {
-  left: 3px;
+  left: 2px;
 }
 #moveCounterTens {
-  left: 30px;
+  left: 28px;
 }
 #moveCounterOnes {
-  left: 57px;
+  left: 54px;
 }
 .match-goal-counter {
   position: absolute;
