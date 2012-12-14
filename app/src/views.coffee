@@ -562,16 +562,6 @@ GG.OffspringSaveButtonView = Ember.View.extend GG.PointsToolTip,
     @set 'disabled', true
     GG.statemanager.send('saveOffspring')
 
-GG.BreedTitleView = Ember.View.extend
-  tagName: 'div'
-  classNames: 'breed-title'
-  #text: (->
-    # not sure if it's ok the query the statemanager like this....
-    #if GG.statemanager.get('currentState.name') is "parentSelect"
-    #  "Parent selection"
-    #else "Breeding"
-  #).property('GG.statemanager.currentState')
-
 GG.TaskDescriptionView = Ember.View.extend
   tagName: 'div'
   classNames: 'task-description'
