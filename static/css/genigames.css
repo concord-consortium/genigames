@@ -1058,11 +1058,12 @@ a:hover {
   left: 470px;
   width: 174px;
   height: 182px;
+  background-color: #fff;
   border: 1px solid #000;
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
   border-radius: 10px;
-  box-shadow: 5px 5px 5px 1px #808080;
+  box-shadow: 5px 5px 5px 1px #011627;
 }
 .meiosisControlView button {
   position: absolute;
