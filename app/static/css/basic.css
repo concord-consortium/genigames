@@ -3,6 +3,10 @@
  *
  * We want this to download lightning-fast.
  */
+body {
+	background-color: black;
+}
+
 #loading {
   position: absolute;
   top: 250px;
