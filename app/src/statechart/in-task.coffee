@@ -103,8 +103,6 @@ GG.StateInTask = Ember.State.extend
 
     animatingMeiosis: Ember.State.create
       setup: (manager)->
-        if GG.cyclesController.get('cycles') <= 0
-          GG.userController.addReputation -GG.actionCostsController.getCost 'extraBreedCycle'
         if GG.breedingController.get('breedType') is GG.BREED_CONTROLLED
           GG.userController.addReputation -GG.actionCostsController.getCost 'meiosisControlEnabled'
         # hide the offspring pool
@@ -121,7 +119,10 @@ GG.StateInTask = Ember.State.extend
         , 800
 
       animate: (manager)->
-        $('#progress-bar').switchClass($('#progress-bar').attr('class'),"breeding",2000)
+        if GG.cyclesController.get('cycles') <= 0
+          GG.userController.addReputation -GG.actionCostsController.getCost 'extraBreedCycle'
+        currentProgClass = $('#progress-bar').attr('class')
+        $('#progress-bar').switchClass(currentProgClass,"breeding",2000) unless currentProgClass is "breeding"
         manager.send 'decrementCycles', 1
         GG.breedingController.set 'childSavedToParents', false
         $('#meiosis-container').removeClass('hidden')
