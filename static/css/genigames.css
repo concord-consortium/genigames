@@ -189,13 +189,19 @@
   width: 125px;
   height: 265px;
 }
-#offspring-pool .offspring {
+#offspring-panel .offspring {
+  position: relative;
+  left: 0;
+  width: 464px;
+  height: 386px;
+  display: inline-block;
+}
+#offspring-panel {
   position: relative;
   width: 464px;
   height: 386px;
-  left: -76px;
+  left: 400px;
   background: top left no-repeat url("../images/offspring-panel.png");
-  display: inline-block;
 }
 .offspring .drake {
   left: 94px;
