@@ -137,18 +137,18 @@
   width: 86px;
   height: 89px;
   background: top left no-repeat url("../images/breed-button.png");
-  background-position-y: -262px;
+  background-position: 0 -262px;
 }
 #breed-button.enabled {
-  background-position-y: 2px;
+  background-position: 0 2px;
   cursor: pointer;
 }
 #breed-button.enabled:active {
-  background-position-y: -175px;
+  background-position: 0 -175px;
   cursor: pointer;
 }
 #breed-button.no-more-breeds {
-  background-position-y: -86px;
+  background-position: 0 -86px;
 }
 #target {
   position: absolute;
@@ -234,22 +234,22 @@
   background: top left no-repeat url("../images/button-back.png");
 }
 .offspring-buttons-back:active {
-  background-position-y: 97%;
+  background-position: 0 97%;
 }
 .offspring-buttons-use {
   background: top left no-repeat url("../images/finish-button.png");
 }
 .offspring-buttons-use:active {
-  background-position-y: 97%;
+  background-position: 0 97%;
 }
 .offspring-buttons-save {
   background: top left no-repeat url("../images/use-as-parent-button.png");
 }
 .offspring-buttons-save:active {
-  background-position-y: 99%;
+  background-position: 0 99%;
 }
 .offspring-buttons-save.disabled {
-  background-position-y: 49%;
+  background-position: 0 49%;
 }
 #parent-available-message {
   position: absolute;
@@ -394,16 +394,16 @@
   cursor: pointer;
 }
 .chromosome.selectable:not(.selected):not(.chromo-Y):hover {
-  background-position-y: -111px;
+  background-position: 0 -111px;
 }
 .chromosome.selectable:not(.selected).chromo-Y:hover {
-  background-position-y: -83px;
+  background-position: 0 -83px;
 }
 .chromosome.selected:not(.chromo-Y) {
-  background-position-y: -222px;
+  background-position: 0 -222px;
 }
 .chromosome.selected.chromo-Y {
-  background-position-y: -168px;
+  background-position: 0 -168px;
 }
 .alleles-container {
   position: relative;
