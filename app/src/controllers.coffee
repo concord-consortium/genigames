@@ -560,6 +560,19 @@ GG.meiosisController = Ember.Object.create
     source = if destCross.chromoView.get('content.sex') == GG.MALE then "father" else "mother"
     meiosisView = @get(source + 'View')
     parentSelector = '#' + meiosisView.get('elementId')
+
+    # mark this one as selected
+    $('#' + destCross.chromoView.get('elementId') + ' .crossoverPoint.' + gene.name).removeClass('clickable').addClass('selected')
+    # Highlight the valid second choices, by removing 'clickable' on invalid ones
+    leftRight = destCross.chromoView.get('right')
+    points = parentSelector + ' .crossoverPoint:not(.' + gene.name + ')'
+    points2 = parentSelector + ' .' + leftRight + ' .crossoverPoint.' + gene.name
+    $(points).removeClass('clickable')
+    $(points2).removeClass('clickable')
+    if $(parentSelector + " .crossoverSelection .step3").hasClass('hidden')
+      $(parentSelector + " .crossoverSelection .step1").addClass('hidden')
+      $(parentSelector + " .crossoverSelection .step2").removeClass('hidden')
+
     if @get('selectedCrossover')?
       sourceCross = @get('selectedCrossover')
       if sourceCross.gene.name == destCross.gene.name and sourceCross.chromoView.get('side') != destCross.chromoView.get('side')
@@ -625,17 +638,6 @@ GG.meiosisController = Ember.Object.create
         console.log("invalid second cross point!")
     else
       @set('selectedCrossover', destCross)
-      # mark this one as selected
-      $('#' + destCross.chromoView.get('elementId') + ' .crossoverPoint.' + gene.name).removeClass('clickable').addClass('selected')
-      # Highlight the valid second choices, by removing 'clickable' on invalid ones
-      leftRight = destCross.chromoView.get('right')
-      points = parentSelector + ' .crossoverPoint:not(.' + gene.name + ')'
-      points2 = parentSelector + ' .' + leftRight + ' .crossoverPoint.' + gene.name
-      $(points).removeClass('clickable')
-      $(points2).removeClass('clickable')
-      if $(parentSelector + " .crossoverSelection .step3").hasClass('hidden')
-        $(parentSelector + " .crossoverSelection .step1").addClass('hidden')
-        $(parentSelector + " .crossoverSelection .step2").removeClass('hidden')
 
   clearCrossPoints: (meiosisView)->
     # clear the saved cross point
