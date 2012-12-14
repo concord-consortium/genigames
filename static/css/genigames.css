@@ -67,7 +67,7 @@
   width: 1300px;
   height: 900px;
   background: top left no-repeat url("../images/background_meiosis.jpg");
-  background-color: #fff;
+  background-color: #000;
   overflow: hidden;
 }
 #breed-top-bar {
@@ -77,25 +77,34 @@
   width: 1040px;
   height: 152px;
 }
-.breed-title {
-  position: relative;
-  top: 58px;
-  left: 16px;
-  float: left;
-  font-size: 2.1em;
-}
-.task-description {
+#task-description {
   position: absolute;
   top: 28px;
   left: 32px;
   width: 770px;
+}
+#progress-bar {
+  position: absolute;
+  top: 63px;
+  left: 25px;
+  height: 35px;
+  background: top left no-repeat url("../images/breeding-progress-overlay.png");
+}
+#progress-bar.selecting {
+  width: 128px;
+}
+#progress-bar.breeding {
+  width: 645px;
+}
+#progress-bar.results {
+  width: 772px;
 }
 #breeder {
   position: absolute;
   top: 110px;
   left: 0;
   width: 2040px;
-  height: 612px;
+  height: 423px;
   background: top left no-repeat url("../images/breeding-panels-left.png");
 }
 #breed-controls {
@@ -933,6 +942,7 @@ a:hover {
   position: absolute;
   width: 100%;
   overflow: hidden;
+  background-color: #000;
 }
 #container > div {
   position: relative;
