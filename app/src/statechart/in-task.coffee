@@ -51,6 +51,7 @@ GG.StateInTask = Ember.State.extend
     parentSelect: Ember.State.create
 
       setup: ->
+        $('#progress-bar').switchClass($('#progress-bar').attr('class'),"selecting",1000)
         GG.offspringController.set 'content', null
         $('#target').show()
         $('#breed-controls').animate({left: 650},600,'easeOutCubic')
@@ -120,6 +121,7 @@ GG.StateInTask = Ember.State.extend
         , 800
 
       animate: (manager)->
+        $('#progress-bar').switchClass($('#progress-bar').attr('class'),"breeding",2000)
         manager.send 'decrementCycles', 1
         GG.breedingController.set 'childSavedToParents', false
         $('#meiosis-container').removeClass('hidden')
@@ -205,6 +207,7 @@ GG.StateInTask = Ember.State.extend
         GG.breedingController.breedDrake()
 
       showOffspring: ->
+        $('#progress-bar').switchClass($('#progress-bar').attr('class'),"results",1000)
         $("#offspring-pool .chromosome-panel").show()
         $('#offspring-panel').animate({left: -76},300,"easeOutCubic")
 
