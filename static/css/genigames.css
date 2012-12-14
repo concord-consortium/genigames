@@ -346,49 +346,69 @@
   left: -350px;
   width: 280px;
 }
-#offspring-pool .male-chromosome {
-  background: top left no-repeat url("../images/male-chromo-right.png");
-}
-#offspring-pool .female-chromosome {
-  background: top left no-repeat url("../images/female-chromo-right.png");
-}
 .chromosome {
   position: absolute;
-  top: 20px;
+  top: 10px;
   width: 35px;
   height: 130px;
-}
-.male-chromosome {
-  background: top left no-repeat url("../images/male-chromo.png");
-}
-.female-chromosome {
-  background: top left no-repeat url("../images/female-chromo.png");
 }
 .chromo-1.left {
   left: 36px;
 }
 .chromo-1.right {
-  left: 67px;
+  left: 70px;
 }
 .chromo-2.left {
   left: 115px;
 }
 .chromo-2.right {
-  left: 146px;
+  left: 149px;
 }
 .chromo-X.left {
   left: 193px;
 }
 .chromo-X.right {
-  left: 224px;
+  left: 227px;
 }
 .chromo-Y {
-  left: 224px;
+  left: 227px;
+}
+.chromosome:not(.chromo-Y) {
+  background: top left no-repeat url("../images/chromosome-long.png");
+  height: 113px;
+}
+.chromosome.chromo-Y {
+  background: top left no-repeat url("../images/chromosome-short.png");
+  height: 83px;
+}
+.chromosome.selectable {
+  cursor: pointer;
+}
+.chromosome.selectable:not(.selected):not(.chromo-Y):hover {
+  background-position-y: -111px;
+}
+.chromosome.selectable:not(.selected).chromo-Y:hover {
+  background-position-y: -83px;
+}
+.chromosome.selected:not(.chromo-Y) {
+  background-position-y: -222px;
+}
+.chromosome.selected.chromo-Y {
+  background-position-y: -168px;
+}
+.alleles-container {
+  position: relative;
+  left: 4px;
+  top: 6px;
+}
+.meiosis .alleles-container {
+  position: relative;
+  left: 0;
 }
 .allele {
   background: top center no-repeat url("../images/allele-bg.png");
   width: 25px;
-  height: 25px;
+  height: 22px;
   text-align: center;
   color: #fff;
   font-weight: bold;
@@ -1002,7 +1022,7 @@ a:hover {
   top: -10px;
   width: 300px;
   height: 120px;
-  background-color: rgba(223,223,223,0.55);
+  background-color: rgba(223,223,223,0.45);
   border-top: 40px solid transparent;
   z-index: -4;
   -webkit-border-radius: 90px;
@@ -1013,7 +1033,7 @@ a:hover {
 .meiosis.mother {
   position: absolute;
   top: 0;
-  left: 0;
+  left: -45px;
   width: 760px;
   height: 217px;
   z-index: 2;
@@ -1031,32 +1051,11 @@ a:hover {
   height: 22px;
   margin-left: 4px;
 }
-.meiosis .chromosome:not(.chromo-Y) {
-  background: top left no-repeat url("../images/chromo-full.png");
-}
-.meiosis .chromosome.chromo-Y {
-  background: top left no-repeat url("../images/chromo-short.png");
-}
-.meiosis .chromosome.selectable {
-  cursor: pointer;
-}
-.meiosis .chromosome.selectable:not(.selected):not(.chromo-Y):hover {
-  background: top left no-repeat url("../images/chromo-full-hover.png");
-}
-.meiosis .chromosome.selectable:not(.selected).chromo-Y:hover {
-  background: top left no-repeat url("../images/chromo-short-hover.png");
-}
-.meiosis .chromosome.selected:not(.chromo-Y) {
-  background: top left no-repeat url("../images/chromo-full-selected.png");
-}
-.meiosis .chromosome.selected.chromo-Y {
-  background: top left no-repeat url("../images/chromo-short-selected.png");
-}
 .meiosisControlView {
   position: absolute;
   top: 0;
   left: 470px;
-  width: 174px;
+  width: 183px;
   height: 182px;
   background-color: #fff;
   border: 1px solid #000;
