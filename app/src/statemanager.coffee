@@ -122,10 +122,18 @@ GG.statemanager = Ember.StateManager.create
           # fixme: this should be eventually handled by a router
           if (taskPath = GG.statemanager.get('params.task'))
             taskPath = taskPath.split "/"
-            townLoaded = GG.townsController.loadTown taskPath[0]
-            GG.tasksController.setNextAvailableTask parseInt(taskPath[1])-1 if not isNaN parseInt(taskPath[1])
-            nextState = if townLoaded then 'inTown' else 'inWorld'
-            GG.statemanager.transitionTo nextState
+            if taskPath[0] is "baseline"
+              GG.baselineController.set 'isBaseline', true
+              townLoaded = GG.townsController.loadTown taskPath[1]
+              GG.tasksController.setCurrentTask GG.tasksController.objectAt parseInt(taskPath[2])-1
+              Ember.run ->
+                GG.universeView.setCurrentView 'baseline'
+              GG.statemanager.transitionTo 'inTask'
+            else
+              townLoaded = GG.townsController.loadTown taskPath[0]
+              GG.tasksController.setNextAvailableTask parseInt(taskPath[1])-1 if not isNaN parseInt(taskPath[1])
+              nextState = if townLoaded then 'inTown' else 'inWorld'
+              GG.statemanager.transitionTo nextState
           else
             GG.statemanager.transitionTo 'inWorld'
 

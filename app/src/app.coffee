@@ -83,6 +83,9 @@ $ ->
       town: GG.TownView
       breeder: GG.BreederView
       childViews: ['town','breeder']
+    baseline: Ember.ContainerView.extend
+      breeder: GG.BreederView
+      childViews: ['breeder']
     setCurrentView: (view)->
       templ = @get(view)
       if templ?

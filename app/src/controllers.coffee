@@ -654,3 +654,6 @@ GG.obstacleCourseController = Ember.Object.create
   obstaclesBinding: 'course.obstacles'
   drakeBinding: 'GG.offspringController.content'
   hidden: true
+
+GG.baselineController = Ember.Object.create
+  isBaseline: false
