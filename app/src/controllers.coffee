@@ -122,11 +122,14 @@ GG.tasksController = Ember.ArrayController.create
     task.set 'showSpeechBubble', true
 
   showTaskCompletion: ->
-    task = @get 'currentTask'
-    messageHidden = =>
-      @taskFinishedBubbleDismissed()
-    GG.showModelDialog task.npc.speech.completionText, messageHidden
-
+    if not GG.baselineController.get 'isBaseline'
+      task = @get 'currentTask'
+      messageHidden = =>
+        @taskFinishedBubbleDismissed()
+      GG.showModelDialog task.npc.speech.completionText, messageHidden
+    else
+      GG.showModelDialog "Great job, you succeeded in breeding the target drake!
+                          <br/><br/>Close this tab to go back to the portal."
   showTaskNonCompletion: ->
     GG.showModelDialog "That's not the drake you're looking for!"
 
