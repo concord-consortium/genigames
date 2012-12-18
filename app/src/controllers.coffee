@@ -123,16 +123,12 @@ GG.tasksController = Ember.ArrayController.create
 
   showTaskCompletion: ->
     task = @get 'currentTask'
-    task.set 'showQuestionBubble', false
-    task.set 'showSpeechBubble', false
-    task.set 'showCompletionBubble', true
+    messageHidden = =>
+      @taskFinishedBubbleDismissed()
+    GG.showModelDialog task.npc.speech.completionText, messageHidden
 
   showTaskNonCompletion: ->
-    task = @get 'currentTask'
-    task.set 'showNonCompletionBubble', true
-
-  nonCompletionBubbleDismissed: ->
-    @get('currentTask').set 'showNonCompletionBubble', false
+    GG.showModelDialog "That's not the drake you're looking for!"
 
   taskAccepted: (task) ->
     task.set 'showSpeechBubble', false
@@ -657,3 +653,30 @@ GG.obstacleCourseController = Ember.Object.create
 
 GG.baselineController = Ember.Object.create
   isBaseline: false
+
+GG.showModelDialog = (text, hideAction) ->
+  $('body').qtip
+    content:
+        title:
+          text: '',
+          button: 'Ok'
+        text: text
+    position:
+       target: $(document.body)
+       corner: 'center'
+    show:
+        ready: true
+        solo: true
+        when: false
+    hide: false
+    style:
+       width:
+        max: 350
+       padding: '14px',
+       border:
+          width: 1
+          radius: 5
+          color: '#666666'
+       name: 'light'
+    api:
+       onHide: hideAction

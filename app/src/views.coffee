@@ -649,26 +649,6 @@ GG.NPCSpeechBubbleView = Ember.View.extend
     @resetTextIdx()
     GG.statemanager.send 'decline'
 
-GG.NPCCompletionBubbleView = Ember.View.extend
-  tagName            : 'div'
-  text               : (->
-    return new Handlebars.SafeString(@get 'content.npc.speech.completionText')
-  ).property('content')
-  classNames         : ['speech-bubble-no-npc']
-  classNameBindings  : ['hidden']
-  hidden             : Ember.computed.not('content.showCompletionBubble')
-  accept: ->
-    GG.tasksController.taskFinishedBubbleDismissed()
-
-GG.NPCNonCompletionBubbleView = Ember.View.extend
-  tagName            : 'div'
-  text               : "That's not the drake you're looking for!"
-  classNames         : ['speech-bubble-no-npc']
-  classNameBindings  : ['hidden']
-  hidden             : Ember.computed.not('content.showNonCompletionBubble')
-  accept: ->
-    GG.tasksController.nonCompletionBubbleDismissed()
-
 GG.NPCHeartBubbleView = Ember.View.extend
   tagName            : 'img'
   classNames         : ['heart-bubble']

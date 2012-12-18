@@ -89,8 +89,6 @@ GG.Task = Ember.Object.extend
   # viewmodel properties
   showQuestionBubble: false
   showSpeechBubble: false
-  showCompletionBubble: false
-  showNonCompletionBubble: false
   showFinalMessageBubble: false
   skipSave: false
 
