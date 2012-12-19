@@ -278,8 +278,16 @@ GG.MeiosisButtonView = Ember.View.extend GG.PointsToolTip,
   showToolTip: (->
     GG.breedingController.get('breedType') is GG.BREED_AUTOMATED
   ).property('GG.breedingController.breedType')
-  toolTipText: "Enable manual control of meiosis."
-  costPropertyName: 'meiosisControlEnabled'
+  toolTipText: (->
+    tip = "Enable manual control of meiosis."
+    tip + if not @get('meiosisEnabled') then "<br/><br/>Currently disabled for this task." else ""
+  ).property()
+  costPropertyName: (->
+    if @get 'meiosisEnabled' then 'meiosisControlEnabled' else ' '
+  ).property()
+  meiosisEnabled: (->
+    !!GG.tasksController.get 'currentTask.meiosisControl'
+  ).property()
   click: ->
     GG.statemanager.send('toggleBreedType')
 

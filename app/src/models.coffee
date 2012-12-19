@@ -86,6 +86,7 @@ GG.Task = Ember.Object.extend
   cycles: 10
   cyclesRemaining: 0
   obstacleCourse: null
+  meiosisControl: "all"
   # viewmodel properties
   showQuestionBubble: false
   showSpeechBubble: false
