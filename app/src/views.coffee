@@ -107,7 +107,7 @@ GG.DrakeView = Ember.View.extend
   ).property()
   shine : (->
     color = @get('org').getCharacteristic('color')
-    ~color.indexOf "Shiny"
+    ~color.indexOf "Metallic"
   ).property()
   armor : (->
     armor = @get('org').getCharacteristic "armor"
