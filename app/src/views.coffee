@@ -705,7 +705,9 @@ GG.MeiosisView = Ember.View.extend
       GG.meiosisController.set(@get('motherFather') + "View", _this)
     , 200
   _createGametes: ->
-    doCrossover = if GG.breedingController.get('breedType') == GG.BREED_CONTROLLED then false else true
+    meiosisControl = GG.tasksController.get 'currentTask.meiosisControl'
+    doCrossover = if GG.breedingController.get('breedType') == GG.BREED_CONTROLLED and
+      (meiosisControl is "crossover" or meiosisControl is "all") then false else true
     newGametes = @get('content.biologicaOrganism').createGametesWithCrossInfo(4, doCrossover)[0]
     @set 'gametes', newGametes
     return newGametes

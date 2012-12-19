@@ -32,6 +32,8 @@ GG.MeiosisAnimation = Ember.Object.create
     args.container = args.mainContainer.find('.chromosome-panel')
     args.cell = args.container.find('.mainCell')
 
+    meiosisControl = GG.tasksController.get 'currentTask.meiosisControl'
+
     # duplicate each chromosome into sister chromatids (prophase I)
     args.container.find('.sister-1,.sister-2').each (i, chromo) ->
       $chromo = $(chromo)
@@ -52,16 +54,25 @@ GG.MeiosisAnimation = Ember.Object.create
     # container.find('.chromo-2:not(.tempNotRight)').addClass("right")
     # container.find('.chromo-2.tempNotRight').removeClass("tempNotRight")
     @registerTimeout @scale(500), =>
-      if GG.breedingController.get('breedType') == GG.BREED_CONTROLLED
+      if GG.breedingController.get('breedType') == GG.BREED_CONTROLLED and
+          (meiosisControl is "crossover" or meiosisControl is "all")
         args.parentView.selectingCrossover =>
-          args.parentView.selectingChromatids =>
+          if meiosisControl is "selection" or meiosisControl is "all"
+            args.parentView.selectingChromatids =>
+              @divide(args)
+          else
             @divide(args)
       else
         args.parentView.crossOver()
 
         # divide cell first time (Anaphase I + Telophase I)
         @registerTimeout 2000, =>
-          @divide(args)
+          if GG.breedingController.get('breedType') == GG.BREED_CONTROLLED and
+              (meiosisControl is "selection")
+            args.parentView.selectingChromatids =>
+              @divide(args)
+          else
+            @divide(args)
 
   separateChromatids: (args)->
     t = @scale(400)
