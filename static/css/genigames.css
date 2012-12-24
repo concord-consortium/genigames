@@ -188,15 +188,15 @@
   position: absolute;
   top: 20px;
   left: 680px;
-  width: 125px;
-  height: 265px;
+  width: 275px;
+  height: 130px;
 }
 #mother-chromosome {
   position: absolute;
   top: 285px;
   left: 680px;
-  width: 125px;
-  height: 265px;
+  width: 275px;
+  height: 130px;
 }
 #offspring-panel .offspring {
   position: relative;
@@ -280,6 +280,7 @@
   position: absolute;
   top: -19px;
   left: 490px;
+  height: 180px;
 }
 #father span {
   position: absolute;
@@ -291,6 +292,7 @@
   position: absolute;
   top: 239px;
   left: 490px;
+  height: 180px;
 }
 #mother span {
   position: absolute;
