@@ -221,6 +221,7 @@ GG.StateInTask = Ember.State.extend
         $('#progress-bar').switchClass($('#progress-bar').attr('class'),"results",1000)
         $("#offspring-pool .chromosome-panel").show()
         $('#offspring-panel').animate({left: -76},300,"easeOutCubic")
+        GG.tutorialMessageController.showFirstOffspringCreatedTutorial()
 
       submitOffspring: (manager) ->
         manager.send 'checkForTaskCompletion'

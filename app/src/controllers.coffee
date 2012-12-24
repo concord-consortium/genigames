@@ -681,6 +681,14 @@ GG.tutorialMessageController = Ember.Object.create
         combination that will produce the drake you want.",
         target, tooltip
 
+  firstOffspringCreated: false
+  showFirstOffspringCreatedTutorial: ->
+    if @get('isFirstTask') and !@get 'firstOffspringCreated'
+      @set 'firstOffspringCreated', true
+      GG.showInfoDialog $("#offspring-pool .chromosome-panel"),
+        "Good job. Notice which alleles of the wing gene gave this drake wings.",
+        "bottomMiddle", "topMiddle"
+
 
 GG.QTipStyle =
   width:
