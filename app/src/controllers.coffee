@@ -672,11 +672,14 @@ GG.tutorialMessageController = Ember.Object.create
   firstDrakeSelected: false
   showFirstDrakeSelectionTutorial: (parent) ->
     if @get('isFirstTask') and !@get 'firstDrakeSelected'
+      target = if parent is "mother" then "topMiddle" else "bottomMiddle"
+      tooltip = if parent is "mother" then "bottomMiddle" else "topMiddle"
       @set 'firstDrakeSelected', true
-      GG.showInfoDialog $('#'+parent),
+      GG.showInfoDialog $("##{parent}-chromosome"),
         "This is the drake genetic make-up. The alleles of genes determine the look of the
         drake, so to breed the drake you want, you’re going to have to create am allele
-        combination that will produce the drake you want."
+        combination that will produce the drake you want.",
+        target, tooltip
 
 
 GG.QTipStyle =
@@ -689,9 +692,9 @@ GG.QTipStyle =
     color: '#4e8da6'
   name: 'light'
 
-GG.showInfoDialog = ($elem, text) ->
+GG.showInfoDialog = ($elem, text, target="leftMiddle", tooltip="rightMiddle") ->
   style = GG.QTipStyle
-  style.tip = 'rightMiddle'
+  style.tip = tooltip
   $elem.qtip
     content:
         title:
@@ -700,8 +703,8 @@ GG.showInfoDialog = ($elem, text) ->
         text: text
     position:
       corner:
-        target: 'leftMiddle'
-        tooltip: 'rightMiddle'
+        target: target
+        tooltip: tooltip
     show:
         ready: true
         solo: true
