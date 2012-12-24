@@ -126,12 +126,12 @@ GG.tasksController = Ember.ArrayController.create
       task = @get 'currentTask'
       messageHidden = =>
         @taskFinishedBubbleDismissed()
-      GG.showModelDialog task.npc.speech.completionText, messageHidden
+      GG.showModalDialog task.npc.speech.completionText, messageHidden
     else
-      GG.showModelDialog "Great job, you succeeded in breeding the target drake!
+      GG.showModalDialog "Great job, you succeeded in breeding the target drake!
                           <br/><br/>Close this tab to go back to the portal."
   showTaskNonCompletion: ->
-    GG.showModelDialog "That's not the drake you're looking for!"
+    GG.showModalDialog "That's not the drake you're looking for!"
 
   taskAccepted: (task) ->
     task.set 'showSpeechBubble', false
@@ -657,7 +657,7 @@ GG.obstacleCourseController = Ember.Object.create
 GG.baselineController = Ember.Object.create
   isBaseline: false
 
-GG.showModelDialog = (text, hideAction) ->
+GG.showModalDialog = (text, hideAction) ->
   $('body').qtip
     content:
         title:
