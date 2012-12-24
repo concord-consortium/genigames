@@ -657,6 +657,48 @@ GG.obstacleCourseController = Ember.Object.create
 GG.baselineController = Ember.Object.create
   isBaseline: false
 
+GG.tutorialMessageController = Ember.Object.create
+  isFirstTask: (->
+    townId = GG.townsController.get("content").indexOf GG.townsController.get "currentTown"
+    taskId = GG.tasksController.get("content").indexOf GG.tasksController.get "currentTask"
+    return townId+taskId is 0
+  ).property('GG.townsController.currentTown', 'GG.tasksController.currentTask')
+
+  showTargetTutorial: ->
+    if @get 'isFirstTask' then GG.showInfoDialog $('#target'),
+      "These are the traits of the drake you need to create. To do that you have
+      to get a male and female parent who can breed the target drake."
+
+GG.QTipStyle =
+  width:
+    max: 350
+  padding: '14px',
+  border:
+    width: 1
+    radius: 5
+    color: '#4e8da6'
+  name: 'light'
+
+GG.showInfoDialog = ($elem, text) ->
+  style = GG.QTipStyle
+  style.tip = 'rightMiddle'
+  $elem.qtip
+    content:
+        title:
+          text: '',
+          button: 'Ok'
+        text: text
+    position:
+      corner:
+        target: 'leftMiddle'
+        tooltip: 'rightMiddle'
+    show:
+        ready: true
+        solo: true
+        when: false
+    hide: false
+    style: style
+
 GG.showModalDialog = (text, hideAction) ->
   $('body').qtip
     content:
@@ -672,14 +714,6 @@ GG.showModalDialog = (text, hideAction) ->
         solo: true
         when: false
     hide: false
-    style:
-       width:
-        max: 350
-       padding: '14px',
-       border:
-          width: 1
-          radius: 5
-          color: '#666666'
-       name: 'light'
+    style: GG.QTipStyle
     api:
        onHide: hideAction
