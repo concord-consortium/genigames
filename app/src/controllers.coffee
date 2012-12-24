@@ -669,6 +669,16 @@ GG.tutorialMessageController = Ember.Object.create
       "These are the traits of the drake you need to create. To do that you have
       to get a male and female parent who can breed the target drake."
 
+  firstDrakeSelected: false
+  showFirstDrakeSelectionTutorial: (parent) ->
+    if @get('isFirstTask') and !@get 'firstDrakeSelected'
+      @set 'firstDrakeSelected', true
+      GG.showInfoDialog $('#'+parent),
+        "This is the drake genetic make-up. The alleles of genes determine the look of the
+        drake, so to breed the drake you want, you’re going to have to create am allele
+        combination that will produce the drake you want."
+
+
 GG.QTipStyle =
   width:
     max: 350

@@ -75,6 +75,9 @@ GG.StateInTask = Ember.State.extend
         controller = if sex is GG.FEMALE then GG.motherPoolController else GG.fatherPoolController
         controller.set('hidden', false)
 
+        parentName = if sex is GG.FEMALE then "mother" else "father"
+        GG.tutorialMessageController.showFirstDrakeSelectionTutorial parentName
+
         GG.logController.logEvent GG.Events.SELECTED_PARENT,
           alleles: parent.get('biologicaOrganism.alleles')
           sex: parent.get('sex')
