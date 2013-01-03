@@ -654,7 +654,9 @@ GG.tutorialMessageController = Ember.Object.create
     if @get 'isFirstTask' then GG.showInfoDialog $('#target'),
       "These are the traits of the drake you need to create. To do that you have
       to get a male and female parent who can breed the target drake.",
-      "leftMiddle","rightMiddle",->
+      target: "leftMiddle"
+      tooltip: "rightMiddle"
+      hideAction: ->
         GG.tutorialMessageController.showParentsTutorial()
 
   firstDrakeSelected: false
@@ -667,7 +669,8 @@ GG.tutorialMessageController = Ember.Object.create
         "This is the drake genetic make-up. The alleles of genes determine the look of the
         drake, so to breed the drake you want, you’re going to have to create am allele
         combination that will produce the drake you want.",
-        target, tooltip
+        target: target
+        tooltip: tooltip
 
   firstOffspringCreated: false
   showFirstOffspringCreatedTutorial: ->
@@ -675,7 +678,8 @@ GG.tutorialMessageController = Ember.Object.create
       @set 'firstOffspringCreated', true
       GG.showInfoDialog $("#offspring-pool .chromosome-panel"),
         "Good job. Notice which alleles of the wing gene gave this drake wings.",
-        "bottomMiddle", "topMiddle"
+        target: "bottomMiddle"
+        tooltip: "topMiddle"
 
   parentsTutorialShown: false
   showParentsTutorial: ->
@@ -684,7 +688,8 @@ GG.tutorialMessageController = Ember.Object.create
       GG.showInfoDialog $("#parent-mothers-pool-container"),
         "Here is where the parents are kept. The male drakes have beards; the females do not.
         You need to have one male and one female drake to make an offspring.",
-        "rightTop", "leftMiddle"
+        target: "rightTop"
+        tooltip: "leftMiddle"
 
   breedButtonTutorialShown: false
   motherBinding: 'GG.parentController.selectedMother'
@@ -697,7 +702,8 @@ GG.tutorialMessageController = Ember.Object.create
       @set 'breedButtonTutorialShown', true
       GG.showInfoDialog $("#breed-button"),
         "Now that you’ve picked parents, hit the Breed button to create the child.",
-        "leftMiddle", "rightMiddle"
+        target: "leftMiddle"
+        tooltip: "rightMiddle"
 
 
 GG.QTipStyle =
@@ -710,9 +716,15 @@ GG.QTipStyle =
     color: '#4e8da6'
   name: 'light'
 
-GG.showInfoDialog = ($elem, text, target="leftMiddle", tooltip="rightMiddle", hideAction=null) ->
-  style = GG.QTipStyle
-  style.tip = tooltip
+GG.showInfoDialog = ($elem, text, opts={}) ->
+  opts.target ?= "leftMiddle"
+  opts.tooltip ?= "rightMiddle"
+  opts.maxWidth ?= 350
+
+  style = Ember.copy GG.QTipStyle, true
+  style.tip = opts.tooltip
+  style.width =
+    max: opts.maxWidth
   config =
     content:
         title:
@@ -721,17 +733,17 @@ GG.showInfoDialog = ($elem, text, target="leftMiddle", tooltip="rightMiddle", hi
         text: text
     position:
       corner:
-        target: target
-        tooltip: tooltip
+        target: opts.target
+        tooltip: opts.tooltip
     show:
         ready: true
         solo: true
         when: false
     hide: false
     style: style
-  if hideAction?
+  if opts.hideAction?
     config.api =
-      onHide: hideAction
+      onHide: opts.hideAction
   $elem.qtip config
 
 GG.showModalDialog = (text, hideAction) ->
