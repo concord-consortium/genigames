@@ -700,6 +700,19 @@ GG.tutorialMessageController = Ember.Object.create
         You need to have one male and one female drake to make an offspring.",
         "rightTop", "leftMiddle"
 
+  breedButtonTutorialShown: false
+  motherBinding: 'GG.parentController.selectedMother'
+  fatherBinding: 'GG.parentController.selectedFather'
+  bothParentsSelected: (->
+    @get('mother')? and @get('father')?
+  ).property('mother','father')
+  showBreedButtonTutorial: ->
+    if @get('isFirstTask') and !@get('breedButtonTutorialShown') and @get 'bothParentsSelected'
+      @set 'breedButtonTutorialShown', true
+      GG.showInfoDialog $("#breed-button"),
+        "Now that you’ve picked parents, hit the Breed button to create the child.",
+        "leftMiddle", "rightMiddle"
+
 
 GG.QTipStyle =
   width:
