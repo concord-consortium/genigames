@@ -667,7 +667,9 @@ GG.tutorialMessageController = Ember.Object.create
   showTargetTutorial: ->
     if @get 'isFirstTask' then GG.showInfoDialog $('#target'),
       "These are the traits of the drake you need to create. To do that you have
-      to get a male and female parent who can breed the target drake."
+      to get a male and female parent who can breed the target drake.",
+      "leftMiddle","rightMiddle",->
+        GG.tutorialMessageController.showParentsTutorial()
 
   firstDrakeSelected: false
   showFirstDrakeSelectionTutorial: (parent) ->
@@ -689,6 +691,15 @@ GG.tutorialMessageController = Ember.Object.create
         "Good job. Notice which alleles of the wing gene gave this drake wings.",
         "bottomMiddle", "topMiddle"
 
+  parentsTutorialShown: false
+  showParentsTutorial: ->
+    if @get('isFirstTask') and !@get 'parentsTutorialShown'
+      @set 'parentsTutorialShown', true
+      GG.showInfoDialog $("#parent-mothers-pool-container"),
+        "Here is where the parents are kept. The male drakes have beards; the females do not.
+        You need to have one male and one female drake to make an offspring.",
+        "rightTop", "leftMiddle"
+
 
 GG.QTipStyle =
   width:
@@ -700,10 +711,10 @@ GG.QTipStyle =
     color: '#4e8da6'
   name: 'light'
 
-GG.showInfoDialog = ($elem, text, target="leftMiddle", tooltip="rightMiddle") ->
+GG.showInfoDialog = ($elem, text, target="leftMiddle", tooltip="rightMiddle", hideAction=null) ->
   style = GG.QTipStyle
   style.tip = tooltip
-  $elem.qtip
+  config =
     content:
         title:
           text: '',
@@ -719,6 +730,10 @@ GG.showInfoDialog = ($elem, text, target="leftMiddle", tooltip="rightMiddle") ->
         when: false
     hide: false
     style: style
+  if hideAction?
+    config.api =
+      onHide: hideAction
+  $elem.qtip config
 
 GG.showModalDialog = (text, hideAction) ->
   $('body').qtip
