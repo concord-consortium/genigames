@@ -650,6 +650,13 @@ GG.tutorialMessageController = Ember.Object.create
     return townId+taskId is 0
   ).property('GG.townsController.currentTown', 'GG.tasksController.currentTask')
 
+  # TODO There should be a better way to detect this other than hard-coding it...
+  isFirstMeiosisControlTask: (->
+    townId = GG.townsController.get("content").indexOf GG.townsController.get "currentTown"
+    taskId = GG.tasksController.get("content").indexOf GG.tasksController.get "currentTask"
+    return townId is 0 and taskId is 4
+  ).property('GG.townsController.currentTown', 'GG.tasksController.currentTask')
+
   showTargetTutorial: ->
     if @get 'isFirstTask' then GG.showInfoDialog $('#target'),
       "These are the traits of the drake you need to create. To do that you have
@@ -715,6 +722,16 @@ GG.tutorialMessageController = Ember.Object.create
         target: "leftMiddle"
         tooltip: "rightMiddle"
         maxWidth: 280
+
+  meiosisControlTutorialShown: false
+  showMeiosisControlTutorial: ->
+    if @get('isFirstMeiosisControlTask') and !@get('meiosisControlTutorialShown') and @get 'bothParentsSelected'
+      @set 'meiosisControlTutorialShown', true
+      GG.showInfoDialog $("#meiosis-button"),
+        "Meiosis control is now active! Turn on this control to choose the chromosomes carrying
+        the alleles you need."
+        target: "leftMiddle"
+        tooltip: "rightMiddle"
 
 
 GG.QTipStyle =

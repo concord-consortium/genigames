@@ -80,6 +80,7 @@ GG.StateInTask = Ember.State.extend
         Ember.run.next this, ->
           # after bindings have updated
           GG.tutorialMessageController.showBreedButtonTutorial()
+          GG.tutorialMessageController.showMeiosisControlTutorial()
 
         GG.logController.logEvent GG.Events.SELECTED_PARENT,
           alleles: parent.get('biologicaOrganism.alleles')
