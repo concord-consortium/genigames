@@ -705,6 +705,17 @@ GG.tutorialMessageController = Ember.Object.create
         target: "leftMiddle"
         tooltip: "rightMiddle"
 
+  meiosisTutorialShown: false
+  showMeiosisTutorial: ->
+    if @get('isFirstTask') and !@get('meiosisTutorialShown')
+      @set 'meiosisTutorialShown', true
+      GG.showInfoDialog $("#meiosis-container .meiosis.father"),
+        "This is meiosis, the method by which half of a parent’s alleles are passed to the child.
+        Notice how the chromosomes are sorted into four cells.",
+        target: "leftMiddle"
+        tooltip: "rightMiddle"
+        maxWidth: 280
+
 
 GG.QTipStyle =
   width:

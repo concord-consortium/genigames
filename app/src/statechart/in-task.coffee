@@ -140,6 +140,7 @@ GG.StateInTask = Ember.State.extend
         GG.breedingController.set 'childSavedToParents', false
         $('#meiosis-container').removeClass('hidden')
         $("#offspring-pool .chromosome-panel").hide()
+        GG.tutorialMessageController.showMeiosisTutorial()
         GG.meiosisController.animate ->
           setTimeout ->
             GG.meiosisController.resetAnimation()
