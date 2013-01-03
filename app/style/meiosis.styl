@@ -23,7 +23,6 @@
   absolute: top left
 
 .meiosis .allele
-  relative: height 22px
   margin-left: 4px
 
 .meiosisControlView
@@ -45,9 +44,8 @@
     font-weight: bold
 
 .crossoverPoint
-  height: 4px
-  width: 30px
-  margin: 1px
+  absolute: height 4px width 30px left 0px
+  z-index: 5
   &.clickable
     cursor: pointer
     border: 1px dotted black
@@ -57,3 +55,17 @@
       background-color: rgb(255,255,150)
   &.selected
     background-color: yellow
+  &.tail
+  &.horns
+  &.dilute
+    top: -3px
+  &.metallic
+  &.color
+  &.firebreathing
+    top: 22px
+  &.wings
+  &.green
+    top: 47px
+  &.armor
+  &.spikes
+    top: 72px

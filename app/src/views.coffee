@@ -789,12 +789,10 @@ GG.MeiosisView = Ember.View.extend
         continue unless sOffset? and dOffset?
 
         dx = dOffset.left - sOffset.left
-        dy = dOffset.top - dOffset.top
 
         leftShift = (if dx > 0 then "+=" else "-=") + Math.abs(dx) + "px"
-        topShift = (if dy > 0 then "+=" else "-=") + Math.abs(dy) + "px"
 
-        animationQueue.push {source: sourceSelector, anim: {top: dy, left: dx}}
+        animationQueue.push {source: sourceSelector, anim: {left: dx}}
 
     # temporarily put alleles on top, so we don't see them sliding under other chromosomes
     $(selectorBase + " .allele").css({"z-index": 10})
