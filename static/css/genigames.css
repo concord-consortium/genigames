@@ -124,10 +124,10 @@
 }
 #meiosis-button {
   position: absolute;
-  top: 23px;
+  top: 22px;
   left: 94px;
-  width: 59px;
-  height: 59px;
+  width: 68px;
+  height: 37px;
   cursor: pointer;
 }
 #breed-button {
@@ -418,8 +418,10 @@
 }
 .allele {
   background: top center no-repeat url("../images/allele-bg.png");
+  position: absolute;
   width: 25px;
   height: 22px;
+  left: 0px;
   text-align: center;
   color: #fff;
   font-weight: bold;
@@ -428,6 +430,24 @@
 }
 .allele.revealable span {
   cursor: pointer;
+}
+.allele.tail,
+.allele.horns,
+.allele.dilute {
+  top: 0px;
+}
+.allele.metallic,
+.allele.color,
+.allele.firebreathing {
+  top: 25px;
+}
+.allele.wings,
+.allele.green {
+  top: 50px;
+}
+.allele.armor,
+.allele.spikes {
+  top: 75px;
 }
 .dominant {
   color: #ff0;
@@ -1046,8 +1066,6 @@ a:hover {
   left: 0;
 }
 .meiosis .allele {
-  position: relative;
-  height: 22px;
   margin-left: 4px;
 }
 .meiosisControlView {
@@ -1080,9 +1098,11 @@ a:hover {
   font-weight: bold;
 }
 .crossoverPoint {
+  position: absolute;
   height: 4px;
   width: 30px;
-  margin: 1px;
+  left: 0px;
+  z-index: 5;
 }
 .crossoverPoint.clickable {
   cursor: pointer;
@@ -1095,6 +1115,24 @@ a:hover {
 }
 .crossoverPoint.selected {
   background-color: #ff0;
+}
+.crossoverPoint.tail,
+.crossoverPoint.horns,
+.crossoverPoint.dilute {
+  top: -3px;
+}
+.crossoverPoint.metallic,
+.crossoverPoint.color,
+.crossoverPoint.firebreathing {
+  top: 22px;
+}
+.crossoverPoint.wings,
+.crossoverPoint.green {
+  top: 47px;
+}
+.crossoverPoint.armor,
+.crossoverPoint.spikes {
+  top: 72px;
 }
 .npc {
   position: absolute;
