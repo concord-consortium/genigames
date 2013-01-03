@@ -172,16 +172,6 @@ GG.parentController = Ember.ArrayController.create
     drake for drake in @get('content') when drake.sex is GG.MALE
   ).property('content.@each')
 
-  selectMother: (drake) ->
-    if drake.sex isnt GG.FEMALE then throw "GG.parentController.selectMother: tried to set a non-female as mother"
-    @set 'selectedMother', drake
-    GG.logController.logEvent GG.Events.SELECTED_PARENT, alleles: drake.get('biologicaOrganism.alleles'), sex: GG.FEMALE
-
-  selectFather: (drake) ->
-    if drake.sex isnt GG.MALE then throw "GG.parentController.selectMother: tried to set a non-male as father"
-    @set 'selectedFather', drake
-    GG.logController.logEvent GG.Events.SELECTED_PARENT, alleles: drake.get('biologicaOrganism.alleles'), sex: GG.MALE
-
   hasRoom: (drake) ->
     if drake.sex is GG.MALE
       return @get('males').length < @get 'maxMales'
@@ -192,15 +182,11 @@ GG.fatherPoolController = Ember.ArrayController.create
   contentBinding: 'GG.parentController.males'
   selectedBinding: 'GG.parentController.selectedFather'
   hidden: true
-  drakeSelected: (drake) ->
-    GG.parentController.selectFather drake
 
 GG.motherPoolController = Ember.ArrayController.create
   contentBinding: 'GG.parentController.females'
   selectedBinding: 'GG.parentController.selectedMother'
   hidden: true
-  drakeSelected: (drake) ->
-    GG.parentController.selectMother drake
 
 # Fixme: This needs to be rethrought now that we will always only
 # have one offspring. Maybe it can just be replaced by breedingController.child
