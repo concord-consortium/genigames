@@ -76,14 +76,17 @@ dark-text-color  = #333
   display: inline-block
 
 parent-pool-container(toppx)
-  absolute: top toppx left 20px width 420px height 205px
+  absolute: top toppx left 20px width 420px height 182px
   overflow: auto
 
 #parent-fathers-pool-container
-  parent-pool-container(0px)
+  parent-pool-container(23px)
 
 #parent-mothers-pool-container
-  parent-pool-container(193px)
+  parent-pool-container(219px)
+
+.parent-pool
+  relative: top -23px
 
 chromosome(toppx)
   absolute: top toppx left 680px width 275px height 130px
