@@ -1,7 +1,9 @@
 <div class="parent-pool">
   {{#each view.content}}
     <div class="parent">
-      {{view GG.DrakeView contentBinding="this" isInParentPool="true" class="clickable"}}
+      <a href="#" {{action "drakeSelected" this on="mouseDown"}}>
+        {{view GG.DrakeView contentBinding="this"}}
+      </a>
       {{#if bred}}
         <a class="removeButton" href="#" {{action "drakeRemoved" this}}>
           <img src="../images/delete.png" />
