@@ -66,7 +66,10 @@ GG.tasksController = Ember.ArrayController.create
     return if task is @get 'currentTask'
 
     if @indexOf(task) >= 0
-      task.set 'cyclesRemaining', task.get 'cycles'
+      if GG.baselineController.get 'isBaseline'
+        task.set 'cyclesRemaining', 0
+      else
+        task.set 'cyclesRemaining', task.get 'cycles'
       @set 'currentTask', task
 
       for femaleAlleles in task.initialDrakes.females
@@ -246,7 +249,10 @@ GG.cyclesController = Ember.Object.create
     return if cycles <= 0
     @set 'cycles', cycles-amt
   reset: ->
-    GG.tasksController.set 'cycles', GG.tasksController.get 'cycles'
+    if GG.baselineController.get 'isBaseline'
+      @set 'cycles', 0
+    else
+      @set 'cycles', GG.tasksController.get 'cycles'
     setTimeout =>
       @updateCounter()
     , 1000

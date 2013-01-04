@@ -79,6 +79,10 @@ GG.WorldTownView = Ember.View.extend
 GG.BreederView = Ember.View.extend
   templateName: 'breeder-view'
   breedTypeBinding: 'GG.breedingController.breedType'
+  isBaselineBinding: 'GG.baselineController.isBaseline'
+  baseline: (->
+    if @get('isBaseline') then "baseline" else "game"
+  ).property('isBaseline')
 
 GG.DrakeView = Ember.View.extend
   templateName       : 'drake'

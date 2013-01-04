@@ -32,7 +32,10 @@ GG.StateInTask = Ember.State.extend
       , 1200
 
     decrementCycles: (manager, amt) ->
-      GG.cyclesController.decrement(amt)
+      if GG.baselineController.get 'isBaseline'
+        GG.cyclesController.increment(amt)
+      else
+        GG.cyclesController.decrement(amt)
 
     resetCounter: ->
       GG.cyclesController.reset()

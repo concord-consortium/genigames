@@ -34,7 +34,10 @@ dark-text-color  = #333
 
 #breed-controls
   absolute: top 165px left 650px width 268px height 101px
-  background-image: url('../images/breed-controls.png')
+  &.game
+    background-image: url('../images/breed-controls.png')
+  &.baseline
+    background-image: url('../images/breed-controls-baseline.png')
   z-index: 2
   &.automated
     background-position: 0 0
