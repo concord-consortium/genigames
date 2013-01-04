@@ -154,6 +154,7 @@ GG.DrakeView = Ember.View.extend
     fire is "Fire breathing"
   ).property()
   didInsertElement: ->
+    return if GG.baselineController.get('isBaseline') # no animations in baseline
     # Wait for the animation images to load, then move it in place and start it up
     swapImage = =>
       GG.breedingController.removeObserver 'isShowingBreeder', swapImage
