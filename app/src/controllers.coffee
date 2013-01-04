@@ -757,7 +757,7 @@ GG.showInfoDialog = ($elem, text, opts={}) ->
     content:
         title:
           text: '',
-          button: 'Ok'
+          button: 'OK'
         text: text
     position:
       corner:
@@ -779,7 +779,7 @@ GG.showModalDialog = (text, hideAction) ->
     content:
         title:
           text: '',
-          button: 'Ok'
+          button: 'OK'
         text: text
     position:
        target: $(document.body)
