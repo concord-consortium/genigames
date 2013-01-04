@@ -172,25 +172,43 @@
   top: 5px;
   left: 10px;
 }
+#target-tutorial-target {
+  position: absolute;
+  top: 27px;
+  left: 0px;
+  width: 1px;
+  height: 1px;
+}
 .parent {
   position: relative;
   display: inline-block;
 }
 #parent-fathers-pool-container {
   position: absolute;
-  top: 0px;
+  top: 23px;
   left: 20px;
   width: 420px;
-  height: 205px;
+  height: 182px;
   overflow: auto;
 }
 #parent-mothers-pool-container {
   position: absolute;
-  top: 193px;
+  top: 219px;
   left: 20px;
   width: 420px;
-  height: 205px;
+  height: 182px;
   overflow: auto;
+}
+.parent-pool {
+  position: relative;
+  top: -23px;
+}
+#parents-tutorial-target {
+  position: absolute;
+  top: 211px;
+  left: 200px;
+  width: 1px;
+  height: 1px;
 }
 #father-chromosome {
   position: absolute;
