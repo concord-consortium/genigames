@@ -97,6 +97,11 @@ GG.DrakeView = Ember.View.extend
   org : (->
     @get('content.biologicaOrganism')
   ).property().cacheable()
+  selected: (->
+    content = @get 'content'
+    content is GG.breedingController.get('mother') or
+      content is GG.breedingController.get('father')
+  ).property('GG.breedingController.mother', 'GG.breedingController.father')
   body : (->
     tail = @get('org').getCharacteristic "tail"
     if tail is "Long tail"
