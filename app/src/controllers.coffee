@@ -249,10 +249,6 @@ GG.cyclesController = Ember.Object.create
     return if cycles <= 0
     @set 'cycles', cycles-amt
   reset: ->
-    if GG.baselineController.get 'isBaseline'
-      @set 'cycles', 0
-    else
-      @set 'cycles', GG.tasksController.get 'cycles'
     setTimeout =>
       @updateCounter()
     , 1000
