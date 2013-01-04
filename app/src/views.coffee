@@ -191,6 +191,11 @@ GG.DrakeView = Ember.View.extend
       return
     GG.animateDrake @$('.drake-idle-img')
 
+  isInParentPool: false
+  mouseDown: ->
+    if @get 'isInParentPool'
+      GG.statemanager.send 'parentSelected', @get 'content'
+
 # Here we create one single animation timer, and add new images
 # to an array so we can animate multiple drakes at once without
 # creating a separate timer for each
