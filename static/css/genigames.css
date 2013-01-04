@@ -120,7 +120,10 @@
   background-position: 0 0;
 }
 #breed-controls.controlled {
-  background-position: 0 100%;
+  background-position: 0 202px;
+}
+#breed-controls.disabled {
+  background-position: 0 101px;
 }
 #meiosis-button {
   position: absolute;
@@ -485,6 +488,16 @@
 .parent-pool .drake .static {
   width: 130px;
   height: 130px;
+}
+.parent-pool .drake {
+  border: 3px solid rgba(0,255,255,0);
+  border-radius: 100px;
+}
+.parent-pool .drake:hover {
+  border: 3px solid rgba(0,255,255,0.4);
+}
+.parent-pool .drake.selected {
+  border: 3px solid rgba(0,255,255,0.7);
 }
 .offspring .drake,
 .offspring .drake .idle,
