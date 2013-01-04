@@ -735,7 +735,7 @@ GG.tutorialMessageController = Ember.Object.create
       @set 'meiosisControlTutorialShown', true
       GG.showInfoDialog $("#meiosis-button"),
         "Meiosis control is now active! Turn on this control to choose the chromosomes carrying
-        the alleles you need."
+        the alleles you need. Then click breed to start."
         target: "leftMiddle"
         tooltip: "rightMiddle"
 
