@@ -113,21 +113,29 @@
   left: 650px;
   width: 268px;
   height: 101px;
-  background-image: url("../images/breed-controls.png");
   z-index: 2;
+  background-position: 0 101px;
 }
-#breed-controls.automated {
+#breed-controls.game {
+  background-image: url("../images/breed-controls.png");
+}
+#breed-controls.baseline {
+  background-image: url("../images/breed-controls-baseline.png");
+}
+#breed-controls.control-enabled.automated {
   background-position: 0 0;
 }
-#breed-controls.controlled {
-  background-position: 0 100%;
+#breed-controls.control-enabled.controlled {
+  background-position: 0 202px;
 }
 #meiosis-button {
   position: absolute;
-  top: 23px;
+  top: 22px;
   left: 94px;
-  width: 59px;
-  height: 59px;
+  width: 68px;
+  height: 37px;
+}
+#meiosis-button.control-enabled {
   cursor: pointer;
 }
 #breed-button {
@@ -164,39 +172,57 @@
   top: 5px;
   left: 10px;
 }
+#target-tutorial-target {
+  position: absolute;
+  top: 27px;
+  left: 0px;
+  width: 1px;
+  height: 1px;
+}
 .parent {
   position: relative;
   display: inline-block;
 }
 #parent-fathers-pool-container {
   position: absolute;
-  top: 0px;
+  top: 23px;
   left: 20px;
   width: 420px;
-  height: 205px;
+  height: 182px;
   overflow: auto;
 }
 #parent-mothers-pool-container {
   position: absolute;
-  top: 193px;
+  top: 219px;
   left: 20px;
   width: 420px;
-  height: 205px;
+  height: 182px;
   overflow: auto;
+}
+.parent-pool {
+  position: relative;
+  top: -23px;
+}
+#parents-tutorial-target {
+  position: absolute;
+  top: 181px;
+  left: 200px;
+  width: 1px;
+  height: 1px;
 }
 #father-chromosome {
   position: absolute;
   top: 20px;
   left: 680px;
-  width: 125px;
-  height: 265px;
+  width: 275px;
+  height: 130px;
 }
 #mother-chromosome {
   position: absolute;
   top: 285px;
   left: 680px;
-  width: 125px;
-  height: 265px;
+  width: 275px;
+  height: 130px;
 }
 #offspring-panel .offspring {
   position: relative;
@@ -280,6 +306,7 @@
   position: absolute;
   top: -19px;
   left: 490px;
+  height: 180px;
 }
 #father span {
   position: absolute;
@@ -291,6 +318,7 @@
   position: absolute;
   top: 239px;
   left: 490px;
+  height: 180px;
 }
 #mother span {
   position: absolute;
@@ -416,8 +444,10 @@
 }
 .allele {
   background: top center no-repeat url("../images/allele-bg.png");
+  position: absolute;
   width: 25px;
   height: 22px;
+  left: 0px;
   text-align: center;
   color: #fff;
   font-weight: bold;
@@ -426,6 +456,24 @@
 }
 .allele.revealable span {
   cursor: pointer;
+}
+.allele.tail,
+.allele.horns,
+.allele.dilute {
+  top: 0px;
+}
+.allele.metallic,
+.allele.color,
+.allele.firebreathing {
+  top: 25px;
+}
+.allele.wings,
+.allele.green {
+  top: 50px;
+}
+.allele.armor,
+.allele.spikes {
+  top: 75px;
 }
 .dominant {
   color: #ff0;
@@ -463,6 +511,16 @@
 .parent-pool .drake .static {
   width: 130px;
   height: 130px;
+}
+.parent-pool .drake {
+  background-repeat: no-repeat;
+  background-position: 16px 31px;
+}
+.parent-pool .drake:hover {
+  background-image: url("../images/glow.png");
+}
+.parent-pool .drake.selected {
+  background-image: url("../images/glow-deep.png");
 }
 .offspring .drake,
 .offspring .drake .idle,
@@ -1044,8 +1102,6 @@ a:hover {
   left: 0;
 }
 .meiosis .allele {
-  position: relative;
-  height: 22px;
   margin-left: 4px;
 }
 .meiosisControlView {
@@ -1078,9 +1134,11 @@ a:hover {
   font-weight: bold;
 }
 .crossoverPoint {
+  position: absolute;
   height: 4px;
   width: 30px;
-  margin: 1px;
+  left: 0px;
+  z-index: 5;
 }
 .crossoverPoint.clickable {
   cursor: pointer;
@@ -1093,6 +1151,24 @@ a:hover {
 }
 .crossoverPoint.selected {
   background-color: #ff0;
+}
+.crossoverPoint.tail,
+.crossoverPoint.horns,
+.crossoverPoint.dilute {
+  top: -3px;
+}
+.crossoverPoint.metallic,
+.crossoverPoint.color,
+.crossoverPoint.firebreathing {
+  top: 22px;
+}
+.crossoverPoint.wings,
+.crossoverPoint.green {
+  top: 47px;
+}
+.crossoverPoint.armor,
+.crossoverPoint.spikes {
+  top: 72px;
 }
 .npc {
   position: absolute;
