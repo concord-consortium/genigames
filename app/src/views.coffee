@@ -86,6 +86,8 @@ GG.BreederView = Ember.View.extend
 
 GG.DrakeView = Ember.View.extend
   templateName       : 'drake'
+  classNames         : ['drake']
+  classNameBindings  : ['selected']
   drakeImageName     : (->
     color = @get('org').getCharacteristic('color').replace("Metallic ","")
     color.charAt(0).toLowerCase() + color.slice(1) + ".png"
