@@ -83,6 +83,9 @@ GG.BreederView = Ember.View.extend
   baseline: (->
     if @get('isBaseline') then "baseline" else "game"
   ).property('isBaseline')
+  meiosisEnabled: (->
+    !!GG.tasksController.get 'currentTask.meiosisControl'
+  ).property('GG.tasksController.currentTask.meiosisControl')
 
 GG.DrakeView = Ember.View.extend
   templateName       : 'drake'
@@ -292,6 +295,7 @@ GG.BreedButtonView = Ember.View.extend GG.PointsToolTip,
 
 GG.MeiosisButtonView = Ember.View.extend GG.PointsToolTip,
   tagName: 'div'
+  classNameBindings: ['meiosisEnabled:control-enabled']
   showToolTip: (->
     GG.breedingController.get('breedType') is GG.BREED_AUTOMATED
   ).property('GG.breedingController.breedType')
@@ -304,7 +308,7 @@ GG.MeiosisButtonView = Ember.View.extend GG.PointsToolTip,
   ).property()
   meiosisEnabled: (->
     !!GG.tasksController.get 'currentTask.meiosisControl'
-  ).property()
+  ).property('GG.tasksController.currentTask.meiosisControl')
   click: ->
     GG.statemanager.send('toggleBreedType')
 

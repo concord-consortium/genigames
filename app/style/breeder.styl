@@ -39,16 +39,17 @@ dark-text-color  = #333
   &.baseline
     background-image: url('../images/breed-controls-baseline.png')
   z-index: 2
-  &.automated
-    background-position: 0 0
-  &.controlled
-    background-position: 0 202px
-  &.disabled
-    background-position: 0 101px
+  &.control-enabled
+    &.automated
+      background-position: 0 0
+    &.controlled
+      background-position: 0 202px
+  background-position: 0 101px
 
 #meiosis-button
   absolute: top 22px left 94px width 68px height 37px
-  cursor: pointer
+  &.control-enabled
+    cursor: pointer
 
 #breed-button
   absolute: top 6px left 170px width 86px height 89px
