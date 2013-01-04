@@ -132,7 +132,7 @@ GG.tasksController = Ember.ArrayController.create
       GG.showModalDialog task.npc.speech.completionText, messageHidden
     else
       GG.showModalDialog "Great job, you succeeded in breeding the target drake!
-                          <br/><br/>Close this tab to go back to the portal."
+                          <br/><br/>Close this page to go back to the portal."
   showTaskNonCompletion: ->
     GG.showModalDialog "That's not the drake you're looking for!"
 
