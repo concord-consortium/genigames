@@ -465,9 +465,10 @@ GG.ChromoView = Ember.View.extend
       else
         @set('selected', true)
         GG.statemanager.send 'selectedChromosome', this
+  allelesClickableDefault: true
   allelesClickable: (->
-    return GG.baselineController.get('isNotBaseline')
-  ).property('GG.baselineController.isNotBaseline')
+    return @get('allelesClickableDefault') and GG.baselineController.get('isNotBaseline')
+  ).property('allelesClickableDefault','GG.baselineController.isNotBaseline')
   alleleClicked: (event) ->
     if @get('allelesClickable')
       allele = event.context
