@@ -30,14 +30,18 @@
       <p>Congratulations! You've now moved alleles between chromatids.</p>
       <p>Repeat the process as desired, or click Continue to move on.</p>
     </div>
-    <div class="cost">Cost: {{GG.actionCostsController.content.crossoverMade}} rep per crossover</div>
+    {{#if GG.baselineController.isNotBaseline}}
+      <div class="cost">Cost: {{GG.actionCostsController.content.crossoverMade}} rep per crossover</div>
+      {{/if}}
     <button {{action "doneSelectingCrossover"}}>Continue</button>
   </div>
   <div class="meiosisControlView chromatidSelection hidden">
     <h3>Chromosome Selection</h3>
     <p>If you would like to control which chromosomes you end up with, select them now.</p>
     <p>Click continue when you are done.</p>
-    <div class="cost">Cost: {{GG.actionCostsController.content.chromosomeSelected}} rep per selection</div>
+    {{#if GG.baselineController.isNotBaseline}}
+      <div class="cost">Cost: {{GG.actionCostsController.content.chromosomeSelected}} rep per selection</div>
+    {{/if}}
     <button {{action "doneSelectingChromatids"}}>Continue</button>
   </div>
 </div>

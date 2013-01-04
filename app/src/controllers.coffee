@@ -644,6 +644,7 @@ GG.obstacleCourseController = Ember.Object.create
 
 GG.baselineController = Ember.Object.create
   isBaseline: false
+  isNotBaseline: Ember.computed.not('isBaseline')
 
 GG.tutorialMessageController = Ember.Object.create
   isFirstTask: (->
