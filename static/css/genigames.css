@@ -113,8 +113,13 @@
   left: 650px;
   width: 268px;
   height: 101px;
-  background-image: url("../images/breed-controls.png");
   z-index: 2;
+}
+#breed-controls.game {
+  background-image: url("../images/breed-controls.png");
+}
+#breed-controls.baseline {
+  background-image: url("../images/breed-controls-baseline.png");
 }
 #breed-controls.automated {
   background-position: 0 0;
@@ -490,14 +495,14 @@
   height: 130px;
 }
 .parent-pool .drake {
-  border: 3px solid rgba(0,255,255,0);
-  border-radius: 100px;
+  background-repeat: no-repeat;
+  background-position: 16px 31px;
 }
 .parent-pool .drake:hover {
-  border: 3px solid rgba(0,255,255,0.4);
+  background-image: url("../images/glow.png");
 }
 .parent-pool .drake.selected {
-  border: 3px solid rgba(0,255,255,0.7);
+  background-image: url("../images/glow-deep.png");
 }
 .offspring .drake,
 .offspring .drake .idle,
