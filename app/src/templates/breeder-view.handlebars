@@ -8,6 +8,7 @@
       </div>
     </div>
     <div id="breeder">
+      <div id="parents-tutorial-target"></div>
       {{view GG.FatherPoolView class="male-parents" id="parent-fathers-pool-container"}}
       {{view GG.MotherPoolView id="parent-mothers-pool-container"}}
       <div id="breed-controls" {{bindAttr class="view.breedType view.baseline"}}>
@@ -36,6 +37,7 @@
         {{/with}}
       </div>
       <div id="target">
+        <div id="target-tutorial-target"></div>
         Target Drake:
           <div id="target-traits">
             {{GG.tasksController.currentTargetTraits}}

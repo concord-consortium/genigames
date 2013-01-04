@@ -660,7 +660,7 @@ GG.tutorialMessageController = Ember.Object.create
   ).property('GG.townsController.currentTown', 'GG.tasksController.currentTask')
 
   showTargetTutorial: ->
-    if @get 'isFirstTask' then GG.showInfoDialog $('#target'),
+    if @get 'isFirstTask' then GG.showInfoDialog $('#target-tutorial-target'),
       "These are the traits of the drake you need to create. To do that you have
       to get a male and female parent who can breed the target drake.",
       target: "leftMiddle"
@@ -697,10 +697,10 @@ GG.tutorialMessageController = Ember.Object.create
   showParentsTutorial: ->
     if @get('isFirstTask') and !@get 'parentsTutorialShown'
       @set 'parentsTutorialShown', true
-      GG.showInfoDialog $("#parent-mothers-pool-container"),
+      GG.showInfoDialog $("#parents-tutorial-target"),
         "Here is where the parents are kept. The male drakes have beards; the females do not.
         You need to have one male and one female drake to make an offspring.",
-        target: "rightTop"
+        target: "rightMiddle"
         tooltip: "leftMiddle"
 
   breedButtonTutorialShown: false
