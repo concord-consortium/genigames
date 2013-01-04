@@ -159,15 +159,16 @@ GG.DrakeView = Ember.View.extend
 
       onComplete = =>
         setTimeout =>
-          layer = '#' + @get('elementId')
-          @set('showIdle', true)
-          Ember.run.next =>
-            $(layer + ' .drake-idle-img').imagesLoaded =>
-              setTimeout =>
-                requestAnimationFrame =>
-                  $(layer + ' .static').remove()
-                  @setNextIdleInterval()
-              , 2000  # this timeout is a hack to remove the blink between showing the static and idle images on FF
+          unless @get('isDestroyed')
+            layer = '#' + @get('elementId')
+            @set('showIdle', true)
+            Ember.run.next =>
+              $(layer + ' .drake-idle-img').imagesLoaded =>
+                setTimeout =>
+                  requestAnimationFrame =>
+                    $(layer + ' .static').remove()
+                    @setNextIdleInterval()
+                , 2000  # this timeout is a hack to remove the blink between showing the static and idle images on FF
         , 2000
 
       if !idleImg.complete
