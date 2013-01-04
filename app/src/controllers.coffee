@@ -673,9 +673,12 @@ GG.tutorialMessageController = Ember.Object.create
       tooltip = if parent is "mother" then "bottomMiddle" else "topMiddle"
       @set 'firstDrakeSelected', true
       GG.showInfoDialog $("##{parent}-chromosome"),
-        "This is the drake genetic make-up. The alleles of genes determine the look of the
-        drake, so to breed the drake you want, you’re going to have to create am allele
-        combination that will produce the drake you want.",
+        'This is the drake genetic make-up. The alleles <span style="position: relative;">
+        <img src="../images/allele-bg.png" style="position: absolute; top: -6px; left: 1px">
+        <span style="position: absolute; top: 0; left: 4px; font-weight: bold;" class="dominant">
+        W1</span></span><br/>of genes determine the look of the
+        drake, so to get the drake you want, you’re going to have to breed to create a
+        genetic combination that will produce the drake.',
         target: target
         tooltip: tooltip
 
