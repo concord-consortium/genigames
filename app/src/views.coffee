@@ -282,8 +282,8 @@ GG.BreedButtonView = Ember.View.extend GG.PointsToolTip,
     !!(this.get('mother') && this.get('father'))
   ).property('mother', 'father')
   noMoreBreeds: (->
-    GG.cyclesController.get('cycles') <= 0
-  ).property('GG.cyclesController.cycles')
+    GG.cyclesController.get('cycles') <= 0 and not GG.baselineController.get 'isBaseline'
+  ).property('GG.cyclesController.cycles', 'GG.baselineController.isBaseline')
 
   click: ->
     GG.statemanager.send('breedDrake')
