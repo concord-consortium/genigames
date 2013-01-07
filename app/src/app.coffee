@@ -34,7 +34,7 @@ minispade.require 'genigames/templates/login'
 minispade.require 'genigames/templates/drake'
 minispade.require 'genigames/templates/choose-class'
 minispade.require 'genigames/templates/meiosis'
-minispade.require 'genigames/templates/obstacle-course'
+minispade.require 'genigames/templates/obstacle-course-dialog'
 minispade.require 'genigames/templates/task-completion-dialog'
 
 # works similar to :contains(), but requires the whole content
@@ -79,7 +79,6 @@ $ ->
     login: GG.LoginView.extend({})
     chooseClass: GG.ChooseClassView.extend({})
     world: GG.WorldView.extend({})
-    course: GG.ObstacleCourseView.extend({})
     town: Ember.ContainerView.extend
       town: GG.TownView
       breeder: GG.BreederView

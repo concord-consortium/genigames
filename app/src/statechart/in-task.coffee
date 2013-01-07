@@ -261,11 +261,7 @@ GG.StateInTask = Ember.State.extend
 
     obstacleCourse: Ember.State.create
       enter: (manager)->
-        GG.obstacleCourseController.set('hidden', false)
-        $('#breeder').hide()
-        $('#breed-top-bar').hide()
+        $('#obstacle-course-dialog').show()
 
       exit: (manager)->
-        GG.obstacleCourseController.set('hidden', true)
-        $('#breeder').show()
-        $('#breed-top-bar').show()
+        $('#obstacle-course-dialog').hide()

@@ -874,15 +874,25 @@ GG.MeiosisView = Ember.View.extend
     return alleles.slice(1)
   ).property('chosenGamete')
 
-GG.ObstacleCourseView = Ember.View.extend
-  templateName: 'obstacle-course'
+GG.ObstacleCourseDialogView = Ember.View.extend
+  elementId: 'obstacle-course-dialog'
+  templateName: 'obstacle-course-dialog'
   tagName: 'div'
-  classNames: ['obstacle-course']
-  classNameBindings: ['hidden']
   courseBinding: 'GG.obstacleCourseController.course'
   obstaclesBinding: 'GG.obstacleCourseController.obstacles'
   drakeBinding: 'GG.obstacleCourseController.drake'
-  hiddenBinding: 'GG.obstacleCourseController.hidden'
+  reputationEarnedBinding: 'GG.tasksController.currentTask.reputation'
+  firstObstacle: (->
+    @get('obstacles')?[0]
+  ).property('obstacles')
+  tryAgain: ->
+    # restart task
+    GG.tasksController.restartCurrentTask()
+  continueOn: ->
+    # Go back to town
+    GG.statemanager.transitionTo 'inTown'
+  ## TODO: Legacy animation code, for the old obstacle course page.
+  #        Leaving it here for now for reference...
   start: ->
     $drake = $('.obstacle-course .drake-container')
     if path = @get 'course.path'
@@ -904,16 +914,21 @@ GG.ObstacleCourseView = Ember.View.extend
     $('.obstacle-course .background').css({left: "0"})
     $('.obstacle-course .drake-container').css({left: "0"})
   done: ->
-    GG.statemanager.transitionTo 'inTown'
+    @continueOn
+  ## END legacy animation code
 
 GG.ObstacleView = Ember.View.extend
   tagName: 'div'
   classNames: ['obstacle']
   classNameBindings: ['type']
   attributeBindings  : ['style']
+  skipStyle: false
   style: (->
-    "top: " + @get('content.positionY') + "px; left: " + @get('content.positionX') + "px;"
-  ).property('content.positionY','content.positionX')
+    if @get 'skipStyle'
+      ""
+    else
+      "top: " + @get('content.positionY') + "px; left: " + @get('content.positionX') + "px;"
+  ).property('content.positionY','content.positionX','skipStyle')
   typeBinding: "content.obstacle"
 
 GG.CompletionDialogView = Ember.View.extend

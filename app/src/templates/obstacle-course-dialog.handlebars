@@ -1,0 +1,34 @@
+<div id='obstacle-course-dialog-content'>
+  {{#with view.drake}}
+    {{view GG.DrakeView contentBinding="this"}}
+  {{/with}}
+  <div class="first-obstacle">
+    {{view GG.ObstacleView contentBinding="view.firstObstacle" skipStyle="true"}}
+  </div>
+  <div class="overall-time-text">
+    <div>
+      <span class="align-left">You:</span><span class="align-right">12.3s</span>
+    </div>
+    <div>vs.</div>
+    <div>
+      <span class="align-left">Opponent:</span><span class="align-right">11.6s</span>
+    </div>
+  </div>
+  <div class="completion-rep">
+    Reputation Points: +{{view.reputationEarned}}
+  </div>
+  <div class="obstacle-time-breakdown">
+    {{#each obstacle in view.obstacles}}
+      <div>
+        <span class="align-left">{{obstacle.obstacle.obstacle}}:</span>
+        <span class="align-right">N seconds</span>
+      </div>
+    {{/each}}
+    <div class="divider"></div>
+    <div><span class="align-right">12.3 seconds</span></div>
+  </div>
+  <div class="obstacle-buttons">
+    <button {{action tryAgain}}>Try Again</button>
+    <button {{action continueOn}}>Continue</button>
+  </div>
+</div>

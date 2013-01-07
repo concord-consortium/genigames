@@ -260,6 +260,6 @@ GG.ObstacleCourse = Ember.Object.extend
       @set "obstacles", obstacleObjs
 
 GG.Obstacle = Ember.Object.extend
-  obstace: null
+  obstacle: null
   positionX: 0
   positionY: 0
