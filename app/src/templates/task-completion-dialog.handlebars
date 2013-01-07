@@ -1,0 +1,15 @@
+<div id='completion-dialog-content'>
+  {{#with GG.offspringController.content}}
+    {{view GG.DrakeView contentBinding="this"}}
+  {{/with}}
+  <div class="completion-text">
+    {{view.text}}
+  </div>
+  <div class="completion-rep">
+    Reputation Points: +{{view.reputationEarned}}
+  </div>
+  <div class="completion-buttons">
+    <button {{action tryAgain}}>Try Again</button>
+    <button {{action continueOn}}>Continue</button>
+  </div>
+</div>

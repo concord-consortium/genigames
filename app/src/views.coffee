@@ -916,3 +916,23 @@ GG.ObstacleView = Ember.View.extend
   typeBinding: "content.obstacle"
 
 
+GG.CompletionDialogView = Ember.View.extend
+  elementId: 'completion-dialog'
+  tagName: 'div'
+  classNames: ['hidden']
+  templateName: 'task-completion-dialog'
+  text: (->
+    # GG.tasksController.get('currentTask.npc.speech.completionText')
+    "Drake created!"
+  ).property('GG.tasksController.currentTask')
+  reputationEarnedBinding: 'GG.tasksController.currentTask.reputation'
+  tryAgain: ->
+    # Dismiss dialog
+    $('#completion-dialog').addClass('hidden')
+    # restart task
+    GG.tasksController.restartCurrentTask()
+  continueOn: ->
+    # Dismiss dialog
+    $('#completion-dialog').addClass('hidden')
+    # Go back to town
+    GG.tasksController.taskFinishedBubbleDismissed()

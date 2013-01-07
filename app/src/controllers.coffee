@@ -90,13 +90,22 @@ GG.tasksController = Ember.ArrayController.create
 
   clearCurrentTask: ->
     @set 'currentTask', null
-    GG.parentController.clear()
+    GG.parentController.reset()
 
   completeCurrentTask: ->
     task = @get 'currentTask'
     task.set 'completed', true
     GG.userController.addReputation task.get 'reputation'
     GG.logController.logEvent GG.Events.COMPLETED_TASK, name: task.get('name')
+
+  restartCurrentTask: ->
+    task = @get 'currentTask'
+    task.set 'completed', false
+    GG.userController.addReputation -(task.get 'reputation')
+    GG.logController.logEvent GG.Events.RESTARTED_TASK, name: task.get('name')
+    @clearCurrentTask()
+    @setCurrentTask(task)
+    GG.statemanager.transitionTo 'parentSelect'
 
   completeTasksThrough: (n) ->
     task.set('completed', true) for task, i in @get('content') when i <= n
@@ -125,11 +134,8 @@ GG.tasksController = Ember.ArrayController.create
     task.set 'showSpeechBubble', true
 
   showTaskCompletion: ->
-    if not GG.baselineController.get 'isBaseline'
-      task = @get 'currentTask'
-      messageHidden = =>
-        @taskFinishedBubbleDismissed()
-      GG.showModalDialog task.npc.speech.completionText, messageHidden
+    if GG.baselineController.get 'isNotBaseline'
+      $('#completion-dialog').removeClass('hidden')
     else
       GG.showModalDialog "Great job, you succeeded in breeding the target drake!
                           <br/><br/>Close this page to go back to the portal."
@@ -165,7 +171,7 @@ GG.parentController = Ember.ArrayController.create
   reset: ->
     @set 'selectedMother', null
     @set 'selectedFather', null
-    @set 'content', []
+    @clear()
 
   females: (->
     drake for drake in @get('content') when drake.sex is GG.FEMALE

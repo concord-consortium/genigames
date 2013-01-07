@@ -1,4 +1,5 @@
 @import 'app/style/mixins/position'
+@import 'app/style/mixins/border'
 light-text-color = #BBB
 dark-text-color  = #333
 
@@ -197,3 +198,26 @@ chromosome(toppx)
 .match-goal-counter
   absolute: top 500px left 490px width 100px
 
+#completion-dialog
+  border-radius 5px
+  absolute: width 340px height 225px left 305px top 167px // 560px height available, 950px width
+  background-color: #4e8da6
+  z-index: 20
+
+#completion-dialog-content
+  background-color: white
+  absolute: bottom 5px right 5px left 5px top 5px
+  padding: 14px
+  z-index: 21
+  text-align: center
+  .drake
+    absolute: top -36px left 14px
+  .completion-text
+    absolute: top 44px left 194px right 14px
+    text-align: center
+  .completion-rep
+    absolute: top 150px left 14px right 14px
+    text-align: center
+  .completion-buttons
+    absolute: top 180px left 14px right 14px
+    text-align: center
