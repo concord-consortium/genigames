@@ -12,7 +12,7 @@
   </div>
   {{view GG.LogoutButton}}
 </div>
-<div id="town" {{bindAttr class="GG.townsController.currentTown.background"}}>
+<div id="town" {{bindAttr class="view.background"}}>
   {{#each view.content}}
     {{#view GG.TaskNPCView contentBinding="this"}}
       <a href="#" {{action "npcSelected" this}}>

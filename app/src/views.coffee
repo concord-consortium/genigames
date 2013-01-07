@@ -605,6 +605,7 @@ GG.MatchGoalCounter = Ember.View.extend
 GG.TownView = Ember.View.extend
   templateName: 'town'
   contentBinding: 'GG.tasksController'
+  backgroundBinding: 'GG.townsController.currentTown.background'
 
 GG.TaskNPCView = Ember.View.extend
   tagName            : 'div'
