@@ -672,8 +672,8 @@ GG.tutorialMessageController = Ember.Object.create
       to get a male and female parent who can breed the target drake.",
       target: "leftMiddle"
       tooltip: "rightMiddle"
-      hideAction: ->
-        GG.tutorialMessageController.showParentsTutorial()
+      hideAction: =>
+        @showParentsTutorial()
 
   firstDrakeSelected: false
   showFirstDrakeSelectionTutorial: (parent) ->
