@@ -725,7 +725,7 @@ GG.tutorialMessageController = Ember.Object.create
         tooltip: "rightMiddle"
 
   meiosisTutorialShown: false
-  showMeiosisTutorial: ->
+  showMeiosisTutorial: (callback)->
     if @get('isFirstTask') and !@get('meiosisTutorialShown')
       @set 'meiosisTutorialShown', true
       GG.showInfoDialog $("#meiosis-container .meiosis.father"),
@@ -734,6 +734,9 @@ GG.tutorialMessageController = Ember.Object.create
         target: "leftMiddle"
         tooltip: "rightMiddle"
         maxWidth: 280
+        hideAction: callback
+    else
+      callback()
 
   meiosisControlTutorialShown: false
   showMeiosisControlTutorial: ->
