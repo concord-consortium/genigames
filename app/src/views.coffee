@@ -916,11 +916,9 @@ GG.ObstacleView = Ember.View.extend
   ).property('content.positionY','content.positionX')
   typeBinding: "content.obstacle"
 
-
 GG.CompletionDialogView = Ember.View.extend
   elementId: 'completion-dialog'
   tagName: 'div'
-  classNames: ['hidden']
   templateName: 'task-completion-dialog'
   text: (->
     # GG.tasksController.get('currentTask.npc.speech.completionText')
@@ -929,11 +927,12 @@ GG.CompletionDialogView = Ember.View.extend
   reputationEarnedBinding: 'GG.tasksController.currentTask.reputation'
   tryAgain: ->
     # Dismiss dialog
-    $('#completion-dialog').addClass('hidden')
+    $('#completion-dialog').hide()
     # restart task
     GG.tasksController.restartCurrentTask()
   continueOn: ->
     # Dismiss dialog
-    $('#completion-dialog').addClass('hidden')
+    $('#completion-dialog').hide()
     # Go back to town
     GG.tasksController.taskFinishedBubbleDismissed()
+

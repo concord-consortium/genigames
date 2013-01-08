@@ -135,7 +135,7 @@ GG.tasksController = Ember.ArrayController.create
 
   showTaskCompletion: ->
     if GG.baselineController.get 'isNotBaseline'
-      $('#completion-dialog').removeClass('hidden')
+      $('#completion-dialog').show()
     else
       GG.showModalDialog "Great job, you succeeded in breeding the target drake!
                           <br/><br/>Close this page to go back to the portal."
