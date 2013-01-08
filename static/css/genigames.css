@@ -379,7 +379,7 @@
   left: 305px;
   top: 167px;
   background-color: #4e8da6;
-  z-index: 20;
+  z-index: 6000;
 }
 #completion-dialog-content {
   background-color: #fff;
@@ -389,7 +389,7 @@
   left: 5px;
   top: 5px;
   padding: 14px;
-  z-index: 21;
+  z-index: 6001;
   text-align: center;
 }
 #completion-dialog-content .drake {
@@ -1082,6 +1082,17 @@ a:hover {
 .logout:active {
   box-shadow: 1px 1px 1px 1px #808080;
 }
+#modal-backdrop {
+  display: none;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  z-index: 5000;
+  opacity: 0.5;
+  background-color: #000;
+}
 #login {
   position: absolute;
   top: 250px;
@@ -1283,9 +1294,9 @@ a:hover {
   width: 340px;
   height: 395px;
   left: 305px;
-  top: 167px;
+  top: 90px;
   background-color: #4e8da6;
-  z-index: 20;
+  z-index: 6000;
 }
 #obstacle-course-dialog-content {
   background-color: #fff;
@@ -1295,7 +1306,7 @@ a:hover {
   left: 5px;
   top: 5px;
   padding: 14px;
-  z-index: 21;
+  z-index: 6001;
   text-align: center;
 }
 #obstacle-course-dialog-content .align-left {
@@ -1310,7 +1321,7 @@ a:hover {
   position: absolute;
   top: 44px;
   left: 14px;
-  z-index: 22;
+  z-index: 6002;
 }
 #obstacle-course-dialog-content .overall-time-text {
   position: absolute;
