@@ -136,6 +136,7 @@ GG.tasksController = Ember.ArrayController.create
   showTaskCompletion: ->
     if GG.baselineController.get 'isNotBaseline'
       $('#completion-dialog').show()
+      $('#modal-backdrop').show()
     else
       GG.showModalDialog "Great job, you succeeded in breeding the target drake!
                           <br/><br/>Close this page to go back to the portal."
@@ -803,3 +804,7 @@ GG.showModalDialog = (text, hideAction) ->
     style: GG.QTipStyle
     api:
        onHide: hideAction
+       beforeShow: ->
+         $('#modal-backdrop').fadeIn(@options.show.effect.length)
+       beforeHide: ->
+         $('#modal-backdrop').fadeOut(@options.show.effect.length)

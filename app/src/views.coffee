@@ -943,11 +943,13 @@ GG.CompletionDialogView = Ember.View.extend
   tryAgain: ->
     # Dismiss dialog
     $('#completion-dialog').hide()
+    $('#modal-backdrop').hide()
     # restart task
     GG.tasksController.restartCurrentTask()
   continueOn: ->
     # Dismiss dialog
     $('#completion-dialog').hide()
+    $('#modal-backdrop').hide()
     # Go back to town
     GG.tasksController.taskFinishedBubbleDismissed()
 
