@@ -699,6 +699,8 @@ GG.tutorialMessageController = Ember.Object.create
         "Good job. Notice which alleles of the wing gene gave this drake wings.",
         target: "bottomMiddle"
         tooltip: "topMiddle"
+        hideAction: =>
+          @showFinishButtonTutorial()
 
   parentsTutorialShown: false
   showParentsTutorial: ->
@@ -748,6 +750,14 @@ GG.tutorialMessageController = Ember.Object.create
         target: "leftMiddle"
         tooltip: "rightMiddle"
 
+  finishButtonTutorialShown: false
+  showFinishButtonTutorial: ->
+    if @get('isFirstTask') and !@get('finishButtonTutorialShown')
+      @set 'finishButtonTutorialShown', true
+      GG.showInfoDialog $("#offspring-buttons .offspring-buttons-use"),
+        "When you have a drake that matches the task, hit Finish to end breeding and complete the challenge."
+        target: "leftMiddle"
+        tooltip: "rightMiddle"
 
 GG.QTipStyle =
   width:
