@@ -62,7 +62,7 @@
 }
 #breeding-background {
   position: absolute;
-  top: 60px;
+  top: 120px;
   left: 0;
   width: 1300px;
   height: 900px;
@@ -1416,10 +1416,11 @@ a:hover {
   bottom: 0px;
 }
 #topBar {
+  background: url("../images/header.jpg");
   position: relative;
-  left: -15px;
-  width: 1034px;
-  height: 59px;
+  left: 20px;
+  width: 960px;
+  height: 121px;
   background-color: #969696;
   color: #fff;
   font-family: Verdana;
@@ -1427,8 +1428,8 @@ a:hover {
 }
 #topBar .logout {
   position: absolute;
-  right: 55px;
-  top: 15px;
+  right: 30px;
+  top: 25px;
   width: 75px;
   height: 25px;
 }
@@ -1438,19 +1439,21 @@ a:hover {
 }
 #greeting {
   position: absolute;
-  left: 55px;
-  top: 15px;
+  left: 30px;
+  top: 20px;
   font-size: 1.5em;
 }
 #reputation {
   position: absolute;
-  left: 230px;
-  top: 20px;
+  left: 30px;
+  top: 75px;
 }
 #level {
   position: absolute;
   left: 400px;
-  top: 20px;
+  top: 75px;
+  width: 530px;
+  text-align: right;
 }
 #sky {
   position: absolute;
