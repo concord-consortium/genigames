@@ -135,6 +135,8 @@ GG.tasksController = Ember.ArrayController.create
 
   showTaskCompletion: ->
     if GG.baselineController.get 'isNotBaseline'
+      if GG.lastShownDialog?
+        GG.lastShownDialog.qtip('hide')
       $('#completion-dialog').show()
       $('#modal-backdrop').show()
     else
@@ -769,6 +771,7 @@ GG.QTipStyle =
     color: '#4e8da6'
   name: 'light'
 
+GG.lastShownDialog = null
 GG.showInfoDialog = ($elem, text, opts={}) ->
   opts.target ?= "leftMiddle"
   opts.tooltip ?= "rightMiddle"
@@ -797,10 +800,13 @@ GG.showInfoDialog = ($elem, text, opts={}) ->
   if opts.hideAction?
     config.api =
       onHide: opts.hideAction
+  GG.lastShownDialog = $elem
   $elem.qtip config
 
 GG.showModalDialog = (text, hideAction) ->
-  $('body').qtip
+  body = $('body')
+  GG.lastShownDialog = body
+  body.qtip
     content:
         title:
           text: '',
