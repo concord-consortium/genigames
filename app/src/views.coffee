@@ -953,3 +953,12 @@ GG.CompletionDialogView = Ember.View.extend
     # Go back to town
     GG.tasksController.taskFinishedBubbleDismissed()
 
+GG.PasswordField = Ember.TextField.extend
+  type: "password"
+  value: ""
+  loginView: null
+  keyUp: (evt)->
+    @interpretKeyEvents(evt)
+    if evt.keyCode == 13 and @get('loginView')?
+      @get('loginView').login()
+

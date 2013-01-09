@@ -20,7 +20,7 @@
     </div>
     <div>
       <span id="password">Password:</span>
-      <span id="password-field">{{view Ember.TextField type="password" valueBinding="view.password"}}</span>
+      <span id="password-field">{{view GG.PasswordField valueBinding="view.password" loginViewBinding="view"}}</span>
     </div>
     <input type="submit" value="Login" {{action login}} />
   {{/if}}
