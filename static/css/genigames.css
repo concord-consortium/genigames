@@ -1149,13 +1149,13 @@ a:hover {
 .meiosis.mother {
   position: absolute;
   top: 0;
-  left: -45px;
+  left: -25px;
   width: 760px;
   height: 217px;
   z-index: 2;
 }
 .meiosis.mother {
-  top: 218px;
+  top: 238px;
 }
 .meiosis .chromosome-panel {
   position: absolute;
