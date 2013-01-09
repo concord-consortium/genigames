@@ -62,7 +62,7 @@
 }
 #breeding-background {
   position: absolute;
-  top: 60px;
+  top: 120px;
   left: 0;
   width: 1300px;
   height: 900px;
@@ -367,6 +367,56 @@
   top: 500px;
   left: 490px;
   width: 100px;
+}
+#completion-dialog {
+  display: none;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  position: absolute;
+  width: 340px;
+  height: 225px;
+  left: 305px;
+  top: 167px;
+  background-color: #4e8da6;
+  z-index: 6000;
+}
+#completion-dialog-content {
+  background-color: #fff;
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  left: 5px;
+  top: 5px;
+  padding: 14px;
+  z-index: 6001;
+  text-align: center;
+}
+#completion-dialog-content .drake {
+  position: absolute;
+  top: -36px;
+  left: 14px;
+}
+#completion-dialog-content .completion-text {
+  position: absolute;
+  top: 44px;
+  left: 194px;
+  right: 14px;
+  text-align: center;
+}
+#completion-dialog-content .completion-rep {
+  position: absolute;
+  top: 150px;
+  left: 14px;
+  right: 14px;
+  text-align: center;
+}
+#completion-dialog-content .completion-buttons {
+  position: absolute;
+  top: 180px;
+  left: 14px;
+  right: 14px;
+  text-align: center;
 }
 .chromosome-panel {
   position: absolute;
@@ -1032,6 +1082,17 @@ a:hover {
 .logout:active {
   box-shadow: 1px 1px 1px 1px #808080;
 }
+#modal-backdrop {
+  display: none;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  z-index: 5000;
+  opacity: 0.5;
+  background-color: #000;
+}
 #login {
   position: absolute;
   top: 250px;
@@ -1088,13 +1149,13 @@ a:hover {
 .meiosis.mother {
   position: absolute;
   top: 0;
-  left: -45px;
+  left: -25px;
   width: 760px;
   height: 217px;
   z-index: 2;
 }
 .meiosis.mother {
-  top: 218px;
+  top: 238px;
 }
 .meiosis .chromosome-panel {
   position: absolute;
@@ -1226,98 +1287,140 @@ a:hover {
   top: 90px;
   z-index: 0;
 }
-.obstacle-course {
+#obstacle-course-dialog {
+  display: none;
+  border-radius: 5px;
   position: absolute;
-  left: 0;
-  top: 60px;
-  width: 1100px;
-  height: 660px;
-  z-index: 0;
+  width: 340px;
+  height: 395px;
+  left: 305px;
+  top: 90px;
+  background-color: #4e8da6;
+  z-index: 6000;
+}
+#obstacle-course-dialog-content {
   background-color: #fff;
-}
-.obstacle-course .course {
   position: absolute;
-  left: 10px;
-  top: 30px;
-  width: 1000px;
-  height: 600px;
-  overflow: hidden;
-  z-index: 1;
-}
-.obstacle-course .controls {
-  position: absolute;
-  left: 50px;
-  top: 20px;
-  width: 150px;
-  height: 20px;
+  bottom: 5px;
+  right: 5px;
+  left: 5px;
+  top: 5px;
+  padding: 14px;
+  z-index: 6001;
   text-align: center;
-  z-index: 10;
 }
-.obstacle-course .background {
+#obstacle-course-dialog-content .align-left {
+  position: absolute;
+  left: 0px;
+}
+#obstacle-course-dialog-content .align-right {
+  position: absolute;
+  right: 0px;
+}
+#obstacle-course-dialog-content .drake {
+  position: absolute;
+  top: 44px;
+  left: 14px;
+  z-index: 6002;
+}
+#obstacle-course-dialog-content .overall-time-text {
+  position: absolute;
+  top: 44px;
+  left: 194px;
+  right: 14px;
+  text-align: center;
+}
+#obstacle-course-dialog-content .overall-time-text div {
+  height: 1.3em;
+}
+#obstacle-course-dialog-content .obstacle-time-breakdown {
+  position: absolute;
+  bottom: 50px;
+  left: 14px;
+  width: 156px;
+  text-align: center;
+}
+#obstacle-course-dialog-content .obstacle-time-breakdown div {
+  height: 1.1em;
+}
+#obstacle-course-dialog-content .obstacle-time-breakdown div.divider {
+  height: 2px;
+  background-color: #ccc;
+}
+#obstacle-course-dialog-content .completion-rep {
+  position: absolute;
+  bottom: 50px;
+  left: 170px;
+  right: 14px;
+  text-align: center;
+}
+#obstacle-course-dialog-content .obstacle-buttons {
+  position: absolute;
+  bottom: 14px;
+  left: 14px;
+  right: 14px;
+  text-align: center;
+}
+#obstacle-course-dialog-content .first-obstacle {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  width: 180px;
+  height: 180px;
+}
+#obstacle-course-dialog-content .first-obstacle .obstacle {
   position: absolute;
   left: 0;
-  top: 30px;
-  width: 2020px;
-  height: 300px;
-  background: top left no-repeat url("../images/obstacle-course/repeatbg_town01.jpg");
-  z-index: 2;
-}
-.obstacle-course .drake-container {
-  position: absolute;
-  left: 0;
-  top: 160px;
-  z-index: 10;
-  overflow: visible;
-}
-.obstacle-course .obstacles {
-  position: absolute;
-  left: 200px;
-  top: 85px;
-  width: 2000px;
-  z-index: 3;
-}
-.obstacle-course .obstacles .obstacle {
-  position: absolute;
-  left: 0;
-  top: 0;
   display: inline-block;
-  z-index: 4;
 }
-.obstacle-course .obstacles .obstacle.ducks {
-  background: top left no-repeat url("../images/obstacle-course/obstacle-ducks.png");
+#obstacle-course-dialog-content .first-obstacle .obstacle.ducks {
+  background: bottom left no-repeat url("../images/obstacle-course/obstacle-ducks.png");
   width: 200px;
   height: 100px;
+  position: absolute;
+  bottom: 0px;
 }
-.obstacle-course .obstacles .obstacle.desk {
-  background: top left no-repeat url("../images/obstacle-course/obstacle-desk.png");
+#obstacle-course-dialog-content .first-obstacle .obstacle.desk {
+  background: bottom left no-repeat url("../images/obstacle-course/obstacle-desk.png");
   width: 200px;
   height: 100px;
+  position: absolute;
+  bottom: 0px;
 }
-.obstacle-course .obstacles .obstacle.sheep {
-  background: top left no-repeat url("../images/obstacle-course/obstacle-sheep.png");
+#obstacle-course-dialog-content .first-obstacle .obstacle.sheep {
+  background: bottom left no-repeat url("../images/obstacle-course/obstacle-sheep.png");
   width: 200px;
   height: 100px;
+  position: absolute;
+  bottom: 0px;
 }
-.obstacle-course .obstacles .obstacle.rain {
-  background: top left no-repeat url("../images/obstacle-course/obstacle-rain.png");
+#obstacle-course-dialog-content .first-obstacle .obstacle.rain {
+  background: bottom left no-repeat url("../images/obstacle-course/obstacle-rain.png");
   width: 200px;
   height: 100px;
+  position: absolute;
+  bottom: 0px;
 }
-.obstacle-course .obstacles .obstacle.tree {
-  background: top left no-repeat url("../images/obstacle-course/tree01.png");
+#obstacle-course-dialog-content .first-obstacle .obstacle.tree {
+  background: bottom left no-repeat url("../images/obstacle-course/tree01.png");
   width: 150px;
   height: 183px;
+  position: absolute;
+  bottom: 0px;
 }
-.obstacle-course .obstacles .obstacle.pond {
-  background: top left no-repeat url("../images/obstacle-course/pond01.png");
+#obstacle-course-dialog-content .first-obstacle .obstacle.pond {
+  background: bottom left no-repeat url("../images/obstacle-course/pond01.png");
   width: 200px;
   height: 84px;
+  position: absolute;
+  bottom: 0px;
 }
 #topBar {
+  background: url("../images/header.jpg");
   position: relative;
-  left: -15px;
-  width: 1034px;
-  height: 59px;
+  left: 20px;
+  width: 960px;
+  height: 121px;
   background-color: #969696;
   color: #fff;
   font-family: Verdana;
@@ -1325,8 +1428,8 @@ a:hover {
 }
 #topBar .logout {
   position: absolute;
-  right: 55px;
-  top: 15px;
+  right: 30px;
+  top: 25px;
   width: 75px;
   height: 25px;
 }
@@ -1336,19 +1439,21 @@ a:hover {
 }
 #greeting {
   position: absolute;
-  left: 55px;
-  top: 15px;
+  left: 30px;
+  top: 20px;
   font-size: 1.5em;
 }
 #reputation {
   position: absolute;
-  left: 230px;
-  top: 20px;
+  left: 30px;
+  top: 75px;
 }
 #level {
   position: absolute;
   left: 400px;
-  top: 20px;
+  top: 75px;
+  width: 530px;
+  text-align: right;
 }
 #sky {
   position: absolute;
