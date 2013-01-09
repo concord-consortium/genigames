@@ -93,6 +93,8 @@ GG.MeiosisAnimation = Ember.Object.create
     # move homologous pairs apart
     # line up sister chromatids along center line (Metaphase II)
     t = @scale(800)
+    if args.parentView.get('motherFather') is 'mother'
+      args.container.animate({top: "-=70px"}, t, 'easeInOutQuad')
     args.container.find('.chromo-1.cell0').animate({top: 0, left: 36}, t, 'easeInOutQuad')
     args.container.find('.chromo-1.cell2').animate({top: 0, left: 66}, t, 'easeInOutQuad')
     args.container.find('.chromo-1.cell1').animate({top: 105, left: 36}, t, 'easeInOutQuad')
@@ -205,16 +207,16 @@ GG.MeiosisAnimation = Ember.Object.create
     t = @scale(600)
     # move the father cell down, mother cell up; expand the cells
     fatherContainer.find('.cell:not(.mainCell)').animate({top: "+=88px", left: "-=15px", width: 300, height: 120}, t, 'easeInOutQuad')
-    motherContainer.find('.cell:not(.mainCell)').animate({top: "-=129px", left: "-=15px", width: 300, height: 120}, t, 'easeInOutQuad')
+    motherContainer.find('.cell:not(.mainCell)').animate({top: "-=79px", left: "-=15px", width: 300, height: 120}, t, 'easeInOutQuad')
 
     # move the father chromos down, mothers up, and reposition
     fatherContainer.find('.chromo-1').animate({top: 163, left: "+=32px"}, t, 'easeInOutQuad')
     fatherContainer.find('.chromo-2').animate({top: 163, left: "+=75px"}, t, 'easeInOutQuad')
     fatherContainer.find('.chromo-X,.chromo-Y').animate({top: 163, left: "+=118px"}, t, 'easeInOutQuad')
 
-    motherContainer.find('.chromo-1').animate({top: -55}, t, 'easeInOutQuad')
-    motherContainer.find('.chromo-2').animate({top: -55, left: "+=45px"}, t, 'easeInOutQuad')
-    motherContainer.find('.chromo-X').animate({top: -55, left: "+=90px"}, t, 'easeInOutQuad')
+    motherContainer.find('.chromo-1').animate({top: -5}, t, 'easeInOutQuad')
+    motherContainer.find('.chromo-2').animate({top: -5, left: "+=45px"}, t, 'easeInOutQuad')
+    motherContainer.find('.chromo-X').animate({top: -5, left: "+=90px"}, t, 'easeInOutQuad')
 
     @registerTimeout t, ->
       motherContainer.find('.cell').remove()
