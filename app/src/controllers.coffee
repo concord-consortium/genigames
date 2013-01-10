@@ -137,6 +137,7 @@ GG.tasksController = Ember.ArrayController.create
     if GG.baselineController.get 'isNotBaseline'
       if GG.lastShownDialog?
         try
+          GG.tutorialMessageController.set('finishButtonTutorialShown', true)
           GG.lastShownDialog.qtip('hide')
         finally
           GG.lastShownDialog = null
