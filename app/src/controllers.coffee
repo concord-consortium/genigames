@@ -136,7 +136,11 @@ GG.tasksController = Ember.ArrayController.create
   showTaskCompletion: ->
     if GG.baselineController.get 'isNotBaseline'
       if GG.lastShownDialog?
-        GG.lastShownDialog.qtip('hide')
+        try
+          GG.tutorialMessageController.set('finishButtonTutorialShown', true)
+          GG.lastShownDialog.qtip('hide')
+        finally
+          GG.lastShownDialog = null
       $('#completion-dialog').show()
       $('#modal-backdrop').show()
     else
