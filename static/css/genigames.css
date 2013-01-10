@@ -1232,7 +1232,7 @@ a:hover {
   top: 72px;
 }
 .npc {
-  position: absolute;
+  position: relative;
 }
 .npc .character {
   position: absolute;
@@ -1420,7 +1420,7 @@ a:hover {
   position: relative;
   left: 20px;
   width: 960px;
-  height: 121px;
+  height: 120px;
   background-color: #969696;
   color: #fff;
   font-family: Verdana;
