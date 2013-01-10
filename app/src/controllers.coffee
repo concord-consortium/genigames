@@ -135,13 +135,17 @@ GG.tasksController = Ember.ArrayController.create
 
   showTaskCompletion: ->
     if GG.baselineController.get 'isNotBaseline'
+      if GG.lastShownDialog?
+        GG.lastShownDialog.qtip('hide')
       $('#completion-dialog').show()
       $('#modal-backdrop').show()
     else
       GG.showModalDialog "Great job, you succeeded in breeding the target drake!
                           <br/><br/>Close this page to go back to the portal."
   showTaskNonCompletion: ->
-    GG.showModalDialog "That's not the drake you're looking for!"
+    msg = "That's not the drake you're looking for!"
+    msg += " You're trying to " + (@get('currentTask.npc.speech.shortText').toLowerCase() || ("breed a drake with " + @get('currentTask.targetDrake') + "."))
+    GG.showModalDialog msg
 
   taskAccepted: (task) ->
     task.set 'showSpeechBubble', false
@@ -769,6 +773,7 @@ GG.QTipStyle =
     color: '#4e8da6'
   name: 'light'
 
+GG.lastShownDialog = null
 GG.showInfoDialog = ($elem, text, opts={}) ->
   opts.target ?= "leftMiddle"
   opts.tooltip ?= "rightMiddle"
@@ -797,10 +802,13 @@ GG.showInfoDialog = ($elem, text, opts={}) ->
   if opts.hideAction?
     config.api =
       onHide: opts.hideAction
+  GG.lastShownDialog = $elem
   $elem.qtip config
 
 GG.showModalDialog = (text, hideAction) ->
-  $('body').qtip
+  body = $('body')
+  GG.lastShownDialog = body
+  body.qtip
     content:
         title:
           text: '',

@@ -93,6 +93,8 @@ GG.MeiosisAnimation = Ember.Object.create
     # move homologous pairs apart
     # line up sister chromatids along center line (Metaphase II)
     t = @scale(800)
+    if args.parentView.get('motherFather') is 'mother'
+      args.container.animate({top: "-=70px"}, t, 'easeInOutQuad')
     args.container.find('.chromo-1.cell0').animate({top: 0, left: 36}, t, 'easeInOutQuad')
     args.container.find('.chromo-1.cell2').animate({top: 0, left: 66}, t, 'easeInOutQuad')
     args.container.find('.chromo-1.cell1').animate({top: 105, left: 36}, t, 'easeInOutQuad')
@@ -108,8 +110,8 @@ GG.MeiosisAnimation = Ember.Object.create
     args.container.find('.chromo-X.cell1, .chromo-Y.cell1').animate({top: 105, left: 196}, t, 'easeInOutQuad')
     args.container.find('.chromo-X.cell3, .chromo-Y.cell3').animate({top: 105, left: 226}, t, 'easeInOutQuad')
 
-    # widen cell
-    args.cell.animate({height: 200, width: 300}, t, 'easeInOutQuad')
+    # make cell taller
+    args.cell.animate({left: "-=5px", top: "-=2px", height: 200, width: 285}, t, 'easeInOutQuad')
     #divide cell
     @registerTimeout t, =>
       @splitCell(args)
@@ -122,8 +124,8 @@ GG.MeiosisAnimation = Ember.Object.create
     args.container.find('.mainCell').remove()
     args.container.append($("<div class='cell cell-top'>").css({height: 200, width: 300, zIndex: -3}))
     args.container.append($("<div class='cell cell-bottom'>").css({height: 200, width: 300, zIndex: -3}))
-    args.container.find('.cell-top').animate({height: 65, top: -5, width: 300}, t, 'easeInOutQuad')
-    args.container.find('.cell-bottom').animate({height: 65, top: 102, width: 300}, t, 'easeInOutQuad')
+    args.container.find('.cell-top').animate({height: 65, top: 2, width: 300}, t, 'easeInOutQuad')
+    args.container.find('.cell-bottom').animate({height: 65, top: 108, width: 300}, t, 'easeInOutQuad')
 
   separateToGametes: (args)->
     t = @scale(2000)
@@ -142,10 +144,10 @@ GG.MeiosisAnimation = Ember.Object.create
   divideCell: (args)->
     t = @scale(2000)
     args.container.find('.cell').remove()
-    args.container.append($("<div class='cell cell-left cell-top'>").css({top: -5, height: 65, zIndex: -2}))
-    args.container.append($("<div class='cell cell-right cell-top'>").css({top: -5, height: 65, zIndex: -2}))
-    args.container.append($("<div class='cell cell-left cell-bottom'>").css({top: 100, height: 65, zIndex: -2}))
-    args.container.append($("<div class='cell cell-right cell-bottom'>").css({top: 100, height: 65, zIndex: -2}))
+    args.container.append($("<div class='cell cell-left cell-top'>").css({top: 2, height: 65, zIndex: -2}))
+    args.container.append($("<div class='cell cell-right cell-top'>").css({top: 2, height: 65, zIndex: -2}))
+    args.container.append($("<div class='cell cell-left cell-bottom'>").css({top: 108, height: 65, zIndex: -2}))
+    args.container.append($("<div class='cell cell-right cell-bottom'>").css({top: 108, height: 65, zIndex: -2}))
     args.container.find('.cell-left').animate({width:145, left: -15}, t, 'easeInOutQuad')
     args.container.find('.cell-right').animate({width:145, left: 158}, t, 'easeInOutQuad')
 
@@ -183,7 +185,7 @@ GG.MeiosisAnimation = Ember.Object.create
 
     args.container.find(chosenChromos).animate({left: leftShift, top: 50}, t, 'easeInOutQuad')
     args.container.find(".chromosome:not(" + chosenChromos + ")").animate({opacity: 0}, 0.7*t)
-    args.container.find(chosenCell).animate({top: 50, left: 73}, t, 'easeInOutQuad')
+    args.container.find(chosenCell).animate({top: 47, left: 73, height: 75}, t, 'easeInOutQuad')
     args.container.find(".cell:not(.mainCell):not(" + chosenCell + ")").animate({opacity: 0}, 0.7*t)
     @registerTimeout 0.7*t, ->
       args.container.find(".chromosome:not(" + chosenChromos + ")").hide()
@@ -205,16 +207,16 @@ GG.MeiosisAnimation = Ember.Object.create
     t = @scale(600)
     # move the father cell down, mother cell up; expand the cells
     fatherContainer.find('.cell:not(.mainCell)').animate({top: "+=88px", left: "-=15px", width: 300, height: 120}, t, 'easeInOutQuad')
-    motherContainer.find('.cell:not(.mainCell)').animate({top: "-=129px", left: "-=15px", width: 300, height: 120}, t, 'easeInOutQuad')
+    motherContainer.find('.cell:not(.mainCell)').animate({top: "-=79px", left: "-=15px", width: 300, height: 120}, t, 'easeInOutQuad')
 
     # move the father chromos down, mothers up, and reposition
     fatherContainer.find('.chromo-1').animate({top: 163, left: "+=32px"}, t, 'easeInOutQuad')
     fatherContainer.find('.chromo-2').animate({top: 163, left: "+=75px"}, t, 'easeInOutQuad')
     fatherContainer.find('.chromo-X,.chromo-Y').animate({top: 163, left: "+=118px"}, t, 'easeInOutQuad')
 
-    motherContainer.find('.chromo-1').animate({top: -55}, t, 'easeInOutQuad')
-    motherContainer.find('.chromo-2').animate({top: -55, left: "+=45px"}, t, 'easeInOutQuad')
-    motherContainer.find('.chromo-X').animate({top: -55, left: "+=90px"}, t, 'easeInOutQuad')
+    motherContainer.find('.chromo-1').animate({top: -5}, t, 'easeInOutQuad')
+    motherContainer.find('.chromo-2').animate({top: -5, left: "+=45px"}, t, 'easeInOutQuad')
+    motherContainer.find('.chromo-X').animate({top: -5, left: "+=90px"}, t, 'easeInOutQuad')
 
     @registerTimeout t, ->
       motherContainer.find('.cell').remove()

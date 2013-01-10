@@ -637,6 +637,11 @@ GG.NPCQuestionBubbleView = Ember.View.extend GG.Animation,
          properties: {top: "+=20px"}, duration: 200, easing: 'easeInCubic']
       delay: 200
       repeat: 2
+  mouseEnter: ->
+    # stop(true, true) is necessary so that we don't end up with a slowly enlarging/shrinking image...
+    @$().stop(true, true).animate({width: "+=20px", height: "+=17px", top: "-=10px", left: "-=8px"}, 100, 'easeOutCubic')
+  mouseLeave: ->
+    @$().stop(true, true).animate({width: "-=20px", height: "-=17px", top: "+=10px", left: "+=8px"}, 100, 'easeOutCubic')
 
 GG.NPCSpeechBubbleView = Ember.View.extend
   tagName            : 'div'
@@ -952,4 +957,13 @@ GG.CompletionDialogView = Ember.View.extend
     $('#modal-backdrop').hide()
     # Go back to town
     GG.tasksController.taskFinishedBubbleDismissed()
+
+GG.PasswordField = Ember.TextField.extend
+  type: "password"
+  value: ""
+  loginView: null
+  keyUp: (evt)->
+    @interpretKeyEvents(evt)
+    if evt.keyCode == 13 and @get('loginView')?
+      @get('loginView').login()
 

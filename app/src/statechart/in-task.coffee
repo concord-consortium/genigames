@@ -216,8 +216,11 @@ GG.StateInTask = Ember.State.extend
           manager.send 'breedDrakeInternal'
         , 200
         setTimeout ->
-          $('#meiosis-container').addClass('hidden')
-        , 400
+          container = $('#meiosis-container')
+          container.animate {opacity: 0}, 100, 'easeInQuad', ->
+            container.addClass('hidden')
+            container.css({opacity: 1})
+        , 100
 
       breedDrake: (manager)->
         manager.transitionTo 'animatingMeiosis'
