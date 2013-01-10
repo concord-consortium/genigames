@@ -655,6 +655,46 @@ GG.obstacleCourseController = Ember.Object.create
   courseBinding: 'GG.tasksController.currentTask.obstacleCourse'
   obstaclesBinding: 'course.obstacles'
   drakeBinding: 'GG.offspringController.content'
+  breedsLeftBinding: 'GG.cyclesController.cycles'
+  opponentBreedsLeft: 4
+
+  myTotalTime: (->
+    return 0 unless @get('course')?
+    total = 0.0
+    for obstacle in @get('obstacles')
+      total += @calculateTime(obstacle.obstacle, false)
+    len = Math.integerDigits(total)
+    return total.toPrecision(len+1)
+  ).property('course','breedsLeft')
+
+  opponentTotalTime: (->
+    return 0 unless @get('course')?
+    total = 0.0
+    for obstacle in @get('obstacles')
+      total += @calculateTime(obstacle.obstacle, true)
+    len = Math.integerDigits(total)
+    return total.toPrecision(len+1)
+  ).property('course','opponentBreedsLeft')
+
+  treeTime: (n)->
+    raw = 21.2/(n+1)
+    return Math.round(10*raw)/10
+
+  pondTime: (n)->
+    raw = 12.4/(n+1)
+    return Math.round(10*raw)/10
+
+  defaultTime: (n)->
+    raw = 14.3/(n+1)
+    return Math.round(10*raw)/10
+
+  calculateTime: (obstacle, opponent=false)->
+    breedsLeft = if opponent then @get('opponentBreedsLeft') else @get('breedsLeft')
+    switch obstacle
+      when "tree" then @treeTime(breedsLeft)
+      when "pond" then @pondTime(breedsLeft)
+      else @defaultTime(breedsLeft)
+
 
 GG.baselineController = Ember.Object.create
   isBaseline: false

@@ -891,6 +891,10 @@ GG.ObstacleCourseDialogView = Ember.View.extend
   firstObstacle: (->
     @get('obstacles')?[0]
   ).property('obstacles')
+  myTime: ->
+    GG.obstacleCourseController.get('myTotalTime')
+  opponentTime: ->
+    GG.obstacleCourseController.get('opponentTotalTime')
   tryAgain: ->
     # restart task
     GG.tasksController.restartCurrentTask()
@@ -922,6 +926,16 @@ GG.ObstacleCourseDialogView = Ember.View.extend
   done: ->
     @continueOn
   ## END legacy animation code
+
+GG.ObstacleTimeView = Ember.View.extend
+  tagName: 'div'
+  obstacle: null
+  breedsLeftBinding: 'GG.cyclesController.cycles'
+  time: (->
+    time = GG.obstacleCourseController.calculateTime(@get('obstacle.obstacle'), false)
+    len = Math.integerDigits(time)
+    return time.toPrecision(len + 1)
+  ).property('obstacle','breedsLeft')
 
 GG.ObstacleView = Ember.View.extend
   tagName: 'div'
