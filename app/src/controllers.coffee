@@ -657,6 +657,7 @@ GG.obstacleCourseController = Ember.Object.create
   drakeBinding: 'GG.offspringController.content'
   breedsLeftBinding: 'GG.cyclesController.cycles'
   opponentBreedsLeft: 4
+  dialogVisible: false
 
   myTotalTime: (->
     return 0 unless @get('course')?
