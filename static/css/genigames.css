@@ -13,18 +13,6 @@
 .needs-caching.drake-red {
   background: url("../images/drakes/red.png");
 }
-.needs-caching.drake-shinyBlue {
-  background: url("../images/drakes/shinyBlue.png");
-}
-.needs-caching.drake-shinyGreen {
-  background: url("../images/drakes/shinyGreen.png");
-}
-.needs-caching.drake-shinyPurple {
-  background: url("../images/drakes/shinyPurple.png");
-}
-.needs-caching.drake-shinyRed {
-  background: url("../images/drakes/shinyRed.png");
-}
 .needs-caching.npc-npc1_bookkeeper1 {
   background: url("../images/npc1_bookkeeper1.png");
 }
@@ -1337,7 +1325,7 @@ a:hover {
   position: absolute;
   bottom: 50px;
   left: 14px;
-  width: 156px;
+  width: 151px;
   text-align: center;
 }
 #obstacle-course-dialog-content .obstacle-time-breakdown div {
@@ -1350,7 +1338,7 @@ a:hover {
 #obstacle-course-dialog-content .completion-rep {
   position: absolute;
   bottom: 50px;
-  left: 170px;
+  left: 175px;
   right: 14px;
   text-align: center;
 }
