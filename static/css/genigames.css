@@ -13,18 +13,6 @@
 .needs-caching.drake-red {
   background: url("../images/drakes/red.png");
 }
-.needs-caching.drake-shinyBlue {
-  background: url("../images/drakes/shinyBlue.png");
-}
-.needs-caching.drake-shinyGreen {
-  background: url("../images/drakes/shinyGreen.png");
-}
-.needs-caching.drake-shinyPurple {
-  background: url("../images/drakes/shinyPurple.png");
-}
-.needs-caching.drake-shinyRed {
-  background: url("../images/drakes/shinyRed.png");
-}
 .needs-caching.npc-npc1_bookkeeper1 {
   background: url("../images/npc1_bookkeeper1.png");
 }
@@ -1232,7 +1220,7 @@ a:hover {
   top: 72px;
 }
 .npc {
-  position: absolute;
+  position: relative;
 }
 .npc .character {
   position: absolute;
@@ -1337,7 +1325,7 @@ a:hover {
   position: absolute;
   bottom: 50px;
   left: 14px;
-  width: 156px;
+  width: 151px;
   text-align: center;
 }
 #obstacle-course-dialog-content .obstacle-time-breakdown div {
@@ -1350,7 +1338,7 @@ a:hover {
 #obstacle-course-dialog-content .completion-rep {
   position: absolute;
   bottom: 50px;
-  left: 170px;
+  left: 175px;
   right: 14px;
   text-align: center;
 }
@@ -1420,7 +1408,7 @@ a:hover {
   position: relative;
   left: 20px;
   width: 960px;
-  height: 121px;
+  height: 120px;
   background-color: #969696;
   color: #fff;
   font-family: Verdana;
@@ -1457,8 +1445,9 @@ a:hover {
 }
 #sky {
   position: absolute;
-  width: 1010px;
-  height: 660px;
+  left: 15px;
+  width: 960px;
+  height: 560px;
   background: url("../images/world01.jpg");
   background-repeat: no-repeat;
   overflow: hidden;
@@ -1471,19 +1460,19 @@ a:hover {
 }
 #world {
   position: absolute;
-  left: 250px;
-  width: 712px;
-  height: 712px;
-  background-position: 0px 4px;
+  left: 348px;
+  top: 87px;
+  width: 432px;
+  height: 432px;
   background-repeat: no-repeat;
   margin-left: auto;
   margin-right: auto;
 }
 #clouds {
   position: absolute;
-  left: 250px;
-  width: 700px;
-  height: 700px;
+  left: 280px;
+  width: 560px;
+  height: 560px;
   background-position: 0px 0px;
   background-repeat: no-repeat;
 }
@@ -1503,36 +1492,36 @@ a:hover {
   width: 150px;
 }
 .townIcon1 {
-  background: no-repeat url("../images/townIcon1-disabled.png");
+  background: no-repeat center url("../images/townIcon1-disabled.png");
   width: 175px;
   height: 125px;
 }
 .townIcon1.enabled {
-  background: no-repeat url("../images/townIcon1.png");
+  background: no-repeat center url("../images/townIcon1.png");
 }
 .townIcon2 {
-  background: no-repeat url("../images/townIcon2-disabled.png");
+  background: no-repeat center url("../images/townIcon2-disabled.png");
   width: 175px;
   height: 125px;
 }
 .townIcon2.enabled {
-  background: no-repeat url("../images/townIcon2.png");
+  background: no-repeat center url("../images/townIcon2.png");
 }
 .townIcon3 {
-  background: no-repeat url("../images/townIcon3-disabled.png");
+  background: no-repeat center url("../images/townIcon3-disabled.png");
   width: 175px;
   height: 125px;
 }
 .townIcon3.enabled {
-  background: no-repeat url("../images/townIcon3.png");
+  background: no-repeat center url("../images/townIcon3.png");
 }
 .townIcon4 {
-  background: no-repeat url("../images/townIcon4-disabled.png");
+  background: no-repeat center url("../images/townIcon4-disabled.png");
   width: 175px;
   height: 125px;
 }
 .townIcon4.enabled {
-  background: no-repeat url("../images/townIcon4.png");
+  background: no-repeat center url("../images/townIcon4.png");
 }
 .world-town {
   height: 110px;
