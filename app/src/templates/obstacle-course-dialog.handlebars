@@ -8,11 +8,11 @@
     </div>
     <div class="overall-time-text">
       <div>
-        <span class="align-left">You:</span><span class="align-right">{{GG.obstacleCourseController.myTotalTime}}s</span>
+        <span class="align-left">You:</span><span class="align-right">{{view.myTotalTime}}s</span>
       </div>
       <div>vs.</div>
       <div>
-        <span class="align-left">Opponent:</span><span class="align-right">{{GG.obstacleCourseController.opponentTotalTime}}s</span>
+        <span class="align-left">Opponent:</span><span class="align-right">{{view.opponentTotalTime}}s</span>
       </div>
     </div>
     <div class="completion-rep">
@@ -26,7 +26,7 @@
         {{/view}}
       {{/each}}
       <div class="divider"></div>
-      <div><span class="align-right">{{GG.obstacleCourseController.myTotalTime}} seconds</span></div>
+      <div><span class="align-right">{{view.myTotalTime}} seconds</span></div>
     </div>
     <div class="obstacle-buttons">
       <button {{action tryAgain}}>Try Again</button>

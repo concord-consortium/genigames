@@ -656,46 +656,49 @@ GG.obstacleCourseController = Ember.Object.create
   obstaclesBinding: 'course.obstacles'
   drakeBinding: 'GG.offspringController.content'
   breedsLeftBinding: 'GG.cyclesController.cycles'
-  opponentBreedsLeft: 4
+  initialBreedsBinding: 'GG.tasksController.currentTask.cycles'
+  opponentBreedsLeft: (->
+    Math.floor((@get('initialBreeds')-1)/2) + 0.5 # Don't allow ties
+  ).property('initialBreeds')
   dialogVisible: false
 
   myTotalTime: (->
-    return 0 unless @get('course')?
+    return 0 unless @get('course')? and @get('obstacles')?
     total = 0.0
     for obstacle in @get('obstacles')
       total += @calculateTime(obstacle.obstacle, false)
     len = Math.integerDigits(total)
-    return total.toPrecision(len+1)
-  ).property('course','breedsLeft')
+    return total.toPrecision(len)
+  ).property('course','breedsLeft','obstacles')
 
   opponentTotalTime: (->
-    return 0 unless @get('course')?
+    return 0 unless @get('course')? and @get('obstacles')?
     total = 0.0
     for obstacle in @get('obstacles')
       total += @calculateTime(obstacle.obstacle, true)
     len = Math.integerDigits(total)
-    return total.toPrecision(len+1)
-  ).property('course','opponentBreedsLeft')
-
-  treeTime: (n)->
-    raw = 21.2/(n+1)
-    return Math.round(10*raw)/10
-
-  pondTime: (n)->
-    raw = 12.4/(n+1)
-    return Math.round(10*raw)/10
-
-  defaultTime: (n)->
-    raw = 14.3/(n+1)
-    return Math.round(10*raw)/10
+    return total.toPrecision(len)
+  ).property('course','opponentBreedsLeft','obstacles')
 
   calculateTime: (obstacle, opponent=false)->
-    breedsLeft = if opponent then @get('opponentBreedsLeft') else @get('breedsLeft')
-    switch obstacle
-      when "tree" then @treeTime(breedsLeft)
-      when "pond" then @pondTime(breedsLeft)
-      else @defaultTime(breedsLeft)
-
+    n = if opponent then @get('opponentBreedsLeft') else @get('breedsLeft')
+    n += 1 # to ensure we don't divide by zero
+    raw = switch obstacle
+      when "tree"
+        10 + (25/n)
+      when "pond"
+        14 + (20/n)
+      when "sheep"
+        14 + (20/n)
+      when "ducks"
+        20 + (10/n)
+      when "rain"
+        4 + (5/n)
+      when "desk"
+        30 + (8/n)
+      else
+        15 + (15/n)
+    return Math.round(raw)
 
 GG.baselineController = Ember.Object.create
   isBaseline: false
