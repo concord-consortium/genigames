@@ -299,10 +299,10 @@ GG.MeiosisButtonView = Ember.View.extend GG.PointsToolTip,
   toolTipText: (->
     tip = "Enable manual control of meiosis."
     tip + if not @get('meiosisEnabled') then "<br/><br/>Currently disabled for this task." else ""
-  ).property()
+  ).property('meiosisEnabled')
   costPropertyName: (->
     if @get 'meiosisEnabled' then 'meiosisControlEnabled' else ' '
-  ).property()
+  ).property('meiosisEnabled')
   meiosisEnabled: (->
     !!GG.tasksController.get 'currentTask.meiosisControl'
   ).property('GG.tasksController.currentTask.meiosisControl')
