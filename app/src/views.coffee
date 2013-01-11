@@ -42,16 +42,17 @@ GG.WorldTownView = Ember.View.extend
   ).property('content.icon')
   enabledBinding: 'content.enabled'
   style: (->
-    # TODO how do we do width and height?
+    # width and height are always set to 175x125 regardless of the icon size (image is always centered in this box). 
     width = 175
     height = 125
-    a = 356
-    b = 356
-    r = 253
+    a = 216    # x position of the center of the world (relative to the world div)
+    b = 216    # y position of the center of the world (relative to the world div)
+    r = 216
+    n = 28     # n is the number to adjust the icon in the world
     # adjust the radius to be a little bigger because the center of the town icons cannot be in the edge of the world
-    # instead, each town icon image should have the "bottom" exactly at 15 pixels higher than the bottom of the image
+    # instead, each town icon image should have the "bottom" exactly at n pixels higher than the bottom of the image
     r = r + (height/2)
-    r = r - 15
+    r = r - n
     # calculate the position of the town based on the position
     # with the center at a,b, r = radius, t = angle:
     # (a + r cos t, b + r sin t)

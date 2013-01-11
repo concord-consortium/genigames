@@ -1,3 +1,14 @@
+<div id="topBar">
+  {{#with GG.userController.user}}
+    <div id="greeting">
+      Hi {{first}}!
+    </div>
+    <div id="reputation">
+      Reputation: {{reputation}}
+    </div>
+  {{/with}}
+  {{view GG.LogoutButton}}
+</div>
 <div id="sky">
   <div id="clouds">
   </div>
@@ -10,5 +21,4 @@
   <!--  </div>  -->
   <div id="message">
   </div>
-  {{view GG.LogoutButton}}
 </div>
