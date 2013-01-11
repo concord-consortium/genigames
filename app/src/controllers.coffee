@@ -662,6 +662,15 @@ GG.obstacleCourseController = Ember.Object.create
   ).property('initialBreeds')
   dialogVisible: false
 
+  reputationEarned: (->
+    # Stub this for now...
+    n = @get('breedsLeft')
+    # we don't earn anything if we have no breeds left
+    # FIXME If the current breed reduced the count from 1 to 0, we should still award some points
+    return 0 if n is 0
+    return 90 + (10*n)
+  ).property('breedsLeft')
+
   myTotalTime: (->
     return 0 unless @get('course')? and @get('obstacles')?
     total = 0.0
