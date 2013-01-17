@@ -34,13 +34,14 @@ GG.WorldView = Ember.View.extend
   contentBinding: 'GG.townsController'
 
 GG.WorldTownView = Ember.View.extend
-  classNameBindings: ['icon','location','enabled']
+  classNameBindings: ['icon','location','enabled','completed']
   attributeBindings: ['style']
   location: "location"
   icon: (->
     @get('content.icon')
   ).property('content.icon')
   enabledBinding: 'content.enabled'
+  completedBinding: 'content.completed'
   style: (->
     # width and height are always set to 175x125 regardless of the icon size (image is always centered in this box). 
     width = 175
