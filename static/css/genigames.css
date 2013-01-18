@@ -1049,6 +1049,12 @@ a:hover {
 .huts {
   background: top left no-repeat url("../images/town03.jpg");
 }
+.village_blue {
+  background: top left no-repeat url("../images/town04.jpg");
+}
+.castle_purple {
+  background: top left no-repeat url("../images/town05.jpg");
+}
 .logout {
   background-color: #bbb;
   color: #fff;
@@ -1499,6 +1505,9 @@ a:hover {
 .townIcon1.enabled {
   background: no-repeat center url("../images/townIcon1.png");
 }
+.townIcon1.enabled.completed {
+  background: no-repeat center url("../images/townIcon1-complete.png");
+}
 .townIcon2 {
   background: no-repeat center url("../images/townIcon2-disabled.png");
   width: 175px;
@@ -1506,6 +1515,9 @@ a:hover {
 }
 .townIcon2.enabled {
   background: no-repeat center url("../images/townIcon2.png");
+}
+.townIcon2.enabled.completed {
+  background: no-repeat center url("../images/townIcon2-complete.png");
 }
 .townIcon3 {
   background: no-repeat center url("../images/townIcon3-disabled.png");
@@ -1515,6 +1527,9 @@ a:hover {
 .townIcon3.enabled {
   background: no-repeat center url("../images/townIcon3.png");
 }
+.townIcon3.enabled.completed {
+  background: no-repeat center url("../images/townIcon3-complete.png");
+}
 .townIcon4 {
   background: no-repeat center url("../images/townIcon4-disabled.png");
   width: 175px;
@@ -1522,6 +1537,20 @@ a:hover {
 }
 .townIcon4.enabled {
   background: no-repeat center url("../images/townIcon4.png");
+}
+.townIcon4.enabled.completed {
+  background: no-repeat center url("../images/townIcon4-complete.png");
+}
+.townIcon5 {
+  background: no-repeat center url("../images/townIcon5-disabled.png");
+  width: 175px;
+  height: 125px;
+}
+.townIcon5.enabled {
+  background: no-repeat center url("../images/townIcon5.png");
+}
+.townIcon5.enabled.completed {
+  background: no-repeat center url("../images/townIcon5-complete.png");
 }
 .world-town {
   height: 110px;
