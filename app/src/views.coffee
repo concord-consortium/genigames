@@ -78,7 +78,7 @@ GG.WorldTownView = Ember.View.extend
     GG.statemanager.send 'townSelected', @get('content')
 
 
-GG.BreederView = Ember.View.extend
+ GG.BreederView = Ember.View.extend
   templateName: 'breeder-view'
   breedTypeBinding: 'GG.breedingController.breedType'
   isBaselineBinding: 'GG.baselineController.isBaseline'
@@ -955,6 +955,7 @@ GG.CompletionDialogView = Ember.View.extend
   elementId: 'completion-dialog'
   tagName: 'div'
   templateName: 'task-completion-dialog'
+
   text: (->
     # GG.tasksController.get('currentTask.npc.speech.completionText')
     "Drake created!"
@@ -972,6 +973,11 @@ GG.CompletionDialogView = Ember.View.extend
     $('#modal-backdrop').hide()
     # Go back to town
     GG.tasksController.taskFinishedBubbleDismissed()
+  continueButtonText: (->
+    if GG.tasksController.get('currentTask.obstacleCourse')?
+      return "Continue"
+    return "Next Level"
+  ).property('GG.tasksController.currentTask')
 
 GG.PasswordField = Ember.TextField.extend
   type: "password"
