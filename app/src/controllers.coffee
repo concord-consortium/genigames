@@ -166,6 +166,10 @@ GG.tasksController = Ember.ArrayController.create
     currentTask = @get 'currentTask'
     return currentTask.isComplete()
 
+  meiosisControlEnabled: (->
+    !!@get 'currentTask.meiosisControl'
+  ).property('currentTask.meiosisControl')
+
 GG.drakeController = Ember.Object.create
   visibleGenesBinding: 'GG.tasksController.currentTask.visibleGenes'
   hiddenGenesBinding: 'GG.tasksController.currentTask.hiddenGenes'

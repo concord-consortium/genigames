@@ -85,9 +85,7 @@ GG.WorldTownView = Ember.View.extend
   baseline: (->
     if @get('isBaseline') then "baseline" else "game"
   ).property('isBaseline')
-  meiosisEnabled: (->
-    !!GG.tasksController.get 'currentTask.meiosisControl'
-  ).property('GG.tasksController.currentTask.meiosisControl')
+  meiosisEnabledBinding: 'GG.tasksController.meiosisControlEnabled'
 
 GG.DrakeView = Ember.View.extend
   templateName       : 'drake'
@@ -304,9 +302,7 @@ GG.MeiosisButtonView = Ember.View.extend GG.PointsToolTip,
   costPropertyName: (->
     if @get 'meiosisEnabled' then 'meiosisControlEnabled' else ' '
   ).property('meiosisEnabled')
-  meiosisEnabled: (->
-    !!GG.tasksController.get 'currentTask.meiosisControl'
-  ).property('GG.tasksController.currentTask.meiosisControl')
+  meiosisEnabledBinding: 'GG.tasksController.meiosisControlEnabled'
   click: ->
     GG.statemanager.send('toggleBreedType')
 

@@ -116,7 +116,7 @@ GG.StateInTask = Ember.State.extend
           GG.animateMeiosis '#parent-mothers-pool-container'
 
       toggleBreedType: ->
-        if GG.tasksController.get 'currentTask.meiosisControl'
+        if GG.tasksController.get 'meiosisControlEnabled'
           GG.breedingController.toggleBreedType()
 
     animatingMeiosis: Ember.State.create
