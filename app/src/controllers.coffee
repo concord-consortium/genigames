@@ -97,11 +97,12 @@ GG.tasksController = Ember.ArrayController.create
     task.set 'completed', true
     GG.reputationController.addReputation(task.get('reputation'), GG.Events.COMPLETED_TASK)
     GG.logController.logEvent GG.Events.COMPLETED_TASK, name: task.get('name')
+    GG.reputationController.finalizeReputation()
 
   restartCurrentTask: ->
     task = @get 'currentTask'
     task.set 'completed', false
-    GG.reputationController.finalizeReputation()
+    GG.reputationController.resetCurrent()
     GG.logController.logEvent GG.Events.RESTARTED_TASK, name: task.get('name')
     @clearCurrentTask()
     @setCurrentTask(task)
@@ -933,7 +934,7 @@ GG.reputationController = Ember.Object.create
   subtractReputation: (rep, reason)->
     @addReputation(-rep, reason)
 
-  # the task is complete, but we're going to redo the same task
+  # the task is complete
   finalizeReputation: ->
     best = @get 'bestTaskReputation'
     current = @get 'currentTaskReputation'
@@ -942,12 +943,5 @@ GG.reputationController = Ember.Object.create
       @set('bestTaskReputation', current)
       @set('bestTaskReputationReasons', @get('currentTaskReputationReasons'))
 
-    @resetCurrent()
-
-  # the task is complete and we're leaving it to go to town or another task
-  commitReputation: ->
-    @finalizeReputation()
-    rep = @get 'bestTaskReputation'
-    if rep > Number.NEGATIVE_INFINITY
-      GG.userController.addReputation rep
-    @reset()
+      best = 0 if best == Number.NEGATIVE_INFINITY
+      GG.userController.addReputation(current - best)

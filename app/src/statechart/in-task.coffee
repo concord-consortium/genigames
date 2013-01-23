@@ -15,10 +15,10 @@ GG.StateInTask = Ember.State.extend
         GG.breedingController.set 'isShowingBreeder', true
         GG.tutorialMessageController.showTargetTutorial()
       GG.cyclesController.reset()
+      GG.reputationController.reset()
       GG.breedingController.set 'breedType', GG.BREED_AUTOMATED
 
     exit: ->
-      GG.reputationController.commitReputation()
       # clear offspring
       GG.breedingController.set 'child', null
       GG.offspringController.set 'content', null
