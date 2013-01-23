@@ -234,10 +234,14 @@ GG.Events =
   SELECTED_PARENT : "Selected parent"
   REMOVED_PARENT  : "Removed parent"
   BRED_DRAGON     : "Bred dragon"
+  BRED_WITH_EXTRA_CYCLE : "Extra breed cycle"
   KEPT_OFFSPRING  : "Kept offspring"
   FREED_OFFSPRING : "Freed offspring"
   SUBMITTED_OFFSPRING : "Submitted offspring"
   REVEALED_ALLELE : "Revealed allele"
+  ENABLED_MEIOSIS_CONTROL : "Meiosis control enabled"
+  CHOSE_CHROMOSOME: "Chromosome selected"
+  MADE_CROSSOVER  : "Crossover selected"
 
 GG.TaskNPC = Ember.Object.extend
   name: null

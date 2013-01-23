@@ -477,7 +477,7 @@ GG.ChromoView = Ember.View.extend
       allele = event.context
       if !allele.visible
         @get('content').markRevealed(@get('side'), allele.allele)
-        GG.userController.addReputation -GG.actionCostsController.getCost 'alleleRevealed'
+        GG.reputationController.subtractReputation(GG.actionCostsController.getCost('alleleRevealed'), GG.Events.REVEALED_ALLELE)
         GG.logController.logEvent GG.Events.REVEALED_ALLELE,
           allele: allele.allele
           side: @get('side')
