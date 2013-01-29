@@ -15,6 +15,7 @@ GG.StateInTask = Ember.State.extend
         GG.breedingController.set 'isShowingBreeder', true
         GG.tutorialMessageController.showTargetTutorial()
       GG.cyclesController.reset()
+      GG.reputationController.reset()
       GG.breedingController.set 'breedType', GG.BREED_AUTOMATED
 
     exit: ->
@@ -115,13 +116,13 @@ GG.StateInTask = Ember.State.extend
           GG.animateMeiosis '#parent-mothers-pool-container'
 
       toggleBreedType: ->
-        if GG.tasksController.get 'currentTask.meiosisControl'
+        if GG.tasksController.get 'meiosisControlEnabled'
           GG.breedingController.toggleBreedType()
 
     animatingMeiosis: Ember.State.create
       setup: (manager)->
         if GG.breedingController.get('breedType') is GG.BREED_CONTROLLED
-          GG.userController.addReputation -GG.actionCostsController.getCost 'meiosisControlEnabled'
+          GG.reputationController.subtractReputation(GG.actionCostsController.getCost('meiosisControlEnabled'), GG.Events.ENABLED_MEIOSIS_CONTROL)
         # hide the offspring pool
         $('#target').hide()
         $('#breed-controls').animate({left: 489},400,'easeOutCubic')
@@ -137,7 +138,7 @@ GG.StateInTask = Ember.State.extend
 
       animate: (manager)->
         if GG.cyclesController.get('cycles') <= 0
-          GG.userController.addReputation -GG.actionCostsController.getCost 'extraBreedCycle'
+          GG.reputationController.subtractReputation(GG.actionCostsController.getCost('extraBreedCycle'), GG.Events.BRED_WITH_EXTRA_CYCLE)
         currentProgClass = $('#progress-bar').attr('class')
         $('#progress-bar').switchClass(currentProgClass,"breeding",2000) unless currentProgClass is "breeding"
         manager.send 'decrementCycles', 1
@@ -250,7 +251,7 @@ GG.StateInTask = Ember.State.extend
         if GG.parentController.hasRoom child
           GG.breedingController.set 'childSavedToParents', true
           GG.parentController.pushObject child
-          GG.userController.addReputation -1
+          GG.reputationController.subtractReputation(1, GG.Events.KEPT_OFFSPRING)
 
           GG.logController.logEvent GG.Events.KEPT_OFFSPRING,
             alleles: child.get('biologicaOrganism.alleles')

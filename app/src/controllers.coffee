@@ -95,13 +95,14 @@ GG.tasksController = Ember.ArrayController.create
   completeCurrentTask: ->
     task = @get 'currentTask'
     task.set 'completed', true
-    GG.userController.addReputation task.get 'reputation'
+    GG.reputationController.addReputation(task.get('reputation'), GG.Events.COMPLETED_TASK)
     GG.logController.logEvent GG.Events.COMPLETED_TASK, name: task.get('name')
+    GG.reputationController.finalizeReputation()
 
   restartCurrentTask: ->
     task = @get 'currentTask'
     task.set 'completed', false
-    GG.userController.addReputation -(task.get 'reputation')
+    GG.reputationController.resetCurrent()
     GG.logController.logEvent GG.Events.RESTARTED_TASK, name: task.get('name')
     @clearCurrentTask()
     @setCurrentTask(task)
@@ -165,6 +166,18 @@ GG.tasksController = Ember.ArrayController.create
   isCurrentTaskComplete: ->
     currentTask = @get 'currentTask'
     return currentTask.isComplete()
+
+  meiosisControlEnabled: (->
+    !!@get 'currentTask.meiosisControl'
+  ).property('currentTask.meiosisControl')
+
+  hasHiddenGenes: (->
+    hidden = @get 'currentTask.hiddenGenes'
+    if hidden? and hidden.length > 0
+      return true
+    else
+      return false
+  ).property('currentTask.hiddenGenes')
 
 GG.drakeController = Ember.Object.create
   visibleGenesBinding: 'GG.tasksController.currentTask.visibleGenes'
@@ -501,7 +514,7 @@ GG.meiosisController = Ember.Object.create
     selected[source][chromo] = null
 
     # Refund the reputation that was charged to select this chromosome
-    GG.userController.addReputation GG.actionCostsController.getCost 'chromosomeSelected'
+    GG.reputationController.addReputation(GG.actionCostsController.getCost('chromosomeSelected'), GG.Events.CHOSE_CHROMOSOME)
 
     clearNum = true
     for own chrom,view of selected[source]
@@ -523,7 +536,7 @@ GG.meiosisController = Ember.Object.create
       selected[source][chromo].set('selected', false)
     else
       # There was no previously selected chromosome, so charge rep points
-      GG.userController.addReputation -GG.actionCostsController.getCost 'chromosomeSelected'
+      GG.reputationController.subtractReputation(GG.actionCostsController.getCost('chromosomeSelected'), GG.Events.CHOSE_CHROMOSOME)
     selected[source][chromo] = chromoView
     gameteNumberProp = if source is "father" then 'fatherGameteNumber' else 'motherGameteNumber'
     destGameteNum = @get(gameteNumberProp)
@@ -578,7 +591,7 @@ GG.meiosisController = Ember.Object.create
     if @get('selectedCrossover')?
       sourceCross = @get('selectedCrossover')
       if sourceCross.gene.name == destCross.gene.name and sourceCross.chromoView.get('side') != destCross.chromoView.get('side')
-        GG.userController.addReputation -GG.actionCostsController.getCost 'crossoverMade'
+        GG.reputationController.subtractReputation(GG.actionCostsController.getCost('crossoverMade'), GG.Events.MADE_CROSSOVER)
         # cross these two
         $('#' + destCross.chromoView.get('elementId') + ' .crossoverPoint.' + gene.name).removeClass('clickable').addClass('selected')
         # get all genes after this one
@@ -886,3 +899,49 @@ GG.showModalDialog = (text, hideAction) ->
          $('#modal-backdrop').fadeIn(@options.show.effect.length)
        beforeHide: ->
          $('#modal-backdrop').fadeOut(@options.show.effect.length)
+
+GG.reputationController = Ember.Object.create
+  currentTaskBinding: 'GG.townsController.currentTask'
+
+  reset: (->
+    @set('bestTaskReputation', Number.NEGATIVE_INFINITY)
+    @set('bestTaskReputationReasons', {})
+    @resetCurrent()
+  ).observes('currentTask')
+
+  resetCurrent: ->
+    @set('currentTaskReputation', 0)
+    @set('currentTaskReputationReasons', {})
+
+  bestTaskReputation: Number.NEGATIVE_INFINITY
+  bestTaskReputationReasons: {}
+
+  currentTaskReputation: 0
+  currentTaskReputationReasons: {}
+
+  addReputation: (rep, reason)->
+    reasons = @get 'currentTaskReputationReasons'
+    current_rep = @get 'currentTaskReputation'
+
+    reasons[reason] ||= 0
+    reasons[reason] += rep
+
+    current_rep += rep
+
+    @set('currentTaskReputationReasons', reasons)
+    @set('currentTaskReputation', current_rep)
+
+  subtractReputation: (rep, reason)->
+    @addReputation(-rep, reason)
+
+  # the task is complete
+  finalizeReputation: ->
+    best = @get 'bestTaskReputation'
+    current = @get 'currentTaskReputation'
+
+    if current > best
+      @set('bestTaskReputation', current)
+      @set('bestTaskReputationReasons', @get('currentTaskReputationReasons'))
+
+      best = 0 if best == Number.NEGATIVE_INFINITY
+      GG.userController.addReputation(current - best)
