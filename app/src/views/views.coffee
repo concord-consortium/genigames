@@ -1,5 +1,5 @@
-minispade.require 'genigames/view-mixins'
-minispade.require 'genigames/meiosis-animation'
+minispade.require 'genigames/views/view-mixins'
+minispade.require 'genigames/views/meiosis-animation'
 
 GG.LoginView = Ember.View.extend
   templateName: 'login'
@@ -43,7 +43,7 @@ GG.WorldTownView = Ember.View.extend
   enabledBinding: 'content.enabled'
   completedBinding: 'content.completed'
   style: (->
-    # width and height are always set to 175x125 regardless of the icon size (image is always centered in this box). 
+    # width and height are always set to 175x125 regardless of the icon size (image is always centered in this box).
     width = 175
     height = 125
     a = 216    # x position of the center of the world (relative to the world div)

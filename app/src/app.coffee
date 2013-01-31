@@ -19,7 +19,7 @@ GG.imageNameStart = "/resources/drakes/images/"
 minispade.require 'genigames/helpers'
 minispade.require 'genigames/models'
 minispade.require 'genigames/controllers'
-minispade.require 'genigames/views'
+minispade.require 'genigames/views/views'
 minispade.require 'genigames/statemanager'
 
 minispade.require 'genigames/templates/world'
