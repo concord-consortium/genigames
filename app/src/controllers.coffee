@@ -101,7 +101,6 @@ GG.tasksController = Ember.ArrayController.create
 
   restartCurrentTask: ->
     task = @get 'currentTask'
-    task.set 'completed', false
     GG.reputationController.resetCurrent()
     GG.logController.logEvent GG.Events.RESTARTED_TASK, name: task.get('name')
     @clearCurrentTask()
