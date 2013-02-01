@@ -92,6 +92,7 @@ GG.Task = Ember.Object.extend
   showSpeechBubble: false
   showFinalMessageBubble: false
   skipSave: false
+  reputationEarned: Number.NEGATIVE_INFINITY
 
   init: ->
     @_super()
@@ -104,11 +105,11 @@ GG.Task = Ember.Object.extend
     @set 'skipSave', false
 
   serialize: ->
-    {completed: @get('completed')}
+    {completed: @get('completed'), reputationEarned: @get('reputationEarned')}
 
   triggerSave: (->
     GG.userController.saveState('task', this) unless @get 'skipSave'
-  ).observes('completed')
+  ).observes('completed','reputationEarned')
 
   isComplete: ->
     # parse required characteristics

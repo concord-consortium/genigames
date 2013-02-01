@@ -917,19 +917,17 @@ GG.showModalDialog = (text, hideAction) ->
          $('#modal-backdrop').fadeOut(@options.show.effect.length)
 
 GG.reputationController = Ember.Object.create
-  currentTaskBinding: 'GG.townsController.currentTask'
-
   reset: (->
     @set('bestTaskReputation', Number.NEGATIVE_INFINITY)
     @set('bestTaskReputationReasons', {})
     @resetCurrent()
-  ).observes('currentTask')
+  )
 
   resetCurrent: ->
     @set('currentTaskReputation', 0)
     @set('currentTaskReputationReasons', {})
 
-  bestTaskReputation: Number.NEGATIVE_INFINITY
+  bestTaskReputationBinding: 'GG.tasksController.currentTask.reputationEarned'
   bestTaskReputationReasons: {}
 
   currentTaskReputation: 0
