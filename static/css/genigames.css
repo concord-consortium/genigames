@@ -136,7 +136,7 @@
   background-position: 0 -262px;
 }
 #breed-button.enabled {
-  background-position: 0 2px;
+  background-position: 0 3px;
   cursor: pointer;
 }
 #breed-button.enabled:active {
