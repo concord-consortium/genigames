@@ -332,14 +332,31 @@ GG.userController = Ember.Object.create
     else
       return {}
 
+  stateQueue: []
+  stateQueueProcessing: false
   saveState: (type, obj)->
-    # FIXME need to use a lock/free mechanism to avoid race conditions
-    allState = @get('state')
-    allState = {} unless allState?
-    allState[type] = {} unless allState[type]
-    allState[type][obj.get('name')] = obj.serialize()
+    stateQueue = @get('stateQueue')
+    stateQueue.push({type: type, obj: obj})
+    @processStateQueue() unless @get('stateQueueProcessing')
+
+  processStateQueue: ->
+    @set('stateQueueProcessing', true)
+    queue = @get('stateQueue')
+    allState = @get('state') || {}
+    while queue.length > 0
+      item = queue.shift()
+      type = item.type
+      obj = item.obj
+      allState[type] ||= {}
+      allState[type][obj.get('name')] = obj.serialize()
+
     @set('state', allState)
+    @set('stateQueueProcessing', false)
+    Ember.run.once this, "persistSaveState"
+
+  persistSaveState: ->
     if @get('learnerDataUrl')?
+      allState = @get('state') || {}
       $.post @get('learnerDataUrl'), JSON.stringify(allState), (data) =>
         console.log 'state saved'
 
