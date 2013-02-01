@@ -7,6 +7,7 @@ GG.User = Ember.Object.extend
   reputation: 0
   skipSave: false
 
+  _idBinding: 'login'
   name: (->
     return @get('first') + " " + @get('last')
   ).property('first', 'last')
@@ -29,6 +30,7 @@ GG.User = Ember.Object.extend
   ).observes('reputation')
 
 GG.Town = Ember.Object.extend
+  _id: null
   name: "Town"
   icon: "huts"
   background: "castle"
@@ -73,6 +75,7 @@ GG.Town = Ember.Object.extend
   ).observes('completed')
 
 GG.Task = Ember.Object.extend
+  _id: null
   name: null
   visibleGenes: null
   hiddenGenes: null

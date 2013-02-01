@@ -326,8 +326,8 @@ GG.userController = Ember.Object.create
 
   loadState: (type, obj)->
     allState = @get('state')
-    if allState? and allState[type]? and allState[type][obj.get('name')]?
-      return allState[type][obj.get('name')]
+    if allState? and allState[type]? and allState[type][obj.get('_id')]?
+      return allState[type][obj.get('_id')]
     else
       return {}
 
@@ -347,7 +347,7 @@ GG.userController = Ember.Object.create
       type = item.type
       obj = item.obj
       allState[type] ||= {}
-      allState[type][obj.get('name')] = obj.serialize()
+      allState[type][obj.get('_id')] = obj.serialize()
 
     @set('state', allState)
     @set('stateQueueProcessing', false)
