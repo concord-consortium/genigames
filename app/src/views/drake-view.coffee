@@ -10,9 +10,11 @@ GG.DrakeView = Ember.View.extend
     '../images/drakes/' + @get 'drakeImageName'
   ).property('drakeImage')
   drakeIdleImage     : (->
-    '../images/drakes/headturn/' + @get 'drakeImageName'
-  ).property('drakeImage')
-  showIdle           : false
+    folder = @get 'currentAnimation.folder'
+    "../images/drakes/#{folder}/" + @get 'drakeImageName'
+  ).property('drakeImage', 'currentAnimation')
+  showAnimation      : false
+  currentAnimation   : null
   width              : "200px"
   org : (->
     @get('content.biologicaOrganism')
@@ -66,56 +68,75 @@ GG.DrakeView = Ember.View.extend
   ).property()
   didInsertElement: ->
     return if GG.baselineController.get('isBaseline') # no animations in baseline
+
     # Wait for the animation images to load, then move it in place and start it up
-    swapImage = =>
-      GG.breedingController.removeObserver 'isShowingBreeder', swapImage
-      idleImg = new Image()
-      idleImg.src = @get('drakeIdleImage')
-
-      onComplete = =>
-        setTimeout =>
-          unless @get('isDestroyed')
-            layer = '#' + @get('elementId')
-            @set('showIdle', true)
-            Ember.run.next =>
-              $(layer + ' .drake-idle-img').imagesLoaded =>
-                setTimeout =>
-                  requestAnimationFrame =>
-                    $(layer + ' .static').remove()
-                    @setNextIdleInterval()
-                , 2000  # this timeout is a hack to remove the blink between showing the static and idle images on FF
-        , 2000
-
-      if !idleImg.complete
-        $(idleImg).bind('error load onreadystatechange', onComplete)
-      else
-        onComplete()
+    setupAnimation = =>
+      GG.breedingController.removeObserver 'isShowingBreeder', setupAnimation
+      @setNextIdleInterval()
 
     if GG.breedingController.get 'isShowingBreeder'
-      swapImage()
+      setupAnimation()
     else
-      GG.breedingController.addObserver 'isShowingBreeder', swapImage
+      GG.breedingController.addObserver 'isShowingBreeder', setupAnimation
+
+  # Wait for the animation images to load, then move it in place and start it up
+  swapImage: ->
+
+    onComplete = =>
+      if @get('isDestroyed') then return
+      Ember.run.next =>
+        $(layer + ' .drake-idle-img').imagesLoaded =>
+          setTimeout =>
+            # rescale animation image width before showing
+            width = @get('currentAnimation.frames') * 100
+            $(layer + ' .drake-idle-img').css "width", "#{width}%"
+            $(layer + ' .idle').show()
+            # rm static image
+            requestAnimationFrame =>
+              $(layer + ' .static').hide()
+              @idleAnimation()
+          , 3000  # this timeout is a hack to remove the blink between showing the static and idle images on FF
+
+    @set('showAnimation', true)
+
+    # show static and hide animation while we wait for image to load
+    layer = '#' + @get('elementId')
+    $("#{layer} .static").show()
+    $("#{layer} .idle").hide()
+
+    $("#{layer} .idle").imagesLoaded onComplete
+
+  setNextAnimation: ->
+    # hard-coded animation selection, knowing that we just have headturn and metallic.
+    # next we will want more interesting automatic selection based on the presense
+    # of arbitrary traits
+    if @get('shine') and Math.random() < 0.6
+      @set 'currentAnimation', GG.drakeAnimations.traitAnimations.metallic
+    else
+      @set 'currentAnimation', GG.drakeAnimations.idleAnimations.headTurn
 
   setNextIdleInterval: ->
-    nextTime = 3000 + Math.random() * 15000
+    nextTime = Math.random() * 10000
     setTimeout =>
-      @idleAnimation()
+      @setNextAnimation()
+      @swapImage()
       @setNextIdleInterval()
     , nextTime
   idleAnimation: ->
     if !@$('img')
       return
-    GG.animateDrake @$('.drake-idle-img')
+    frames = @get 'currentAnimation.frames'
+    GG.animateDrake @$('.drake-idle-img'), frames
 
 # Here we create one single animation timer, and add new images
 # to an array so we can animate multiple drakes at once without
 # creating a separate timer for each
-GG.animateDrake = ($img) ->
+GG.animateDrake = ($img, frames) ->
   if GG.drakeAnimationList.length > 1 then return
 
   GG.drakeAnimationList.push $img
   GG.drakeAnimationPositions.push 0
-  GG.drakeAnimationLengths.push 15  # for the moment we assume animations are 15 frames
+  GG.drakeAnimationLengths.push frames
 
   draw = ->
     setTimeout =>
@@ -150,3 +171,22 @@ GG.drakeAnimationPositions = []
 GG.drakeAnimationLengths = []
 
 GG.drakeAnimationRunning = false
+
+
+###
+  Object for keeping information about individual drake animations.
+
+  All idle animations can go under the "idleAnimations" property, so we can randomly select
+  between them. We can follow the same pattern for other animations whenever we don't care
+  which of a set we use.
+###
+
+GG.drakeAnimations =
+  idleAnimations:
+    headTurn:
+      folder: 'headTurn'
+      frames: 15
+  traitAnimations:
+    metallic:
+      folder: 'shine'
+      frames: 7
