@@ -3,7 +3,7 @@ GG.DrakeView = Ember.View.extend
   classNames         : ['drake']
   classNameBindings  : ['selected']
   drakeImageName     : (->
-    color = @get('org').getCharacteristic('color').replace("Metallic ","")
+    color = @get('org').getCharacteristic('color')
     color.charAt(0).toLowerCase() + color.slice(1) + ".png"
   ).property()
   drakeImage         : (->
@@ -33,8 +33,8 @@ GG.DrakeView = Ember.View.extend
     else 'drake-body-short-tail'
   ).property()
   shine : (->
-    color = @get('org').getCharacteristic('color')
-    ~color.indexOf "Metallic"
+    metallic = @get('org').getCharacteristic('metallic')
+    metallic is "Metallic"
   ).property()
   armor : (->
     armor = @get('org').getCharacteristic "armor"
