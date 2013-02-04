@@ -184,7 +184,7 @@ GG.drakeAnimationRunning = false
 GG.drakeAnimations =
   idleAnimations:
     headTurn:
-      folder: 'headTurn'
+      folder: 'headturn'
       frames: 15
   traitAnimations:
     metallic:
