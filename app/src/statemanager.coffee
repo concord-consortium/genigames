@@ -9,6 +9,10 @@ minispade.require 'genigames/statechart/in-world'
 minispade.require 'genigames/statechart/in-town'
 minispade.require 'genigames/statechart/in-task'
 
+GG.gamedWorld     = "game"
+GG.baselineWorld  = "baseline"
+GG.worldName      = GG.gamedWorld
+
 GG.statemanager = Ember.StateManager.create
   # enableLogging: true         # uncomment to log state transitions during development
 
@@ -115,16 +119,21 @@ GG.statemanager = Ember.StateManager.create
               children.push(items.town[tow])
             items.world[wo].towns = children
 
-          # TODO Instead of just using the "game" world, perhaps we can
-          # have some way to set this externally?
-          for to in items.world.game.towns
-            town = GG.Town.create to
-            GG.townsController.addTown town
           # fixme: this should be eventually handled by a router
           if (taskPath = GG.statemanager.get('params.task'))
             taskPath = taskPath.split "/"
             if taskPath[0] is "baseline"
               GG.baselineController.set 'isBaseline', true
+              GG.worldName = GG.baselineWorld
+
+          # get the appropriate world and create its towns
+          for to in items.world[GG.worldName].towns
+            town = GG.Town.create to
+            GG.townsController.addTown town
+
+          # fixme: this should be eventually handled by a router
+          if (taskPath)
+            if taskPath[0] is "baseline"
               townLoaded = GG.townsController.loadTown taskPath[1]
               GG.tasksController.setCurrentTask GG.tasksController.objectAt parseInt(taskPath[2])-1
               Ember.run ->
