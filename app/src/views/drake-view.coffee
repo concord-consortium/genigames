@@ -81,6 +81,7 @@ GG.DrakeView = Ember.View.extend
 
   # Wait for the animation images to load, then move it in place and start it up
   swapImage: ->
+    if @get('isDestroyed') then return
 
     onComplete = =>
       if @get('isDestroyed') then return
@@ -110,6 +111,7 @@ GG.DrakeView = Ember.View.extend
   hasShownTraitAnimation: false
 
   setNextAnimation: ->
+    if @get('isDestroyed') then return
     # hard-coded animation selection, knowing that we just have headturn and metallic.
     # next we will want more interesting automatic selection based on the presense
     # of arbitrary traits
