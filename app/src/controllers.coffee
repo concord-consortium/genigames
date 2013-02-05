@@ -902,6 +902,18 @@ GG.showInfoDialog = ($elem, text, opts={}) ->
   GG.lastShownDialog = $elem
   $elem.qtip config
 
+GG.showChainedInfoDialog = ($elem, textArr, opts={}) ->
+  opts.finalCallback = opts.hideAction unless opts.finalCallback?
+  text = textArr[0]
+  textArr = textArr.splice(1)
+  if textArr.length
+    opts.hideAction = ->
+      GG.showChainedInfoDialog $elem, textArr, opts
+    GG.showInfoDialog $elem, text, opts
+  else
+    opts.hideAction = opts.finalCallback
+    GG.showInfoDialog $elem, text, opts
+
 GG.showModalDialog = (text, hideAction) ->
   body = $('body')
   GG.lastShownDialog = body
