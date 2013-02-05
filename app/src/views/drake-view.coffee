@@ -95,6 +95,7 @@ GG.DrakeView = Ember.View.extend
             requestAnimationFrame =>
               $(layer + ' .static').hide()
               @idleAnimation()
+              @setNextIdleInterval()
           , 4000  # this timeout is a hack to remove the blink between showing the static and idle images on FF
 
     @set('showAnimation', true)
@@ -120,7 +121,6 @@ GG.DrakeView = Ember.View.extend
     setTimeout =>
       @setNextAnimation()
       @swapImage()
-      @setNextIdleInterval()
     , nextTime
   idleAnimation: ->
     if !@$('img')
