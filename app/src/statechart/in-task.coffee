@@ -64,6 +64,7 @@ GG.StateInTask = Ember.State.extend
         $('#progress-bar').switchClass($('#progress-bar').attr('class'),"selecting",1000)
         GG.offspringController.set 'content', null
         $('#target').show()
+        $('#chromosome-labels').show()
         $('#breed-controls').animate({left: 650},600,'easeOutCubic')
         $("#breeder").animate({left: 0},800,"easeOutCubic")
         setTimeout ->
@@ -125,6 +126,7 @@ GG.StateInTask = Ember.State.extend
           GG.reputationController.subtractReputation(GG.actionCostsController.getCost('meiosisControlEnabled'), GG.Events.ENABLED_MEIOSIS_CONTROL)
         # hide the offspring pool
         $('#target').hide()
+        $('#chromosome-labels').hide()
         $('#breed-controls').animate({left: 489},400,'easeOutCubic')
         $("#breeder").animate({left: -459},500,"easeOutCubic")
         $("#offspring-panel").animate({left: 400},500,"easeOutCubic")
