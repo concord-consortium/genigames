@@ -67,12 +67,13 @@ GG.MeiosisAnimation = Ember.Object.create
 
         # divide cell first time (Anaphase I + Telophase I)
         @registerTimeout 2000, =>
-          if GG.breedingController.get('breedType') == GG.BREED_CONTROLLED and
-              (meiosisControl is "selection")
-            args.parentView.selectingChromatids =>
+          GG.tutorialMessageController.showMeiosisDivisionTutorial =>
+            if GG.breedingController.get('breedType') == GG.BREED_CONTROLLED and
+                (meiosisControl is "selection")
+              args.parentView.selectingChromatids =>
+                @divide(args)
+            else
               @divide(args)
-          else
-            @divide(args)
 
   separateChromatids: (args)->
     t = @scale(400)
@@ -152,7 +153,9 @@ GG.MeiosisAnimation = Ember.Object.create
     args.container.find('.cell-right').animate({width:145, left: 158}, t, 'easeInOutQuad')
 
     @registerTimeout t, =>
-      @chooseGamete(args)
+      GG.tutorialMessageController.showMeiosisGameteTutorial =>
+        @chooseGamete(args)
+      , args.parentView.get('motherFather')
 
   chooseGamete: (args)->
     # TODO eventually let students choose
@@ -222,4 +225,5 @@ GG.MeiosisAnimation = Ember.Object.create
       motherContainer.find('.cell').remove()
 
     @registerTimeout 1.5*t, ->
-      callback()
+      GG.tutorialMessageController.showMeiosisFertilizationTutorial ->
+        callback()

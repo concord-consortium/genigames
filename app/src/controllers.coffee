@@ -524,8 +524,9 @@ GG.meiosisController = Ember.Object.create
   animate: (callback)->
     if @get('motherView')? and @get('fatherView')?
       @get('fatherView').animate =>
-        @get('motherView').animate =>
-          GG.MeiosisAnimation.mergeChosenGametes("#" + @get('fatherView.elementId'), "#" + @get('motherView.elementId'), callback)
+        GG.tutorialMessageController.showMeiosisMotherTutorial =>
+          @get('motherView').animate =>
+            GG.MeiosisAnimation.mergeChosenGametes("#" + @get('fatherView.elementId'), "#" + @get('motherView.elementId'), callback)
   resetAnimation: ->
     if @get('motherView')? and @get('fatherView')?
       @get('motherView').resetAnimation()
@@ -847,7 +848,6 @@ GG.tutorialMessageController = Ember.Object.create
         hideAction: callback
     else if @get('isFirstMeiosisDescriptionTask') and !@get('meiosisTutorial2Shown')
       @set 'meiosisTutorial2Shown', true
-      chainedCallback = =>
       GG.showChainedInfoDialog $("#meiosis-container .meiosis.father"),
         [
           "When you click the “breed” button, what you’re seeing is the process
@@ -856,6 +856,70 @@ GG.tutorialMessageController = Ember.Object.create
           chromosome from each pair of chromosomes.",
           "First, the chromosomes are duplicated. <b>Crossovers</b> can occur at this time."
         ]
+        target: "leftMiddle"
+        tooltip: "rightMiddle"
+        maxWidth: 280
+        hideAction: callback
+    else
+      callback()
+
+  meiosisCrossoverTutorialshown: false
+  showMeiosisDivisionTutorial: (callback) ->
+    if @get('isFirstMeiosisDescriptionTask') and !@get('meiosisCrossoverTutorialshown')
+      @set 'meiosisCrossoverTutorialshown', true
+      GG.showInfoDialog $("#meiosis-container .meiosis.father"),
+        "Then the cell divides twice.",
+        target: "leftMiddle"
+        tooltip: "rightMiddle"
+        maxWidth: 280
+        hideAction: callback
+    else
+      callback()
+
+  meiosisFatherGameteTutorialShown: false
+  meiosisMotherGameteTutorialShown: false
+  showMeiosisGameteTutorial: (callback, parent) ->
+    parentTutorialShown = if parent is "mother"
+      'meiosisMotherGameteTutorialShown'
+    else 'meiosisFatherGameteTutorialShown'
+    if @get('isFirstMeiosisDescriptionTask') and !@get parentTutorialShown
+      @set parentTutorialShown, true
+      text = if parent is "father"
+        "The result is four gamete cells with half the normal number of chromosomes.
+        In males, gametes are called sperm cells."
+      else "In females, gametes are called egg cells."
+
+      GG.showInfoDialog $("#meiosis-container .meiosis.#{parent}"),
+        text,
+        target: "leftMiddle"
+        tooltip: "rightMiddle"
+        maxWidth: 280
+        hideAction: callback
+    else
+      callback()
+
+  meiosisMotherTutorialShown: false
+  showMeiosisMotherTutorial: (callback) ->
+    if @get('isFirstMeiosisDescriptionTask') and !@get('meiosisMotherTutorialShown')
+      @set 'meiosisMotherTutorialShown', true
+      GG.showInfoDialog $("#meiosis-container .meiosis.mother"),
+        "The same process happens for the mother.",
+        target: "leftMiddle"
+        tooltip: "rightMiddle"
+        maxWidth: 280
+        hideAction: callback
+    else
+      callback()
+
+  meiosisFertilizationTutorialShown: false
+  showMeiosisFertilizationTutorial: (callback) ->
+    if @get('isFirstMeiosisDescriptionTask') and !@get('meiosisFertilizationTutorialShown')
+      @set 'meiosisFertilizationTutorialShown', true
+      GG.showInfoDialog $("#meiosis-container"),
+        "Fertilization is when a sperm and egg cell fuse. The single chromosomes
+        from the male and female parents are now in one cell, resulting in pairs
+        of chromosomes. The fertilized egg then divides many times and develops
+        into an individual."
         target: "leftMiddle"
         tooltip: "rightMiddle"
         maxWidth: 280
