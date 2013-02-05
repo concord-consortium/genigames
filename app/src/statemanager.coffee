@@ -111,6 +111,7 @@ GG.statemanager = Ember.StateManager.create
           for own wo of items.world
             children = []
             for tow in items.world[wo].towns
+              if !items.town[tow] then console.log("No town named #{tow}"); continue
               children.push(items.town[tow])
             items.world[wo].towns = children
 
