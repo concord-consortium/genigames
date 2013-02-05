@@ -103,6 +103,18 @@
   height: 423px;
   background: top left no-repeat url("../images/brackets.png");
 }
+#chromosome-labels.father {
+  height: 100px;
+}
+#chromosome-labels.mother {
+  top: 122px;
+  background-position: 0 -100px;
+}
+#chromosome-labels.none {
+  position: absolute;
+  width: 0;
+  height: 0;
+}
 #breed-controls {
   position: absolute;
   top: 165px;
