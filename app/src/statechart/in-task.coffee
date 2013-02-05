@@ -129,8 +129,6 @@ GG.StateInTask = Ember.State.extend
 
     animatingMeiosis: Ember.State.create
       setup: (manager)->
-        if GG.breedingController.get('breedType') is GG.BREED_CONTROLLED
-          GG.reputationController.subtractReputation(GG.actionCostsController.getCost('meiosisControlEnabled'), GG.Events.ENABLED_MEIOSIS_CONTROL)
         # hide the offspring pool
         $('#target').hide()
         $('#chromosome-labels').hide()
@@ -260,7 +258,6 @@ GG.StateInTask = Ember.State.extend
         if GG.parentController.hasRoom child
           GG.breedingController.set 'childSavedToParents', true
           GG.parentController.pushObject child
-          GG.reputationController.subtractReputation(1, GG.Events.KEPT_OFFSPRING)
 
           GG.logController.logEvent GG.Events.KEPT_OFFSPRING,
             alleles: child.get('biologicaOrganism.alleles')
