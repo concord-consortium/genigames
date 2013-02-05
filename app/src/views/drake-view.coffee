@@ -107,17 +107,22 @@ GG.DrakeView = Ember.View.extend
 
     $("#{layer} .idle").imagesLoaded onComplete
 
+  hasShownTraitAnimation: false
+
   setNextAnimation: ->
     # hard-coded animation selection, knowing that we just have headturn and metallic.
     # next we will want more interesting automatic selection based on the presense
     # of arbitrary traits
-    if @get('shine') and Math.random() < 0.6
+    if @get('shine') and (!@get('hasShownTraitAnimation') or Math.random() < 0.5)
       @set 'currentAnimation', GG.drakeAnimations.traitAnimations.metallic
+      @set 'hasShownTraitAnimation', true
     else
       @set 'currentAnimation', GG.drakeAnimations.idleAnimations.headTurn
 
   setNextIdleInterval: ->
-    nextTime = Math.random() * 9000
+    if @get('shine') and !@get 'hasShownTraitAnimation'
+      nextTime = 50
+    else nextTime = Math.random() * 6000
     setTimeout =>
       @setNextAnimation()
       @swapImage()
