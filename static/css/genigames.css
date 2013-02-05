@@ -95,6 +95,14 @@
   height: 423px;
   background: top left no-repeat url("../images/breeding-panels-left.png");
 }
+#chromosome-labels {
+  position: absolute;
+  top: 22px;
+  left: 716px;
+  width: 400px;
+  height: 423px;
+  background: top left no-repeat url("../images/brackets.png");
+}
 #breed-controls {
   position: absolute;
   top: 165px;
@@ -200,7 +208,7 @@
 }
 #father-chromosome {
   position: absolute;
-  top: 20px;
+  top: 31px;
   left: 680px;
   width: 275px;
   height: 130px;
