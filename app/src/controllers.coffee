@@ -96,6 +96,7 @@ GG.tasksController = Ember.ArrayController.create
     task = @get 'currentTask'
     task.set 'completed', true
     GG.reputationController.addReputation(task.get('reputation'), GG.Events.COMPLETED_TASK)
+    GG.reputationController.finalizeReputationForTaskRun()
     GG.logController.logEvent GG.Events.COMPLETED_TASK, name: task.get('name')
     GG.reputationController.finalizeReputation()
 
@@ -957,6 +958,11 @@ GG.reputationController = Ember.Object.create
 
   subtractReputation: (rep, reason)->
     @addReputation(-rep, reason)
+
+  # ensure "current" rep for task is valid
+  finalizeReputationForTaskRun: ->
+    current = @get 'currentTaskReputation'
+    @set 'currentTaskReputation', Math.max current, 0
 
   # the task is complete
   finalizeReputation: ->
