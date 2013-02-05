@@ -208,6 +208,16 @@ GG.parentController = Ember.ArrayController.create
     else
       return @get('females').length < @get 'maxFemales'
 
+  whosSelected: (->
+    mother = @get('selectedMother')
+    father = @get('selectedFather')
+    if mother or father
+      return "mother" unless father
+      return "father" unless mother
+      return "both"
+    return "none"
+  ).property('selectedMother', 'selectedFather')
+
 GG.fatherPoolController = Ember.ArrayController.create
   contentBinding: 'GG.parentController.males'
   selectedBinding: 'GG.parentController.selectedFather'

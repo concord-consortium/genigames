@@ -64,7 +64,8 @@ GG.StateInTask = Ember.State.extend
         $('#progress-bar').switchClass($('#progress-bar').attr('class'),"selecting",1000)
         GG.offspringController.set 'content', null
         $('#target').show()
-        $('#chromosome-labels').show()
+        whosSelected = GG.parentController.get 'whosSelected'
+        $('#chromosome-labels').attr('class', whosSelected).show()
         $('#breed-controls').animate({left: 650},600,'easeOutCubic')
         $("#breeder").animate({left: 0},800,"easeOutCubic")
         setTimeout ->
@@ -87,6 +88,9 @@ GG.StateInTask = Ember.State.extend
           GG.tutorialMessageController.showBreedButtonTutorial()
           GG.tutorialMessageController.showMeiosisControlTutorial()
 
+        whosSelected = GG.parentController.get 'whosSelected'
+        $('#chromosome-labels').attr('class', whosSelected).show()
+
         GG.logController.logEvent GG.Events.SELECTED_PARENT,
           alleles: parent.get('biologicaOrganism.alleles')
           sex: parent.get('sex')
@@ -99,6 +103,9 @@ GG.StateInTask = Ember.State.extend
           controller = if sex is GG.FEMALE then GG.motherPoolController else GG.fatherPoolController
           controller.set('hidden', true)
         GG.parentController.removeObject parent
+
+        whosSelected = GG.parentController.get 'whosSelected'
+        $('#chromosome-labels').attr('class', whosSelected).show()
 
         GG.logController.logEvent GG.Events.REMOVED_PARENT,
           alleles: parent.get('biologicaOrganism.alleles')
