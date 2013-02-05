@@ -760,6 +760,12 @@ GG.tutorialMessageController = Ember.Object.create
     return townId+taskId is 0
   ).property('GG.townsController.currentTown', 'GG.tasksController.currentTask')
 
+  isFirstMeiosisDescriptionTask: (->
+    townId = GG.townsController.get("content").indexOf GG.townsController.get "currentTown"
+    taskId = GG.tasksController.get("content").indexOf GG.tasksController.get "currentTask"
+    return townId is 0 and taskId is 2
+  ).property('GG.townsController.currentTown', 'GG.tasksController.currentTask')
+
   # TODO There should be a better way to detect this other than hard-coding it...
   isFirstMeiosisControlTask: (->
     townId = GG.townsController.get("content").indexOf GG.townsController.get "currentTown"
@@ -827,13 +833,29 @@ GG.tutorialMessageController = Ember.Object.create
         target: "leftMiddle"
         tooltip: "rightMiddle"
 
-  meiosisTutorialShown: false
+  meiosisTutorialShown:  false
+  meiosisTutorial2Shown: false
   showMeiosisTutorial: (callback)->
     if @get('isFirstTask') and !@get('meiosisTutorialShown')
       @set 'meiosisTutorialShown', true
       GG.showInfoDialog $("#meiosis-container .meiosis.father"),
         "This is meiosis, the method by which half of a parent’s alleles are passed to the child.
         Notice how the chromosomes are sorted into four cells.",
+        target: "leftMiddle"
+        tooltip: "rightMiddle"
+        maxWidth: 280
+        hideAction: callback
+    else if @get('isFirstMeiosisDescriptionTask') and !@get('meiosisTutorial2Shown')
+      @set 'meiosisTutorial2Shown', true
+      chainedCallback = =>
+      GG.showChainedInfoDialog $("#meiosis-container .meiosis.father"),
+        [
+          "When you click the “breed” button, what you’re seeing is the process
+          of <b>meiosis</b> and <b>fertilization</b>",
+          "Meiosis produces four <b> gamete</b> cells. Each gamete gets one
+          chromosome from each pair of chromosomes.",
+          "First, the chromosomes are duplicated. <b>Crossovers</b> can occur at this time."
+        ]
         target: "leftMiddle"
         tooltip: "rightMiddle"
         maxWidth: 280
