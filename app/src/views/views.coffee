@@ -804,24 +804,12 @@ GG.CompletionDialogView = Ember.View.extend
     # GG.tasksController.get('currentTask.npc.speech.completionText')
     "Drake created!"
   ).property('GG.tasksController.currentTask')
-  reputationWonBinding: 'GG.tasksController.currentTask.reputation'
-  reputationReasonsBinding: 'GG.reputationController.currentTaskReputationReasons'
+  reputationWonBinding: 'GG.reputationController.reputationForTask'
   taskReputationBinding: 'GG.reputationController.currentTaskReputation'
-  extraBreedsRep: (->
-    @_repFor GG.Events.BRED_WITH_EXTRA_CYCLE
-  ).property('taskReputation')
-  meiosisControlRep: (->
-    enables = @_repFor GG.Events.ENABLED_MEIOSIS_CONTROL
-    chromos = @_repFor GG.Events.CHOSE_CHROMOSOME
-    crosses = @_repFor GG.Events.MADE_CROSSOVER
-    return enables + chromos + crosses
-  ).property('taskReputation')
-  alleleRevealRep: (->
-    @_repFor GG.Events.REVEALED_ALLELE
-  ).property('taskReputation')
-  _repFor: (evt)->
-    reasons = @get('reputationReasons')
-    return reasons[evt] || 0
+  extraBreedsRepBinding: 'GG.reputationController.extraBreedsRep'
+  meiosisControlRepBinding: 'GG.reputationController.meiosisControlRep'
+  alleleRevealRepBinding: 'GG.reputationController.alleleRevealRep'
+
   tryAgain: ->
     # Dismiss dialog
     $('#completion-dialog').hide()

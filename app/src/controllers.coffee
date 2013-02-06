@@ -1077,3 +1077,26 @@ GG.reputationController = Ember.Object.create
 
       best = 0 if best == Number.NEGATIVE_INFINITY
       GG.userController.addReputation(current - best)
+
+  _repFor: (evt)->
+    reasons = @get('currentTaskReputationReasons')
+    reasons[evt] || 0
+
+  reputationForTask: (->
+    GG.tasksController.get 'currentTask.reputation'
+  ).property('currentTaskReputation')
+
+  extraBreedsRep: (->
+    @_repFor GG.Events.BRED_WITH_EXTRA_CYCLE
+  ).property('currentTaskReputation')
+
+  meiosisControlRep: (->
+    enables = @_repFor GG.Events.ENABLED_MEIOSIS_CONTROL
+    chromos = @_repFor GG.Events.CHOSE_CHROMOSOME
+    crosses = @_repFor GG.Events.MADE_CROSSOVER
+    enables + chromos + crosses
+  ).property('currentTaskReputation')
+
+  alleleRevealRep: (->
+    @_repFor GG.Events.REVEALED_ALLELE
+  ).property('currentTaskReputation')
