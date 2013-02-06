@@ -95,6 +95,26 @@
   height: 423px;
   background: top left no-repeat url("../images/breeding-panels-left.png");
 }
+#chromosome-labels {
+  position: absolute;
+  top: 22px;
+  left: 716px;
+  width: 400px;
+  height: 423px;
+  background: top left no-repeat url("../images/brackets.png");
+}
+#chromosome-labels.father {
+  height: 100px;
+}
+#chromosome-labels.mother {
+  top: 122px;
+  background-position: 0 -100px;
+}
+#chromosome-labels.none {
+  position: absolute;
+  width: 0;
+  height: 0;
+}
 #breed-controls {
   position: absolute;
   top: 165px;
@@ -136,7 +156,7 @@
   background-position: 0 -262px;
 }
 #breed-button.enabled {
-  background-position: 0 2px;
+  background-position: 0 3px;
   cursor: pointer;
 }
 #breed-button.enabled:active {
@@ -200,7 +220,7 @@
 }
 #father-chromosome {
   position: absolute;
-  top: 20px;
+  top: 31px;
   left: 680px;
   width: 275px;
   height: 130px;
@@ -363,7 +383,7 @@
   border-radius: 5px;
   position: absolute;
   width: 340px;
-  height: 225px;
+  height: 285px;
   left: 305px;
   top: 167px;
   background-color: #4e8da6;
@@ -399,9 +419,28 @@
   right: 14px;
   text-align: center;
 }
+#completion-dialog-content .completion-rep .completion-rep-item {
+  width: 100%;
+  height: 1.1em;
+}
+#completion-dialog-content .completion-rep .completion-rep-item .action {
+  text-align: left;
+  position: absolute;
+  left: 0px;
+}
+#completion-dialog-content .completion-rep .completion-rep-item .points {
+  position: absolute;
+  right: 0px;
+}
+#completion-dialog-content .completion-rep .completion-rep-item .points.spent {
+  color: #f00;
+}
+#completion-dialog-content .completion-rep .completion-rep-item.total {
+  border-top: 1px solid #d3d3d3;
+}
 #completion-dialog-content .completion-buttons {
   position: absolute;
-  top: 180px;
+  top: 240px;
   left: 14px;
   right: 14px;
   text-align: center;
@@ -1049,6 +1088,12 @@ a:hover {
 .huts {
   background: top left no-repeat url("../images/town03.jpg");
 }
+.village_blue {
+  background: top left no-repeat url("../images/town04.jpg");
+}
+.castle_purple {
+  background: top left no-repeat url("../images/town05.jpg");
+}
 .logout {
   background-color: #bbb;
   color: #fff;
@@ -1499,6 +1544,9 @@ a:hover {
 .townIcon1.enabled {
   background: no-repeat center url("../images/townIcon1.png");
 }
+.townIcon1.enabled.completed {
+  background: no-repeat center url("../images/townIcon1-complete.png");
+}
 .townIcon2 {
   background: no-repeat center url("../images/townIcon2-disabled.png");
   width: 175px;
@@ -1506,6 +1554,9 @@ a:hover {
 }
 .townIcon2.enabled {
   background: no-repeat center url("../images/townIcon2.png");
+}
+.townIcon2.enabled.completed {
+  background: no-repeat center url("../images/townIcon2-complete.png");
 }
 .townIcon3 {
   background: no-repeat center url("../images/townIcon3-disabled.png");
@@ -1515,6 +1566,9 @@ a:hover {
 .townIcon3.enabled {
   background: no-repeat center url("../images/townIcon3.png");
 }
+.townIcon3.enabled.completed {
+  background: no-repeat center url("../images/townIcon3-complete.png");
+}
 .townIcon4 {
   background: no-repeat center url("../images/townIcon4-disabled.png");
   width: 175px;
@@ -1522,6 +1576,20 @@ a:hover {
 }
 .townIcon4.enabled {
   background: no-repeat center url("../images/townIcon4.png");
+}
+.townIcon4.enabled.completed {
+  background: no-repeat center url("../images/townIcon4-complete.png");
+}
+.townIcon5 {
+  background: no-repeat center url("../images/townIcon5-disabled.png");
+  width: 175px;
+  height: 125px;
+}
+.townIcon5.enabled {
+  background: no-repeat center url("../images/townIcon5.png");
+}
+.townIcon5.enabled.completed {
+  background: no-repeat center url("../images/townIcon5-complete.png");
 }
 .world-town {
   height: 110px;
