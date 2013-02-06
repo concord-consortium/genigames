@@ -8,7 +8,7 @@ obstacle(img, width, height)
 #obstacle-course-dialog
   display: none
   border-radius 5px
-  absolute: width 340px height 395px left 305px top 90px // 560px height available, 950px width
+  absolute: width 440px height 375px left 275px top 90px // 560px height available, 950px width
   background-color: #4e8da6
   z-index: 6000
 
@@ -26,21 +26,30 @@ obstacle(img, width, height)
     absolute: top 44px left 14px
     z-index: 6002
   .overall-time-text
-    absolute: top 44px left 194px right 14px
+    absolute: top 22px right 60px width 132px
     text-align: center
     div
       height: 1.3em
   .obstacle-time-breakdown
-    absolute: bottom 50px left 14px width 151px
+    absolute: bottom 75px left 14px width 140px
     text-align: center
     div
       height: 1.1em
-      &.divider
-        height: 2px
-        background-color: #cccccc
-  .completion-rep
-    absolute: bottom 50px left 175px right 14px
-    text-align: center
+  .reputation-calculation
+    absolute: bottom 50px right 14px width 222px
+    text-align: left
+    div
+      height: 1.1em
+    .points-title
+      text-align: center
+      padding-bottom: 10px
+    .points
+      absolute: right 0px
+      &.spent
+        color: red
+  div.divider
+    height: 2px
+    background-color: #cccccc
   .obstacle-buttons
     absolute: bottom 14px left 14px right 14px
     text-align: center

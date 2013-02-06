@@ -732,7 +732,11 @@ GG.ObstacleCourseDialogView = Ember.View.extend
   courseBinding: 'GG.obstacleCourseController.course'
   obstaclesBinding: 'GG.obstacleCourseController.obstacles'
   drakeBinding: 'GG.obstacleCourseController.drake'
-  reputationEarnedBinding: 'GG.obstacleCourseController.reputationEarned'
+  reputationWonBinding: 'GG.obstacleCourseController.reputationEarned'
+  taskReputationBinding: 'GG.reputationController.currentTaskReputation'
+  extraBreedsRepBinding: 'GG.reputationController.extraBreedsRep'
+  meiosisControlRepBinding: 'GG.reputationController.meiosisControlRep'
+  alleleRevealRepBinding: 'GG.reputationController.alleleRevealRep'
   visibleBinding: 'GG.obstacleCourseController.dialogVisible'
   firstObstacle: (->
     @get('obstacles')?[0]

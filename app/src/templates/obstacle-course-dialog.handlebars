@@ -8,6 +8,9 @@
     </div>
     <div class="overall-time-text">
       <div>
+        <h2>Time Taken</h2>
+      </div>
+      <div>
         <span class="align-left">You:</span><span class="align-right">{{view.myTotalTime}}s</span>
       </div>
       <div>vs.</div>
@@ -15,9 +18,30 @@
         <span class="align-left">Opponent:</span><span class="align-right">{{view.opponentTotalTime}}s</span>
       </div>
     </div>
-    <div class="completion-rep">
-      Reputation Points: +{{view.reputationEarned}}
+
+    <div class="reputation-calculation">
+      <div class="points-title">
+        <h2>Points</h2>
+      </div>
+      <div class="completion-rep">
+        <span class="align-left">Reputation Points Won:</span><span class="points">{{view.reputationWon}}</span>
+      </div>
+      {{#if GG.tasksController.meiosisControlEnabled}}
+        <div class="completion-rep-item">
+          <span class="action align-left">Points Spent on Meiosis Control:</span><span class="points spent">{{view.meiosisControlRep}}</span>
+        </div>
+      {{/if}}
+      {{#if GG.tasksController.hasHiddenGenes}}
+        <div class="completion-rep-item">
+          <span class="action align-left">Points Spent on Allele Reveal:</span><span class="points spent">{{view.alleleRevealRep}}</span>
+        </div>
+      {{/if}}
+      <div class="divider"></div>
+      <div class="completion-rep-item total">
+        <span class="action align-left">Points Earned:</span><span class="points earned">{{view.taskReputation}}</span>
+      </div>
     </div>
+
     <div class="obstacle-time-breakdown">
       {{#each obstacle in view.obstacles}}
         {{#view GG.ObstacleTimeView obstacleBinding="obstacle"}}
