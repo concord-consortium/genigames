@@ -54,10 +54,10 @@ GG.StateInTask = Ember.State.extend
         sex: child.get('sex')
         success: success
 
-    completeTask: ->
+    completeTask: (manager) ->
       GG.tasksController.completeCurrentTask()
       if GG.tasksController.get('currentTask.obstacleCourse')?
-        GG.statemanager.transitionTo 'obstacleCourse'
+        manager.transitionTo 'obstacleCourse'
       else
         GG.tasksController.showTaskCompletion()
 

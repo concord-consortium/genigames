@@ -95,7 +95,11 @@ GG.tasksController = Ember.ArrayController.create
   completeCurrentTask: ->
     task = @get 'currentTask'
     task.set 'completed', true
-    GG.reputationController.addReputation(task.get('reputation'), GG.Events.COMPLETED_TASK)
+    if GG.tasksController.get('currentTask.obstacleCourse')?
+      reputation = GG.obstacleCourseController.get 'reputationEarned'
+    else
+      reputation = task.get('reputation')
+    GG.reputationController.addReputation(reputation, GG.Events.COMPLETED_TASK)
     GG.reputationController.finalizeReputationForTaskRun()
     GG.logController.logEvent GG.Events.COMPLETED_TASK, name: task.get('name')
     GG.reputationController.finalizeReputation()
