@@ -56,7 +56,10 @@ GG.StateInTask = Ember.State.extend
 
     completeTask: ->
       GG.tasksController.completeCurrentTask()
-      GG.tasksController.showTaskCompletion()
+      if GG.tasksController.get('currentTask.obstacleCourse')?
+        GG.statemanager.transitionTo 'obstacleCourse'
+      else
+        GG.tasksController.showTaskCompletion()
 
     parentSelect: Ember.State.create
 
