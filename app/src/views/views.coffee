@@ -738,6 +738,7 @@ GG.ObstacleCourseDialogView = Ember.View.extend
   meiosisControlRepBinding: 'GG.reputationController.meiosisControlRep'
   alleleRevealRepBinding: 'GG.reputationController.alleleRevealRep'
   visibleBinding: 'GG.obstacleCourseController.dialogVisible'
+  taskCompleteBinding: 'GG.obstacleCourseController.taskComplete'
   firstObstacle: (->
     @get('obstacles')?[0]
   ).property('obstacles')

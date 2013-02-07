@@ -17,6 +17,15 @@
       <div>
         <span class="align-left">Opponent:</span><span class="align-right">{{view.opponentTotalTime}}s</span>
       </div>
+      <div class="victory">
+        <h1>
+          {{#if view.taskComplete}}
+            Victory!
+          {{else}}
+            You lost.
+          {{/if}}
+        </h1>
+      </div>
     </div>
 
     <div class="reputation-calculation">

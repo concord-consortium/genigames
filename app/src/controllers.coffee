@@ -169,11 +169,15 @@ GG.tasksController = Ember.ArrayController.create
 
   isCurrentTaskComplete: ->
     task = @get 'currentTask'
+    drake = GG.breedingController.get 'child'
+
+    if not task? and not drake?
+      return false
+
     # parse required characteristics
     parsedCharacteristics = task.get('targetDrake').split(/\s*,\s*/).map (ch, idx, arr)->
       ch = ch.toLowerCase()
       ch.charAt(0).toUpperCase() + ch.slice(1)
-    drake = GG.breedingController.get 'child'
     if drake.hasCharacteristics(parsedCharacteristics)
       task.set 'matchCount', (task.get 'matchCount')+1
       return true if task.get('matchCount') >= task.get('targetCount')
@@ -709,16 +713,29 @@ GG.obstacleCourseController = Ember.Object.create
   obstaclesBinding: 'course.obstacles'
   drakeBinding: 'GG.offspringController.content'
   breedsLeftBinding: 'GG.cyclesController.cycles'
+  taskComplete: (->
+    GG.tasksController.isCurrentTaskComplete()
+  ).property('drake')
+  obstaclesPassed: 0
   dialogVisible: false
 
   reputationEarned: (->
-    # Stub this for now...
-    n = @get('breedsLeft')
-    # we don't earn anything if we have no breeds left
-    # FIXME If the current breed reduced the count from 1 to 0, we should still award some points
-    return 0 if n is 0
-    return 90 + (10*n)
-  ).property('breedsLeft')
+    taskRep = GG.tasksController.get 'currentTask.reputation'
+    if not taskRep? then return null
+    taskComplete = @get 'taskComplete'
+    if taskComplete
+      training = @get 'breedsLeft'
+      # earn 10 points per breed left
+      return taskRep + (training * 10)
+    else
+      # earn 10% of repuation per obstacle passed
+      # this calculation is ugly...
+      @set 'obstaclesPassed', 0
+      for obstacle in @get('obstacles')
+        @calculateTime(obstacle, false)
+      passed = @get 'obstaclesPassed'
+      return Math.round  taskRep * passed * 0.1
+  ).property('drake', 'obstaclesPassed')
 
   myTotalTime: (->
     return 0 unless @get('course')? and @get('obstacles')?
@@ -756,6 +773,7 @@ GG.obstacleCourseController = Ember.Object.create
       # failure
       return obsTime * 4
 
+    @set 'obstaclesPassed', @get('obstaclesPassed') + 1
     training = @get 'breedsLeft'
     speedup  = Math.pow(0.9, training)    # reduce speed by 10% for each training cycle
 
