@@ -114,17 +114,6 @@ GG.Task = Ember.Object.extend
     GG.userController.saveState('task', this) unless @get 'skipSave'
   ).observes('completed','reputationEarned')
 
-  isComplete: ->
-    # parse required characteristics
-    parsedCharacteristics = @get('targetDrake').split(/\s*,\s*/).map (ch, idx, arr)->
-      ch = ch.toLowerCase()
-      ch.charAt(0).toUpperCase() + ch.slice(1)
-    drake = GG.breedingController.get 'child'
-    if drake.hasCharacteristics(parsedCharacteristics)
-      @set 'matchCount', (@get 'matchCount')+1
-      return true if @get('matchCount') >= @get('targetCount')
-    return false
-
 GG.Drake = Ember.Object.extend
   visibleGenesBinding: 'GG.drakeController.visibleGenes'
   hiddenGenesBinding: 'GG.drakeController.hiddenGenes'

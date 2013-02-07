@@ -168,8 +168,16 @@ GG.tasksController = Ember.ArrayController.create
       GG.statemanager.transitionTo 'inTown'
 
   isCurrentTaskComplete: ->
-    currentTask = @get 'currentTask'
-    return currentTask.isComplete()
+    task = @get 'currentTask'
+    # parse required characteristics
+    parsedCharacteristics = task.get('targetDrake').split(/\s*,\s*/).map (ch, idx, arr)->
+      ch = ch.toLowerCase()
+      ch.charAt(0).toUpperCase() + ch.slice(1)
+    drake = GG.breedingController.get 'child'
+    if drake.hasCharacteristics(parsedCharacteristics)
+      task.set 'matchCount', (task.get 'matchCount')+1
+      return true if task.get('matchCount') >= task.get('targetCount')
+    return false
 
   meiosisControlEnabled: (->
     !!@get 'currentTask.meiosisControl'
