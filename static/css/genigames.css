@@ -1324,9 +1324,9 @@ a:hover {
   display: none;
   border-radius: 5px;
   position: absolute;
-  width: 340px;
-  height: 395px;
-  left: 305px;
+  width: 440px;
+  height: 375px;
+  left: 275px;
   top: 90px;
   background-color: #4e8da6;
   z-index: 6000;
@@ -1358,34 +1358,52 @@ a:hover {
 }
 #obstacle-course-dialog-content .overall-time-text {
   position: absolute;
-  top: 44px;
-  left: 194px;
-  right: 14px;
+  top: 22px;
+  right: 60px;
+  width: 132px;
   text-align: center;
 }
 #obstacle-course-dialog-content .overall-time-text div {
   height: 1.3em;
 }
+#obstacle-course-dialog-content .overall-time-text .victory {
+  padding-top: 15px;
+  font-size: 1.2em;
+}
 #obstacle-course-dialog-content .obstacle-time-breakdown {
   position: absolute;
-  bottom: 50px;
+  bottom: 75px;
   left: 14px;
-  width: 151px;
+  width: 140px;
   text-align: center;
 }
 #obstacle-course-dialog-content .obstacle-time-breakdown div {
   height: 1.1em;
 }
-#obstacle-course-dialog-content .obstacle-time-breakdown div.divider {
-  height: 2px;
-  background-color: #ccc;
-}
-#obstacle-course-dialog-content .completion-rep {
+#obstacle-course-dialog-content .reputation-calculation {
   position: absolute;
   bottom: 50px;
-  left: 175px;
   right: 14px;
+  width: 222px;
+  text-align: left;
+}
+#obstacle-course-dialog-content .reputation-calculation div {
+  height: 1.1em;
+}
+#obstacle-course-dialog-content .reputation-calculation .points-title {
   text-align: center;
+  padding-bottom: 10px;
+}
+#obstacle-course-dialog-content .reputation-calculation .points {
+  position: absolute;
+  right: 0px;
+}
+#obstacle-course-dialog-content .reputation-calculation .points.spent {
+  color: #f00;
+}
+#obstacle-course-dialog-content div.divider {
+  height: 2px;
+  background-color: #ccc;
 }
 #obstacle-course-dialog-content .obstacle-buttons {
   position: absolute;
