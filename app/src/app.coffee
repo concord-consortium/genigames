@@ -52,13 +52,6 @@ Ember.Handlebars.registerHelper 'meiosisDefaults', (path, options) ->
   options.hash.crossoverSelectableBinding = "view.crossoverSelectable"
   return Ember.Handlebars.helpers.view(path, options)
 
-Math.log10 = (n)->
-  Math.log(n) / Math.LN10
-
-Math.integerDigits = (n)->
-  throw "unsupported" if n < 0
-  if n is 0 then 1 else (Math.log10(n) + 1)
-
 # on load
 $ ->
 

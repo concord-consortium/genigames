@@ -780,9 +780,7 @@ GG.ObstacleTimeView = Ember.View.extend
   obstacle: null
   breedsLeftBinding: 'GG.cyclesController.cycles'
   time: (->
-    time = GG.obstacleCourseController.calculateTime(@get('obstacle.obstacle'), false)
-    len = Math.integerDigits(time)
-    return time.toPrecision(len)
+    time = GG.obstacleCourseController.calculateTime(@get('obstacle'), false)
   ).property('obstacle','breedsLeft')
 
 GG.ObstacleView = Ember.View.extend

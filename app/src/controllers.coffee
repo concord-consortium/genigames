@@ -709,10 +709,6 @@ GG.obstacleCourseController = Ember.Object.create
   obstaclesBinding: 'course.obstacles'
   drakeBinding: 'GG.offspringController.content'
   breedsLeftBinding: 'GG.cyclesController.cycles'
-  initialBreedsBinding: 'GG.tasksController.currentTask.cycles'
-  opponentBreedsLeft: (->
-    Math.floor((@get('initialBreeds')-1)/2) + 0.5 # Don't allow ties
-  ).property('initialBreeds')
   dialogVisible: false
 
   reputationEarned: (->
@@ -726,41 +722,44 @@ GG.obstacleCourseController = Ember.Object.create
 
   myTotalTime: (->
     return 0 unless @get('course')? and @get('obstacles')?
-    total = 0.0
+    total = 0
     for obstacle in @get('obstacles')
-      total += @calculateTime(obstacle.obstacle, false)
-    len = Math.integerDigits(total)
-    return total.toPrecision(len)
-  ).property('course','breedsLeft','obstacles')
+      total += @calculateTime(obstacle, false)
+    return total
+  ).property('course','breedsLeft','obstacles', 'drake')
 
   opponentTotalTime: (->
     return 0 unless @get('course')? and @get('obstacles')?
-    total = 0.0
+    total = 0
     for obstacle in @get('obstacles')
-      total += @calculateTime(obstacle.obstacle, true)
-    len = Math.integerDigits(total)
-    return total.toPrecision(len)
+      total += @calculateTime(obstacle, true)
+    return Math.round total
   ).property('course','opponentBreedsLeft','obstacles')
 
   calculateTime: (obstacle, opponent=false)->
-    n = if opponent then @get('opponentBreedsLeft') else @get('breedsLeft')
-    n += 1 # to ensure we don't divide by zero
-    raw = switch obstacle
-      when "tree"
-        10 + (25/n)
-      when "pond"
-        14 + (20/n)
-      when "sheep"
-        14 + (20/n)
-      when "ducks"
-        20 + (10/n)
-      when "rain"
-        4 + (5/n)
-      when "desk"
-        30 + (8/n)
-      else
-        15 + (15/n)
-    return Math.round(raw)
+    obsTime = obstacle.time || 1
+
+    # opponent always goes 10% slower
+    if opponent then return obsTime * 1.1
+
+    drake  = @get 'drake'
+    target = obstacle.target
+
+    return 0 unless drake
+    return 1 unless target
+
+    parsedCharacteristics = target.split(/\s*,\s*/).map (ch, idx, arr)->
+      ch = ch.toLowerCase()
+      ch.charAt(0).toUpperCase() + ch.slice(1)
+
+    unless drake.hasCharacteristics(parsedCharacteristics)
+      # failure
+      return obsTime * 4
+
+    training = @get 'breedsLeft'
+    speedup  = Math.pow(0.9, training)    # reduce speed by 10% for each training cycle
+
+    return Math.round obsTime * speedup
 
 GG.baselineController = Ember.Object.create
   isBaseline: false
