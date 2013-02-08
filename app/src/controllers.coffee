@@ -719,6 +719,22 @@ GG.obstacleCourseController = Ember.Object.create
   obstaclesPassed: 0
   dialogVisible: false
 
+  showInfoDialog: ->
+    if not GG.tasksController.isCurrentTaskComplete()
+      text = "Uh oh, you're out of breeds! You're going to send this Drake to
+              the obstacle course. Good luck!"
+    else
+      breedsLeft = @get 'breedsLeft'
+      num = "no, one, two, three, four, five, six, seven, eight, nine, ten".split(", ")[breedsLeft]
+      s = if breedsLeft is 1 then "" else "s"
+      text = "Great job, I think this Drake will do well in the obstacle course!
+              Because you had #{num} breed#{s} remaining, your Drake "
+      text +=
+        if breedsLeft then "will be trained #{num} time#{s} before the course,
+                            which will make it even faster!"
+        else "won't be trained before the course."
+    GG.showModalDialog text, -> GG.statemanager.send  "startCourse"
+
   reputationEarned: (->
     taskRep = GG.tasksController.get 'currentTask.reputation'
     if not taskRep? then return null

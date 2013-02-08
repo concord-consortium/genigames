@@ -274,6 +274,9 @@ GG.StateInTask = Ember.State.extend
 
     obstacleCourse: Ember.State.create
       enter: (manager)->
+        GG.obstacleCourseController.showInfoDialog()
+
+      startCourse: (manager)->
         GG.obstacleCourseController.set('dialogVisible', true)
         $('#obstacle-course-dialog').show()
         $('#modal-backdrop').show()
