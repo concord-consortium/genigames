@@ -63,7 +63,9 @@
     </div>
     <div class="obstacle-buttons">
       <button {{action tryAgain}}>Try Again</button>
-      <button {{action continueOn}}>Next Level</button>
+      {{#if view.taskComplete}}
+        <button {{action continueOn}}>Next Level</button>
+      {{/if}}
     </div>
   </div>
 {{/if}}
