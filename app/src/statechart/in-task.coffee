@@ -239,11 +239,16 @@ GG.StateInTask = Ember.State.extend
       breedDrakeInternal: ->
         GG.breedingController.breedDrake()
 
-      showOffspring: ->
+      showOffspring: (manager) ->
         $('#progress-bar').switchClass($('#progress-bar').attr('class'),"results",1000)
         $("#offspring-pool .chromosome-panel").show()
         $('#offspring-panel').animate({left: -76},300,"easeOutCubic")
         GG.tutorialMessageController.showFirstOffspringCreatedTutorial()
+        if GG.tasksController.get('currentTask.cyclesRemaining') is 0 and
+            GG.tasksController.get('currentTask.obstacleCourse')?
+          setTimeout ->
+            manager.transitionTo 'obstacleCourse'
+          , 800
 
       submitOffspring: (manager) ->
         manager.send 'checkForTaskCompletion'

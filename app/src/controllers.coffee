@@ -721,7 +721,7 @@ GG.obstacleCourseController = Ember.Object.create
 
   showInfoDialog: ->
     if not GG.tasksController.isCurrentTaskComplete()
-      text = "Uh oh, you're out of breeds! You're going to send this Drake to
+      text = "Uh oh, you're out of breeds! You're going to have to send this Drake to
               the obstacle course. Good luck!"
     else
       breedsLeft = @get 'breedsLeft'

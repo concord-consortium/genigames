@@ -116,11 +116,17 @@ GG.BreedButtonView = Ember.View.extend GG.PointsToolTip,
   toolTipText: (->
     tip = "Produce an offspring drake from the current parents"
     if @get 'noMoreBreeds'
-      tip += ". Because you are out of breeding cycles, this will cost you reputation!"
+      if GG.tasksController.get('currentTask.obstacleCourse')?
+        tip += ". Because you are out of breeding cycles, and this challenge contains
+                an obstacle course, you can't breed anymore."
+      else
+        tip += ". Because you are out of breeding cycles, this will cost you reputation!"
     tip
   ).property('noMoreBreeds')
   costPropertyName: (->
-    if @get 'noMoreBreeds' then 'extraBreedCycle' else ' '
+    if @get('noMoreBreeds') && !GG.tasksController.get('currentTask.obstacleCourse')?
+      'extraBreedCycle'
+    else ' '
   ).property('noMoreBreeds')
 
   motherBinding: 'GG.parentController.selectedMother'
@@ -128,14 +134,16 @@ GG.BreedButtonView = Ember.View.extend GG.PointsToolTip,
 
   classNameBindings : ['enabled', 'noMoreBreeds']
   enabled: (->
-    !!(this.get('mother') && this.get('father'))
-  ).property('mother', 'father')
+    !!(this.get('mother') && this.get('father')) and
+    !(@get('noMoreBreeds') && GG.tasksController.get('currentTask.obstacleCourse')?)
+  ).property('mother', 'father', 'noMoreBreeds')
   noMoreBreeds: (->
     GG.cyclesController.get('cycles') <= 0 and not GG.baselineController.get 'isBaseline'
   ).property('GG.cyclesController.cycles', 'GG.baselineController.isBaseline')
 
   click: ->
-    GG.statemanager.send('breedDrake')
+    if @get 'enabled'
+      GG.statemanager.send('breedDrake')
 
 GG.MeiosisButtonView = Ember.View.extend GG.PointsToolTip,
   tagName: 'div'
