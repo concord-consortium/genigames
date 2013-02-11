@@ -195,6 +195,23 @@ GG.tasksController = Ember.ArrayController.create
       return false
   ).property('currentTask.hiddenGenes')
 
+  baselineTaskReputation: (->
+    rep = 0
+    if @get('currentTask')?
+      cyclesUsed = @get('currentTask.cyclesRemaining')
+      cyclesAllowed = @get('currentTask.cycles')
+      if cyclesUsed < (cyclesAllowed/2)
+        rep = 100
+      else if cyclesUsed > (cyclesAllowed*2)
+        rep = 0
+      else
+        allowed = (cyclesAllowed*2)-(cyclesAllowed/2)
+        used = cyclesUsed - (cyclesAllowed/2)
+        remaining = allowed - used
+        rep = Math.floor(100*(remaining/allowed))
+    return rep
+  ).property('currentTask','currentTask.cyclesRemaining')
+
 GG.drakeController = Ember.Object.create
   visibleGenesBinding: 'GG.tasksController.currentTask.visibleGenes'
   hiddenGenesBinding: 'GG.tasksController.currentTask.hiddenGenes'
@@ -1110,7 +1127,11 @@ GG.reputationController = Ember.Object.create
   # the task is complete
   finalizeReputation: ->
     best = @get 'bestTaskReputation'
-    current = @get 'currentTaskReputation'
+    if GG.baselineController.get 'isBaseline'
+      # calculate "reputation" based on breeds used
+      current = GG.tasksController.get 'baselineTaskReputation'
+    else
+      current = @get 'currentTaskReputation'
 
     if current > best
       @set('bestTaskReputation', current)
