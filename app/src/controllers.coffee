@@ -753,6 +753,7 @@ GG.obstacleCourseController = Ember.Object.create
     GG.showModalDialog text, -> GG.statemanager.send  "startCourse"
 
   reputationEarned: (->
+    return 0 unless @get('course')?
     taskRep = GG.tasksController.get 'currentTask.reputation'
     if not taskRep? then return null
     taskComplete = @get 'taskComplete'
