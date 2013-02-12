@@ -735,6 +735,21 @@ GG.obstacleCourseController = Ember.Object.create
   ).property('drake')
   obstaclesPassed: 0
   dialogVisible: false
+  currentObstacleIndex: 0
+  currentObstacle: null
+
+  setFirstObstacle: (->
+    @set 'currentObstacle', @get('obstacles')[0]
+  ).observes 'obstacles'
+
+  setCurrentObstacle: (->
+    index = @get 'currentObstacleIndex'
+    @set 'currentObstacle', @get('obstacles')[index]
+  ).observes 'currentObstacleIndex'
+
+  goToNextObstacle: ->
+    nextIndex = @get('currentObstacleIndex')+1
+    @set 'currentObstacleIndex', nextIndex
 
   showInfoDialog: ->
     if not GG.tasksController.isCurrentTaskComplete()

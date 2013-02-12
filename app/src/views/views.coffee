@@ -763,9 +763,7 @@ GG.ObstacleCourseDialogView = Ember.View.extend
   alleleRevealRepBinding: 'GG.reputationController.alleleRevealRep'
   visibleBinding: 'GG.obstacleCourseController.dialogVisible'
   taskCompleteBinding: 'GG.obstacleCourseController.taskComplete'
-  firstObstacle: (->
-    @get('obstacles')?[0]
-  ).property('obstacles')
+  currentObstacleBinding: 'GG.obstacleCourseController.currentObstacle'
   myTotalTimeBinding: 'GG.obstacleCourseController.myTotalTime'
   opponentTotalTimeBinding: 'GG.obstacleCourseController.opponentTotalTime'
   tryAgain: ->
@@ -774,31 +772,6 @@ GG.ObstacleCourseDialogView = Ember.View.extend
   continueOn: ->
     # Go back to town
     GG.statemanager.transitionTo 'inTown'
-  ## TODO: Legacy animation code, for the old obstacle course page.
-  #        Leaving it here for now for reference...
-  start: ->
-    $drake = $('.obstacle-course .drake-container')
-    if path = @get 'course.path'
-      segments = path.split " "
-      for point in segments
-        [x,y] = point.split ","
-        console.log "going to "+x+","+y
-        $drake.animate
-          left: x+"px",
-          top:  y+"px",
-          10000/segments.length,
-          'linear'
-    else
-      $drake.animate({left: "+=800px"}, 10000, 'linear')
-    $('.obstacle-course .obstacles').animate({left: "-=400px"}, 10000, 'linear')
-    $('.obstacle-course .background').animate({left: "-=400px"}, 10000, 'linear')
-  reset: ->
-    $('.obstacle-course .obstacles').css({left: "200px"})
-    $('.obstacle-course .background').css({left: "0"})
-    $('.obstacle-course .drake-container').css({left: "0"})
-  done: ->
-    @continueOn
-  ## END legacy animation code
 
 GG.ObstacleTimeView = Ember.View.extend
   tagName: 'div'

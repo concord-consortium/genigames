@@ -3,21 +3,21 @@
     {{#with view.drake}}
       {{view GG.DrakeView contentBinding="this"}}
     {{/with}}
-    <div class="first-obstacle">
-      {{view GG.ObstacleView contentBinding="view.firstObstacle" skipStyle="true"}}
+    <div class="current-obstacle">
+      {{view GG.ObstacleView contentBinding="view.currentObstacle" skipStyle="true"}}
     </div>
     <div class="overall-time-text">
       <div>
         <h2>Time Taken</h2>
       </div>
       <div>
-        <span class="align-left">You:</span><span class="align-right">{{view.myTotalTime}}s</span>
+        <span class="align-left">You:</span><span class="align-right revealable">{{view.myTotalTime}}s</span>
       </div>
       <div>vs.</div>
       <div>
         <span class="align-left">Opponent:</span><span class="align-right">{{view.opponentTotalTime}}s</span>
       </div>
-      <div class="victory">
+      <div class="victory revealable">
         <h1>
           {{#if view.taskComplete}}
             Victory!
@@ -33,21 +33,21 @@
         <h2>Points</h2>
       </div>
       <div class="completion-rep">
-        <span class="align-left">Reputation Points Won:</span><span class="points">{{view.reputationWon}}</span>
+        <span class="align-left">Reputation Points Won:</span><span class="points revealable">{{view.reputationWon}}</span>
       </div>
       {{#if GG.tasksController.meiosisControlEnabled}}
         <div class="completion-rep-item">
-          <span class="action align-left">Points Spent on Meiosis Control:</span><span class="points spent">{{view.meiosisControlRep}}</span>
+          <span class="action align-left">Points Spent on Meiosis Control:</span><span class="points spent revealable">{{view.meiosisControlRep}}</span>
         </div>
       {{/if}}
       {{#if GG.tasksController.hasHiddenGenes}}
         <div class="completion-rep-item">
-          <span class="action align-left">Points Spent on Allele Reveal:</span><span class="points spent">{{view.alleleRevealRep}}</span>
+          <span class="action align-left">Points Spent on Allele Reveal:</span><span class="points spent revealable">{{view.alleleRevealRep}}</span>
         </div>
       {{/if}}
       <div class="divider"></div>
       <div class="completion-rep-item total">
-        <span class="action align-left">Points Earned:</span><span class="points earned">{{view.taskReputation}}</span>
+        <span class="action align-left">Points Earned:</span><span class="points earned revealable">{{view.taskReputation}}</span>
       </div>
     </div>
 
@@ -55,13 +55,13 @@
       {{#each obstacle in view.obstacles}}
         {{#view GG.ObstacleTimeView obstacleBinding="obstacle"}}
           <span class="align-left">{{view.obstacle.obstacle}}:</span>
-          <span class="align-right">{{view.time}} seconds</span>
+          <span class="align-right revealable">{{view.time}} seconds</span>
         {{/view}}
       {{/each}}
       <div class="divider"></div>
-      <div><span class="align-right">{{view.myTotalTime}} seconds</span></div>
+      <div><span class="align-right revealable">{{view.myTotalTime}} seconds</span></div>
     </div>
-    <div class="obstacle-buttons">
+    <div class="obstacle-buttons revealable">
       <button {{action tryAgain}}>Try Again</button>
       {{#if view.taskComplete}}
         <button {{action continueOn}}>Next Level</button>
