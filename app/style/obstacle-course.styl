@@ -1,7 +1,7 @@
 @import 'app/style/mixins/position'
 
 obstacle(img, width, height)
-  background: bottom left no-repeat url(img)
+  background: bottom left no-repeat url('../images/obstacle-course/' + img)
   width: width
   height: height
 
@@ -16,6 +16,7 @@ obstacle(img, width, height)
   background-color: white
   absolute: bottom 5px right 5px left 5px top 5px
   padding: 14px
+  overflow: hidden
   z-index: 6001
   text-align: center
   .align-left
@@ -61,24 +62,63 @@ obstacle(img, width, height)
   .current-obstacle
     absolute: top 14px left 14px width 180px height 180px
     .obstacle
-      absolute: left
+      absolute: left bottom
       display: inline-block
-      &.ducks
-        obstacle('../images/obstacle-course/obstacle-ducks.png', 200px, 100px)
-        absolute: bottom 0px
-      &.desk
-        obstacle('../images/obstacle-course/obstacle-desk.png', 200px, 100px)
-        absolute: bottom 0px
-      &.sheep
-        obstacle('../images/obstacle-course/obstacle-sheep.png', 200px, 100px)
-        absolute: bottom 0px
-      &.rain
-        obstacle('../images/obstacle-course/obstacle-rain.png', 200px, 100px)
-        absolute: bottom 0px
-      &.tree
-        obstacle('../images/obstacle-course/tree01.png', 150px, 183px)
-        absolute: bottom 0px
-      &.pond
-        obstacle('../images/obstacle-course/pond01.png', 200px, 84px)
-        absolute: bottom 0px
-
+      &.after
+        display:none
+      &.blue
+        obstacle('color_blue1.png', 275px, 200px)
+        &.after
+          obstacle('color_blue2.png', 275px, 200px)
+      &.green
+        obstacle('color_green1.png', 325px, 175px)
+        &.after
+          obstacle('color_green2.png', 325px, 175px)
+      &.red
+        obstacle('color_blue1.png', 300px, 215px)
+        &.after
+          obstacle('color_red2.png', 300px, 215px)
+      &.fire
+        obstacle('firebreath1.png', 200px, 200px)
+        &.after
+          obstacle('firebreath2.png', 200px, 200px)
+      &.nonmetallic
+        obstacle('matte1.png', 350px, 225px)
+        &.after
+          obstacle('matte2.png', 350px, 225px)
+      &.metallic
+        obstacle('metallic01.png', 125px, 225px)
+        &.after
+          obstacle('metallic02.png', 125px, 225px)
+      &.narrow-spines
+        obstacle('spines-narrow1.png', 200px, 210px)
+        &.after
+          obstacle('spines-narrow2.png', 200px, 210px)
+      &.medium-spines
+        obstacle('spines-medium1.png', 350px, 410px)
+        &.after
+          obstacle('spines-medium2.png', 350px, 410px)
+      &.wide-spines
+        obstacle('spines-narrow1.png', 175px, 175px)
+        &.after
+          obstacle('spines-narrow2.png', 175px, 175px)
+      &.short-tail
+        obstacle('tail_short1.png', 175px, 125px)
+        &.after
+          obstacle('tail_short2.png', 175px, 125px)
+      &.kinked-tail
+        obstacle('tail_kinked1.png', 350px, 200px)
+        &.after
+          obstacle('tail_kinked2.png', 350px, 200px)
+      &.long-tail
+        obstacle('tail_long1.png', 225px, 375px)
+        &.after
+          obstacle('tail_long2.png', 225px, 375px)
+      &.wingless
+        obstacle('wingless1.png', 300px, 200px)
+        &.after
+          obstacle('wingless2.png', 300px, 200px)
+      &.wings
+        obstacle('wings1.png', 325px, 400px)
+        &.after
+          obstacle('wings2.png', 325px, 400px)

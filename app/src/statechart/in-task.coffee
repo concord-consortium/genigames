@@ -288,23 +288,30 @@ GG.StateInTask = Ember.State.extend
         $('#modal-backdrop').show()
 
         GG.obstacleCourseController.set 'currentObstacleIndex', 0
-        numObstacles = GG.obstacleCourseController.get 'obstacles'
+        numObstacles = GG.obstacleCourseController.get('obstacles').length
+
+        finishObstacle = ->
+          index = GG.obstacleCourseController.get 'currentObstacleIndex'
+          $($(".obstacle-time-breakdown .revealable")[index]).show()
+          if GG.obstacleCourseController.didPassObstacle()
+            $(".obstacle").hide()
+            $(".obstacle.after").show()
+          setTimeout showNextObstacle, 1800
 
         showNextObstacle = ->
           index = GG.obstacleCourseController.get 'currentObstacleIndex'
-          $($(".obstacle-time-breakdown .revealable")[index]).show()
-          GG.obstacleCourseController.goToNextObstacle()
-          if index < (numObstacles-2)
-            setTimeout showNextObstacle, 3000
+          if index < numObstacles - 1
+            GG.obstacleCourseController.goToNextObstacle()
+            setTimeout finishObstacle, 1800
           else
             setTimeout ->
               $(".obstacle-time-breakdown .align-right").show()
               setTimeout ->
                 $("#obstacle-course-dialog-content .revealable").show()
               , 500
-            , 3000
+            , 200
 
-        setTimeout showNextObstacle, 3000
+        setTimeout finishObstacle, 1800
 
       exit: (manager)->
         GG.obstacleCourseController.set('dialogVisible', false)

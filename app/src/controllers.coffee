@@ -809,6 +809,14 @@ GG.obstacleCourseController = Ember.Object.create
     return Math.round total
   ).property('course','opponentBreedsLeft','obstacles')
 
+  didPassObstacle: (obstacle=@get('currentObstacle')) ->
+    drake  = @get 'drake'
+    target = obstacle.target
+    parsedCharacteristics = target.split(/\s*,\s*/).map (ch, idx, arr)->
+      ch = ch.toLowerCase()
+      ch.charAt(0).toUpperCase() + ch.slice(1)
+    drake.hasCharacteristics(parsedCharacteristics)
+
   calculateTime: (obstacle, opponent=false)->
     obsTime = obstacle.time || 1
 
@@ -821,11 +829,7 @@ GG.obstacleCourseController = Ember.Object.create
     return 0 unless drake
     return 1 unless target
 
-    parsedCharacteristics = target.split(/\s*,\s*/).map (ch, idx, arr)->
-      ch = ch.toLowerCase()
-      ch.charAt(0).toUpperCase() + ch.slice(1)
-
-    unless drake.hasCharacteristics(parsedCharacteristics)
+    unless @didPassObstacle obstacle
       # failure
       return obsTime * 4
 

@@ -791,8 +791,9 @@ GG.ObstacleTimeView = Ember.View.extend
 GG.ObstacleView = Ember.View.extend
   tagName: 'div'
   classNames: ['obstacle']
-  classNameBindings: ['type']
+  classNameBindings: ['type', 'after']
   attributeBindings  : ['style']
+  after: false
   skipStyle: false
   style: (->
     if @get 'skipStyle'

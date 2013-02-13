@@ -3,8 +3,11 @@
     {{#with view.drake}}
       {{view GG.DrakeView contentBinding="this"}}
     {{/with}}
-    <div class="current-obstacle">
-      {{view GG.ObstacleView contentBinding="view.currentObstacle" skipStyle="true"}}
+    <div class="current-obstacle before">
+      {{view GG.ObstacleView contentBinding="view.currentObstacle" skipStyle=true}}
+    </div>
+    <div class="current-obstacle after">
+      {{view GG.ObstacleView contentBinding="view.currentObstacle" skipStyle=true after=true}}
     </div>
     <div class="overall-time-text">
       <div>
