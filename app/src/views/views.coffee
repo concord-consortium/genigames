@@ -733,6 +733,21 @@ GG.MeiosisView = Ember.View.extend
     return alleles.slice(1)
   ).property('chosenGamete')
 
+GG.MeiosisSpeedSliderView = Ember.View.extend
+  tagName: 'div'
+  elementId: 'meiosis-speed-slider-parent'
+  didInsertElement: ->
+    # slider can go from -Infinity to 1.9999.
+    # For now, we'll just have 2 values: 0 and 1.
+    # The smaller the slider value, the slower the animation will go.
+    $('#meiosis-speed-slider').slider
+      value: (2 - GG.MeiosisAnimation.get('timeScale'))
+      min: -1
+      max: 1
+      step: 2
+      change: (event,ui)->
+        GG.MeiosisAnimation.set('timeScale', (2 - ui.value))
+
 GG.ObstacleCourseDialogView = Ember.View.extend
   elementId: 'obstacle-course-dialog'
   templateName: 'obstacle-course-dialog'
