@@ -756,7 +756,6 @@ GG.ObstacleCourseDialogView = Ember.View.extend
   courseBinding: 'GG.obstacleCourseController.course'
   obstaclesBinding: 'GG.obstacleCourseController.obstacles'
   drakeBinding: 'GG.obstacleCourseController.drake'
-  reputationWonBinding: 'GG.obstacleCourseController.reputationEarned'
   taskReputationBinding: 'GG.reputationController.currentTaskReputation'
   extraBreedsRepBinding: 'GG.reputationController.extraBreedsRep'
   meiosisControlRepBinding: 'GG.reputationController.meiosisControlRep'
@@ -766,6 +765,14 @@ GG.ObstacleCourseDialogView = Ember.View.extend
   currentObstacleBinding: 'GG.obstacleCourseController.currentObstacle'
   myTotalTimeBinding: 'GG.obstacleCourseController.myTotalTime'
   opponentTotalTimeBinding: 'GG.obstacleCourseController.opponentTotalTime'
+  nTrainingsBinding: 'GG.cyclesController.cycles'
+  trainingPoints: (->
+    @get('nTrainings') * 10
+  ).property('nTrainings')
+  courseCompletionPoints: (->
+    GG.obstacleCourseController.get('reputationEarned') - @get('trainingPoints')
+  ).property('GG.obstacleCourseController.reputationEarned', 'trainingPoints')
+
   tryAgain: ->
     # restart task
     GG.tasksController.restartCurrentTask()

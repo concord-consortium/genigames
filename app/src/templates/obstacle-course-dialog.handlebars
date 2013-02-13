@@ -30,19 +30,22 @@
 
     <div class="reputation-calculation">
       <div class="points-title">
-        <h2>Points</h2>
+        <h2>Reputation Points</h2>
       </div>
       <div class="completion-rep">
-        <span class="align-left">Reputation Points Won:</span><span class="points revealable">{{view.reputationWon}}</span>
+        <span class="align-left">Obstacle Course Completion:</span><span class="points revealable">{{view.courseCompletionPoints}}</span>
+      </div>
+      <div class="completion-rep">
+        <span class="align-left">Speed Bonus for {{view.nTrainings}} Trainings</span><span class="points revealable">{{view.trainingPoints}}</span>
       </div>
       {{#if GG.tasksController.meiosisControlEnabled}}
         <div class="completion-rep-item">
-          <span class="action align-left">Points Spent on Meiosis Control:</span><span class="points spent revealable">{{view.meiosisControlRep}}</span>
+          <span class="action align-left">Meiosis Control:</span><span class="points spent revealable">{{view.meiosisControlRep}}</span>
         </div>
       {{/if}}
       {{#if GG.tasksController.hasHiddenGenes}}
         <div class="completion-rep-item">
-          <span class="action align-left">Points Spent on Allele Reveal:</span><span class="points spent revealable">{{view.alleleRevealRep}}</span>
+          <span class="action align-left">Allele Reveal:</span><span class="points spent revealable">{{view.alleleRevealRep}}</span>
         </div>
       {{/if}}
       <div class="divider"></div>
