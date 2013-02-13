@@ -135,7 +135,7 @@ GG.StateInTask = Ember.State.extend
         # hide the offspring pool
         $('#target').hide()
         $('#chromosome-labels').hide()
-        $('#breed-controls').animate({left: 489},400,'easeOutCubic')
+        $('#breed-controls').animate({left: 474},400,'easeOutCubic')
         $("#breeder").animate({left: -459},500,"easeOutCubic")
         $("#offspring-panel").animate({left: 400},500,"easeOutCubic")
         setTimeout ->

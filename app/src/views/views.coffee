@@ -741,6 +741,7 @@ GG.MeiosisSpeedSliderView = Ember.View.extend
     # For now, we'll just have 2 values: 0 and 1.
     # The smaller the slider value, the slower the animation will go.
     $('#meiosis-speed-slider').slider
+      orientation: 'vertical'
       value: (2 - GG.MeiosisAnimation.get('timeScale'))
       min: -1
       max: 1
