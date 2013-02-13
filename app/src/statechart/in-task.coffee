@@ -247,6 +247,7 @@ GG.StateInTask = Ember.State.extend
         if GG.tasksController.get('currentTask.cyclesRemaining') is 0 and
             GG.tasksController.get('currentTask.obstacleCourse')?
           setTimeout ->
+            GG.tasksController.awardTaskReputation false
             manager.transitionTo 'obstacleCourse'
           , 800
 

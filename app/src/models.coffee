@@ -236,6 +236,9 @@ GG.Events =
   CHOSE_CHROMOSOME: "Chromosome selected"
   MADE_CROSSOVER  : "Crossover selected"
 
+  #Obstacle course events
+  INCOMPLETE_COURSE: "Incomplete obstacle course"
+
 GG.TaskNPC = Ember.Object.extend
   name: null
   imageURL: null

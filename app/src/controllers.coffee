@@ -92,17 +92,24 @@ GG.tasksController = Ember.ArrayController.create
     @set 'currentTask', null
     GG.parentController.reset()
 
-  completeCurrentTask: ->
+  awardTaskReputation: (success) ->
     task = @get 'currentTask'
-    task.set 'completed', true
-    if GG.tasksController.get('currentTask.obstacleCourse')?
+    isCourse = GG.tasksController.get('currentTask.obstacleCourse')?
+    if isCourse
       reputation = GG.obstacleCourseController.get 'reputationEarned'
     else
       reputation = task.get('reputation')
-    GG.reputationController.addReputation(reputation, GG.Events.COMPLETED_TASK)
+    event = if (isCourse and !success) then GG.Events.INCOMPLETE_COURSE else GG.Events.COMPLETED_TASK
+    GG.reputationController.addReputation(reputation, event)
     GG.reputationController.finalizeReputationForTaskRun()
-    GG.logController.logEvent GG.Events.COMPLETED_TASK, name: task.get('name')
     GG.reputationController.finalizeReputation()
+
+
+  completeCurrentTask: ->
+    task = @get 'currentTask'
+    task.set 'completed', true
+    @awardTaskReputation true
+    GG.logController.logEvent GG.Events.COMPLETED_TASK, name: task.get('name')
 
   restartCurrentTask: ->
     task = @get 'currentTask'
