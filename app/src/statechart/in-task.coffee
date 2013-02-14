@@ -132,19 +132,26 @@ GG.StateInTask = Ember.State.extend
 
     animatingMeiosis: Ember.State.create
       setup: (manager)->
-        # hide the offspring pool
         $('#target').hide()
-        $('#chromosome-labels').hide()
         $('#breed-controls').animate({left: 474},400,'easeOutCubic')
         $("#breeder").animate({left: -459},500,"easeOutCubic")
+        # hide the offspring pool
         $("#offspring-panel").animate({left: 400},500,"easeOutCubic")
+        $("#offspring-pool .chromosome-panel").hide()
+        # show the original parent chromosomes
         setTimeout ->
+          $('#chromosome-labels').show()
+          GG.motherPoolController.set('hidden', false)
+          GG.fatherPoolController.set('hidden', false)
+        , 200
+        setTimeout ->
+          $('#chromosome-labels').hide()
           GG.motherPoolController.set('hidden', true)
           GG.fatherPoolController.set('hidden', true)
-        , 600
+        , 2600
         setTimeout ->
           manager.send 'animate'
-        , 800
+        , 2800
 
       animate: (manager)->
         if GG.cyclesController.get('cycles') <= 0
