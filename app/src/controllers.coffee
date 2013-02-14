@@ -747,12 +747,12 @@ GG.obstacleCourseController = Ember.Object.create
   currentObstacle: null
 
   setFirstObstacle: (->
-    @set 'currentObstacle', @get('obstacles')[0]
+    @set 'currentObstacle', @get('obstacles')?[0]
   ).observes 'obstacles'
 
   setCurrentObstacle: (->
     index = @get 'currentObstacleIndex'
-    @set 'currentObstacle', @get('obstacles')[index]
+    @set 'currentObstacle', @get('obstacles')?[index]
   ).observes 'currentObstacleIndex'
 
   goToNextObstacle: ->
