@@ -543,6 +543,11 @@ GG.NPCHeartBubbleView = Ember.View.extend GG.PointsToolTip,
   toolTipText: (->
     @get('content').getShortText()
   ).property('content')
+  mouseEnter: ->
+    # stop(true, true) is necessary so that we don't end up with a slowly enlarging/shrinking image...
+    @$().stop(true, true).animate({width: "+=4px", height: "+=4px", top: "-=2px", left: "-=2px"}, 100, 'easeOutCubic')
+  mouseLeave: ->
+    @$().stop(true, true).animate({width: "-=4px", height: "-=4px", top: "+=2px", left: "+=2px"}, 100, 'easeOutCubic')
 
 GG.NPCFinalMessageBubbleView = Ember.View.extend
   tagName            : 'div'

@@ -34,7 +34,9 @@
         <button {{action "next"}}>Go straight to next town</button>
         <button {{action "world"}}>Go to world view</button>
       {{/view}}
-      {{view GG.NPCHeartBubbleView contentBinding="this"}}
+      <a href="#" {{action "npcSelected" this}}>
+        {{view GG.NPCHeartBubbleView contentBinding="this"}}
+      </a>
       {{view GG.NPCView contentBinding="this"}}
     {{/view}}
   {{/each}}

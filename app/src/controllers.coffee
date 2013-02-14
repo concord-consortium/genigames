@@ -142,7 +142,7 @@ GG.tasksController = Ember.ArrayController.create
 
   showTaskDescription: (task) ->
     @setCurrentTask task
-    task.set 'showQuestionBubble', false
+    otherTask.set('showQuestionBubble', false) for otherTask in GG.tasksController.content
     task.set 'showSpeechBubble', true
 
   showTaskCompletion: ->
