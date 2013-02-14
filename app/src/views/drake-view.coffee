@@ -16,6 +16,8 @@ GG.DrakeView = Ember.View.extend
   showAnimation      : false
   currentAnimation   : null
   width              : "200px"
+  obstacleCourse       : false
+  obstacleStateBinding : 'content.obstacleState'
   org : (->
     @get('content.biologicaOrganism')
   ).property().cacheable()
@@ -68,6 +70,7 @@ GG.DrakeView = Ember.View.extend
   ).property()
   didInsertElement: ->
     return if GG.baselineController.get('isBaseline') # no animations in baseline
+    #return if @get 'obstacleCourse' # don't automatically start obstacle course animations
 
     # Wait for the animation images to load, then move it in place and start it up
     setupAnimation = =>
@@ -87,6 +90,7 @@ GG.DrakeView = Ember.View.extend
       if @get('isDestroyed') then return
       Ember.run.next =>
         $(layer + ' .drake-idle-img').imagesLoaded =>
+          time = if @get('obstacleState')? then 800 else 3000
           setTimeout =>
             # rescale animation image width before showing
             width = @get('currentAnimation.frames') * 100
@@ -97,7 +101,7 @@ GG.DrakeView = Ember.View.extend
               $(layer + ' .static').hide()
               @idleAnimation()
               @setNextIdleInterval()
-          , 3000  # this timeout is a hack to remove the blink between showing the static and idle images on FF
+          , time  # this timeout is a hack to remove the blink between showing the static and idle images on FF
 
     @set('showAnimation', true)
 
@@ -109,20 +113,32 @@ GG.DrakeView = Ember.View.extend
     $("#{layer} .idle").imagesLoaded onComplete
 
   hasShownTraitAnimation: false
+  hasShownObstacleAnimation: false
+
+  animateObstacleResult: (->
+    if @get('obstacleCourse') and @get('obstacleState')?
+      @set 'hasShownObstacleAnimation', false
+      @setNextIdleInterval()
+  ).observes('obstacleState')
 
   setNextAnimation: ->
     if @get('isDestroyed') then return
-    # hard-coded animation selection, knowing that we just have headturn and metallic.
-    # next we will want more interesting automatic selection based on the presense
-    # of arbitrary traits
-    if @get('shine') and (!@get('hasShownTraitAnimation') or Math.random() < 0.5)
+
+    if (@get('obstacleCourse') and @get('obstacleState')?)
+      state = @get('obstacleState')
+      @set 'currentAnimation', GG.drakeAnimations.obstacleAnimations[state]
+      @set 'hasShownObstacleAnimation', true
+    else if @get('shine') and (!@get('hasShownTraitAnimation') or Math.random() < 0.5)
       @set 'currentAnimation', GG.drakeAnimations.traitAnimations.metallic
       @set 'hasShownTraitAnimation', true
     else
       @set 'currentAnimation', GG.drakeAnimations.idleAnimations.headTurn
 
   setNextIdleInterval: ->
-    if @get('shine') and !@get 'hasShownTraitAnimation'
+    if (@get 'hasShownObstacleAnimation') then return
+
+    if (@get('shine') and !@get 'hasShownTraitAnimation') or
+        (@get('obstacleCourse') and @get('obstacleState')?)
       nextTime = 50
     else nextTime = Math.random() * 6000
     setTimeout =>
@@ -133,13 +149,14 @@ GG.DrakeView = Ember.View.extend
     if !@$('img')
       return
     frames = @get 'currentAnimation.frames'
-    GG.animateDrake @$('.drake-idle-img'), frames
+    GG.animateDrake @$('.drake-idle-img'), frames, @get('obstacleCourse')
 
 # Here we create one single animation timer, and add new images
 # to an array so we can animate multiple drakes at once without
 # creating a separate timer for each
-GG.animateDrake = ($img, frames) ->
-  if GG.drakeAnimationList.length > 1 then return
+GG.animateDrake = ($img, frames, force) ->
+  if GG.drakeAnimationList.length > 1 and !force
+    return
 
   GG.drakeAnimationList.push $img
   GG.drakeAnimationPositions.push 0
@@ -197,3 +214,13 @@ GG.drakeAnimations =
     metallic:
       folder: 'shine'
       frames: 7
+  obstacleAnimations:
+    successSmall:
+      folder: 'successSmall'
+      frames: 15
+    successLarge:
+      folder: 'successLarge'
+      frames: 15
+    fail:
+      folder: 'fail'
+      frames: 15

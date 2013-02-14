@@ -290,28 +290,40 @@ GG.StateInTask = Ember.State.extend
         GG.obstacleCourseController.set 'currentObstacleIndex', 0
         numObstacles = GG.obstacleCourseController.get('obstacles').length
 
+        startObstacle = ->
+          if GG.obstacleCourseController.didPassObstacle()
+            if GG.cyclesController.get('cycles') then state = "successLarge"
+            else state = "successSmall"
+          else
+            state = "fail"
+
+          GG.obstacleCourseController.get('drake').set 'obstacleState', state
+          setTimeout finishObstacle, 1800
+
         finishObstacle = ->
+          GG.obstacleCourseController.get('drake').set('obstacleState', null)
           index = GG.obstacleCourseController.get 'currentObstacleIndex'
           $($(".obstacle-time-breakdown .revealable")[index]).show()
           if GG.obstacleCourseController.didPassObstacle()
             $(".obstacle").hide()
             $(".obstacle.after").show()
-          setTimeout showNextObstacle, 1800
+
+          setTimeout showNextObstacle, 2400
 
         showNextObstacle = ->
           index = GG.obstacleCourseController.get 'currentObstacleIndex'
           if index < numObstacles - 1
             GG.obstacleCourseController.goToNextObstacle()
-            setTimeout finishObstacle, 1800
+            startObstacle()
           else
             setTimeout ->
               $(".obstacle-time-breakdown .align-right").show()
               setTimeout ->
                 $("#obstacle-course-dialog-content .revealable").show()
               , 500
-            , 200
+            , 100
 
-        setTimeout finishObstacle, 1800
+        startObstacle()
 
       exit: (manager)->
         GG.obstacleCourseController.set('dialogVisible', false)

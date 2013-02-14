@@ -1,7 +1,7 @@
 {{#if view.visible}}
   <div id='obstacle-course-dialog-content'>
     {{#with view.drake}}
-      {{view GG.DrakeView contentBinding="this"}}
+      {{view GG.DrakeView contentBinding="this" obstacleCourse=true}}
     {{/with}}
     <div class="current-obstacle before">
       {{view GG.ObstacleView contentBinding="view.currentObstacle" skipStyle=true}}
