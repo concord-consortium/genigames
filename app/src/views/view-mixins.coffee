@@ -52,6 +52,9 @@ GG.PointsToolTip = Ember.Mixin.create
   showToolTip: true
   toolTipText: null
   costPropertyName: null
+  toolTipConfigTarget: 'bottomMiddle'
+  toolTipConfigTooltip: 'topLeft'
+  toolTipConfigTip: 'topLeft'
 
   attributeBindings: ['tooltip']
 
@@ -71,8 +74,11 @@ GG.PointsToolTip = Ember.Mixin.create
     if @get('showToolTip') and @get('tooltip')
       @$().qtip 'destroy' if @get 'qtip'
 
-      params = GG.QTipDefaults
+      params = Ember.copy GG.QTipDefaults, true
       params.content = @get 'tooltip'
+      params.position.corner.target = @get 'toolTipConfigTarget'
+      params.position.corner.tooltip = @get 'toolTipConfigTooltip'
+      params.style.tip = @get 'toolTipConfigTip'
       @set 'qtip', @$().qtip params
     else if @get 'qtip'
       @$().qtip 'destroy'

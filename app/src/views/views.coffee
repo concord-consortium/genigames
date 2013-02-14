@@ -537,6 +537,9 @@ GG.NPCHeartBubbleView = Ember.View.extend GG.PointsToolTip,
   attributeBindings  : ['src']
   src                : '../images/heart-bubble.png'
   hidden             : Ember.computed.not('content.completed')
+  toolTipConfigTarget:  'topMiddle'
+  toolTipConfigTooltip: 'bottomLeft'
+  toolTipConfigTip   :  'bottomLeft'
   toolTipText: (->
     @get('content').getShortText()
   ).property('content')
