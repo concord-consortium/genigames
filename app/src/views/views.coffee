@@ -433,14 +433,7 @@ GG.TaskDescriptionView = Ember.View.extend
   tagName: 'div'
   currentTaskBinding: 'GG.tasksController.currentTask'
   text: (->
-    text = @get('currentTask.npc.speech.shortText') || @get('currentTask.npc.speech.text') || ""
-    if typeof(text) == 'object'
-      # This results in some pretty ugly text...
-      # but we only use this if shortText isn't defined.
-      text = text.reduce (prev, item, idx, arr)->
-        return prev + " " + item
-    text = text.replace(/(<([^>]+)>)/ig, " ")
-    return text
+    @get('currentTask')?.getShortText()
   ).property('currentTask').cacheable()
 
 GG.MoveCounter = Ember.View.extend
@@ -537,13 +530,16 @@ GG.NPCSpeechBubbleView = Ember.View.extend
     @resetTextIdx()
     GG.statemanager.send 'decline'
 
-GG.NPCHeartBubbleView = Ember.View.extend
+GG.NPCHeartBubbleView = Ember.View.extend GG.PointsToolTip,
   tagName            : 'img'
   classNames         : ['heart-bubble']
   classNameBindings  : ['hidden']
   attributeBindings  : ['src']
   src                : '../images/heart-bubble.png'
   hidden             : Ember.computed.not('content.completed')
+  toolTipText: (->
+    @get('content').getShortText()
+  ).property('content')
 
 GG.NPCFinalMessageBubbleView = Ember.View.extend
   tagName            : 'div'

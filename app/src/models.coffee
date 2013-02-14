@@ -114,6 +114,16 @@ GG.Task = Ember.Object.extend
     GG.userController.saveState('task', this) unless @get 'skipSave'
   ).observes('completed','reputationEarned')
 
+  getShortText: ->
+    text = @get('npc.speech.shortText') || @get('npc.speech.text') || ""
+    if typeof(text) == 'object'
+      # This results in some pretty ugly text...
+      # but we only use this if shortText isn't defined.
+      text = text.reduce (prev, item, idx, arr)->
+        return prev + " " + item
+    text = text.replace(/(<([^>]+)>)/ig, " ")
+    return text
+
 GG.Drake = Ember.Object.extend
   visibleGenesBinding: 'GG.drakeController.visibleGenes'
   hiddenGenesBinding: 'GG.drakeController.hiddenGenes'
