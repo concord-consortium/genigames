@@ -372,6 +372,7 @@ GG.userController = Ember.Object.create
 
   addReputation: (amt) ->
     user = @get 'user'
+    return unless user
     user.set 'reputation', user.get('reputation') + amt
     GG.logController.logEvent GG.Events.REPUTATION_CHANGED, amount: amt, result: user.get('reputation')
 
