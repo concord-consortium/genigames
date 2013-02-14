@@ -149,18 +149,24 @@ GG.DrakeView = Ember.View.extend
     if !@$('img')
       return
     frames = @get 'currentAnimation.frames'
-    GG.animateDrake @$('.drake-idle-img'), frames, @get('obstacleCourse')
+    force = @get('obstacleCourse')
+
+    if force then callback = ->
+      GG.animateDrake @$('.drake-idle-img'), frames, force
+
+    GG.animateDrake @$('.drake-idle-img'), frames, force, callback
 
 # Here we create one single animation timer, and add new images
 # to an array so we can animate multiple drakes at once without
 # creating a separate timer for each
-GG.animateDrake = ($img, frames, force) ->
+GG.animateDrake = ($img, frames, force, callback) ->
   if GG.drakeAnimationList.length > 1 and !force
     return
 
   GG.drakeAnimationList.push $img
   GG.drakeAnimationPositions.push 0
   GG.drakeAnimationLengths.push frames
+  GG.drakeAnimationCallbacks.push callback
 
   draw = ->
     setTimeout =>
@@ -182,6 +188,8 @@ GG.animateDrake = ($img, frames, force) ->
           GG.drakeAnimationList.splice(i, 1)
           GG.drakeAnimationPositions.splice(i, 1)
           GG.drakeAnimationLengths.splice(i, 1)
+          callback = GG.drakeAnimationCallbacks.splice(i, 1)[0]
+          if callback then callback()
         else
           GG.drakeAnimationList[i].css({left:"-"+(pos*100)+"%"})
     , 83  # ~ 12 fps
@@ -190,9 +198,10 @@ GG.animateDrake = ($img, frames, force) ->
     GG.drakeAnimationRunning = true
     requestAnimationFrame draw, $img
 
-GG.drakeAnimationList = []
+GG.drakeAnimationList      = []
 GG.drakeAnimationPositions = []
-GG.drakeAnimationLengths = []
+GG.drakeAnimationLengths   = []
+GG.drakeAnimationCallbacks = []
 
 GG.drakeAnimationRunning = false
 

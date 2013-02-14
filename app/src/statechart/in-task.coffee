@@ -298,7 +298,7 @@ GG.StateInTask = Ember.State.extend
             state = "fail"
 
           GG.obstacleCourseController.get('drake').set 'obstacleState', state
-          setTimeout finishObstacle, 1800
+          setTimeout finishObstacle, 1900
 
         finishObstacle = ->
           GG.obstacleCourseController.get('drake').set('obstacleState', null)
@@ -308,7 +308,7 @@ GG.StateInTask = Ember.State.extend
             $(".obstacle").hide()
             $(".obstacle.after").show()
 
-          setTimeout showNextObstacle, 2400
+          setTimeout showNextObstacle, 2800
 
         showNextObstacle = ->
           index = GG.obstacleCourseController.get 'currentObstacleIndex'
