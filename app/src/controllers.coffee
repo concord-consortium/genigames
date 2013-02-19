@@ -937,12 +937,13 @@ GG.tutorialMessageController = Ember.Object.create
         tooltip: "rightMiddle"
         maxWidth: 280
         hideAction: callback
+        modal: true
     else if @get('isFirstMeiosisDescriptionTask') and !@get('meiosisTutorial2Shown')
       @set 'meiosisTutorial2Shown', true
       GG.showChainedInfoDialog $("#meiosis-container .meiosis.father"),
         [
           "When you click the “breed” button, what you’re seeing is the process
-          of <b>meiosis</b> and <b>fertilization</b>",
+          of <b>meiosis</b> and <b>fertilization</b>.",
           "Meiosis produces four <b> gamete</b> cells. Each gamete gets one
           chromosome from each pair of chromosomes.",
           "First, the chromosomes are duplicated. <b>Crossovers</b> can occur at this time."
@@ -951,6 +952,7 @@ GG.tutorialMessageController = Ember.Object.create
         tooltip: "rightMiddle"
         maxWidth: 280
         hideAction: callback
+        modal: true
     else
       callback()
 
@@ -964,6 +966,7 @@ GG.tutorialMessageController = Ember.Object.create
         tooltip: "rightMiddle"
         maxWidth: 280
         hideAction: callback
+        modal: true
     else
       callback()
 
@@ -986,6 +989,7 @@ GG.tutorialMessageController = Ember.Object.create
         tooltip: "rightMiddle"
         maxWidth: 280
         hideAction: callback
+        modal: true
     else
       callback()
 
@@ -999,6 +1003,7 @@ GG.tutorialMessageController = Ember.Object.create
         tooltip: "rightMiddle"
         maxWidth: 280
         hideAction: callback
+        modal: true
     else
       callback()
 
@@ -1015,6 +1020,7 @@ GG.tutorialMessageController = Ember.Object.create
         tooltip: "rightMiddle"
         maxWidth: 280
         hideAction: callback
+        modal: true
     else
       callback()
 
@@ -1052,6 +1058,8 @@ GG.showInfoDialog = ($elem, text, opts={}) ->
   opts.target ?= "leftMiddle"
   opts.tooltip ?= "rightMiddle"
   opts.maxWidth ?= 350
+  opts.modal ?= false
+  opts.modalFade ?= false
 
   style = Ember.copy GG.QTipStyle, true
   style.tip = opts.tooltip
@@ -1076,6 +1084,13 @@ GG.showInfoDialog = ($elem, text, opts={}) ->
   if opts.hideAction?
     config.api =
       onHide: opts.hideAction
+  if opts.modal
+    backdrop = if opts.modalFade then "#modal-backdrop-fade" else "#modal-backdrop-clear"
+    config.api ?= {}
+    config.api.beforeShow = ->
+      $(backdrop).fadeIn(@options.show.effect.length)
+    config.api.beforeHide = ->
+      $(backdrop).fadeOut(@options.show.effect.length)
   GG.lastShownDialog = $elem
   $elem.qtip config
 
