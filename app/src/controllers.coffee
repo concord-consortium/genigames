@@ -931,7 +931,8 @@ GG.tutorialMessageController = Ember.Object.create
       @set 'meiosisTutorialShown', true
       GG.showInfoDialog $("#meiosis-container .meiosis.father"),
         "This is meiosis, the method by which half of a parent’s alleles are passed to the child.
-        Notice how the chromosomes are sorted into four cells.",
+        You will see each parent's chromosomes getting sorted into four cells. One of the four
+        from each parent is randomly chosen for the offspring.",
         target: "leftMiddle"
         tooltip: "rightMiddle"
         maxWidth: 280
