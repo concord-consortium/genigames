@@ -32,6 +32,10 @@ GG.StateInTown = Ember.State.extend
       GG.tasksController.showTaskDescription task
       GG.statemanager.transitionTo 'npcShowingTask'
 
+    replayTask: (manager, task) ->
+      GG.tasksController.setCurrentTask task
+      GG.tasksController.taskAccepted task
+
   npcShowingTask: Ember.State.create
     accept: (manager, task) ->
       GG.tasksController.taskAccepted task

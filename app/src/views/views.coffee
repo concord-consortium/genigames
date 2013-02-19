@@ -463,6 +463,8 @@ GG.TaskNPCView = Ember.View.extend
   ).property('content.npc.position.x','content.npc.position.y')
   npcSelected: (evt) ->
     GG.statemanager.send 'npcSelected', evt.context
+  replayTask: (evt) ->
+    GG.statemanager.send 'replayTask', evt.context
 
 GG.NPCView = Ember.View.extend
   tagName            : 'img'
