@@ -46,7 +46,14 @@ GG.StateInTown = Ember.State.extend
     decline: (manager) ->
       manager.transitionTo 'npcsWaiting'
 
+    replayTask: (manager, task) ->
+      # do nothing
+
   npcShowingFinalMessage: Ember.State.create
     enter: ->
       lastTask = GG.tasksController.get("lastObject")
       lastTask.set('showFinalMessageBubble', true)
+
+    replayTask: (manager, task) ->
+      GG.tasksController.setCurrentTask task
+      GG.tasksController.taskAccepted task
