@@ -294,7 +294,7 @@ GG.StateInTask = Ember.State.extend
       startCourse: (manager)->
         GG.obstacleCourseController.set('dialogVisible', true)
         $('#obstacle-course-dialog').show()
-        $('#modal-backdrop').show()
+        $('#modal-backdrop-fade').show()
 
         GG.obstacleCourseController.set 'currentObstacleIndex', 0
         numObstacles = GG.obstacleCourseController.get('obstacles').length
@@ -337,4 +337,4 @@ GG.StateInTask = Ember.State.extend
       exit: (manager)->
         GG.obstacleCourseController.set('dialogVisible', false)
         $('#obstacle-course-dialog').hide()
-        $('#modal-backdrop').hide()
+        $('#modal-backdrop-fade').hide()

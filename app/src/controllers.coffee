@@ -154,7 +154,7 @@ GG.tasksController = Ember.ArrayController.create
         finally
           GG.lastShownDialog = null
       $('#completion-dialog').show()
-      $('#modal-backdrop').show()
+      $('#modal-backdrop-fade').show()
     else
       GG.showModalDialog "Great job, you succeeded in breeding the target drake!
                           <br/><br/>Close this page to go back to the portal."
@@ -1112,9 +1112,9 @@ GG.showModalDialog = (text, hideAction) ->
     api:
        onHide: hideAction
        beforeShow: ->
-         $('#modal-backdrop').fadeIn(@options.show.effect.length)
+         $('#modal-backdrop-fade').fadeIn(@options.show.effect.length)
        beforeHide: ->
-         $('#modal-backdrop').fadeOut(@options.show.effect.length)
+         $('#modal-backdrop-fade').fadeOut(@options.show.effect.length)
 
 GG.reputationController = Ember.Object.create
   reset: (->
