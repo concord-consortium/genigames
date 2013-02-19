@@ -83,6 +83,7 @@ GG.WorldTownView = Ember.View.extend
   templateName: 'breeder-view'
   breedTypeBinding: 'GG.breedingController.breedType'
   isBaselineBinding: 'GG.baselineController.isBaseline'
+  hasObstacleCourseBinding: 'GG.obstacleCourseController.hasObstacleCourse'
   baseline: (->
     if @get('isBaseline') then "baseline" else "game"
   ).property('isBaseline')

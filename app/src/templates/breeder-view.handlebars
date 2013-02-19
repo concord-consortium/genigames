@@ -4,7 +4,11 @@
       {{#view GG.TaskDescriptionView id="task-description"}}
         {{view.text}}
       {{/view}}
+      {{#if GG.obstacleCourseController.hasObstacleCourse}}
+        <div id="progress-bar-obstacle"></div>
+      {{/if}}
       <div id="progress-bar" class="selecting">
+        <div {{bindAttr class=":bg view.hasObstacleCourse:obstacle-course" }}></div>
       </div>
     </div>
     <div id="breeder">

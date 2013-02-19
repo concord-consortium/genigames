@@ -291,6 +291,7 @@ GG.StateInTask = Ember.State.extend
 
     obstacleCourse: Ember.State.create
       enter: (manager)->
+        $('#progress-bar').switchClass($('#progress-bar').attr('class'),"obstacle-results",1000)
         GG.obstacleCourseController.showInfoDialog()
 
       startCourse: (manager)->

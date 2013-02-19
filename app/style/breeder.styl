@@ -21,13 +21,26 @@ dark-text-color  = #333
 
 #progress-bar
   absolute: top 63px left 25px height 35px
-  background: top left no-repeat url('../images/breeding-progress-overlay.png')
+  overflow: hidden
+  .bg
+    absolute: top 0px left 0px width 894px height 38px
+    background: top left no-repeat url('../images/breeding-progress-overlay.png')
+    &.obstacle-course
+      absolute: top 2px left 0px
+      background: top left no-repeat url('../images/obstacle-progress-overlay.png')
   &.selecting
     width: 128px
   &.breeding
     width: 645px
   &.results
     width: 772px
+  &.obstacle-results
+    width: 894px
+
+#progress-bar-obstacle
+  absolute: top 65px left 25px height 38px width 894px
+  background: top left no-repeat url('../images/obstacle-progress-bg.png')
+  overflow: hidden
 
 #breeder
   absolute: top 110px left width 2040px height 423px

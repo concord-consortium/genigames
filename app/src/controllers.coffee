@@ -752,6 +752,10 @@ GG.obstacleCourseController = Ember.Object.create
   currentObstacleIndex: 0
   currentObstacle: null
 
+  hasObstacleCourse: (->
+    @get('course')?
+  ).property('course')
+
   setFirstObstacle: (->
     @set 'currentObstacle', @get('obstacles')?[0]
   ).observes 'obstacles'
