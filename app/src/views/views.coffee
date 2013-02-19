@@ -543,7 +543,7 @@ GG.NPCHeartBubbleView = Ember.View.extend GG.PointsToolTip,
   toolTipConfigTooltip: 'bottomLeft'
   toolTipConfigTip   :  'bottomLeft'
   toolTipText: (->
-    @get('content').getShortText()
+    "Replay: " + @get('content.targetDrake')
   ).property('content')
   mouseEnter: ->
     # stop(true, true) is necessary so that we don't end up with a slowly enlarging/shrinking image...
