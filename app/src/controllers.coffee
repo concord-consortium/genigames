@@ -573,6 +573,9 @@ GG.meiosisController = Ember.Object.create
       @get('motherView').resetAnimation()
       @get('fatherView').resetAnimation()
       @set('selectedChromosomes', { father: {}, mother: {}})
+      @set('chromosomeSelected', false)
+      @set('crossoverSelected', false)
+  chromosomeSelected: false
   selectedChromosomes: { father: {}, mother: {}}
   deselectChromosome: (chromoView) ->
     selected = @get('selectedChromosomes')
@@ -597,6 +600,7 @@ GG.meiosisController = Ember.Object.create
     # cheat by selecting and then deselecting and having them move to the same gamete anyway
 
   selectChromosome: (chromoView) ->
+    @set('chromosomeSelected', true)
     selected = @get('selectedChromosomes')
     source = if chromoView.get('content.sex') == GG.MALE then "father" else "mother"
     chromo = chromoView.get('chromo')
@@ -636,8 +640,10 @@ GG.meiosisController = Ember.Object.create
           else
             @set('motherView.gametes', $.extend(true, {}, gametes))
             @get('motherView').notifyPropertyChange('gametes')
+  crossoverSelected: false
   selectedCrossover: null
   selectCrossover: (destCross)->
+    @set('crossoverSelected', true)
     # get the gene for this allele
     gene = BioLogica.Genetics.getGeneOfAllele(GG.DrakeSpecies, destCross.allele)
     destCross.gene = gene

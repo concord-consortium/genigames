@@ -33,7 +33,9 @@
     {{#if GG.baselineController.isNotBaseline}}
       <div class="cost">Cost: {{GG.actionCostsController.content.crossoverMade}} rep per crossover</div>
       {{/if}}
-    <button {{action "doneSelectingCrossover"}}>Continue</button>
+    <button {{action "doneSelectingCrossover"}}>
+      {{view.doneSelectingCrossoverButtonText}}
+    </button>
   </div>
   <div class="meiosisControlView chromatidSelection hidden">
     <h3>Chromosome Selection</h3>
@@ -42,6 +44,8 @@
     {{#if GG.baselineController.isNotBaseline}}
       <div class="cost">Cost: {{GG.actionCostsController.content.chromosomeSelected}} rep per selection</div>
     {{/if}}
-    <button {{action "doneSelectingChromatids"}}>Continue</button>
+    <button {{action "doneSelectingChromatids"}}>
+      {{view.doneSelectingChromatidsButtonText}}
+    </button>
   </div>
 </div>

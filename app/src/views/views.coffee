@@ -695,6 +695,14 @@ GG.MeiosisView = Ember.View.extend
       # put the alleles back at their default level, so they slide under/over
       $("#" + @get('elementId') + " .allele").css({"z-index": ''})
     , 1550
+  chromosomeSelectedBinding: 'GG.meiosisController.chromosomeSelected'
+  crossoverSelectedBinding: 'GG.meiosisController.crossoverSelected'
+  doneSelectingCrossoverButtonText: (->
+    if @get('crossoverSelected') then "Continue" else "Skip"
+  ).property('crossoverSelected')
+  doneSelectingChromatidsButtonText: (->
+    if @get('chromosomeSelected') then "Continue" else "Skip"
+  ).property('chromosomeSelected')
   allelesClickable: false
   crossoverSelectable: false
   chromosomesSelectable: false
