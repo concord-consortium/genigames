@@ -2363,7 +2363,7 @@ a:hover {
   height: 175px;
 }
 #obstacle-course-dialog-content .current-obstacle .obstacle.red {
-  background: bottom left no-repeat url("../images/obstacle-course/color_blue1.png");
+  background: bottom left no-repeat url("../images/obstacle-course/color_red1.png");
   width: 254px;
   height: 215px;
 }
@@ -2371,6 +2371,16 @@ a:hover {
   background: bottom left no-repeat url("../images/obstacle-course/color_red2.png");
   width: 254px;
   height: 215px;
+}
+#obstacle-course-dialog-content .current-obstacle .obstacle.purple {
+  background: bottom left no-repeat url("../images/obstacle-course/color_purple1.png");
+  width: 225px;
+  height: 150px;
+}
+#obstacle-course-dialog-content .current-obstacle .obstacle.purple.after {
+  background: bottom left no-repeat url("../images/obstacle-course/color_purple2.png");
+  width: 225px;
+  height: 150px;
 }
 #obstacle-course-dialog-content .current-obstacle .obstacle.fire {
   background: bottom left no-repeat url("../images/obstacle-course/firebreath1.png");
