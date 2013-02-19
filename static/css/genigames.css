@@ -1155,7 +1155,8 @@ a:hover {
 .logout:active {
   box-shadow: 1px 1px 1px 1px #808080;
 }
-#modal-backdrop {
+#modal-backdrop-fade,
+#modal-backdrop-clear {
   display: none;
   position: absolute;
   top: 0px;
@@ -1163,6 +1164,8 @@ a:hover {
   right: 0px;
   bottom: 0px;
   z-index: 5000;
+}
+#modal-backdrop-fade {
   opacity: 0.5;
   background-color: #000;
 }
@@ -2180,6 +2183,7 @@ a:hover {
 .npc .character {
   position: absolute;
   top: 129px;
+  z-index: 0;
 }
 .npc .bubble {
   position: absolute;
@@ -2228,7 +2232,7 @@ a:hover {
   position: absolute;
   left: 0;
   top: 90px;
-  z-index: 0;
+  z-index: 10;
 }
 #obstacle-course-dialog {
   display: none;
