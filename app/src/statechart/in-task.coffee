@@ -131,29 +131,29 @@ GG.StateInTask = Ember.State.extend
           GG.breedingController.toggleBreedType()
 
     animatingMeiosis: Ember.State.create
+      firstTime: true
       setup: (manager)->
+        @set('firstTime', true)
         $('#target').hide()
         $('#breed-controls').animate({left: 474},400,'easeOutCubic')
         $("#breeder").animate({left: -459},500,"easeOutCubic")
         # hide the offspring pool
         $("#offspring-panel").animate({left: 400},500,"easeOutCubic")
         $("#offspring-pool .chromosome-panel").hide()
-        # show the original parent chromosomes
-        setTimeout ->
-          $('#chromosome-labels').show()
-          GG.motherPoolController.set('hidden', false)
-          GG.fatherPoolController.set('hidden', false)
-        , 200
         setTimeout ->
           $('#chromosome-labels').hide()
           GG.motherPoolController.set('hidden', true)
           GG.fatherPoolController.set('hidden', true)
-        , 2600
+        , 600
         setTimeout ->
           manager.send 'animate'
-        , 2800
+        , 800
 
       animate: (manager)->
+        firstTime = @get 'firstTime'
+        @set('firstTime', false)
+        delay = if firstTime then 2000 else 1
+
         if GG.cyclesController.get('cycles') <= 0
           GG.reputationController.subtractReputation(GG.actionCostsController.getCost('extraBreedCycle'), GG.Events.BRED_WITH_EXTRA_CYCLE)
         currentProgClass = $('#progress-bar').attr('class')
@@ -162,12 +162,14 @@ GG.StateInTask = Ember.State.extend
         GG.breedingController.set 'childSavedToParents', false
         $('#meiosis-container').removeClass('hidden')
         $("#offspring-pool .chromosome-panel").hide()
-        GG.tutorialMessageController.showMeiosisTutorial ->
-          GG.meiosisController.animate ->
-            setTimeout ->
-              GG.meiosisController.resetAnimation()
-            , 500
-            manager.transitionTo 'breeding'
+        setTimeout ->
+          GG.tutorialMessageController.showMeiosisTutorial ->
+            GG.meiosisController.animate ->
+              setTimeout ->
+                GG.meiosisController.resetAnimation()
+              , 500
+              manager.transitionTo 'breeding'
+        , delay
 
       selectingCrossoverCallback: null
       doneSelectingCrossover: (manager, parent) ->
