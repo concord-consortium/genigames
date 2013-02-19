@@ -86,13 +86,16 @@ $ ->
     baseline: Ember.ContainerView.extend
       breeder: GG.BreederView
       childViews: ['breeder']
+    currentViewLabel: 'none'
     setCurrentView: (view)->
-      templ = @get(view)
-      if templ?
-        real = templ.create()
-        @set('currentView', real)
-      else
-        console.error("Failed to transition to universe view: " + view)
+      if @get('currentViewLabel') != view
+        templ = @get(view)
+        if templ?
+          real = templ.create()
+          @set('currentView', real)
+          @set('currentViewLabel', view)
+        else
+          console.error("Failed to transition to universe view: " + view)
 
   $("#loading").remove()
   GG.universeView.appendTo('#container')
