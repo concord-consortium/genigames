@@ -4,6 +4,10 @@ GG.StateInTown = Ember.State.extend
 
   enter: ->
     GG.universeView.setCurrentView 'town'
+    $('#town').fadeIn(1000)
+
+  exit: ->
+    $('#town').fadeOut(1000)
 
   npcsWaiting: Ember.State.create
     enter: (manager) ->
