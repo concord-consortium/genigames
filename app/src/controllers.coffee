@@ -178,7 +178,7 @@ GG.tasksController = Ember.ArrayController.create
     task = @get 'currentTask'
     drake = GG.breedingController.get 'child'
 
-    if not task? and not drake?
+    if not task? or not drake?
       return false
 
     # parse required characteristics
