@@ -112,8 +112,17 @@ GG.DrakeView = Ember.View.extend
 
     $("#{layer} .idle").imagesLoaded onComplete
 
-  hasShownTraitAnimation: false
+  shownTraitAnimations: {}
   hasShownObstacleAnimation: false
+
+  _notShownTraitAnimation: (trait)->
+    shown = @get 'shownTraitAnimations'
+    !(shown[trait]? and shown[trait])
+
+  _setShownTraitAnimation: (trait)->
+    shown = @get 'shownTraitAnimations'
+    shown[trait] = true
+    @set 'shownTraitAnimations', shown
 
   animateObstacleResult: (->
     if @get('obstacleCourse') and @get('obstacleState')?
@@ -124,20 +133,29 @@ GG.DrakeView = Ember.View.extend
   setNextAnimation: ->
     if @get('isDestroyed') then return
 
+    # if a drake has both fire and shine, then we want fire to show up 1/3 of the time,
+    # and shine to show up 1/3 of the time (50% of the remaining 2/3). Otherwise, fire
+    # should show up 1/2 of the time.
+    fireOdds = if @get('shine') then 0.333 else 0.5
+
     if (@get('obstacleCourse') and @get('obstacleState')?)
       state = @get('obstacleState')
       @set 'currentAnimation', GG.drakeAnimations.obstacleAnimations[state]
       @set 'hasShownObstacleAnimation', true
-    else if @get('shine') and (!@get('hasShownTraitAnimation') or Math.random() < 0.5)
+    else if @get('fire') and (@_notShownTraitAnimation('fire') or Math.random() < fireOdds)
+      @set 'currentAnimation', GG.drakeAnimations.traitAnimations.firebreath
+      @_setShownTraitAnimation('fire')
+    else if @get('shine') and (@_notShownTraitAnimation('shine') or Math.random() < 0.5)
       @set 'currentAnimation', GG.drakeAnimations.traitAnimations.metallic
-      @set 'hasShownTraitAnimation', true
+      @_setShownTraitAnimation('shine')
     else
       @set 'currentAnimation', GG.drakeAnimations.idleAnimations.headTurn
 
   setNextIdleInterval: ->
     if (@get 'hasShownObstacleAnimation') then return
 
-    if (@get('shine') and !@get 'hasShownTraitAnimation') or
+    if (@get('shine') and @_notShownTraitAnimation('shine')) or
+        (@get('fire') and @_notShownTraitAnimation('fire')) or
         (@get('obstacleCourse') and @get('obstacleState')?)
       nextTime = 50
     else nextTime = Math.random() * 6000
@@ -220,6 +238,9 @@ GG.drakeAnimations =
       folder: 'headturn'
       frames: 15
   traitAnimations:
+    firebreath:
+      folder: 'firebreath'
+      frames: 15
     metallic:
       folder: 'shine'
       frames: 7
