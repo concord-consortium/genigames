@@ -2476,6 +2476,26 @@ a:hover {
   width: 254px;
   height: 375px;
 }
+#obstacle-course-dialog-content .current-obstacle .obstacle.forward-horns {
+  background: bottom left no-repeat url("../images/obstacle-course/horns-forward1.png");
+  width: 250px;
+  height: 170px;
+}
+#obstacle-course-dialog-content .current-obstacle .obstacle.forward-horns.after {
+  background: bottom left no-repeat url("../images/obstacle-course/horns-forward2.png");
+  width: 250px;
+  height: 170px;
+}
+#obstacle-course-dialog-content .current-obstacle .obstacle.armor {
+  background: bottom left no-repeat url("../images/obstacle-course/armor1.png");
+  width: 254px;
+  height: 150px;
+}
+#obstacle-course-dialog-content .current-obstacle .obstacle.armor.after {
+  background: bottom left no-repeat url("../images/obstacle-course/armor2.png");
+  width: 254px;
+  height: 150px;
+}
 #obstacle-course-dialog-content .current-obstacle .obstacle.wingless {
   background: bottom left no-repeat url("../images/obstacle-course/wingless1.png");
   width: 254px;
