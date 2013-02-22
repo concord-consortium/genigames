@@ -76,7 +76,21 @@
   top: 63px;
   left: 25px;
   height: 35px;
+  overflow: hidden;
+}
+#progress-bar .bg {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 894px;
+  height: 38px;
   background: top left no-repeat url("../images/breeding-progress-overlay.png");
+}
+#progress-bar .bg.obstacle-course {
+  position: absolute;
+  top: 2px;
+  left: 0px;
+  background: top left no-repeat url("../images/obstacle-progress-overlay.png");
 }
 #progress-bar.selecting {
   width: 128px;
@@ -86,6 +100,18 @@
 }
 #progress-bar.results {
   width: 772px;
+}
+#progress-bar.obstacle-results {
+  width: 894px;
+}
+#progress-bar-obstacle {
+  position: absolute;
+  top: 65px;
+  left: 25px;
+  height: 38px;
+  width: 894px;
+  background: top left no-repeat url("../images/obstacle-progress-bg.png");
+  overflow: hidden;
 }
 #breeder {
   position: absolute;
