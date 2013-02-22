@@ -753,7 +753,7 @@ GG.obstacleCourseController = Ember.Object.create
   currentObstacle: null
 
   hasObstacleCourse: (->
-    @get('course')?
+    @get('course')? && GG.baselineController.get('isNotBaseline')
   ).property('course')
 
   setFirstObstacle: (->
