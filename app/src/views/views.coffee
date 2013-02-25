@@ -133,7 +133,7 @@ GG.BreedButtonView = Ember.View.extend GG.PointsToolTip,
   toolTipText: (->
     tip = "Produce an offspring drake from the current parents"
     if @get 'noMoreBreeds'
-      if GG.tasksController.get('currentTask.obstacleCourse')?
+      if GG.obstacleCourseController.get('hasObstacleCourse')
         tip += ". Because you are out of breeding cycles, and this challenge contains
                 an obstacle course, you can't breed anymore."
       else
@@ -141,7 +141,7 @@ GG.BreedButtonView = Ember.View.extend GG.PointsToolTip,
     tip
   ).property('noMoreBreeds')
   costPropertyName: (->
-    if @get('noMoreBreeds') && !GG.tasksController.get('currentTask.obstacleCourse')?
+    if @get('noMoreBreeds') && !GG.obstacleCourseController.get('hasObstacleCourse')
       'extraBreedCycle'
     else ' '
   ).property('noMoreBreeds')
@@ -152,7 +152,7 @@ GG.BreedButtonView = Ember.View.extend GG.PointsToolTip,
   classNameBindings : ['enabled', 'noMoreBreeds']
   enabled: (->
     !!(this.get('mother') && this.get('father')) and
-    !(@get('noMoreBreeds') && GG.tasksController.get('currentTask.obstacleCourse')?)
+    !(@get('noMoreBreeds') && GG.obstacleCourseController.get('hasObstacleCourse'))
   ).property('mother', 'father', 'noMoreBreeds')
   noMoreBreeds: (->
     GG.cyclesController.get('cycles') <= 0 and not GG.baselineController.get 'isBaseline'
@@ -862,7 +862,7 @@ GG.CompletionDialogView = Ember.View.extend
     # Go back to town
     GG.tasksController.taskFinishedBubbleDismissed()
   continueButtonText: (->
-    if GG.tasksController.get('currentTask.obstacleCourse')?
+    if GG.obstacleCourseController.get('hasObstacleCourse')
       return "Continue"
     return "Next Level"
   ).property('GG.tasksController.currentTask')

@@ -94,7 +94,7 @@ GG.tasksController = Ember.ArrayController.create
 
   awardTaskReputation: (success) ->
     task = @get 'currentTask'
-    isCourse = GG.tasksController.get('currentTask.obstacleCourse')?
+    isCourse = GG.obstacleCourseController.get 'hasObstacleCourse'
     if isCourse
       reputation = GG.obstacleCourseController.get 'reputationEarned'
     else
@@ -169,7 +169,7 @@ GG.tasksController = Ember.ArrayController.create
 
   taskFinishedBubbleDismissed: ->
     @get('currentTask').set 'showCompletionBubble', false
-    if @get('currentTask.obstacleCourse')?
+    if GG.obstacleCourseController.get 'hasObstacleCourse'
       GG.statemanager.transitionTo 'obstacleCourse'
     else
       GG.statemanager.transitionTo 'inTown'

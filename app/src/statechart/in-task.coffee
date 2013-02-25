@@ -56,7 +56,7 @@ GG.StateInTask = Ember.State.extend
 
     completeTask: (manager) ->
       GG.tasksController.completeCurrentTask()
-      if GG.tasksController.get('currentTask.obstacleCourse')?
+      if GG.obstacleCourseController.get('hasObstacleCourse')
         manager.transitionTo 'obstacleCourse'
       else
         GG.tasksController.showTaskCompletion()
@@ -256,7 +256,7 @@ GG.StateInTask = Ember.State.extend
         $('#offspring-panel').animate({left: -76},300,"easeOutCubic")
         GG.tutorialMessageController.showFirstOffspringCreatedTutorial()
         if GG.tasksController.get('currentTask.cyclesRemaining') is 0 and
-            GG.tasksController.get('currentTask.obstacleCourse')?
+            GG.obstacleCourseController.get('hasObstacleCourse')
           setTimeout ->
             GG.tasksController.awardTaskReputation false
             manager.transitionTo 'obstacleCourse'
