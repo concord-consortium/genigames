@@ -357,6 +357,7 @@ GG.userController = Ember.Object.create
   state: null
   learnerId: null
   loaded: false
+  groupInfoSaved: false
   learnerChanged: (->
     # TODO update learner data
     console.log 'learner changed: ', @get('learnerId')
@@ -1216,3 +1217,30 @@ GG.reputationController = Ember.Object.create
   alleleRevealRep: (->
     @_repFor GG.Events.REVEALED_ALLELE
   ).property('currentTaskReputation')
+
+GG.groupsController = Ember.Object.create
+  groups: Ember.ArrayProxy.create
+    content: Ember.A([
+      GG.GroupMember.create(),
+      GG.GroupMember.create()
+    ])
+  error: false
+  verifyContent: ->
+    groups = @get('groups')
+    found = groups.find (user)->
+      user.get('invalidName') or user.get('invalidSchoolID')
+    if found or groups.get('length') < 1
+      @set('error', true)
+      return
+    @set('error', false)
+  removeUser: (user)->
+    console.log("remove user called: ", user)
+    groups = @get('groups')
+    groups.removeObject(user)
+    console.log("remove user ended")
+  addUser: ->
+    console.log("add user called")
+    groups = @get('groups')
+    groups.pushObject(GG.GroupMember.create())
+    console.log("add user ended")
+

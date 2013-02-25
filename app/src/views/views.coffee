@@ -30,6 +30,22 @@ GG.ChooseClassView = Ember.View.extend
   choose: ->
     GG.statemanager.send 'chooseLearner', @get('learner')
 
+GG.DefineGroupsView = Ember.View.extend
+  tagName: 'div'
+  elementId: 'define-groups'
+  templateName: 'define-groups'
+  groupsBinding: 'GG.groupsController.groups'
+  errorBinding: 'GG.groupsController.error'
+  removeUser: (evt)->
+    GG.groupsController.removeUser(evt.context)
+  addUser: ->
+    GG.groupsController.addUser()
+  done: ->
+    console.log("done called")
+    GG.groupsController.verifyContent()
+    unless GG.groupsController.get('error')
+      GG.statemanager.send 'definedGroups'
+
 GG.WorldView = Ember.View.extend
   templateName: 'world'
   contentBinding: 'GG.townsController'

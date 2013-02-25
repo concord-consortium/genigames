@@ -33,6 +33,7 @@ minispade.require 'genigames/templates/match-goal-counter'
 minispade.require 'genigames/templates/login'
 minispade.require 'genigames/templates/drake'
 minispade.require 'genigames/templates/choose-class'
+minispade.require 'genigames/templates/define-groups'
 minispade.require 'genigames/templates/meiosis'
 minispade.require 'genigames/templates/obstacle-course-dialog'
 minispade.require 'genigames/templates/task-completion-dialog'
@@ -78,6 +79,7 @@ $ ->
   GG.universeView = Ember.ContainerView.create
     login: GG.LoginView.extend({})
     chooseClass: GG.ChooseClassView.extend({})
+    defineGroups: GG.DefineGroupsView.extend({})
     world: GG.WorldView.extend({})
     town: Ember.ContainerView.extend
       town: GG.TownView

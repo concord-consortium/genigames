@@ -80,85 +80,102 @@ GG.statemanager = Ember.StateManager.create
           # if none, set GG.userController.loaded = true
           GG.userController.set('loaded', true)
 
-      GG.statemanager.send 'load'
+      GG.statemanager.send 'nextStep'
 
     chooseLearner: (state, learner)->
       GG.userController.set('learnerId', learner)
-      GG.statemanager.send 'load'
+      GG.statemanager.send 'nextStep'
 
-    load: ->
-      # load the game after we log in so that we can create towns and tasks
-      # with the current user's saved state
-      loadGame = ->
-        # GET /api/game
-        # set the player's task according to the game specification
-        gamePath = if UNDER_TEST? then 'api/testgame' else 'api/game'
+    definedGroups: (state, data)->
+      groupMembers = GG.groupsController.get('groups').map (item)->
+        item.serialize()
+      GG.logController.logEvent(GG.Events.GROUP_LOGGED_IN, {groupMembers: groupMembers})
+      GG.userController.set('groupInfoSaved', true)
+      GG.statemanager.send 'nextStep'
 
-        $.getJSON gamePath, (data) ->
-          # re-construct the data into heirarchical format, since
-          # couchdb doesn't make that easy to do before delivering it
-          items = {
-            'task': {},
-            'town': {},
-            'world': {}
-          }
-          for item in data.rows
-            items[item.key][item.id] = item.value
-
-          # now embed tasks into towns
-          for own t of items.town
-            children = []
-            for ta in items.town[t].tasks
-              children.push(items.task[ta])
-            items.town[t].tasks = children
-
-          for own wo of items.world
-            children = []
-            for tow in items.world[wo].towns
-              if !items.town[tow] then console.log("No town named #{tow}"); continue
-              children.push(items.town[tow])
-            items.world[wo].towns = children
-
-          # fixme: this should be eventually handled by a router
-          if (taskPath = GG.statemanager.get('params.task'))
-            taskPath = taskPath.split "/"
-            if taskPath[0] is "baseline"
-              GG.baselineController.set 'isBaseline', true
-              GG.worldName = GG.baselineWorld
-
-          # get the appropriate world and create its towns
-          for to in items.world[GG.worldName].towns
-            town = GG.Town.create to
-            GG.townsController.addTown town
-
-          # fixme: this should be eventually handled by a router
-          if (taskPath)
-            if taskPath[0] is "baseline"
-              townLoaded = GG.townsController.loadTown taskPath[1]
-              GG.tasksController.setCurrentTask GG.tasksController.objectAt parseInt(taskPath[2])-1
-              Ember.run ->
-                GG.universeView.setCurrentView 'baseline'
-              GG.statemanager.transitionTo 'inTask'
-            else
-              townLoaded = GG.townsController.loadTown taskPath[0]
-              GG.tasksController.setNextAvailableTask parseInt(taskPath[1])-1 if not isNaN parseInt(taskPath[1])
-              nextState = if townLoaded then 'inTown' else 'inWorld'
-              GG.statemanager.transitionTo nextState
+    nextStep: ->
+      doNext = ->
+        # load the game after we log in so that we can create towns and tasks
+        # with the current user's saved state
+        if GG.userController.get('loaded')
+          GG.userController.removeObserver('loaded', obs)
+          console.log("Group: " + GG.userController.get('user.group'))
+          console.log("Saved: " + GG.userController.get('groupInfoSaved'))
+          if GG.userController.get('user.group') and not GG.userController.get('groupInfoSaved')
+            GG.universeView.setCurrentView 'defineGroups'
+            return
           else
-            GG.statemanager.transitionTo 'inWorld'
-
-        $.getJSON '/couchdb/genigames/actionCosts', (data) ->
-          actionCosts = GG.ActionCosts.create data
-          GG.actionCostsController.set 'content', actionCosts
+            GG.statemanager.send 'loadGame'
 
       if GG.userController.get('loaded')
-        loadGame()
+        doNext()
       else
         obs = ->
-          if GG.userController.get('loaded')
-            GG.userController.removeObserver('loaded', obs)
-            loadGame()
+          doNext()
         GG.userController.addObserver('loaded', obs)
+
+
+    loadGame: ->
+      # GET /api/game
+      # set the player's task according to the game specification
+      gamePath = if UNDER_TEST? then 'api/testgame' else 'api/game'
+
+      $.getJSON gamePath, (data) ->
+        # re-construct the data into heirarchical format, since
+        # couchdb doesn't make that easy to do before delivering it
+        items = {
+          'task': {},
+          'town': {},
+          'world': {}
+        }
+        for item in data.rows
+          items[item.key][item.id] = item.value
+
+        # now embed tasks into towns
+        for own t of items.town
+          children = []
+          for ta in items.town[t].tasks
+            children.push(items.task[ta])
+          items.town[t].tasks = children
+
+        for own wo of items.world
+          children = []
+          for tow in items.world[wo].towns
+            if !items.town[tow] then console.log("No town named #{tow}"); continue
+            children.push(items.town[tow])
+          items.world[wo].towns = children
+
+        # fixme: this should be eventually handled by a router
+        if (taskPath = GG.statemanager.get('params.task'))
+          taskPath = taskPath.split "/"
+          if taskPath[0] is "baseline"
+            GG.baselineController.set 'isBaseline', true
+            GG.worldName = GG.baselineWorld
+
+        # get the appropriate world and create its towns
+        for to in items.world[GG.worldName].towns
+          town = GG.Town.create to
+          GG.townsController.addTown town
+
+        # fixme: this should be eventually handled by a router
+        if (taskPath)
+          if taskPath[0] is "baseline"
+            townLoaded = GG.townsController.loadTown taskPath[1]
+            GG.tasksController.setCurrentTask GG.tasksController.objectAt parseInt(taskPath[2])-1
+            Ember.run ->
+              GG.universeView.setCurrentView 'baseline'
+            GG.statemanager.transitionTo 'inTask'
+          else
+            townLoaded = GG.townsController.loadTown taskPath[0]
+            GG.tasksController.setNextAvailableTask parseInt(taskPath[1])-1 if not isNaN parseInt(taskPath[1])
+            nextState = if townLoaded then 'inTown' else 'inWorld'
+            GG.statemanager.transitionTo nextState
+        else
+          GG.statemanager.transitionTo 'inWorld'
+
+      $.getJSON '/couchdb/genigames/actionCosts', (data) ->
+        actionCosts = GG.ActionCosts.create data
+        GG.actionCostsController.set 'content', actionCosts
 
   loggingOut: Ember.State.create
     enter: ->

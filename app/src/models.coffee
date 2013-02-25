@@ -4,6 +4,7 @@ GG.User = Ember.Object.extend
   last: null
   class_words: []
   teacher: false
+  group: false
   reputation: 0
   skipSave: false
 
@@ -223,6 +224,7 @@ GG.Drake.createFromBiologicaOrganism = (org) ->
 GG.Events =
   # Session events
   STARTED_SESSION : "Started session"
+  GROUP_LOGGED_IN : "Group logged in"
 
   # Town events
   ENTERED_TOWN    : "Entered town"
@@ -273,3 +275,27 @@ GG.Obstacle = Ember.Object.extend
   obstacle: null
   positionX: 0
   positionY: 0
+
+GG.GroupMember = Ember.Object.extend
+  name: ""
+  schoolID: ""
+  serialize: ->
+    {name: @get('name'), schoolID: @get('schoolID')}
+  validName: (->
+    return not @get('invalidName')
+  ).property('invalidName')
+  invalidName: (->
+    name = @get('name')
+    return @_null(name) or @_empty(name)
+  ).property('name')
+  validSchoolID: (->
+    return not @get('invalidSchoolID')
+  ).property('invalidSchoolID')
+  invalidSchoolID: (->
+    id = @get('schoolID')
+    return @_null(id) or @_empty(id)
+  ).property('schoolID')
+  _null: (text)->
+    return not text?
+  _empty: (text)->
+    return text.length < 1
