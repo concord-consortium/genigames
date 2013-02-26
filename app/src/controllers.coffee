@@ -872,7 +872,7 @@ GG.tutorialMessageController = Ember.Object.create
   isFirstMeiosisControlTask: (->
     townId = GG.townsController.get("content").indexOf GG.townsController.get "currentTown"
     taskId = GG.tasksController.get("content").indexOf GG.tasksController.get "currentTask"
-    return townId is 0 and taskId is 4
+    return (townId is 0 and taskId is 4) or (GG.baselineController.get('isBaseline') and townId is 1 and taskId is 0)
   ).property('GG.townsController.currentTown', 'GG.tasksController.currentTask')
 
   showTargetTutorial: ->
