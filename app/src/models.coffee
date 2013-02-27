@@ -122,7 +122,7 @@ GG.Task = Ember.Object.extend
       # but we only use this if shortText isn't defined.
       text = text.reduce (prev, item, idx, arr)->
         return prev + " " + item
-    text = text.replace(/(<([^>]+)>)/ig, " ")
+    text = text.replace(/(<([^>]+)>)/ig, " ").replace('drake', Ember.I18n.t('drake'))
     return text
 
 GG.Drake = Ember.Object.extend

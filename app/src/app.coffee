@@ -9,12 +9,17 @@ minispade.require 'genigames/vendor/handlebars'
 minispade.require 'genigames/vendor/ember'
 minispade.require 'genigames/vendor/biologica'
 minispade.require 'genigames/vendor/jquery-preload-css-images'
+minispade.require 'genigames/vendor/ember-i18n'
 
 window.GG = GG = Ember.Application.create()
 
 GG.MALE   = 0
 GG.FEMALE = 1
 GG.imageNameStart = "/resources/drakes/images/"
+
+GG.gamedWorld     = "game"
+GG.baselineWorld  = "baseline"
+GG.worldName      = GG.gamedWorld
 
 minispade.require 'genigames/helpers'
 minispade.require 'genigames/models'
@@ -53,6 +58,16 @@ Ember.Handlebars.registerHelper 'meiosisDefaults', (path, options) ->
   options.hash.crossoverSelectableBinding = "view.crossoverSelectable"
   return Ember.Handlebars.helpers.view(path, options)
 
+GG.gamedTranslations =
+  drake: 'drake'
+  Drake: 'Drake'
+
+GG.baselineTranslations =
+  drake: 'lizard'
+  Drake: 'Lizard'
+
+Ember.I18n.translations = GG.gamedTranslations
+
 # on load
 $ ->
 
@@ -75,6 +90,14 @@ $ ->
       urlParams[decode match[1]] = decode match[2]
   finder()
   GG.statemanager.set('params', urlParams)
+
+  # fixme: this should be eventually handled by a router
+  if (urlParams.task)
+    taskPath = urlParams.task.split "/"
+    if taskPath[0] is "baseline"
+      GG.baselineController.set 'isBaseline', true
+      GG.worldName = GG.baselineWorld
+      Ember.I18n.translations = GG.baselineTranslations
 
   GG.universeView = Ember.ContainerView.create
     login: GG.LoginView.extend({})

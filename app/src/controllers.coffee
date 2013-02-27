@@ -156,11 +156,15 @@ GG.tasksController = Ember.ArrayController.create
       $('#completion-dialog').show()
       $('#modal-backdrop-fade').show()
     else
-      GG.showModalDialog "Great job, you succeeded in breeding the target drake!
-                          <br/><br/>Close this page to go back to the portal."
+      GG.showModalDialog "Great job, you succeeded in breeding the target %@!
+                          <br/><br/>Close this page to go back to the portal.".fmt(Ember.I18n.t('drake'))
   showTaskNonCompletion: ->
-    msg = "That's not the drake you're looking for!"
-    msg += " You're trying to " + (@get('currentTask.npc.speech.shortText').toLowerCase() || ("breed a drake with " + @get('currentTask.targetDrake') + "."))
+    msg = "That's not the %@ you're looking for!".fmt(Ember.I18n.t('drake'))
+    msg += " You're trying to "
+    msg += (
+      @get('currentTask.npc.speech.shortText').toLowerCase() ||
+      ("breed a drake with " + @get('currentTask.targetDrake') + ".")
+    ).replace('drake', Ember.I18n.t('drake'))
     GG.showModalDialog msg
 
   taskAccepted: (task) ->
@@ -877,8 +881,8 @@ GG.tutorialMessageController = Ember.Object.create
 
   showTargetTutorial: ->
     if @get 'isFirstTask' then GG.showInfoDialog $('#target-tutorial-target'),
-      "These are the traits of the drake you need to create. To do that you have
-      to get a male and female parent who can breed the target drake.",
+      "These are the traits of the %@1 you need to create. To do that you have
+      to get a male and female parent who can breed the target %@1.".fmt(Ember.I18n.t('drake')),
       target: "leftMiddle"
       tooltip: "rightMiddle"
       hideAction: =>
@@ -891,12 +895,12 @@ GG.tutorialMessageController = Ember.Object.create
       tooltip = if parent is "mother" then "bottomMiddle" else "topMiddle"
       @set 'firstDrakeSelected', true
       GG.showInfoDialog $("##{parent}-chromosome"),
-        'This is the drake genetic make-up. The alleles <span style="position: relative;">
+        'This is the %@1 genetic make-up. The alleles <span style="position: relative;">
         <img src="../images/allele-bg.png" style="position: absolute; top: -6px; left: 1px">
         <span style="position: absolute; top: 0; left: 4px; font-weight: bold;" class="dominant">
         W1</span></span><br/>of genes determine the look of the
-        drake, so to get the drake you want, you’re going to have to breed to create a
-        genetic combination that will produce the drake.',
+        %@1, so to get the %@1 you want, you’re going to have to breed to create a
+        genetic combination that will produce the %@1.'.fmt(Ember.I18n.t('drake')),
         target: target
         tooltip: tooltip
 
@@ -905,7 +909,7 @@ GG.tutorialMessageController = Ember.Object.create
     if @get('isFirstTask') and !@get 'firstOffspringCreated'
       @set 'firstOffspringCreated', true
       GG.showInfoDialog $("#offspring-pool .chromosome-panel"),
-        "Good job. Notice which alleles of the wing gene gave this drake wings.",
+        "Good job. Notice which alleles of the wing gene gave this %@1 wings.".fmt(Ember.I18n.t('drake')),
         target: "bottomMiddle"
         tooltip: "topMiddle"
         hideAction: =>
@@ -916,8 +920,8 @@ GG.tutorialMessageController = Ember.Object.create
     if @get('isFirstTask') and !@get 'parentsTutorialShown'
       @set 'parentsTutorialShown', true
       GG.showInfoDialog $("#parents-tutorial-target"),
-        "Here is where the parents are kept. The male drakes have beards; the females do not.
-        You need to have one male and one female drake to make an offspring.",
+        "Here is where the parents are kept. The male %@1s have beards; the females do not.
+        You need to have one male and one female %@1 to make an offspring.".fmt(Ember.I18n.t('drake')),
         target: "rightMiddle"
         tooltip: "leftMiddle"
 
@@ -1050,7 +1054,7 @@ GG.tutorialMessageController = Ember.Object.create
     if @get('isFirstTask') and !@get('finishButtonTutorialShown')
       @set 'finishButtonTutorialShown', true
       GG.showInfoDialog $("#offspring-buttons .offspring-buttons-use"),
-        "When you have a drake that matches the task, hit Finish to end breeding and complete the challenge."
+        "When you have a %@1 that matches the task, hit Finish to end breeding and complete the challenge.".fmt(Ember.I18n.t('drake'))
         target: "leftMiddle"
         tooltip: "rightMiddle"
 

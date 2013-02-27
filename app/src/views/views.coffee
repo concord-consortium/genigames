@@ -131,7 +131,7 @@ GG.OffspringPoolView = Ember.View.extend
 GG.BreedButtonView = Ember.View.extend GG.PointsToolTip,
   tagName: 'div'
   toolTipText: (->
-    tip = "Produce an offspring drake from the current parents"
+    tip = "Produce an offspring %@ from the current parents".fmt(Ember.I18n.t('drake'))
     if @get 'noMoreBreeds'
       if GG.obstacleCourseController.get('hasObstacleCourse')
         tip += ". Because you are out of breeding cycles, and this challenge contains
@@ -426,7 +426,7 @@ GG.OffspringBackButtonView = Ember.View.extend GG.PointsToolTip,
 
 GG.OffspringUseButtonView = Ember.View.extend GG.PointsToolTip,
   tagName: 'div'
-  toolTipText: "Submit the current drake as the solution to this task"
+  toolTipText: "Submit the current %@ as the solution to this task".fmt(Ember.I18n.t('drake'))
   classNames : 'offspring-buttons-use'
   click: ->
     GG.statemanager.send('submitOffspring')
@@ -435,9 +435,9 @@ GG.OffspringSaveButtonView = Ember.View.extend GG.PointsToolTip,
   tagName: 'div'
   toolTipText: (->
     if !GG.breedingController.get 'childSavedToParents'
-      "Use this drake as a parent"
+      "Use this %@ as a parent".fmt(Ember.I18n.t('drake'))
     else
-      "Already saved this drake! Press the Back button to select parents."
+      "Already saved this %@! Press the Back button to select parents.".fmt(Ember.I18n.t('drake'))
   ).property('GG.breedingController.childSavedToParents')
   classNames : 'offspring-buttons-save'
   classNameBindings: ['disabled']
@@ -841,7 +841,7 @@ GG.CompletionDialogView = Ember.View.extend
 
   text: (->
     # GG.tasksController.get('currentTask.npc.speech.completionText')
-    "Drake created!"
+    "%@ created!".fmt(Ember.I18n.t('Drake'))
   ).property('GG.tasksController.currentTask')
   reputationWonBinding: 'GG.reputationController.reputationForTask'
   taskReputationBinding: 'GG.reputationController.currentTaskReputation'
