@@ -8,7 +8,7 @@ obstacle(img, width, height)
 #obstacle-course-dialog
   display: none
   border-radius 5px
-  absolute: width 470px height 375px left 260px top 90px // 560px height available, 950px width
+  absolute: width 540px height 560px left 225px top 0px // 560px height available, 950px width
   background-color: #4e8da6
   z-index: 6000
 
@@ -24,10 +24,10 @@ obstacle(img, width, height)
   .align-right
     absolute: right 0px
   .drake
-    absolute: top 44px left 14px
+    absolute: top 229px left 14px
     z-index: 6002
   .overall-time-text
-    absolute: top 22px right 60px width 132px
+    absolute: top 207px right 50px width 132px
     text-align: center
     div
       height: 1.3em
@@ -60,24 +60,24 @@ obstacle(img, width, height)
     absolute: bottom 14px left 14px right 14px
     text-align: center
   .current-obstacle
-    absolute: top 14px left 14px width 180px height 180px
+    absolute: top 194px left 14px width 180px height 180px
     .obstacle
       absolute: left bottom
       display: inline-block
       &.after
         display:none
       &.blue
-        obstacle('color_blue1.png', 254px, 200px)
+        obstacle('color_blue1.png', 275px, 200px)
         &.after
-          obstacle('color_blue2.png', 254px, 200px)
+          obstacle('color_blue2.png', 275px, 200px)
       &.green
-        obstacle('color_green1.png', 254px, 175px)
+        obstacle('color_green1.png', 325px, 175px)
         &.after
-          obstacle('color_green2.png', 254px, 175px)
+          obstacle('color_green2.png', 325px, 175px)
       &.red
-        obstacle('color_red1.png', 254px, 215px)
+        obstacle('color_red1.png', 300px, 215px)
         &.after
-          obstacle('color_red2.png', 254px, 215px)
+          obstacle('color_red2.png', 300px, 215px)
       &.purple
         obstacle('color_purple1.png', 225px, 150px)
         &.after
@@ -87,9 +87,9 @@ obstacle(img, width, height)
         &.after
           obstacle('firebreath2.png', 200px, 200px)
       &.nonmetallic
-        obstacle('matte1.png', 254px, 195px)
+        obstacle('matte1.png', 290px, 195px)
         &.after
-          obstacle('matte2.png', 254px, 195px)
+          obstacle('matte2.png', 290px, 195px)
       &.metallic
         obstacle('metallic01.png', 125px, 225px)
         &.after
@@ -99,38 +99,38 @@ obstacle(img, width, height)
         &.after
           obstacle('spines-narrow2.png', 200px, 210px)
       &.medium-spines
-        obstacle('spines-medium1.png', 254px, 410px)
+        obstacle('spines-medium1.png', 350px, 410px)
         &.after
-          obstacle('spines-medium2.png', 254px, 410px)
+          obstacle('spines-medium2.png', 350px, 410px)
       &.wide-spines
-        obstacle('spines-narrow1.png', 175px, 175px)
+        obstacle('spines-wide1.png', 175px, 175px)
         &.after
-          obstacle('spines-narrow2.png', 175px, 175px)
+          obstacle('spines-wide1.png', 175px, 175px)
       &.short-tail
         obstacle('tail_short1.png', 175px, 125px)
         &.after
           obstacle('tail_short2.png', 175px, 125px)
       &.kinked-tail
-        obstacle('tail_kinked1.png', 254px, 200px)
+        obstacle('tail_kinked1.png', 350px, 200px)
         &.after
-          obstacle('tail_kinked2.png', 254px, 200px)
+          obstacle('tail_kinked2.png', 350px, 200px)
       &.long-tail
-        obstacle('tail_long1.png', 254px, 375px)
+        obstacle('tail_long1.png', 225px, 375px)
         &.after
-          obstacle('tail_long2.png', 254px, 375px)
+          obstacle('tail_long2.png', 225px, 375px)
       &.forward-horns
-        obstacle('horns-forward1.png', 250px, 170px)
+        obstacle('horns-forward1.png', 250px, 175px)
         &.after
-          obstacle('horns-forward2.png', 250px, 170px)
+          obstacle('horns-forward2.png', 250px, 175px)
       &.armor
-        obstacle('armor1.png', 254px, 150px)
+        obstacle('armor1.png', 300px, 150px)
         &.after
-          obstacle('armor2.png', 254px, 150px)
+          obstacle('armor2.png', 300px, 150px)
       &.wingless
-        obstacle('wingless1.png', 254px, 200px)
+        obstacle('wingless1.png', 300px, 200px)
         &.after
-          obstacle('wingless2.png', 254px, 200px)
+          obstacle('wingless2.png', 300px, 200px)
       &.wings
-        obstacle('wings1.png', 254px, 400px)
+        obstacle('wings1.png', 325px, 400px)
         &.after
-          obstacle('wings2.png', 254px, 400px)
+          obstacle('wings2.png', 325px, 400px)
