@@ -426,7 +426,9 @@ GG.OffspringBackButtonView = Ember.View.extend GG.PointsToolTip,
 
 GG.OffspringUseButtonView = Ember.View.extend GG.PointsToolTip,
   tagName: 'div'
-  toolTipText: "Submit the current %@ as the solution to this task".fmt(Ember.I18n.t('drake'))
+  toolTipText: (->
+    "Submit the current %@ as the solution to this task".fmt(Ember.I18n.t('drake'))
+  ).property()
   classNames : 'offspring-buttons-use'
   click: ->
     GG.statemanager.send('submitOffspring')
