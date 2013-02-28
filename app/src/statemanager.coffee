@@ -8,6 +8,7 @@ STATES:
 minispade.require 'genigames/statechart/in-world'
 minispade.require 'genigames/statechart/in-town'
 minispade.require 'genigames/statechart/in-task'
+minispade.require 'genigames/statechart/in-task-list'
 
 GG.statemanager = Ember.StateManager.create
   # enableLogging: true         # uncomment to log state transitions during development
@@ -152,10 +153,14 @@ GG.statemanager = Ember.StateManager.create
         if (taskPath)
           if taskPath[0] is "baseline"
             townLoaded = GG.townsController.loadTown taskPath[1]
-            GG.tasksController.setCurrentTask GG.tasksController.objectAt parseInt(taskPath[2])-1
+            if taskPath[2]
+              GG.tasksController.setCurrentTask GG.tasksController.objectAt parseInt(taskPath[2])-1
             Ember.run ->
               GG.universeView.setCurrentView 'baseline'
-            GG.statemanager.transitionTo 'inTask'
+            if taskPath[2]
+              GG.statemanager.transitionTo 'inTask'
+            else
+              GG.statemanager.transitionTo 'inTaskList'
           else
             townLoaded = GG.townsController.loadTown taskPath[0]
             GG.tasksController.setNextAvailableTask parseInt(taskPath[1])-1 if not isNaN parseInt(taskPath[1])
@@ -175,5 +180,7 @@ GG.statemanager = Ember.StateManager.create
   inWorld: GG.StateInWorld,
 
   inTown: GG.StateInTown,
+
+  inTaskList: GG.StateInTaskList,
 
   inTask: GG.StateInTask

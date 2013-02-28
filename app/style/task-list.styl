@@ -1,0 +1,46 @@
+@import 'app/style/mixins/position'
+@import 'app/style/mixins/border'
+
+#task-list
+  position: left 0px right 0px top 0px bottom 0px
+  background-color: white
+  background-image: url('/portal/assets/styles/bg-body.png')
+  background-repeat: repeat-x
+  .project-header
+    height: 126px
+    background: url("/portal/assets/banners/genigames.png") no-repeat scroll 0px 0px transparent
+  .main-content
+    absolute: top 126px left 0px right 0px height 418px
+    background-color: white
+    .content-bubble
+      absolute: top 14px left 30px width 900px height 350px
+      background-color: #fef7e0
+      border-radius: 13px
+      padding: 20px
+      color: #3a878b
+  .title
+    font-size: 20px
+    font-weight: bold
+    padding-bottom: 20px
+  .tasks
+    relative: left 20px
+  .task
+    clear: left
+    float: left
+    font-size: 1.1em
+    font-weight: bold
+    margin-bottom: 25px
+    cursor: pointer
+    &:hover
+      color: #da5936
+  .checkmark
+    color: green
+    font-size: 1.2em
+    visibility: hidden
+    &.completed
+      visibility: visible
+
+#tasks-completed
+  clear: left
+  float: left
+  display: none

@@ -42,6 +42,7 @@ minispade.require 'genigames/templates/define-groups'
 minispade.require 'genigames/templates/meiosis'
 minispade.require 'genigames/templates/obstacle-course-dialog'
 minispade.require 'genigames/templates/task-completion-dialog'
+minispade.require 'genigames/templates/task-list'
 
 # works similar to :contains(), but requires the whole content
 # (whitespace removed from beginning and end) to match
@@ -109,8 +110,9 @@ $ ->
       breeder: GG.BreederView
       childViews: ['town','breeder']
     baseline: Ember.ContainerView.extend
+      taskList: GG.BaselineTaskListView
       breeder: GG.BreederView
-      childViews: ['breeder']
+      childViews: ['taskList','breeder']
     currentViewLabel: 'none'
     setCurrentView: (view)->
       if @get('currentViewLabel') != view

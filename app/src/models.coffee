@@ -125,6 +125,11 @@ GG.Task = Ember.Object.extend
     text = text.replace(/(<([^>]+)>)/ig, " ").replace('drake', Ember.I18n.t('drake'))
     return text
 
+  cleanedUpShortText: (->
+    text = @get('npc.speech.shortText') || ""
+    return text.replace('drake', Ember.I18n.t('drake'))
+  ).property()
+
 GG.Drake = Ember.Object.extend
   visibleGenesBinding: 'GG.drakeController.visibleGenes'
   hiddenGenesBinding: 'GG.drakeController.hiddenGenes'

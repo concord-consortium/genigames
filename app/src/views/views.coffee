@@ -885,3 +885,10 @@ GG.PasswordField = Ember.TextField.extend
     if evt.keyCode == 13 and @get('loginView')?
       @get('loginView').login()
 
+GG.BaselineTaskListView = Ember.View.extend
+  tagName: 'div'
+  elementId: 'task-list'
+  templateName: 'task-list'
+
+  taskSelected: (evt) ->
+    GG.statemanager.send 'taskSelected', evt.context
