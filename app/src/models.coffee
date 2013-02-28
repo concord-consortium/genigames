@@ -252,6 +252,7 @@ GG.Events =
   REVEALED_ALLELE : "Revealed allele"
   ENABLED_MEIOSIS_CONTROL : "Meiosis control enabled"
   CHOSE_CHROMOSOME: "Chromosome selected"
+  DESELECTED_CHROMOSOME: "Chromosome deselected"
   MADE_CROSSOVER  : "Crossover selected"
 
   #Obstacle course events

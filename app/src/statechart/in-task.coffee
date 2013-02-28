@@ -212,8 +212,22 @@ GG.StateInTask = Ember.State.extend
 
       deselectedChromosome: (manager, chromoView)->
         GG.meiosisController.deselectChromosome(chromoView)
+        GG.logController.logEvent GG.Events.DESELECTED_CHROMOSOME,
+          drake: if chromoView.get('content.female') then "mother" else "father"
+          chromosome: chromoView.get('chromo')
+          side: chromoView.get('side')
+          sister: chromoView.get('sister')
+          visibleAlleles: chromoView.get('visibleGamete')
+          hiddenAlleles: chromoView.get('hiddenGamete')
       selectedChromosome: (manager, chromoView)->
         GG.meiosisController.selectChromosome(chromoView)
+        GG.logController.logEvent GG.Events.CHOSE_CHROMOSOME,
+          drake: if chromoView.get('content.female') then "mother" else "father"
+          chromosome: chromoView.get('chromo')
+          side: chromoView.get('side')
+          sister: chromoView.get('sister')
+          visibleAlleles: chromoView.get('visibleGamete')
+          hiddenAlleles: chromoView.get('hiddenGamete')
 
       selectedCrossover: (manager, context)->
         GG.meiosisController.selectCrossover(context)
