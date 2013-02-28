@@ -849,8 +849,12 @@ GG.CompletionDialogView = Ember.View.extend
   templateName: 'task-completion-dialog'
 
   text: (->
-    # GG.tasksController.get('currentTask.npc.speech.completionText')
-    "%@ created!".fmt(Ember.I18n.t('Drake'))
+    if GG.baselineController.get('isBaseline')
+      t = "Great job, you succeeded in breeding the target %@!".fmt(Ember.I18n.t('drake'))
+    else
+      # GG.tasksController.get('currentTask.npc.speech.completionText')
+      t = "%@ created!".fmt(Ember.I18n.t('Drake'))
+    return t
   ).property('GG.tasksController.currentTask')
   reputationWonBinding: 'GG.reputationController.reputationForTask'
   taskReputationBinding: 'GG.reputationController.currentTaskReputation'
@@ -871,6 +875,9 @@ GG.CompletionDialogView = Ember.View.extend
     # Go back to town
     GG.tasksController.taskFinishedBubbleDismissed()
   continueButtonText: (->
+    if GG.baselineController.get('isBaseline')
+      return "Challenge List"
+
     if GG.obstacleCourseController.get('hasObstacleCourse')
       return "Continue"
     return "Next Level"

@@ -150,18 +150,15 @@ GG.tasksController = Ember.ArrayController.create
     task.set 'showSpeechBubble', true
 
   showTaskCompletion: ->
-    if GG.baselineController.get 'isNotBaseline'
-      if GG.lastShownDialog?
-        try
-          GG.tutorialMessageController.set('finishButtonTutorialShown', true)
-          GG.lastShownDialog.qtip('hide')
-        finally
-          GG.lastShownDialog = null
-      $('#completion-dialog').show()
-      $('#modal-backdrop-fade').show()
-    else
-      GG.showModalDialog "Great job, you succeeded in breeding the target %@!
-                          <br/><br/>Close this page to go back to the portal.".fmt(Ember.I18n.t('drake'))
+    if GG.baselineController.get('isNotBaseline') and GG.lastShownDialog?
+      try
+        GG.tutorialMessageController.set('finishButtonTutorialShown', true)
+        GG.lastShownDialog.qtip('hide')
+      finally
+        GG.lastShownDialog = null
+    $('#completion-dialog').show()
+    $('#modal-backdrop-fade').show()
+
   showTaskNonCompletion: ->
     msg = "That's not the %@ you're looking for!".fmt(Ember.I18n.t('drake'))
     msg += " You're trying to "
@@ -176,11 +173,14 @@ GG.tasksController = Ember.ArrayController.create
     GG.statemanager.transitionTo 'inTask'
 
   taskFinishedBubbleDismissed: ->
-    @get('currentTask').set 'showCompletionBubble', false
-    if GG.obstacleCourseController.get 'hasObstacleCourse'
-      GG.statemanager.transitionTo 'obstacleCourse'
+    if GG.baselineController.get('isBaseline')
+      GG.statemanager.transitionTo 'inTaskList'
     else
-      GG.statemanager.transitionTo 'inTown'
+      @get('currentTask').set 'showCompletionBubble', false
+      if GG.obstacleCourseController.get 'hasObstacleCourse'
+        GG.statemanager.transitionTo 'obstacleCourse'
+      else
+        GG.statemanager.transitionTo 'inTown'
 
   isCurrentTaskComplete: ->
     task = @get 'currentTask'
