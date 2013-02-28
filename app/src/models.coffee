@@ -252,6 +252,7 @@ GG.Events =
   SUBMITTED_OFFSPRING : "Submitted offspring"
   REVEALED_ALLELE : "Revealed allele"
   ENABLED_MEIOSIS_CONTROL : "Meiosis control enabled"
+  DISABLED_MEIOSIS_CONTROL: "Meiosis control disabled"
   CHOSE_CHROMOSOME: "Chromosome selected"
   DESELECTED_CHROMOSOME: "Chromosome deselected"
   MADE_CROSSOVER  : "Crossover selected"
