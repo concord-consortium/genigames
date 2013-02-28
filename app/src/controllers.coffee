@@ -655,6 +655,13 @@ GG.meiosisController = Ember.Object.create
           else
             @set('motherView.gametes', $.extend(true, {}, gametes))
             @get('motherView').notifyPropertyChange('gametes')
+  visibility: (chromoView, allele)->
+    if chromoView.get('visibleAlleles').indexOf(allele) != -1
+      return 'visible'
+    if chromoView.get('hiddenAlleles').indexOf(allele) != -1
+      return 'hidden'
+    else
+      return 'invisible'
   crossoverSelected: false
   selectedCrossover: null
   selectCrossover: (destCross)->
@@ -686,20 +693,45 @@ GG.meiosisController = Ember.Object.create
         $('#' + destCross.chromoView.get('elementId') + ' .crossoverPoint.' + gene.name).removeClass('clickable').addClass('selected')
         # get all genes after this one
         genesToSwap = [gene]
-        allelesToSwap = [{gene: sourceCross.gene, source: sourceCross.allele, dest: destCross.allele}]
+        allelesToSwap = [
+          {
+            gene: sourceCross.gene,
+            source: sourceCross.allele,
+            sourceVisibility: @visibility(sourceCross.chromoView, sourceCross.allele)
+            dest: destCross.allele
+            destVisibility: @visibility(destCross.chromoView, destCross.allele)
+          }
+        ]
         for allele in sourceCross.chromoView.get('alleles')
           alGene = BioLogica.Genetics.getGeneOfAllele(GG.DrakeSpecies, allele.allele)
           if alGene.start > sourceCross.gene.start
             genesToSwap.push(alGene)
-            allelesToSwap.push({gene: alGene, source: allele.allele})
+            allelesToSwap.push
+              gene: alGene
+              source: allele.allele
+              sourceVisibility: @visibility(sourceCross.chromoView, allele.allele)
 
         for allele in destCross.chromoView.get('alleles')
           alGene = BioLogica.Genetics.getGeneOfAllele(GG.DrakeSpecies, allele.allele)
           if alGene.start > sourceCross.gene.start
-            allelesToSwap.map (item)->
+            allelesToSwap.map (item)=>
               if item.gene.name == alGene.name
                 item.dest = allele.allele
+                item.destVisibility = @visibility(destCross.chromoView, allele.allele)
               return item
+
+        GG.logController.logEvent GG.Events.MADE_CROSSOVER,
+          sourceChromo:
+            drake: if sourceCross.chromoView.get('content.female') then "mother" else "father"
+            side: sourceCross.chromoView.get('side')
+            chromo: sourceCross.chromoView.get('chromo')
+            sister: sourceCross.chromoView.get('sister')
+          destinationChromo:
+            drake: if destCross.chromoView.get('content.female') then "mother" else "father"
+            side: destCross.chromoView.get('side')
+            chromo: destCross.chromoView.get('chromo')
+            sister: destCross.chromoView.get('sister')
+          allelesToSwap: allelesToSwap
 
         # swap them visually
         sourceCell = sourceCross.chromoView.get('cellNum')
