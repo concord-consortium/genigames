@@ -1,8 +1,7 @@
 {
-  "alleleRevealed": 3,
-  "breedButtonClicked": 2,
-  "meiosisControlEnabled": 5,
-  "crossoverMade": 10,
-  "chromosomeSelected": 10,
-  "extraBreedCycle": 5
+  "alleleRevealed": [3],
+  "crossoverMade": [8,12,16,20,24],
+  "chromosomeSelected": [8,12,16,20,24],
+  "extraBreedCycle": [10,15,20,25,30],
+  "cycleRemainingBonus": [5,8,12,15,18]
 }
