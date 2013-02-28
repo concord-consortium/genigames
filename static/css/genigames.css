@@ -119,7 +119,7 @@
   left: 0;
   width: 2040px;
   height: 423px;
-  background: top left no-repeat url("../images/breeding-panels-left.png");
+  background: -81px -134px no-repeat url("../images/breeding-panels-left.png");
 }
 #chromosome-labels {
   position: absolute;
@@ -2084,6 +2084,41 @@ a:hover {
 }
 #choose-class div {
   padding: 3px;
+}
+#define-groups {
+  position: absolute;
+  width: 660px;
+  left: 170px;
+  color: #999;
+}
+#define-groups div {
+  padding: 5px;
+}
+#define-groups .title {
+  font-weight: bold;
+  font-size: 1.2em;
+}
+#define-groups .headers {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+#define-groups .name,
+#define-groups .school-id,
+#define-groups .remove-link {
+  display: inline-block;
+}
+#define-groups .name {
+  width: 300px;
+}
+#define-groups .school-id {
+  width: 200px;
+}
+#define-groups .remove-link {
+  width: 100px;
+}
+#define-groups .error {
+  color: #900;
+  font-size: 0.9em;
 }
 #username,
 #password {
