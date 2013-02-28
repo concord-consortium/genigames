@@ -295,8 +295,10 @@ GG.breedingController = Ember.Object.create
   toggleBreedType: ->
     if GG.breedingController.get('breedType') is GG.BREED_AUTOMATED
       GG.breedingController.set 'breedType', GG.BREED_CONTROLLED
+      GG.logController.logEvent GG.Events.ENABLED_MEIOSIS_CONTROL
     else
       GG.breedingController.set 'breedType', GG.BREED_AUTOMATED
+      GG.logController.logEvent GG.Events.DISABLED_MEIOSIS_CONTROL
 
   child: null
   childSavedToParents: false
