@@ -243,6 +243,7 @@ GG.Events =
   # Breeding events
   SELECTED_PARENT : "Selected parent"
   REMOVED_PARENT  : "Removed parent"
+  BREED_BUTTON_CLICKED : "Breed button clicked"
   BRED_DRAGON     : "Bred dragon"
   BRED_WITH_EXTRA_CYCLE : "Extra breed cycle"
   KEPT_OFFSPRING  : "Kept offspring"

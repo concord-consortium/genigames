@@ -116,6 +116,7 @@ GG.StateInTask = Ember.State.extend
 
       breedDrake: (manager) ->
         if GG.motherPoolController.get('selected') && GG.fatherPoolController.get('selected')
+          GG.logController.logEvent GG.Events.BREED_BUTTON_CLICKED, {duringMeiosis: false}
           manager.transitionTo 'animatingMeiosis'
 
       startFatherMeiosis: ->
@@ -218,6 +219,7 @@ GG.StateInTask = Ember.State.extend
         GG.meiosisController.selectCrossover(context)
 
       breedDrake: (manager)->
+        GG.logController.logEvent GG.Events.BREED_BUTTON_CLICKED, {duringMeiosis: true}
         # If the breed button gets clicked while we're animating,
         # reset the animation and go again
         GG.meiosisController.resetAnimation()
@@ -245,6 +247,7 @@ GG.StateInTask = Ember.State.extend
         , 100
 
       breedDrake: (manager)->
+        GG.logController.logEvent GG.Events.BREED_BUTTON_CLICKED, {duringMeiosis: false}
         manager.transitionTo 'animatingMeiosis'
 
       breedDrakeInternal: ->
