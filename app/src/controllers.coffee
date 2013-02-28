@@ -666,14 +666,14 @@ GG.meiosisController = Ember.Object.create
     meiosisView = @get(source + 'View')
     parentSelector = '#' + meiosisView.get('elementId')
 
-    # mark this one as selected
-    $('#' + destCross.chromoView.get('elementId') + ' .crossoverPoint.' + gene.name).removeClass('clickable').addClass('selected')
     # Highlight the valid second choices, by removing 'clickable' on invalid ones
     leftRight = destCross.chromoView.get('right')
     points = parentSelector + ' .crossoverPoint:not(.' + gene.name + ')'
     points2 = parentSelector + ' .' + leftRight + ' .crossoverPoint.' + gene.name
-    $(points).removeClass('clickable')
-    $(points2).removeClass('clickable')
+    $(points).removeClass('clickable').addClass('hidden')
+    $(points2).removeClass('clickable').addClass('hidden')
+    # mark this one as selected
+    $('#' + destCross.chromoView.get('elementId') + ' .crossoverPoint.' + gene.name).removeClass('hidden').addClass('selected')
     if $(parentSelector + " .crossoverSelection .step3").hasClass('hidden')
       $(parentSelector + " .crossoverSelection .step1").addClass('hidden')
       $(parentSelector + " .crossoverSelection .step2").removeClass('hidden')
