@@ -113,7 +113,9 @@ GG.tasksController = Ember.ArrayController.create
     task = @get 'currentTask'
     task.set 'completed', true
     @awardTaskReputation true
-    GG.logController.logEvent GG.Events.COMPLETED_TASK, name: task.get('name')
+    GG.logController.logEvent GG.Events.COMPLETED_TASK,
+      name: task.get('name')
+      breedCounter: GG.cyclesController.get('cycles')
 
   restartCurrentTask: ->
     task = @get 'currentTask'
