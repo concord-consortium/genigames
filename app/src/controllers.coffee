@@ -11,6 +11,10 @@ GG.townsController = Ember.ArrayController.create
   addTown: (town) ->
     @pushObject town
 
+  currentTownIndex: (->
+    @indexOf(@get('currentTown'))
+  ).property('currentTown')
+
   firstIncompleteTown: (->
     towns = @get('content')
     for i in [0...(towns.length)]
@@ -537,7 +541,11 @@ GG.sessionController = Ember.Object.create
 
 GG.actionCostsController = Ember.Object.create
   getCost: (action) ->
-    @get('content.'+action) || 0
+    level = GG.townsController.get('currentTownIndex')
+    pts = [].concat @get('content.'+action)
+    if level >= pts.length
+      level = (pts.length - 1) # the final value is used for all remaining levels
+    pts[level] || 0
 
 GG.meiosisController = Ember.Object.create
   motherView: null

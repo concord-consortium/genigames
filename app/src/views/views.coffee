@@ -603,6 +603,13 @@ GG.MeiosisView = Ember.View.extend
   ).property('content')
   gametes: null
   useGametes: false
+  currentTownBinding: 'GG.townsController.currentTown'
+  crossoverCost: (->
+    GG.actionCostsController.getCost('crossoverMade')
+  ).property('currentTown')
+  chromosomeSelectedCost: (->
+    GG.actionCostsController.getCost('chromosomeSelected')
+  ).property('currentTown')
   rerender: ->
     @_super()
     setTimeout =>
@@ -800,7 +807,7 @@ GG.ObstacleCourseDialogView = Ember.View.extend
   opponentTotalTimeBinding: 'GG.obstacleCourseController.opponentTotalTime'
   nTrainingsBinding: 'GG.cyclesController.cycles'
   trainingPoints: (->
-    @get('nTrainings') * 10
+    @get('nTrainings') * GG.actionCostsController.getCost('cycleRemainingBonus')
   ).property('nTrainings')
   courseCompletionPoints: (->
     GG.obstacleCourseController.get('reputationEarned') - @get('trainingPoints')

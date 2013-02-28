@@ -258,7 +258,7 @@ GG.TaskNPC = Ember.Object.extend
   position: null
 
 GG.ActionCosts = Ember.Object.extend
-  breedButtonClicked: 1
+  someEvent: [0]
 
 GG.ObstacleCourse = Ember.Object.extend
   obstacles: null
