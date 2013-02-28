@@ -229,6 +229,7 @@ GG.Drake.createFromBiologicaOrganism = (org) ->
 GG.Events =
   # Session events
   STARTED_SESSION : "Started session"
+  USER_LOGGED_IN  : "User logged in"
   GROUP_LOGGED_IN : "Group logged in"
 
   # Town events

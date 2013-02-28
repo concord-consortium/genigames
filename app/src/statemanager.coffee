@@ -46,6 +46,13 @@ GG.statemanager = Ember.StateManager.create
       GG.sessionController.loginPortal(data.username, data.password)
 
     successfulLogin: (manager)->
+      user = GG.sessionController.get('user')
+      GG.logController.logEvent GG.Events.USER_LOGGED_IN,
+        user:
+          login: user.get('login')
+          firstName: user.get('first')
+          lastName: user.get('last')
+          group: user.get('group')
       if GG.sessionController.get('preloadingComplete')
         manager.send 'preloadedSuccessfulLogin'
       else
