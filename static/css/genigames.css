@@ -2300,9 +2300,9 @@ a:hover {
   border-radius: 5px;
   position: absolute;
   width: 470px;
-  height: 375px;
+  height: 445px;
   left: 260px;
-  top: 90px;
+  top: 55px;
   background-color: #4e8da6;
   z-index: 6000;
 }
@@ -2328,14 +2328,14 @@ a:hover {
 }
 #obstacle-course-dialog-content .drake {
   position: absolute;
-  top: 44px;
-  left: 14px;
+  top: 114px;
+  left: 50px;
   z-index: 6002;
 }
 #obstacle-course-dialog-content .overall-time-text {
   position: absolute;
   top: 22px;
-  right: 60px;
+  left: 25px;
   width: 132px;
   text-align: center;
 }
@@ -2394,9 +2394,9 @@ a:hover {
 #obstacle-course-dialog-content .current-obstacle {
   position: absolute;
   top: 14px;
-  left: 14px;
-  width: 180px;
-  height: 180px;
+  right: 14px;
+  width: 250px;
+  height: 250px;
 }
 #obstacle-course-dialog-content .current-obstacle .obstacle {
   position: absolute;
@@ -2409,33 +2409,33 @@ a:hover {
 }
 #obstacle-course-dialog-content .current-obstacle .obstacle.blue {
   background: bottom left no-repeat url("../images/obstacle-course/color_blue1.png");
-  width: 254px;
-  height: 200px;
+  width: 250px;
+  height: 182px;
 }
 #obstacle-course-dialog-content .current-obstacle .obstacle.blue.after {
   background: bottom left no-repeat url("../images/obstacle-course/color_blue2.png");
-  width: 254px;
-  height: 200px;
+  width: 250px;
+  height: 182px;
 }
 #obstacle-course-dialog-content .current-obstacle .obstacle.green {
   background: bottom left no-repeat url("../images/obstacle-course/color_green1.png");
-  width: 254px;
-  height: 175px;
+  width: 250px;
+  height: 135px;
 }
 #obstacle-course-dialog-content .current-obstacle .obstacle.green.after {
   background: bottom left no-repeat url("../images/obstacle-course/color_green2.png");
-  width: 254px;
-  height: 175px;
+  width: 250px;
+  height: 135px;
 }
 #obstacle-course-dialog-content .current-obstacle .obstacle.red {
   background: bottom left no-repeat url("../images/obstacle-course/color_red1.png");
-  width: 254px;
-  height: 215px;
+  width: 250px;
+  height: 179px;
 }
 #obstacle-course-dialog-content .current-obstacle .obstacle.red.after {
   background: bottom left no-repeat url("../images/obstacle-course/color_red2.png");
-  width: 254px;
-  height: 215px;
+  width: 250px;
+  height: 179px;
 }
 #obstacle-course-dialog-content .current-obstacle .obstacle.purple {
   background: bottom left no-repeat url("../images/obstacle-course/color_purple1.png");
@@ -2459,13 +2459,13 @@ a:hover {
 }
 #obstacle-course-dialog-content .current-obstacle .obstacle.nonmetallic {
   background: bottom left no-repeat url("../images/obstacle-course/matte1.png");
-  width: 254px;
-  height: 195px;
+  width: 250px;
+  height: 168px;
 }
 #obstacle-course-dialog-content .current-obstacle .obstacle.nonmetallic.after {
   background: bottom left no-repeat url("../images/obstacle-course/matte2.png");
-  width: 254px;
-  height: 195px;
+  width: 250px;
+  height: 168px;
 }
 #obstacle-course-dialog-content .current-obstacle .obstacle.metallic {
   background: bottom left no-repeat url("../images/obstacle-course/metallic01.png");
@@ -2489,21 +2489,21 @@ a:hover {
 }
 #obstacle-course-dialog-content .current-obstacle .obstacle.medium-spines {
   background: bottom left no-repeat url("../images/obstacle-course/spines-medium1.png");
-  width: 254px;
-  height: 410px;
+  width: 213px;
+  height: 250px;
 }
 #obstacle-course-dialog-content .current-obstacle .obstacle.medium-spines.after {
   background: bottom left no-repeat url("../images/obstacle-course/spines-medium2.png");
-  width: 254px;
-  height: 410px;
+  width: 213px;
+  height: 250px;
 }
 #obstacle-course-dialog-content .current-obstacle .obstacle.wide-spines {
-  background: bottom left no-repeat url("../images/obstacle-course/spines-narrow1.png");
+  background: bottom left no-repeat url("../images/obstacle-course/spines-wide1.png");
   width: 175px;
   height: 175px;
 }
 #obstacle-course-dialog-content .current-obstacle .obstacle.wide-spines.after {
-  background: bottom left no-repeat url("../images/obstacle-course/spines-narrow2.png");
+  background: bottom left no-repeat url("../images/obstacle-course/spines-wide1.png");
   width: 175px;
   height: 175px;
 }
@@ -2519,63 +2519,63 @@ a:hover {
 }
 #obstacle-course-dialog-content .current-obstacle .obstacle.kinked-tail {
   background: bottom left no-repeat url("../images/obstacle-course/tail_kinked1.png");
-  width: 254px;
-  height: 200px;
+  width: 250px;
+  height: 143px;
 }
 #obstacle-course-dialog-content .current-obstacle .obstacle.kinked-tail.after {
   background: bottom left no-repeat url("../images/obstacle-course/tail_kinked2.png");
-  width: 254px;
-  height: 200px;
+  width: 250px;
+  height: 143px;
 }
 #obstacle-course-dialog-content .current-obstacle .obstacle.long-tail {
   background: bottom left no-repeat url("../images/obstacle-course/tail_long1.png");
-  width: 254px;
-  height: 375px;
+  width: 150px;
+  height: 250px;
 }
 #obstacle-course-dialog-content .current-obstacle .obstacle.long-tail.after {
   background: bottom left no-repeat url("../images/obstacle-course/tail_long2.png");
-  width: 254px;
-  height: 375px;
+  width: 150px;
+  height: 250px;
 }
 #obstacle-course-dialog-content .current-obstacle .obstacle.forward-horns {
   background: bottom left no-repeat url("../images/obstacle-course/horns-forward1.png");
   width: 250px;
-  height: 170px;
+  height: 175px;
 }
 #obstacle-course-dialog-content .current-obstacle .obstacle.forward-horns.after {
   background: bottom left no-repeat url("../images/obstacle-course/horns-forward2.png");
   width: 250px;
-  height: 170px;
+  height: 175px;
 }
 #obstacle-course-dialog-content .current-obstacle .obstacle.armor {
   background: bottom left no-repeat url("../images/obstacle-course/armor1.png");
-  width: 254px;
-  height: 150px;
+  width: 250px;
+  height: 125px;
 }
 #obstacle-course-dialog-content .current-obstacle .obstacle.armor.after {
   background: bottom left no-repeat url("../images/obstacle-course/armor2.png");
-  width: 254px;
-  height: 150px;
+  width: 250px;
+  height: 125px;
 }
 #obstacle-course-dialog-content .current-obstacle .obstacle.wingless {
   background: bottom left no-repeat url("../images/obstacle-course/wingless1.png");
-  width: 254px;
-  height: 200px;
+  width: 250px;
+  height: 167px;
 }
 #obstacle-course-dialog-content .current-obstacle .obstacle.wingless.after {
   background: bottom left no-repeat url("../images/obstacle-course/wingless2.png");
-  width: 254px;
-  height: 200px;
+  width: 250px;
+  height: 167px;
 }
 #obstacle-course-dialog-content .current-obstacle .obstacle.wings {
   background: bottom left no-repeat url("../images/obstacle-course/wings1.png");
-  width: 254px;
-  height: 400px;
+  width: 203px;
+  height: 250px;
 }
 #obstacle-course-dialog-content .current-obstacle .obstacle.wings.after {
   background: bottom left no-repeat url("../images/obstacle-course/wings2.png");
-  width: 254px;
-  height: 400px;
+  width: 203px;
+  height: 250px;
 }
 #topBar {
   background: url("../images/header.jpg");
