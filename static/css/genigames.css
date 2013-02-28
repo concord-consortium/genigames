@@ -2577,6 +2577,70 @@ a:hover {
   width: 203px;
   height: 250px;
 }
+#task-list {
+  position: left 0px right 0px top 0px bottom 0px;
+  background-color: #fff;
+  background-image: url("/portal/assets/styles/bg-body.png");
+  background-repeat: repeat-x;
+}
+#task-list .project-header {
+  height: 126px;
+  background: url("/portal/assets/banners/genigames.png") no-repeat scroll 0px 0px transparent;
+}
+#task-list .main-content {
+  position: absolute;
+  top: 126px;
+  left: 0px;
+  right: 0px;
+  height: 418px;
+  background-color: #fff;
+}
+#task-list .main-content .content-bubble {
+  position: absolute;
+  top: 14px;
+  left: 30px;
+  width: 900px;
+  height: 350px;
+  background-color: #fef7e0;
+  -webkit-border-radius: 13px;
+  -moz-border-radius: 13px;
+  border-radius: 13px;
+  padding: 20px;
+  color: #3a878b;
+}
+#task-list .title {
+  font-size: 20px;
+  font-weight: bold;
+  padding-bottom: 20px;
+}
+#task-list .tasks {
+  position: relative;
+  left: 20px;
+}
+#task-list .task {
+  clear: left;
+  float: left;
+  font-size: 1.1em;
+  font-weight: bold;
+  margin-bottom: 25px;
+  cursor: pointer;
+}
+#task-list .task:hover {
+  color: #da5936;
+}
+#task-list .checkmark {
+  color: #008000;
+  font-size: 1.2em;
+  visibility: hidden;
+}
+#task-list .checkmark.completed {
+  visibility: visible;
+}
+#tasks-completed {
+  clear: left;
+  float: left;
+  display: none;
+}
 #topBar {
   background: url("../images/header.jpg");
   position: relative;
