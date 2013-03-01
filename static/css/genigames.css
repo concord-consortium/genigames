@@ -2098,41 +2098,6 @@ a:hover {
 #choose-class div {
   padding: 3px;
 }
-#define-groups {
-  position: absolute;
-  width: 660px;
-  left: 170px;
-  color: #999;
-}
-#define-groups div {
-  padding: 5px;
-}
-#define-groups .title {
-  font-weight: bold;
-  font-size: 1.2em;
-}
-#define-groups .headers {
-  font-weight: bold;
-  font-size: 1.1em;
-}
-#define-groups .name,
-#define-groups .school-id,
-#define-groups .remove-link {
-  display: inline-block;
-}
-#define-groups .name {
-  width: 300px;
-}
-#define-groups .school-id {
-  width: 200px;
-}
-#define-groups .remove-link {
-  width: 100px;
-}
-#define-groups .error {
-  color: #900;
-  font-size: 0.9em;
-}
 #username,
 #password {
   width: 200px;
@@ -2144,6 +2109,9 @@ a:hover {
 #loadingStatus {
   position: relative;
   top: 150px;
+}
+#login-permission-denied {
+  display: none;
 }
 #meiosis-container {
   position: absolute;
@@ -2590,30 +2558,34 @@ a:hover {
   width: 203px;
   height: 250px;
 }
-#task-list {
+#task-list,
+#define-groups {
   position: left 0px right 0px top 0px bottom 0px;
   background-color: #fff;
   background-image: url("/portal/assets/styles/bg-body.png");
   background-repeat: repeat-x;
 }
-#task-list .project-header {
+#task-list .project-header,
+#define-groups .project-header {
   height: 126px;
   background: url("/portal/assets/banners/genigames.png") no-repeat scroll 0px 0px transparent;
 }
-#task-list .main-content {
+#task-list .main-content,
+#define-groups .main-content {
   position: absolute;
   top: 126px;
   left: 0px;
   right: 0px;
-  height: 418px;
+  min-height: 420px;
   background-color: #fff;
 }
-#task-list .main-content .content-bubble {
-  position: absolute;
-  top: 14px;
-  left: 30px;
+#task-list .main-content .content-bubble,
+#define-groups .main-content .content-bubble {
+  margin-top: 14px;
+  margin-bottom: 14px;
+  margin-left: 30px;
   width: 900px;
-  height: 350px;
+  min-height: 350px;
   background-color: #fef7e0;
   -webkit-border-radius: 13px;
   -moz-border-radius: 13px;
@@ -2621,16 +2593,23 @@ a:hover {
   padding: 20px;
   color: #3a878b;
 }
-#task-list .title {
+#task-list .main-content .content-bubble .student-table,
+#define-groups .main-content .content-bubble .student-table {
+  color: #000;
+}
+#task-list .title,
+#define-groups .title {
   font-size: 20px;
   font-weight: bold;
   padding-bottom: 20px;
 }
-#task-list .tasks {
+#task-list .tasks,
+#define-groups .tasks {
   position: relative;
   left: 20px;
 }
-#task-list .task {
+#task-list .task,
+#define-groups .task {
   clear: left;
   float: left;
   font-size: 1.1em;
@@ -2638,16 +2617,94 @@ a:hover {
   margin-bottom: 25px;
   cursor: pointer;
 }
-#task-list .task:hover {
+#task-list .task:hover,
+#define-groups .task:hover {
   color: #da5936;
 }
-#task-list .checkmark {
+#task-list .checkmark,
+#define-groups .checkmark {
   color: #008000;
   font-size: 1.2em;
   visibility: hidden;
 }
-#task-list .checkmark.completed {
+#task-list .checkmark.completed,
+#define-groups .checkmark.completed {
   visibility: visible;
+}
+#task-list .name,
+#define-groups .name,
+#task-list .school-id,
+#define-groups .school-id,
+#task-list .remove-link,
+#define-groups .remove-link {
+  display: inline-block;
+}
+#task-list .list-user,
+#define-groups .list-user {
+  padding-bottom: 10px;
+}
+#task-list .headers,
+#define-groups .headers {
+  font-size: 1.15em;
+  font-weight: bold;
+  padding-bottom: 20px;
+}
+#task-list .name,
+#define-groups .name {
+  width: 300px;
+}
+#task-list .school-id,
+#define-groups .school-id {
+  width: 200px;
+}
+#task-list .remove-link,
+#define-groups .remove-link {
+  width: 100px;
+}
+#task-list .add-link,
+#define-groups .add-link {
+  padding-bottom: 20px;
+}
+#task-list .remove-link a,
+#define-groups .remove-link a,
+#task-list .add-link a,
+#define-groups .add-link a {
+  text-decoration: none;
+}
+#task-list .caption,
+#define-groups .caption {
+  padding-bottom: 3px;
+}
+#task-list .error,
+#define-groups .error {
+  color: #900;
+  font-size: 0.9em;
+}
+#task-list input,
+#define-groups input {
+  -moz-box-shadow: none;
+  -webkit-box-shado: none;
+  box-shadow: none;
+}
+#task-list input[type="text"]:valid,
+#define-groups input[type="text"]:valid {
+  font-size: 13px;
+  border: 1px solid #f00;
+  padding: 4px;
+}
+#task-list input[type="text"]:valid.ok,
+#define-groups input[type="text"]:valid.ok {
+  border: 1px solid #a1d2d1;
+}
+#task-list input[type="submit"],
+#define-groups input[type="submit"] {
+  border: 0px solid #f3951d;
+  color: #fff;
+  -webkit-border-radius: 12px;
+  -moz-border-radius: 12px;
+  border-radius: 12px;
+  padding: 4px 14px;
+  background-color: #f3951d;
 }
 #tasks-completed {
   clear: left;
