@@ -439,6 +439,7 @@ GG.logController = Ember.Object.create
       @processEventQueue()
   ).observes('learnerLogUrl')
 
+  syncTime: new SyncTime('/portal/time')
   session: null
   eventQueue: []
   eventQueueInProgress: []
@@ -462,12 +463,13 @@ GG.logController = Ember.Object.create
         @persistEvent(evt)
 
   logEvent: (evt, params) ->
-    date = new Date()
+    date = @syncTime.now()
     logData =
       session     : @get('session')
       time        : date.getTime()
       prettyTime  : date.toString()
       internetTime: date.toInternetTime(2)
+      timeDrift   : @syncTime.drift
       event       : evt
       parameters  : params
 
@@ -1308,4 +1310,5 @@ GG.groupsController = Ember.Object.create
     groups = @get('groups')
     groups.pushObject(GG.GroupMember.create())
     console.log("add user ended")
+
 
