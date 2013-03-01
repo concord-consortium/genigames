@@ -462,9 +462,12 @@ GG.logController = Ember.Object.create
         @persistEvent(evt)
 
   logEvent: (evt, params) ->
+    date = new Date()
     logData =
       session     : @get('session')
-      time        : new Date().getTime()
+      time        : date.getTime()
+      prettyTime  : date.toString()
+      internetTime: date.toInternetTime(2)
       event       : evt
       parameters  : params
 
@@ -480,6 +483,7 @@ GG.logController = Ember.Object.create
         console.log 'log event save failed!'
         @eventQueue.push evt
     else
+      console.log 'log event generated (no save)', evt
       @eventQueue.push evt
 
   generateGUID: ->

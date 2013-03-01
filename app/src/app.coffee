@@ -10,6 +10,7 @@ minispade.require 'genigames/vendor/ember'
 minispade.require 'genigames/vendor/biologica'
 minispade.require 'genigames/vendor/jquery-preload-css-images'
 minispade.require 'genigames/vendor/ember-i18n'
+minispade.require 'genigames/vendor/ppds-date'
 
 window.GG = GG = Ember.Application.create()
 
