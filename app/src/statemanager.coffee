@@ -98,18 +98,27 @@ GG.statemanager = Ember.StateManager.create
       GG.statemanager.send 'nextStep'
 
     nextStep: ->
-      doNext = ->
+      doNext = =>
         # load the game after we log in so that we can create towns and tasks
         # with the current user's saved state
         if GG.userController.get('loaded')
           GG.userController.removeObserver('loaded', obs)
-          console.log("Group: " + GG.userController.get('user.group'))
-          console.log("Saved: " + GG.userController.get('groupInfoSaved'))
-          if GG.userController.get('user.group') and not GG.userController.get('groupInfoSaved')
-            GG.universeView.setCurrentView 'defineGroups'
-            return
+          permissions = @checkCohorts()
+          if permissions.approved
+            if GG.userController.get('user.group') and not GG.userController.get('groupInfoSaved')
+              GG.universeView.setCurrentView 'defineGroups'
+              return
+            else
+              GG.statemanager.send 'loadGame'
           else
-            GG.statemanager.send 'loadGame'
+            # Permission denied!
+            GG.logController.logEvent permissions.reason, {cohorts: GG.sessionController.get('user.cohorts')}
+            $("#login-status").hide()
+            $('#login-permission-denied').show()
+            setTimeout ->
+              console.log("Forwarding to portal...")
+              window.location = "/portal/"
+            , 3000
 
       if GG.userController.get('loaded')
         doNext()
@@ -118,6 +127,20 @@ GG.statemanager = Ember.StateManager.create
           doNext()
         GG.userController.addObserver('loaded', obs)
 
+    checkCohorts: ->
+      u = GG.sessionController.get('user')
+      if (taskPath = GG.statemanager.get('params.task'))
+        taskPath = taskPath.split "/"
+      if (taskPath)
+        if taskPath[0] is "baseline"
+          if not u.get('isBaselineUser')
+            return {approved: false, reason: GG.Events.USER_DENIED_BASELINE}
+          else
+            return {approved: true}
+      if not u.get('isGameUser')
+        return {approved: false, reason: GG.Events.USER_DENIED_GAME}
+
+      return {approved: true}
 
     loadGame: ->
       # GET /api/game

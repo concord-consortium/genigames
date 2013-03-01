@@ -13,6 +13,14 @@ GG.User = Ember.Object.extend
     return @get('first') + " " + @get('last')
   ).property('first', 'last')
 
+  isBaselineUser: (->
+    @get('cohorts').indexOf('baseline') != -1
+  ).property('cohorts.@index')
+
+  isGameUser: (->
+    @get('cohorts').indexOf('gamed') != -1
+  ).property('cohorts.@index')
+
   # User object gets created *before* we load the learner data,
   # so we have to manually trigger restoring the user state
   restoreState: ->
@@ -231,6 +239,8 @@ GG.Events =
   STARTED_SESSION : "Started session"
   USER_LOGGED_IN  : "User logged in"
   GROUP_LOGGED_IN : "Group logged in"
+  USER_DENIED_GAME: "User denied game access"
+  USER_DENIED_BASELINE: "User denied baseline access"
 
   # Town events
   ENTERED_TOWN    : "Entered town"
