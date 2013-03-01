@@ -71,6 +71,19 @@
   left: 32px;
   width: 770px;
 }
+#task-reputation-available {
+  position: absolute;
+  top: 28px;
+  right: 247px;
+  width: 770px;
+  text-align: right;
+}
+#task-reputation-best {
+  position: absolute;
+  top: 28px;
+  left: 822px;
+  color: #fff;
+}
 #progress-bar {
   position: absolute;
   top: 63px;
