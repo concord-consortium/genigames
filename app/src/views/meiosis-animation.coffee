@@ -1,6 +1,8 @@
 GG.MeiosisAnimation = Ember.Object.create
   timeScale: 1
   animation: 0
+  stage: "not started"
+  parent: "unknown"
 
   scale: (baseTime)->
     return baseTime * @get('timeScale')
@@ -31,6 +33,9 @@ GG.MeiosisAnimation = Ember.Object.create
     args.mainContainer = $("#{chromosomeContainerName}")
     args.container = args.mainContainer.find('.chromosome-panel')
     args.cell = args.container.find('.mainCell')
+
+    @set('parent', if parentView.get('content.female') then "mother" else "father")
+    @set('stage', "pre-gamete selection")
 
     meiosisControl = GG.tasksController.get 'currentTask.meiosisControl'
 
@@ -183,6 +188,8 @@ GG.MeiosisAnimation = Ember.Object.create
     chosenChromos = ".cell" + gamete
     leftShift = (if right then "+=" else "-=" ) + "88px"
     topShift = (if down then "+=" else "-=" ) + "55px"
+
+    @set('stage', "post-gamete selection")
 
     t = @scale(1000)
 
