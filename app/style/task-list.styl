@@ -2,6 +2,7 @@
 @import 'app/style/mixins/border'
 
 #task-list
+#define-groups
   position: left 0px right 0px top 0px bottom 0px
   background-color: white
   background-image: url('/portal/assets/styles/bg-body.png')
@@ -10,14 +11,21 @@
     height: 126px
     background: url("/portal/assets/banners/genigames.png") no-repeat scroll 0px 0px transparent
   .main-content
-    absolute: top 126px left 0px right 0px height 418px
+    absolute: top 126px left 0px right 0px
+    min-height: 420px
     background-color: white
     .content-bubble
-      absolute: top 14px left 30px width 900px height 350px
+      margin-top: 14px
+      margin-bottom: 14px
+      margin-left: 30px
+      width: 900px
+      min-height 350px
       background-color: #fef7e0
       border-radius: 13px
       padding: 20px
       color: #3a878b
+      .student-table
+        color: #000000
   .title
     font-size: 20px
     font-weight: bold
@@ -39,6 +47,52 @@
     visibility: hidden
     &.completed
       visibility: visible
+  // define-groups config below here
+  .name
+  .school-id
+  .remove-link
+    display: inline-block
+
+  .list-user
+    padding-bottom: 10px
+
+  .headers
+    font-size: 1.15em
+    font-weight: bold
+    padding-bottom: 20px
+  .name
+    width: 300px
+  .school-id
+    width: 200px
+  .remove-link
+    width: 100px
+  .add-link
+    padding-bottom: 20px
+  .remove-link
+  .add-link
+    a
+      text-decoration: none
+  .caption
+    padding-bottom: 3px
+  .error
+    color: #990000
+    font-size: 0.9em
+  input
+    -moz-box-shadow: none
+    -webkit-box-shado: none
+    box-shadow: none
+  input[type="text"]:valid
+    font-size: 13px
+    border: 1px solid red
+    padding: 4px
+    &.ok
+      border: 1px solid rgb(161, 210, 209)
+  input[type="submit"]
+    border: 0px solid rgb(243, 149, 29)
+    color: white
+    border-radius: 12px
+    padding: 4px 14px
+    background-color: rgb(243, 149, 29)
 
 #tasks-completed
   clear: left

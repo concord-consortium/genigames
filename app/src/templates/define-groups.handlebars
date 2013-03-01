@@ -1,28 +1,37 @@
-<div class="title">Please enter in the users who are in your group:</div>
-<div>
-  <div class="headers">
-    <div class="name">Name</div>
-    <div class="school-id">School ID</div>
-  </div>
-  {{#each user in view.groups}}
-    <div class="list-user">
-      <div class="name">
-        <span {{bindAttr class=":error user.validName:hidden" }}>Please enter a valid name</span><br />
-        {{view Ember.TextField valueBinding="user.name"}}
+<div class="project-header"></div>
+<div class="main-content">
+  <div class='content-bubble'>
+    <div class="title">Please enter the names and IDs of the students in your group:</div>
+    <div class='student-table'>
+      <div class="headers">
+        <div class="name">Names</div>
+        <div class="school-id">ID Numbers</div>
       </div>
-      <div class="school-id">
-        <span {{bindAttr class=":error user.validSchoolID:hidden" }}>Please enter a valid School ID</span><br />
-        {{view Ember.TextField valueBinding="user.schoolID"}}
-      </div>
-      <div class="remove-link">
-        <a href="#" {{action removeUser user target="view"}}>Remove</a>
-      </div>
+      {{#each user in view.groups}}
+        <div class="list-user">
+          <div class="name">
+            <div class="caption">
+              Student Name<span {{bindAttr class=":error user.validName:hidden" }}> - Missing!</span>
+            </div>
+            {{view Ember.TextField valueBinding="user.name" size="40" classNameBindings="user.validName:ok"}}
+          </div>
+          <div class="school-id">
+            <div class="caption">
+              School ID<span {{bindAttr class=":error user.validSchoolID:hidden" }}> - Missing!</span>
+            </div>
+            {{view Ember.TextField valueBinding="user.schoolID" size="22" classNameBindings="user.validSchoolID:ok"}}
+          </div>
+          <div class="remove-link">
+            <a href="#" {{action removeUser user target="view"}}>Remove</a>
+          </div>
+        </div>
+      {{/each}}
     </div>
-  {{/each}}
-</div>
-<div class='add-link'>
-  <a href="#" {{action addUser target="view"}}>Add another user</a>
-</div>
-<div class='submit-button'>
-  <input type="submit" value="Finished" {{action done}} />
+    <div class='add-link'>
+      <a href="#" {{action addUser target="view"}}>Add another student</a>
+    </div>
+    <div class='submit-button'>
+      <input type="submit" value="Finished" {{action done}} />
+    </div>
+  </div>
 </div>
