@@ -1203,6 +1203,10 @@ GG.reputationController = Ember.Object.create
 
   bestTaskReputationBinding: 'GG.tasksController.currentTask.reputationEarned'
   bestTaskReputationReasons: {}
+  bestTaskReputationDisplay: (->
+    best = @get('bestTaskReputation')
+    if best < 0 then 0 else best
+    ).property('bestTaskReputation')
 
   currentTaskReputation: 0
   currentTaskReputationReasons: {}
@@ -1247,9 +1251,18 @@ GG.reputationController = Ember.Object.create
     reasons = @get('currentTaskReputationReasons')
     reasons[evt] || 0
 
+  currentTaskBinding: 'GG.tasksController.currentTask'
   reputationForTask: (->
-    GG.tasksController.get 'currentTask.reputation'
-  ).property('currentTaskReputation')
+    @get 'currentTask.reputation'
+  ).property('currentTask')
+
+  currentTaskReputationAssumingCompletion: (->
+    current = @get('currentTaskReputation')
+    current += @get('reputationForTask')
+    current -= @_repFor GG.Events.INCOMPLETE_COURSE
+    current -= @_repFor GG.Events.COMPLETED_TASK
+    if current < 0 then 0 else current
+  ).property('currentTaskReputation','reputationForTask')
 
   extraBreedsRep: (->
     @_repFor GG.Events.BRED_WITH_EXTRA_CYCLE

@@ -4,6 +4,14 @@
       {{#view GG.TaskDescriptionView id="task-description"}}
         {{view.text}}
       {{/view}}
+      {{#if GG.baselineController.isNotBaseline}}
+        <div id="task-reputation-available">
+          Worth {{GG.reputationController.currentTaskReputationAssumingCompletion}} Reputation
+        </div>
+        <div id="task-reputation-best">
+          Best Score: {{GG.reputationController.bestTaskReputationDisplay}}
+        </div>
+      {{/if}}
       {{#if GG.obstacleCourseController.hasObstacleCourse}}
         <div id="progress-bar-obstacle"></div>
       {{/if}}
