@@ -12,38 +12,39 @@ dark-text-color  = #333
   background: top left no-repeat url('../images/background_meiosis.jpg')
   background-color: black
   overflow: hidden
+  &.obstacle-course
+    background: top left no-repeat url('../images/background_meiosis_obstacle.jpg')
 
 #breed-top-bar
   absolute: top 0px left width 1040px height 152px
 
 #task-description
-  absolute: top 28px left 32px width 770px
+  absolute: top 33px left 34px width 610px
 
 #task-reputation-available
-  absolute: top 28px right 247px width 770px
-  text-align: right
+  absolute: top 33px left 666px width 140px
+  text-align: center
 
 #task-reputation-best
-  absolute: top 28px left 822px
-  color: white
+  absolute: top 33px left 832px width 90px
 
 #progress-bar
   absolute: top 63px left 25px height 35px
   overflow: hidden
   .bg
-    absolute: top 0px left 0px width 894px height 38px
+    absolute: top 0px left 11px width 894px height 38px
     background: top left no-repeat url('../images/breeding-progress-overlay.png')
     &.obstacle-course
-      absolute: top 2px left 0px
+      absolute: top 0px left 11px
       background: top left no-repeat url('../images/obstacle-progress-overlay.png')
   &.selecting
     width: 128px
   &.breeding
-    width: 645px
+    width: 658px
   &.results
-    width: 772px
+    width: 784px
   &.obstacle-results
-    width: 894px
+    width: 906px
 
 #progress-bar-obstacle
   absolute: top 65px left 25px height 38px width 894px

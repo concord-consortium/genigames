@@ -1,5 +1,5 @@
 <div id="breeding-apparatus">
-  <div id="breeding-background">
+  <div id="breeding-background" {{bindAttr class="view.hasObstacleCourse:obstacle-course"}}>
     <div id="breed-top-bar">
       {{#view GG.TaskDescriptionView id="task-description"}}
         {{view.text}}
@@ -11,9 +11,6 @@
         <div id="task-reputation-best">
           Best Score: {{GG.reputationController.bestTaskReputationDisplay}}
         </div>
-      {{/if}}
-      {{#if GG.obstacleCourseController.hasObstacleCourse}}
-        <div id="progress-bar-obstacle"></div>
       {{/if}}
       <div id="progress-bar" class="selecting">
         <div {{bindAttr class=":bg view.hasObstacleCourse:obstacle-course" }}></div>
