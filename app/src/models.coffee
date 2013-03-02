@@ -3,6 +3,7 @@ GG.User = Ember.Object.extend
   first: null
   last: null
   class_words: []
+  cohorts: []
   teacher: false
   group: false
   reputation: 0
