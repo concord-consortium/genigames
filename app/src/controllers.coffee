@@ -848,7 +848,7 @@ GG.obstacleCourseController = Ember.Object.create
     if taskComplete
       training = @get 'breedsLeft'
       # earn 10 points per breed left
-      return taskRep + (training * 10)
+      return taskRep + (training * GG.actionCostsController.getCost('cycleRemainingBonus'))
     else
       # earn 10% of repuation per obstacle passed
       # this calculation is ugly...
@@ -1262,13 +1262,17 @@ GG.reputationController = Ember.Object.create
     @get 'currentTask.reputation'
   ).property('currentTask')
 
+  breedsLeftBinding: 'GG.cyclesController.cycles'
+  hasObstacleCourseBinding: 'GG.obstacleCourseController.hasObstacleCourse'
   currentTaskReputationAssumingCompletion: (->
     current = @get('currentTaskReputation')
     current += @get('reputationForTask')
+    if @get('hasObstacleCourse')
+      current += (@get('breedsLeft') * GG.actionCostsController.getCost('cycleRemainingBonus'))
     current -= @_repFor GG.Events.INCOMPLETE_COURSE
     current -= @_repFor GG.Events.COMPLETED_TASK
     if current < 0 then 0 else current
-  ).property('currentTaskReputation','reputationForTask')
+  ).property('currentTaskReputation','reputationForTask','breedsLeft','hasObstacleCourse')
 
   extraBreedsRep: (->
     @_repFor GG.Events.BRED_WITH_EXTRA_CYCLE
