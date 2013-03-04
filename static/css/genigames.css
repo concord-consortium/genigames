@@ -1,3 +1,30 @@
+/* @license
+ * MyFonts Webfont Build ID 2493616, 2013-03-02T09:45:24-0500
+ *
+ * The fonts listed in this notice are subject to the End User License
+ * Agreement(s) entered into by the website owner. All other parties are
+ * explicitly restricted from using the Licensed Webfonts(s).
+ *
+ * You may obtain a valid license at the URLs below.
+ *
+ * Webfont: Century Gothic Std Regular by Monotype Imaging
+ * URL: http://www.myfonts.com/fonts/mti/century-gothic/std-regular/
+ * Copyright: Copyright The Monotype Corporation. All rights reserved.
+ *
+ *
+ * License: http://www.myfonts.com/viewlicense?type=web&buildid=2493616
+ *
+ * © 2013 MyFonts Inc
+*/
+@import url("//hello.myfonts.net/count/260cb0");
+@font-face {
+  font-family: 'CenturyGothicStd';
+  src: url("/fonts/260CB0_0_0.eot");
+  src: url("/fonts/260CB0_0_0.eot?#iefix") format('embedded-opentype'), url("/fonts/260CB0_0_0.woff") format('woff'), url("/fonts/260CB0_0_0.ttf") format('truetype');
+}
+html body div {
+  font-family: 'CenturyGothicStd', 'sans-serif';
+}
 .needs-caching.drake-albino {
   background: url("../images/drakes/albino.png");
 }
@@ -85,7 +112,7 @@
   position: absolute;
   top: 33px;
   left: 832px;
-  width: 90px;
+  width: 96px;
 }
 #progress-bar {
   position: absolute;
@@ -254,7 +281,6 @@
   left: 508px;
   width: 124px;
   height: 83px;
-  font-family: Monaco, Consolas, "Lucida Console", monospace;
   color: #bbb;
 }
 #target-traits {
@@ -2087,6 +2113,7 @@ a:hover {
   width: 700px;
   height: 701px;
   text-align: center;
+  font-weight: bold;
 }
 #login div {
   padding: 3px;
@@ -2722,7 +2749,6 @@ a:hover {
   height: 120px;
   background-color: #969696;
   color: #fff;
-  font-family: Verdana;
   font-size: 1.2em;
 }
 #topBar .logout {
