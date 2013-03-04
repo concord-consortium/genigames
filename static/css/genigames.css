@@ -17,10 +17,17 @@
  * © 2013 MyFonts Inc
 */
 @import url("//hello.myfonts.net/count/260cb0");
+@import url("//hello.myfonts.net/count/26134e");
 @font-face {
   font-family: 'CenturyGothicStd';
   src: url("/fonts/260CB0_0_0.eot");
   src: url("/fonts/260CB0_0_0.eot?#iefix") format('embedded-opentype'), url("/fonts/260CB0_0_0.woff") format('woff'), url("/fonts/260CB0_0_0.ttf") format('truetype');
+}
+@font-face {
+  font-family: 'CenturyGothicStd';
+  src: url("/fonts/26134E_0_0.eot");
+  src: url("/fonts/26134E_0_0.eot?#iefix") format('embedded-opentype'), url("/fonts/26134E_0_0.woff") format('woff'), url("/fonts/26134E_0_0.ttf") format('truetype');
+  font-weight: bold;
 }
 html body div {
   font-family: 'CenturyGothicStd', 'sans-serif';
@@ -91,7 +98,7 @@ html body div {
 #breed-top-bar {
   color: #39230b;
   font-weight: bold;
-  font-size: 0.9em;
+  font-size: 1.1em;
   position: absolute;
   top: 0px;
   left: 0;
@@ -100,20 +107,20 @@ html body div {
 }
 #task-description {
   position: absolute;
-  top: 35px;
+  top: 33px;
   left: 34px;
   width: 610px;
 }
 #task-reputation-available {
   position: absolute;
-  top: 35px;
+  top: 33px;
   left: 666px;
   width: 140px;
   text-align: center;
 }
 #task-reputation-best {
   position: absolute;
-  top: 35px;
+  top: 33px;
   left: 826px;
   width: 107px;
   text-align: center;
