@@ -172,8 +172,13 @@ GG.statemanager = Ember.StateManager.create
             children.push(items.town[tow])
           items.world[wo].towns = children
 
-        # get the appropriate world and create its towns
-        for to in items.world[GG.worldName].towns
+        # get the appooropriate world and create its towns
+        world = items.world[GG.worldName]
+        console.log("using world: ", world)
+        if world.species? and BioLogica.Species[world.species]?
+           GG.DrakeSpecies = BioLogica.Species[world.species]
+           GG.Genetics = new BioLogica.Genetics GG.DrakeSpecies
+        for to in world.towns
           town = GG.Town.create to
           GG.townsController.addTown town
 

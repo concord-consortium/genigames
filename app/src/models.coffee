@@ -154,6 +154,10 @@ GG.Drake = Ember.Object.extend
     @_super()
     @set 'revealedAlleles', {a: [], b: []}
 
+  species: (->
+    @get('biologicaOrganism.species.name')
+  ).property('biologicaOrganism')
+
   genotype: (->
     alleleString = @get('biologicaOrganism').getAlleleString()
 

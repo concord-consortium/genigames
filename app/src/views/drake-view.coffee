@@ -18,6 +18,9 @@ GG.DrakeView = Ember.View.extend
   width              : "200px"
   obstacleCourse       : false
   obstacleStateBinding : 'content.obstacleState'
+  species: (->
+    @get('content.species')
+  ).property()
   org : (->
     @get('content.biologicaOrganism')
   ).property().cacheable()
