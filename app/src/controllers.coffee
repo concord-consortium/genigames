@@ -910,24 +910,31 @@ GG.baselineController = Ember.Object.create
   isNotBaseline: Ember.computed.not('isBaseline')
 
 GG.tutorialMessageController = Ember.Object.create
+  enabled: true
   isFirstTask: (->
+    unless @get('enabled')
+      return false
     townId = GG.townsController.get("content").indexOf GG.townsController.get "currentTown"
     taskId = GG.tasksController.get("content").indexOf GG.tasksController.get "currentTask"
     return townId+taskId is 0
-  ).property('GG.townsController.currentTown', 'GG.tasksController.currentTask')
+  ).property('enabled', 'GG.townsController.currentTown', 'GG.tasksController.currentTask')
 
   isFirstMeiosisDescriptionTask: (->
+    unless @get('enabled')
+      return false
     townId = GG.townsController.get("content").indexOf GG.townsController.get "currentTown"
     taskId = GG.tasksController.get("content").indexOf GG.tasksController.get "currentTask"
     return townId is 0 and taskId is 2
-  ).property('GG.townsController.currentTown', 'GG.tasksController.currentTask')
+  ).property('enabled', 'GG.townsController.currentTown', 'GG.tasksController.currentTask')
 
   # TODO There should be a better way to detect this other than hard-coding it...
   isFirstMeiosisControlTask: (->
+    unless @get('enabled')
+      return false
     townId = GG.townsController.get("content").indexOf GG.townsController.get "currentTown"
     taskId = GG.tasksController.get("content").indexOf GG.tasksController.get "currentTask"
     return (townId is 0 and taskId is 4) or (GG.baselineController.get('isBaseline') and townId is 1 and taskId is 0)
-  ).property('GG.townsController.currentTown', 'GG.tasksController.currentTask')
+  ).property('enabled', 'GG.townsController.currentTown', 'GG.tasksController.currentTask')
 
   showTargetTutorial: ->
     if @get 'isFirstTask' then GG.showInfoDialog $('#target-tutorial-target'),

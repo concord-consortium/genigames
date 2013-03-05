@@ -172,10 +172,15 @@ GG.statemanager = Ember.StateManager.create
 
         # get the appooropriate world and create its towns
         world = items.world[GG.worldName]
-        console.log("using world: ", world)
         if world.species? and BioLogica.Species[world.species]?
            GG.DrakeSpecies = BioLogica.Species[world.species]
            GG.Genetics = new BioLogica.Genetics GG.DrakeSpecies
+        if world.options?
+          for opt in world.options
+            switch opt
+              when "no tutorials"
+                GG.tutorialMessageController.set('enabled', false)
+
         for to in world.towns
           town = GG.Town.create to
           GG.townsController.addTown town
