@@ -2612,10 +2612,15 @@ a:hover {
 }
 #task-list,
 #define-groups {
-  position: left 0px right 0px top 0px bottom 0px;
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  bottom: 0px;
   background-color: #fff;
   background-image: url("/portal/assets/styles/bg-body.png");
   background-repeat: repeat-x;
+  z-index: 2;
 }
 #task-list .project-header,
 #define-groups .project-header {
