@@ -94,6 +94,9 @@ $ ->
   finder()
   GG.statemanager.set('params', urlParams)
 
+  if (urlParams.world)
+    GG.worldName = urlParams.world
+
   # fixme: this should be eventually handled by a router
   if (urlParams.task)
     taskPath = urlParams.task.split "/"
