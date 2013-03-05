@@ -1,3 +1,13 @@
+{{#if view.isExternalObstacleCourse}}
+  <div id="obstacle-course-dialog-content">
+    <div class="external-title">
+      Drake Submitted
+    </div>
+    <div class="external-content">
+      Obstacle Course to Begin Shortly
+    </div>
+  </div>
+{{else}}
 {{#if view.visible}}
   <div id='obstacle-course-dialog-content'>
     {{#with view.drake}}
@@ -74,4 +84,5 @@
       {{/if}}
     </div>
   </div>
+{{/if}}
 {{/if}}

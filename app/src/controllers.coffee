@@ -794,6 +794,8 @@ GG.meiosisController = Ember.Object.create
       $(selector).removeClass('hidden')
       $(selector).removeClass('selected')
 
+GG.OBSTACLE_COURSE_INTERNAL = "obstacle_course_internal"
+GG.OBSTACLE_COURSE_EXTERNAL = "obstacle_course_external"
 GG.obstacleCourseController = Ember.Object.create
   courseBinding: 'GG.tasksController.currentTask.obstacleCourse'
   obstaclesBinding: 'course.obstacles'
@@ -806,6 +808,7 @@ GG.obstacleCourseController = Ember.Object.create
   dialogVisible: false
   currentObstacleIndex: 0
   currentObstacle: null
+  mode: GG.OBSTACLE_COURSE_INTERNAL
 
   hasObstacleCourse: (->
     @get('course')? && GG.baselineController.get('isNotBaseline')

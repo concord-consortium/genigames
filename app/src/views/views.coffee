@@ -806,12 +806,16 @@ GG.ObstacleCourseDialogView = Ember.View.extend
   myTotalTimeBinding: 'GG.obstacleCourseController.myTotalTime'
   opponentTotalTimeBinding: 'GG.obstacleCourseController.opponentTotalTime'
   nTrainingsBinding: 'GG.cyclesController.cycles'
+  modeBinding: 'GG.obstacleCourseController.mode'
   trainingPoints: (->
     @get('nTrainings') * GG.actionCostsController.getCost('cycleRemainingBonus')
   ).property('nTrainings')
   courseCompletionPoints: (->
     GG.obstacleCourseController.get('reputationEarned') - @get('trainingPoints')
   ).property('GG.obstacleCourseController.reputationEarned', 'trainingPoints')
+  isExternalObstacleCourse: (->
+    @get('mode') == GG.OBSTACLE_COURSE_EXTERNAL
+  ).property('mode')
 
   tryAgain: ->
     # restart task

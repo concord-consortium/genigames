@@ -180,6 +180,8 @@ GG.statemanager = Ember.StateManager.create
             switch opt
               when "no tutorials"
                 GG.tutorialMessageController.set('enabled', false)
+              when "external obstacle course"
+                GG.obstacleCourseController.set("mode", GG.OBSTACLE_COURSE_EXTERNAL)
 
         for to in world.towns
           town = GG.Town.create to
