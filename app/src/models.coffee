@@ -14,13 +14,8 @@ GG.User = Ember.Object.extend
     return @get('first') + " " + @get('last')
   ).property('first', 'last')
 
-  isBaselineUser: (->
-    @get('cohorts').indexOf('baseline') != -1
-  ).property('cohorts.@index')
-
-  isGameUser: (->
-    @get('cohorts').indexOf('gamed') != -1
-  ).property('cohorts.@index')
+  hasCohort: (cohort)->
+    @get('cohorts').indexOf(cohort) != -1
 
   # User object gets created *before* we load the learner data,
   # so we have to manually trigger restoring the user state
