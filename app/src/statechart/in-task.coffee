@@ -6,6 +6,7 @@ GG.StateInTask = Ember.State.extend
     initialState: 'parentSelect'
 
     enter: ->
+      $('#task-list').hide()
       if not GG.baselineController.get 'isBaseline'
         $('#breeding-apparatus').animate {"left":"20px"},1200,'easeOutCubic', ->
           GG.breedingController.set 'isShowingBreeder', true

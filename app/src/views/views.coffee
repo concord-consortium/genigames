@@ -898,7 +898,6 @@ GG.PasswordField = Ember.TextField.extend
 
 GG.BaselineTaskListView = Ember.View.extend
   tagName: 'div'
-  elementId: 'task-list'
   templateName: 'task-list'
 
   taskSelected: (evt) ->

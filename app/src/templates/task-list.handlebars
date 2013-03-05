@@ -1,20 +1,32 @@
-<div class="project-header"></div>
-<div class="main-content">
-  <div class='content-bubble'>
-    <div class="title">
-      {{GG.townsController.currentTown.name}} Challenges
-    </div>
-    <div class="tasks">
-      {{#each task in GG.tasksController.content}}
-        <div class="task" {{action taskSelected task}}>
-          <span {{bindAttr class=":checkmark task.completed:completed"}}>&#x2713;</span>
-          {{task.cleanedUpShortText}}
+<div id="task-list">
+  <div class="project-header"></div>
+  <div class="main-content">
+    <div class='content-bubble'>
+      <div class="title">
+        {{GG.townsController.currentTown.name}} Challenges
+      </div>
+      <div class="tasks">
+        {{#each task in GG.tasksController.content}}
+          <div class="task" {{action taskSelected task}}>
+            <span {{bindAttr class=":checkmark task.completed:completed"}}>&#x2713;</span>
+            {{task.cleanedUpShortText}}
+          </div>
+        {{/each}}
+        <div id="tasks-completed">
+          You've finished all the tasks! Close this page to return to the portal
+          and move on to the next level.
         </div>
-      {{/each}}
-      <div id="tasks-completed">
-        You've finished all the tasks! Close this page to return to the portal
-        and move on to the next level.
       </div>
     </div>
+  </div>
+</div>
+<div id="topBar">
+  {{#with GG.userController.user}}
+    <div id="greeting">
+      Hi {{first}}!
+    </div>
+  {{/with}}
+  <div id="level">
+    {{GG.townsController.currentTown.name}} {{GG.tasksController.currentLevelId}}
   </div>
 </div>
