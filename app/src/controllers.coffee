@@ -58,6 +58,7 @@ GG.townsController = Ember.ArrayController.create
 GG.tasksController = Ember.ArrayController.create
   content    : []
   currentTask: null
+  taskStartTime: 0
 
   reset: ->
     @set 'content', []
@@ -85,6 +86,7 @@ GG.tasksController = Ember.ArrayController.create
         GG.parentController.pushObject GG.Drake.createFromBiologicaOrganism org
 
       GG.logController.logEvent GG.Events.STARTED_TASK, name: task.get('name')
+      @set('taskStartTime', new Date().getTime())
     else
       throw "GG.tasksController.setCurrentTask: argument is not a known task"
 
@@ -116,6 +118,7 @@ GG.tasksController = Ember.ArrayController.create
     GG.logController.logEvent GG.Events.COMPLETED_TASK,
       name: task.get('name')
       breedCounter: GG.cyclesController.get('cycles')
+      elapsedTimeMs: (new Date().getTime()) - @get('taskStartTime')
 
   restartCurrentTask: ->
     task = @get 'currentTask'
