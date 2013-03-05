@@ -2340,6 +2340,17 @@ a:hover {
   z-index: 6001;
   text-align: center;
 }
+#obstacle-course-dialog-content .external-title {
+  font-weight: bold;
+  font-size: 2em;
+  position: relative;
+  top: 150px;
+}
+#obstacle-course-dialog-content .external-content {
+  font-size: 1.3em;
+  position: relative;
+  top: 170px;
+}
 #obstacle-course-dialog-content .align-left {
   position: absolute;
   left: 0px;
@@ -2759,8 +2770,9 @@ a:hover {
   width: 960px;
   height: 120px;
   background-color: #969696;
-  color: #fff;
-  font-size: 1.2em;
+  color: #a1a790;
+  font-size: 14pt;
+  font-weight: normal;
 }
 #topBar .logout {
   position: absolute;
@@ -2768,6 +2780,7 @@ a:hover {
   top: 25px;
   width: 75px;
   height: 25px;
+  font-size: 12pt;
 }
 #topBar .logout div {
   position: relative;
@@ -2777,7 +2790,7 @@ a:hover {
   position: absolute;
   left: 30px;
   top: 20px;
-  font-size: 1.5em;
+  font-size: 25pt;
 }
 #reputation {
   position: absolute;
