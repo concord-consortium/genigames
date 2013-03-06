@@ -1,17 +1,66 @@
-.needs-caching.drake-albino {
-  background: url("../images/drakes/albino.png");
+/* @license
+ * MyFonts Webfont Build ID 2493616, 2013-03-02T09:45:24-0500
+ *
+ * The fonts listed in this notice are subject to the End User License
+ * Agreement(s) entered into by the website owner. All other parties are
+ * explicitly restricted from using the Licensed Webfonts(s).
+ *
+ * You may obtain a valid license at the URLs below.
+ *
+ * Webfont: Century Gothic Std Regular by Monotype Imaging
+ * URL: http://www.myfonts.com/fonts/mti/century-gothic/std-regular/
+ * Copyright: Copyright The Monotype Corporation. All rights reserved.
+ *
+ *
+ * License: http://www.myfonts.com/viewlicense?type=web&buildid=2493616
+ *
+ * © 2013 MyFonts Inc
+*/
+@import url("//hello.myfonts.net/count/260cb0");
+@import url("//hello.myfonts.net/count/26134e");
+@font-face {
+  font-family: 'CenturyGothicStd';
+  src: url("/fonts/260CB0_0_0.eot");
+  src: url("/fonts/260CB0_0_0.eot?#iefix") format('embedded-opentype'), url("/fonts/260CB0_0_0.woff") format('woff'), url("/fonts/260CB0_0_0.ttf") format('truetype');
 }
-.needs-caching.drake-blue {
-  background: url("../images/drakes/blue.png");
+@font-face {
+  font-family: 'CenturyGothicStd';
+  src: url("/fonts/26134E_0_0.eot");
+  src: url("/fonts/26134E_0_0.eot?#iefix") format('embedded-opentype'), url("/fonts/26134E_0_0.woff") format('woff'), url("/fonts/26134E_0_0.ttf") format('truetype');
+  font-weight: bold;
 }
-.needs-caching.drake-green {
-  background: url("../images/drakes/green.png");
+html body div {
+  font-family: 'CenturyGothicStd', 'sans-serif';
 }
-.needs-caching.drake-purple {
-  background: url("../images/drakes/purple.png");
+.needs-caching.drake-albino-GGDrake {
+  background: url("../images/drakes/GGDrake/albino.png");
 }
-.needs-caching.drake-red {
-  background: url("../images/drakes/red.png");
+.needs-caching.drake-albino-GGTournamentDrake {
+  background: url("../images/drakes/GGTournamentDrake/albino.png");
+}
+.needs-caching.drake-blue-GGDrake {
+  background: url("../images/drakes/GGDrake/blue.png");
+}
+.needs-caching.drake-blue-GGTournamentDrake {
+  background: url("../images/drakes/GGTournamentDrake/blue.png");
+}
+.needs-caching.drake-green-GGDrake {
+  background: url("../images/drakes/GGDrake/green.png");
+}
+.needs-caching.drake-green-GGTournamentDrake {
+  background: url("../images/drakes/GGTournamentDrake/green.png");
+}
+.needs-caching.drake-purple-GGDrake {
+  background: url("../images/drakes/GGDrake/purple.png");
+}
+.needs-caching.drake-purple-GGTournamentDrake {
+  background: url("../images/drakes/GGTournamentDrake/purple.png");
+}
+.needs-caching.drake-red-GGDrake {
+  background: url("../images/drakes/GGDrake/red.png");
+}
+.needs-caching.drake-red-GGTournamentDrake {
+  background: url("../images/drakes/GGTournamentDrake/red.png");
 }
 .needs-caching.npc-npc1_bookkeeper1 {
   background: url("../images/npc1_bookkeeper1.png");
@@ -58,7 +107,13 @@
   background-color: #000;
   overflow: hidden;
 }
+#breeding-background.obstacle-course {
+  background: top left no-repeat url("../images/background_meiosis_obstacle.jpg");
+}
 #breed-top-bar {
+  color: #39230b;
+  font-weight: bold;
+  font-size: 1.1em;
   position: absolute;
   top: 0px;
   left: 0;
@@ -67,9 +122,23 @@
 }
 #task-description {
   position: absolute;
-  top: 28px;
-  left: 32px;
-  width: 770px;
+  top: 33px;
+  left: 34px;
+  width: 610px;
+}
+#task-reputation-available {
+  position: absolute;
+  top: 33px;
+  left: 666px;
+  width: 140px;
+  text-align: center;
+}
+#task-reputation-best {
+  position: absolute;
+  top: 33px;
+  left: 826px;
+  width: 107px;
+  text-align: center;
 }
 #progress-bar {
   position: absolute;
@@ -81,28 +150,28 @@
 #progress-bar .bg {
   position: absolute;
   top: 0px;
-  left: 0px;
+  left: 11px;
   width: 894px;
   height: 38px;
   background: top left no-repeat url("../images/breeding-progress-overlay.png");
 }
 #progress-bar .bg.obstacle-course {
   position: absolute;
-  top: 2px;
-  left: 0px;
+  top: 0px;
+  left: 11px;
   background: top left no-repeat url("../images/obstacle-progress-overlay.png");
 }
 #progress-bar.selecting {
   width: 128px;
 }
 #progress-bar.breeding {
-  width: 645px;
+  width: 658px;
 }
 #progress-bar.results {
-  width: 772px;
+  width: 784px;
 }
 #progress-bar.obstacle-results {
-  width: 894px;
+  width: 906px;
 }
 #progress-bar-obstacle {
   position: absolute;
@@ -238,7 +307,6 @@
   left: 508px;
   width: 124px;
   height: 83px;
-  font-family: Monaco, Consolas, "Lucida Console", monospace;
   color: #bbb;
 }
 #target-traits {
@@ -682,44 +750,86 @@
   position: absolute;
   left: 0;
 }
-.drake-fire {
+.GGDrake .drake-fire {
   top: 0px;
 }
-.drake-reverse-horns {
+.GGDrake .drake-reverse-horns {
   top: -100%;
 }
-.drake-forward-horns {
+.GGDrake .drake-forward-horns {
   top: -200%;
 }
-.drake-male {
+.GGDrake .drake-male {
   top: -300%;
 }
-.drake-female {
+.GGDrake .drake-female {
   top: -400%;
 }
-.drake-armor {
+.GGDrake .drake-armor {
   top: -500%;
 }
-.drake-wide-spikes {
+.GGDrake .drake-wide-spikes {
   top: -600%;
 }
-.drake-medium-spikes {
+.GGDrake .drake-medium-spikes {
   top: -700%;
 }
-.drake-wings {
+.GGDrake .drake-wings {
   top: -800%;
 }
-.drake-shiny {
+.GGDrake .drake-shiny {
   top: -900%;
 }
-.drake-body-long-tail {
+.GGDrake .drake-body-long-tail {
   top: -1000%;
 }
-.drake-body-kinked-tail {
+.GGDrake .drake-body-kinked-tail {
   top: -1100%;
 }
-.drake-body-short-tail {
+.GGDrake .drake-body-short-tail {
   top: -1200%;
+}
+.GGTournamentDrake .drake-fire {
+  top: 0px;
+}
+.GGTournamentDrake .drake-reverse-horns {
+  top: -100%;
+}
+.GGTournamentDrake .drake-forward-horns {
+  top: -200%;
+}
+.GGTournamentDrake .drake-upward-horns {
+  top: -300%;
+}
+.GGTournamentDrake .drake-male {
+  top: -400%;
+}
+.GGTournamentDrake .drake-female {
+  top: -500%;
+}
+.GGTournamentDrake .drake-striped-neck {
+  top: -600%;
+}
+.GGTournamentDrake .drake-spotted-neck {
+  top: -700%;
+}
+.GGTournamentDrake .drake-large-fin {
+  top: -800%;
+}
+.GGTournamentDrake .drake-medium-fin {
+  top: -900%;
+}
+.GGTournamentDrake .drake-body-long-tail {
+  top: -1000%;
+}
+.GGTournamentDrake .drake-body-kinked-tail {
+  top: -1100%;
+}
+.GGTournamentDrake .drake-body-short-tail {
+  top: -1200%;
+}
+.GGTournamentDrake .drake-body-fat-tail {
+  top: -1300%;
 }
 .flip {
   -moz-transform: scaleX(-1);
@@ -2071,6 +2181,7 @@ a:hover {
   width: 700px;
   height: 701px;
   text-align: center;
+  font-weight: bold;
 }
 #login div {
   padding: 3px;
@@ -2085,41 +2196,6 @@ a:hover {
 #choose-class div {
   padding: 3px;
 }
-#define-groups {
-  position: absolute;
-  width: 660px;
-  left: 170px;
-  color: #999;
-}
-#define-groups div {
-  padding: 5px;
-}
-#define-groups .title {
-  font-weight: bold;
-  font-size: 1.2em;
-}
-#define-groups .headers {
-  font-weight: bold;
-  font-size: 1.1em;
-}
-#define-groups .name,
-#define-groups .school-id,
-#define-groups .remove-link {
-  display: inline-block;
-}
-#define-groups .name {
-  width: 300px;
-}
-#define-groups .school-id {
-  width: 200px;
-}
-#define-groups .remove-link {
-  width: 100px;
-}
-#define-groups .error {
-  color: #900;
-  font-size: 0.9em;
-}
 #username,
 #password {
   width: 200px;
@@ -2131,6 +2207,9 @@ a:hover {
 #loadingStatus {
   position: relative;
   top: 150px;
+}
+#login-permission-denied {
+  display: none;
 }
 #meiosis-container {
   position: absolute;
@@ -2300,9 +2379,9 @@ a:hover {
   border-radius: 5px;
   position: absolute;
   width: 470px;
-  height: 375px;
+  height: 445px;
   left: 260px;
-  top: 90px;
+  top: 55px;
   background-color: #4e8da6;
   z-index: 6000;
 }
@@ -2318,6 +2397,17 @@ a:hover {
   z-index: 6001;
   text-align: center;
 }
+#obstacle-course-dialog-content .external-title {
+  font-weight: bold;
+  font-size: 2em;
+  position: relative;
+  top: 150px;
+}
+#obstacle-course-dialog-content .external-content {
+  font-size: 1.3em;
+  position: relative;
+  top: 170px;
+}
 #obstacle-course-dialog-content .align-left {
   position: absolute;
   left: 0px;
@@ -2328,14 +2418,14 @@ a:hover {
 }
 #obstacle-course-dialog-content .drake {
   position: absolute;
-  top: 44px;
-  left: 14px;
+  top: 114px;
+  left: 50px;
   z-index: 6002;
 }
 #obstacle-course-dialog-content .overall-time-text {
   position: absolute;
   top: 22px;
-  right: 60px;
+  left: 25px;
   width: 132px;
   text-align: center;
 }
@@ -2394,9 +2484,9 @@ a:hover {
 #obstacle-course-dialog-content .current-obstacle {
   position: absolute;
   top: 14px;
-  left: 14px;
-  width: 180px;
-  height: 180px;
+  right: 14px;
+  width: 250px;
+  height: 250px;
 }
 #obstacle-course-dialog-content .current-obstacle .obstacle {
   position: absolute;
@@ -2409,33 +2499,33 @@ a:hover {
 }
 #obstacle-course-dialog-content .current-obstacle .obstacle.blue {
   background: bottom left no-repeat url("../images/obstacle-course/color_blue1.png");
-  width: 254px;
-  height: 200px;
+  width: 250px;
+  height: 182px;
 }
 #obstacle-course-dialog-content .current-obstacle .obstacle.blue.after {
   background: bottom left no-repeat url("../images/obstacle-course/color_blue2.png");
-  width: 254px;
-  height: 200px;
+  width: 250px;
+  height: 182px;
 }
 #obstacle-course-dialog-content .current-obstacle .obstacle.green {
   background: bottom left no-repeat url("../images/obstacle-course/color_green1.png");
-  width: 254px;
-  height: 175px;
+  width: 250px;
+  height: 135px;
 }
 #obstacle-course-dialog-content .current-obstacle .obstacle.green.after {
   background: bottom left no-repeat url("../images/obstacle-course/color_green2.png");
-  width: 254px;
-  height: 175px;
+  width: 250px;
+  height: 135px;
 }
 #obstacle-course-dialog-content .current-obstacle .obstacle.red {
   background: bottom left no-repeat url("../images/obstacle-course/color_red1.png");
-  width: 254px;
-  height: 215px;
+  width: 250px;
+  height: 179px;
 }
 #obstacle-course-dialog-content .current-obstacle .obstacle.red.after {
   background: bottom left no-repeat url("../images/obstacle-course/color_red2.png");
-  width: 254px;
-  height: 215px;
+  width: 250px;
+  height: 179px;
 }
 #obstacle-course-dialog-content .current-obstacle .obstacle.purple {
   background: bottom left no-repeat url("../images/obstacle-course/color_purple1.png");
@@ -2459,13 +2549,13 @@ a:hover {
 }
 #obstacle-course-dialog-content .current-obstacle .obstacle.nonmetallic {
   background: bottom left no-repeat url("../images/obstacle-course/matte1.png");
-  width: 254px;
-  height: 195px;
+  width: 250px;
+  height: 168px;
 }
 #obstacle-course-dialog-content .current-obstacle .obstacle.nonmetallic.after {
   background: bottom left no-repeat url("../images/obstacle-course/matte2.png");
-  width: 254px;
-  height: 195px;
+  width: 250px;
+  height: 168px;
 }
 #obstacle-course-dialog-content .current-obstacle .obstacle.metallic {
   background: bottom left no-repeat url("../images/obstacle-course/metallic01.png");
@@ -2489,21 +2579,21 @@ a:hover {
 }
 #obstacle-course-dialog-content .current-obstacle .obstacle.medium-spines {
   background: bottom left no-repeat url("../images/obstacle-course/spines-medium1.png");
-  width: 254px;
-  height: 410px;
+  width: 213px;
+  height: 250px;
 }
 #obstacle-course-dialog-content .current-obstacle .obstacle.medium-spines.after {
   background: bottom left no-repeat url("../images/obstacle-course/spines-medium2.png");
-  width: 254px;
-  height: 410px;
+  width: 213px;
+  height: 250px;
 }
 #obstacle-course-dialog-content .current-obstacle .obstacle.wide-spines {
-  background: bottom left no-repeat url("../images/obstacle-course/spines-narrow1.png");
+  background: bottom left no-repeat url("../images/obstacle-course/spines-wide1.png");
   width: 175px;
   height: 175px;
 }
 #obstacle-course-dialog-content .current-obstacle .obstacle.wide-spines.after {
-  background: bottom left no-repeat url("../images/obstacle-course/spines-narrow2.png");
+  background: bottom left no-repeat url("../images/obstacle-course/spines-wide1.png");
   width: 175px;
   height: 175px;
 }
@@ -2519,63 +2609,221 @@ a:hover {
 }
 #obstacle-course-dialog-content .current-obstacle .obstacle.kinked-tail {
   background: bottom left no-repeat url("../images/obstacle-course/tail_kinked1.png");
-  width: 254px;
-  height: 200px;
+  width: 250px;
+  height: 143px;
 }
 #obstacle-course-dialog-content .current-obstacle .obstacle.kinked-tail.after {
   background: bottom left no-repeat url("../images/obstacle-course/tail_kinked2.png");
-  width: 254px;
-  height: 200px;
+  width: 250px;
+  height: 143px;
 }
 #obstacle-course-dialog-content .current-obstacle .obstacle.long-tail {
   background: bottom left no-repeat url("../images/obstacle-course/tail_long1.png");
-  width: 254px;
-  height: 375px;
+  width: 150px;
+  height: 250px;
 }
 #obstacle-course-dialog-content .current-obstacle .obstacle.long-tail.after {
   background: bottom left no-repeat url("../images/obstacle-course/tail_long2.png");
-  width: 254px;
-  height: 375px;
+  width: 150px;
+  height: 250px;
 }
 #obstacle-course-dialog-content .current-obstacle .obstacle.forward-horns {
   background: bottom left no-repeat url("../images/obstacle-course/horns-forward1.png");
   width: 250px;
-  height: 170px;
+  height: 175px;
 }
 #obstacle-course-dialog-content .current-obstacle .obstacle.forward-horns.after {
   background: bottom left no-repeat url("../images/obstacle-course/horns-forward2.png");
   width: 250px;
-  height: 170px;
+  height: 175px;
 }
 #obstacle-course-dialog-content .current-obstacle .obstacle.armor {
   background: bottom left no-repeat url("../images/obstacle-course/armor1.png");
-  width: 254px;
-  height: 150px;
+  width: 250px;
+  height: 125px;
 }
 #obstacle-course-dialog-content .current-obstacle .obstacle.armor.after {
   background: bottom left no-repeat url("../images/obstacle-course/armor2.png");
-  width: 254px;
-  height: 150px;
+  width: 250px;
+  height: 125px;
 }
 #obstacle-course-dialog-content .current-obstacle .obstacle.wingless {
   background: bottom left no-repeat url("../images/obstacle-course/wingless1.png");
-  width: 254px;
-  height: 200px;
+  width: 250px;
+  height: 167px;
 }
 #obstacle-course-dialog-content .current-obstacle .obstacle.wingless.after {
   background: bottom left no-repeat url("../images/obstacle-course/wingless2.png");
-  width: 254px;
-  height: 200px;
+  width: 250px;
+  height: 167px;
 }
 #obstacle-course-dialog-content .current-obstacle .obstacle.wings {
   background: bottom left no-repeat url("../images/obstacle-course/wings1.png");
-  width: 254px;
-  height: 400px;
+  width: 203px;
+  height: 250px;
 }
 #obstacle-course-dialog-content .current-obstacle .obstacle.wings.after {
   background: bottom left no-repeat url("../images/obstacle-course/wings2.png");
-  width: 254px;
-  height: 400px;
+  width: 203px;
+  height: 250px;
+}
+#task-list,
+#define-groups {
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  bottom: 0px;
+  background-color: #fff;
+  background-image: url("/portal/assets/styles/bg-body.png");
+  background-repeat: repeat-x;
+  z-index: 2;
+}
+#task-list .project-header,
+#define-groups .project-header {
+  height: 126px;
+  background: url("/portal/assets/banners/genigames.png") no-repeat scroll 0px 0px transparent;
+}
+#task-list .main-content,
+#define-groups .main-content {
+  position: absolute;
+  top: 126px;
+  left: 0px;
+  right: 0px;
+  min-height: 420px;
+  background-color: #fff;
+}
+#task-list .main-content .content-bubble,
+#define-groups .main-content .content-bubble {
+  margin-top: 14px;
+  margin-bottom: 14px;
+  margin-left: 30px;
+  width: 900px;
+  min-height: 350px;
+  background-color: #fef7e0;
+  -webkit-border-radius: 13px;
+  -moz-border-radius: 13px;
+  border-radius: 13px;
+  padding: 20px;
+  color: #3a878b;
+}
+#task-list .main-content .content-bubble .student-table,
+#define-groups .main-content .content-bubble .student-table {
+  color: #000;
+}
+#task-list .title,
+#define-groups .title {
+  font-size: 20px;
+  font-weight: bold;
+  padding-bottom: 20px;
+}
+#task-list .tasks,
+#define-groups .tasks {
+  position: relative;
+  left: 20px;
+}
+#task-list .task,
+#define-groups .task {
+  clear: left;
+  float: left;
+  font-size: 1.1em;
+  font-weight: bold;
+  margin-bottom: 25px;
+  cursor: pointer;
+}
+#task-list .task:hover,
+#define-groups .task:hover {
+  color: #da5936;
+}
+#task-list .checkmark,
+#define-groups .checkmark {
+  color: #008000;
+  font-size: 1.2em;
+  visibility: hidden;
+}
+#task-list .checkmark.completed,
+#define-groups .checkmark.completed {
+  visibility: visible;
+}
+#task-list .name,
+#define-groups .name,
+#task-list .school-id,
+#define-groups .school-id,
+#task-list .remove-link,
+#define-groups .remove-link {
+  display: inline-block;
+}
+#task-list .list-user,
+#define-groups .list-user {
+  padding-bottom: 10px;
+}
+#task-list .headers,
+#define-groups .headers {
+  font-size: 1.15em;
+  font-weight: bold;
+  padding-bottom: 20px;
+}
+#task-list .name,
+#define-groups .name {
+  width: 300px;
+}
+#task-list .school-id,
+#define-groups .school-id {
+  width: 200px;
+}
+#task-list .remove-link,
+#define-groups .remove-link {
+  width: 100px;
+}
+#task-list .add-link,
+#define-groups .add-link {
+  padding-bottom: 20px;
+}
+#task-list .remove-link a,
+#define-groups .remove-link a,
+#task-list .add-link a,
+#define-groups .add-link a {
+  text-decoration: none;
+}
+#task-list .caption,
+#define-groups .caption {
+  padding-bottom: 3px;
+}
+#task-list .error,
+#define-groups .error {
+  color: #900;
+  font-size: 0.9em;
+}
+#task-list input,
+#define-groups input {
+  -moz-box-shadow: none;
+  -webkit-box-shado: none;
+  box-shadow: none;
+}
+#task-list input[type="text"]:valid,
+#define-groups input[type="text"]:valid {
+  font-size: 13px;
+  border: 1px solid #f00;
+  padding: 4px;
+}
+#task-list input[type="text"]:valid.ok,
+#define-groups input[type="text"]:valid.ok {
+  border: 1px solid #a1d2d1;
+}
+#task-list input[type="submit"],
+#define-groups input[type="submit"] {
+  border: 0px solid #f3951d;
+  color: #fff;
+  -webkit-border-radius: 12px;
+  -moz-border-radius: 12px;
+  border-radius: 12px;
+  padding: 4px 14px;
+  background-color: #f3951d;
+}
+#tasks-completed {
+  clear: left;
+  float: left;
+  display: none;
 }
 #topBar {
   background: url("../images/header.jpg");
@@ -2584,9 +2832,9 @@ a:hover {
   width: 960px;
   height: 120px;
   background-color: #969696;
-  color: #fff;
-  font-family: Verdana;
-  font-size: 1.2em;
+  color: #a1a790;
+  font-size: 14pt;
+  font-weight: normal;
 }
 #topBar .logout {
   position: absolute;
@@ -2594,6 +2842,7 @@ a:hover {
   top: 25px;
   width: 75px;
   height: 25px;
+  font-size: 12pt;
 }
 #topBar .logout div {
   position: relative;
@@ -2603,7 +2852,7 @@ a:hover {
   position: absolute;
   left: 30px;
   top: 20px;
-  font-size: 1.5em;
+  font-size: 25pt;
 }
 #reputation {
   position: absolute;
