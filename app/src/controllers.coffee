@@ -757,6 +757,7 @@ GG.meiosisController = Ember.Object.create
           # swap them in the gametes.cells
           gametes = meiosisView.get('gametes')
           chromo = sourceCross.chromoView.get('chromo')
+          chromo = 'XY' if chromo is 'X'
 
           for swapAlleles in allelesToSwap
             alleles = gametes.cells[sourceCell][chromo].alleles.without(swapAlleles.source)
