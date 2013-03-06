@@ -1,17 +1,19 @@
 GG.DrakeView = Ember.View.extend
   templateName       : 'drake'
   classNames         : ['drake']
-  classNameBindings  : ['selected']
+  classNameBindings  : ['selected','species']
   drakeImageName     : (->
     color = @get('org').getCharacteristic('color')
     color.charAt(0).toLowerCase() + color.slice(1) + ".png"
   ).property()
   drakeImage         : (->
-    '../images/drakes/' + @get 'drakeImageName'
+    species = @get 'species'
+    "../images/drakes/#{species}/" + @get 'drakeImageName'
   ).property('drakeImage')
   drakeIdleImage     : (->
     folder = @get 'currentAnimation.folder'
-    "../images/drakes/#{folder}/" + @get 'drakeImageName'
+    species = @get 'species'
+    "../images/drakes/#{species}/#{folder}/" + @get 'drakeImageName'
   ).property('drakeImage', 'currentAnimation')
   showAnimation      : false
   currentAnimation   : null
@@ -47,7 +49,7 @@ GG.DrakeView = Ember.View.extend
   ).property()
   wings : (->
     wings = @get('org').getCharacteristic "wings"
-    wings is "Wings"
+    @get('species') is 'GGDrake' and wings is "Wings"
   ).property()
   spikes : (->
     spikes = @get('org').getCharacteristic "spikes"
@@ -65,11 +67,30 @@ GG.DrakeView = Ember.View.extend
     horns = @get('org').getCharacteristic "horns"
     if horns is "Forward horns"
       'drake-forward-horns'
+    else if horns is "Upward horns"
+      'drake-upward-horns'
     else 'drake-reverse-horns'
   ).property()
   fire : (->
     fire = @get('org').getCharacteristic "fire breathing"
     fire is "Fire breathing"
+  ).property()
+  neckpattern: (->
+    pattern = @get('org').getCharacteristic 'neckpattern'
+    if pattern is "Striped neck"
+      'drake-striped-neck'
+    else if pattern is "Spotted neck"
+      'drake-spotted-neck'
+    else false
+  ).property()
+  fin: (->
+    fin = @get('org').getCharacteristic 'fin'
+    if fin is "Large fin"
+      'drake-large-fin'
+    else if fin is "Medium fin"
+      'drake-medium-fin'
+    # small fin is part of the body artwork
+    else false
   ).property()
   didInsertElement: ->
     return if GG.baselineController.get('isBaseline') # no animations in baseline

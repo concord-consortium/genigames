@@ -7,8 +7,14 @@
     {{#if view.spikes}}
       <img {{bindAttr src="view.drakeImage" class=":drake-img view.spikes"}}></img>
     {{/if}}
+    {{#if view.fin}}
+      <img {{bindAttr src="view.drakeImage" class=":drake-img view.fin"}}></img>
+    {{/if}}
     {{#if view.armor}}
       <img {{bindAttr src="view.drakeImage" class=":drake-img :drake-armor"}}></img>
+    {{/if}}
+    {{#if view.neckpattern}}
+      <img {{bindAttr src="view.drakeImage" class=":drake-img view.neckpattern"}}></img>
     {{/if}}
     {{#if view.wings}}
       <img {{bindAttr src="view.drakeImage" class=":drake-img :drake-wings"}}></img>
@@ -28,8 +34,14 @@
       {{#if view.spikes}}
         <img {{bindAttr src="view.drakeIdleImage" class=":drake-idle-img view.spikes"}}></img>
       {{/if}}
+      {{#if view.fin}}
+        <img {{bindAttr src="view.drakeIdleImage" class=":drake-idle-img view.fin"}}></img>
+      {{/if}}
       {{#if view.armor}}
         <img {{bindAttr src="view.drakeIdleImage" class=":drake-idle-img :drake-armor"}}></img>
+      {{/if}}
+      {{#if view.neckpattern}}
+        <img {{bindAttr src="view.drakeIdleImage" class=":drake-idle-img view.neckpattern"}}></img>
       {{/if}}
       {{#if view.wings}}
         <img {{bindAttr src="view.drakeIdleImage" class=":drake-idle-img :drake-wings"}}></img>
