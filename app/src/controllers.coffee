@@ -768,6 +768,26 @@ GG.meiosisController = Ember.Object.create
             alleles.push(swapAlleles.source)
             gametes.cells[destCell][chromo].alleles = alleles
 
+            # also swap revealed status
+            sourceRevealed = gametes.cells[sourceCell][chromo].revealed || []
+            destRevealed   = gametes.cells[destCell][chromo].revealed || []
+            isSourceRevealed = sourceRevealed.indexOf(swapAlleles.source) != -1
+            isDestRevealed   = destRevealed.indexOf(swapAlleles.dest) != -1
+            # remove them both first, then insert them second.
+            # this way we avoid problems if the alleles are the same.
+            if isSourceRevealed
+              sourceRevealed = sourceRevealed.without(swapAlleles.source)
+            if isDestRevealed
+              destRevealed = destRevealed.without(swapAlleles.dest)
+            if isSourceRevealed
+              destRevealed.push(swapAlleles.source)
+            if isDestRevealed
+              sourceRevealed.push(swapAlleles.dest)
+
+            if isSourceRevealed or isDestRevealed
+              gametes.cells[sourceCell][chromo].revealed = sourceRevealed
+              gametes.cells[destCell][chromo].revealed = destRevealed
+
           meiosisView.set('gametes', $.extend(true, {}, gametes))
           meiosisView.notifyPropertyChange('gametes')
 
