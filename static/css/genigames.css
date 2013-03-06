@@ -32,20 +32,35 @@
 html body div {
   font-family: 'CenturyGothicStd', 'sans-serif';
 }
-.needs-caching.drake-albino {
-  background: url("../images/drakes/albino.png");
+.needs-caching.drake-albino-GGDrake {
+  background: url("../images/drakes/GGDrake/albino.png");
 }
-.needs-caching.drake-blue {
-  background: url("../images/drakes/blue.png");
+.needs-caching.drake-albino-GGTournamentDrake {
+  background: url("../images/drakes/GGTournamentDrake/albino.png");
 }
-.needs-caching.drake-green {
-  background: url("../images/drakes/green.png");
+.needs-caching.drake-blue-GGDrake {
+  background: url("../images/drakes/GGDrake/blue.png");
 }
-.needs-caching.drake-purple {
-  background: url("../images/drakes/purple.png");
+.needs-caching.drake-blue-GGTournamentDrake {
+  background: url("../images/drakes/GGTournamentDrake/blue.png");
 }
-.needs-caching.drake-red {
-  background: url("../images/drakes/red.png");
+.needs-caching.drake-green-GGDrake {
+  background: url("../images/drakes/GGDrake/green.png");
+}
+.needs-caching.drake-green-GGTournamentDrake {
+  background: url("../images/drakes/GGTournamentDrake/green.png");
+}
+.needs-caching.drake-purple-GGDrake {
+  background: url("../images/drakes/GGDrake/purple.png");
+}
+.needs-caching.drake-purple-GGTournamentDrake {
+  background: url("../images/drakes/GGTournamentDrake/purple.png");
+}
+.needs-caching.drake-red-GGDrake {
+  background: url("../images/drakes/GGDrake/red.png");
+}
+.needs-caching.drake-red-GGTournamentDrake {
+  background: url("../images/drakes/GGTournamentDrake/red.png");
 }
 .needs-caching.npc-npc1_bookkeeper1 {
   background: url("../images/npc1_bookkeeper1.png");
@@ -735,44 +750,86 @@ html body div {
   position: absolute;
   left: 0;
 }
-.drake-fire {
+.GGDrake .drake-fire {
   top: 0px;
 }
-.drake-reverse-horns {
+.GGDrake .drake-reverse-horns {
   top: -100%;
 }
-.drake-forward-horns {
+.GGDrake .drake-forward-horns {
   top: -200%;
 }
-.drake-male {
+.GGDrake .drake-male {
   top: -300%;
 }
-.drake-female {
+.GGDrake .drake-female {
   top: -400%;
 }
-.drake-armor {
+.GGDrake .drake-armor {
   top: -500%;
 }
-.drake-wide-spikes {
+.GGDrake .drake-wide-spikes {
   top: -600%;
 }
-.drake-medium-spikes {
+.GGDrake .drake-medium-spikes {
   top: -700%;
 }
-.drake-wings {
+.GGDrake .drake-wings {
   top: -800%;
 }
-.drake-shiny {
+.GGDrake .drake-shiny {
   top: -900%;
 }
-.drake-body-long-tail {
+.GGDrake .drake-body-long-tail {
   top: -1000%;
 }
-.drake-body-kinked-tail {
+.GGDrake .drake-body-kinked-tail {
   top: -1100%;
 }
-.drake-body-short-tail {
+.GGDrake .drake-body-short-tail {
   top: -1200%;
+}
+.GGTournamentDrake .drake-fire {
+  top: 0px;
+}
+.GGTournamentDrake .drake-reverse-horns {
+  top: -100%;
+}
+.GGTournamentDrake .drake-forward-horns {
+  top: -200%;
+}
+.GGTournamentDrake .drake-upward-horns {
+  top: -300%;
+}
+.GGTournamentDrake .drake-male {
+  top: -400%;
+}
+.GGTournamentDrake .drake-female {
+  top: -500%;
+}
+.GGTournamentDrake .drake-striped-neck {
+  top: -600%;
+}
+.GGTournamentDrake .drake-spotted-neck {
+  top: -700%;
+}
+.GGTournamentDrake .drake-large-fin {
+  top: -800%;
+}
+.GGTournamentDrake .drake-medium-fin {
+  top: -900%;
+}
+.GGTournamentDrake .drake-body-long-tail {
+  top: -1000%;
+}
+.GGTournamentDrake .drake-body-kinked-tail {
+  top: -1100%;
+}
+.GGTournamentDrake .drake-body-short-tail {
+  top: -1200%;
+}
+.GGTournamentDrake .drake-body-fat-tail {
+  top: -1300%;
 }
 .flip {
   -moz-transform: scaleX(-1);
