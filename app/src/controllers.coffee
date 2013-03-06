@@ -134,8 +134,14 @@ GG.tasksController = Ember.ArrayController.create
 
   currentLevelId: (->
     task = @get('currentTask')
-    if task then ": " + task.get 'name'
-    else ""
+    id = ""
+    if GG.baselineController.get('isBaseline')
+      if task and task.get('baselineName')
+        id = ": " + task.get 'baselineName'
+    else
+      if task
+        id = ": " + task.get 'name'
+    return id
   ).property('currentTask')
 
   currentTargetTraits: (->
