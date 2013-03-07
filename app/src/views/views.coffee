@@ -23,6 +23,13 @@ GG.LogoutButton = Ember.View.extend
   click: ->
     GG.statemanager.transitionTo 'loggingOut'
 
+GG.BackToTaskListButton = Ember.View.extend
+  tagName: 'div'
+  classNames: 'task-list'
+  template: Ember.Handlebars.compile('<div>Challenge List</div>')
+  click: ->
+    GG.statemanager.transitionTo 'inTaskList'
+
 GG.ChooseClassView = Ember.View.extend
   templateName: 'choose-class'
   optionsBinding: 'GG.sessionController.classesWithLearners'
