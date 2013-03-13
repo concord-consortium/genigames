@@ -668,22 +668,38 @@ html body div {
 .allele.revealable span {
   cursor: pointer;
 }
-.allele.tail,
-.allele.horns,
-.allele.dilute {
+.allele.GGDrake.tail,
+.allele.GGDrake.horns,
+.allele.GGDrake.dilute {
   top: 0px;
 }
-.allele.metallic,
-.allele.color,
-.allele.firebreathing {
+.allele.GGDrake.metallic,
+.allele.GGDrake.color,
+.allele.GGDrake.firebreathing {
   top: 25px;
 }
-.allele.wings,
-.allele.green {
+.allele.GGDrake.wings,
+.allele.GGDrake.green {
   top: 50px;
 }
-.allele.armor,
-.allele.spikes {
+.allele.GGDrake.armor,
+.allele.GGDrake.spikes {
+  top: 75px;
+}
+.allele.GGTournamentDrake.tail,
+.allele.GGTournamentDrake.horns,
+.allele.GGTournamentDrake.neckpattern {
+  top: 0px;
+}
+.allele.GGTournamentDrake.wings,
+.allele.GGTournamentDrake.backfin,
+.allele.GGTournamentDrake.firebreathing {
+  top: 25px;
+}
+.allele.GGTournamentDrake.green {
+  top: 50px;
+}
+.allele.GGTournamentDrake.spikes {
   top: 75px;
 }
 .dominant {
@@ -813,23 +829,32 @@ html body div {
 .GGTournamentDrake .drake-spotted-neck {
   top: -700%;
 }
-.GGTournamentDrake .drake-large-fin {
+.GGTournamentDrake .drake-wide-spikes {
   top: -800%;
 }
-.GGTournamentDrake .drake-medium-fin {
+.GGTournamentDrake .drake-medium-spikes {
   top: -900%;
 }
-.GGTournamentDrake .drake-body-long-tail {
+.GGTournamentDrake .drake-wings {
   top: -1000%;
 }
-.GGTournamentDrake .drake-body-kinked-tail {
+.GGTournamentDrake .drake-large-fin {
   top: -1100%;
 }
-.GGTournamentDrake .drake-body-short-tail {
+.GGTournamentDrake .drake-medium-fin {
   top: -1200%;
 }
-.GGTournamentDrake .drake-body-fat-tail {
+.GGTournamentDrake .drake-body-long-tail {
   top: -1300%;
+}
+.GGTournamentDrake .drake-body-kinked-tail {
+  top: -1400%;
+}
+.GGTournamentDrake .drake-body-short-tail {
+  top: -1500%;
+}
+.GGTournamentDrake .drake-body-fat-tail {
+  top: -1600%;
 }
 .flip {
   -moz-transform: scaleX(-1);
@@ -1270,7 +1295,8 @@ a:hover {
 .castle_purple {
   background: top left no-repeat url("../images/town05.jpg");
 }
-.logout {
+.logout,
+.task-list {
   background-color: #bbb;
   color: #fff;
   position: absolute;
@@ -1281,14 +1307,17 @@ a:hover {
   text-align: center;
   z-index: 2;
 }
-.logout div {
+.logout div,
+.task-list div {
   position: relative;
   top: 1px;
 }
-.logout:hover {
+.logout:hover,
+.task-list:hover {
   cursor: pointer;
 }
-.logout:active {
+.logout:active,
+.task-list:active {
   box-shadow: 1px 1px 1px 1px #808080;
 }
 #modal-backdrop-fade,
@@ -2845,6 +2874,18 @@ a:hover {
   font-size: 12pt;
 }
 #topBar .logout div {
+  position: relative;
+  top: 3px;
+}
+#topBar .task-list {
+  position: absolute;
+  right: 30px;
+  top: 25px;
+  width: 125px;
+  height: 25px;
+  font-size: 12pt;
+}
+#topBar .task-list div {
   position: relative;
   top: 3px;
 }
