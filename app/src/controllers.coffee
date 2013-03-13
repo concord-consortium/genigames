@@ -338,6 +338,7 @@ GG.breedingController = Ember.Object.create
         mother: @get('mother.biologicaOrganism.alleles')
         father: @get('father.biologicaOrganism.alleles')
         offspring: drake.get('biologicaOrganism.alleles')
+        offspringSex: drake.get('sex')
 
 GG.cyclesController = Ember.Object.create
   cyclesBinding: 'GG.tasksController.currentTask.cyclesRemaining'
