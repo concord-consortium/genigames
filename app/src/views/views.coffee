@@ -187,9 +187,12 @@ GG.MeiosisButtonView = Ember.View.extend GG.PointsToolTip,
     GG.statemanager.send('toggleBreedType')
 
 GG.AlleleView = Ember.View.extend GG.PointsToolTip,
-  classNameBindings: ['defaultClassNames', 'revealable', 'dominant', 'gene']
+  classNameBindings: ['defaultClassNames', 'revealable', 'dominant', 'gene', 'species']
   defaultClassNames: 'allele'
   valueBinding: 'content.allele'
+  species: (->
+    GG.DrakeSpecies.name
+  ).property()
   hiddenValue: (->
     value = @get 'value'
     value.charAt(0) + "?"

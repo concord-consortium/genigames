@@ -49,7 +49,7 @@ GG.DrakeView = Ember.View.extend
   ).property()
   wings : (->
     wings = @get('org').getCharacteristic "wings"
-    @get('species') is 'GGDrake' and wings is "Wings"
+    wings is "Wings"
   ).property()
   spikes : (->
     spikes = @get('org').getCharacteristic "spikes"
