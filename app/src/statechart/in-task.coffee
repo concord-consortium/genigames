@@ -180,6 +180,7 @@ GG.StateInTask = Ember.State.extend
         $('#' + parent.get('elementId') + " .crossoverPoint").removeClass('clickable')
         $('#' + parent.get('elementId') + " .crossoverPoint").addClass('hidden')
         GG.meiosisController.set('crossoverSelected', false)
+        GG.meiosisController.set('selectedCrossover', null)
         if callback?
           callback.call()
         else
@@ -199,9 +200,10 @@ GG.StateInTask = Ember.State.extend
       selectingChromatidsCallback: null
       doneSelectingChromatids: (manager, parent) ->
         callback = @get('selectingChromatidsCallback')
+        GG.meiosisController.set('chromosomeSelected', false)
+        GG.meiosisController.set('selectedChromosomes', { father: {}, mother: {}})
         if callback?
           $('#' + parent.get('elementId') + " .chromatidSelection").addClass('hidden')
-          GG.meiosisController.set('chromosomeSelected', false)
           callback.call()
         else
           console.log("no callback specified for doneSelectingChromatids!")
