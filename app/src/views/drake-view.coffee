@@ -37,6 +37,8 @@ GG.DrakeView = Ember.View.extend
       'drake-body-long-tail'
     else if tail is "Kinked tail"
       'drake-body-kinked-tail'
+    else if tail is "Fat tail"
+      'drake-body-fat-tail'
     else 'drake-body-short-tail'
   ).property()
   shine : (->
