@@ -1288,7 +1288,8 @@ GG.reputationController = Ember.Object.create
     else
       current = @get 'currentTaskReputation'
 
-    if current > best
+    current = 0 if current == null
+    if best == null || current > best
       @set('bestTaskReputation', current)
       @set('bestTaskReputationReasons', @get('currentTaskReputationReasons'))
 
