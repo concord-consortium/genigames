@@ -569,6 +569,7 @@ GG.actionCostsController = Ember.Object.create
 
 GG.meiosisController = Ember.Object.create
   canBreedDuringAnimation: true
+  inAnimation: false
   motherView: null
   fatherView: null
   motherGameteNumberBinding: 'motherView.randomGameteNumberOverride'
@@ -598,10 +599,14 @@ GG.meiosisController = Ember.Object.create
   ).property('chosenMotherGamete','chosenFatherGamete')
   animate: (callback)->
     if @get('motherView')? and @get('fatherView')?
+      @set('inAnimation', true)
       @get('fatherView').animate =>
         GG.tutorialMessageController.showMeiosisMotherTutorial =>
           @get('motherView').animate =>
-            GG.MeiosisAnimation.mergeChosenGametes("#" + @get('fatherView.elementId'), "#" + @get('motherView.elementId'), callback)
+            GG.MeiosisAnimation.mergeChosenGametes("#" + @get('fatherView.elementId'), "#" + @get('motherView.elementId'), =>
+              @set('inAnimation', false)
+              callback()
+            )
   resetAnimation: ->
     if @get('motherView')? and @get('fatherView')?
       @get('motherView').resetAnimation()
@@ -610,6 +615,7 @@ GG.meiosisController = Ember.Object.create
       @set('chromosomeSelected', false)
       @set('selectedCrossover', null)
       @set('crossoverSelected', false)
+      @set('inAnimation', false)
   chromosomeSelected: false
   selectedChromosomes: { father: {}, mother: {}}
   deselectChromosome: (chromoView) ->

@@ -136,6 +136,7 @@ GG.StateInTask = Ember.State.extend
       firstTime: true
       setup: (manager)->
         @set('firstTime', true)
+        GG.meiosisController.set('inAnimation', true)
         $('#target').hide()
         $('#breed-controls').animate({left: 474},400,'easeOutCubic')
         $("#breeder").animate({left: -459},500,"easeOutCubic")

@@ -157,10 +157,18 @@ GG.BreedButtonView = Ember.View.extend GG.PointsToolTip,
   fatherBinding: 'GG.parentController.selectedFather'
 
   classNameBindings : ['enabled', 'noMoreBreeds']
+  inAnimationBinding: 'GG.meiosisController.inAnimation'
+  canBreedDuringAnimationBinding: 'GG.meiosisController.canBreedDuringAnimation'
   enabled: (->
-    !!(this.get('mother') && this.get('father')) and
-    !(@get('noMoreBreeds') && GG.obstacleCourseController.get('hasObstacleCourse'))
-  ).property('mother', 'father', 'noMoreBreeds')
+    if !this.get('mother') || !this.get('father')
+      return false
+    else if (@get('noMoreBreeds') && GG.obstacleCourseController.get('hasObstacleCourse'))
+      return false
+    else if @get('inAnimation') && !@get('canBreedDuringAnimation')
+      return false
+    else
+      return true
+  ).property('mother', 'father', 'noMoreBreeds', 'inAnimation', 'canBreedDuringAnimation')
   noMoreBreeds: (->
     GG.cyclesController.get('cycles') <= 0 and not GG.baselineController.get 'isBaseline'
   ).property('GG.cyclesController.cycles', 'GG.baselineController.isBaseline')
