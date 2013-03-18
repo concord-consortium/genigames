@@ -524,7 +524,7 @@ html body div {
   z-index: 6000;
 }
 #completion-dialog-content {
-  background-color: #233c49;
+  background: top left repeat url("../images/background_tileblue.png");
   color: #cdcdcd;
   position: absolute;
   bottom: 5px;
@@ -2416,7 +2416,7 @@ a:hover {
   z-index: 6000;
 }
 #obstacle-course-dialog-content {
-  background-color: #233c49;
+  background: top left repeat url("../images/background_tileblue.png");
   color: #cdcdcd;
   position: absolute;
   bottom: 5px;
