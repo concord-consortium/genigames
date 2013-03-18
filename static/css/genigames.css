@@ -130,14 +130,14 @@ html body div {
   position: absolute;
   top: 33px;
   left: 666px;
-  width: 140px;
+  width: 120px;
   text-align: center;
 }
 #task-reputation-best {
   position: absolute;
   top: 33px;
-  left: 826px;
-  width: 107px;
+  left: 807px;
+  width: 120px;
   text-align: center;
 }
 #progress-bar {
@@ -524,7 +524,8 @@ html body div {
   z-index: 6000;
 }
 #completion-dialog-content {
-  background-color: #fff;
+  background-color: #233c49;
+  color: #cdcdcd;
   position: absolute;
   bottom: 5px;
   right: 5px;
@@ -2415,7 +2416,8 @@ a:hover {
   z-index: 6000;
 }
 #obstacle-course-dialog-content {
-  background-color: #fff;
+  background-color: #233c49;
+  color: #cdcdcd;
   position: absolute;
   bottom: 5px;
   right: 5px;
