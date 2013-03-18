@@ -568,6 +568,7 @@ GG.actionCostsController = Ember.Object.create
     pts[level] || 0
 
 GG.meiosisController = Ember.Object.create
+  canBreedDuringAnimation: true
   motherView: null
   fatherView: null
   motherGameteNumberBinding: 'motherView.randomGameteNumberOverride'

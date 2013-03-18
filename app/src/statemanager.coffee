@@ -182,6 +182,8 @@ GG.statemanager = Ember.StateManager.create
                 GG.tutorialMessageController.set('enabled', false)
               when "external obstacle course"
                 GG.obstacleCourseController.set("mode", GG.OBSTACLE_COURSE_EXTERNAL)
+              when "no breed during meiosis"
+                GG.meiosisController.set('canBreedDuringAnimation', false)
 
         for to in world.towns
           town = GG.Town.create to

@@ -236,16 +236,17 @@ GG.StateInTask = Ember.State.extend
         GG.meiosisController.selectCrossover(context)
 
       breedDrake: (manager)->
-        GG.logController.logEvent GG.Events.BREED_BUTTON_CLICKED,
-          duringMeiosis: true
-          parent: GG.MeiosisAnimation.get('parent')
-          stage: GG.MeiosisAnimation.get('stage')
-        # If the breed button gets clicked while we're animating,
-        # reset the animation and go again
-        GG.meiosisController.resetAnimation()
-        setTimeout ->
-          manager.send 'animate'
-        , 200
+        if GG.meiosisController.get('canBreedDuringAnimation')
+          GG.logController.logEvent GG.Events.BREED_BUTTON_CLICKED,
+            duringMeiosis: true
+            parent: GG.MeiosisAnimation.get('parent')
+            stage: GG.MeiosisAnimation.get('stage')
+          # If the breed button gets clicked while we're animating,
+          # reset the animation and go again
+          GG.meiosisController.resetAnimation()
+          setTimeout ->
+            manager.send 'animate'
+          , 200
 
       selectParents: (manager) ->
         GG.meiosisController.resetAnimation()
