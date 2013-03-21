@@ -184,6 +184,8 @@ GG.statemanager = Ember.StateManager.create
                 GG.obstacleCourseController.set("mode", GG.OBSTACLE_COURSE_EXTERNAL)
               when "no breed during meiosis"
                 GG.meiosisController.set('canBreedDuringAnimation', false)
+              when "swap rep changed earned"
+                GG.reputationController.set("swapChangedEarned", true)
 
         for to in world.towns
           town = GG.Town.create to

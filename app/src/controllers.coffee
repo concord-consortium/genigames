@@ -399,7 +399,8 @@ GG.userController = Ember.Object.create
     user = @get 'user'
     return unless user
     user.set 'reputation', user.get('reputation') + amt
-    GG.logController.logEvent GG.Events.REPUTATION_CHANGED, amount: amt, result: user.get('reputation')
+    evt = if @get('swapChangedEarned') then GG.Events.REPUTATION_EARNED else GG.Events.REPUTATION_CHANGED
+    GG.logController.logEvent evt, amount: amt, result: user.get('reputation')
 
   loadState: (type, obj)->
     allState = @get('state')
@@ -1248,6 +1249,7 @@ GG.showModalDialog = (text, hideAction) ->
          $('#modal-backdrop-fade').fadeOut(@options.show.effect.length)
 
 GG.reputationController = Ember.Object.create
+  swapChangedEarned: false
   reset: (->
     @set('bestTaskReputation', Number.NEGATIVE_INFINITY)
     @set('bestTaskReputationReasons', {})
@@ -1298,6 +1300,8 @@ GG.reputationController = Ember.Object.create
       current = @get 'currentTaskReputation'
 
     current = 0 if current == null
+    evt = if @get('swapChangedEarned') then GG.Events.REPUTATION_CHANGED else GG.Events.REPUTATION_EARNED
+    GG.logController.logEvent evt, {amount: current}
     if best == null || current > best
       @set('bestTaskReputation', current)
       @set('bestTaskReputationReasons', @get('currentTaskReputationReasons'))

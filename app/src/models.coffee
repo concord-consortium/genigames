@@ -250,6 +250,7 @@ GG.Events =
   STARTED_TASK    : "Started task"
   COMPLETED_TASK  : "Completed task"
   REPUTATION_CHANGED : "Reputation changed"
+  REPUTATION_EARNED : "Reputation earned"
 
   # Breeding events
   SELECTED_PARENT : "Selected parent"
