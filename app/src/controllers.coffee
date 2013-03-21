@@ -109,16 +109,18 @@ GG.tasksController = Ember.ArrayController.create
     GG.reputationController.addReputation(reputation, event)
     GG.reputationController.finalizeReputationForTaskRun()
     GG.reputationController.finalizeReputation()
+    return reputation
 
 
   completeCurrentTask: ->
     task = @get 'currentTask'
     task.set 'completed', true
-    @awardTaskReputation true
+    reputation = @awardTaskReputation(true)
     GG.logController.logEvent GG.Events.COMPLETED_TASK,
       name: task.get('name')
       breedCounter: GG.cyclesController.get('cycles')
       elapsedTimeMs: (new Date().getTime()) - @get('taskStartTime')
+      reputationEarned: reputation
 
   restartCurrentTask: ->
     task = @get 'currentTask'
