@@ -108,8 +108,7 @@ GG.tasksController = Ember.ArrayController.create
     event = if (isCourse and !success) then GG.Events.INCOMPLETE_COURSE else GG.Events.COMPLETED_TASK
     GG.reputationController.addReputation(reputation, event)
     GG.reputationController.finalizeReputationForTaskRun()
-    GG.reputationController.finalizeReputation()
-    return reputation
+    return GG.reputationController.finalizeReputation()
 
 
   completeCurrentTask: ->
@@ -1308,6 +1307,7 @@ GG.reputationController = Ember.Object.create
 
       best = 0 if best == Number.NEGATIVE_INFINITY
       GG.userController.addReputation(current - best)
+    return current
 
   _repFor: (evt)->
     reasons = @get('currentTaskReputationReasons')
