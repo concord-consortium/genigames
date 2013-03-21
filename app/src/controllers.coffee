@@ -398,7 +398,7 @@ GG.userController = Ember.Object.create
     user = @get 'user'
     return unless user
     user.set 'reputation', user.get('reputation') + amt
-    evt = if @get('swapChangedEarned') then GG.Events.REPUTATION_EARNED else GG.Events.REPUTATION_CHANGED
+    evt = if GG.reputationController.get('swapChangedEarned') then GG.Events.REPUTATION_EARNED else GG.Events.REPUTATION_CHANGED
     GG.logController.logEvent evt, amount: amt, result: user.get('reputation')
 
   loadState: (type, obj)->
