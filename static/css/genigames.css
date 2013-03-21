@@ -2329,22 +2329,38 @@ a:hover {
 .crossoverPoint.selected {
   background-color: #ff0;
 }
-.crossoverPoint.tail,
-.crossoverPoint.horns,
-.crossoverPoint.dilute {
+.crossoverPoint.GGDrake.tail,
+.crossoverPoint.GGDrake.horns,
+.crossoverPoint.GGDrake.dilute {
   top: -3px;
 }
-.crossoverPoint.metallic,
-.crossoverPoint.color,
-.crossoverPoint.firebreathing {
+.crossoverPoint.GGDrake.metallic,
+.crossoverPoint.GGDrake.color,
+.crossoverPoint.GGDrake.firebreathing {
   top: 22px;
 }
-.crossoverPoint.wings,
-.crossoverPoint.green {
+.crossoverPoint.GGDrake.wings,
+.crossoverPoint.GGDrake.green {
   top: 47px;
 }
-.crossoverPoint.armor,
-.crossoverPoint.spikes {
+.crossoverPoint.GGDrake.armor,
+.crossoverPoint.GGDrake.spikes {
+  top: 72px;
+}
+.crossoverPoint.GGTournamentDrake.tail,
+.crossoverPoint.GGTournamentDrake.horns,
+.crossoverPoint.GGTournamentDrake.neckpattern {
+  top: -3px;
+}
+.crossoverPoint.GGTournamentDrake.wings,
+.crossoverPoint.GGTournamentDrake.backfin,
+.crossoverPoint.GGTournamentDrake.firebreathing {
+  top: 22px;
+}
+.crossoverPoint.GGTournamentDrake.green {
+  top: 47px;
+}
+.crossoverPoint.GGTournamentDrake.spikes {
   top: 72px;
 }
 .npc {
