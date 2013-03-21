@@ -410,12 +410,15 @@ GG.ChromosomePanelView = Ember.View.extend
 GG.CrossoverPointView = Ember.View.extend
   tagName: 'div'
   classNames: ['crossoverPoint','hidden']
-  classNameBindings: ['gene']
+  classNameBindings: ['gene','species']
   allele: null
   chromoView: null
   gene: (->
     return BioLogica.Genetics.getGeneOfAllele(GG.DrakeSpecies, @get('allele'))?.name
   ).property('allele')
+  species: (->
+    GG.DrakeSpecies.name
+  ).property()
   click: ->
     GG.statemanager.send 'selectedCrossover', {chromoView: @get('chromoView'), allele: @get('allele')}
 
