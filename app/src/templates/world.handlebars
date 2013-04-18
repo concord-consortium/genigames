@@ -3,9 +3,11 @@
     <div id="greeting">
       Hi {{first}}!
     </div>
-    <div id="reputation">
-      Reputation: {{reputation}}
-    </div>
+    {{#if GG.reputationController.showTotal}}
+      <div id="reputation">
+        Reputation: {{reputation}}
+      </div>
+    {{/if}}
   {{/with}}
   {{view GG.LogoutButton}}
 </div>

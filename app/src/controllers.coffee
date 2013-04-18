@@ -1249,6 +1249,7 @@ GG.showModalDialog = (text, hideAction) ->
 
 GG.reputationController = Ember.Object.create
   swapChangedEarned: false
+  showTotal: true
   reset: (->
     @set('bestTaskReputation', Number.NEGATIVE_INFINITY)
     @set('bestTaskReputationReasons', {})
