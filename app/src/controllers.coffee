@@ -1372,4 +1372,6 @@ GG.groupsController = Ember.Object.create
     groups.pushObject(GG.GroupMember.create())
     console.log("add user ended")
 
+GG.optionsController = Ember.Object.create
+  projectedDisplay: false
 

@@ -188,6 +188,8 @@ GG.statemanager = Ember.StateManager.create
                 GG.reputationController.set("swapChangedEarned", true)
               when "hide total reputation"
                 GG.reputationController.set('showTotal', false)
+              when "projected display"
+                GG.optionsController.set('projectedDisplay', true)
 
         for to in world.towns
           town = GG.Town.create to

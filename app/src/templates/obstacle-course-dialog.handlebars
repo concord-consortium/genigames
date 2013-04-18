@@ -53,12 +53,12 @@
       </div>
       {{#if GG.tasksController.meiosisControlEnabled}}
         <div class="completion-rep-item">
-          <span class="action align-left">Meiosis Control:</span><span class="points spent revealable">{{view.meiosisControlRep}}</span>
+          <span class="action align-left">Meiosis Control:</span><span {{bindAttr class=":points :spent :revealable GG.optionsController.projectedDisplay:projected"}}>{{view.meiosisControlRep}}</span>
         </div>
       {{/if}}
       {{#if GG.tasksController.hasHiddenGenes}}
         <div class="completion-rep-item">
-          <span class="action align-left">Allele Reveal:</span><span class="points spent revealable">{{view.alleleRevealRep}}</span>
+          <span class="action align-left">Allele Reveal:</span><span {{bindAttr class=":points :spent :revealable GG.optionsController.projectedDisplay:projected"}}>{{view.alleleRevealRep}}</span>
         </div>
       {{/if}}
       <div class="divider"></div>

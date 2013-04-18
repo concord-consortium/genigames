@@ -11,16 +11,16 @@
         <span class="action">Reputation Points Won:</span><span class="points earned">{{view.reputationWon}}</span>
       </div>
       <div class="completion-rep-item">
-        <span class="action">Points Spent on Extra Breeds:</span><span class="points spent">{{view.extraBreedsRep}}</span>
+        <span class="action">Points Spent on Extra Breeds:</span><span {{bindAttr class=":points :spent GG.optionsController.projectedDisplay:projected"}}>{{view.extraBreedsRep}}</span>
       </div>
       {{#if GG.tasksController.meiosisControlEnabled}}
         <div class="completion-rep-item">
-          <span class="action">Points Spent on Meiosis Control:</span><span class="points spent">{{view.meiosisControlRep}}</span>
+          <span class="action">Points Spent on Meiosis Control:</span><span {{bindAttr class=":points :spent GG.optionsController.projectedDisplay:projected"}}>{{view.meiosisControlRep}}</span>
         </div>
       {{/if}}
       {{#if GG.tasksController.hasHiddenGenes}}
         <div class="completion-rep-item">
-          <span class="action">Points Spent on Allele Reveal:</span><span class="points spent">{{view.alleleRevealRep}}</span>
+          <span class="action">Points Spent on Allele Reveal:</span><span {{bindAttr class=":points :spent GG.optionsController.projectedDisplay:projected"}}>{{view.alleleRevealRep}}</span>
         </div>
       {{/if}}
       <div class="completion-rep-item total">
