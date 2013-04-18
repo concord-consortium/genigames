@@ -570,6 +570,9 @@ html body div {
 #completion-dialog-content .completion-rep .completion-rep-item .points.spent {
   color: #f00;
 }
+#completion-dialog-content .completion-rep .completion-rep-item .points.spent.projected {
+  color: #fff;
+}
 #completion-dialog-content .completion-rep .completion-rep-item.total {
   border-top: 1px solid #d3d3d3;
 }
@@ -2516,6 +2519,9 @@ a:hover {
 }
 #obstacle-course-dialog-content .reputation-calculation .points.spent {
   color: #f00;
+}
+#obstacle-course-dialog-content .reputation-calculation .points.spent.projected {
+  color: #fff;
 }
 #obstacle-course-dialog-content div.divider {
   height: 2px;
