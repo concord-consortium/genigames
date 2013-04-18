@@ -114,7 +114,9 @@ GG.tasksController = Ember.ArrayController.create
   completeCurrentTask: ->
     task = @get 'currentTask'
     task.set 'completed', true
-    reputation = @awardTaskReputation(true)
+    # If the current task is not complete, that means completion was forced.
+    # A task with an obstacle course will do this when breeds remaining hits 0, for example.
+    reputation = @awardTaskReputation(@get('isCurrentTaskComplete'))
     GG.logController.logEvent GG.Events.COMPLETED_TASK,
       name: task.get('name')
       breedCounter: GG.cyclesController.get('cycles')

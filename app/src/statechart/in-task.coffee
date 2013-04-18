@@ -48,6 +48,13 @@ GG.StateInTask = Ember.State.extend
       if GG.tasksController.isCurrentTaskComplete()
         manager.send 'completeTask'
         success = true
+      else if GG.tasksController.get('currentTask.cyclesRemaining') is 0 and
+            GG.obstacleCourseController.get('hasObstacleCourse')
+          # log the drake submission
+          # also log the task as "completed"
+          manager.send 'completeTask'
+          # success should be false, probably, but leave it as true so we don't mess up the tournament
+          success = true
       else
         GG.tasksController.showTaskNonCompletion()
       GG.logController.logEvent GG.Events.SUBMITTED_OFFSPRING,
@@ -282,10 +289,7 @@ GG.StateInTask = Ember.State.extend
         GG.tutorialMessageController.showFirstOffspringCreatedTutorial()
         if GG.tasksController.get('currentTask.cyclesRemaining') is 0 and
             GG.obstacleCourseController.get('hasObstacleCourse')
-          setTimeout ->
-            GG.tasksController.awardTaskReputation false
-            manager.transitionTo 'obstacleCourse'
-          , 800
+          manager.send 'checkForTaskCompletion'
 
       submitOffspring: (manager) ->
         manager.send 'checkForTaskCompletion'
