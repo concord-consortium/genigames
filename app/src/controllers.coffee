@@ -898,11 +898,29 @@ GG.obstacleCourseController = Ember.Object.create
     else
       # earn 10% of repuation per obstacle passed
       # this calculation is ugly...
-      @set 'obstaclesPassed', 0
-      for obstacle in @get('obstacles')
-        @calculateTime(obstacle, false)
-      passed = @get 'obstaclesPassed'
-      return Math.round  taskRep * passed * 0.1
+      if @get('obstacles') && @get('obstacles').length > 0
+        @set 'obstaclesPassed', 0
+        for obstacle in @get('obstacles')
+          @calculateTime(obstacle, false)
+        passed = @get 'obstaclesPassed'
+        return Math.round  taskRep * passed * 0.1
+      else
+        # we have an obstacle course with no obstacles (aka the tournament)
+        # calculate the score based on the number of matching traits
+        task = GG.tasksController.get 'currentTask'
+        drake = GG.breedingController.get 'child'
+        if not task? or not drake?
+          return Math.round(taskRep * 0.5)
+
+        # parse required characteristics
+        parsedCharacteristics = task.get('targetDrake').split(/\s*,\s*/).map (ch, idx, arr)->
+          ch = ch.toLowerCase()
+          ch.charAt(0).toUpperCase() + ch.slice(1)
+        matchedChars = drake.hasHowManyCharacteristics(parsedCharacteristics)
+        modifiers = [0, 0.2, 0.4, 0.6, 0.7, 1.0]
+        if matchedChars >= modifiers.length
+          matchedChars = modifiers.length - 1
+        return Math.round  taskRep * modifiers[matchedChars]
   ).property('drake', 'obstaclesPassed')
 
   myTotalTime: (->

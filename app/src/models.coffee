@@ -221,6 +221,18 @@ GG.Drake = Ember.Object.extend
       return false unless has
     return true
 
+  hasHowManyCharacteristics: (characteristics)->
+    gorg = @get 'biologicaOrganism'
+    count = 0
+    for ch in characteristics
+      if ch == "Female" && @get('female')
+        count += 1
+      else if ch == "Male" && @get('male')
+        count += 1
+      else if ~gorg.getAllCharacteristics().indexOf ch
+        count += 1
+    return count
+
   allelesString: (->
     genotype = @get 'visibleGenotype'
     genotype.a.concat(genotype.b).join(',') unless !genotype
