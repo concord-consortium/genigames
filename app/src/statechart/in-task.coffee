@@ -63,6 +63,8 @@ GG.StateInTask = Ember.State.extend
         success: success
 
     completeTask: (manager) ->
+      $('#task-reputation-available').hide()
+      $('#task-reputation-best').hide()
       GG.tasksController.completeCurrentTask()
       if GG.obstacleCourseController.get('hasObstacleCourse')
         manager.transitionTo 'obstacleCourse'
@@ -79,6 +81,8 @@ GG.StateInTask = Ember.State.extend
         $('#chromosome-labels').attr('class', whosSelected).show()
         $('#breed-controls').animate({left: 650},600,'easeOutCubic')
         $("#breeder").animate({left: 0},800,"easeOutCubic")
+        $('#task-reputation-available').show()
+        $('#task-reputation-best').show()
         setTimeout ->
           GG.motherPoolController.set('hidden', !GG.motherPoolController.selected)
           GG.fatherPoolController.set('hidden', !GG.fatherPoolController.selected)
