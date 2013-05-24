@@ -1338,6 +1338,29 @@ a:hover {
   opacity: 0.5;
   background-color: #000;
 }
+.connection-warning {
+  display: none;
+  position: absolute;
+  left: 50%;
+  top: 25px;
+  width: 400px;
+  height: 100px;
+  z-index: 100;
+  background-color: #f00;
+  border: #8b0000 6px solid;
+  margin-left: -206px;
+  padding: 6px;
+  color: #000;
+  text-align: center;
+  font-size: 1.3em;
+}
+.connection-warning.regained {
+  background-color: #90ee90;
+  border-color: #008000;
+}
+.connection-warning h1 {
+  padding: 10px;
+}
 /* jQuery UI - v1.10.0 - 2013-02-13
 * http://jqueryui.com
 * Includes: jquery.ui.core.css, jquery.ui.slider.css
