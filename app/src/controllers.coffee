@@ -457,6 +457,7 @@ GG.logController = Ember.Object.create
   session: null
   eventQueue: []
   eventQueueInProgress: []
+  triedToEmptyEventQueue: false
 
   startNewSession: ->
     @set('session', @generateGUID())
@@ -469,7 +470,18 @@ GG.logController = Ember.Object.create
     , 10000
 
   processEventQueue: ->
-    if @get('learnerLogUrl')?
+    if @get('triedToEmptyEventQueue') and @eventQueue.length is 0
+      # we had lost connection but now we have regained it
+      @set 'triedToEmptyEventQueue', false
+      GG.statemanager.send 'notifyConnectionRegained'
+
+    if @get('learnerLogUrl')? and @eventQueue.length > 0
+      # a previous save event failed, so we have events in our queue
+      if @get('triedToEmptyEventQueue')
+        # we already tried to empty event queue once and we didn't succeed
+        GG.statemanager.send 'notifyConnectionLost'
+      @set 'triedToEmptyEventQueue', true
+
       @eventQueueInProgress = @eventQueue.slice(0)
       @eventQueue = []
       while @eventQueueInProgress.length > 0

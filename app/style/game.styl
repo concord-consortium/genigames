@@ -55,3 +55,22 @@
 #modal-backdrop-fade
   opacity: 0.5
   background-color: black
+
+.connection-warning
+  display: none
+  absolute: left 50% top 25px width 400px height 100px
+  z-index: 100
+  background-color: red
+  border: darkred 6px solid
+  margin-left: -206px
+  padding: 6px
+  color: black
+  text-align: center
+  font-size: 1.3em
+
+  &.regained
+    background-color: lightgreen
+    border-color: green
+
+  h1
+    padding: 10px
