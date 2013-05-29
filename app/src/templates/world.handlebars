@@ -1,7 +1,7 @@
 <div id="topBar">
   {{#with GG.userController.user}}
     <div id="greeting">
-      Hi {{first}}!
+      <span {{action "openAdminPassword" target="GG.statemanager"}}>Hi</span> {{first}}!
     </div>
     {{#if GG.reputationController.showTotal}}
       <div id="reputation">
@@ -23,4 +23,7 @@
   <!--  </div>  -->
   <div id="message">
   </div>
+
+  <!-- Admin/manual-submission forms -->
+  {{view GG.adminView}}
 </div>

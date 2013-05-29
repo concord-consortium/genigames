@@ -1,0 +1,46 @@
+<div id="admin-password" class="admin">
+  <div>
+    Password: {{view Ember.TextField type="password" valueBinding="GG.manualEventController.password" size="30"}}
+  </div>
+  <button {{action "closeAdminPanel" target="GG.statemanager"}}>Cancel</button>
+  <button {{action "openAdminPanel" target="GG.statemanager"}}>Submit</button>
+</div>
+<div id="admin-panel" class="admin">
+  <h1>Manual event submission</h1>
+  <div>
+    <span>Task:</span>
+    <span>
+      {{view Ember.Select
+        contentBinding="view.firstTown.tasks"
+        optionLabelPath="content.name"
+        optionValuePath="content.name"
+        selectionBinding="GG.manualEventController.task"}}
+    </span>
+  </div>
+  <div class="drake-submission">
+    <div>
+      <span>Submitted drake alleles (optional):</span>
+      <span>{{view Ember.TextField valueBinding="GG.manualEventController.drakeAlleles" size="30"}}</span>
+    </div>
+    <div>
+      <span>Sex:</span>
+      <span>
+        {{view Ember.Select
+          contentBinding="GG.manualEventController.drakeSexes"
+          selectionBinding="GG.manualEventController.drakeSex"}}
+      </span>
+    </div>
+  </div>
+  <div>
+    <span>Breeds remaining:</span>
+    <span>{{view Ember.TextField valueBinding="GG.manualEventController.breedsRemaining" size="3"}}</span>
+    <span>Time elapsed:</span>
+    <span>{{view Ember.TextField valueBinding="GG.manualEventController.time" size="4"}} seconds</span>
+  </div>
+  <div>
+    <span>Reputation earned:</span>
+    <span>{{view Ember.TextField valueBinding="GG.manualEventController.reputation" size="4"}}</span>
+  </div>
+  <button {{action "cancel" target="GG.manualEventController"}}>Cancel</button>
+  <button {{action "submit" target="GG.manualEventController"}}>Submit</button>
+</div>

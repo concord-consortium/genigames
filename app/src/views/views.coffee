@@ -923,3 +923,10 @@ GG.BaselineTaskListView = Ember.View.extend
 
   taskSelected: (evt) ->
     GG.statemanager.send 'taskSelected', evt.context
+
+GG.adminView = Ember.View.extend
+  templateName: 'admin'
+  contentBinding: 'GG.townsController'
+  firstTown: (->
+    @get 'content.firstObject'
+  ).property('content.[]')

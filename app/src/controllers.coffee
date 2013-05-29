@@ -1407,3 +1407,41 @@ GG.groupsController = Ember.Object.create
 GG.optionsController = Ember.Object.create
   projectedDisplay: false
 
+GG.manualEventController = Ember.Object.create
+  password: ""
+  task: null
+  drakeAlleles: ""
+  drakeSexes: [  "Female", "Male" ]
+  drakeSex: null
+  breedsRemaining: 0
+  time: 120
+  reputation: ""
+  cancel: ->
+    GG.statemanager.send 'closeAdminPanel'
+  submit: ->
+    session = GG.logController.get 'session'
+    GG.logController.set 'session', "MANUAL-SUBMISSION"
+
+    task = @get 'task'
+
+    alleles = @get("drakeAlleles") || "MANUAL-SUBMISSION"
+    sex = if @get("drakeSex") is "Female" then 1 else 0
+
+    breedCounter = task.cycles - @get('breedsRemaining')
+    time = 1000 * @get 'time'
+    reputation = @get 'reputation'
+
+    GG.logController.logEvent GG.Events.COMPLETED_TASK,
+      name: task.name
+      breedCounter: breedCounter
+      elapsedTimeMs: time
+      reputationEarned: reputation
+
+    GG.logController.logEvent GG.Events.SUBMITTED_OFFSPRING,
+      alleles: alleles
+      sex: @get "drakeSex"
+      success: true    # must be always true for flash app
+
+    GG.logController.set 'session', session
+    GG.statemanager.send 'closeAdminPanel'
+
