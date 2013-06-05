@@ -1427,7 +1427,7 @@ GG.manualEventController = Ember.Object.create
     alleles = @get("drakeAlleles") || "MANUAL-SUBMISSION"
     sex = if @get("drakeSex") is "Female" then 1 else 0
 
-    breedCounter = task.cycles - @get('breedsRemaining')
+    breedCounter = @get('breedsRemaining')
     time = 1000 * @get 'time'
     reputation = @get 'reputation'
 
