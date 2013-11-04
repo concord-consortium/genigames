@@ -1020,6 +1020,14 @@ GG.tutorialMessageController = Ember.Object.create
     return (townId is 0 and taskId is 4) or (GG.baselineController.get('isBaseline') and townId is 1 and taskId is 0)
   ).property('enabled', 'GG.townsController.currentTown', 'GG.tasksController.currentTask')
 
+  isFirstMeiosisGenderControlTask: (->
+    unless @get('enabled')
+      return false
+    townId = GG.townsController.get("content").indexOf GG.townsController.get "currentTown"
+    taskId = GG.tasksController.get("content").indexOf GG.tasksController.get "currentTask"
+    return (townId is 0 and taskId is 5)
+  ).property('enabled', 'GG.townsController.currentTown', 'GG.tasksController.currentTask')
+
   showTargetTutorial: ->
     if @get 'isFirstTask' then GG.showInfoDialog $('#target-tutorial-target'),
       "These are the traits of the %@1 you need to create. To do that you have
@@ -1125,6 +1133,17 @@ GG.tutorialMessageController = Ember.Object.create
         modal: true
     else
       callback()
+
+  meiosisGenderTutorialShown: false
+  showMeiosisGenderTutorial: ->
+    if @get('isFirstMeiosisGenderControlTask') and !@get('meiosisGenderTutorialShown')
+      @set 'meiosisGenderTutorialShown', true
+      GG.showInfoDialog $("#meiosis-container .meiosis.father"),
+        "When you need to control the sex of the offspring drake, use the father's chromosomes.",
+        target: "leftMiddle"
+        tooltip: "rightMiddle"
+        maxWidth: 280
+        modal: false
 
   meiosisFatherGameteTutorialShown: false
   meiosisMotherGameteTutorialShown: false

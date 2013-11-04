@@ -224,6 +224,7 @@ GG.StateInTask = Ember.State.extend
         @set('selectingChromatidsCallback', context.callback)
         selector = '#' + context.elementId + ' .chromatidSelection'
         $(selector).removeClass('hidden')
+        GG.tutorialMessageController.showMeiosisGenderTutorial()
 
       deselectedChromosome: (manager, chromoView)->
         GG.meiosisController.deselectChromosome(chromoView)
