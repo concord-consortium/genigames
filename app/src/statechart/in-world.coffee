@@ -53,6 +53,8 @@ GG.StateInWorld = Ember.State.extend
     townSelected: (manager, town) ->
       if town.get('enabled')
         manager.send 'navigateToTown', town
+      else
+        manager.send 'openTownPassword', town
 
   movingDirectlyToNextTown: Ember.State.create
     # setup is called after we have fully entered the state, so we can call actions

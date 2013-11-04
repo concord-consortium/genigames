@@ -248,10 +248,8 @@ GG.statemanager = Ember.StateManager.create
       $("#connection-regained").fadeOut()
     , 2000
 
-  openAdminPassword: ->
-    # ignore if we are not in a tournament
-    return unless GG.worldName is "tournament"
-
+  openTownPassword: (manager, town) ->
+    GG.townsController.set 'townToBeUnlocked', town
     $('#admin-password').fadeIn()
 
   closeAdminPanel: ->

@@ -7,6 +7,7 @@ GG.BREED_CONTROLLED = "controlled"
 GG.townsController = Ember.ArrayController.create
   content    : []
   currentTown: null
+  townToBeUnlocked: null
 
   addTown: (town) ->
     @pushObject town
