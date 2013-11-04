@@ -49,6 +49,18 @@ GG.StateInWorld = Ember.State.extend
       else
         manager.send 'openTownPassword', town
 
+    unlockTown: (manager) ->
+      pass = GG.manualEventController.get 'password'
+      GG.manualEventController.set 'password', ""
+
+      return unless pass
+
+      pass13 = pass.replace /[a-zA-Z]/g, (c) ->
+        String.fromCharCode if ((if c <= "Z" then 90 else 122)) >= (c = c.charCodeAt(0) + 13) then c else c - 26
+      if pass13 is "tra1tnzrf"  # top s33cret.....
+        GG.townsController.unlockTown()
+        manager.send 'closeAdminPanel'
+
   movingDirectlyToNextTown: Ember.State.create
     # setup is called after we have fully entered the state, so we can call actions
     # fixme: the animation sitll won't work without the timeout below

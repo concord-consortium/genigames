@@ -46,6 +46,12 @@ GG.townsController = Ember.ArrayController.create
 
     @setCurrentTown(town, true) if town?
 
+  unlockTown: ->
+    town = @get 'townToBeUnlocked'
+    if not town then return
+
+    town.set 'enabled', true
+
   completeCurrentTown: ->
     town = @get('currentTown')
     town.set('completed', true)
@@ -528,7 +534,7 @@ GG.sessionController = Ember.Object.create
   error: false
   loggingIn: false
   firstTime: true
-  preloadingComplete: false
+  preloadingComplete: true
   waitingForPreload: false
   loggedIn: (->
     @get('user') != null
