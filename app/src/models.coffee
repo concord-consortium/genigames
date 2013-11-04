@@ -65,11 +65,11 @@ GG.Town = Ember.Object.extend
     @set 'skipSave', false
 
   serialize: ->
-    {completed: @get('completed')}
+    {completed: @get('completed'), enabled: @get('enabled')}
 
   triggerSave: (->
     GG.userController.saveState('town', this) unless @get 'skipSave'
-  ).observes('completed')
+  ).observes('completed', 'enabled')
 
 GG.Task = Ember.Object.extend
   _id: null
