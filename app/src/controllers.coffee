@@ -51,6 +51,7 @@ GG.townsController = Ember.ArrayController.create
     if not town then return
 
     town.set 'enabled', true
+    GG.logController.logEvent GG.Events.ENABLED_TOWN, name: town.get('name')
 
   completeCurrentTown: ->
     town = @get('currentTown')

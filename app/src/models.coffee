@@ -249,6 +249,7 @@ GG.Events =
   # Town events
   ENTERED_TOWN    : "Entered town"
   COMPLETED_TOWN  : "Completed town"
+  ENABLED_TOWN    : "Enabled town"
 
   # Task events
   STARTED_TASK    : "Started task"
