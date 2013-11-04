@@ -5,11 +5,6 @@ GG.StateInWorld = Ember.State.extend
   enter: ->
     GG.universeView.setCurrentView 'world'
 
-    # first enable towns based on user data
-    # then, if no towns enabled
-
-    GG.townsController.get("firstObject").set "enabled", true
-
   spriteAnimation: null
 
   navigateToTown: (manager, town) ->

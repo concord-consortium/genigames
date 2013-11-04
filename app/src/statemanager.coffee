@@ -195,6 +195,10 @@ GG.statemanager = Ember.StateManager.create
           town = GG.Town.create to
           GG.townsController.addTown town
 
+        # first enable towns based on user data
+        # then, if no towns enabled...
+        GG.townsController.get("firstObject").set "enabled", true
+
         # fixme: this should be eventually handled by a router
         if (taskPath = GG.statemanager.get('params.task'))
           taskPath = taskPath.split "/"
