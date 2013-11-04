@@ -4,18 +4,11 @@ GG.StateInWorld = Ember.State.extend
 
   enter: ->
     GG.universeView.setCurrentView 'world'
-    currentTown = GG.townsController.get('currentTown')
-    if currentTown?
-    #  setTimeout ->
-    #    $('#world').rotate(currentTown.get('position') + "deg")
-    #  , 10
-    else
-      firstTown = GG.townsController.get('firstIncompleteTown')
-    #  if firstTown?
-    #    setTimeout ->
-    #      $('#world').rotate(firstTown.get('position') + "deg")
-    #    , 10
-      #GG.townsController.set 'currentTown', GG.townsController.get('firstObject')
+
+    # first enable towns based on user data
+    # then, if no towns enabled
+
+    GG.townsController.get("firstObject").set "enabled", true
 
   spriteAnimation: null
 

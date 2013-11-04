@@ -42,15 +42,7 @@ GG.Town = Ember.Object.extend
   position: 0
   finalMessage: "Nice work, you've completed all the tasks in this town!"
   otherTownsBinding: Ember.Binding.oneWay('GG.townsController.content')
-  enabled: (->
-    towns = @get('otherTowns')
-    idx = towns.indexOf(this)
-    if idx is 0
-      return true
-    for i in [0...idx]
-      return false unless towns[i].get('completed')
-    return true
-  ).property().volatile()
+  enabled: false
 
   tasks: []
   realTasks: []
