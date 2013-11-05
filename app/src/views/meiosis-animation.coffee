@@ -71,7 +71,7 @@ GG.MeiosisAnimation = Ember.Object.create
         args.parentView.crossOver()
 
         # divide cell first time (Anaphase I + Telophase I)
-        @registerTimeout 2000, =>
+        @registerTimeout @scale(2000), =>
           GG.tutorialMessageController.showMeiosisDivisionTutorial =>
             if GG.breedingController.get('breedType') == GG.BREED_CONTROLLED and
                 (meiosisControl is "selection")
@@ -81,7 +81,7 @@ GG.MeiosisAnimation = Ember.Object.create
               @divide(args)
 
   separateChromatids: (args)->
-    t = @scale(400)
+    t = @scale(600)
     # separate chromatids
     i = -1
     offset = 16

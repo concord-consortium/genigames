@@ -155,19 +155,21 @@ GG.StateInTask = Ember.State.extend
         # hide the offspring pool
         $("#offspring-panel").animate({left: 400},500,"easeOutCubic")
         $("#offspring-pool .chromosome-panel").hide()
+        scale = GG.MeiosisAnimation.get 'timeScale'
         setTimeout ->
           $('#chromosome-labels').hide()
           GG.motherPoolController.set('hidden', true)
           GG.fatherPoolController.set('hidden', true)
-        , 600
+        , GG.MeiosisAnimation.scale(600)
         setTimeout ->
           manager.send 'animate'
-        , 800
+        , GG.MeiosisAnimation.scale(800)
 
       animate: (manager)->
+        scale = GG.MeiosisAnimation.get 'timeScale'
         firstTime = @get 'firstTime'
         @set('firstTime', false)
-        delay = if firstTime then 2000 else 1
+        delay = if firstTime then GG.MeiosisAnimation.scale(2000) else 1
 
         if GG.cyclesController.get('cycles') <= 0
           GG.reputationController.subtractReputation(GG.actionCostsController.getCost('extraBreedCycle'), GG.Events.BRED_WITH_EXTRA_CYCLE)

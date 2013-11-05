@@ -710,6 +710,7 @@ GG.MeiosisView = Ember.View.extend
   animateMoves: (moves, callback)->
     animationQueue = []
     selectorBase = "#" + @get('elementId')
+    scale = GG.MeiosisAnimation.get 'timeScale'
     for own gene,swaps of moves
       for own dest,source of swaps
         sourceSelector = selectorBase + " .cell" + source + " .allele." + gene
@@ -732,7 +733,7 @@ GG.MeiosisView = Ember.View.extend
     $(selectorBase + " .allele").css({"z-index": 10})
     for i in [0...animationQueue.length]
       anim = animationQueue[i]
-      $(anim.source).animate(anim.anim, 1500, 'easeInOutQuad')
+      $(anim.source).animate(anim.anim, GG.MeiosisAnimation.scale(1500), 'easeInOutQuad')
 
     setTimeout =>
       callback()
@@ -742,7 +743,7 @@ GG.MeiosisView = Ember.View.extend
           $(anim.source).css({left: '', top: ''})
       # put the alleles back at their default level, so they slide under/over
       $("#" + @get('elementId') + " .allele").css({"z-index": ''})
-    , 1550
+    , GG.MeiosisAnimation.scale(1550)
   chromosomeSelectedBinding: 'GG.meiosisController.chromosomeSelected'
   crossoverSelectedBinding: 'GG.meiosisController.crossoverSelected'
   doneSelectingCrossoverButtonText: (->
