@@ -1034,6 +1034,14 @@ GG.tutorialMessageController = Ember.Object.create
     return (townId is 0 and taskId is 5)
   ).property('enabled', 'GG.townsController.currentTown', 'GG.tasksController.currentTask')
 
+  isFirstMeiosisSpeedControlTask: (->
+    unless @get('enabled')
+      return false
+    townId = GG.townsController.get("content").indexOf GG.townsController.get "currentTown"
+    taskId = GG.tasksController.get("content").indexOf GG.tasksController.get "currentTask"
+    return (townId is 0 and taskId is 6)
+  ).property('enabled', 'GG.townsController.currentTown', 'GG.tasksController.currentTask')
+
   showTargetTutorial: ->
     if @get 'isFirstTask' then GG.showInfoDialog $('#target-tutorial-target'),
       "These are the traits of the %@1 you need to create. To do that you have
@@ -1081,6 +1089,7 @@ GG.tutorialMessageController = Ember.Object.create
         tooltip: "leftMiddle"
 
   breedButtonTutorialShown: false
+  speedTutorialShown: false
   motherBinding: 'GG.parentController.selectedMother'
   fatherBinding: 'GG.parentController.selectedFather'
   bothParentsSelected: (->
@@ -1091,6 +1100,13 @@ GG.tutorialMessageController = Ember.Object.create
       @set 'breedButtonTutorialShown', true
       GG.showInfoDialog $("#breed-button"),
         "Now that you’ve picked parents, hit the Breed button to create the child.",
+        target: "leftMiddle"
+        tooltip: "rightMiddle"
+    else if @get('isFirstMeiosisSpeedControlTask') and !@get('speedTutorialShown') and @get 'bothParentsSelected'
+      @set 'speedTutorialShown', true
+      GG.showInfoDialog $('#meiosis-speed-slider'),
+        "Use this to control the speed of meiosis. When it's down low,
+        it goes slow. At the top, it goes fast.",
         target: "leftMiddle"
         tooltip: "rightMiddle"
 
