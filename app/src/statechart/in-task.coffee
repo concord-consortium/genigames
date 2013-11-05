@@ -67,7 +67,8 @@ GG.StateInTask = Ember.State.extend
       $('#task-reputation-best').hide()
       GG.tasksController.completeCurrentTask()
       if GG.obstacleCourseController.get('hasObstacleCourse')
-        manager.transitionTo 'obstacleCourse'
+        # manager.transitionTo 'obstacleCourse'
+        GG.tasksController.showTaskCompletion()
       else
         GG.tasksController.showTaskCompletion()
 
