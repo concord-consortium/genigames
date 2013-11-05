@@ -805,9 +805,9 @@ GG.MeiosisSpeedSliderView = Ember.View.extend
     $('#meiosis-speed-slider').slider
       orientation: 'vertical'
       value: (2 - GG.MeiosisAnimation.get('timeScale'))
-      min: -1
-      max: 1
-      step: 2
+      min: 0.5
+      max: 1.7
+      step: 0.01
       change: (event,ui)->
         GG.MeiosisAnimation.set('timeScale', (2 - ui.value))
 
