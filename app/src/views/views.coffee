@@ -799,6 +799,11 @@ GG.MeiosisView = Ember.View.extend
 GG.MeiosisSpeedSliderView = Ember.View.extend
   tagName: 'div'
   elementId: 'meiosis-speed-slider-parent'
+  updateEnabled: (->
+    disabled = !GG.meiosisController.get('speedControlEnabled')
+    console.log("weeee! "+disabled)
+    $('#meiosis-speed-slider').slider("option", "disabled", disabled);
+  ).observes('GG.meiosisController.speedControlEnabled')
   didInsertElement: ->
     # slider can go from -Infinity to 1.9999.
     # For now, we'll just have 2 values: 0 and 1.

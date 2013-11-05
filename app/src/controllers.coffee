@@ -593,6 +593,12 @@ GG.actionCostsController = Ember.Object.create
 
 GG.meiosisController = Ember.Object.create
   canBreedDuringAnimation: true
+  speedControlEnabled: (->
+    # enable on town 1 task 7
+    townId = 1 + GG.townsController.get("content").indexOf GG.townsController.get "currentTown"
+    taskId = 1 + GG.tasksController.get("content").indexOf GG.tasksController.get "currentTask"
+    return townId*10 + taskId >= 17
+  ).property('GG.townsController.currentTown', 'GG.tasksController.currentTask')
   inAnimation: false
   motherView: null
   fatherView: null
