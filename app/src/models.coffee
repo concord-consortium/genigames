@@ -42,12 +42,21 @@ GG.Town = Ember.Object.extend
   position: 0
   finalMessage: "Nice work, you've completed all the tasks in this town!"
   otherTownsBinding: Ember.Binding.oneWay('GG.townsController.content')
-  enabled: false
+  enabled: (->
+    towns = @get('otherTowns')
+    idx = towns.indexOf(this)
+    if idx is 0
+      return true
+    for i in [0...idx]
+      return false unless towns[i].get('completed')
+    return true
+  ).property().volatile()
 
   tasks: []
   realTasks: []
   completed: false
   skipSave: false
+  locked: true
 
   init: ->
     @_super()
@@ -65,7 +74,7 @@ GG.Town = Ember.Object.extend
     @set 'skipSave', false
 
   serialize: ->
-    {completed: @get('completed'), enabled: @get('enabled')}
+    {completed: @get('completed'), locked: @get('locked')}
 
   triggerSave: (->
     GG.userController.saveState('town', this) unless @get 'skipSave'
@@ -249,7 +258,7 @@ GG.Events =
   # Town events
   ENTERED_TOWN    : "Entered town"
   COMPLETED_TOWN  : "Completed town"
-  ENABLED_TOWN    : "Enabled town"
+  UNLOCKED_TOWN   : "Unlocked town"
 
   # Task events
   STARTED_TASK    : "Started task"

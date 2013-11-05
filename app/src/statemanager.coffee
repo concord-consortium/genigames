@@ -197,7 +197,7 @@ GG.statemanager = Ember.StateManager.create
 
         # first enable towns based on user data
         # then, if no towns enabled...
-        GG.townsController.get("firstObject").set "enabled", true
+        GG.townsController.get("firstObject").set "locked", false
 
         # fixme: this should be eventually handled by a router
         if (taskPath = GG.statemanager.get('params.task'))

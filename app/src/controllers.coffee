@@ -25,7 +25,7 @@ GG.townsController = Ember.ArrayController.create
 
   setCurrentTown: (town, force=false) ->
     @completeTownsThrough @indexOf(town) - 1 if force
-    return false if town is @currentTown or not town.get('enabled')
+    return false if town is @currentTown
 
     if @indexOf(town) >= 0
       @set 'currentTown', town
@@ -50,8 +50,8 @@ GG.townsController = Ember.ArrayController.create
     town = @get 'townToBeUnlocked'
     if not town then return
 
-    town.set 'enabled', true
-    GG.logController.logEvent GG.Events.ENABLED_TOWN, name: town.get('name')
+    town.set 'locked', false
+    GG.logController.logEvent GG.Events.UNLOCKED_TOWN, name: town.get('name')
 
   completeCurrentTown: ->
     town = @get('currentTown')

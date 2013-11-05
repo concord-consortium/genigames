@@ -39,7 +39,7 @@ GG.StateInWorld = Ember.State.extend
 
   townsWaiting: Ember.State.create
     townSelected: (manager, town) ->
-      if town.get('enabled')
+      if not town.get('locked')
         manager.send 'navigateToTown', town
       else
         manager.send 'openTownPassword', town
