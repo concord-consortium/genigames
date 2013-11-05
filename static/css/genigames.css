@@ -272,6 +272,9 @@ html body div {
   background-color: #3b84a2;
   background-image: none;
 }
+#meiosis-speed-slider.ui-state-disabled {
+  background-color: #2a393f;
+}
 #meiosis-speed-slider .ui-slider-handle {
   position: absolute;
   width: 10px;
@@ -3010,7 +3013,7 @@ a:hover {
 .townIcon1.enabled {
   background: no-repeat center url("../images/townIcon1.png");
 }
-.townIcon1.enabled.completed {
+.townIcon1.completed {
   background: no-repeat center url("../images/townIcon1-complete.png");
 }
 .townIcon2 {
@@ -3021,7 +3024,7 @@ a:hover {
 .townIcon2.enabled {
   background: no-repeat center url("../images/townIcon2.png");
 }
-.townIcon2.enabled.completed {
+.townIcon2.completed {
   background: no-repeat center url("../images/townIcon2-complete.png");
 }
 .townIcon3 {
@@ -3032,7 +3035,7 @@ a:hover {
 .townIcon3.enabled {
   background: no-repeat center url("../images/townIcon3.png");
 }
-.townIcon3.enabled.completed {
+.townIcon3.completed {
   background: no-repeat center url("../images/townIcon3-complete.png");
 }
 .townIcon4 {
@@ -3043,7 +3046,7 @@ a:hover {
 .townIcon4.enabled {
   background: no-repeat center url("../images/townIcon4.png");
 }
-.townIcon4.enabled.completed {
+.townIcon4.completed {
   background: no-repeat center url("../images/townIcon4-complete.png");
 }
 .townIcon5 {
@@ -3054,12 +3057,15 @@ a:hover {
 .townIcon5.enabled {
   background: no-repeat center url("../images/townIcon5.png");
 }
-.townIcon5.enabled.completed {
+.townIcon5.completed {
   background: no-repeat center url("../images/townIcon5-complete.png");
 }
 .world-town {
   height: 110px;
   width: 170px;
+}
+.locked {
+  content: url("../images/lock.png");
 }
 #dragon-right {
   background: url("../images/drakesprite-small.png");
