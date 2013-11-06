@@ -1031,7 +1031,7 @@ GG.tutorialMessageController = Ember.Object.create
       return false
     townId = GG.townsController.get("content").indexOf GG.townsController.get "currentTown"
     taskId = GG.tasksController.get("content").indexOf GG.tasksController.get "currentTask"
-    return (townId is 0 and taskId is 5)
+    return (townId is 0 and taskId is 6)
   ).property('enabled', 'GG.townsController.currentTown', 'GG.tasksController.currentTask')
 
   isFirstMeiosisSpeedControlTask: (->
