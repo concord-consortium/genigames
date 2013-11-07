@@ -50,9 +50,7 @@ GG.StateInWorld = Ember.State.extend
 
       return unless pass
 
-      pass13 = pass.replace /[a-zA-Z]/g, (c) ->
-        String.fromCharCode if ((if c <= "Z" then 90 else 122)) >= (c = c.charCodeAt(0) + 13) then c else c - 26
-      if pass13 is "tra1tnzrf"  # top s33cret.....
+      if pass is GG.townsController.get('townToBeUnlocked.password')
         GG.townsController.unlockTown()
         manager.send 'closeAdminPanel'
 

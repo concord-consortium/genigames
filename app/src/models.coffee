@@ -41,6 +41,7 @@ GG.Town = Ember.Object.extend
   background: "castle"
   position: 0
   finalMessage: "Nice work, you've completed all the tasks in this town!"
+  password: "gen1games"       # to be replaced by author
   otherTownsBinding: Ember.Binding.oneWay('GG.townsController.content')
   enabled: (->
     if (arguments.length > 1) then return   # setter
