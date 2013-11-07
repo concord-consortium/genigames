@@ -43,6 +43,8 @@ GG.Town = Ember.Object.extend
   finalMessage: "Nice work, you've completed all the tasks in this town!"
   otherTownsBinding: Ember.Binding.oneWay('GG.townsController.content')
   enabled: (->
+    if (arguments.length > 1) then return   # setter
+
     towns = @get('otherTowns')
     idx = towns.indexOf(this)
     if idx is 0
@@ -78,7 +80,7 @@ GG.Town = Ember.Object.extend
 
   triggerSave: (->
     GG.userController.saveState('town', this) unless @get 'skipSave'
-  ).observes('completed', 'enabled')
+  ).observes('completed', 'enabled', 'locked')
 
 GG.Task = Ember.Object.extend
   _id: null
