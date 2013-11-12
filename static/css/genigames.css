@@ -133,6 +133,12 @@ html body div {
   width: 120px;
   text-align: center;
 }
+#task-reputation-available.drop {
+  text-shadow: 0 0 8px #f00;
+}
+#task-reputation-available.gain {
+  text-shadow: 0 0 8px #008000;
+}
 #task-reputation-best {
   position: absolute;
   top: 33px;
