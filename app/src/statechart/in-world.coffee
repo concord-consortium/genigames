@@ -53,6 +53,9 @@ GG.StateInWorld = Ember.State.extend
       if pass is GG.townsController.get('townToBeUnlocked.password')
         GG.townsController.unlockTown()
         manager.send 'closeAdminPanel'
+        setTimeout =>
+          manager.send 'navigateToTown', GG.townsController.get('townToBeUnlocked')
+        , 700
 
   movingDirectlyToNextTown: Ember.State.create
     # setup is called after we have fully entered the state, so we can call actions
