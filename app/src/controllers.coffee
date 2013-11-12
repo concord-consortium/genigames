@@ -1402,6 +1402,7 @@ GG.reputationController = Ember.Object.create
 
   breedsLeftBinding: 'GG.cyclesController.cycles'
   hasObstacleCourseBinding: 'GG.obstacleCourseController.hasObstacleCourse'
+  animatedReputation: 0
   currentTaskReputationAssumingCompletion: (->
     current = @get('currentTaskReputation')
     current += @get('reputationForTask')
@@ -1412,6 +1413,23 @@ GG.reputationController = Ember.Object.create
     if current < 0 then 0 else current
   ).property('currentTaskReputation','reputationForTask','breedsLeft','hasObstacleCourse')
 
+  animateOnReputationChange: (->
+    changeAnimatedReputation = =>
+      animated = @get('animatedReputation')
+      current = @get('currentTaskReputationAssumingCompletion')
+      if animated < current
+        @set('animatedReputation', animated+1)
+        $("#task-reputation-available").addClass("gain")
+      else if animated > current
+        @set('animatedReputation', animated-1)
+        $("#task-reputation-available").addClass("drop")
+      if @get('animatedReputation') != @get('currentTaskReputationAssumingCompletion')
+        setTimeout(changeAnimatedReputation, 90)
+      else
+        $("#task-reputation-available").removeClass("drop").removeClass("gain")
+
+    changeAnimatedReputation()
+  ).observes('currentTaskReputationAssumingCompletion')
   extraBreedsRep: (->
     @_repFor GG.Events.BRED_WITH_EXTRA_CYCLE
   ).property('currentTaskReputation')
