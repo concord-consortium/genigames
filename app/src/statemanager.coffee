@@ -79,6 +79,7 @@ GG.statemanager = Ember.StateManager.create
           return
         else if found.length == 1
           # if one, use that learner
+          GG.userController.set('classWord', found[0].word)
           GG.userController.set('learnerId', found[0].learner)
         else
           # if none, set GG.userController.loaded = true
@@ -86,8 +87,9 @@ GG.statemanager = Ember.StateManager.create
 
       GG.statemanager.send 'nextStep'
 
-    chooseLearner: (state, learner)->
-      GG.userController.set('learnerId', learner)
+    chooseLearner: (state, clazz)->
+      GG.userController.set('classWord', clazz.word)
+      GG.userController.set('learnerId', clazz.learner)
       GG.statemanager.send 'nextStep'
 
     definedGroups: (state, data)->

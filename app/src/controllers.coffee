@@ -389,6 +389,7 @@ GG.userController = Ember.Object.create
   user: null
   state: null
   learnerId: null
+  classWord: null
   loaded: false
   groupInfoSaved: false
   learnerChanged: (->

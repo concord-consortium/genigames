@@ -33,9 +33,9 @@ GG.BackToTaskListButton = Ember.View.extend
 GG.ChooseClassView = Ember.View.extend
   templateName: 'choose-class'
   optionsBinding: 'GG.sessionController.classesWithLearners'
-  learner: null
+  clazz: null
   choose: ->
-    GG.statemanager.send 'chooseLearner', @get('learner')
+    GG.statemanager.send 'chooseLearner', @get('clazz')
 
 GG.DefineGroupsView = Ember.View.extend
   tagName: 'div'
