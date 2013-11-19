@@ -1421,14 +1421,16 @@ GG.reputationController = Ember.Object.create
     changeAnimatedReputation = =>
       animated = @get('animatedReputation')
       current = @get('currentTaskReputationAssumingCompletion')
-      if animated < current
+      if (animated + 15) < current
+        @set('animatedReputation', current)    # jump ahead
+      else if animated < current
         @set('animatedReputation', animated+1)
         $("#task-reputation-available").addClass("gain")
       else if animated > current
         @set('animatedReputation', animated-1)
         $("#task-reputation-available").addClass("drop")
       if @get('animatedReputation') != @get('currentTaskReputationAssumingCompletion')
-        setTimeout(changeAnimatedReputation, 90)
+        setTimeout(changeAnimatedReputation, 150)
       else
         $("#task-reputation-available").removeClass("drop").removeClass("gain")
 
