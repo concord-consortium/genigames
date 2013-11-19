@@ -583,6 +583,7 @@ GG.sessionController = Ember.Object.create
     GG.userController.set('learnerId', null)
     GG.tasksController.set('content',[])
     GG.townsController.set('content',[])
+    GG.leaderboardController.set('content',[])
     $.post @logoutUrl, {}, (data) ->
       GG.statemanager.transitionTo 'loggingIn'
 
