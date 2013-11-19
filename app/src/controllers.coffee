@@ -1521,7 +1521,7 @@ GG.leaderboardController = Ember.ArrayController.create
     classWord  = GG.userController.get 'classWord'
     learnerId  = GG.userController.get 'learnerId'
 
-    return unless (classword? and learnerId?)
+    return unless (classWord? and learnerId?)
 
     userName   = GG.userController.get 'user.nameWithLearnerId'
     reputation = GG.userController.get 'user.reputation'
