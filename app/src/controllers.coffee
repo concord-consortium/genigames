@@ -1527,13 +1527,14 @@ GG.leaderboardController = Ember.ArrayController.create
       @set 'fbClassRef', null
       return
 
-    userName   = GG.userController.get 'user.nameWithLearnerId'
-    reputation = GG.userController.get 'user.reputation'
-
     fbRef = new Firebase 'https://genigames-leaderboard.firebaseio.com/'
 
     # find existing class ref, or create one with some initial data
     fbRef.child(classWord).once 'value', (snapshot) =>
+
+      userName   = GG.userController.get 'user.nameWithLearnerId'
+      reputation = GG.userController.get 'user.reputation'
+
       if (snapshot.val() == null)
         # create class ref, add add self and score (FB needs some non-null data)
         userCreationObj = {}
