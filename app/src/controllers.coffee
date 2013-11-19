@@ -579,6 +579,8 @@ GG.sessionController = Ember.Object.create
     @set('user', null)
     @set('loaded', false)
     @set('loggingIn', false)
+    GG.userController.set('classWord', null)
+    GG.userController.set('learnerId', null)
     GG.tasksController.set('content',[])
     GG.townsController.set('content',[])
     $.post @logoutUrl, {}, (data) ->
