@@ -1521,7 +1521,9 @@ GG.leaderboardController = Ember.ArrayController.create
     classWord  = GG.userController.get 'classWord'
     learnerId  = GG.userController.get 'learnerId'
 
-    return unless (classWord? and learnerId?)
+    if not (classWord? and learnerId?)
+      @set 'fbClassRef', null
+      return
 
     userName   = GG.userController.get 'user.nameWithLearnerId'
     reputation = GG.userController.get 'user.reputation'
