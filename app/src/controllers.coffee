@@ -1522,8 +1522,9 @@ GG.leaderboardController = Ember.ArrayController.create
   fbClassCreator: (->
     classWord  = GG.userController.get 'classWord'
     learnerId  = GG.userController.get 'learnerId'
+    userName   = GG.userController.get 'user.nameWithLearnerId'
 
-    if not (classWord? and learnerId?)
+    if not (classWord? and learnerId? and userName?)
       @set 'fbClassRef', null
       return
 
@@ -1532,7 +1533,6 @@ GG.leaderboardController = Ember.ArrayController.create
     # find existing class ref, or create one with some initial data
     fbRef.child(classWord).once 'value', (snapshot) =>
 
-      userName   = GG.userController.get 'user.nameWithLearnerId'
       reputation = GG.userController.get 'user.reputation'
 
       if (snapshot.val() == null)
@@ -1548,7 +1548,7 @@ GG.leaderboardController = Ember.ArrayController.create
       else
         fbRef.child(classWord).child(userName).setWithPriority(reputation, -reputation)
         @set 'fbClassRef', fbRef.child(classWord)
-  ).observes('GG.userController.classWord', 'GG.userController.learnerId')
+  ).observes('GG.userController.classWord', 'GG.userController.learnerId', 'GG.userController.user.nameWithLearnerId')
 
   fbClassObserver: (->
     changedCallback = (scoreSnapshot, prevScoreName) =>
