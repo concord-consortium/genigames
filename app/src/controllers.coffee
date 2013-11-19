@@ -1513,3 +1513,73 @@ GG.manualEventController = Ember.Object.create
     GG.logController.set 'session', session
     GG.statemanager.send 'closeAdminPanel'
 
+
+GG.leaderboardController = Ember.ArrayController.create
+  content    : []
+  fbClassRef: null
+  fbClassCreator: (->
+    classWord  = GG.userController.get 'classWord'
+    userName   = GG.userController.get 'user.nameWithLearnerId'
+    reputation = GG.userController.get 'user.reputation'
+
+    fbRef = new Firebase 'https://genigames-leaderboard.firebaseio.com/'
+
+    # find existing class ref, or create one with some initial data
+    fbRef.child(classWord).once 'value', (snapshot) =>
+      if (snapshot.val() == null)
+        # create class ref, add add self and score (FB needs some non-null data)
+        userCreationObj = {}
+        userCreationObj[userName] = reputation
+
+        fbRef.child(classWord).set userCreationObj, (error) =>
+          if error
+            console.log "Error creating FB child node #{classWord}"
+          else
+            @set 'fbClassRef', fbRef.child(classWord)
+      else
+        fbRef.child(classWord).child(userName).setWithPriority(reputation, -reputation)
+        @set 'fbClassRef', fbRef.child(classWord)
+  ).observes('GG.userController.classWord')
+
+  fbClassObserver: (->
+    changedCallback = (scoreSnapshot, prevScoreName) =>
+      name = scoreSnapshot.name()
+      score = scoreSnapshot.val()
+
+      entry = @find (e) -> e.get("name") is name
+
+      if entry?
+        entry.set 'score', score
+        @removeObject entry
+      else
+        entry = GG.LeaderboardEntry.create
+          name: name
+          score: score
+
+      if not prevScoreName?
+        @insertAt 0, entry
+      else
+        entries = @get 'content'
+        for e, i in entries
+          if e.get('name') is prevScoreName
+            @insertAt i+1, entry
+
+    fbClassRef = @get 'fbClassRef'
+    fbClassRef.on 'child_added', changedCallback
+    fbClassRef.on 'child_changed', changedCallback
+  ).observes('fbClassRef')
+
+  updateReputation: (->
+    classRef = @get('fbClassRef')
+    return unless classRef?
+
+    userName   = GG.userController.get 'user.nameWithLearnerId'
+    return unless userName?
+    reputation = GG.userController.get 'user.reputation'
+    # set with priority: -rep to order with highest scores at top
+    classRef.child(userName).setWithPriority(reputation, -reputation)
+  ).observes('GG.userController.user.reputation')
+
+
+
+
