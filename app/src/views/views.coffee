@@ -626,6 +626,14 @@ GG.MeiosisView = Ember.View.extend
   gametes: null
   useGametes: false
   currentTownBinding: 'GG.townsController.currentTown'
+  movesRemaining: (->
+    Math.max GG.freeMovesController.get('movesRemaining'), 0
+  ).property('GG.freeMovesController.movesRemaining')
+  movesRemainingString: (->
+    moves = @get 'movesRemaining'
+    "#{moves} move#{if moves isnt 1 then 's' else ''} remaining."
+  ).property('movesRemaining')
+  hasFreeMovesRemainingBinding: 'GG.freeMovesController.hasFreeMoveRemaining'
   crossoverCost: (->
     GG.actionCostsController.getCost('crossoverMade')
   ).property('currentTown')
