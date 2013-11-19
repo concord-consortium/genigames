@@ -132,12 +132,17 @@ html body div {
   left: 666px;
   width: 120px;
   text-align: center;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
 }
 #task-reputation-available.drop {
-  text-shadow: 0 0 8px #f00;
+  box-shadow: 0 0 15px #fc0;
+  background: #fc0;
 }
 #task-reputation-available.gain {
-  text-shadow: 0 0 8px #008000;
+  box-shadow: 0 0 15px #3f0;
+  background: rgba(51,255,0,0.45);
 }
 #task-reputation-best {
   position: absolute;
