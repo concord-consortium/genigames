@@ -201,6 +201,9 @@ GG.statemanager = Ember.StateManager.create
         # then, if no towns enabled...
         GG.townsController.get("firstObject").set "locked", false
 
+        # force leaderboard to update
+        GG.leaderboardController.updateReputation()
+
         # fixme: this should be eventually handled by a router
         if (taskPath = GG.statemanager.get('params.task'))
           taskPath = taskPath.split "/"
