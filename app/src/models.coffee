@@ -356,5 +356,5 @@ GG.LeaderboardEntry = Ember.Object.extend
     /\((.*)\)/.exec(@get('name'))?[1] is ""+learnerId
   ).property('name')
   show: (->
-    @get('rank') < 4 or @get('isUser')
+    @get('rank') < 11 or @get('isUser')
   ).property('rank', 'isUser')
