@@ -30,6 +30,7 @@ GG.User = Ember.Object.extend
     for k in Object.keys(prevState)
       @set(k, prevState[k])
     @set 'skipSave', false
+    @propertyDidChange 'reputation'   # force leaderboard to update
 
   serialize: ->
     {reputation: @get('reputation')}

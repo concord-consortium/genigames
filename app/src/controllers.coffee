@@ -561,7 +561,6 @@ GG.sessionController = Ember.Object.create
       else
         user = GG.User.create data
         @set('user', user)
-        @get('user').propertyDidChange('reputation')    # force leaderboard to update
         GG.statemanager.send 'successfulLogin'
     , "json").error =>
       @set('loggingIn', false)
