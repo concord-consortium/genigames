@@ -1573,6 +1573,7 @@ GG.leaderboardController = Ember.ArrayController.create
             @insertAt i+1, entry
 
     fbClassRef = @get 'fbClassRef'
+    if not fbClassRef? then return
     fbClassRef.on 'child_added', changedCallback
     fbClassRef.on 'child_changed', changedCallback
   ).observes('fbClassRef')
