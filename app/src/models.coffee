@@ -101,6 +101,7 @@ GG.Task = Ember.Object.extend
   reputation: 1
   cycles: 10
   cyclesRemaining: 0
+  freeMoves: 0
   obstacleCourse: null
   meiosisControl: "all"
   # viewmodel properties
