@@ -19,7 +19,8 @@ GG.StateInTask = Ember.State.extend
       GG.reputationController.reset()
       GG.breedingController.set 'breedType', GG.BREED_AUTOMATED
 
-    exit: ->
+    exit: (manager) ->
+      manager.send 'hideLeaderboard'
       # clear offspring
       GG.breedingController.set 'child', null
       GG.offspringController.set 'content', null

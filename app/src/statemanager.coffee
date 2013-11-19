@@ -261,4 +261,10 @@ GG.statemanager = Ember.StateManager.create
   closeAdminPanel: ->
     $('.admin').fadeOut()
 
+  showLeaderboard: ->
+    $('.leader-board').fadeToggle()
+
+  hideLeaderboard: ->
+    $('.leader-board').fadeOut()
+
 
