@@ -2920,6 +2920,7 @@ a:hover {
   color: #a1a790;
   font-size: 14pt;
   font-weight: normal;
+  z-index: 2;
 }
 #topBar .logout {
   position: absolute;
@@ -2955,6 +2956,7 @@ a:hover {
   position: absolute;
   left: 30px;
   top: 75px;
+  cursor: pointer;
 }
 #level {
   position: absolute;
@@ -3142,4 +3144,42 @@ a:hover {
 .admin .drake-submission {
   border: 1px solid #000;
   margin: 6px;
+}
+.leader-board {
+  display: none;
+  position: relative;
+  top: 30px;
+  width: 270px;
+  padding: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  z-index: 1000;
+  background-color: #fff;
+  border: 4px solid #000;
+  box-shadow: 0 0 50px #fff;
+}
+.leader-board h1 {
+  text-align: center;
+  font-size: 1.5em;
+  padding: 9px;
+}
+.leader-board .close {
+  position: absolute;
+  top: 5px;
+  left: 244px;
+  color: #888;
+  cursor: pointer;
+}
+.leader-board div {
+  padding: 5px;
+}
+.leader-board div.is-user {
+  background-color: #b4b4fc;
+  font-weight: bold;
+}
+.leader-board div .rank {
+  font-weight: bold;
+}
+.leader-board div .score {
+  float: right;
 }
