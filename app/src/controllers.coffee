@@ -1519,6 +1519,10 @@ GG.leaderboardController = Ember.ArrayController.create
   fbClassRef: null
   fbClassCreator: (->
     classWord  = GG.userController.get 'classWord'
+    learnerId  = GG.userController.get 'learnerId'
+
+    return unless (classword? and learnerId?)
+
     userName   = GG.userController.get 'user.nameWithLearnerId'
     reputation = GG.userController.get 'user.reputation'
 
@@ -1539,7 +1543,7 @@ GG.leaderboardController = Ember.ArrayController.create
       else
         fbRef.child(classWord).child(userName).setWithPriority(reputation, -reputation)
         @set 'fbClassRef', fbRef.child(classWord)
-  ).observes('GG.userController.classWord')
+  ).observes('GG.userController.classWord', 'GG.userController.learnerId')
 
   fbClassObserver: (->
     changedCallback = (scoreSnapshot, prevScoreName) =>
