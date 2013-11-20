@@ -389,6 +389,7 @@ GG.userController = Ember.Object.create
   user: null
   state: null
   learnerId: null
+  classWord: null
   loaded: false
   groupInfoSaved: false
   learnerChanged: (->
@@ -578,8 +579,11 @@ GG.sessionController = Ember.Object.create
     @set('user', null)
     @set('loaded', false)
     @set('loggingIn', false)
+    GG.userController.set('classWord', null)
+    GG.userController.set('learnerId', null)
     GG.tasksController.set('content',[])
     GG.townsController.set('content',[])
+    GG.leaderboardController.set('content',[])
     $.post @logoutUrl, {}, (data) ->
       GG.statemanager.transitionTo 'loggingIn'
 
@@ -657,7 +661,9 @@ GG.meiosisController = Ember.Object.create
     selected[source][chromo] = null
 
     # Refund the reputation that was charged to select this chromosome
-    GG.reputationController.addReputation(GG.actionCostsController.getCost('chromosomeSelected'), GG.Events.CHOSE_CHROMOSOME)
+    GG.freeMovesController.refundMove()
+    if GG.freeMovesController.get('movesRemaining') <= 0
+      GG.reputationController.addReputation(GG.actionCostsController.getCost('chromosomeSelected'), GG.Events.CHOSE_CHROMOSOME)
 
     clearNum = true
     for own chrom,view of selected[source]
@@ -680,7 +686,11 @@ GG.meiosisController = Ember.Object.create
       selected[source][chromo].set('selected', false)
     else
       # There was no previously selected chromosome, so charge rep points
-      GG.reputationController.subtractReputation(GG.actionCostsController.getCost('chromosomeSelected'), GG.Events.CHOSE_CHROMOSOME)
+      if GG.freeMovesController.get 'hasFreeMoveRemaining'
+        GG.freeMovesController.useMove()
+      else
+        GG.freeMovesController.useMove()
+        GG.reputationController.subtractReputation(GG.actionCostsController.getCost('chromosomeSelected'), GG.Events.CHOSE_CHROMOSOME)
     selected[source][chromo] = chromoView
     gameteNumberProp = if source is "father" then 'fatherGameteNumber' else 'motherGameteNumber'
     destGameteNum = @get(gameteNumberProp)
@@ -744,7 +754,11 @@ GG.meiosisController = Ember.Object.create
     if @get('selectedCrossover')?
       sourceCross = @get('selectedCrossover')
       if sourceCross.gene.name == destCross.gene.name and sourceCross.chromoView.get('side') != destCross.chromoView.get('side')
-        GG.reputationController.subtractReputation(GG.actionCostsController.getCost('crossoverMade'), GG.Events.MADE_CROSSOVER)
+        if GG.freeMovesController.get 'hasFreeMoveRemaining'
+          GG.freeMovesController.useMove()
+        else
+          GG.freeMovesController.useMove()
+          GG.reputationController.subtractReputation(GG.actionCostsController.getCost('crossoverMade'), GG.Events.MADE_CROSSOVER)
         # cross these two
         $('#' + destCross.chromoView.get('elementId') + ' .crossoverPoint.' + gene.name).removeClass('clickable').addClass('selected')
         # get all genes after this one
@@ -1417,14 +1431,16 @@ GG.reputationController = Ember.Object.create
     changeAnimatedReputation = =>
       animated = @get('animatedReputation')
       current = @get('currentTaskReputationAssumingCompletion')
-      if animated < current
+      if (animated + 15) < current
+        @set('animatedReputation', current)    # jump ahead
+      else if animated < current
         @set('animatedReputation', animated+1)
         $("#task-reputation-available").addClass("gain")
       else if animated > current
         @set('animatedReputation', animated-1)
         $("#task-reputation-available").addClass("drop")
       if @get('animatedReputation') != @get('currentTaskReputationAssumingCompletion')
-        setTimeout(changeAnimatedReputation, 90)
+        setTimeout(changeAnimatedReputation, 150)
       else
         $("#task-reputation-available").removeClass("drop").removeClass("gain")
 
@@ -1444,6 +1460,22 @@ GG.reputationController = Ember.Object.create
   alleleRevealRep: (->
     @_repFor GG.Events.REVEALED_ALLELE
   ).property('currentTaskReputation')
+
+GG.freeMovesController = Ember.Object.create
+  freeMovesBinding: 'GG.tasksController.currentTask.freeMoves'
+  movesUsed: 0
+  useMove: ->
+    @set 'movesUsed', (@get('movesUsed') + 1)
+  refundMove: ->
+    movesUsed = @get 'movesUsed'
+    @set 'movesUsed', Math.max movesUsed-1, 0
+  movesRemaining: (->
+    freeMoves = @get 'freeMoves'
+    freeMoves - @get 'movesUsed'
+  ).property('freeMoves', 'movesUsed')
+  hasFreeMoveRemaining: (->
+    @get('movesRemaining') > 0
+  ).property('movesRemaining')
 
 GG.groupsController = Ember.Object.create
   groups: Ember.ArrayProxy.create
@@ -1511,4 +1543,82 @@ GG.manualEventController = Ember.Object.create
 
     GG.logController.set 'session', session
     GG.statemanager.send 'closeAdminPanel'
+
+
+GG.leaderboardController = Ember.ArrayController.create
+  content    : []
+  fbClassRef: null
+  fbClassCreator: (->
+    classWord  = GG.userController.get 'classWord'
+    learnerId  = GG.userController.get 'learnerId'
+    userName   = GG.userController.get 'user.nameWithLearnerId'
+
+    if (not (classWord? and learnerId? and userName?)) or ~userName.indexOf("(null)")
+      @set 'fbClassRef', null
+      return
+
+    fbRef = new Firebase 'https://genigames-leaderboard.firebaseio.com/'
+
+    # find existing class ref, or create one with some initial data
+    fbRef.child(classWord).once 'value', (snapshot) =>
+
+      reputation = GG.userController.get 'user.reputation'
+
+      if (snapshot.val() == null)
+        # create class ref, add add self and score (FB needs some non-null data)
+        userCreationObj = {}
+        userCreationObj[userName] = reputation
+
+        fbRef.child(classWord).set userCreationObj, (error) =>
+          if error
+            console.log "Error creating FB child node #{classWord}"
+          else
+            @set 'fbClassRef', fbRef.child(classWord)
+      else
+        fbRef.child(classWord).child(userName).setWithPriority(reputation, -reputation)
+        @set 'fbClassRef', fbRef.child(classWord)
+  ).observes('GG.userController.classWord', 'GG.userController.learnerId', 'GG.userController.user.nameWithLearnerId')
+
+  fbClassObserver: (->
+    changedCallback = (scoreSnapshot, prevScoreName) =>
+      name = scoreSnapshot.name()
+      score = scoreSnapshot.val()
+
+      entry = @find (e) -> e.get("name") is name
+
+      if entry?
+        entry.set 'score', score
+        @removeObject entry
+      else
+        entry = GG.LeaderboardEntry.create
+          name: name
+          score: score
+
+      if not prevScoreName?
+        @insertAt 0, entry
+      else
+        entries = @get 'content'
+        for e, i in entries
+          if e.get('name') is prevScoreName
+            @insertAt i+1, entry
+
+    fbClassRef = @get 'fbClassRef'
+    if not fbClassRef? then return
+    fbClassRef.on 'child_added', changedCallback
+    fbClassRef.on 'child_changed', changedCallback
+  ).observes('fbClassRef')
+
+  updateReputation: (->
+    classRef = @get('fbClassRef')
+    return unless classRef?
+
+    userName   = GG.userController.get 'user.nameWithLearnerId'
+    return unless userName?
+    reputation = GG.userController.get 'user.reputation'
+    # set with priority: -rep to order with highest scores at top
+    classRef.child(userName).setWithPriority(reputation, -reputation)
+  ).observes('GG.userController.user.reputation')
+
+
+
 

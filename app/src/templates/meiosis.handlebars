@@ -31,8 +31,12 @@
       <p>Repeat the process as desired, or click Continue to move on.</p>
     </div>
     {{#if GG.baselineController.isNotBaseline}}
-      <div class="cost">Cost: {{view.crossoverCost}} rep per crossover</div>
+      {{#if view.hasFreeMovesRemaining}}
+        <p>{{view.movesRemainingString}}</p>
+      {{else}}
+        <div class="cost">Cost: {{view.crossoverCost}} rep per crossover</div>
       {{/if}}
+    {{/if}}
     <button {{action "doneSelectingCrossover"}}>
       {{view.doneSelectingCrossoverButtonText}}
     </button>
@@ -42,7 +46,11 @@
     <p>If you would like to control which chromosomes you end up with, select them now.</p>
     <p>Click continue when you are done.</p>
     {{#if GG.baselineController.isNotBaseline}}
-      <div class="cost">Cost: {{view.chromosomeSelectedCost}} rep per selection</div>
+      {{#if view.hasFreeMovesRemaining}}
+        <p>{{view.movesRemainingString}}</p>
+      {{else}}
+        <div class="cost">Cost: {{view.chromosomeSelectedCost}} rep per selection</div>
+      {{/if}}
     {{/if}}
     <button {{action "doneSelectingChromatids"}}>
       {{view.doneSelectingChromatidsButtonText}}

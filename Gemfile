@@ -1,5 +1,6 @@
 source "http://rubygems.org"
 
+gem "coffee-script-source", "~> 1.2.0"
 gem "coffee-script"
 
 gem "tilt"

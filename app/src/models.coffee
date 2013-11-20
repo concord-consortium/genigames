@@ -14,6 +14,10 @@ GG.User = Ember.Object.extend
     return @get('first') + " " + @get('last')
   ).property('first', 'last')
 
+  nameWithLearnerId: (->
+    return "#{@get('name')} (#{GG.userController.get('learnerId')})"
+  ).property('first', 'last', 'GG.userController.learnerId')
+
   hasCohort: (cohort)->
     @get('cohorts').indexOf(cohort) != -1
 
@@ -97,6 +101,7 @@ GG.Task = Ember.Object.extend
   reputation: 1
   cycles: 10
   cyclesRemaining: 0
+  freeMoves: 0
   obstacleCourse: null
   meiosisControl: "all"
   # viewmodel properties
@@ -336,3 +341,21 @@ GG.GroupMember = Ember.Object.extend
     return not text?
   _empty: (text)->
     return text.length < 1
+
+GG.LeaderboardEntry = Ember.Object.extend
+  name: null
+  score: null
+  rank: (->
+    GG.leaderboardController.indexOf(this) + 1
+  ).property('GG.leaderboardController.content.@each')
+  displayName: (->
+
+    /([^(])*/.exec(@get('name'))[0].trim()
+  ).property('name')
+  isUser: (->
+    learnerId = GG.userController.get('learnerId')
+    /\((.*)\)/.exec(@get('name'))?[1] is ""+learnerId
+  ).property('name')
+  show: (->
+    @get('rank') < 11 or @get('isUser')
+  ).property('rank', 'isUser')
