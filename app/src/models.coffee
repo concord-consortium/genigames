@@ -14,6 +14,10 @@ GG.User = Ember.Object.extend
     return @get('first') + " " + @get('last')
   ).property('first', 'last')
 
+  nameWithLearnerId: (->
+    return "#{@get('name')} (#{GG.userController.get('learnerId')})"
+  ).property('first', 'last', 'GG.userController.learnerId')
+
   hasCohort: (cohort)->
     @get('cohorts').indexOf(cohort) != -1
 
@@ -41,8 +45,11 @@ GG.Town = Ember.Object.extend
   background: "castle"
   position: 0
   finalMessage: "Nice work, you've completed all the tasks in this town!"
+  password: "gen1games"       # to be replaced by author
   otherTownsBinding: Ember.Binding.oneWay('GG.townsController.content')
   enabled: (->
+    if (arguments.length > 1) then return   # setter
+
     towns = @get('otherTowns')
     idx = towns.indexOf(this)
     if idx is 0
@@ -56,6 +63,7 @@ GG.Town = Ember.Object.extend
   realTasks: []
   completed: false
   skipSave: false
+  locked: true
 
   init: ->
     @_super()
@@ -73,11 +81,11 @@ GG.Town = Ember.Object.extend
     @set 'skipSave', false
 
   serialize: ->
-    {completed: @get('completed')}
+    {completed: @get('completed'), locked: @get('locked')}
 
   triggerSave: (->
     GG.userController.saveState('town', this) unless @get 'skipSave'
-  ).observes('completed')
+  ).observes('completed', 'enabled', 'locked')
 
 GG.Task = Ember.Object.extend
   _id: null
@@ -93,6 +101,7 @@ GG.Task = Ember.Object.extend
   reputation: 1
   cycles: 10
   cyclesRemaining: 0
+  freeMoves: 0
   obstacleCourse: null
   meiosisControl: "all"
   # viewmodel properties
@@ -257,6 +266,7 @@ GG.Events =
   # Town events
   ENTERED_TOWN    : "Entered town"
   COMPLETED_TOWN  : "Completed town"
+  UNLOCKED_TOWN   : "Unlocked town"
 
   # Task events
   STARTED_TASK    : "Started task"
@@ -331,3 +341,21 @@ GG.GroupMember = Ember.Object.extend
     return not text?
   _empty: (text)->
     return text.length < 1
+
+GG.LeaderboardEntry = Ember.Object.extend
+  name: null
+  score: null
+  rank: (->
+    GG.leaderboardController.indexOf(this) + 1
+  ).property('GG.leaderboardController.content.@each')
+  displayName: (->
+
+    /([^(])*/.exec(@get('name'))[0].trim()
+  ).property('name')
+  isUser: (->
+    learnerId = GG.userController.get('learnerId')
+    /\((.*)\)/.exec(@get('name'))?[1] is ""+learnerId
+  ).property('name')
+  show: (->
+    @get('rank') < 11 or @get('isUser')
+  ).property('rank', 'isUser')

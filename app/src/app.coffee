@@ -45,7 +45,7 @@ minispade.require 'genigames/templates/meiosis'
 minispade.require 'genigames/templates/obstacle-course-dialog'
 minispade.require 'genigames/templates/task-completion-dialog'
 minispade.require 'genigames/templates/task-list'
-minispade.require 'genigames/templates/admin'
+minispade.require 'genigames/templates/town-unlock'
 
 # works similar to :contains(), but requires the whole content
 # (whitespace removed from beginning and end) to match

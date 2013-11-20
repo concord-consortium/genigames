@@ -6,7 +6,7 @@
       {{/view}}
       {{#if GG.baselineController.isNotBaseline}}
         <div id="task-reputation-available">
-          Worth {{GG.reputationController.currentTaskReputationAssumingCompletion}} Rep
+          Worth {{GG.reputationController.animatedReputation}} Rep
         </div>
         <div id="task-reputation-best">
           Best Score: {{GG.reputationController.bestTaskReputationDisplay}}
@@ -99,5 +99,18 @@
     {{view GG.MatchGoalCounter}}
     {{view GG.ObstacleCourseDialogView}}
     {{view GG.CompletionDialogView}}
+  </div>
+
+  <!-- leaderboard -->
+  <div id="leader-board-breeder" class="leader-board">
+    <h1>Class Leaderboard</h2>
+    <a class="close" {{action "hideLeaderboard"  target="GG.statemanager"}}>close</a>
+    {{#each GG.leaderboardController}}
+      {{#if this.show}}
+      <div {{bindAttr class="this.isUser"}}>
+        <span class="rank">{{rank}}.</span> <span class="name">{{displayName}}</span> <span class="score">{{score}}</span>
+      </div>
+      {{/if}}
+    {{/each}}
   </div>
 </div>

@@ -27,6 +27,13 @@ dark-text-color  = #333
 #task-reputation-available
   absolute: top 33px left 666px width 120px
   text-align: center
+  border-radius: 8px
+  &.drop
+    box-shadow: 0 0 15px #FC0
+    background: #FC0
+  &.gain
+    box-shadow: 0 0 15px #3F0
+    background: rgba(51, 255, 0, 0.45)
 
 #task-reputation-best
   absolute: top 33px left 807px width 120px
@@ -101,6 +108,8 @@ dark-text-color  = #333
   absolute: top 15px left 0px height 70px width 6px
   background-color: #3b84a2
   background-image: none
+  &.ui-state-disabled
+    background-color: #2A393F
   .ui-slider-handle
     absolute: width 10px height 10px left -3px
     margin-bottom: -5px

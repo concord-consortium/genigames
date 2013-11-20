@@ -4,8 +4,8 @@
       {{view Ember.Select
         contentBinding="view.options"
         optionLabelPath="content.label"
-        optionValuePath="content.learner"
-        valueBinding="view.learner"}}
+        optionValuePath="content"
+        valueBinding="view.clazz"}}
     </div>
     <input type="submit" value="Choose this class" {{action choose}} />
 </div>

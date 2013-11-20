@@ -1,10 +1,10 @@
 <div id="topBar">
   {{#with GG.userController.user}}
     <div id="greeting">
-      <span {{action "openAdminPassword" target="GG.statemanager"}}>Hi</span> {{first}}!
+      Hi {{first}}!
     </div>
     {{#if GG.reputationController.showTotal}}
-      <div id="reputation">
+      <div id="reputation" {{action "showLeaderboard" target="GG.statemanager"}}>
         Reputation: {{reputation}}
       </div>
     {{/if}}
@@ -33,8 +33,7 @@
       {{#view GG.NPCFinalMessageBubbleView contentBinding="this"}}
         {{view.text}}
         <br/><br/>
-        <button {{action "next"}}>Go straight to next town</button>
-        <button {{action "world"}}>Go to world view</button>
+        <button {{action "world"}}>Leave the town</button>
       {{/view}}
       <a href="#" {{action "replayTask" this}}>
         {{view GG.NPCHeartBubbleView contentBinding="this"}}
@@ -43,6 +42,16 @@
     {{/view}}
   {{/each}}
 
-  <!-- Admin/manual-submission forms -->
-  {{view GG.adminView}}
+  <!-- leaderboard -->
+  <div id="leader-board" class="leader-board">
+    <h1>Class Leaderboard</h2>
+    <a class="close" {{action "hideLeaderboard"  target="GG.statemanager"}}>close</a>
+    {{#each GG.leaderboardController}}
+      {{#if this.show}}
+      <div {{bindAttr class="this.isUser"}}>
+        <span class="rank">{{rank}}.</span> <span class="name">{{displayName}}</span> <span class="score">{{score}}</span>
+      </div>
+      {{/if}}
+    {{/each}}
+  </div>
 </div>

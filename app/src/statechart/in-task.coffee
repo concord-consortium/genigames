@@ -19,7 +19,8 @@ GG.StateInTask = Ember.State.extend
       GG.reputationController.reset()
       GG.breedingController.set 'breedType', GG.BREED_AUTOMATED
 
-    exit: ->
+    exit: (manager) ->
+      manager.send 'hideLeaderboard'
       # clear offspring
       GG.breedingController.set 'child', null
       GG.offspringController.set 'content', null
@@ -67,7 +68,8 @@ GG.StateInTask = Ember.State.extend
       $('#task-reputation-best').hide()
       GG.tasksController.completeCurrentTask()
       if GG.obstacleCourseController.get('hasObstacleCourse')
-        manager.transitionTo 'obstacleCourse'
+        # manager.transitionTo 'obstacleCourse'
+        GG.tasksController.showTaskCompletion()
       else
         GG.tasksController.showTaskCompletion()
 
@@ -154,19 +156,21 @@ GG.StateInTask = Ember.State.extend
         # hide the offspring pool
         $("#offspring-panel").animate({left: 400},500,"easeOutCubic")
         $("#offspring-pool .chromosome-panel").hide()
+        scale = GG.MeiosisAnimation.get 'timeScale'
         setTimeout ->
           $('#chromosome-labels').hide()
           GG.motherPoolController.set('hidden', true)
           GG.fatherPoolController.set('hidden', true)
-        , 600
+        , GG.MeiosisAnimation.scale(600)
         setTimeout ->
           manager.send 'animate'
-        , 800
+        , GG.MeiosisAnimation.scale(800)
 
       animate: (manager)->
+        scale = GG.MeiosisAnimation.get 'timeScale'
         firstTime = @get 'firstTime'
         @set('firstTime', false)
-        delay = if firstTime then 2000 else 1
+        delay = if firstTime then GG.MeiosisAnimation.scale(2000) else 1
 
         if GG.cyclesController.get('cycles') <= 0
           GG.reputationController.subtractReputation(GG.actionCostsController.getCost('extraBreedCycle'), GG.Events.BRED_WITH_EXTRA_CYCLE)
@@ -224,6 +228,7 @@ GG.StateInTask = Ember.State.extend
         @set('selectingChromatidsCallback', context.callback)
         selector = '#' + context.elementId + ' .chromatidSelection'
         $(selector).removeClass('hidden')
+        GG.tutorialMessageController.showMeiosisGenderTutorial()
 
       deselectedChromosome: (manager, chromoView)->
         GG.meiosisController.deselectChromosome(chromoView)

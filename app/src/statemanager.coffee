@@ -79,6 +79,7 @@ GG.statemanager = Ember.StateManager.create
           return
         else if found.length == 1
           # if one, use that learner
+          GG.userController.set('classWord', found[0].word)
           GG.userController.set('learnerId', found[0].learner)
         else
           # if none, set GG.userController.loaded = true
@@ -86,8 +87,9 @@ GG.statemanager = Ember.StateManager.create
 
       GG.statemanager.send 'nextStep'
 
-    chooseLearner: (state, learner)->
-      GG.userController.set('learnerId', learner)
+    chooseLearner: (state, clazz)->
+      GG.userController.set('classWord', clazz.word)
+      GG.userController.set('learnerId', clazz.learner)
       GG.statemanager.send 'nextStep'
 
     definedGroups: (state, data)->
@@ -195,6 +197,13 @@ GG.statemanager = Ember.StateManager.create
           town = GG.Town.create to
           GG.townsController.addTown town
 
+        # first enable towns based on user data
+        # then, if no towns enabled...
+        GG.townsController.get("firstObject").set "locked", false
+
+        # force leaderboard to update
+        GG.leaderboardController.updateReputation()
+
         # fixme: this should be eventually handled by a router
         if (taskPath = GG.statemanager.get('params.task'))
           taskPath = taskPath.split "/"
@@ -248,25 +257,17 @@ GG.statemanager = Ember.StateManager.create
       $("#connection-regained").fadeOut()
     , 2000
 
-  openAdminPassword: ->
-    # ignore if we are not in a tournament
-    return unless GG.worldName is "tournament"
-
+  openTownPassword: (manager, town) ->
+    GG.townsController.set 'townToBeUnlocked', town
     $('#admin-password').fadeIn()
-
-  openAdminPanel: ->
-    pass = GG.manualEventController.get 'password'
-    GG.manualEventController.set 'password', ""
-
-    return unless pass
-
-    pass13 = pass.replace /[a-zA-Z]/g, (c) ->
-      String.fromCharCode if ((if c <= "Z" then 90 else 122)) >= (c = c.charCodeAt(0) + 13) then c else c - 26
-    if pass13 is "tra1tnzrf"  # top s33cret.....
-      $('#admin-password').hide()
-      $('#admin-panel').fadeIn()
 
   closeAdminPanel: ->
     $('.admin').fadeOut()
+
+  showLeaderboard: ->
+    $('.leader-board').fadeToggle()
+
+  hideLeaderboard: ->
+    $('.leader-board').fadeOut()
 
 

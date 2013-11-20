@@ -33,9 +33,9 @@ GG.BackToTaskListButton = Ember.View.extend
 GG.ChooseClassView = Ember.View.extend
   templateName: 'choose-class'
   optionsBinding: 'GG.sessionController.classesWithLearners'
-  learner: null
+  clazz: null
   choose: ->
-    GG.statemanager.send 'chooseLearner', @get('learner')
+    GG.statemanager.send 'chooseLearner', @get('clazz')
 
 GG.DefineGroupsView = Ember.View.extend
   tagName: 'div'
@@ -58,7 +58,7 @@ GG.WorldView = Ember.View.extend
   contentBinding: 'GG.townsController'
 
 GG.WorldTownView = Ember.View.extend
-  classNameBindings: ['icon','location','enabled','completed']
+  classNameBindings: ['icon','location','enabled','completed','locked']
   attributeBindings: ['style']
   location: "location"
   icon: (->
@@ -66,6 +66,7 @@ GG.WorldTownView = Ember.View.extend
   ).property('content.icon')
   enabledBinding: 'content.enabled'
   completedBinding: 'content.completed'
+  lockedBinding: 'content.locked'
   style: (->
     # width and height are always set to 175x125 regardless of the icon size (image is always centered in this box).
     width = 175
@@ -625,6 +626,14 @@ GG.MeiosisView = Ember.View.extend
   gametes: null
   useGametes: false
   currentTownBinding: 'GG.townsController.currentTown'
+  movesRemaining: (->
+    Math.max GG.freeMovesController.get('movesRemaining'), 0
+  ).property('GG.freeMovesController.movesRemaining')
+  movesRemainingString: (->
+    moves = @get 'movesRemaining'
+    "#{moves} move#{if moves isnt 1 then 's' else ''} remaining."
+  ).property('movesRemaining')
+  hasFreeMovesRemainingBinding: 'GG.freeMovesController.hasFreeMoveRemaining'
   crossoverCost: (->
     GG.actionCostsController.getCost('crossoverMade')
   ).property('currentTown')
@@ -709,6 +718,7 @@ GG.MeiosisView = Ember.View.extend
   animateMoves: (moves, callback)->
     animationQueue = []
     selectorBase = "#" + @get('elementId')
+    scale = GG.MeiosisAnimation.get 'timeScale'
     for own gene,swaps of moves
       for own dest,source of swaps
         sourceSelector = selectorBase + " .cell" + source + " .allele." + gene
@@ -731,7 +741,7 @@ GG.MeiosisView = Ember.View.extend
     $(selectorBase + " .allele").css({"z-index": 10})
     for i in [0...animationQueue.length]
       anim = animationQueue[i]
-      $(anim.source).animate(anim.anim, 1500, 'easeInOutQuad')
+      $(anim.source).animate(anim.anim, GG.MeiosisAnimation.scale(1500), 'easeInOutQuad')
 
     setTimeout =>
       callback()
@@ -741,7 +751,7 @@ GG.MeiosisView = Ember.View.extend
           $(anim.source).css({left: '', top: ''})
       # put the alleles back at their default level, so they slide under/over
       $("#" + @get('elementId') + " .allele").css({"z-index": ''})
-    , 1550
+    , GG.MeiosisAnimation.scale(1550)
   chromosomeSelectedBinding: 'GG.meiosisController.chromosomeSelected'
   crossoverSelectedBinding: 'GG.meiosisController.crossoverSelected'
   doneSelectingCrossoverButtonText: (->
@@ -797,6 +807,11 @@ GG.MeiosisView = Ember.View.extend
 GG.MeiosisSpeedSliderView = Ember.View.extend
   tagName: 'div'
   elementId: 'meiosis-speed-slider-parent'
+  updateEnabled: (->
+    disabled = !GG.meiosisController.get('speedControlEnabled')
+    console.log("weeee! "+disabled)
+    $('#meiosis-speed-slider').slider("option", "disabled", disabled);
+  ).observes('GG.meiosisController.speedControlEnabled')
   didInsertElement: ->
     # slider can go from -Infinity to 1.9999.
     # For now, we'll just have 2 values: 0 and 1.
@@ -804,9 +819,9 @@ GG.MeiosisSpeedSliderView = Ember.View.extend
     $('#meiosis-speed-slider').slider
       orientation: 'vertical'
       value: (2 - GG.MeiosisAnimation.get('timeScale'))
-      min: -1
-      max: 1
-      step: 2
+      min: 0.5
+      max: 1.7
+      step: 0.01
       change: (event,ui)->
         GG.MeiosisAnimation.set('timeScale', (2 - ui.value))
 
@@ -924,8 +939,8 @@ GG.BaselineTaskListView = Ember.View.extend
   taskSelected: (evt) ->
     GG.statemanager.send 'taskSelected', evt.context
 
-GG.adminView = Ember.View.extend
-  templateName: 'admin'
+GG.townUnlockView = Ember.View.extend
+  templateName: 'town-unlock'
   contentBinding: 'GG.townsController'
   firstTown: (->
     @get 'content.firstObject'

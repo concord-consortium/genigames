@@ -4,18 +4,6 @@ GG.StateInWorld = Ember.State.extend
 
   enter: ->
     GG.universeView.setCurrentView 'world'
-    currentTown = GG.townsController.get('currentTown')
-    if currentTown?
-    #  setTimeout ->
-    #    $('#world').rotate(currentTown.get('position') + "deg")
-    #  , 10
-    else
-      firstTown = GG.townsController.get('firstIncompleteTown')
-    #  if firstTown?
-    #    setTimeout ->
-    #      $('#world').rotate(firstTown.get('position') + "deg")
-    #    , 10
-      #GG.townsController.set 'currentTown', GG.townsController.get('firstObject')
 
   spriteAnimation: null
 
@@ -51,8 +39,23 @@ GG.StateInWorld = Ember.State.extend
 
   townsWaiting: Ember.State.create
     townSelected: (manager, town) ->
-      if town.get('enabled')
+      if not town.get('locked')
         manager.send 'navigateToTown', town
+      else
+        manager.send 'openTownPassword', town
+
+    unlockTown: (manager) ->
+      pass = GG.manualEventController.get 'password'
+      GG.manualEventController.set 'password', ""
+
+      return unless pass
+
+      if pass is GG.townsController.get('townToBeUnlocked.password')
+        GG.townsController.unlockTown()
+        manager.send 'closeAdminPanel'
+        setTimeout =>
+          manager.send 'navigateToTown', GG.townsController.get('townToBeUnlocked')
+        , 700
 
   movingDirectlyToNextTown: Ember.State.create
     # setup is called after we have fully entered the state, so we can call actions

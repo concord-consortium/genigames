@@ -7,6 +7,7 @@ GG.BREED_CONTROLLED = "controlled"
 GG.townsController = Ember.ArrayController.create
   content    : []
   currentTown: null
+  townToBeUnlocked: null
 
   addTown: (town) ->
     @pushObject town
@@ -24,7 +25,7 @@ GG.townsController = Ember.ArrayController.create
 
   setCurrentTown: (town, force=false) ->
     @completeTownsThrough @indexOf(town) - 1 if force
-    return false if town is @currentTown or not town.get('enabled')
+    return false if town is @currentTown
 
     if @indexOf(town) >= 0
       @set 'currentTown', town
@@ -44,6 +45,13 @@ GG.townsController = Ember.ArrayController.create
       town = (town for town in @get('content') when town.get('name') == townName)[0]
 
     @setCurrentTown(town, true) if town?
+
+  unlockTown: ->
+    town = @get 'townToBeUnlocked'
+    if not town then return
+
+    town.set 'locked', false
+    GG.logController.logEvent GG.Events.UNLOCKED_TOWN, name: town.get('name')
 
   completeCurrentTown: ->
     town = @get('currentTown')
@@ -381,6 +389,7 @@ GG.userController = Ember.Object.create
   user: null
   state: null
   learnerId: null
+  classWord: null
   loaded: false
   groupInfoSaved: false
   learnerChanged: (->
@@ -570,8 +579,11 @@ GG.sessionController = Ember.Object.create
     @set('user', null)
     @set('loaded', false)
     @set('loggingIn', false)
+    GG.userController.set('classWord', null)
+    GG.userController.set('learnerId', null)
     GG.tasksController.set('content',[])
     GG.townsController.set('content',[])
+    GG.leaderboardController.set('content',[])
     $.post @logoutUrl, {}, (data) ->
       GG.statemanager.transitionTo 'loggingIn'
 
@@ -585,6 +597,12 @@ GG.actionCostsController = Ember.Object.create
 
 GG.meiosisController = Ember.Object.create
   canBreedDuringAnimation: true
+  speedControlEnabled: (->
+    # enable on town 1 task 7
+    townId = 1 + GG.townsController.get("content").indexOf GG.townsController.get "currentTown"
+    taskId = 1 + GG.tasksController.get("content").indexOf GG.tasksController.get "currentTask"
+    return townId*10 + taskId >= 17
+  ).property('GG.townsController.currentTown', 'GG.tasksController.currentTask')
   inAnimation: false
   motherView: null
   fatherView: null
@@ -643,7 +661,9 @@ GG.meiosisController = Ember.Object.create
     selected[source][chromo] = null
 
     # Refund the reputation that was charged to select this chromosome
-    GG.reputationController.addReputation(GG.actionCostsController.getCost('chromosomeSelected'), GG.Events.CHOSE_CHROMOSOME)
+    GG.freeMovesController.refundMove()
+    if GG.freeMovesController.get('movesRemaining') <= 0
+      GG.reputationController.addReputation(GG.actionCostsController.getCost('chromosomeSelected'), GG.Events.CHOSE_CHROMOSOME)
 
     clearNum = true
     for own chrom,view of selected[source]
@@ -666,7 +686,11 @@ GG.meiosisController = Ember.Object.create
       selected[source][chromo].set('selected', false)
     else
       # There was no previously selected chromosome, so charge rep points
-      GG.reputationController.subtractReputation(GG.actionCostsController.getCost('chromosomeSelected'), GG.Events.CHOSE_CHROMOSOME)
+      if GG.freeMovesController.get 'hasFreeMoveRemaining'
+        GG.freeMovesController.useMove()
+      else
+        GG.freeMovesController.useMove()
+        GG.reputationController.subtractReputation(GG.actionCostsController.getCost('chromosomeSelected'), GG.Events.CHOSE_CHROMOSOME)
     selected[source][chromo] = chromoView
     gameteNumberProp = if source is "father" then 'fatherGameteNumber' else 'motherGameteNumber'
     destGameteNum = @get(gameteNumberProp)
@@ -730,7 +754,11 @@ GG.meiosisController = Ember.Object.create
     if @get('selectedCrossover')?
       sourceCross = @get('selectedCrossover')
       if sourceCross.gene.name == destCross.gene.name and sourceCross.chromoView.get('side') != destCross.chromoView.get('side')
-        GG.reputationController.subtractReputation(GG.actionCostsController.getCost('crossoverMade'), GG.Events.MADE_CROSSOVER)
+        if GG.freeMovesController.get 'hasFreeMoveRemaining'
+          GG.freeMovesController.useMove()
+        else
+          GG.freeMovesController.useMove()
+          GG.reputationController.subtractReputation(GG.actionCostsController.getCost('crossoverMade'), GG.Events.MADE_CROSSOVER)
         # cross these two
         $('#' + destCross.chromoView.get('elementId') + ' .crossoverPoint.' + gene.name).removeClass('clickable').addClass('selected')
         # get all genes after this one
@@ -1012,6 +1040,22 @@ GG.tutorialMessageController = Ember.Object.create
     return (townId is 0 and taskId is 4) or (GG.baselineController.get('isBaseline') and townId is 1 and taskId is 0)
   ).property('enabled', 'GG.townsController.currentTown', 'GG.tasksController.currentTask')
 
+  isFirstMeiosisGenderControlTask: (->
+    unless @get('enabled')
+      return false
+    townId = GG.townsController.get("content").indexOf GG.townsController.get "currentTown"
+    taskId = GG.tasksController.get("content").indexOf GG.tasksController.get "currentTask"
+    return (townId is 0 and taskId is 6)
+  ).property('enabled', 'GG.townsController.currentTown', 'GG.tasksController.currentTask')
+
+  isFirstMeiosisSpeedControlTask: (->
+    unless @get('enabled')
+      return false
+    townId = GG.townsController.get("content").indexOf GG.townsController.get "currentTown"
+    taskId = GG.tasksController.get("content").indexOf GG.tasksController.get "currentTask"
+    return (townId is 0 and taskId is 6)
+  ).property('enabled', 'GG.townsController.currentTown', 'GG.tasksController.currentTask')
+
   showTargetTutorial: ->
     if @get 'isFirstTask' then GG.showInfoDialog $('#target-tutorial-target'),
       "These are the traits of the %@1 you need to create. To do that you have
@@ -1059,6 +1103,7 @@ GG.tutorialMessageController = Ember.Object.create
         tooltip: "leftMiddle"
 
   breedButtonTutorialShown: false
+  speedTutorialShown: false
   motherBinding: 'GG.parentController.selectedMother'
   fatherBinding: 'GG.parentController.selectedFather'
   bothParentsSelected: (->
@@ -1069,6 +1114,13 @@ GG.tutorialMessageController = Ember.Object.create
       @set 'breedButtonTutorialShown', true
       GG.showInfoDialog $("#breed-button"),
         "Now that you’ve picked parents, hit the Breed button to create the child.",
+        target: "leftMiddle"
+        tooltip: "rightMiddle"
+    else if @get('isFirstMeiosisSpeedControlTask') and !@get('speedTutorialShown') and @get 'bothParentsSelected'
+      @set 'speedTutorialShown', true
+      GG.showInfoDialog $('#meiosis-speed-slider'),
+        "Use this to control the speed of meiosis. When it's down low,
+        it goes slow. At the top, it goes fast.",
         target: "leftMiddle"
         tooltip: "rightMiddle"
 
@@ -1117,6 +1169,17 @@ GG.tutorialMessageController = Ember.Object.create
         modal: true
     else
       callback()
+
+  meiosisGenderTutorialShown: false
+  showMeiosisGenderTutorial: ->
+    if @get('isFirstMeiosisGenderControlTask') and !@get('meiosisGenderTutorialShown')
+      @set 'meiosisGenderTutorialShown', true
+      GG.showInfoDialog $("#meiosis-container .meiosis.father"),
+        "When you need to control the sex of the offspring drake, use the father's chromosomes.",
+        target: "leftMiddle"
+        tooltip: "rightMiddle"
+        maxWidth: 280
+        modal: false
 
   meiosisFatherGameteTutorialShown: false
   meiosisMotherGameteTutorialShown: false
@@ -1353,6 +1416,7 @@ GG.reputationController = Ember.Object.create
 
   breedsLeftBinding: 'GG.cyclesController.cycles'
   hasObstacleCourseBinding: 'GG.obstacleCourseController.hasObstacleCourse'
+  animatedReputation: 0
   currentTaskReputationAssumingCompletion: (->
     current = @get('currentTaskReputation')
     current += @get('reputationForTask')
@@ -1363,6 +1427,25 @@ GG.reputationController = Ember.Object.create
     if current < 0 then 0 else current
   ).property('currentTaskReputation','reputationForTask','breedsLeft','hasObstacleCourse')
 
+  animateOnReputationChange: (->
+    changeAnimatedReputation = =>
+      animated = @get('animatedReputation')
+      current = @get('currentTaskReputationAssumingCompletion')
+      if (animated + 15) < current
+        @set('animatedReputation', current)    # jump ahead
+      else if animated < current
+        @set('animatedReputation', animated+1)
+        $("#task-reputation-available").addClass("gain")
+      else if animated > current
+        @set('animatedReputation', animated-1)
+        $("#task-reputation-available").addClass("drop")
+      if @get('animatedReputation') != @get('currentTaskReputationAssumingCompletion')
+        setTimeout(changeAnimatedReputation, 150)
+      else
+        $("#task-reputation-available").removeClass("drop").removeClass("gain")
+
+    changeAnimatedReputation()
+  ).observes('currentTaskReputationAssumingCompletion')
   extraBreedsRep: (->
     @_repFor GG.Events.BRED_WITH_EXTRA_CYCLE
   ).property('currentTaskReputation')
@@ -1377,6 +1460,22 @@ GG.reputationController = Ember.Object.create
   alleleRevealRep: (->
     @_repFor GG.Events.REVEALED_ALLELE
   ).property('currentTaskReputation')
+
+GG.freeMovesController = Ember.Object.create
+  freeMovesBinding: 'GG.tasksController.currentTask.freeMoves'
+  movesUsed: 0
+  useMove: ->
+    @set 'movesUsed', (@get('movesUsed') + 1)
+  refundMove: ->
+    movesUsed = @get 'movesUsed'
+    @set 'movesUsed', Math.max movesUsed-1, 0
+  movesRemaining: (->
+    freeMoves = @get 'freeMoves'
+    freeMoves - @get 'movesUsed'
+  ).property('freeMoves', 'movesUsed')
+  hasFreeMoveRemaining: (->
+    @get('movesRemaining') > 0
+  ).property('movesRemaining')
 
 GG.groupsController = Ember.Object.create
   groups: Ember.ArrayProxy.create
@@ -1444,4 +1543,82 @@ GG.manualEventController = Ember.Object.create
 
     GG.logController.set 'session', session
     GG.statemanager.send 'closeAdminPanel'
+
+
+GG.leaderboardController = Ember.ArrayController.create
+  content    : []
+  fbClassRef: null
+  fbClassCreator: (->
+    classWord  = GG.userController.get 'classWord'
+    learnerId  = GG.userController.get 'learnerId'
+    userName   = GG.userController.get 'user.nameWithLearnerId'
+
+    if (not (classWord? and learnerId? and userName?)) or ~userName.indexOf("(null)")
+      @set 'fbClassRef', null
+      return
+
+    fbRef = new Firebase 'https://genigames-leaderboard.firebaseio.com/'
+
+    # find existing class ref, or create one with some initial data
+    fbRef.child(classWord).once 'value', (snapshot) =>
+
+      reputation = GG.userController.get 'user.reputation'
+
+      if (snapshot.val() == null)
+        # create class ref, add add self and score (FB needs some non-null data)
+        userCreationObj = {}
+        userCreationObj[userName] = reputation
+
+        fbRef.child(classWord).set userCreationObj, (error) =>
+          if error
+            console.log "Error creating FB child node #{classWord}"
+          else
+            @set 'fbClassRef', fbRef.child(classWord)
+      else
+        fbRef.child(classWord).child(userName).setWithPriority(reputation, -reputation)
+        @set 'fbClassRef', fbRef.child(classWord)
+  ).observes('GG.userController.classWord', 'GG.userController.learnerId', 'GG.userController.user.nameWithLearnerId')
+
+  fbClassObserver: (->
+    changedCallback = (scoreSnapshot, prevScoreName) =>
+      name = scoreSnapshot.name()
+      score = scoreSnapshot.val()
+
+      entry = @find (e) -> e.get("name") is name
+
+      if entry?
+        entry.set 'score', score
+        @removeObject entry
+      else
+        entry = GG.LeaderboardEntry.create
+          name: name
+          score: score
+
+      if not prevScoreName?
+        @insertAt 0, entry
+      else
+        entries = @get 'content'
+        for e, i in entries
+          if e.get('name') is prevScoreName
+            @insertAt i+1, entry
+
+    fbClassRef = @get 'fbClassRef'
+    if not fbClassRef? then return
+    fbClassRef.on 'child_added', changedCallback
+    fbClassRef.on 'child_changed', changedCallback
+  ).observes('fbClassRef')
+
+  updateReputation: (->
+    classRef = @get('fbClassRef')
+    return unless classRef?
+
+    userName   = GG.userController.get 'user.nameWithLearnerId'
+    return unless userName?
+    reputation = GG.userController.get 'user.reputation'
+    # set with priority: -rep to order with highest scores at top
+    classRef.child(userName).setWithPriority(reputation, -reputation)
+  ).observes('GG.userController.user.reputation')
+
+
+
 
