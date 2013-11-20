@@ -1553,7 +1553,7 @@ GG.leaderboardController = Ember.ArrayController.create
     learnerId  = GG.userController.get 'learnerId'
     userName   = GG.userController.get 'user.nameWithLearnerId'
 
-    if not (classWord? and learnerId? and userName?)
+    if (not (classWord? and learnerId? and userName?)) or ~userName.indexOf("(null)")
       @set 'fbClassRef', null
       return
 
