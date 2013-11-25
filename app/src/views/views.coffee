@@ -502,8 +502,18 @@ GG.TaskNPCView = Ember.View.extend
   attributeBindings  : ['style']
   style: (->
     return "" if @get('content.showInForeground')
-    "top: " + @get('content.npc.position.y') + "px; left: " + @get('content.npc.position.x') + "px;"
-  ).property('content.npc.position.x','content.npc.position.y', 'content.showInForeground')
+
+    scale = @get('content.npc.scale') || 0.5
+
+    style = "top: " + @get('content.npc.position.y') + "px; left: " + @get('content.npc.position.x') + "px;"
+
+    for vendor in ["-webkit-", "-moz-", "-ms-", "-o-", ""]
+      style += "#{vendor}transform: scale(#{scale});"
+      style += "#{vendor}transform-origin: 0 0;"
+
+    return style
+
+  ).property('content.npc.position.x','content.npc.position.y', 'content.npc.position.scale','content.showInForeground')
   npcLocationState: (->
     if @get('content.showInForeground') then @get('content.foregroundLocation') else "background"
   ).property('content.showInForeground')

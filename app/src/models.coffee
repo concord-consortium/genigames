@@ -298,6 +298,7 @@ GG.TaskNPC = Ember.Object.extend
   imageURL: null
   task: null
   position: null
+  scale: null
   showInForeground: false
   foregroundLocation: null
 
