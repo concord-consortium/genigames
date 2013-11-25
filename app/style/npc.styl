@@ -21,18 +21,32 @@
     margin-top: -111px
 
 .speech-bubble
-  absolute: left -215px top -131px
+  absolute: top -131px
   z-index: 2
   font-size: 1.2em
   width: 225px
   background-color: rgb(251, 252, 225)
   padding: 23px
   border-radius: 35px
+
+.right .speech-bubble
+  left: -215px
   &:after
     absolute: right 40px bottom -30px width 0
     content: ""
     position: absolute
     border-width: 0 20px 30px 0
+    border-style: solid
+    border-color: transparent rgb(251, 252, 225)
+    display: block
+
+.left .speech-bubble
+  left: 61px
+  &:after
+    absolute: left 40px bottom -30px width 0
+    content: ""
+    position: absolute
+    border-width: 0 0 30px 20px
     border-style: solid
     border-color: transparent rgb(251, 252, 225)
     display: block
