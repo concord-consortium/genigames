@@ -497,11 +497,16 @@ GG.TownView = Ember.View.extend
 
 GG.TaskNPCView = Ember.View.extend
   tagName            : 'div'
-  classNames         : 'npc'
+  classNames         : ['npc']
+  classNameBindings  : ['npcLocationState']
   attributeBindings  : ['style']
   style: (->
+    return "" if @get('content.showInForeground')
     "top: " + @get('content.npc.position.y') + "px; left: " + @get('content.npc.position.x') + "px;"
-  ).property('content.npc.position.x','content.npc.position.y')
+  ).property('content.npc.position.x','content.npc.position.y', 'content.showInForeground')
+  npcLocationState: (->
+    if @get('content.showInForeground') then @get('content.foregroundLocation') else "background"
+  ).property('content.showInForeground')
   npcSelected: (evt) ->
     GG.statemanager.send 'npcSelected', evt.context
   replayTask: (evt) ->
@@ -809,7 +814,6 @@ GG.MeiosisSpeedSliderView = Ember.View.extend
   elementId: 'meiosis-speed-slider-parent'
   updateEnabled: (->
     disabled = !GG.meiosisController.get('speedControlEnabled')
-    console.log("weeee! "+disabled)
     $('#meiosis-speed-slider').slider("option", "disabled", disabled);
   ).observes('GG.meiosisController.speedControlEnabled')
   didInsertElement: ->

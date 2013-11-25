@@ -298,6 +298,8 @@ GG.TaskNPC = Ember.Object.extend
   imageURL: null
   task: null
   position: null
+  showInForeground: false
+  foregroundLocation: null
 
 GG.ActionCosts = Ember.Object.extend
   someEvent: [0]

@@ -15,9 +15,26 @@ GG.StateInTown = Ember.State.extend
       task.set('showQuestionBubble', false) for task in GG.tasksController.content
       task.set('showSpeechBubble', false) for task in GG.tasksController.content
 
-      firstIncompleteTask = null
-      for task in GG.tasksController.content
-        firstIncompleteTask = task unless task.get('completed') or firstIncompleteTask?
+      firstIncompleteTask_i = -1
+      lastCompleteTask_i = -1
+      for task, i in GG.tasksController.content
+        foregroundLocation = if (i%2) then "right" else "left"
+        task.set('foregroundLocation', foregroundLocation)
+        task.set('showInForeground', false)
+        complete = task.get('completed')
+        lastCompleteTask_i = i if complete
+        firstIncompleteTask_i = i unless complete or (firstIncompleteTask_i > -1)
+
+      if firstIncompleteTask_i > -1
+        firstIncompleteTask = GG.tasksController.content[firstIncompleteTask_i]
+      else
+        firstIncompleteTask_i = GG.tasksController.content.length-1
+        lastCompleteTask_i = firstIncompleteTask_i - 1
+
+      GG.tasksController.content[firstIncompleteTask_i].set('showInForeground', true)
+      GG.tasksController.content[lastCompleteTask_i].set('showInForeground', true) unless (lastCompleteTask_i < 0)
+
+
 
       # Go to world view if all tasks are complete?
       # TODO Add some sort of transition with dialog
