@@ -80,6 +80,9 @@ html body div {
 .needs-caching.npc-npc2_alchemist2_right {
   background: url("../images/npc2_alchemist2_right.png");
 }
+.needs-caching.bubbles.heart-empty {
+  background: url("../images/heart-bubble-empty.png");
+}
 .needs-caching.bubbles.heart {
   background: url("../images/heart-bubble.png");
 }
@@ -1297,6 +1300,8 @@ a:hover {
   margin-right: auto;
   width: 960px;
   height: 560px;
+  overflow: hidden;
+  position: relative;
 }
 .castle {
   background: top left no-repeat url("../images/town01.jpg");
@@ -2403,22 +2408,30 @@ a:hover {
 .crossoverPoint.GGTournamentDrake.spikes {
   top: 72px;
 }
+.npc.left {
+  top: 415px;
+  left: 200px;
+  z-index: 2;
+}
+.npc.right {
+  top: 415px;
+  left: 625px;
+  z-index: 2;
+}
 .npc {
-  position: relative;
+  position: absolute;
 }
 .npc .character {
-  position: absolute;
-  top: 129px;
   z-index: 0;
 }
 .npc .bubble {
   position: absolute;
-  margin-left: 20px;
+  margin-left: 44px;
+  margin-top: -111px;
 }
 .speech-bubble {
   position: absolute;
-  left: -220px;
-  bottom: -70px;
+  bottom: 205px;
   z-index: 2;
   font-size: 1.2em;
   width: 225px;
@@ -2428,7 +2441,10 @@ a:hover {
   -moz-border-radius: 35px;
   border-radius: 35px;
 }
-.speech-bubble:after {
+.right .speech-bubble {
+  left: -215px;
+}
+.right .speech-bubble:after {
   position: absolute;
   right: 40px;
   bottom: -30px;
@@ -2436,6 +2452,21 @@ a:hover {
   content: "";
   position: absolute;
   border-width: 0 20px 30px 0;
+  border-style: solid;
+  border-color: transparent #fbfce1;
+  display: block;
+}
+.left .speech-bubble {
+  left: 61px;
+}
+.left .speech-bubble:after {
+  position: absolute;
+  left: 40px;
+  bottom: -30px;
+  width: 0;
+  content: "";
+  position: absolute;
+  border-width: 0 0 30px 20px;
   border-style: solid;
   border-color: transparent #fbfce1;
   display: block;
@@ -2457,8 +2488,21 @@ a:hover {
 .heart-bubble {
   position: absolute;
   left: 0;
-  top: 90px;
+  top: -44px;
   z-index: 10;
+  width: 48px;
+}
+.heart-bubble-empty {
+  position: relative;
+  left: 0;
+  top: 1px;
+  width: 48px;
+}
+.heart-bubble-empty-wrapper {
+  position: absolute;
+  top: -46px;
+  overflow: hidden;
+  z-index: 11;
 }
 #obstacle-course-dialog {
   display: none;
