@@ -589,23 +589,25 @@ GG.NPCSpeechBubbleView = Ember.View.extend
     GG.statemanager.send 'decline'
 
 GG.NPCHeartBubbleView = Ember.View.extend GG.PointsToolTip,
-  tagName            : 'img'
-  classNames         : ['heart-bubble']
+  templateName       : 'heart-bubble'
   classNameBindings  : ['hidden']
-  attributeBindings  : ['src']
-  src                : '../images/heart-bubble.png'
   hidden             : Ember.computed.not('content.completed')
-  toolTipConfigTarget:  'topMiddle'
-  toolTipConfigTooltip: 'bottomLeft'
-  toolTipConfigTip   :  'bottomLeft'
+  toolTipConfigTarget:  'bottomLeft'
+  toolTipConfigTooltip: 'bottomRight'
+  toolTipConfigTip   :  'rightBottom'
   toolTipText: (->
     "Replay: " + @get('content.targetDrake')
   ).property('content')
+  updateHeartFill: (->
+    score = @get('content.reputationEarned') / @get('content.reputation')
+    height = 33 - (score * 23)    # height is from top, min 33px, max 10px
+    @$('.heart-bubble-empty-wrapper').css({height: height})
+  ).observes('content.reputationEarned')
   mouseEnter: ->
     # stop(true, true) is necessary so that we don't end up with a slowly enlarging/shrinking image...
-    @$().stop(true, true).animate({width: "+=4px", height: "+=4px", top: "-=2px", left: "-=2px"}, 100, 'easeOutCubic')
+    @$('img').stop(true, true).animate({width: "+=4px", height: "+=4px", top: "-=2px", left: "-=2px"}, 100, 'easeOutCubic')
   mouseLeave: ->
-    @$().stop(true, true).animate({width: "-=4px", height: "-=4px", top: "+=2px", left: "+=2px"}, 100, 'easeOutCubic')
+    @$('img').stop(true, true).animate({width: "-=4px", height: "-=4px", top: "+=2px", left: "+=2px"}, 100, 'easeOutCubic')
 
 GG.NPCFinalMessageBubbleView = Ember.View.extend
   tagName            : 'div'

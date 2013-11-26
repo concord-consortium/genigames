@@ -44,6 +44,7 @@ minispade.require 'genigames/templates/define-groups'
 minispade.require 'genigames/templates/meiosis'
 minispade.require 'genigames/templates/obstacle-course-dialog'
 minispade.require 'genigames/templates/task-completion-dialog'
+minispade.require 'genigames/templates/heart-bubble'
 minispade.require 'genigames/templates/task-list'
 minispade.require 'genigames/templates/town-unlock'
 
