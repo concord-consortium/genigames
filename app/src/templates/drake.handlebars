@@ -26,7 +26,7 @@
     {{/if}}
   </div>
   {{#if view.showAnimation}}
-    <div class="idle">
+    <div class="idle" style="display: none">
       <img {{bindAttr src="view.drakeIdleImage" class=":drake-idle-img view.body"}}></img>
       {{#if view.shine}}
         <img {{bindAttr src="view.drakeIdleImage" class=":drake-idle-img :drake-shiny"}}></img>
