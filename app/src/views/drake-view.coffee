@@ -162,7 +162,7 @@ GG.DrakeView = Ember.View.extend
     # if a drake has both fire and shine, then we want fire to show up 1/3 of the time,
     # and shine to show up 1/3 of the time (50% of the remaining 2/3). Otherwise, fire
     # should show up 1/2 of the time.
-    fireOdds = if @get('shine') then 0.333 else 0.5
+    fireOdds = if @get('shine') then 0.333 else 0.7
 
     if (@get('obstacleCourse') and @get('obstacleState')?)
       state = @get('obstacleState')
@@ -171,7 +171,7 @@ GG.DrakeView = Ember.View.extend
     else if @get('fire') and (@_notShownTraitAnimation('fire') or Math.random() < fireOdds)
       @set 'currentAnimation', GG.drakeAnimations.traitAnimations.firebreath
       @_setShownTraitAnimation('fire')
-    else if @get('shine') and (@_notShownTraitAnimation('shine') or Math.random() < 0.5)
+    else if @get('shine') and (@_notShownTraitAnimation('shine') or Math.random() < 0.7)
       @set 'currentAnimation', GG.drakeAnimations.traitAnimations.metallic
       @_setShownTraitAnimation('shine')
     else
@@ -269,7 +269,7 @@ GG.drakeAnimations =
       frames: 15
     metallic:
       folder: 'shine'
-      frames: 7
+      frames: 13
   obstacleAnimations:
     successSmall:
       folder: 'successSmall'
