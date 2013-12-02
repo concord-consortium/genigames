@@ -1,6 +1,13 @@
 GG.StateInTown = Ember.State.extend
 
   initialState: 'npcsWaiting'
+  justCompletedTask: null
+
+  setup: (manager, context) ->
+    if context?
+      @set 'justCompletedTask', context
+    else
+      @set 'justCompletedTask', null
 
   enter: ->
     GG.universeView.setCurrentView 'town'
@@ -10,7 +17,10 @@ GG.StateInTown = Ember.State.extend
     $('#town').fadeOut(1000)
 
   npcsWaiting: Ember.State.create
-    enter: (manager) ->
+
+    # we use setup instead of enter because otherwise the variable justCompletedTask
+    # will not have been set yet. Note: "setup" method name may change in later v's of Ember
+    setup: (manager) ->
       GG.tasksController.clearCurrentTask()
       task.set('showQuestionBubble', false) for task in GG.tasksController.content
       task.set('showSpeechBubble', false) for task in GG.tasksController.content
@@ -34,11 +44,14 @@ GG.StateInTown = Ember.State.extend
       GG.tasksController.content[firstIncompleteTask_i].set('showInForeground', true)
       GG.tasksController.content[lastCompleteTask_i].set('showInForeground', true) unless (lastCompleteTask_i < 0)
 
+      justCompletedTask = @get 'parentState.justCompletedTask'
 
-
-      # Go to world view if all tasks are complete?
-      # TODO Add some sort of transition with dialog
-      if firstIncompleteTask?
+      if justCompletedTask?
+        setTimeout =>
+          manager.transitionTo 'npcsShowingTaskEndMessage'
+          GG.tasksController.showTaskEndMessage justCompletedTask
+        , 1000
+      else if firstIncompleteTask?
         setTimeout =>
           firstIncompleteTask.set('showQuestionBubble', true)
         , 1000
@@ -56,6 +69,11 @@ GG.StateInTown = Ember.State.extend
     replayTask: (manager, task) ->
       GG.tasksController.setCurrentTask task
       GG.tasksController.taskAccepted task
+
+  npcsShowingTaskEndMessage: Ember.State.create
+    done: (manager) ->
+      @get('parentState').set('justCompletedTask', null)
+      manager.transitionTo 'npcsWaiting'
 
   npcShowingTask: Ember.State.create
     accept: (manager, task) ->

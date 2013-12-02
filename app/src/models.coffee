@@ -108,6 +108,7 @@ GG.Task = Ember.Object.extend
   showQuestionBubble: false
   showSpeechBubble: false
   showFinalMessageBubble: false
+  isShowingEndMessage: false
   skipSave: false
   reputationEarned: Number.NEGATIVE_INFINITY
 

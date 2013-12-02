@@ -171,6 +171,14 @@ GG.tasksController = Ember.ArrayController.create
     otherTask.set('showQuestionBubble', false) for otherTask in GG.tasksController.content
     task.set 'showSpeechBubble', true
 
+  showTaskEndMessage: (task) ->
+    if task.get('npc.speech.completionText')?
+      task.set 'npc.speech.text', task.get 'npc.speech.completionText'
+      task.set 'isShowingEndMessage', true
+      task.set 'showSpeechBubble', true
+    else
+      GG.statemanager.send 'done'
+
   showTaskCompletion: ->
     if GG.baselineController.get('isNotBaseline') and GG.lastShownDialog?
       try
@@ -202,7 +210,7 @@ GG.tasksController = Ember.ArrayController.create
       if GG.obstacleCourseController.get 'hasObstacleCourse'
         GG.statemanager.transitionTo 'obstacleCourse'
       else
-        GG.statemanager.transitionTo 'inTown'
+        GG.statemanager.transitionTo 'inTown', @get('currentTask')
 
   isCurrentTaskComplete: ->
     task = @get 'currentTask'

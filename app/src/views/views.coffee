@@ -560,21 +560,26 @@ GG.NPCSpeechBubbleView = Ember.View.extend
     @resetTextIdx()
   text               : (->
     authoredText = @get 'content.npc.speech.text'
-    currentText = authoredText[@get 'textIdx']
+    currentText = if typeof authoredText == "string" then authoredText else authoredText[@get 'textIdx']
     currentText = currentText.replace(/\[(.*?)\]/g, "") # rm button text
     return new Handlebars.SafeString(currentText)
   ).property('content','textIdx')
   isLastText: (->
     return @get('textIdx') >= @get('lastTextIdx')
   ).property('textIdx','lastTextIdx')
+  isShowingEndMessageBinding: 'content.isShowingEndMessage'
+  nowShowingEndMessage: (->
+    if @get 'isShowingEndMessage'
+      @resetTextIdx()
+  ).observes('isShowingEndMessage')
   resetTextIdx: (->
     @set 'textIdx', 0
     authoredText = @get 'content.npc.speech.text'
-    @set 'lastTextIdx', (authoredText.length - 1)
+    @set 'lastTextIdx', (if typeof authoredText isnt "string" then (authoredText.length - 1) else 0)
   ).observes('content')
   continueButtonText: (->
     authoredText = @get 'content.npc.speech.text'
-    currentText = authoredText[@get 'textIdx']
+    currentText = if typeof authoredText == "string" then authoredText else authoredText[@get 'textIdx']
     buttonText = /\[(.*?)\]/g.exec(currentText)
     if (buttonText)
       return buttonText[1]
@@ -587,6 +592,8 @@ GG.NPCSpeechBubbleView = Ember.View.extend
   decline: ->
     @resetTextIdx()
     GG.statemanager.send 'decline'
+  done: ->
+    GG.statemanager.send 'done'
 
 GG.NPCHeartBubbleView = Ember.View.extend GG.PointsToolTip,
   templateName       : 'heart-bubble'

@@ -24,8 +24,12 @@
         {{view.text}}
         <br/><br/>
         {{#if view.isLastText}}
-          <button {{action "accept"}}>{{view.content.npc.speech.accept}}</button>
-          <button {{action "decline"}}>{{view.content.npc.speech.decline}}</button>
+          {{#if view.isShowingEndMessage}}
+            <button {{action "done"}}>{{view.continueButtonText}}</button>
+          {{else}}
+            <button {{action "accept"}}>{{view.content.npc.speech.accept}}</button>
+            <button {{action "decline"}}>{{view.content.npc.speech.decline}}</button>
+          {{/if}}
         {{else}}
           <button {{action "next"}}>{{view.continueButtonText}}</button>
         {{/if}}
