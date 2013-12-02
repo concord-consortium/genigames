@@ -17,7 +17,11 @@ GG.StateInTask = Ember.State.extend
         GG.tutorialMessageController.showTargetTutorial()
       GG.cyclesController.reset()
       GG.reputationController.reset()
-      GG.breedingController.set 'breedType', GG.BREED_AUTOMATED
+      if (GG.userController.get('controlMeiosis') and GG.tasksController.get('meiosisControlEnabled'))
+        breedType = GG.BREED_CONTROLLED
+      else
+        breedType = GG.BREED_AUTOMATED
+      GG.breedingController.set 'breedType', breedType
 
     exit: (manager) ->
       manager.send 'hideLeaderboard'

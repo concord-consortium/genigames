@@ -325,9 +325,11 @@ GG.breedingController = Ember.Object.create
   toggleBreedType: ->
     if GG.breedingController.get('breedType') is GG.BREED_AUTOMATED
       GG.breedingController.set 'breedType', GG.BREED_CONTROLLED
+      GG.userController.set('controlMeiosis', true)
       GG.logController.logEvent GG.Events.ENABLED_MEIOSIS_CONTROL
     else
       GG.breedingController.set 'breedType', GG.BREED_AUTOMATED
+      GG.userController.set('controlMeiosis', false)
       GG.logController.logEvent GG.Events.DISABLED_MEIOSIS_CONTROL
 
   child: null
@@ -419,6 +421,13 @@ GG.userController = Ember.Object.create
     user.set 'reputation', user.get('reputation') + amt
     evt = if GG.reputationController.get('swapChangedEarned') then GG.Events.REPUTATION_EARNED else GG.Events.REPUTATION_CHANGED
     GG.logController.logEvent evt, amount: amt, result: user.get('reputation')
+
+  controlMeiosis: ((k, v) ->
+    if arguments.length > 1
+      @set('user.controlMeiosis', v)
+
+    @get 'user.controlMeiosis'
+  ).property('user.controlMeiosis')
 
   loadState: (type, obj)->
     allState = @get('state')
