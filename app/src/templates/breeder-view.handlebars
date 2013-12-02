@@ -62,6 +62,7 @@
         {{view GG.EggView id="egg"}}
       </div>
       <div id="meiosis-container" class="hidden">
+        <div id="chromosome-labels-meiosis"></div>
         {{#with GG.breedingController.father}}
           {{view GG.MeiosisView contentBinding="this"}}
         {{/with}}

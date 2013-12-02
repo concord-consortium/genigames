@@ -85,6 +85,7 @@ GG.StateInTask = Ember.State.extend
         $("#breeder").animate({left: 0},800,"easeOutCubic")
         $('#task-reputation-available').show()
         $('#task-reputation-best').show()
+        $('#chromosome-labels-meiosis').hide()
         setTimeout ->
           GG.motherPoolController.set('hidden', !GG.motherPoolController.selected)
           GG.fatherPoolController.set('hidden', !GG.fatherPoolController.selected)
