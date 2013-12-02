@@ -171,7 +171,7 @@ GG.DrakeView = Ember.View.extend
     else if @get('fire') and (@_notShownTraitAnimation('fire') or Math.random() < fireOdds)
       @set 'currentAnimation', GG.drakeAnimations.traitAnimations.firebreath
       @_setShownTraitAnimation('fire')
-    else if @get('shine') and (@_notShownTraitAnimation('shine') or Math.random() < 0.7)
+    else if @get('shine') and (@_notShownTraitAnimation('shine') or Math.random() < 0.8)
       @set 'currentAnimation', GG.drakeAnimations.traitAnimations.metallic
       @_setShownTraitAnimation('shine')
     else
