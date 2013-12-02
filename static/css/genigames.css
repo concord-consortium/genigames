@@ -224,6 +224,27 @@ html body div {
   width: 0;
   height: 0;
 }
+#chromosome-labels-meiosis {
+  position: relative;
+  top: -3px;
+  left: 7px;
+  height: 166px;
+  width: 408px;
+  background: top left no-repeat url("../images/brackets-long.png");
+  z-index: 10;
+}
+#chromosome-labels-meiosis.father {
+  height: 27px;
+}
+#chromosome-labels-meiosis.mother {
+  top: 96px;
+  background-position: 0 -100px;
+}
+#chromosome-labels-meiosis.none {
+  position: relative;
+  width: 0;
+  height: 0;
+}
 #breed-controls {
   position: absolute;
   top: 165px;
@@ -617,7 +638,7 @@ html body div {
 }
 .chromosome {
   position: absolute;
-  top: 10px;
+  top: 20px;
   width: 35px;
   height: 130px;
 }
