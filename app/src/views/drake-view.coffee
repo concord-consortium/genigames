@@ -116,7 +116,7 @@ GG.DrakeView = Ember.View.extend
       if @get('isDestroyed') then return
       Ember.run.next =>
         $(layer + ' .drake-idle-img').imagesLoaded =>
-          time = if @get('obstacleState')? then 800 else 3000
+          time = if @get('obstacleState')? then 800 else 1700
           setTimeout =>
             # rescale animation image width before showing
             width = @get('currentAnimation.frames') * 100
@@ -184,6 +184,8 @@ GG.DrakeView = Ember.View.extend
         (@get('fire') and @_notShownTraitAnimation('fire')) or
         (@get('obstacleCourse') and @get('obstacleState')?)
       nextTime = 50
+    else if @get('shine')
+      nextTime = 100 + Math.random() * 2000
     else nextTime = Math.random() * 6000
     setTimeout =>
       @setNextAnimation()
