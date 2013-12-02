@@ -46,7 +46,7 @@ GG.StateInTown = Ember.State.extend
 
       justCompletedTask = @get 'parentState.justCompletedTask'
 
-      if justCompletedTask?
+      if justCompletedTask? and (justCompletedTask is GG.tasksController.content[lastCompleteTask_i])
         setTimeout =>
           manager.transitionTo 'npcsShowingTaskEndMessage'
           GG.tasksController.showTaskEndMessage justCompletedTask
