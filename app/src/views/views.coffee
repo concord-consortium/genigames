@@ -598,7 +598,10 @@ GG.NPCSpeechBubbleView = Ember.View.extend
 GG.NPCHeartBubbleView = Ember.View.extend GG.PointsToolTip,
   templateName       : 'heart-bubble'
   classNameBindings  : ['hidden']
-  hidden             : Ember.computed.not('content.completed')
+  hidden             : (->
+    console.log("hidden? "+(!@get('content.completed') or @get('content.showSpeechBubble')))
+    !@get('content.completed') or @get('content.showSpeechBubble')
+  ).property('content.completed', 'content.showSpeechBubble')
   toolTipConfigTarget:  'bottomLeft'
   toolTipConfigTooltip: 'bottomRight'
   toolTipConfigTip   :  'rightBottom'
