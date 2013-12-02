@@ -171,7 +171,7 @@ GG.DrakeView = Ember.View.extend
     else if @get('fire') and (@_notShownTraitAnimation('fire') or Math.random() < fireOdds)
       @set 'currentAnimation', GG.drakeAnimations.traitAnimations.firebreath
       @_setShownTraitAnimation('fire')
-    else if @get('shine') and (@_notShownTraitAnimation('shine') or Math.random() < 0.8)
+    else if @get('shine') and (@_notShownTraitAnimation('shine') or Math.random() < 0.85)
       @set 'currentAnimation', GG.drakeAnimations.traitAnimations.metallic
       @_setShownTraitAnimation('shine')
     else
@@ -183,9 +183,9 @@ GG.DrakeView = Ember.View.extend
     if (@get('shine') and @_notShownTraitAnimation('shine')) or
         (@get('fire') and @_notShownTraitAnimation('fire')) or
         (@get('obstacleCourse') and @get('obstacleState')?)
-      nextTime = 50
+      nextTime = 100
     else if @get('shine')
-      nextTime = 100 + Math.random() * 2000
+      nextTime = 800 + Math.random() * 1300
     else nextTime = Math.random() * 6000
     setTimeout =>
       @setNextAnimation()
