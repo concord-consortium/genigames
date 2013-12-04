@@ -2,13 +2,13 @@
 @import 'app/style/mixins/border'
 
 .npc.left
-  top: 415px
-  left: 200px
+  top: 110px
+  left: -8px
   z-index: 2
 
 .npc.right
-  top: 415px
-  left: 625px
+  top: 110px
+  left: 470px
   z-index: 2
 
 .npc
@@ -17,20 +17,20 @@
     z-index: 0
   .bubble
     position: absolute
-    margin-left: 44px
-    margin-top: -111px
+    margin-left: 344px
+    margin-top: 36px
 
 .speech-bubble
-  absolute: bottom 205px
+  absolute: bottom 708px
   z-index: 2
   font-size: 1.2em
-  width: 225px
+  width: 245px
   background-color: rgb(251, 252, 225)
   padding: 23px
   border-radius: 35px
 
 .right .speech-bubble
-  left: -215px
+  left: -135px
   &:after
     absolute: right 40px bottom -30px width 0
     content: ""
@@ -41,7 +41,7 @@
     display: block
 
 .left .speech-bubble
-  left: 61px
+  left: 303px
   &:after
     absolute: left 40px bottom -30px width 0
     content: ""
@@ -61,16 +61,16 @@
   border: black solid 2px
 
 .heart-bubble
-  absolute: left top -44px
+  absolute: left 110px top 115px
   z-index: 10
   width: 48px
 
 .heart-bubble-empty
-  relative: left top 1px
+  relative: left top -2px
   width: 48px
 
 .heart-bubble-empty-wrapper
-  absolute: top -46px
+  absolute: left 110px top 115px
   overflow: hidden
   z-index: 11
 
