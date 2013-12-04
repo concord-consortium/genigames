@@ -2512,23 +2512,26 @@ a:hover {
   border-radius: 35px;
   border: #000 solid 2px;
 }
+.heart-wrapper {
+  position: absolute;
+  left: 104px;
+  top: 77px;
+}
 .heart-bubble {
   position: absolute;
-  left: 110px;
-  top: 115px;
+  left: 0;
+  top: 0;
   z-index: 10;
-  width: 48px;
 }
 .heart-bubble-empty {
   position: relative;
   left: 0;
-  top: -2px;
-  width: 48px;
+  top: 0;
 }
 .heart-bubble-empty-wrapper {
   position: absolute;
-  left: 110px;
-  top: 115px;
+  left: 0;
+  top: 0;
   overflow: hidden;
   z-index: 11;
 }
