@@ -23,6 +23,21 @@ GG.LogoutButton = Ember.View.extend
   click: ->
     GG.statemanager.transitionTo 'loggingOut'
 
+GG.GoToTownButton = Ember.View.extend GG.PointsToolTip,
+  tagName: 'div'
+  classNames: 'goToTown'
+  toolTipText: "Go back to town"
+  isShowingBreederBinding: 'GG.breedingController.isShowingBreeder2'
+  hidden: (->
+    not @get('isShowingBreeder')
+  ).property('isShowingBreeder')
+  classNameBindings: ['hidden']
+
+GG.GoToWorldButton = Ember.View.extend GG.PointsToolTip,
+  tagName: 'div'
+  classNames: 'goToWorld'
+  toolTipText: "Go back to world"
+
 GG.BackToTaskListButton = Ember.View.extend
   tagName: 'div'
   classNames: 'task-list'
@@ -599,7 +614,6 @@ GG.NPCHeartBubbleView = Ember.View.extend GG.PointsToolTip,
   templateName       : 'heart-bubble'
   classNameBindings  : ['hidden']
   hidden             : (->
-    console.log("hidden? "+(!@get('content.completed') or @get('content.showSpeechBubble')))
     !@get('content.completed') or @get('content.showSpeechBubble')
   ).property('content.completed', 'content.showSpeechBubble')
   toolTipConfigTarget:  'bottomLeft'

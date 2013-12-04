@@ -319,6 +319,7 @@ GG.breedingController = Ember.Object.create
   motherBinding: 'GG.parentController.selectedMother'
   fatherBinding: 'GG.parentController.selectedFather'
   isShowingBreeder: false
+  isShowingBreeder2: false   # stupid stupid Ember...
   isBreeding: false
 
   breedType: GG.BREED_AUTOMATED

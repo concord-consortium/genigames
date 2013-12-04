@@ -10,6 +10,7 @@ GG.StateInTask = Ember.State.extend
       if not GG.baselineController.get 'isBaseline'
         $('#breeding-apparatus').animate {"left":"20px"},1200,'easeOutCubic', ->
           GG.breedingController.set 'isShowingBreeder', true
+          GG.breedingController.set 'isShowingBreeder2', true
           GG.tutorialMessageController.showTargetTutorial()
       else
         $('#breeding-apparatus').css {"left":"20px"}
@@ -25,6 +26,8 @@ GG.StateInTask = Ember.State.extend
 
     exit: (manager) ->
       manager.send 'hideLeaderboard'
+      GG.breedingController.set 'isShowingBreeder', false
+      GG.breedingController.set 'isShowingBreeder2', false
       # clear offspring
       GG.breedingController.set 'child', null
       GG.offspringController.set 'content', null
