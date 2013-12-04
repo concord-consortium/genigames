@@ -2435,6 +2435,19 @@ a:hover {
 .crossoverPoint.GGTournamentDrake.spikes {
   top: 72px;
 }
+.npc {
+  position: absolute;
+  pointer-events: none;
+}
+.npc .character {
+  z-index: 0;
+}
+.npc .bubble {
+  position: absolute;
+  pointer-events: all;
+  margin-left: 344px;
+  margin-top: 36px;
+}
 .npc.left {
   top: 110px;
   left: -8px;
@@ -2445,20 +2458,10 @@ a:hover {
   left: 470px;
   z-index: 2;
 }
-.npc {
-  position: absolute;
-}
-.npc .character {
-  z-index: 0;
-}
-.npc .bubble {
-  position: absolute;
-  margin-left: 344px;
-  margin-top: 36px;
-}
 .speech-bubble {
   position: absolute;
   bottom: 708px;
+  pointer-events: all;
   z-index: 2;
   font-size: 1.2em;
   width: 245px;
@@ -2516,6 +2519,7 @@ a:hover {
   position: absolute;
   left: 104px;
   top: 77px;
+  pointer-events: all;
 }
 .heart-bubble {
   position: absolute;
