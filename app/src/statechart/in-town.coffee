@@ -16,6 +16,9 @@ GG.StateInTown = Ember.State.extend
   exit: ->
     $('#town').fadeOut(1000)
 
+  goToWorld: (manager) ->
+    manager.transitionTo 'inWorld'
+
   npcsWaiting: Ember.State.create
 
     # we use setup instead of enter because otherwise the variable justCompletedTask

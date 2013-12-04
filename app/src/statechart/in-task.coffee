@@ -2,6 +2,12 @@ GG.StateInTask = Ember.State.extend
 
   initialState: 'showingBreeder'
 
+  goToTown: (manager) ->
+    manager.transitionTo 'inTown'
+
+  goToWorld: (manager) ->
+    manager.transitionTo 'inWorld'
+
   showingBreeder: Ember.State.create
     initialState: 'parentSelect'
 

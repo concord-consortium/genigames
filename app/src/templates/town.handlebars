@@ -12,6 +12,8 @@
   <div id="level">
     {{GG.townsController.currentTown.name}} {{GG.tasksController.currentLevelId}}
   </div>
+  {{view GG.GoToTownButton}}
+  {{view GG.GoToWorldButton}}
   {{view GG.LogoutButton}}
 </div>
 <div id="town" {{bindAttr class="view.background"}}>

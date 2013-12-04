@@ -32,11 +32,15 @@ GG.GoToTownButton = Ember.View.extend GG.PointsToolTip,
     not @get('isShowingBreeder')
   ).property('isShowingBreeder')
   classNameBindings: ['hidden']
+  click: ->
+    GG.statemanager.send 'goToTown'
 
 GG.GoToWorldButton = Ember.View.extend GG.PointsToolTip,
   tagName: 'div'
   classNames: 'goToWorld'
   toolTipText: "Go back to world"
+  click: ->
+    GG.statemanager.send 'goToWorld'
 
 GG.BackToTaskListButton = Ember.View.extend
   tagName: 'div'
