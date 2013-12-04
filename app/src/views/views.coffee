@@ -616,13 +616,14 @@ GG.NPCSpeechBubbleView = Ember.View.extend
 
 GG.NPCHeartBubbleView = Ember.View.extend GG.PointsToolTip,
   templateName       : 'heart-bubble'
+  classNames         : ['heart-wrapper']
   classNameBindings  : ['hidden']
   hidden             : (->
     !@get('content.completed') or @get('content.showSpeechBubble')
   ).property('content.completed', 'content.showSpeechBubble')
   toolTipConfigTarget:  'bottomLeft'
   toolTipConfigTooltip: 'bottomRight'
-  toolTipConfigTip   :  'rightBottom'
+  toolTipConfigTip   :  'bottomRight'
   toolTipText: (->
     "Replay: " + @get('content.targetDrake')
   ).property('content')
