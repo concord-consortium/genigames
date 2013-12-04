@@ -26,7 +26,7 @@ GG.LogoutButton = Ember.View.extend
 GG.GoToTownButton = Ember.View.extend GG.PointsToolTip,
   tagName: 'div'
   classNames: 'goToTown'
-  toolTipText: "Go back to town"
+  toolTipText: "Reset task and go back to town"
   isShowingBreederBinding: 'GG.breedingController.isShowingBreeder2'
   hidden: (->
     not @get('isShowingBreeder')
