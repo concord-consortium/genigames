@@ -1,6 +1,17 @@
 @import 'app/style/mixins/position'
 @import 'app/style/mixins/border'
 
+.npc
+  position: absolute
+  pointer-events: none
+  .character
+    z-index: 0
+  .bubble
+    position: absolute
+    pointer-events: all
+    margin-left: 344px
+    margin-top: 36px
+
 .npc.left
   top: 110px
   left: -8px
@@ -11,17 +22,9 @@
   left: 470px
   z-index: 2
 
-.npc
-  position: absolute
-  .character
-    z-index: 0
-  .bubble
-    position: absolute
-    margin-left: 344px
-    margin-top: 36px
-
 .speech-bubble
   absolute: bottom 708px
+  pointer-events: all
   z-index: 2
   font-size: 1.2em
   width: 245px
@@ -62,6 +65,7 @@
 
 .heart-wrapper
   absolute: left 104px top 77px
+  pointer-events: all
 
 .heart-bubble
   absolute: left top
