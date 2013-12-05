@@ -17,6 +17,7 @@
   {{view GG.LogoutButton}}
 </div>
 <div id="town" {{bindAttr class="view.background"}}>
+  <div class="gradient"></div>
   {{#each view.content}}
     {{#view GG.TaskNPCView contentBinding="this"}}
       <a href="#" {{action "npcSelected" this}}>
