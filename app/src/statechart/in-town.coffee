@@ -53,7 +53,7 @@ GG.StateInTown = Ember.State.extend
         setTimeout =>
           manager.transitionTo 'npcsShowingTaskEndMessage'
           GG.tasksController.showTaskEndMessage justCompletedTask
-        , 1000
+        , 50
       else if firstIncompleteTask?
         setTimeout =>
           firstIncompleteTask.set('showQuestionBubble', true)
