@@ -523,13 +523,13 @@ GG.TaskNPCView = Ember.View.extend
     return "" if @get('content.showInForeground')
 
     scale = @get('content.npc.scale') || 0.5
-
+    layer = @get('content.npc.layer') || 1
     flip  = @get('content.npc.flip') || false
 
     if flip then xModifier = -1 else xModifier = 1
 
-    style = "top: " + @get('content.npc.position.y') + "px; left: " + @get('content.npc.position.x') + "px;"
-
+    style =  "top: " + @get('content.npc.position.y') + "px; left: " + @get('content.npc.position.x') + "px;"
+    style += "z-index: #{layer-1};"
     for vendor in ["-webkit-", "-moz-", "-ms-", "-o-", ""]
       style += "#{vendor}transform: scaleX(#{scale * xModifier}) scaleY(#{scale});"
       style += "#{vendor}transform-origin: 0 0;"
