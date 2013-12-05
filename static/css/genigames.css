@@ -2451,18 +2451,18 @@ a:hover {
 .npc.left {
   top: 110px;
   left: -8px;
-  z-index: 2;
+  z-index: 3;
 }
 .npc.right {
   top: 110px;
   left: 470px;
-  z-index: 2;
+  z-index: 3;
 }
 .speech-bubble {
   position: absolute;
   bottom: 708px;
   pointer-events: all;
-  z-index: 2;
+  z-index: 3;
   font-size: 1.2em;
   width: 245px;
   background-color: #fbfce1;
@@ -2506,7 +2506,7 @@ a:hover {
   left: 340px;
   top: 134px;
   width: 225px;
-  z-index: 2;
+  z-index: 3;
   font-size: 1.2em;
   background-color: #fbfce1;
   padding: 23px;
