@@ -257,6 +257,11 @@ GG.tasksController = Ember.ArrayController.create
     return rep
   ).property('currentTask','currentTask.cyclesRemaining')
 
+  updateHeartFills: ->
+    task.propertyDidChange('reputationEarned') for task in @get('content')
+
+
+
 GG.drakeController = Ember.Object.create
   visibleGenesBinding: 'GG.tasksController.currentTask.visibleGenes'
   hiddenGenesBinding: 'GG.tasksController.currentTask.hiddenGenes'
