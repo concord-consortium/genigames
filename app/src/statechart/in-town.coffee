@@ -24,7 +24,6 @@ GG.StateInTown = Ember.State.extend
     # we use setup instead of enter because otherwise the variable justCompletedTask
     # will not have been set yet. Note: "setup" method name may change in later v's of Ember
     setup: (manager) ->
-      GG.tasksController.updateHeartFills()
       GG.tasksController.clearCurrentTask()
       task.set('showQuestionBubble', false) for task in GG.tasksController.content
       task.set('showSpeechBubble', false) for task in GG.tasksController.content
@@ -64,6 +63,10 @@ GG.StateInTown = Ember.State.extend
         setTimeout =>
           manager.transitionTo 'npcShowingFinalMessage'
         , 1000
+
+      setTimeout =>
+        GG.tasksController.updateHeartFills()
+      , 100
 
 
     npcSelected: (manager, task) ->
