@@ -224,8 +224,8 @@ html body div {
   width: 0;
   height: 0;
 }
-#chromosome-labels-meiosis {
-  position: relative;
+#chromosome-labels-meiosis-long {
+  position: absolute;
   top: -3px;
   left: 7px;
   height: 166px;
@@ -233,8 +233,26 @@ html body div {
   background: top left no-repeat url("../images/brackets-long.png");
   z-index: 10;
 }
-#chromosome-labels-meiosis.father {
+#chromosome-labels-meiosis-long.father {
   height: 27px;
+}
+#chromosome-labels-meiosis-long.mother {
+  top: 96px;
+  background-position: 0 -100px;
+}
+#chromosome-labels-meiosis-long.none {
+  position: relative;
+  width: 0;
+  height: 0;
+}
+#chromosome-labels-meiosis {
+  position: relative;
+  top: -3px;
+  left: 10px;
+  height: 267px;
+  width: 408px;
+  background: top left no-repeat url("../images/brackets-dark.png");
+  z-index: 10;
 }
 #chromosome-labels-meiosis.mother {
   top: 96px;
@@ -244,6 +262,19 @@ html body div {
   position: relative;
   width: 0;
   height: 0;
+}
+#chromosome-labels-offspring {
+  position: absolute;
+  top: 25px;
+  left: -314px;
+  width: 227px;
+  height: 32px;
+}
+#chromosome-labels-offspring.male {
+  background: top left no-repeat url("../images/brackets.png");
+}
+#chromosome-labels-offspring.female {
+  background: top -260px left no-repeat url("../images/brackets.png");
 }
 #breed-controls {
   position: absolute;
