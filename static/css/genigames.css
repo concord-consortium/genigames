@@ -255,8 +255,8 @@ html body div {
   z-index: 10;
 }
 #chromosome-labels-meiosis.mother {
-  top: 96px;
-  background-position: 0 -100px;
+  top: 238px;
+  background-position: 0 -243px;
 }
 #chromosome-labels-meiosis.none {
   position: relative;
@@ -2363,6 +2363,9 @@ a:hover {
   -webkit-border-radius: 90px;
   -moz-border-radius: 90px;
   border-radius: 90px;
+}
+.cell.not-chosen {
+  background-color: rgba(223,223,223,0.25);
 }
 .meiosis.father,
 .meiosis.mother {
