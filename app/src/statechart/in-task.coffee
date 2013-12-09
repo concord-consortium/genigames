@@ -171,6 +171,7 @@ GG.StateInTask = Ember.State.extend
         # hide the offspring pool
         $("#offspring-panel").animate({left: 400},500,"easeOutCubic")
         $("#offspring-pool .chromosome-panel").hide()
+        $("#chromosome-labels-offspring").hide()
         scale = GG.MeiosisAnimation.get 'timeScale'
         setTimeout ->
           $('#chromosome-labels').hide()
@@ -195,6 +196,7 @@ GG.StateInTask = Ember.State.extend
         GG.breedingController.set 'childSavedToParents', false
         $('#meiosis-container').removeClass('hidden')
         $("#offspring-pool .chromosome-panel").hide()
+        $("#chromosome-labels-offspring").hide()
         $('#chromosome-labels-meiosis').fadeIn(GG.MeiosisAnimation.scale(200))
         setTimeout ->
           GG.tutorialMessageController.showMeiosisTutorial ->
@@ -310,6 +312,7 @@ GG.StateInTask = Ember.State.extend
       showOffspring: (manager) ->
         $('#progress-bar').switchClass($('#progress-bar').attr('class'),"results",1000)
         $("#offspring-pool .chromosome-panel").show()
+        $("#chromosome-labels-offspring").show()
         $('#offspring-panel').animate({left: -76},300,"easeOutCubic")
         GG.tutorialMessageController.showFirstOffspringCreatedTutorial()
         if GG.tasksController.get('currentTask.cyclesRemaining') is 0 and

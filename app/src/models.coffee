@@ -218,6 +218,10 @@ GG.Drake = Ember.Object.extend
     @get('sex') == GG.MALE
   ).property('sex')
 
+  sexString: (->
+    if @get('sex') == GG.FEMALE then "female" else "male"
+  ).property('sex')
+
   hasCharacteristics: (characteristics) ->
     gorg = @get 'biologicaOrganism'
 

@@ -73,6 +73,7 @@
       </div>
       {{#view GG.OffspringPoolView id="offspring-pool"}}
         {{#with GG.offspringController.content}}
+          <div id="chromosome-labels-offspring" {{bindAttr class="this.sexString"}}></div>
           {{#with GG.offspringController}}
             {{view GG.ChromosomePanelView controllerBinding="this"}}
           {{/with}}
