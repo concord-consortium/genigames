@@ -210,6 +210,7 @@ GG.tasksController = Ember.ArrayController.create
       if GG.obstacleCourseController.get 'hasObstacleCourse'
         GG.statemanager.transitionTo 'obstacleCourse'
       else
+        GG.reputationController.set('currentTaskReputation', 0)
         GG.statemanager.transitionTo 'inTown', @get('currentTask')
 
   isCurrentTaskComplete: ->
@@ -1445,8 +1446,8 @@ GG.reputationController = Ember.Object.create
     current += @get('reputationForTask')
     if @get('hasObstacleCourse')
       current += (@get('breedsLeft') * GG.actionCostsController.getCost('cycleRemainingBonus'))
-    current -= @_repFor GG.Events.INCOMPLETE_COURSE
-    current -= @_repFor GG.Events.COMPLETED_TASK
+    #current -= @_repFor GG.Events.INCOMPLETE_COURSE
+    #current -= @_repFor GG.Events.COMPLETED_TASK
     if current < 0 then 0 else current
   ).property('currentTaskReputation','reputationForTask','breedsLeft','hasObstacleCourse')
 
@@ -1454,8 +1455,10 @@ GG.reputationController = Ember.Object.create
     changeAnimatedReputation = =>
       animated = @get('animatedReputation')
       current = @get('currentTaskReputationAssumingCompletion')
-      if (animated + 15) < current
+      if ((animated + 15) < current) or ((animated - 15) > current)
         @set('animatedReputation', current)    # jump ahead
+        $("#task-reputation-available").removeClass("drop").removeClass("gain")
+        return
       else if animated < current
         @set('animatedReputation', animated+1)
         $("#task-reputation-available").addClass("gain")
