@@ -96,15 +96,21 @@ GG.MeiosisAnimation = Ember.Object.create
     args.cell.animate({width: 450}, t, 'easeInOutQuad')
 
     parent = if args.parentView.get('content.female') then "mother" else "father"
+
+    if parent is "father"
+      $('#chromosome-labels-meiosis').attr('class', 'mother')
+    else
+      $('#chromosome-labels-meiosis').removeClass('mother')
+      $('#chromosome-labels-meiosis').hide()
     @registerTimeout t/2, =>
-      $('#chromosome-labels-meiosis').attr('class', parent).fadeIn(t*2)
+      $('#chromosome-labels-meiosis-long').attr('class', parent).fadeIn(t*2)
 
   divide: (args)->
     # move homologous pairs apart
     # line up sister chromatids along center line (Metaphase II)
     t = @scale(800)
 
-    $('#chromosome-labels-meiosis').fadeOut(t/3)
+    $('#chromosome-labels-meiosis-long').fadeOut(t/3)
 
     if args.parentView.get('motherFather') is 'mother'
       args.container.animate({top: "-=70px"}, t, 'easeInOutQuad')

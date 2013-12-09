@@ -99,6 +99,7 @@ GG.StateInTask = Ember.State.extend
         $('#task-reputation-available').show()
         $('#task-reputation-best').show()
         $('#chromosome-labels-meiosis').hide()
+        $('#chromosome-labels-meiosis-long').hide()
         setTimeout ->
           GG.motherPoolController.set('hidden', !GG.motherPoolController.selected)
           GG.fatherPoolController.set('hidden', !GG.fatherPoolController.selected)
@@ -194,6 +195,7 @@ GG.StateInTask = Ember.State.extend
         GG.breedingController.set 'childSavedToParents', false
         $('#meiosis-container').removeClass('hidden')
         $("#offspring-pool .chromosome-panel").hide()
+        $('#chromosome-labels-meiosis').fadeIn(GG.MeiosisAnimation.scale(200))
         setTimeout ->
           GG.tutorialMessageController.showMeiosisTutorial ->
             GG.meiosisController.animate ->
