@@ -176,26 +176,30 @@ GG.MeiosisAnimation = Ember.Object.create
       , args.parentView.get('motherFather')
 
   chooseGamete: (args)->
-    lastGamete = -1
-    pickRandomGamete = =>
-      args.container.find(".cell").addClass 'not-chosen'
-      gamete = ExtMath.randomInt(4) while (gamete is lastGamete or gamete < 0)
-      lastGamete = gamete
-      left = gamete is 0 or gamete is 1
-      top  = gamete is 0 or gamete is 2
-      horizontal = if left then "left" else "right"
-      vertical   = if top  then "top" else "bottom"
-      chosenCell = ".cell-#{horizontal}.cell-#{vertical}"
-      args.container.find(chosenCell).removeClass 'not-chosen'
+    if (args.parentView.get('randomGameteNumberOverride') < 0)
+      realSelectionTime = @scale(1800)
+      lastGamete = -1
+      pickRandomGamete = =>
+        args.container.find(".cell").addClass 'not-chosen'
+        gamete = ExtMath.randomInt(4) while (gamete is lastGamete or gamete < 0)
+        lastGamete = gamete
+        left = gamete is 0 or gamete is 1
+        top  = gamete is 0 or gamete is 2
+        horizontal = if left then "left" else "right"
+        vertical   = if top  then "top" else "bottom"
+        chosenCell = ".cell-#{horizontal}.cell-#{vertical}"
+        args.container.find(chosenCell).removeClass 'not-chosen'
 
-    times = [90]
-    times.push(times[i-1]+90) for i in [1..5]
-    times.push(times[i-1]+120) for i in [6..9]
-    times.push(times[i-1]+180) for i in [10..12]
-    for t in times
-      @registerTimeout @scale(t), pickRandomGamete
+      times = [90]
+      times.push(times[i-1]+90) for i in [1..5]
+      times.push(times[i-1]+120) for i in [6..9]
+      times.push(times[i-1]+180) for i in [10..12]
+      for t in times
+        @registerTimeout @scale(t), pickRandomGamete
+    else
+      realSelectionTime = 0
 
-    @registerTimeout @scale(1800), =>
+    @registerTimeout realSelectionTime, =>
       args.container.find(".cell").addClass 'not-chosen'
       gamete = args.parentView.get('randomGameteNumber')
       left = gamete is 0 or gamete is 1

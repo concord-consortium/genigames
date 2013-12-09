@@ -674,6 +674,8 @@ GG.meiosisController = Ember.Object.create
       @set('selectedCrossover', null)
       @set('crossoverSelected', false)
       @set('inAnimation', false)
+      @set('motherGameteNumber', -1)
+      @set('fatherGameteNumber', -1)
   chromosomeSelected: false
   selectedChromosomes: { father: {}, mother: {}}
   deselectChromosome: (chromoView) ->
