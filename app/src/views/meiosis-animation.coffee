@@ -176,31 +176,15 @@ GG.MeiosisAnimation = Ember.Object.create
       , args.parentView.get('motherFather')
 
   chooseGamete: (args)->
-    # TODO eventually let students choose
-    # container.find('.cell').click (evt)->
-    #   console.log("cell click complete", evt)
-    # enlarge the chosen gamete
-    # and make the rest disappear
     gamete = args.parentView.get('randomGameteNumber')
-    chosenChromos = ""
-    chosenCell = ""
-    down = true
-    right = true
-    if gamete == 0
-      chosenCell = ".cell-left.cell-top"
-    else if gamete == 1
-      chosenCell = ".cell-left.cell-bottom"
-      down = false
-    else if gamete == 2
-      chosenCell = ".cell-right.cell-top"
-      right = false
-    else if gamete == 3
-      chosenCell = ".cell-right.cell-bottom"
-      down = false
-      right = false
+    left = gamete is 0 or gamete is 1
+    top  = gamete is 0 or gamete is 2
+    horizontal = if left then "left" else "right"
+    vertical   = if top  then "top" else "bottom"
+    chosenCell = ".cell-#{horizontal}.cell-#{vertical}"
     chosenChromos = ".cell" + gamete
-    leftShift = (if right then "+=" else "-=" ) + "88px"
-    topShift = (if down then "+=" else "-=" ) + "55px"
+    leftShift = (if left then "+=" else "-=" ) + "88px"
+    topShift = (if top then "+=" else "-=" ) + "55px"
 
     @set('stage', "post-gamete selection")
 
