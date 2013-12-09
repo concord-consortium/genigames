@@ -176,30 +176,53 @@ GG.MeiosisAnimation = Ember.Object.create
       , args.parentView.get('motherFather')
 
   chooseGamete: (args)->
-    gamete = args.parentView.get('randomGameteNumber')
-    left = gamete is 0 or gamete is 1
-    top  = gamete is 0 or gamete is 2
-    horizontal = if left then "left" else "right"
-    vertical   = if top  then "top" else "bottom"
-    chosenCell = ".cell-#{horizontal}.cell-#{vertical}"
-    chosenChromos = ".cell" + gamete
-    leftShift = (if left then "+=" else "-=" ) + "88px"
-    topShift = (if top then "+=" else "-=" ) + "55px"
+    lastGamete = -1
+    pickRandomGamete = =>
+      args.container.find(".cell").addClass 'not-chosen'
+      gamete = ExtMath.randomInt(4) while (gamete is lastGamete or gamete < 0)
+      lastGamete = gamete
+      left = gamete is 0 or gamete is 1
+      top  = gamete is 0 or gamete is 2
+      horizontal = if left then "left" else "right"
+      vertical   = if top  then "top" else "bottom"
+      chosenCell = ".cell-#{horizontal}.cell-#{vertical}"
+      args.container.find(chosenCell).removeClass 'not-chosen'
 
-    @set('stage', "post-gamete selection")
+    times = [90]
+    times.push(times[i-1]+90) for i in [1..5]
+    times.push(times[i-1]+120) for i in [6..9]
+    times.push(times[i-1]+180) for i in [10..12]
+    for t in times
+      @registerTimeout @scale(t), pickRandomGamete
 
-    t = @scale(1000)
+    @registerTimeout @scale(1800), =>
+      args.container.find(".cell").addClass 'not-chosen'
+      gamete = args.parentView.get('randomGameteNumber')
+      left = gamete is 0 or gamete is 1
+      top  = gamete is 0 or gamete is 2
+      horizontal = if left then "left" else "right"
+      vertical   = if top  then "top" else "bottom"
+      chosenCell = ".cell-#{horizontal}.cell-#{vertical}"
+      chosenChromos = ".cell" + gamete
+      leftShift = (if left then "+=" else "-=" ) + "88px"
+      topShift = (if top then "+=" else "-=" ) + "55px"
 
-    args.container.find(chosenChromos).animate({left: leftShift, top: 50}, t, 'easeInOutQuad')
-    args.container.find(".chromosome:not(" + chosenChromos + ")").animate({opacity: 0}, 0.7*t)
-    args.container.find(chosenCell).animate({top: 47, left: 73, height: 75}, t, 'easeInOutQuad')
-    args.container.find(".cell:not(.mainCell):not(" + chosenCell + ")").animate({opacity: 0}, 0.7*t)
-    @registerTimeout 0.7*t, ->
-      args.container.find(".chromosome:not(" + chosenChromos + ")").hide()
-      args.container.find(".cell:not(.mainCell):not(" + chosenCell + ")").remove()
-    if args.callback?
-      @registerTimeout 1.1*t, ->
-        args.callback()
+      args.container.find(chosenCell).removeClass 'not-chosen'
+
+      @set('stage', "post-gamete selection")
+
+      t = @scale(1000)
+
+      args.container.find(chosenChromos).animate({left: leftShift, top: 50}, t, 'easeInOutQuad')
+      args.container.find(".chromosome:not(" + chosenChromos + ")").animate({opacity: 0}, 0.7*t)
+      args.container.find(chosenCell).animate({top: 47, left: 73, height: 75}, t, 'easeInOutQuad')
+      args.container.find(".cell:not(.mainCell):not(" + chosenCell + ")").animate({opacity: 0}, 0.7*t)
+      @registerTimeout 0.7*t, ->
+        args.container.find(".chromosome:not(" + chosenChromos + ")").hide()
+        args.container.find(".cell:not(.mainCell):not(" + chosenCell + ")").remove()
+      if args.callback?
+        @registerTimeout 1.1*t, ->
+          args.callback()
 
   mergeChosenGametes: (fatherContainerName, motherContainerName, callback)->
     fatherContainer = $(fatherContainerName)
