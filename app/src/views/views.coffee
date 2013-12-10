@@ -38,7 +38,7 @@ GG.GoToTownButton = Ember.View.extend GG.PointsToolTip,
 GG.GoToWorldButton = Ember.View.extend GG.PointsToolTip,
   tagName: 'div'
   classNames: 'goToWorld'
-  toolTipText: "Go back to world"
+  toolTipText: "Click to leave the town"
   click: ->
     GG.statemanager.send 'goToWorld'
 
@@ -656,6 +656,8 @@ GG.NPCFinalMessageBubbleView = Ember.View.extend
     GG.statemanager.transitionTo 'inWorld.townsWaiting'
   dismissFinalBubble: ->
     @set 'content.showFinalMessageBubble', false
+    $('.goToWorld').mouseover()
+    setTimeout (-> $('.goToWorld').qtip("hide")), 2500
 
 GG.MeiosisView = Ember.View.extend
   templateName: 'meiosis'
