@@ -1082,14 +1082,17 @@ GG.tutorialMessageController = Ember.Object.create
     return (townId is 0 and taskId is 6)
   ).property('enabled', 'GG.townsController.currentTown', 'GG.tasksController.currentTask')
 
+  targetTutorialShown: false
   showTargetTutorial: ->
-    if @get 'isFirstTask' then GG.showInfoDialog $('#target-tutorial-target'),
-      "These are the traits of the %@1 you need to create. To do that you have
-      to get a male and female parent who can breed the target %@1.".fmt(Ember.I18n.t('drake')),
-      target: "leftMiddle"
-      tooltip: "rightMiddle"
-      hideAction: =>
-        @showParentsTutorial()
+    if @get('isFirstTask')  and !@get 'targetTutorialShown'
+      @set 'targetTutorialShown', true
+      GG.showInfoDialog $('#target-tutorial-target'),
+        "These are the traits of the %@1 you need to create. To do that you have
+        to get a male and female parent who can breed the target %@1.".fmt(Ember.I18n.t('drake')),
+        target: "leftMiddle"
+        tooltip: "rightMiddle"
+        hideAction: =>
+          @showParentsTutorial()
 
   firstDrakeSelected: false
   showFirstDrakeSelectionTutorial: (parent) ->
