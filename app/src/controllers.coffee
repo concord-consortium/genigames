@@ -1497,6 +1497,8 @@ GG.freeMovesController = Ember.Object.create
   refundMove: ->
     movesUsed = @get 'movesUsed'
     @set 'movesUsed', Math.max movesUsed-1, 0
+  reset: ->
+    @set 'movesUsed', 0
   movesRemaining: (->
     freeMoves = @get 'freeMoves'
     freeMoves - @get 'movesUsed'
