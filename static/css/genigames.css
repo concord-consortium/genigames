@@ -2483,14 +2483,16 @@ a:hover {
   margin-top: 36px;
 }
 .npc.left {
+  z-index: 3;
+  background: top -110px left 36px no-repeat url("../images/townForegroundShadowsOval.png");
   top: 110px;
   left: -8px;
-  z-index: 3;
 }
 .npc.right {
+  z-index: 3;
+  background: top -110px left 36px no-repeat url("../images/townForegroundShadowsOval.png");
   top: 110px;
   left: 470px;
-  z-index: 3;
 }
 .speech-bubble {
   position: absolute;
