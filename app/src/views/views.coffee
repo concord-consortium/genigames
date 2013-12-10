@@ -654,6 +654,8 @@ GG.NPCFinalMessageBubbleView = Ember.View.extend
     GG.statemanager.transitionTo 'inWorld.movingDirectlyToNextTown'
   world: ->
     GG.statemanager.transitionTo 'inWorld.townsWaiting'
+  dismissFinalBubble: ->
+    @set 'content.showFinalMessageBubble', false
 
 GG.MeiosisView = Ember.View.extend
   templateName: 'meiosis'

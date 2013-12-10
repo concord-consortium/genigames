@@ -41,6 +41,7 @@
         {{view.text}}
         <br/><br/>
         <button {{action "world"}}>Leave the town</button>
+        <button {{action "dismissFinalBubble"}}>Hang around for a while</button>
       {{/view}}
       <a href="#" {{action "replayTask" this}}>
         {{view GG.NPCHeartBubbleView contentBinding="this"}}
