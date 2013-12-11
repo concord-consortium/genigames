@@ -184,7 +184,7 @@ GG.tasksController = Ember.ArrayController.create
       try
         GG.tutorialMessageController.set('finishButtonTutorialShown', true)
         GG.lastShownDialog.qtip('hide')
-      finally
+      catch e
         GG.lastShownDialog = null
     $('#completion-dialog').show()
     $('#modal-backdrop-fade').show()
