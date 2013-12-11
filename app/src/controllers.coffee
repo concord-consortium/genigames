@@ -1333,6 +1333,8 @@ GG.showInfoDialog = ($elem, text, opts={}) ->
       $(backdrop).fadeOut(@options.show.effect.length)
   GG.lastShownDialog = $elem
   $elem.qtip config
+  $elem.bind 'hide', ->
+    $(this).qtip('hide')
 
 GG.showChainedInfoDialog = ($elem, textArr, opts={}) ->
   opts.finalCallback = opts.hideAction unless opts.finalCallback?

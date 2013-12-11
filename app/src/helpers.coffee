@@ -25,3 +25,15 @@ if !window.cancelAnimationFrame
   window.cancelAnimationFrame = (id) ->
     clearTimeout id
 
+
+# Add show/hide triggers to elements
+
+(($) ->
+    $.each(['show','hide'], (i, val) ->
+        _org = $.fn[val]
+        $.fn[val] = ->
+            this.trigger(val)
+            _org.apply(this, arguments)
+
+    )
+)(jQuery)
