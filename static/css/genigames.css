@@ -114,6 +114,7 @@ html body div {
   background: top left no-repeat url("../images/background_meiosis_obstacle.jpg");
 }
 #breed-top-bar {
+  background: 20px 17px no-repeat url("../images/targetRadioButtonWAlleles.jpg");
   color: #39230b;
   font-weight: bold;
   font-size: 1.1em;
@@ -123,78 +124,8 @@ html body div {
   width: 1040px;
   height: 152px;
 }
-#task-description {
-  position: absolute;
-  top: 33px;
-  left: 34px;
-  width: 610px;
-}
-#task-reputation-available {
-  position: absolute;
-  top: 33px;
-  left: 666px;
-  width: 120px;
-  text-align: center;
-  -webkit-border-radius: 8px;
-  -moz-border-radius: 8px;
-  border-radius: 8px;
-}
-#task-reputation-available.drop {
-  box-shadow: 0 0 15px #fc0;
-  background: #fc0;
-}
-#task-reputation-available.gain {
-  box-shadow: 0 0 15px #3f0;
-  background: rgba(51,255,0,0.45);
-}
-#task-reputation-best {
-  position: absolute;
-  top: 33px;
-  left: 807px;
-  width: 120px;
-  text-align: center;
-}
-#progress-bar {
-  position: absolute;
-  top: 63px;
-  left: 25px;
-  height: 35px;
-  overflow: hidden;
-}
-#progress-bar .bg {
-  position: absolute;
-  top: 0px;
-  left: 11px;
-  width: 894px;
-  height: 38px;
-  background: top left no-repeat url("../images/breeding-progress-overlay.png");
-}
-#progress-bar .bg.obstacle-course {
-  position: absolute;
-  top: 0px;
-  left: 11px;
-  background: top left no-repeat url("../images/obstacle-progress-overlay.png");
-}
-#progress-bar.selecting {
-  width: 128px;
-}
-#progress-bar.breeding {
-  width: 658px;
-}
-#progress-bar.results {
-  width: 784px;
-}
-#progress-bar.obstacle-results {
-  width: 906px;
-}
-#progress-bar-obstacle {
-  position: absolute;
-  top: 65px;
-  left: 25px;
-  height: 38px;
-  width: 894px;
-  background: top left no-repeat url("../images/obstacle-progress-bg.png");
-  overflow: hidden;
+#breed-top-bar.no-alleles {
+  background: 20px 17px no-repeat url("../images/targetRadioButton.jpg");
 }
 #breeder {
   position: absolute;
@@ -651,6 +582,58 @@ html body div {
   left: 14px;
   right: 14px;
   text-align: center;
+}
+.trait-group {
+  float: left;
+  padding-top: 47px;
+  padding-left: 60px;
+  padding-right: 14px;
+}
+.trait-group.horns {
+  padding-left: 80px;
+  padding-right: 30px;
+}
+.characteristic {
+  width: 100px;
+  height: 20px;
+  padding-top: 5px;
+}
+.characteristic-radio {
+  background: top left no-repeat url("../images/radioButton.png");
+  width: 14px;
+  height: 14px;
+}
+.characteristic.selected .characteristic-radio {
+  background: bottom left no-repeat url("../images/radioButton.png");
+}
+.no-alleles .trait-group {
+  padding-left: 38px;
+  padding-right: 0px;
+}
+.no-alleles .trait-group.horns {
+  padding-left: 46px;
+  padding-right: 10px;
+}
+.no-alleles .trait-group.color {
+  padding-left: 44px;
+  padding-right: 10px;
+  padding-top: 42px;
+}
+.no-alleles .trait-group.color .characteristic {
+  padding-top: 1px;
+  height: 16px;
+}
+.no-alleles .trait-group.spikes .characteristic,
+.no-alleles .trait-group.tail .characteristic {
+  height: 15px;
+  padding-top: 4px;
+}
+.no-alleles .trait-group.armor {
+  padding-left: 43px;
+}
+.no-alleles .characteristic {
+  width: 59px;
+  height: 25px;
 }
 .chromosome-panel {
   position: absolute;
@@ -1170,8 +1153,6 @@ select,
 textarea {
   margin: 0;
 }
-input:valid,
-textarea:valid,
 input:invalid,
 textarea:invalid {
   border-radius: 1px;
