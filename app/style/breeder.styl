@@ -16,10 +16,13 @@ dark-text-color  = #333
     background: top left no-repeat url('../images/background_meiosis_obstacle.jpg')
 
 #breed-top-bar
+  background: 20px 17px no-repeat url('../images/targetRadioButtonWAlleles.jpg')
   color: #39230b
   font-weight: bold
   font-size: 1.1em
   absolute: top 0px left width 1040px height 152px
+  &.no-alleles
+    background: 20px 17px no-repeat url('../images/targetRadioButton.jpg')
 
 #breeder
   absolute: top 110px left width 2040px height 423px
@@ -288,3 +291,49 @@ chromosome(toppx)
   .completion-buttons
     absolute: top 240px left 14px right 14px
     text-align: center
+
+.trait-group
+  float: left
+  padding-top: 47px
+  padding-left: 60px
+  padding-right: 14px
+  &.horns
+    padding-left: 80px
+    padding-right: 30px
+
+.characteristic
+  width: 100px
+  height: 20px
+  padding-top: 5px
+
+.characteristic-radio
+  background: top left no-repeat url('../images/radioButton.png')
+  width: 14px
+  height: 14px
+
+.characteristic.selected .characteristic-radio
+  background: bottom left no-repeat url('../images/radioButton.png')
+
+.no-alleles
+  .trait-group
+    padding-left: 38px
+    padding-right: 0px
+    &.horns
+      padding-left: 46px
+      padding-right: 10px
+    &.color
+      padding-left: 44px
+      padding-right: 10px
+      padding-top: 42px
+      .characteristic
+        padding-top: 1px
+        height: 16px
+    &.spikes, &.tail
+      .characteristic
+        height: 15px
+        padding-top: 4px
+    &.armor
+      padding-left: 43px
+  .characteristic
+    width: 59px
+    height: 25px

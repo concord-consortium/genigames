@@ -131,6 +131,45 @@ GG.WorldTownView = Ember.View.extend
     if @get('isBaseline') then "baseline" else "game"
   ).property('isBaseline')
   meiosisEnabledBinding: 'GG.tasksController.meiosisControlEnabled'
+  showAllTraits: (->
+    townId = GG.townsController.get("content").indexOf GG.townsController.get "currentTown"
+    return (townId > 1)
+  ).property('GG.townsController.currentTown')
+
+GG.TraitSelectionView = Ember.View.extend
+  templateName: 'trait-selection'
+  showAllTraits: (->
+    townId = GG.townsController.get("content").indexOf GG.townsController.get "currentTown"
+    return (townId > 1)
+  ).property('GG.townsController.currentTown')
+  characteristicSelected: (evt) ->
+    elem = evt.currentTarget
+    container = elem.parentElement
+    $(container).find(".characteristic").removeClass("selected")
+    $(elem).addClass("selected")
+
+    GG.logController.logEvent GG.Events.SELECTED_CHARACTERISTIC,
+          trait: container.classList[1]
+          characteristic: ""+evt.context
+  traits: (->
+    initialTraits =
+      [
+        {trait: "gender",    characteristics: ["male", "female"]}
+        {trait: "wings",     characteristics: ["wings", "no-wings"]}
+        {trait: "metallic",  characteristics: ["metallic", "non-metallic"]}
+        {trait: "horns",     characteristics: ["reverse-horns", "forward-horns"]}
+        {trait: "fire",      characteristics: ["no-fire", "fire"]}
+      ]
+    if !@get 'showAllTraits'
+      return initialTraits
+    else
+      return initialTraits.concat [
+          {trait: "color",    characteristics: ["green", "purple", "blue", "red"]}
+          {trait: "spikes",     characteristics: ["wide-spikes", "medium-spikes", "narrow-spikes"]}
+          {trait: "tail",  characteristics: ["short-tail", "kinked-tail", "long-tail"]}
+          {trait: "armor",     characteristics: ["armor", "no-armor"]}
+        ]
+  ).property('showAllTraits')
 
 GG.ParentPoolView = Ember.View.extend
   templateName: 'parent-pool-view'

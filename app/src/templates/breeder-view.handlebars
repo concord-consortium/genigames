@@ -1,6 +1,7 @@
 <div id="breeding-apparatus">
   <div id="breeding-background" {{bindAttr class="view.hasObstacleCourse:obstacle-course"}}>
-    <div id="breed-top-bar">
+    <div id="breed-top-bar" {{bindAttr class="view.showAllTraits:no-alleles"}}>
+      {{view GG.TraitSelectionView}}
     </div>
     <div id="breeder">
       <div id="chromosome-labels"></div>

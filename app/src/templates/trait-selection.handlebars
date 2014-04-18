@@ -1,0 +1,11 @@
+<div id="trait-selection">
+  {{#each trait in view.traits}}
+    <div {{bindAttr class=":trait-group trait.trait" }}>
+      {{#each trait.characteristics}}
+        <div {{bindAttr class=":characteristic this" }} {{action "characteristicSelected" this}}>
+          <div class="characteristic-radio"></div>
+        </div>
+      {{/each}}
+    </div>
+  {{/each}}
+</div>
