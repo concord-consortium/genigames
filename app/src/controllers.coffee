@@ -1653,7 +1653,3 @@ GG.leaderboardController = Ember.ArrayController.create
     # set with priority: -rep to order with highest scores at top
     classRef.child(userName).setWithPriority(reputation, -reputation)
   ).observes('GG.userController.user.reputation')
-
-
-
-

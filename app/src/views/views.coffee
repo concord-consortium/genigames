@@ -489,13 +489,6 @@ GG.OffspringSaveButtonView = Ember.View.extend GG.PointsToolTip,
     @set 'disabled', true
     GG.statemanager.send('saveOffspring')
 
-GG.TaskDescriptionView = Ember.View.extend
-  tagName: 'div'
-  currentTaskBinding: 'GG.tasksController.currentTask'
-  text: (->
-    @get('currentTask')?.getShortText()
-  ).property('currentTask').cacheable()
-
 GG.MoveCounter = Ember.View.extend
   templateName: 'move-counter'
   classNames: ['move-counter']

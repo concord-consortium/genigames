@@ -1,20 +1,6 @@
 <div id="breeding-apparatus">
   <div id="breeding-background" {{bindAttr class="view.hasObstacleCourse:obstacle-course"}}>
     <div id="breed-top-bar">
-      {{#view GG.TaskDescriptionView id="task-description"}}
-        {{view.text}}
-      {{/view}}
-      {{#if GG.baselineController.isNotBaseline}}
-        <div id="task-reputation-available">
-          Worth {{GG.reputationController.animatedReputation}} Rep
-        </div>
-        <div id="task-reputation-best">
-          Best Score: {{GG.reputationController.bestTaskReputationDisplay}}
-        </div>
-      {{/if}}
-      <div id="progress-bar" class="selecting">
-        <div {{bindAttr class=":bg view.hasObstacleCourse:obstacle-course" }}></div>
-      </div>
     </div>
     <div id="breeder">
       <div id="chromosome-labels"></div>

@@ -90,7 +90,6 @@ GG.StateInTask = Ember.State.extend
     parentSelect: Ember.State.create
 
       setup: ->
-        $('#progress-bar').switchClass($('#progress-bar').attr('class'),"selecting",1000)
         GG.offspringController.set 'content', null
         $('#target').show()
         whosSelected = GG.parentController.get 'whosSelected'
@@ -192,8 +191,6 @@ GG.StateInTask = Ember.State.extend
 
         if GG.cyclesController.get('cycles') <= 0
           GG.reputationController.subtractReputation(GG.actionCostsController.getCost('extraBreedCycle'), GG.Events.BRED_WITH_EXTRA_CYCLE)
-        currentProgClass = $('#progress-bar').attr('class')
-        $('#progress-bar').switchClass(currentProgClass,"breeding",2000) unless currentProgClass is "breeding"
         manager.send 'decrementCycles', 1
         GG.breedingController.set 'childSavedToParents', false
         $('#meiosis-container').removeClass('hidden')
@@ -312,7 +309,6 @@ GG.StateInTask = Ember.State.extend
         GG.breedingController.breedDrake()
 
       showOffspring: (manager) ->
-        $('#progress-bar').switchClass($('#progress-bar').attr('class'),"results",1000)
         $("#offspring-pool .chromosome-panel").show()
         $("#chromosome-labels-offspring").show()
         $('#offspring-panel').animate({left: -76},300,"easeOutCubic")
@@ -350,7 +346,6 @@ GG.StateInTask = Ember.State.extend
 
     obstacleCourse: Ember.State.create
       enter: (manager)->
-        $('#progress-bar').switchClass($('#progress-bar').attr('class'),"obstacle-results",1000)
         GG.obstacleCourseController.showInfoDialog()
 
       startCourse: (manager)->
