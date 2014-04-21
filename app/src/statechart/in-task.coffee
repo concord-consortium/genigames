@@ -13,6 +13,7 @@ GG.StateInTask = Ember.State.extend
 
     enter: ->
       $('#task-list').hide()
+      $(".characteristic").removeClass("selected")
       if not GG.baselineController.get 'isBaseline'
         $('#breeding-apparatus').animate {"left":"20px"},1200,'easeOutCubic', ->
           GG.breedingController.set 'isShowingBreeder', true
