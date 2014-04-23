@@ -122,7 +122,7 @@ html body div {
   top: 0px;
   left: 0;
   width: 1040px;
-  height: 152px;
+  height: 112px;
 }
 #breed-top-bar.no-alleles {
   background: 20px 17px no-repeat url("../images/targetRadioButton.jpg");
@@ -582,6 +582,13 @@ html body div {
   left: 14px;
   right: 14px;
   text-align: center;
+}
+#trait-bar-tutorial-target {
+  position: absolute;
+  top: 109px;
+  left: 342px;
+  width: 1px;
+  height: 1px;
 }
 .trait-group {
   float: left;
