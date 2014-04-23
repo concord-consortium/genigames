@@ -2,12 +2,15 @@ GG.StateInTown = Ember.State.extend
 
   initialState: 'npcsWaiting'
   justCompletedTask: null
+  lastSuccess: null
 
   setup: (manager, context) ->
     if context?
-      @set 'justCompletedTask', context
+      @set 'justCompletedTask', context[0]
+      @set 'lastSuccess', context[1]
     else
       @set 'justCompletedTask', null
+      @set 'lastSuccess', null
 
   enter: ->
     GG.universeView.setCurrentView 'town'
@@ -50,15 +53,22 @@ GG.StateInTown = Ember.State.extend
       GG.tasksController.content[lastCompleteTask_i].set('showInForeground', true) unless (lastCompleteTask_i < 0)
 
       justCompletedTask = @get 'parentState.justCompletedTask'
-
-      if justCompletedTask? and (justCompletedTask is GG.tasksController.content[lastCompleteTask_i]) and (!finishedAllTasks)
+      lastSuccess = @get 'parentState.lastSuccess'
+      if justCompletedTask? and lastSuccess and (justCompletedTask is GG.tasksController.content[lastCompleteTask_i]) and (!finishedAllTasks)
         setTimeout =>
           manager.transitionTo 'npcsShowingTaskEndMessage'
           GG.tasksController.showTaskEndMessage justCompletedTask
         , 50
+      else if justCompletedTask? and !lastSuccess
+        setTimeout =>
+          manager.transitionTo 'npcsShowingTaskEndMessage'
+          GG.tasksController.showTaskFailMessage justCompletedTask
+        , 50
       else if firstIncompleteTask?
         setTimeout =>
-          firstIncompleteTask.set('showQuestionBubble', true)
+          firstIncompleteTask.set 'isShowingFailMessage', false
+          firstIncompleteTask.set 'isShowingEndMessage', false
+          firstIncompleteTask.set 'showQuestionBubble', true
         , 1000
       else
         GG.townsController.completeCurrentTown()
@@ -80,6 +90,9 @@ GG.StateInTown = Ember.State.extend
       GG.tasksController.taskAccepted task
 
   npcsShowingTaskEndMessage: Ember.State.create
+    replay: (manager, task) ->
+      GG.tasksController.setCurrentTask task, true
+      GG.tasksController.restartCurrentTask()
     done: (manager) ->
       @get('parentState').set('justCompletedTask', null)
       manager.transitionTo 'npcsWaiting'

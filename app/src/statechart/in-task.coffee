@@ -62,31 +62,23 @@ GG.StateInTask = Ember.State.extend
       child = GG.offspringController.get 'content'
       success = false
       if GG.tasksController.isCurrentTaskComplete()
-        manager.send 'completeTask'
         success = true
-      else if GG.tasksController.get('currentTask.cyclesRemaining') is 0 and
-            GG.obstacleCourseController.get('hasObstacleCourse')
-          # log the drake submission
-          # also log the task as "completed"
-          manager.send 'completeTask'
-          # success should be false, probably, but leave it as true so we don't mess up the tournament
-          success = true
-      else
-        GG.tasksController.showTaskNonCompletion()
       GG.logController.logEvent GG.Events.SUBMITTED_OFFSPRING,
         alleles: child.get('biologicaOrganism.alleles')
         sex: child.get('sex')
         success: success
+      manager.send 'completeTask', success
 
-    completeTask: (manager) ->
+    completeTask: (manager, success) ->
       $('#task-reputation-available').hide()
       $('#task-reputation-best').hide()
-      GG.tasksController.completeCurrentTask()
+      if success
+        GG.tasksController.completeCurrentTask()
       if GG.obstacleCourseController.get('hasObstacleCourse')
         # manager.transitionTo 'obstacleCourse'
         GG.tasksController.showTaskCompletion()
       else
-        GG.tasksController.showTaskCompletion()
+        GG.tasksController.showTaskCompletion(success)
 
     parentSelect: Ember.State.create
 

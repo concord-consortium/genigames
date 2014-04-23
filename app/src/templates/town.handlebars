@@ -26,16 +26,16 @@
       {{#view GG.NPCSpeechBubbleView contentBinding="this"}}
         {{view.text}}
         <br/><br/>
-        {{#if view.isLastText}}
-          {{#if view.isShowingEndMessage}}
-            <button {{action "done"}}>{{view.continueButtonText}}</button>
-          {{else}}
-            <button {{action "accept"}}>{{view.content.npc.speech.accept}}</button>
-            <button {{action "decline"}}>{{view.content.npc.speech.decline}}</button>
-          {{/if}}
+        {{#if view.isShowingEndMessage}}
+          <button {{action "done"}}>{{view.continueButtonText}}</button>
         {{else}}
-          <button {{action "next"}}>{{view.continueButtonText}}</button>
-        {{/if}}
+        {{#if view.isShowingFailMessage}}
+          <button {{action "replay"}}>Try again</button>
+          <button {{action "done"}}>Go to another task</button>
+        {{else}}
+          <button {{action "accept"}}>{{view.content.npc.speech.accept}}</button>
+          <button {{action "decline"}}>{{view.content.npc.speech.decline}}</button>
+        {{/if}}{{/if}}
       {{/view}}
       {{#view GG.NPCFinalMessageBubbleView contentBinding="this"}}
         {{view.text}}

@@ -610,17 +610,38 @@ GG.NPCSpeechBubbleView = Ember.View.extend
   hidden             : Ember.computed.not('content.showSpeechBubble')
   init               : ->
     @_super()
+  currentText        : (->
+    if @get 'isShowingEndMessage'
+      text = @get 'content.npc.speech.completionText'
+    else if @get 'isShowingFailMessage'
+      text = @get('content.npc.speech.failText') || "That's not the drake I'm looking for!"
+    else
+      text = @get 'content.npc.speech.text'
+    if typeof text == "string" then text else text[0]
+  ).property('content.npc.speech.text', 'isShowingEndMessage', 'isShowingFailMessage')
   text               : (->
-    authoredText = @get 'content.npc.speech.text'
-    currentText = if typeof authoredText == "string" then authoredText else authoredText[0]
-    currentText = currentText.replace(/\[(.*?)\]/g, "") # rm button text
-    return new Handlebars.SafeString(currentText)
-  ).property('content.npc.speech.text')
+    currentText = @get 'currentText'
+    text = currentText.replace(/\[(.*?)\]/g, "") # rm button text
+    return new Handlebars.SafeString(text)
+  ).property('currentText')
+  continueButtonText: (->
+    text = @get 'currentText'
+    buttonText = /\[(.*?)\]/g.exec(text)
+    console.log "buttonText: "+buttonText
+    if (buttonText)
+      return buttonText[1]
+    return "Continue"
+  ).property('text')
   isShowingEndMessageBinding: 'content.isShowingEndMessage'
+  isShowingFailMessageBinding: 'content.isShowingFailMessage'
   accept: ->
+    console.log("***"+@get('content'))
     GG.statemanager.send 'accept', @get 'content'
   decline: ->
     GG.statemanager.send 'decline'
+  replay: ->
+    console.log("***"+@get('content'))
+    GG.statemanager.send 'replay', @get 'content'
   done: ->
     GG.statemanager.send 'done'
 

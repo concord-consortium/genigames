@@ -75,7 +75,7 @@ GG.tasksController = Ember.ArrayController.create
   addTask: (task) ->
     @pushObject task
 
-  setCurrentTask: (task) ->
+  setCurrentTask: (task, muteLog = false) ->
     return if task is @get 'currentTask'
 
     if @indexOf(task) >= 0
@@ -93,7 +93,8 @@ GG.tasksController = Ember.ArrayController.create
         org = BioLogica.Organism.createLiveOrganism GG.DrakeSpecies, maleAlleles, BioLogica.MALE
         GG.parentController.pushObject GG.Drake.createFromBiologicaOrganism org
 
-      GG.logController.logEvent GG.Events.STARTED_TASK, name: task.get('name')
+      unless muteLog
+        GG.logController.logEvent GG.Events.STARTED_TASK, name: task.get('name')
       @set('taskStartTime', new Date().getTime())
     else
       throw "GG.tasksController.setCurrentTask: argument is not a known task"
@@ -137,7 +138,7 @@ GG.tasksController = Ember.ArrayController.create
     GG.logController.logEvent GG.Events.RESTARTED_TASK, name: task.get('name')
     @clearCurrentTask()
     @setCurrentTask(task)
-    GG.statemanager.transitionTo 'parentSelect'
+    @taskAccepted task
 
   completeTasksThrough: (n) ->
     task.set('completed', true) for task, i in @get('content') when i <= n
@@ -173,19 +174,23 @@ GG.tasksController = Ember.ArrayController.create
 
   showTaskEndMessage: (task) ->
     if task.get('npc.speech.completionText')?
-      task.set 'npc.speech.text', task.get 'npc.speech.completionText'
       task.set 'isShowingEndMessage', true
       task.set 'showSpeechBubble', true
     else
       GG.statemanager.send 'done'
 
-  showTaskCompletion: ->
+  showTaskFailMessage: (task) ->
+    task.set 'isShowingFailMessage', true
+    task.set 'showSpeechBubble', true
+
+  showTaskCompletion: (success) ->
     if GG.baselineController.get('isNotBaseline') and GG.lastShownDialog?
       try
         GG.tutorialMessageController.set('finishButtonTutorialShown', true)
         GG.lastShownDialog.qtip('hide')
       catch e
         GG.lastShownDialog = null
+    GG.statemanager.transitionTo 'inTown', [@get('currentTask'), success]
 
   showTaskNonCompletion: ->
     msg = "That's not the %@ you're looking for!".fmt(Ember.I18n.t('drake'))
@@ -199,17 +204,6 @@ GG.tasksController = Ember.ArrayController.create
   taskAccepted: (task) ->
     task.set 'showSpeechBubble', false
     GG.statemanager.transitionTo 'inTask'
-
-  taskFinishedBubbleDismissed: ->
-    if GG.baselineController.get('isBaseline')
-      GG.statemanager.transitionTo 'inTaskList'
-    else
-      @get('currentTask').set 'showCompletionBubble', false
-      if GG.obstacleCourseController.get 'hasObstacleCourse'
-        GG.statemanager.transitionTo 'obstacleCourse'
-      else
-        GG.reputationController.set('currentTaskReputation', 0)
-        GG.statemanager.transitionTo 'inTown', @get('currentTask')
 
   isCurrentTaskComplete: ->
     task = @get 'currentTask'
@@ -558,7 +552,7 @@ GG.sessionController = Ember.Object.create
   error: false
   loggingIn: false
   firstTime: true
-  preloadingComplete: false
+  preloadingComplete: true
   waitingForPreload: false
   loggedIn: (->
     @get('user') != null
