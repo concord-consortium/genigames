@@ -940,46 +940,6 @@ GG.ObstacleView = Ember.View.extend
   ).property('content.positionY','content.positionX','skipStyle')
   typeBinding: "content.obstacle"
 
-GG.CompletionDialogView = Ember.View.extend
-  elementId: 'completion-dialog'
-  tagName: 'div'
-  templateName: 'task-completion-dialog'
-
-  text: (->
-    if GG.baselineController.get('isBaseline')
-      t = "Great job, you succeeded in breeding the target %@!".fmt(Ember.I18n.t('drake'))
-    else
-      # GG.tasksController.get('currentTask.npc.speech.completionText')
-      t = "%@ created!".fmt(Ember.I18n.t('Drake'))
-    return t
-  ).property('GG.tasksController.currentTask')
-  reputationWonBinding: 'GG.reputationController.reputationForTask'
-  taskReputationBinding: 'GG.reputationController.currentTaskReputation'
-  extraBreedsRepBinding: 'GG.reputationController.extraBreedsRep'
-  meiosisControlRepBinding: 'GG.reputationController.meiosisControlRep'
-  alleleRevealRepBinding: 'GG.reputationController.alleleRevealRep'
-
-  tryAgain: ->
-    # Dismiss dialog
-    $('#completion-dialog').hide()
-    $('#modal-backdrop-fade').hide()
-    # restart task
-    GG.tasksController.restartCurrentTask()
-  continueOn: ->
-    # Dismiss dialog
-    $('#completion-dialog').hide()
-    $('#modal-backdrop-fade').hide()
-    # Go back to town
-    GG.tasksController.taskFinishedBubbleDismissed()
-  continueButtonText: (->
-    if GG.baselineController.get('isBaseline')
-      return "Challenge List"
-
-    if GG.obstacleCourseController.get('hasObstacleCourse')
-      return "Continue"
-    return "Next Level"
-  ).property('GG.tasksController.currentTask')
-
 GG.PasswordField = Ember.TextField.extend
   type: "password"
   value: ""

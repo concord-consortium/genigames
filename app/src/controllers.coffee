@@ -186,8 +186,6 @@ GG.tasksController = Ember.ArrayController.create
         GG.lastShownDialog.qtip('hide')
       catch e
         GG.lastShownDialog = null
-    $('#completion-dialog').show()
-    $('#modal-backdrop-fade').show()
 
   showTaskNonCompletion: ->
     msg = "That's not the %@ you're looking for!".fmt(Ember.I18n.t('drake'))

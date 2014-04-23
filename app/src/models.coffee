@@ -277,6 +277,7 @@ GG.Events =
   # Task events
   STARTED_TASK    : "Started task"
   COMPLETED_TASK  : "Completed task"
+  RESTARTED_TASK : "Restarted task"
   REPUTATION_CHANGED : "Reputation changed"
   REPUTATION_EARNED : "Reputation earned"
   SELECTED_CHARACTERISTIC : "Selected characteristic"
