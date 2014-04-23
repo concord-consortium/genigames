@@ -18,11 +18,11 @@ GG.StateInTask = Ember.State.extend
         $('#breeding-apparatus').animate {"left":"20px"},1200,'easeOutCubic', ->
           GG.breedingController.set 'isShowingBreeder', true
           GG.breedingController.set 'isShowingBreeder2', true
-          GG.tutorialMessageController.showTargetTutorial()
+          GG.tutorialMessageController.showTraitBarTutorial()
       else
         $('#breeding-apparatus').css {"left":"20px"}
         GG.breedingController.set 'isShowingBreeder', true
-        GG.tutorialMessageController.showTargetTutorial()
+        GG.tutorialMessageController.showTraitBarTutorial()
       GG.cyclesController.reset()
       GG.reputationController.reset()
       GG.freeMovesController.reset()

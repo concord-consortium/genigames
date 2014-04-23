@@ -1074,6 +1074,18 @@ GG.tutorialMessageController = Ember.Object.create
     return (townId is 0 and taskId is 6)
   ).property('enabled', 'GG.townsController.currentTown', 'GG.tasksController.currentTask')
 
+  traitBarTutorialShown: false
+  showTraitBarTutorial: ->
+    if @get('isFirstTask')  and !@get 'traitBarTutorialShown'
+      @set 'traitBarTutorialShown', true
+      GG.showInfoDialog $('#trait-bar-tutorial-target'),
+        "Trait Tracker! <br/> Use this to check off the target traits and
+        alleles for the offspring %@1.".fmt(Ember.I18n.t('drake')),
+        target: "bottomMiddle"
+        tooltip: "topMiddle"
+        hideAction: =>
+          @showTargetTutorial()
+
   targetTutorialShown: false
   showTargetTutorial: ->
     if @get('isFirstTask')  and !@get 'targetTutorialShown'
