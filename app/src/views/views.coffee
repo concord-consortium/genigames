@@ -685,6 +685,11 @@ GG.MeiosisView = Ember.View.extend
   chromosomeSelectedCost: (->
     GG.actionCostsController.getCost('chromosomeSelected')
   ).property('currentTown')
+  selectFirstParent: ->
+    if @get('content.sex') == GG.MALE
+      GG.statemanager.send 'selectFatherMeiosis'
+    else
+      GG.statemanager.send 'selectMotherMeiosis'
   rerender: ->
     @_super()
     setTimeout =>

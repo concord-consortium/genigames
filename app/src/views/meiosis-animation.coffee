@@ -22,6 +22,8 @@ GG.MeiosisAnimation = Ember.Object.create
   ###
   reset: (chromosomeContainerName, parentView) ->
     @set('animation', @get('animation')+1)
+    $('#chromosome-labels-meiosis-long').hide()
+    $('#chromosome-labels-meiosis').attr('class', parent).fadeIn(100)
     parentView.rerender()
 
   animate: (chromosomeContainerName, parentView, callback) ->

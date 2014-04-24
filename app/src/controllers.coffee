@@ -606,6 +606,8 @@ GG.meiosisController = Ember.Object.create
   inAnimation: false
   motherView: null
   fatherView: null
+  firstView: null
+  secondView: null
   motherGameteNumberBinding: 'motherView.randomGameteNumberOverride'
   fatherGameteNumberBinding: 'fatherView.randomGameteNumberOverride'
   chosenMotherAllelesBinding: 'motherView.chosenGameteAlleles'
@@ -613,6 +615,20 @@ GG.meiosisController = Ember.Object.create
   chosenMotherGameteBinding: 'motherView.chosenGamete'
   chosenFatherGameteBinding: 'fatherView.chosenGamete'
   chosenSexBinding: 'fatherView.chosenSex'
+  selectFirstParent: (parent, force) ->
+    return if @get('inAnimation') unless force
+    if !parent?
+      @set 'firstView', null
+      @set 'secondView', null
+    else if parent is "mother"
+      @set 'firstView', @get 'motherView'
+      @set 'secondView', @get 'fatherView'
+    else
+      @set 'firstView', @get 'fatherView'
+      @set 'secondView', @get 'motherView'
+
+    if @get 'waitingForParentSelection'
+      @animate()
   chosenAlleles: (->
     return @get('chosenMotherAlleles') + "," + @get('chosenFatherAlleles')
   ).property('chosenMotherAlleles','chosenFatherAlleles')
@@ -632,17 +648,24 @@ GG.meiosisController = Ember.Object.create
     return res
   ).property('chosenMotherGamete','chosenFatherGamete')
   animate: (callback)->
-    if @get('motherView')? and @get('fatherView')?
+    if @get('firstView')? and @get('secondView')?
+      @set 'waitingForParentSelection', false
       @set('inAnimation', true)
-      @get('fatherView').animate =>
+      @get('firstView').animate =>
         GG.tutorialMessageController.showMeiosisMotherTutorial =>
-          @get('motherView').animate =>
+          @get('secondView').animate =>
             GG.MeiosisAnimation.mergeChosenGametes("#" + @get('fatherView.elementId'), "#" + @get('motherView.elementId'), =>
               @set('inAnimation', false)
-              callback()
+              if callback
+                callback()
+              else @get('delayedCallback')()
             )
+    else
+      @set 'waitingForParentSelection', true
+      @set 'delayedCallback', callback
   resetAnimation: ->
     if @get('motherView')? and @get('fatherView')?
+      @selectFirstParent(null, true)
       @get('motherView').resetAnimation()
       @get('fatherView').resetAnimation()
       @set('selectedChromosomes', { father: {}, mother: {}})

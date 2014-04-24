@@ -18,7 +18,7 @@
         {{view GG.ValueCounter}}
         {{view GG.MoveCounter}}
       </div>
-      <div id="mother">
+      <div id="mother" {{action "selectMotherMeiosis" target="GG.statemanager"}}>
         {{#with GG.breedingController.mother}}
           {{view GG.DrakeView contentBinding="this"}}
         {{/with}}
@@ -28,7 +28,7 @@
           {{view GG.ChromosomePanelView controllerBinding="this"}}
         {{/with}}
       </div>
-      <div id="father">
+      <div id="father" {{action "selectFatherMeiosis" target="GG.statemanager"}}>
         {{#with GG.breedingController.father}}
           {{view GG.DrakeView contentBinding="this"}}
         {{/with}}

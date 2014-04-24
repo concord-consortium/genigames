@@ -149,7 +149,7 @@ GG.StateInTask = Ember.State.extend
       firstTime: true
       setup: (manager)->
         @set('firstTime', true)
-        GG.meiosisController.set('inAnimation', true)
+        GG.meiosisController.selectFirstParent(null)
         $("#breeder").animate({left: -459},500,"easeOutCubic")
         # hide the offspring pool
         $("#offspring-panel").animate({left: 400},500,"easeOutCubic")
@@ -164,6 +164,11 @@ GG.StateInTask = Ember.State.extend
         setTimeout ->
           manager.send 'animate'
         , GG.MeiosisAnimation.scale(800)
+
+      selectMotherMeiosis: ->
+        GG.meiosisController.selectFirstParent("mother")
+      selectFatherMeiosis: ->
+        GG.meiosisController.selectFirstParent("father")
 
       animate: (manager)->
         scale = GG.MeiosisAnimation.get 'timeScale'
