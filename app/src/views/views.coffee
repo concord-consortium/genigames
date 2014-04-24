@@ -145,10 +145,13 @@ GG.TraitSelectionView = Ember.View.extend
   characteristicSelected: (evt) ->
     elem = evt.currentTarget
     container = elem.parentElement
-    $(container).find(".characteristic").removeClass("selected")
-    $(elem).addClass("selected")
 
-    GG.logController.logEvent GG.Events.SELECTED_CHARACTERISTIC,
+    wasSelected = $(elem).hasClass("selected")
+
+    $(container).find(".characteristic").removeClass("selected")
+    $(elem).addClass("selected") unless wasSelected
+
+    GG.logController.logEvent (unless wasSelected then GG.Events.SELECTED_CHARACTERISTIC else GG.Events.DESELECTED_CHARACTERISTIC),
           trait: container.classList[1]
           characteristic: ""+evt.context
   traits: (->

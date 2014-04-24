@@ -282,6 +282,7 @@ GG.Events =
   REPUTATION_CHANGED : "Reputation changed"
   REPUTATION_EARNED : "Reputation earned"
   SELECTED_CHARACTERISTIC : "Selected characteristic"
+  DESELECTED_CHARACTERISTIC: "Deselected characteristic"
 
   # Breeding events
   SELECTED_PARENT : "Selected parent"
