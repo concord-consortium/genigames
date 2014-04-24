@@ -7,7 +7,6 @@ GG.User = Ember.Object.extend
   teacher: false
   group: false
   reputation: 0
-  controlMeiosis: false
   skipSave: false
 
   _idBinding: 'login'
@@ -33,11 +32,11 @@ GG.User = Ember.Object.extend
     @set 'skipSave', false
 
   serialize: ->
-    {reputation: @get('reputation'), controlMeiosis: @get('controlMeiosis')}
+    {reputation: @get('reputation')}
 
   triggerSave: (->
     GG.userController.saveState('user', this) unless @get 'skipSave'
-  ).observes('reputation', 'controlMeiosis')
+  ).observes('reputation')
 
 GG.Town = Ember.Object.extend
   _id: null

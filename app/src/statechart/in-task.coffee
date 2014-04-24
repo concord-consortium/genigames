@@ -25,7 +25,7 @@ GG.StateInTask = Ember.State.extend
         GG.tutorialMessageController.showTraitBarTutorial()
       GG.cyclesController.reset()
       GG.reputationController.reset()
-      if (GG.userController.get('controlMeiosis') and GG.tasksController.get('meiosisControlEnabled'))
+      if GG.tasksController.get('meiosisControlEnabled')
         breedType = GG.BREED_CONTROLLED
       else
         breedType = GG.BREED_AUTOMATED
@@ -144,10 +144,6 @@ GG.StateInTask = Ember.State.extend
       startMotherMeiosis: ->
         if GG.breedingController.get 'mother'
           GG.animateMeiosis '#parent-mothers-pool-container'
-
-      toggleBreedType: ->
-        if GG.tasksController.get 'meiosisControlEnabled'
-          GG.breedingController.toggleBreedType()
 
     animatingMeiosis: Ember.State.create
       firstTime: true
