@@ -1078,11 +1078,11 @@ GG.tutorialMessageController = Ember.Object.create
   showTraitBarTutorial: ->
     if @get('isFirstTask')  and !@get 'traitBarTutorialShown'
       @set 'traitBarTutorialShown', true
-      GG.showInfoDialog $('#trait-bar-tutorial-target'),
+      GG.showInfoDialog $('#breed-top-bar'),
         "Trait Tracker! <br/> Use this to check off the target traits and
         alleles for the offspring %@1.".fmt(Ember.I18n.t('drake')),
-        target: "bottomMiddle"
-        tooltip: "topMiddle"
+        target: "topMiddle"
+        tooltip: "bottomMiddle"
         hideAction: =>
           @showTargetTutorial()
 
