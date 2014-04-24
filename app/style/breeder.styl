@@ -78,14 +78,14 @@ dark-text-color  = #333
   z-index: 2
 
 #meiosis-speed-slider-parent
-  absolute: top 0px left 170px width 6px height 100px
+  absolute: top 4px left 108px width 100px height 6px
   .slow-icon
-    absolute: bottom -6px left -5px width 16px height 16px
+    absolute: bottom -20px left -20px width 16px height 16px
   .fast-icon
-    absolute: top -6px left -5px width 16px height 16px
+    absolute: bottom -20px left 73px width 16px height 16px
 
 #meiosis-speed-slider
-  absolute: top 15px left 0px height 70px width 6px
+  absolute: top 15px left 0px height 6px width 70px
   background-color: #3b84a2
   background-image: none
   &.ui-state-disabled
@@ -210,21 +210,21 @@ chromosome(toppx)
   background-repeat: no-repeat
   background-position: 0px 0px
 
+.value-counter
+  absolute: top 30px left 8px width 75px height 28px
+
 .move-counter
-  absolute: top 23px left 8px width 75px height 28px
+  absolute: top 77px left 8px width 75px height 28px
 
 .moveCounterDigit
-  absolute: top 1px left width 19px height 26px
+  absolute: top left width 15px height 15px
   background: top left no-repeat url('../images/move-counter-sprite.png')
-
-#moveCounterHundreds
-  left: 2px
-
-#moveCounterTens
-  left: 28px
-
-#moveCounterOnes
-  left: 54px
+  &.hundreds
+    left: 14px
+  &.tens
+    left: 33px
+  &.ones
+    left: 52px
 
 .match-goal-counter
   absolute: top 500px left 490px width 100px

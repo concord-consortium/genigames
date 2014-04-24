@@ -501,6 +501,10 @@ GG.OffspringSaveButtonView = Ember.View.extend GG.PointsToolTip,
     @set 'disabled', true
     GG.statemanager.send('saveOffspring')
 
+GG.ValueCounter = Ember.View.extend
+  templateName: 'move-counter'
+  classNames: ['value-counter']
+
 GG.MoveCounter = Ember.View.extend
   templateName: 'move-counter'
   classNames: ['move-counter']
@@ -866,7 +870,7 @@ GG.MeiosisSpeedSliderView = Ember.View.extend
     # For now, we'll just have 2 values: 0 and 1.
     # The smaller the slider value, the slower the animation will go.
     $('#meiosis-speed-slider').slider
-      orientation: 'vertical'
+      orientation: 'horizontal'
       value: (2 - GG.MeiosisAnimation.get('timeScale'))
       min: 0.5
       max: 1.7
