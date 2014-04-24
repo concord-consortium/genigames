@@ -1122,6 +1122,8 @@ select,
 textarea {
   margin: 0;
 }
+input:valid,
+textarea:valid,
 input:invalid,
 textarea:invalid {
   border-radius: 1px;
@@ -1325,6 +1327,15 @@ a:hover {
 }
 .angeral {
   background: top left no-repeat url("../images/town/town2.png");
+}
+.tarrins_crag {
+  background: top left no-repeat url("../images/town/town3.jpg");
+}
+.narran {
+  background: top left no-repeat url("../images/town/town4.jpg");
+}
+.luxceros {
+  background: top left no-repeat url("../images/town/town5.jpg");
 }
 .logout,
 .task-list {
