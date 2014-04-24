@@ -204,39 +204,23 @@ GG.BreedButtonView = Ember.View.extend GG.PointsToolTip,
   tagName: 'div'
   toolTipText: (->
     tip = "Produce an offspring %@ from the current parents".fmt(Ember.I18n.t('drake'))
-    if @get 'noMoreBreeds'
-      if GG.obstacleCourseController.get('hasObstacleCourse')
-        tip += ". Because you are out of breeding cycles, and this challenge contains
-                an obstacle course, you can't breed anymore."
-      else
-        tip += ". Because you are out of breeding cycles, this will cost you reputation!"
-    tip
-  ).property('noMoreBreeds')
-  costPropertyName: (->
-    if @get('noMoreBreeds') && !GG.obstacleCourseController.get('hasObstacleCourse')
-      'extraBreedCycle'
-    else ' '
-  ).property('noMoreBreeds')
+  ).property()
+  costPropertyName: ' '
 
   motherBinding: 'GG.parentController.selectedMother'
   fatherBinding: 'GG.parentController.selectedFather'
 
-  classNameBindings : ['enabled', 'noMoreBreeds']
+  classNameBindings : ['enabled']
   inAnimationBinding: 'GG.meiosisController.inAnimation'
   canBreedDuringAnimationBinding: 'GG.meiosisController.canBreedDuringAnimation'
   enabled: (->
     if !this.get('mother') || !this.get('father')
       return false
-    else if (@get('noMoreBreeds') && GG.obstacleCourseController.get('hasObstacleCourse'))
-      return false
     else if @get('inAnimation') && !@get('canBreedDuringAnimation')
       return false
     else
       return true
-  ).property('mother', 'father', 'noMoreBreeds', 'inAnimation', 'canBreedDuringAnimation')
-  noMoreBreeds: (->
-    GG.cyclesController.get('cycles') <= 0 and not GG.baselineController.get 'isBaseline'
-  ).property('GG.cyclesController.cycles', 'GG.baselineController.isBaseline')
+  ).property('mother', 'father', 'inAnimation', 'canBreedDuringAnimation')
 
   click: ->
     if @get 'enabled'

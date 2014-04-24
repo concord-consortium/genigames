@@ -69,19 +69,13 @@ dark-text-color  = #333
     background: top -260px left no-repeat url('../images/brackets.png')
 
 #breed-controls
-  absolute: top 165px left 480px width 283px height 101px
+  absolute: top 156px left 484px width 283px height 120px
   background-repeat: no-repeat
   &.game
-    background-image: url('../images/breed-controls.png')
+    background-image: url('../images/meiosis-gauges.png')
   &.baseline
     background-image: url('../images/breed-controls-baseline.png')
   z-index: 2
-  &.control-enabled
-    &.automated
-      background-position: 0 0
-    &.controlled
-      background-position: 0 -101px
-  background-position: 0 -202px
 
 #meiosis-speed-slider-parent
   absolute: top 0px left 170px width 6px height 100px
@@ -103,7 +97,7 @@ dark-text-color  = #333
     background-image: none
 
 #breed-button
-  absolute: top 6px left 185px width 86px height 89px
+  absolute: top 32px left 103px width 86px height 89px
   background: top left no-repeat url('../images/breed-button.png')
   background-position: 0 -262px
   &.enabled
@@ -112,8 +106,6 @@ dark-text-color  = #333
     &:active
       background-position: 0 -175px
       cursor: pointer
-  &.no-more-breeds
-    background-position: 0 -86px
 
 .parent
   position: relative
