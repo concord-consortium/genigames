@@ -66,7 +66,7 @@ GG.PointsToolTip = Ember.Mixin.create
     if GG.baselineController.get('isNotBaseline')
       costPropertyName = @get 'costPropertyName'
       cost = GG.actionCostsController.getCost costPropertyName
-      costStr = if cost then "<br/><br/>Cost: #{cost} rep points." else ""
+      costStr = if cost then "<br/><br/>Cost: $#{cost}." else ""
     return @get('toolTipText') + costStr
   ).property('showToolTip', 'costPropertyName', 'toolTipText')
 
