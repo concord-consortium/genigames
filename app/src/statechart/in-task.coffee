@@ -25,7 +25,6 @@ GG.StateInTask = Ember.State.extend
         GG.tutorialMessageController.showTraitBarTutorial()
       GG.cyclesController.reset()
       GG.reputationController.reset()
-      GG.freeMovesController.reset()
       if (GG.userController.get('controlMeiosis') and GG.tasksController.get('meiosisControlEnabled'))
         breedType = GG.BREED_CONTROLLED
       else

@@ -679,9 +679,7 @@ GG.meiosisController = Ember.Object.create
     selected[source][chromo] = null
 
     # Refund the reputation that was charged to select this chromosome
-    GG.freeMovesController.refundMove()
-    if GG.freeMovesController.get('movesRemaining') <= 0
-      GG.reputationController.addReputation(GG.actionCostsController.getCost('chromosomeSelected'), GG.Events.CHOSE_CHROMOSOME)
+    GG.reputationController.addReputation(GG.actionCostsController.getCost('chromosomeSelected'), GG.Events.CHOSE_CHROMOSOME)
 
     clearNum = true
     for own chrom,view of selected[source]
@@ -704,11 +702,7 @@ GG.meiosisController = Ember.Object.create
       selected[source][chromo].set('selected', false)
     else
       # There was no previously selected chromosome, so charge rep points
-      if GG.freeMovesController.get 'hasFreeMoveRemaining'
-        GG.freeMovesController.useMove()
-      else
-        GG.freeMovesController.useMove()
-        GG.reputationController.subtractReputation(GG.actionCostsController.getCost('chromosomeSelected'), GG.Events.CHOSE_CHROMOSOME)
+      GG.reputationController.subtractReputation(GG.actionCostsController.getCost('chromosomeSelected'), GG.Events.CHOSE_CHROMOSOME)
     selected[source][chromo] = chromoView
     gameteNumberProp = if source is "father" then 'fatherGameteNumber' else 'motherGameteNumber'
     destGameteNum = @get(gameteNumberProp)
@@ -772,11 +766,7 @@ GG.meiosisController = Ember.Object.create
     if @get('selectedCrossover')?
       sourceCross = @get('selectedCrossover')
       if sourceCross.gene.name == destCross.gene.name and sourceCross.chromoView.get('side') != destCross.chromoView.get('side')
-        if GG.freeMovesController.get 'hasFreeMoveRemaining'
-          GG.freeMovesController.useMove()
-        else
-          GG.freeMovesController.useMove()
-          GG.reputationController.subtractReputation(GG.actionCostsController.getCost('crossoverMade'), GG.Events.MADE_CROSSOVER)
+        GG.reputationController.subtractReputation(GG.actionCostsController.getCost('crossoverMade'), GG.Events.MADE_CROSSOVER)
         # cross these two
         $('#' + destCross.chromoView.get('elementId') + ' .crossoverPoint.' + gene.name).removeClass('clickable').addClass('selected')
         # get all genes after this one
@@ -1487,24 +1477,6 @@ GG.reputationController = Ember.Object.create
   alleleRevealRep: (->
     @_repFor GG.Events.REVEALED_ALLELE
   ).property('currentTaskReputation')
-
-GG.freeMovesController = Ember.Object.create
-  freeMovesBinding: 'GG.tasksController.currentTask.freeMoves'
-  movesUsed: 0
-  useMove: ->
-    @set 'movesUsed', (@get('movesUsed') + 1)
-  refundMove: ->
-    movesUsed = @get 'movesUsed'
-    @set 'movesUsed', Math.max movesUsed-1, 0
-  reset: ->
-    @set 'movesUsed', 0
-  movesRemaining: (->
-    freeMoves = @get 'freeMoves'
-    freeMoves - @get 'movesUsed'
-  ).property('freeMoves', 'movesUsed')
-  hasFreeMoveRemaining: (->
-    @get('movesRemaining') > 0
-  ).property('movesRemaining')
 
 GG.groupsController = Ember.Object.create
   groups: Ember.ArrayProxy.create
