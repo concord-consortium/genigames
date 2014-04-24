@@ -609,6 +609,12 @@ GG.NPCSpeechBubbleView = Ember.View.extend
       return buttonText[1]
     return "Continue"
   ).property('text')
+  acceptText: (->
+    @get('content.npc.speech.accept') || "Sure"
+  ).property('content.npc.speech.accept')
+  declineText: (->
+    @get('content.npc.speech.decline') || "Maybe later"
+  ).property('content.npc.speech.decline')
   isShowingEndMessageBinding: 'content.isShowingEndMessage'
   isShowingFailMessageBinding: 'content.isShowingFailMessage'
   accept: ->

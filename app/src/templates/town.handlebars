@@ -33,8 +33,8 @@
           <button {{action "replay"}}>Try again</button>
           <button {{action "done"}}>Go to another task</button>
         {{else}}
-          <button {{action "accept"}}>{{view.content.npc.speech.accept}}</button>
-          <button {{action "decline"}}>{{view.content.npc.speech.decline}}</button>
+          <button {{action "accept"}}>{{view.acceptText}}</button>
+          <button {{action "decline"}}>{{view.declineText}}</button>
         {{/if}}{{/if}}
       {{/view}}
       {{#view GG.NPCFinalMessageBubbleView contentBinding="this"}}
