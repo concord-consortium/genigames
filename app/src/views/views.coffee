@@ -205,7 +205,7 @@ GG.BreedButtonView = Ember.View.extend GG.PointsToolTip,
   toolTipText: (->
     tip = "Produce an offspring %@ from the current parents".fmt(Ember.I18n.t('drake'))
   ).property()
-  costPropertyName: ' '
+  costPropertyName: 'extraBreedCycle'
 
   motherBinding: 'GG.parentController.selectedMother'
   fatherBinding: 'GG.parentController.selectedFather'
