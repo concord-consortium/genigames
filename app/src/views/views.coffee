@@ -601,14 +601,7 @@ GG.NPCSpeechBubbleView = Ember.View.extend
     text = currentText.replace(/\[(.*?)\]/g, "") # rm button text
     return new Handlebars.SafeString(text)
   ).property('currentText')
-  continueButtonText: (->
-    text = @get 'currentText'
-    buttonText = /\[(.*?)\]/g.exec(text)
-    console.log "buttonText: "+buttonText
-    if (buttonText)
-      return buttonText[1]
-    return "Continue"
-  ).property('text')
+  continueButtonText: "Continue"
   acceptText: (->
     @get('content.npc.speech.accept') || "Sure"
   ).property('content.npc.speech.accept')
