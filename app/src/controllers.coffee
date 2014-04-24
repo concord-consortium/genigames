@@ -360,28 +360,6 @@ GG.breedingController = Ember.Object.create
         offspring: drake.get('biologicaOrganism.alleles')
         offspringSex: drake.get('sex')
 
-GG.valueController = Ember.Object.create
-  valueBinding: 'GG.tasksController.currentTask.reputation'
-  updateCounter: (->
-    value = @get 'value'
-    return if value < 0
-    if (value >= 100)
-      hundreds = Math.floor(value / 100) % 10
-      $('.value-counter .hundreds').show().animate({backgroundPosition: @getPosition(hundreds)}, 200)
-    else
-      $('.value-counter .hundreds').hide()
-    if (value >= 10)
-      tens = Math.floor(value / 10) % 10
-      $('.value-counter .tens').show().animate({backgroundPosition: @getPosition(tens)}, 200)
-    else
-      $('.value-counter .tens').hide()
-    ones = value % 10
-    $('.value-counter .ones').animate({backgroundPosition: @getPosition(ones)}, 200)
-  ).observes('value')
-  getPosition: (num) ->
-    pos = num * 18
-    "(0px -" + pos + "px)"
-
 GG.cyclesController = Ember.Object.create
   cyclesBinding: 'GG.tasksController.currentTask.cyclesRemaining'
   increment: (amt=1) ->
@@ -1669,3 +1647,49 @@ GG.leaderboardController = Ember.ArrayController.create
     # set with priority: -rep to order with highest scores at top
     classRef.child(userName).setWithPriority(reputation, -reputation)
   ).observes('GG.userController.user.reputation')
+
+GG.valueCounterController = Ember.Object.create
+  valueBinding: 'GG.tasksController.currentTask.reputation'
+  updateCounter: (->
+    value = @get 'value'
+    return if value < 0
+    if (value >= 100)
+      hundreds = Math.floor(value / 100) % 10
+      $('.value-counter .hundreds').show().animate({backgroundPosition: @getPosition(hundreds)}, 200)
+    else
+      $('.value-counter .hundreds').hide()
+    if (value >= 10)
+      tens = Math.floor(value / 10) % 10
+      $('.value-counter .tens').show().animate({backgroundPosition: @getPosition(tens)}, 200)
+    else
+      $('.value-counter .tens').hide()
+    ones = value % 10
+    $('.value-counter .ones').animate({backgroundPosition: @getPosition(ones)}, 200)
+  ).observes('value')
+  getPosition: (num) ->
+    pos = num * 18
+    "(0px -" + pos + "px)"
+
+GG.costCounterController = Ember.Object.create
+  value: (->
+    GG.reputationController.get('currentTaskReputation') * -1
+  ).property('GG.reputationController.currentTaskReputation')
+  updateCounter: (->
+    value = @get 'value'
+    return if value < 0
+    if (value >= 100)
+      hundreds = Math.floor(value / 100) % 10
+      $('.cost-counter .hundreds').show().animate({backgroundPosition: @getPosition(hundreds)}, 200)
+    else
+      $('.cost-counter .hundreds').hide()
+    if (value >= 10)
+      tens = Math.floor(value / 10) % 10
+      $('.cost-counter .tens').show().animate({backgroundPosition: @getPosition(tens)}, 200)
+    else
+      $('.cost-counter .tens').hide()
+    ones = value % 10
+    $('.cost-counter .ones').animate({backgroundPosition: @getPosition(ones)}, 200)
+  ).observes('value')
+  getPosition: (num) ->
+    pos = num * 18
+    "(0px -" + pos + "px)"

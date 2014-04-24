@@ -507,7 +507,7 @@ GG.ValueCounter = Ember.View.extend
 
 GG.MoveCounter = Ember.View.extend
   templateName: 'move-counter'
-  classNames: ['move-counter']
+  classNames: ['cost-counter']
 
 GG.MatchGoalCounter = Ember.View.extend
   templateName: 'match-goal-counter'
