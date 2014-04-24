@@ -242,23 +242,6 @@ GG.BreedButtonView = Ember.View.extend GG.PointsToolTip,
     if @get 'enabled'
       GG.statemanager.send('breedDrake')
 
-GG.MeiosisButtonView = Ember.View.extend GG.PointsToolTip,
-  tagName: 'div'
-  classNameBindings: ['meiosisEnabled:control-enabled']
-  showToolTip: (->
-    GG.breedingController.get('breedType') is GG.BREED_AUTOMATED
-  ).property('GG.breedingController.breedType')
-  toolTipText: (->
-    tip = "Enable manual control of meiosis."
-    tip + if not @get('meiosisEnabled') then "<br/><br/>Currently disabled for this task." else ""
-  ).property('meiosisEnabled')
-  costPropertyName: (->
-    if @get 'meiosisEnabled' then 'meiosisControlEnabled' else ' '
-  ).property('meiosisEnabled')
-  meiosisEnabledBinding: 'GG.tasksController.meiosisControlEnabled'
-  click: ->
-    GG.statemanager.send('toggleBreedType')
-
 GG.AlleleView = Ember.View.extend GG.PointsToolTip,
   classNameBindings: ['defaultClassNames', 'revealable', 'dominant', 'gene', 'species']
   defaultClassNames: 'allele'

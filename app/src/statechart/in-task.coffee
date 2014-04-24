@@ -109,7 +109,6 @@ GG.StateInTask = Ember.State.extend
         Ember.run.next this, ->
           # after bindings have updated
           GG.tutorialMessageController.showBreedButtonTutorial()
-          GG.tutorialMessageController.showMeiosisControlTutorial()
 
         whosSelected = GG.parentController.get 'whosSelected'
         $('#chromosome-labels').attr('class', whosSelected).show()

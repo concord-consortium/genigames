@@ -1268,16 +1268,6 @@ GG.tutorialMessageController = Ember.Object.create
     else
       callback()
 
-  meiosisControlTutorialShown: false
-  showMeiosisControlTutorial: ->
-    if @get('isFirstMeiosisControlTask') and !@get('meiosisControlTutorialShown') and @get 'bothParentsSelected'
-      @set 'meiosisControlTutorialShown', true
-      GG.showInfoDialog $("#meiosis-button"),
-        "Meiosis control is now active! Turn on this control to choose the chromosomes carrying
-        the alleles you need. Then click breed to start."
-        target: "leftMiddle"
-        tooltip: "rightMiddle"
-
   finishButtonTutorialShown: false
   showFinishButtonTutorial: ->
     if @get('isFirstTask') and !@get('finishButtonTutorialShown')
