@@ -41,7 +41,6 @@ GG.StateInTask = Ember.State.extend
       GG.offspringController.set 'content', null
 
       $("#breeder").animate({left: 0},400,"easeOutCubic")
-      $('#breed-controls').animate({left: 650},400,'easeOutCubic')
       $('#breeding-apparatus').animate({"left":"3000px"},1200,'easeInCubic')
       setTimeout =>
         # hide the breeding apparatus
@@ -86,7 +85,6 @@ GG.StateInTask = Ember.State.extend
         GG.offspringController.set 'content', null
         whosSelected = GG.parentController.get 'whosSelected'
         $('#chromosome-labels').attr('class', whosSelected).show()
-        $('#breed-controls').animate({left: 650},600,'easeOutCubic')
         $("#breeder").animate({left: 0},800,"easeOutCubic")
         $('#task-reputation-available').show()
         $('#task-reputation-best').show()
@@ -158,7 +156,6 @@ GG.StateInTask = Ember.State.extend
       setup: (manager)->
         @set('firstTime', true)
         GG.meiosisController.set('inAnimation', true)
-        $('#breed-controls').animate({left: 474},400,'easeOutCubic')
         $("#breeder").animate({left: -459},500,"easeOutCubic")
         # hide the offspring pool
         $("#offspring-panel").animate({left: 400},500,"easeOutCubic")
