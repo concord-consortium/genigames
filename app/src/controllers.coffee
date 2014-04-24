@@ -1084,7 +1084,7 @@ GG.tutorialMessageController = Ember.Object.create
         target: "topMiddle"
         tooltip: "bottomMiddle"
         hideAction: =>
-          @showTargetTutorial()
+          @showParentsTutorial()
 
   targetTutorialShown: false
   showTargetTutorial: ->

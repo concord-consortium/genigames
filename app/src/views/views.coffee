@@ -151,6 +151,9 @@ GG.TraitSelectionView = Ember.View.extend
     $(container).find(".characteristic").removeClass("selected")
     $(elem).addClass("selected") unless wasSelected
 
+    # show parent tutorial after first selected
+    GG.tutorialMessageController.showParentsTutorial()
+
     GG.logController.logEvent (unless wasSelected then GG.Events.SELECTED_CHARACTERISTIC else GG.Events.DESELECTED_CHARACTERISTIC),
           trait: container.classList[1]
           characteristic: ""+evt.context
@@ -638,12 +641,10 @@ GG.NPCSpeechBubbleView = Ember.View.extend
   isShowingEndMessageBinding: 'content.isShowingEndMessage'
   isShowingFailMessageBinding: 'content.isShowingFailMessage'
   accept: ->
-    console.log("***"+@get('content'))
     GG.statemanager.send 'accept', @get 'content'
   decline: ->
     GG.statemanager.send 'decline'
   replay: ->
-    console.log("***"+@get('content'))
     GG.statemanager.send 'replay', @get 'content'
   done: ->
     GG.statemanager.send 'done'
