@@ -209,54 +209,37 @@ html body div {
 }
 #breed-controls {
   position: absolute;
-  top: 165px;
-  left: 635px;
+  top: 156px;
+  left: 484px;
   width: 283px;
-  height: 101px;
+  height: 120px;
   background-repeat: no-repeat;
   z-index: 2;
-  background-position: 0 -202px;
 }
 #breed-controls.game {
-  background-image: url("../images/breed-controls.png");
+  background-image: url("../images/meiosis-gauges.png");
 }
 #breed-controls.baseline {
   background-image: url("../images/breed-controls-baseline.png");
 }
-#breed-controls.control-enabled.automated {
-  background-position: 0 0;
-}
-#breed-controls.control-enabled.controlled {
-  background-position: 0 -101px;
-}
-#meiosis-button {
-  position: absolute;
-  top: 22px;
-  left: 94px;
-  width: 68px;
-  height: 37px;
-}
-#meiosis-button.control-enabled {
-  cursor: pointer;
-}
 #meiosis-speed-slider-parent {
   position: absolute;
-  top: 0px;
-  left: 170px;
-  width: 6px;
-  height: 100px;
+  top: 4px;
+  left: 108px;
+  width: 100px;
+  height: 6px;
 }
 #meiosis-speed-slider-parent .slow-icon {
   position: absolute;
-  bottom: -6px;
-  left: -5px;
+  bottom: -20px;
+  left: -20px;
   width: 16px;
   height: 16px;
 }
 #meiosis-speed-slider-parent .fast-icon {
   position: absolute;
-  top: -6px;
-  left: -5px;
+  bottom: -20px;
+  left: 73px;
   width: 16px;
   height: 16px;
 }
@@ -264,8 +247,8 @@ html body div {
   position: absolute;
   top: 15px;
   left: 0px;
-  height: 70px;
-  width: 6px;
+  height: 6px;
+  width: 70px;
   background-color: #3b84a2;
   background-image: none;
 }
@@ -283,8 +266,8 @@ html body div {
 }
 #breed-button {
   position: absolute;
-  top: 6px;
-  left: 185px;
+  top: 32px;
+  left: 103px;
   width: 86px;
   height: 89px;
   background: top left no-repeat url("../images/breed-button.png");
@@ -297,29 +280,6 @@ html body div {
 #breed-button.enabled:active {
   background-position: 0 -175px;
   cursor: pointer;
-}
-#breed-button.no-more-breeds {
-  background-position: 0 -86px;
-}
-#target {
-  position: absolute;
-  top: 170px;
-  left: 508px;
-  width: 124px;
-  height: 83px;
-  color: #bbb;
-}
-#target-traits {
-  position: relative;
-  top: 5px;
-  left: 10px;
-}
-#target-tutorial-target {
-  position: absolute;
-  top: 27px;
-  left: 0px;
-  width: 1px;
-  height: 1px;
 }
 .parent {
   position: relative;
@@ -480,29 +440,38 @@ html body div {
   background-repeat: no-repeat;
   background-position: 0px 0px;
 }
-.move-counter {
+.value-counter {
   position: absolute;
-  top: 23px;
+  top: 30px;
+  left: 8px;
+  width: 75px;
+  height: 28px;
+}
+.cost-counter {
+  position: absolute;
+  top: 77px;
   left: 8px;
   width: 75px;
   height: 28px;
 }
 .moveCounterDigit {
   position: absolute;
-  top: 1px;
+  top: 0;
   left: 0;
-  width: 19px;
-  height: 26px;
+  width: 15px;
+  height: 15px;
   background: top left no-repeat url("../images/move-counter-sprite.png");
 }
-#moveCounterHundreds {
-  left: 2px;
+.moveCounterDigit.hundreds {
+  display: none;
+  left: 14px;
 }
-#moveCounterTens {
-  left: 28px;
+.moveCounterDigit.tens {
+  display: none;
+  left: 33px;
 }
-#moveCounterOnes {
-  left: 54px;
+.moveCounterDigit.ones {
+  left: 52px;
 }
 .match-goal-counter {
   position: absolute;
@@ -582,13 +551,6 @@ html body div {
   left: 14px;
   right: 14px;
   text-align: center;
-}
-#trait-bar-tutorial-target {
-  position: absolute;
-  top: 109px;
-  left: 342px;
-  width: 1px;
-  height: 1px;
 }
 .trait-group {
   float: left;
