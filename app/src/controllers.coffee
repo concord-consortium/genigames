@@ -616,9 +616,11 @@ GG.meiosisController = Ember.Object.create
   chosenFatherGameteBinding: 'fatherView.chosenGamete'
   chosenSexBinding: 'fatherView.chosenSex'
   firstParent: null
+  secondParent: null
   selectFirstParent: (parent, force) ->
     return if @get('inAnimation') unless force
     @set 'firstParent', parent
+    @set 'secondParent', (if parent is "mother" then "father" else "mother")
     if !parent?
       @set 'firstView', null
       @set 'secondView', null
@@ -653,16 +655,16 @@ GG.meiosisController = Ember.Object.create
     if @get('firstView')? and @get('secondView')?
       @set 'waitingForParentSelection', false
       @set('inAnimation', true)
-      GG.tutorialMessageController.showMeiosisTutorial(@get('firstParent'))
-      @get('firstView').animate =>
-        GG.tutorialMessageController.showMeiosisMotherTutorial =>
-          @get('secondView').animate =>
-            GG.MeiosisAnimation.mergeChosenGametes("#" + @get('fatherView.elementId'), "#" + @get('motherView.elementId'), =>
-              @set('inAnimation', false)
-              if callback
-                callback()
-              else @get('delayedCallback')()
-            )
+      GG.tutorialMessageController.showMeiosisTutorial @get('firstParent'), =>
+        @get('firstView').animate =>
+          GG.tutorialMessageController.showMeiosisOtherParentTutorial @get('secondParent'), =>
+            @get('secondView').animate =>
+              GG.MeiosisAnimation.mergeChosenGametes("#" + @get('fatherView.elementId'), "#" + @get('motherView.elementId'), =>
+                @set('inAnimation', false)
+                if callback
+                  callback()
+                else @get('delayedCallback')()
+              )
     else
       @set 'waitingForParentSelection', true
       @set 'delayedCallback', callback
@@ -1170,7 +1172,6 @@ GG.tutorialMessageController = Ember.Object.create
   meiosisTutorialShown:  false
   meiosisTutorial2Shown: false
   showMeiosisTutorial: (parent, callback)->
-    console.log("showMeiosisTutorial!")
     if @get('isFirstTask') and !@get('meiosisTutorialShown')
       @set 'meiosisTutorialShown', true
       GG.showInfoDialog $("#meiosis-container .meiosis.#{parent}"),
@@ -1249,11 +1250,11 @@ GG.tutorialMessageController = Ember.Object.create
       callback()
 
   meiosisMotherTutorialShown: false
-  showMeiosisMotherTutorial: (callback) ->
+  showMeiosisOtherParentTutorial: (parent, callback) ->
     if @get('isFirstMeiosisDescriptionTask') and !@get('meiosisMotherTutorialShown')
       @set 'meiosisMotherTutorialShown', true
-      GG.showInfoDialog $("#meiosis-container .meiosis.mother"),
-        "The same process happens for the mother.",
+      GG.showInfoDialog $("#meiosis-container .meiosis.#{parent}"),
+        "The same process happens for the #{parent}.",
         target: "leftMiddle"
         tooltip: "rightMiddle"
         maxWidth: 280
