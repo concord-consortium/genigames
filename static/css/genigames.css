@@ -142,6 +142,7 @@ html body div {
   width: 400px;
   height: 423px;
   background: top left no-repeat url("../images/brackets.png");
+  pointer-events: none;
 }
 #chromosome-labels.father {
   height: 100px;
@@ -162,6 +163,7 @@ html body div {
   height: 166px;
   width: 408px;
   background: top left no-repeat url("../images/brackets-long.png");
+  pointer-events: none;
   z-index: 10;
 }
 #chromosome-labels-meiosis-long.father {
@@ -183,6 +185,7 @@ html body div {
   height: 267px;
   width: 408px;
   background: top left no-repeat url("../images/brackets-dark.png");
+  pointer-events: none;
   z-index: 10;
 }
 #chromosome-labels-meiosis.mother {
@@ -1122,8 +1125,6 @@ select,
 textarea {
   margin: 0;
 }
-input:valid,
-textarea:valid,
 input:invalid,
 textarea:invalid {
   border-radius: 1px;
