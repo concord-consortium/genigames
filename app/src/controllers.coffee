@@ -655,6 +655,7 @@ GG.meiosisController = Ember.Object.create
     if @get('firstView')? and @get('secondView')?
       @set 'waitingForParentSelection', false
       @set('inAnimation', true)
+      $(".parent-select-target").removeClass("active")
       GG.tutorialMessageController.showMeiosisTutorial @get('firstParent'), =>
         @get('firstView').animate =>
           GG.tutorialMessageController.showMeiosisOtherParentTutorial @get('secondParent'), =>

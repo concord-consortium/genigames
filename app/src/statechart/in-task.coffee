@@ -175,6 +175,7 @@ GG.StateInTask = Ember.State.extend
         GG.meiosisController.selectFirstParent("father")
 
       animate: (manager)->
+        $(".parent-select-target").addClass("active")
         scale = GG.MeiosisAnimation.get 'timeScale'
         firstTime = @get 'firstTime'
         @set('firstTime', false)
