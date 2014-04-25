@@ -329,6 +329,9 @@ html body div {
   width: 275px;
   height: 130px;
 }
+.parent-select-target.active {
+  cursor: pointer;
+}
 #offspring-panel .offspring {
   position: relative;
   left: 0;
