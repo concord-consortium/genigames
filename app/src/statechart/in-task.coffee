@@ -133,6 +133,7 @@ GG.StateInTask = Ember.State.extend
           sex: sex
 
       breedDrake: (manager) ->
+        GG.hideInfoDialogs()
         if GG.motherPoolController.get('selected') && GG.fatherPoolController.get('selected')
           GG.logController.logEvent GG.Events.BREED_BUTTON_CLICKED, {duringMeiosis: false}
           manager.transitionTo 'animatingMeiosis'
@@ -155,6 +156,9 @@ GG.StateInTask = Ember.State.extend
         $("#offspring-panel").animate({left: 400},500,"easeOutCubic")
         $("#offspring-pool .chromosome-panel").hide()
         $("#chromosome-labels-offspring").hide()
+        setTimeout ->
+          GG.tutorialMessageController.showMeiosisSelectionTutorial()
+        , 1000
         scale = GG.MeiosisAnimation.get 'timeScale'
         setTimeout ->
           $('#chromosome-labels').hide()
@@ -185,12 +189,11 @@ GG.StateInTask = Ember.State.extend
         $("#chromosome-labels-offspring").hide()
         $('#chromosome-labels-meiosis').fadeIn(GG.MeiosisAnimation.scale(200))
         setTimeout ->
-          GG.tutorialMessageController.showMeiosisTutorial ->
-            GG.meiosisController.animate ->
-              setTimeout ->
-                GG.meiosisController.resetAnimation()
-              , 500
-              manager.transitionTo 'breeding'
+          GG.meiosisController.animate ->
+            setTimeout ->
+              GG.meiosisController.resetAnimation()
+            , 500
+            manager.transitionTo 'breeding'
         , delay
 
       selectingCrossoverCallback: null

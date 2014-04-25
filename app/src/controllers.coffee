@@ -615,8 +615,10 @@ GG.meiosisController = Ember.Object.create
   chosenMotherGameteBinding: 'motherView.chosenGamete'
   chosenFatherGameteBinding: 'fatherView.chosenGamete'
   chosenSexBinding: 'fatherView.chosenSex'
+  firstParent: null
   selectFirstParent: (parent, force) ->
     return if @get('inAnimation') unless force
+    @set 'firstParent', parent
     if !parent?
       @set 'firstView', null
       @set 'secondView', null
@@ -651,6 +653,7 @@ GG.meiosisController = Ember.Object.create
     if @get('firstView')? and @get('secondView')?
       @set 'waitingForParentSelection', false
       @set('inAnimation', true)
+      GG.tutorialMessageController.showMeiosisTutorial(@get('firstParent'))
       @get('firstView').animate =>
         GG.tutorialMessageController.showMeiosisMotherTutorial =>
           @get('secondView').animate =>
@@ -1111,6 +1114,16 @@ GG.tutorialMessageController = Ember.Object.create
         target: target
         tooltip: tooltip
 
+  meiosisSelectionTutorialShown: false
+  showMeiosisSelectionTutorial: ->
+    if @get('isFirstTask')
+      @set 'meiosisSelectionTutorialShown', true
+      GG.showInfoDialog $('.father .mainCell'),
+        "To start meiosis, click on the mother or the father, or click on the chromosomes",
+        target: "rightBottom"
+        tooltip: "leftTop"
+        hideTip: true
+
   firstOffspringCreated: false
   showFirstOffspringCreatedTutorial: ->
     if @get('isFirstTask') and !@get 'firstOffspringCreated'
@@ -1156,10 +1169,11 @@ GG.tutorialMessageController = Ember.Object.create
 
   meiosisTutorialShown:  false
   meiosisTutorial2Shown: false
-  showMeiosisTutorial: (callback)->
+  showMeiosisTutorial: (parent, callback)->
+    console.log("showMeiosisTutorial!")
     if @get('isFirstTask') and !@get('meiosisTutorialShown')
       @set 'meiosisTutorialShown', true
-      GG.showInfoDialog $("#meiosis-container .meiosis.father"),
+      GG.showInfoDialog $("#meiosis-container .meiosis.#{parent}"),
         "This is meiosis, the method by which half of a parent’s alleles are passed to the child.
         You will see each parent's chromosomes getting sorted into four cells. One of the four
         from each parent is randomly chosen for the offspring.",
@@ -1170,7 +1184,7 @@ GG.tutorialMessageController = Ember.Object.create
         modal: true
     else if @get('isFirstMeiosisDescriptionTask') and !@get('meiosisTutorial2Shown')
       @set 'meiosisTutorial2Shown', true
-      GG.showChainedInfoDialog $("#meiosis-container .meiosis.father"),
+      GG.showChainedInfoDialog $("#meiosis-container .meiosis.#{parent}"),
         [
           "When you click the “breed” button, what you’re seeing is the process
           of <b>meiosis</b> and <b>fertilization</b>.",
@@ -1187,10 +1201,10 @@ GG.tutorialMessageController = Ember.Object.create
       callback()
 
   meiosisCrossoverTutorialshown: false
-  showMeiosisDivisionTutorial: (callback) ->
+  showMeiosisDivisionTutorial: (parent, callback) ->
     if @get('isFirstMeiosisDescriptionTask') and !@get('meiosisCrossoverTutorialshown')
       @set 'meiosisCrossoverTutorialshown', true
-      GG.showInfoDialog $("#meiosis-container .meiosis.father"),
+      GG.showInfoDialog $("#meiosis-container .meiosis.#{parent}"),
         "Then the cell divides twice.",
         target: "leftMiddle"
         tooltip: "rightMiddle"
@@ -1294,6 +1308,8 @@ GG.showInfoDialog = ($elem, text, opts={}) ->
 
   style = Ember.copy GG.QTipStyle, true
   style.tip = opts.tooltip
+  if opts.hideTip
+    style.tip = false
   style.width =
     max: opts.maxWidth
   config =
@@ -1363,6 +1379,9 @@ GG.showModalDialog = (text, hideAction) ->
          $('#modal-backdrop-fade').fadeIn(@options.show.effect.length)
        beforeHide: ->
          $('#modal-backdrop-fade').fadeOut(@options.show.effect.length)
+
+GG.hideInfoDialogs = ->
+  $('.qtip').qtip('hide')
 
 GG.reputationController = Ember.Object.create
   swapChangedEarned: false
