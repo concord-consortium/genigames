@@ -1116,7 +1116,7 @@ GG.tutorialMessageController = Ember.Object.create
 
   meiosisSelectionTutorialShown: false
   showMeiosisSelectionTutorial: ->
-    if @get('isFirstTask')
+    if @get('isFirstTask') and !@get 'meiosisSelectionTutorialShown'
       @set 'meiosisSelectionTutorialShown', true
       GG.showInfoDialog $('.father .mainCell'),
         "To start meiosis, click on the mother or the father, or click on the chromosomes",
@@ -1198,7 +1198,7 @@ GG.tutorialMessageController = Ember.Object.create
         hideAction: callback
         modal: true
     else
-      callback()
+      callback() if callback?
 
   meiosisCrossoverTutorialshown: false
   showMeiosisDivisionTutorial: (parent, callback) ->
