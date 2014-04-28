@@ -182,3 +182,34 @@ townIcon(img, width=175px, height=125px)
 
     .score
       float: right
+
+#powerup-popup
+  display: none
+  position: relative
+  top: 30px
+  width: 706px
+  height: 499px
+  padding: 10px
+  margin-left: auto
+  margin-right: auto
+  z-index: 6000
+  background-image: url('../images/powerPopup.png')
+  background-repeat: no-repeat
+
+  .powerup-text
+    text-align: center
+    font-size: 2.5em
+    padding: 9px
+    position: absolute
+    color: #cccccc
+    top: 285px
+    left: 125px
+    width: 345px
+    height: 3em
+
+  .close
+    position: absolute
+    top: 430px
+    left: 400px
+    color: #999
+    cursor: pointer

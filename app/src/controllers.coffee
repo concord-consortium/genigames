@@ -1298,6 +1298,9 @@ GG.tutorialMessageController = Ember.Object.create
         target: "leftMiddle"
         tooltip: "rightMiddle"
 
+GG.powerUpController = Ember.Object.create
+  text: ""
+
 GG.QTipStyle =
   width:
     max: 350

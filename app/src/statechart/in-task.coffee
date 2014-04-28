@@ -9,7 +9,7 @@ GG.StateInTask = Ember.State.extend
     manager.transitionTo 'inWorld'
 
   showingBreeder: Ember.State.create
-    initialState: 'parentSelect'
+    initialState: 'powerUp'
 
     enter: ->
       $('#task-list').hide()
@@ -77,6 +77,44 @@ GG.StateInTask = Ember.State.extend
         GG.tasksController.showTaskCompletion()
       else
         GG.tasksController.showTaskCompletion(success)
+
+    powerUp: Ember.State.create
+      powerups: []
+      displayed: false
+      enter: (manager)->
+        powerups = GG.tasksController.get('currentTask.powerups')
+        @set('powerups', powerups || [])
+        observer = ->
+          GG.breedingController.removeObserver observer
+          manager.send 'displayNextPowerup'
+        GG.breedingController.addObserver 'isShowingBreeder', observer
+
+      displayNextPowerup: (manager)->
+        return if @get('displayed')
+        powerups = @get('powerups')
+        if powerups && powerups.length > 0
+          @set 'displayed', true
+          powerup = powerups[0]
+          @set('powerups', powerups.slice(1))
+          # Display powerup
+          GG.powerUpController.set('text', powerup)
+          $('#modal-backdrop-fade').fadeIn(500)
+          $('#powerup-popup').fadeIn(500)
+        else
+          setTimeout =>
+            @set 'displayed', false
+            manager.transitionTo 'parentSelect'
+          , 1
+
+      dismissPowerupPopup: (manager)->
+        return unless @get('displayed')
+        @set 'displayed', false
+        # Hide dialog, then display the next powerup, if any
+        $('#modal-backdrop-fade').fadeOut(500)
+        $('#powerup-popup').fadeOut(500)
+        setTimeout ->
+          manager.send 'displayNextPowerup'
+        , 505
 
     parentSelect: Ember.State.create
 

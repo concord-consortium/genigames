@@ -95,4 +95,10 @@
       {{/if}}
     {{/each}}
   </div>
+
+  <!-- power-up popup -->
+  <div id="powerup-popup">
+    <div class="powerup-text">{{GG.powerUpController.text}}</div>
+    <a class="close" {{action "dismissPowerupPopup"  target="GG.statemanager"}}>close</a>
+  </div>
 </div>
