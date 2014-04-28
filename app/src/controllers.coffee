@@ -1306,6 +1306,17 @@ GG.tutorialMessageController = Ember.Object.create
 GG.powerUpController = Ember.Object.create
   text: ""
 
+  unlockPowerup: (powerup) ->
+    user = GG.userController.get 'user'
+    return unless user
+    powerups = user.get 'powerups'
+    powerups.pushObject(powerup) unless powerups.indexOf(powerup) != -1
+
+  hasPowerup: (powerup) ->
+    user = GG.userController.get 'user'
+    return user && user.get('powerups').indexOf(powerup) != -1
+
+
 GG.QTipStyle =
   width:
     max: 350

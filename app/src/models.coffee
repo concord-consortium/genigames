@@ -8,6 +8,7 @@ GG.User = Ember.Object.extend
   group: false
   reputation: 0
   skipSave: false
+  powerups: []
 
   _idBinding: 'login'
   name: (->
@@ -32,11 +33,11 @@ GG.User = Ember.Object.extend
     @set 'skipSave', false
 
   serialize: ->
-    {reputation: @get('reputation')}
+    {reputation: @get('reputation'), powerups: @get('powerups')}
 
   triggerSave: (->
     GG.userController.saveState('user', this) unless @get 'skipSave'
-  ).observes('reputation')
+  ).observes('reputation', 'powerups.@each')
 
 GG.Town = Ember.Object.extend
   _id: null
