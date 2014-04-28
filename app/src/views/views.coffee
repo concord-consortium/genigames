@@ -590,12 +590,14 @@ GG.NPCSpeechBubbleView = Ember.View.extend
   currentText        : (->
     if @get 'isShowingEndMessage'
       text = @get 'content.npc.speech.completionText'
+    else if @get 'isShowingThanksMessage'
+      text = "Thanks again!"
     else if @get 'isShowingFailMessage'
       text = @get('content.npc.speech.failText') || "That's not the drake I'm looking for!"
     else
       text = @get 'content.npc.speech.text'
     if typeof text == "string" then text else text[0]
-  ).property('content.npc.speech.text', 'isShowingEndMessage', 'isShowingFailMessage')
+  ).property('content.npc.speech.text', 'isShowingEndMessage', 'isShowingThanksMessage', 'isShowingFailMessage')
   text               : (->
     currentText = @get 'currentText'
     text = currentText.replace(/\[(.*?)\]/g, "") # rm button text
@@ -609,6 +611,7 @@ GG.NPCSpeechBubbleView = Ember.View.extend
     @get('content.npc.speech.decline') || "Maybe later"
   ).property('content.npc.speech.decline')
   isShowingEndMessageBinding: 'content.isShowingEndMessage'
+  isShowingThanksMessageBinding: 'content.isShowingThanksMessage'
   isShowingFailMessageBinding: 'content.isShowingFailMessage'
   accept: ->
     GG.statemanager.send 'accept', @get 'content'

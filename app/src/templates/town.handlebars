@@ -29,13 +29,16 @@
         {{#if view.isShowingEndMessage}}
           <button {{action "done"}}>{{view.continueButtonText}}</button>
         {{else}}
+        {{#if view.isShowingThanksMessage}}
+          <button {{action "done"}}>{{view.continueButtonText}}</button>
+        {{else}}
         {{#if view.isShowingFailMessage}}
           <button {{action "replay"}}>Try again</button>
           <button {{action "done"}}>Go to another task</button>
         {{else}}
           <button {{action "accept"}}>{{view.acceptText}}</button>
           <button {{action "decline"}}>{{view.declineText}}</button>
-        {{/if}}{{/if}}
+        {{/if}}{{/if}}{{/if}}
       {{/view}}
       {{#view GG.NPCFinalMessageBubbleView contentBinding="this"}}
         {{view.text}}

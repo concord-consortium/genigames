@@ -179,7 +179,15 @@ GG.tasksController = Ember.ArrayController.create
     else
       GG.statemanager.send 'done'
 
+  showTaskThanksMessage: (task) ->
+    task.set 'isShowingThanksMessage', true
+    task.set 'isShowingFailMessage', false
+    task.set 'isShowingEndMessage', false
+    task.set 'showSpeechBubble', true
+
   showTaskFailMessage: (task) ->
+    task.set 'isShowingThanksMessage', false
+    task.set 'isShowingEndMessage', false
     task.set 'isShowingFailMessage', true
     task.set 'showSpeechBubble', true
 

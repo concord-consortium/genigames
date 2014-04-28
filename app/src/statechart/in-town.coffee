@@ -70,7 +70,12 @@ GG.StateInTown = Ember.State.extend
           manager.transitionTo 'npcsShowingTaskEndMessage'
           GG.tasksController.showTaskEndMessage justCompletedTask
         , 50
-      else if justCompletedTask? and !lastSuccess
+      else if justCompletedTask? and (lastSuccess == true) and justCompletedAnEarlierTask
+        setTimeout =>
+          manager.transitionTo 'npcsShowingTaskEndMessage'
+          GG.tasksController.showTaskThanksMessage justCompletedTask
+        , 50
+      else if justCompletedTask? and (lastSuccess == false)
         setTimeout =>
           manager.transitionTo 'npcsShowingTaskEndMessage'
           GG.tasksController.showTaskFailMessage justCompletedTask
@@ -79,6 +84,7 @@ GG.StateInTown = Ember.State.extend
         setTimeout =>
           firstIncompleteTask.set 'isShowingFailMessage', false
           firstIncompleteTask.set 'isShowingEndMessage', false
+          firstIncompleteTask.set 'isShowingThanksMessage', false
           firstIncompleteTask.set 'showQuestionBubble', true
         , 1000
       else
@@ -105,7 +111,7 @@ GG.StateInTown = Ember.State.extend
       GG.tasksController.setCurrentTask task, true
       GG.tasksController.restartCurrentTask()
     done: (manager) ->
-      @get('parentState').set('justCompletedTask', null)
+      @get('parentState').set('lastSuccess', null)
       manager.transitionTo 'npcsWaiting'
 
   npcShowingTask: Ember.State.create
