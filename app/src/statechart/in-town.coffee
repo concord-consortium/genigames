@@ -129,5 +129,7 @@ GG.StateInTown = Ember.State.extend
       lastTask.set('showFinalMessageBubble', true)
 
     replayTask: (manager, task) ->
+      lastTask = GG.tasksController.get("lastObject")
+      lastTask.set('showFinalMessageBubble', false)
       GG.tasksController.setCurrentTask task
       GG.tasksController.taskAccepted task
