@@ -50,11 +50,22 @@ GG.StateInTown = Ember.State.extend
         finishedAllTasks = true
 
       GG.tasksController.content[firstIncompleteTask_i].set('showInForeground', true)
-      GG.tasksController.content[lastCompleteTask_i].set('showInForeground', true) unless (lastCompleteTask_i < 0)
 
       justCompletedTask = @get 'parentState.justCompletedTask'
       lastSuccess = @get 'parentState.lastSuccess'
-      if justCompletedTask? and lastSuccess and (justCompletedTask is GG.tasksController.content[lastCompleteTask_i]) and (!finishedAllTasks)
+
+      justCompletedAnEarlierTask = justCompletedTask? and
+        (justCompletedTask isnt GG.tasksController.content[lastCompleteTask_i]) and
+        (justCompletedTask isnt GG.tasksController.content[firstIncompleteTask_i])
+
+      if justCompletedTask? and justCompletedAnEarlierTask
+        otherTaskLocation = GG.tasksController.content[firstIncompleteTask_i].get('foregroundLocation')
+        justCompletedTask.set('foregroundLocation', (if otherTaskLocation is "right" then "left" else "right"))
+        justCompletedTask.set('showInForeground', true)
+      else
+        GG.tasksController.content[lastCompleteTask_i].set('showInForeground', true) unless (lastCompleteTask_i < 0)
+
+      if justCompletedTask? and (lastSuccess == true) and (justCompletedTask is GG.tasksController.content[lastCompleteTask_i]) and (!finishedAllTasks)
         setTimeout =>
           manager.transitionTo 'npcsShowingTaskEndMessage'
           GG.tasksController.showTaskEndMessage justCompletedTask
