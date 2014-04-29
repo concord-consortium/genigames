@@ -39,7 +39,7 @@ GG.MeiosisAnimation = Ember.Object.create
     @set('parent', if parentView.get('content.female') then "mother" else "father")
     @set('stage', "pre-gamete selection")
 
-    meiosisControl = GG.tasksController.get 'currentTask.meiosisControl'
+    meiosisControl = GG.tasksController.get('currentTask.meiosisControl') || "selection"
 
     # duplicate each chromosome into sister chromatids (prophase I)
     args.container.find('.sister-1,.sister-2').each (i, chromo) ->
