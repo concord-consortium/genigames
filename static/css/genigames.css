@@ -610,6 +610,13 @@ html body div {
   width: 59px;
   height: 25px;
 }
+#trait-selection-tutorial-target {
+  position: absolute;
+  top: 110px;
+  left: 300px;
+  width: 1px;
+  height: 1px;
+}
 .chromosome-panel {
   position: absolute;
   top: 0;
@@ -3293,4 +3300,35 @@ a:hover {
 }
 .leader-board div .score {
   float: right;
+}
+#powerup-popup {
+  display: none;
+  position: relative;
+  top: 30px;
+  width: 706px;
+  height: 499px;
+  padding: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  z-index: 6000;
+  background-image: url("../images/powerPopup.png");
+  background-repeat: no-repeat;
+}
+#powerup-popup .powerup-text {
+  text-align: center;
+  font-size: 2.5em;
+  padding: 9px;
+  position: absolute;
+  color: #ccc;
+  top: 285px;
+  left: 125px;
+  width: 345px;
+  height: 3em;
+}
+#powerup-popup .close {
+  position: absolute;
+  top: 430px;
+  left: 400px;
+  color: #999;
+  cursor: pointer;
 }
