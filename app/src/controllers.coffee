@@ -1318,18 +1318,22 @@ GG.showInfoDialog = ($elem, text, opts={}) ->
   opts.maxWidth ?= 350
   opts.modal ?= false
   opts.modalFade ?= false
+  opts.buttonText ?= 'OK'
 
   style = Ember.copy GG.QTipStyle, true
   style.tip = opts.tooltip
   if opts.hideTip
     style.tip = false
+  if opts.hideButton
+    opts.buttonText = false
+
   style.width =
     max: opts.maxWidth
   config =
     content:
         title:
           text: '',
-          button: 'OK'
+          button: opts.buttonText
         text: text
     position:
       corner:
