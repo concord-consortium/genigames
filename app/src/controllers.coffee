@@ -229,7 +229,7 @@ GG.tasksController = Ember.ArrayController.create
       return true if task.get('matchCount') >= task.get('targetCount')
     return false
 
-  powerupsBinding: 'GG.powerUpController.powerups'
+  powerupsBinding: 'GG.userController.user.powerups'
   meiosisControlEnabled: (->
     GG.powerUpController.hasPowerup("meiosis control") || !!@get('currentTask.meiosisControl')
   ).property('currentTask.meiosisControl', 'powerups.@each')
@@ -1306,7 +1306,6 @@ GG.tutorialMessageController = Ember.Object.create
 
 GG.powerUpController = Ember.Object.create
   text: ""
-  powerupsBinding: 'GG.userController.user.powerups'
 
   unlockPowerup: (powerup) ->
     user = GG.userController.get 'user'
