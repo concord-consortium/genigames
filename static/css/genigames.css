@@ -3316,13 +3316,25 @@ a:hover {
   background-image: url("../images/powerPopup.png");
   background-repeat: no-repeat;
 }
-#powerup-popup .powerup-text {
+#powerup-popup .powerup-title {
   text-align: center;
   font-size: 2.5em;
+  font-weight: bold;
+  padding: 9px;
+  position: absolute;
+  color: #fbccff;
+  top: 255px;
+  left: 125px;
+  width: 345px;
+  height: 3em;
+}
+#powerup-popup .powerup-text {
+  text-align: center;
+  font-size: 1.3em;
   padding: 9px;
   position: absolute;
   color: #ccc;
-  top: 285px;
+  top: 355px;
   left: 125px;
   width: 345px;
   height: 3em;
