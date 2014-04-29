@@ -80,6 +80,51 @@ html body div {
 .needs-caching.npc-npc2_alchemist2_right {
   background: url("../images/npc2_alchemist2_right.png");
 }
+.needs-caching.npc-atheena {
+  background: url("../images/npc/atheena.png");
+}
+.needs-caching.npc-blacksmith {
+  background: url("../images/npc/blacksmith.png");
+}
+.needs-caching.npc-boy {
+  background: url("../images/npc/boy.png");
+}
+.needs-caching.npc-cook {
+  background: url("../images/npc/cook.png");
+}
+.needs-caching.npc-dragonBreeder {
+  background: url("../images/npc/dragonBreeder.png");
+}
+.needs-caching.npc-farmer {
+  background: url("../images/npc/farmer.png");
+}
+.needs-caching.npc-farmersWife {
+  background: url("../images/npc/farmersWife.png");
+}
+.needs-caching.npc-fendrel {
+  background: url("../images/npc/fendrel.png");
+}
+.needs-caching.npc-fendrel-colored-beard {
+  background: url("../images/npc/fendrel-colored-beard.png");
+}
+.needs-caching.npc-fisherwoman {
+  background: url("../images/npc/fisherwoman.png");
+}
+.needs-caching.npc-knight {
+  background: url("../images/npc/knight.png");
+}
+.needs-caching.npc-merek {
+  background: url("../images/npc/merek.png");
+}
+.needs-caching.npc-noblewoman {
+  background: url("../images/npc/noblewoman.png");
+}
+.needs-caching.npc-princess {
+  background: url("../images/npc/princess.png");
+}
+.needs-caching.npc-rowan {
+  background: url("../images/npc/rowan.png");
+}
 .needs-caching.bubbles.heart-empty {
   background: url("../images/heart-bubble-empty.png");
 }
@@ -365,25 +410,28 @@ html body div {
   cursor: pointer;
 }
 .offspring-buttons-back {
-  background: top left no-repeat url("../images/button-back.png");
-}
-.offspring-buttons-back:active {
-  background-position: 0 97%;
+  background: top left no-repeat url("../images/button_pickNewParents.png");
 }
 .offspring-buttons-use {
-  background: top left no-repeat url("../images/finish-button.png");
-}
-.offspring-buttons-use:active {
-  background-position: 0 97%;
+  background: top left no-repeat url("../images/button_readyToSell.png");
 }
 .offspring-buttons-save {
-  background: top left no-repeat url("../images/use-as-parent-button.png");
+  background: top left no-repeat url("../images/button_useAsParent.png");
 }
-.offspring-buttons-save:active {
-  background-position: 0 99%;
+.offspring-buttons-save:hover,
+.offspring-buttons-use:hover,
+.offspring-buttons-back:hover {
+  background-position: 0 33%;
 }
-.offspring-buttons-save.disabled {
-  background-position: 0 49%;
+.offspring-buttons-save:active,
+.offspring-buttons-use:active,
+.offspring-buttons-back:active {
+  background-position: 0 67%;
+}
+.offspring-buttons-save.disabled,
+.offspring-buttons-use.disabled,
+.offspring-buttons-back.disabled {
+  background-position: 0 100%;
 }
 #parent-available-message {
   position: absolute;
