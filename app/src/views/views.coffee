@@ -145,18 +145,19 @@ GG.TraitSelectionView = Ember.View.extend
   characteristicSelected: (evt) ->
     elem = evt.currentTarget
     container = elem.parentElement
+    characteristic = ""+evt.context
 
     wasSelected = $(elem).hasClass("selected")
 
     $(container).find(".characteristic").removeClass("selected")
     $(elem).addClass("selected") unless wasSelected
 
-    # show parent tutorial after first selected
-    GG.tutorialMessageController.showParentsTutorial()
-
     GG.logController.logEvent (unless wasSelected then GG.Events.SELECTED_CHARACTERISTIC else GG.Events.DESELECTED_CHARACTERISTIC),
           trait: container.classList[1]
-          characteristic: ""+evt.context
+          characteristic: characteristic
+
+    GG.statemanager.send 'selectTrait', characteristic
+
   traits: (->
     initialTraits =
       [

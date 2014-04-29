@@ -78,6 +78,9 @@ GG.StateInTask = Ember.State.extend
       else
         GG.tasksController.showTaskCompletion(success)
 
+    selectTrait: ->
+      # do nothing
+
     powerUp: Ember.State.create
       powerups: []
       displayed: false
@@ -183,6 +186,20 @@ GG.StateInTask = Ember.State.extend
       startMotherMeiosis: ->
         if GG.breedingController.get 'mother'
           GG.animateMeiosis '#parent-mothers-pool-container'
+
+      waitForTraitSelection: (manager) ->
+        manager.transitionTo 'waitingForTraitSelection'
+
+    # popup tutorial state
+    waitingForTraitSelection: Ember.State.create
+      selectTrait: (manager, characteristic) ->
+        if characteristic is "wings"
+          # show parent tutorial after first selected
+          GG.tutorialMessageController.showParentsTutorial()
+          manager.transitionTo 'parentSelect'
+
+      parentSelected: ->
+        # do nothing
 
     animatingMeiosis: Ember.State.create
       firstTime: true
