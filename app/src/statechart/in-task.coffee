@@ -89,8 +89,12 @@ GG.StateInTask = Ember.State.extend
         @set('powerups', powerups || [])
         observer = ->
           GG.breedingController.removeObserver observer
-          manager.send 'displayNextPowerup'
-        GG.breedingController.addObserver 'isShowingBreeder', observer
+          if GG.breedingController.get 'isShowingBreeder'
+            manager.send 'displayNextPowerup'
+        if GG.breedingController.get 'isShowingBreeder'
+          observer()
+        else
+          GG.breedingController.addObserver 'isShowingBreeder', observer
 
       displayNextPowerup: (manager)->
         return if @get('displayed')

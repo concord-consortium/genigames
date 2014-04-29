@@ -4,6 +4,76 @@ minispade.require 'genigames/controller-mixins'
 GG.BREED_AUTOMATED  = "automated"
 GG.BREED_CONTROLLED = "controlled"
 
+GG.userController = Ember.Object.create
+  learnerDataUrl: (->
+    lid = @get('learnerId')
+    if lid?
+      '/portal/dataservice/bucket_loggers/learner/' + lid + '/bucket_contents.bundle'
+    else
+      null
+  ).property('learnerId')
+
+  user: null
+  state: null
+  learnerId: null
+  classWord: null
+  loaded: false
+  groupInfoSaved: false
+  learnerChanged: (->
+    # TODO update learner data
+    console.log 'learner changed: ', @get('learnerId')
+    @set('loaded', false)
+    $.getJSON(@get('learnerDataUrl'), (data) =>
+      @set('state', data)
+      @get('user').restoreState()
+      @set('loaded', true)
+    ).error =>
+      @set('state', null)
+      @set('loaded', true)
+  ).observes('learnerId')
+
+  addReputation: (amt) ->
+    user = @get 'user'
+    return unless user
+    user.set 'reputation', user.get('reputation') + amt
+    evt = if GG.reputationController.get('swapChangedEarned') then GG.Events.REPUTATION_EARNED else GG.Events.REPUTATION_CHANGED
+    GG.logController.logEvent evt, amount: amt, result: user.get('reputation')
+
+  loadState: (type, obj)->
+    allState = @get('state')
+    if allState? and allState[type]? and allState[type][obj.get('_id')]?
+      return allState[type][obj.get('_id')]
+    else
+      return {}
+
+  stateQueue: []
+  stateQueueProcessing: false
+  saveState: (type, obj)->
+    stateQueue = @get('stateQueue')
+    stateQueue.push({type: type, obj: obj})
+    @processStateQueue() unless @get('stateQueueProcessing')
+
+  processStateQueue: ->
+    @set('stateQueueProcessing', true)
+    queue = @get('stateQueue')
+    allState = @get('state') || {}
+    while queue.length > 0
+      item = queue.shift()
+      type = item.type
+      obj = item.obj
+      allState[type] ||= {}
+      allState[type][obj.get('_id')] = obj.serialize()
+
+    @set('state', allState)
+    @set('stateQueueProcessing', false)
+    Ember.run.once this, "persistSaveState"
+
+  persistSaveState: ->
+    if @get('learnerDataUrl')?
+      allState = @get('state') || {}
+      $.post @get('learnerDataUrl'), JSON.stringify(allState), (data) =>
+        console.log 'state saved'
+
 GG.townsController = Ember.ArrayController.create
   content    : []
   currentTown: null
@@ -229,7 +299,7 @@ GG.tasksController = Ember.ArrayController.create
       return true if task.get('matchCount') >= task.get('targetCount')
     return false
 
-  powerupsBinding: 'GG.userController.user.powerups'
+  powerupsBinding: Ember.Binding.oneWay('GG.userController.user.powerups')
   meiosisControlEnabled: (->
     GG.powerUpController.hasPowerup("meiosis control") || !!@get('currentTask.meiosisControl')
   ).property('currentTask.meiosisControl', 'powerups.@each')
@@ -385,76 +455,6 @@ GG.cyclesController = Ember.Object.create
   getPosition: (num) ->
     pos = num * 26
     "(0px -" + pos + "px)"
-
-GG.userController = Ember.Object.create
-  learnerDataUrl: (->
-    lid = @get('learnerId')
-    if lid?
-      '/portal/dataservice/bucket_loggers/learner/' + lid + '/bucket_contents.bundle'
-    else
-      null
-  ).property('learnerId')
-
-  user: null
-  state: null
-  learnerId: null
-  classWord: null
-  loaded: false
-  groupInfoSaved: false
-  learnerChanged: (->
-    # TODO update learner data
-    console.log 'learner changed: ', @get('learnerId')
-    @set('loaded', false)
-    $.getJSON(@get('learnerDataUrl'), (data) =>
-      @set('state', data)
-      @get('user').restoreState()
-      @set('loaded', true)
-    ).error =>
-      @set('state', null)
-      @set('loaded', true)
-  ).observes('learnerId')
-
-  addReputation: (amt) ->
-    user = @get 'user'
-    return unless user
-    user.set 'reputation', user.get('reputation') + amt
-    evt = if GG.reputationController.get('swapChangedEarned') then GG.Events.REPUTATION_EARNED else GG.Events.REPUTATION_CHANGED
-    GG.logController.logEvent evt, amount: amt, result: user.get('reputation')
-
-  loadState: (type, obj)->
-    allState = @get('state')
-    if allState? and allState[type]? and allState[type][obj.get('_id')]?
-      return allState[type][obj.get('_id')]
-    else
-      return {}
-
-  stateQueue: []
-  stateQueueProcessing: false
-  saveState: (type, obj)->
-    stateQueue = @get('stateQueue')
-    stateQueue.push({type: type, obj: obj})
-    @processStateQueue() unless @get('stateQueueProcessing')
-
-  processStateQueue: ->
-    @set('stateQueueProcessing', true)
-    queue = @get('stateQueue')
-    allState = @get('state') || {}
-    while queue.length > 0
-      item = queue.shift()
-      type = item.type
-      obj = item.obj
-      allState[type] ||= {}
-      allState[type][obj.get('_id')] = obj.serialize()
-
-    @set('state', allState)
-    @set('stateQueueProcessing', false)
-    Ember.run.once this, "persistSaveState"
-
-  persistSaveState: ->
-    if @get('learnerDataUrl')?
-      allState = @get('state') || {}
-      $.post @get('learnerDataUrl'), JSON.stringify(allState), (data) =>
-        console.log 'state saved'
 
 GG.logController = Ember.Object.create
   learnerIdBinding: 'GG.userController.learnerId'
