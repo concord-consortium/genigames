@@ -103,7 +103,7 @@ GG.StateInTask = Ember.State.extend
           @set 'displayed', true
           powerup = powerups[0]
           @set('powerups', powerups.slice(1))
-          if GG.powerUpController.hasPowerup(powerup)
+          if GG.powerUpController.hasPowerup(powerup.name)
             # Already unlocked this
             setTimeout =>
               @set 'displayed', false
@@ -111,7 +111,7 @@ GG.StateInTask = Ember.State.extend
             , 1
           else
             # Display powerup
-            GG.powerUpController.set('text', powerup)
+            GG.powerUpController.set('powerup', powerup)
             GG.powerUpController.unlockPowerup(powerup)
             $('#modal-backdrop-fade').fadeIn(500)
             $('#powerup-popup').fadeIn(500)

@@ -1305,17 +1305,17 @@ GG.tutorialMessageController = Ember.Object.create
         tooltip: "rightMiddle"
 
 GG.powerUpController = Ember.Object.create
-  text: ""
+  powerup: {}
 
   unlockPowerup: (powerup) ->
     user = GG.userController.get 'user'
     return unless user
     powerups = user.get 'powerups'
-    powerups.pushObject(powerup) unless powerups.indexOf(powerup) != -1
+    powerups.pushObject(powerup.name) unless powerups.indexOf(powerup.name) != -1
 
-  hasPowerup: (powerup) ->
+  hasPowerup: (name) ->
     user = GG.userController.get 'user'
-    return user && user.get('powerups').indexOf(powerup) != -1
+    return user && user.get('powerups').indexOf(name) != -1
 
 
 GG.QTipStyle =
