@@ -1093,7 +1093,7 @@ GG.tutorialMessageController = Ember.Object.create
         , 200
 
       @set 'traitBarTutorialShown', true
-      GG.showInfoDialog $('#breed-top-bar'),
+      GG.showInfoDialog $('#trait-selection-tutorial-target'),
         "Use the Trait Tracker to remember the traits you need. Atheena has asked for
         a %@1 with wings. To move ahead, click wings now.".fmt(Ember.I18n.t('drake')),
         target: "bottomMiddle"
