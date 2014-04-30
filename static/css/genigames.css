@@ -353,10 +353,17 @@ html body div {
   position: relative;
   top: -23px;
 }
-#parents-tutorial-target {
+#male-parents-tutorial-target {
   position: absolute;
-  top: 181px;
-  left: 200px;
+  top: 90px;
+  left: 250px;
+  width: 1px;
+  height: 1px;
+}
+#female-parents-tutorial-target {
+  position: absolute;
+  top: 271px;
+  left: 250px;
   width: 1px;
   height: 1px;
 }
@@ -1183,8 +1190,6 @@ select,
 textarea {
   margin: 0;
 }
-input:valid,
-textarea:valid,
 input:invalid,
 textarea:invalid {
   border-radius: 1px;
