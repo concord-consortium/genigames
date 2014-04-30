@@ -635,7 +635,7 @@ GG.NPCHeartBubbleView = Ember.View.extend GG.PointsToolTip,
     "Replay: " + @get('content.targetDrake')
   ).property('content')
   updateHeartFill: (->
-    score = @get('content.reputationEarned') / @get('content.reputation')
+    score = @get('content.reputationEarned') / @get('content.reputationFullScore')
     height = 53 - (score * 37)    # height is from top, min 53px, max 16px
     @$('.heart-bubble-empty-wrapper').css({height: height})
   ).observes('content.reputationEarned')
