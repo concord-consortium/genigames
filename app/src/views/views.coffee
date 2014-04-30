@@ -640,6 +640,8 @@ GG.NPCHeartBubbleView = Ember.View.extend GG.PointsToolTip,
   updateHeartFill: (->
     score = @get('content.reputationEarned') / @get('content.reputationFullScore')
     height = 53 - (score * 37)    # height is from top, min 53px, max 16px
+    height = 16 if height < 16
+    height = 53 if height > 53
     @$('.heart-bubble-empty-wrapper').css({height: height})
   ).observes('content.reputationEarned')
   mouseEnter: ->
