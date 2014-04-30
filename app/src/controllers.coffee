@@ -1465,8 +1465,9 @@ GG.reputationController = Ember.Object.create
     evt = if @get('swapChangedEarned') then GG.Events.REPUTATION_CHANGED else GG.Events.REPUTATION_EARNED
     GG.logController.logEvent evt, {amount: current}
     if best == null || current > best
-      @set('bestTaskReputation', current)
-      @set('bestTaskReputationReasons', @get('currentTaskReputationReasons'))
+      Ember.run =>
+        @set('bestTaskReputation', current)
+        @set('bestTaskReputationReasons', @get('currentTaskReputationReasons'))
 
       best = 0 if best == Number.NEGATIVE_INFINITY
       GG.userController.addReputation(current - best)
