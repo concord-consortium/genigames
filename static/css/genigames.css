@@ -627,6 +627,7 @@ html body div {
   width: 100px;
   height: 20px;
   padding-top: 5px;
+  cursor: pointer;
 }
 .characteristic-radio {
   background: top left no-repeat url("../images/radioButton.png");
