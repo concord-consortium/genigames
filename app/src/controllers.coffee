@@ -1100,20 +1100,6 @@ GG.tutorialMessageController = Ember.Object.create
         target: "bottomMiddle"
         tooltip: "topMiddle"
         hideButton: true
-        hideAction: =>
-          @showParentsTutorial()
-
-  targetTutorialShown: false
-  showTargetTutorial: ->
-    if @get('isFirstTask')  and !@get 'targetTutorialShown'
-      @set 'targetTutorialShown', true
-      GG.showInfoDialog $('#target-tutorial-target'),
-        "These are the traits of the %@1 you need to create. To do that you have
-        to get a male and female parent who can breed the target %@1.".fmt(Ember.I18n.t('drake')),
-        target: "leftMiddle"
-        tooltip: "rightMiddle"
-        hideAction: =>
-          @showParentsTutorial()
 
   firstDrakeSelected: false
   showFirstDrakeSelectionTutorial: (parent) ->
