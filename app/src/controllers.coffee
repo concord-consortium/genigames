@@ -1610,6 +1610,8 @@ GG.leaderboardController = Ember.ArrayController.create
       @set 'fbClassRef', null
       return
 
+    GG.logController.logEvent "Trying to connect to FireBase"
+
     fbRef = new Firebase 'https://genigames-leaderboard.firebaseio.com/'
 
     # find existing class ref, or create one with some initial data
@@ -1624,10 +1626,13 @@ GG.leaderboardController = Ember.ArrayController.create
 
         fbRef.child(classWord).set userCreationObj, (error) =>
           if error
+            GG.logController.logEvent "Error creating FireBase child node #{classWord}"
             console.log "Error creating FB child node #{classWord}"
           else
+            GG.logController.logEvent "Created FireBase child node #{classWord}"
             @set 'fbClassRef', fbRef.child(classWord)
       else
+        GG.logController.logEvent "Using FireBase child node #{classWord}"
         fbRef.child(classWord).child(userName).setWithPriority(reputation, -reputation)
         @set 'fbClassRef', fbRef.child(classWord)
   ).observes('GG.userController.classWord', 'GG.userController.learnerId', 'GG.userController.user.nameWithLearnerId')
