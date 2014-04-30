@@ -1190,6 +1190,8 @@ select,
 textarea {
   margin: 0;
 }
+input:valid,
+textarea:valid,
 input:invalid,
 textarea:invalid {
   border-radius: 1px;
