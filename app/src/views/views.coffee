@@ -527,8 +527,11 @@ GG.TownView = Ember.View.extend
 GG.TaskNPCView = Ember.View.extend
   tagName            : 'div'
   classNames         : ['npc']
-  classNameBindings  : ['npcLocationState']
+  classNameBindings  : ['npcLocationState','hidden']
   attributeBindings  : ['style']
+  hidden: (->
+    !(@get('content.completed') || @get('content.showInForeground') )
+  ).property('content.completed', 'content.showInForeground')
   style: (->
     return "" if @get('content.showInForeground')
 
