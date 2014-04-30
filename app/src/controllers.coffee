@@ -1138,15 +1138,21 @@ GG.tutorialMessageController = Ember.Object.create
         hideAction: =>
           @showFinishButtonTutorial()
 
-  parentsTutorialShown: false
-  showParentsTutorial: ->
-    if @get('isFirstTask') and !@get 'parentsTutorialShown'
-      @set 'parentsTutorialShown', true
-      GG.showInfoDialog $("#parents-tutorial-target"),
-        "Here is where the parents are kept. The male %@1s have beards; the females do not.
-        You need to have one male and one female %@1 to make an offspring.".fmt(Ember.I18n.t('drake')),
-        target: "rightMiddle"
-        tooltip: "leftMiddle"
+  showMaleParentsTutorial: ->
+    GG.showInfoDialog $("#male-parents-tutorial-target"),
+      "Here are the male parent %@1s. The male %@1s have beards; the females do not.
+      Choose one for breeding now.".fmt(Ember.I18n.t('drake')),
+      target: "rightMiddle"
+      tooltip: "leftMiddle"
+      hideButton: true
+
+  showFemaleParentsTutorial: ->
+    GG.showInfoDialog $("#female-parents-tutorial-target"),
+      "Here are the female parent %@1s.
+      Choose one for breeding now.".fmt(Ember.I18n.t('drake')),
+      target: "rightMiddle"
+      tooltip: "leftMiddle"
+      hideButton: true
 
   breedButtonTutorialShown: false
   speedTutorialShown: false

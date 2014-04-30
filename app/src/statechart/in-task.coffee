@@ -202,16 +202,48 @@ GG.StateInTask = Ember.State.extend
       waitForTraitSelection: (manager) ->
         manager.transitionTo 'waitingForTraitSelection'
 
-    # popup tutorial state
-    waitingForTraitSelection: Ember.State.create
-      selectTrait: (manager, characteristic) ->
-        if characteristic is "wings"
-          # show parent tutorial after first selected
-          GG.tutorialMessageController.showParentsTutorial()
-          manager.transitionTo 'parentSelect'
 
-      parentSelected: ->
-        # do nothing
+      # These tutorial states are substates of parentSelect
+      # waitingForTraitSelection is entered explicitly by the tutorial controller
+      initialState: 'noTutorial'
+
+      # no tutorial. (Can't be empty, so has an 'empty' methof)
+      noTutorial: Ember.State.create
+        empty: ->
+
+      # tutorial state
+      waitingForTraitSelection: Ember.State.create
+        selectTrait: (manager, characteristic) ->
+          if characteristic is "wings"
+            manager.transitionTo 'waitingForParentSelection'
+
+        parentSelected: ->
+          # do nothing
+        goToTown: (manager) ->
+          # no nothing
+        goToWorld: (manager) ->
+          # no nothing
+
+      # tutorial state
+      waitingForParentSelection: Ember.State.create
+        setup: ->
+          # show parent tutorial after first selected
+          GG.tutorialMessageController.showMaleParentsTutorial()
+
+        parentSelected: (manager, parent) ->
+          sex = parent.get('sex')
+          if sex is GG.MALE
+            @get('parentState').parentSelected(manager, parent)
+            GG.tutorialMessageController.showFemaleParentsTutorial()
+          else if GG.breedingController.get('father')
+            @get('parentState').parentSelected(manager, parent)
+            manager.transitionTo 'noTutorial'
+
+        goToTown: (manager) ->
+          # no nothing
+        goToWorld: (manager) ->
+          # no nothing
+
 
     animatingMeiosis: Ember.State.create
       firstTime: true
