@@ -39,10 +39,9 @@
   </div>
   <div class="meiosisControlView chromatidSelection hidden">
     <h3>Chromosome Selection</h3>
-    <p>If you would like to control which chromosomes you end up with, select them now.</p>
-    <p>Click continue when you are done.</p>
+    <p>Select one or more chromosomes for the offspring now.</p>
     {{#if GG.baselineController.isNotBaseline}}
-      <div class="cost">Cost: ${{view.chromosomeSelectedCost}} per selection</div>
+    <p>Breeding cost is ${{view.chromosomeSelectedCost}} per chromosome.</p>
     {{/if}}
     <button {{action "doneSelectingChromatids"}}>
       {{view.doneSelectingChromatidsButtonText}}
