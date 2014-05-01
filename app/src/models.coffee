@@ -276,6 +276,7 @@ GG.Events =
   ENTERED_TOWN    : "Entered town"
   COMPLETED_TOWN  : "Completed town"
   UNLOCKED_TOWN   : "Unlocked town"
+  PAID_TOWN       : "Paid to unlock town"
 
   # Task events
   STARTED_TASK    : "Started task"

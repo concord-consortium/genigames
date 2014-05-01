@@ -44,6 +44,19 @@ GG.StateInWorld = Ember.State.extend
       else
         manager.send 'openTownUnlocker', town
 
+    payForTown: (manager) ->
+      if GG.townsController.get('canPayForNextTown')
+        $('#admin-password').hide()
+        $('#admin-password-success').show()
+        user = GG.userController.get 'user'
+        user.set 'reputation', (user.get('reputation') - GG.townsController.get('nextTownsCost'))
+        GG.logController.logEvent GG.Events.PAID_TOWN, name: GG.townsController.get 'townToBeUnlocked.name'
+        GG.townsController.unlockTown()
+        setTimeout =>
+          manager.send 'closeAdminPanel'
+          manager.send 'navigateToTown', GG.townsController.get('townToBeUnlocked')
+        , 1200
+
     unlockTown: (manager) ->
       pass = GG.manualEventController.get 'password'
       GG.manualEventController.set 'password', ""
