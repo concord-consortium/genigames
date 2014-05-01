@@ -665,6 +665,7 @@ GG.NPCFinalMessageBubbleView = Ember.View.extend
   next: ->
     GG.statemanager.transitionTo 'inWorld.movingDirectlyToNextTown'
   world: ->
+    @set 'content.showFinalMessageBubble', false
     GG.statemanager.transitionTo 'inWorld.townsWaiting'
   dismissFinalBubble: ->
     @set 'content.showFinalMessageBubble', false

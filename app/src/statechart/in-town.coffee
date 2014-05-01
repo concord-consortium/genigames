@@ -87,7 +87,7 @@ GG.StateInTown = Ember.State.extend
           firstIncompleteTask.set 'isShowingThanksMessage', false
           firstIncompleteTask.set 'showQuestionBubble', true
         , 1000
-      else
+      else if justCompletedTask and !justCompletedAnEarlierTask
         GG.townsController.completeCurrentTown()
         setTimeout =>
           manager.transitionTo 'npcShowingFinalMessage'
