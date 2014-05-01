@@ -42,7 +42,7 @@ GG.StateInWorld = Ember.State.extend
       if not town.get('locked')
         manager.send 'navigateToTown', town
       else
-        manager.send 'openTownPassword', town
+        manager.send 'openTownUnlocker', town
 
     unlockTown: (manager) ->
       pass = GG.manualEventController.get 'password'

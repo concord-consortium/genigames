@@ -962,6 +962,8 @@ GG.BaselineTaskListView = Ember.View.extend
 GG.townUnlockView = Ember.View.extend
   templateName: 'town-unlock'
   contentBinding: 'GG.townsController'
+  costBinding: 'content.nextTownsCost'
+  showPayMessageBinding: 'content.canPayForNextTown'
   firstTown: (->
     @get 'content.firstObject'
   ).property('content.[]')

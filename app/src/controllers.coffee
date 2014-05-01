@@ -116,6 +116,24 @@ GG.townsController = Ember.ArrayController.create
 
     @setCurrentTown(town, true) if town?
 
+  nextTownsCost: (->
+    nextTown = @indexOf(@get 'townToBeUnlocked')
+    previousTown = @get('content')[nextTown-1] unless !nextTown
+    if not previousTown then return 0
+
+    previousTown.get('completionCost')
+  ).property('townToBeUnlocked')
+
+  canPayForNextTown: (->
+    nextTown = @indexOf(@get 'townToBeUnlocked')
+    previousTown = @get('content')[nextTown-1] unless !nextTown
+    if not previousTown then return false
+
+    if (previousTown.get('locked')) then return false
+
+    return (GG.userController.get('user.reputation') >= previousTown.get('completionCost'))
+  ).property('townToBeUnlocked', 'GG.userController.user.reputation')
+
   unlockTown: ->
     town = @get 'townToBeUnlocked'
     if not town then return

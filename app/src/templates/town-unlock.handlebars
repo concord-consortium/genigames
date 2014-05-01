@@ -1,10 +1,24 @@
 <div id="admin-password" class="admin">
   <div>
-    Enter the password to unlock {{GG.townsController.townToBeUnlocked.name}}.
+    <h1>Breeders License required.</h1>
+    <h3 style="text-align: center">The Town of {{GG.townsController.townToBeUnlocked.name}} requires a fee of ${{view.cost}}.</h3>
   </div>
-  <div>
-    Password: {{view Ember.TextField type="password" valueBinding="GG.manualEventController.password" size="30"}}
-  </div>
-  <button {{action "closeAdminPanel" target="GG.statemanager"}}>Cancel</button>
-  <button {{action "unlockTown" target="GG.statemanager"}}>Submit</button>
+  {{#if view.showPayMessage}}
+    <div style="margin: 20px 0 0 -181px;">
+      <button {{action "payForTown" target="GG.statemanager"}}>Pay Fee</button>
+      <button {{action "closeAdminPanel" target="GG.statemanager"}}>Cancel</button>
+    </div>
+  {{else}}
+    <div>
+      You cannot afford to enter this town yet, unless you have a password.
+    </div>
+    <div>
+      Enter the password to unlock {{GG.townsController.townToBeUnlocked.name}}.
+    </div>
+    <div>
+      Password: {{view Ember.TextField type="password" valueBinding="GG.manualEventController.password" size="30"}}
+    </div>
+    <button {{action "closeAdminPanel" target="GG.statemanager"}}>Cancel</button>
+    <button {{action "unlockTown" target="GG.statemanager"}}>Submit</button>
+  {{/if}}
 </div>

@@ -257,7 +257,7 @@ GG.statemanager = Ember.StateManager.create
       $("#connection-regained").fadeOut()
     , 2000
 
-  openTownPassword: (manager, town) ->
+  openTownUnlocker: (manager, town) ->
     GG.townsController.set 'townToBeUnlocked', town
     $('#admin-password').fadeIn()
 
