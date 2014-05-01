@@ -1126,12 +1126,10 @@ GG.tutorialMessageController = Ember.Object.create
       tooltip = if parent is "mother" then "bottomMiddle" else "topMiddle"
       @set 'firstDrakeSelected', true
       GG.showInfoDialog $("##{parent}-chromosome"),
-        'This is the %@1 genetic make-up. The alleles <span style="position: relative;">
-        <img src="../images/allele-bg.png" style="position: absolute; top: -6px; left: 1px">
-        <span style="position: absolute; top: 0; left: 4px; font-weight: bold;" class="dominant">
-        W1</span></span><br/>of genes determine the look of the
-        %@1, so to get the %@1 you want, you’re going to have to breed to create a
-        genetic combination that will produce the %@1.'.fmt(Ember.I18n.t('drake')),
+        'These are the %@1\'s chromosomes. Here, the gene for Wings is shown: <span style="position: relative;">
+        <img src="../images/allele-bg.png" style="position: absolute; top: -6px; left: 3px">
+        <span style="position: absolute; top: 0; left: 6px; font-weight: bold;" class="dominant">
+        W1</span></span>'.fmt(Ember.I18n.t('drake')),
         target: target
         tooltip: tooltip
 
@@ -1145,20 +1143,9 @@ GG.tutorialMessageController = Ember.Object.create
         tooltip: "leftTop"
         hideTip: true
 
-  firstOffspringCreated: false
-  showFirstOffspringCreatedTutorial: ->
-    if @get('isFirstTask') and !@get 'firstOffspringCreated'
-      @set 'firstOffspringCreated', true
-      GG.showInfoDialog $("#offspring-pool .chromosome-panel"),
-        "Good job. Notice which alleles of the wing gene gave this %@1 wings.".fmt(Ember.I18n.t('drake')),
-        target: "bottomMiddle"
-        tooltip: "topMiddle"
-        hideAction: =>
-          @showFinishButtonTutorial()
-
   showMaleParentsTutorial: ->
     GG.showInfoDialog $("#male-parents-tutorial-target"),
-      "Here are the male parent %@1s. The male %@1s have beards; the females do not.
+      "Here are the male parent %@1s.
       Choose one for breeding now.".fmt(Ember.I18n.t('drake')),
       target: "rightMiddle"
       tooltip: "leftMiddle"
@@ -1183,7 +1170,8 @@ GG.tutorialMessageController = Ember.Object.create
     if @get('isFirstTask') and !@get('breedButtonTutorialShown') and @get 'bothParentsSelected'
       @set 'breedButtonTutorialShown', true
       GG.showInfoDialog $("#breed-button"),
-        "Now that you’ve picked parents, hit the Breed button to create the child.",
+        "Good job! Notice that males have beards and females don't.
+        Next, hit the Breed button to create the child.",
         target: "leftMiddle"
         tooltip: "rightMiddle"
     else if @get('isFirstMeiosisSpeedControlTask') and !@get('speedTutorialShown') and @get 'bothParentsSelected'
@@ -1197,7 +1185,8 @@ GG.tutorialMessageController = Ember.Object.create
   meiosisTutorialShown:  false
   meiosisTutorial2Shown: false
   showMeiosisTutorial: (parent, callback)->
-    if @get('isFirstTask') and !@get('meiosisTutorialShown')
+    GG.hideInfoDialogs()
+    if false and @get('isFirstTask') and !@get('meiosisTutorialShown') # remove from here for now
       @set 'meiosisTutorialShown', true
       GG.showInfoDialog $("#meiosis-container .meiosis.#{parent}"),
         "This is meiosis, the method by which half of a parent’s alleles are passed to the child.
@@ -1310,7 +1299,8 @@ GG.tutorialMessageController = Ember.Object.create
     if @get('isFirstTask') and !@get('finishButtonTutorialShown')
       @set 'finishButtonTutorialShown', true
       GG.showInfoDialog $("#offspring-buttons .offspring-buttons-use"),
-        "When you have a %@1 that matches the task, hit Finish to end breeding and complete the challenge.".fmt(Ember.I18n.t('drake'))
+        "When you have a %@1 that matches the task, hit Ready to Sell to
+        end breeding and sell the %@1 to Athena.".fmt(Ember.I18n.t('drake'))
         target: "leftMiddle"
         tooltip: "rightMiddle"
 

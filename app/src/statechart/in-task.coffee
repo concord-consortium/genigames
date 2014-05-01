@@ -402,7 +402,9 @@ GG.StateInTask = Ember.State.extend
         $("#offspring-pool .chromosome-panel").show()
         $("#chromosome-labels-offspring").show()
         $('#offspring-panel').animate({left: -76},300,"easeOutCubic")
-        GG.tutorialMessageController.showFirstOffspringCreatedTutorial()
+        setTimeout ->
+          GG.tutorialMessageController.showFinishButtonTutorial()
+        , 1200
         if GG.tasksController.get('currentTask.cyclesRemaining') is 0 and
             GG.obstacleCourseController.get('hasObstacleCourse')
           manager.send 'checkForTaskCompletion'
