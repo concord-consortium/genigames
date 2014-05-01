@@ -65,6 +65,7 @@ GG.Town = Ember.Object.extend
   completed: false
   skipSave: false
   locked: true
+  completionCost: 100
 
   init: ->
     @_super()
