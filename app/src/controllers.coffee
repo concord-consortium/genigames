@@ -148,7 +148,10 @@ GG.townsController = Ember.ArrayController.create
 
   # 'completeTownsThrough 2' will complete towns 0,1,2
   completeTownsThrough: (n) ->
-    town.set('completed', true) for town, i in @get('content') when i <= n
+    for town, i in @get('content') when i <= n
+      town.set('completed', true)
+      town.set('locked', false)
+      GG.tasksController.completeAllTasksForTown town
     GG.logController.logEvent GG.Events.COMPLETED_TOWN, name: ("Towns through #" + n)
 
 GG.tasksController = Ember.ArrayController.create
@@ -229,8 +232,26 @@ GG.tasksController = Ember.ArrayController.create
     @taskAccepted task
 
   completeTasksThrough: (n) ->
-    task.set('completed', true) for task, i in @get('content') when i <= n
+    for task, i in @get('content') when i <= n
+      task.set('completed', true)
+      powerups = task.get('powerups')
+      if powerups && powerups.length > 0
+        powerup = powerups[0]
+        console.log("powerup! #{powerup.name}")
+        GG.powerUpController.unlockPowerup(powerup)
+
     GG.logController.logEvent GG.Events.COMPLETED_TASK, name: ("Tasks through #" + n)
+
+  completeAllTasksForTown: (town) ->
+    for task, i in town.get('realTasks')
+      task.set('completed', true)
+      powerups = task.get('powerups')
+      if powerups && powerups.length > 0
+        powerup = powerups[0]
+        console.log("powerup! #{powerup.name}")
+        GG.powerUpController.unlockPowerup(powerup)
+
+    GG.logController.logEvent GG.Events.COMPLETED_TASK, name: ("Completed all tasks for #{town.get('name')}")
 
   currentLevelId: (->
     task = @get('currentTask')
