@@ -1202,7 +1202,7 @@ GG.tutorialMessageController = Ember.Object.create
     if @get('isFirstMeiosisGenderControlTask') and !@get('meiosisGenderTutorialShown')
       @set 'meiosisGenderTutorialShown', true
       GG.showInfoDialog $("#meiosis-container .meiosis.father"),
-        "When you need to control the sex of the offspring drake, use the father's chromosomes.",
+        "Hint: When you need to control the sex of the offspring drake, use the father's X and Y chromosomes.",
         target: "leftMiddle"
         tooltip: "rightMiddle"
         maxWidth: 280
