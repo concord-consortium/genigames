@@ -72,11 +72,7 @@ GG.StateInTask = Ember.State.extend
       $('#task-reputation-best').hide()
       if success
         GG.tasksController.completeCurrentTask()
-      if GG.obstacleCourseController.get('hasObstacleCourse')
-        # manager.transitionTo 'obstacleCourse'
-        GG.tasksController.showTaskCompletion()
-      else
-        GG.tasksController.showTaskCompletion(success)
+      GG.tasksController.showTaskCompletion(success)
 
     selectTrait: ->
       # do nothing
@@ -405,9 +401,6 @@ GG.StateInTask = Ember.State.extend
         setTimeout ->
           GG.tutorialMessageController.showFinishButtonTutorial()
         , 1200
-        if GG.tasksController.get('currentTask.cyclesRemaining') is 0 and
-            GG.obstacleCourseController.get('hasObstacleCourse')
-          manager.send 'checkForTaskCompletion'
 
       submitOffspring: (manager) ->
         manager.send 'checkForTaskCompletion'
