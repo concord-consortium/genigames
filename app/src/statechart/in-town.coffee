@@ -141,7 +141,10 @@ GG.StateInTown = Ember.State.extend
 
   showingEndAnimation: Ember.State.create
     enter: ->
-      $(".npc").fadeOut(1000)
+      $(".npc, .gradient").fadeOut(1000)
       $("#finalAnimation").fadeIn(1000)
+      setTimeout ->
+        $("#topBar, #town").fadeOut(1500)
+      , 2500
 
 
