@@ -375,6 +375,14 @@ GG.StateInTask = Ember.State.extend
           manager.transitionTo 'parentSelect'
         , 200
 
+      goToTown: (manager) ->
+        GG.meiosisController.resetAnimation()
+        manager.transitionTo 'inTown'
+
+      goToWorld: (manager) ->
+        GG.meiosisController.resetAnimation()
+        manager.transitionTo 'inWorld'
+
     breeding: Ember.State.create
       setup: (manager) ->
         setTimeout ->
