@@ -147,4 +147,7 @@ GG.StateInTown = Ember.State.extend
         $("#topBar, #town").fadeOut(1500)
       , 2500
 
+      window.flashAnimationComplete = ->
+        $("#flash-buttons").fadeIn(2000)
+
 
