@@ -237,7 +237,6 @@ GG.tasksController = Ember.ArrayController.create
       powerups = task.get('powerups')
       if powerups && powerups.length > 0
         powerup = powerups[0]
-        console.log("powerup! #{powerup.name}")
         GG.powerUpController.unlockPowerup(powerup)
 
     GG.logController.logEvent GG.Events.COMPLETED_TASK, name: ("Tasks through #" + n)
@@ -248,7 +247,6 @@ GG.tasksController = Ember.ArrayController.create
       powerups = task.get('powerups')
       if powerups && powerups.length > 0
         powerup = powerups[0]
-        console.log("powerup! #{powerup.name}")
         GG.powerUpController.unlockPowerup(powerup)
 
     GG.logController.logEvent GG.Events.COMPLETED_TASK, name: ("Completed all tasks for #{town.get('name')}")
@@ -1276,10 +1274,13 @@ GG.powerUpController = Ember.Object.create
     return unless user
     powerups = user.get 'powerups'
     powerups.pushObject(powerup.name) unless powerups.indexOf(powerup.name) != -1
+    @set 'powerupChanged', @get('powerupChanged') + 1
 
   hasPowerup: (name) ->
     user = GG.userController.get 'user'
     return user && user.get('powerups').indexOf(name) != -1
+
+  powerupChanged: 0
 
 
 GG.QTipStyle =
