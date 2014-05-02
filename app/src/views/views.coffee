@@ -662,6 +662,7 @@ GG.NPCFinalMessageBubbleView = Ember.View.extend
   classNames         : ['speech-bubble']
   classNameBindings  : ['hidden']
   hidden             : Ember.computed.not('content.showFinalMessageBubble')
+  isFinalTaskBinding : 'content.finalTask'
   next: ->
     GG.statemanager.transitionTo 'inWorld.movingDirectlyToNextTown'
   world: ->

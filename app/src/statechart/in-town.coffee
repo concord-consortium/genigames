@@ -133,3 +133,15 @@ GG.StateInTown = Ember.State.extend
       lastTask.set('showFinalMessageBubble', false)
       GG.tasksController.setCurrentTask task
       GG.tasksController.taskAccepted task
+
+    showEndAnimation: (manager) ->
+      lastTask = GG.tasksController.get("lastObject")
+      lastTask.set('showFinalMessageBubble', false)
+      manager.transitionTo 'showingEndAnimation'
+
+  showingEndAnimation: Ember.State.create
+    enter: ->
+      $(".npc").fadeOut(1000)
+      $("#finalAnimation").fadeIn(1000)
+
+
