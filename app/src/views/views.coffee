@@ -10,11 +10,15 @@ GG.LoginView = Ember.View.extend
   errorBinding: 'GG.sessionController.error'
   firstTimeBinding: 'GG.sessionController.firstTime'
   waitingForPreloadBinding: 'GG.sessionController.waitingForPreload'
+  registeredUsernameBinding: 'GG.sessionController.registeredUsername'
   login: ->
     pw = @get('password')
     @set('password', "")
-    data = {username: @get('username'), password: pw}
+    username = @get('username') or $('#username-field input').attr('value')
+    data = {username: username, password: pw}
     GG.statemanager.send 'login', data
+  register: ->
+    GG.statemanager.send 'register'
 
 GG.LogoutButton = Ember.View.extend
   tagName: 'div'

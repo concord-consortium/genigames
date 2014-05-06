@@ -99,6 +99,25 @@ GG.statemanager = Ember.StateManager.create
       GG.userController.set('groupInfoSaved', true)
       GG.statemanager.send 'nextStep'
 
+    showRegistration: ->
+      $('#login').hide()
+      $('#register').fadeIn()
+
+    returnToLogin: ->
+      $('#register').hide()
+      $('#login').fadeIn()
+      if username = GG.sessionController.get 'registeredUsername'
+        $('#username-field input').attr 'value', username
+
+    register: (manager) ->
+      $.post('/portal/portal/students', $('#new_portal_student').serialize()).always (ret) ->
+        match = ret.responseText.match(/with the username <b>(.*)<\/b>/)
+        if match and match.length
+          username = match[1]
+          GG.sessionController.set 'registeredUsername', username
+          manager.send 'returnToLogin'
+
+
     nextStep: ->
       doNext = =>
         # load the game after we log in so that we can create towns and tasks
