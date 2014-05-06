@@ -71,7 +71,7 @@ GG.PointsToolTip = Ember.Mixin.create
   ).property('showToolTip', 'costPropertyName', 'toolTipText', 'GG.tooltipController.show')
 
   toggleToolTip: (->
-    if @get('showToolTip') and @get('tooltip')
+    if @get('showToolTip') and @get('tooltip') and (GG.tooltipController.get('show') or  @get('forceTooltip'))
       @$().qtip 'destroy' if @get 'qtip'
 
       params = Ember.copy GG.QTipDefaults, true
@@ -81,9 +81,10 @@ GG.PointsToolTip = Ember.Mixin.create
       params.style.tip = @get 'toolTipConfigTip'
       @set 'qtip', @$().qtip params
     else if @get 'qtip'
+      console.log("destroy")
       @$().qtip 'destroy'
       @set 'qtip', null
-  ).observes('showToolTip', 'tooltip')
+  ).observes('showToolTip', 'tooltip', 'toolTipText', 'forceTooltip', 'GG.tooltipController.show')
 
   didInsertElement: ->
     @_super()

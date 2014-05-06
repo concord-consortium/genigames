@@ -142,12 +142,15 @@ GG.WorldTownView = Ember.View.extend
     return (townId > 1)
   ).property('GG.townsController.currentTown')
 
-GG.TraitSelectionView = Ember.View.extend
+GG.TraitSelectionView = Ember.View.extend GG.PointsToolTip,
   templateName: 'trait-selection'
   showAllTraits: (->
     townId = GG.townsController.get("content").indexOf GG.townsController.get "currentTown"
     return (townId > 1)
   ).property('GG.townsController.currentTown')
+  toolTipText: "Use the buttons to keep track of the traits you are breeding for"
+  toolTipConfigTooltip: 'bottomRight'
+  toolTipConfigTip: 'bottomRight'
   characteristicSelected: (evt) ->
     elem = evt.currentTarget
     container = elem.parentElement
@@ -510,13 +513,15 @@ GG.OffspringSaveButtonView = Ember.View.extend GG.PointsToolTip,
     @set 'disabled', true
     GG.statemanager.send('saveOffspring')
 
-GG.ValueCounter = Ember.View.extend
+GG.ValueCounter = Ember.View.extend GG.PointsToolTip,
   templateName: 'move-counter'
   classNames: ['value-counter']
+  toolTipText: "This is the amount you're being offered for breeding the target drake"
 
-GG.MoveCounter = Ember.View.extend
+GG.MoveCounter = Ember.View.extend GG.PointsToolTip,
   templateName: 'move-counter'
   classNames: ['cost-counter']
+  toolTipText: "This tracks how much you have spent to breed, select chromosomes, and do crossovers"
 
 GG.MatchGoalCounter = Ember.View.extend
   templateName: 'match-goal-counter'
@@ -566,7 +571,7 @@ GG.TaskNPCView = Ember.View.extend
   replayTask: (evt) ->
     GG.statemanager.send 'replayTask', evt.context
 
-GG.NPCView = Ember.View.extend
+GG.NPCView = Ember.View.extend GG.PointsToolTip,
   tagName            : 'img'
   classNames         : ['character']
   attributeBindings  : ['src']
@@ -643,8 +648,13 @@ GG.NPCHeartBubbleView = Ember.View.extend GG.PointsToolTip,
   toolTipConfigTooltip: 'bottomRight'
   toolTipConfigTip   :  'bottomRight'
   toolTipText: (->
-    "Replay: " + @get('content.targetDrake')
-  ).property('content')
+    if GG.tooltipController.get 'show'
+      "Replay: #{@get('content.targetDrake')}<br>Hearts show gratitude for a correctly bred drake.
+      If the heart is not completely full, it means you can earn more by trying again and breeding more efficiently."
+    else
+      "Replay: " + @get('content.targetDrake')
+  ).property('content', 'GG.tooltipController.show')
+  forceTooltip: true
   updateHeartFill: (->
     score = @get('content.reputationEarned') / @get('content.reputationFullScore')
     height = 53 - (score * 37)    # height is from top, min 53px, max 16px
@@ -873,9 +883,10 @@ GG.MeiosisView = Ember.View.extend
     return alleles.slice(1)
   ).property('chosenGamete')
 
-GG.MeiosisSpeedSliderView = Ember.View.extend
+GG.MeiosisSpeedSliderView = Ember.View.extend GG.PointsToolTip,
   tagName: 'div'
   elementId: 'meiosis-speed-slider-parent'
+  toolTipText: "Use this slider to speed up or slow down meiosis"
   updateEnabled: (->
     disabled = !GG.powerUpController.hasPowerup("speed control")
     $('#meiosis-speed-slider').slider("option", "disabled", disabled);
