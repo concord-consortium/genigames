@@ -975,3 +975,13 @@ GG.townUnlockView = Ember.View.extend
   firstTown: (->
     @get 'content.firstObject'
   ).property('content.[]')
+
+GG.HelpModeButton = Ember.View.extend GG.PointsToolTip,
+  tagName: 'div'
+  classNames: ['questionmark-button']
+  classNameBindings: ['active']
+  activeBinding: 'GG.tooltipController.show'
+  forceTooltip: true
+  toolTipText: "Click to get help by hovering over objects."
+  click: ->
+    GG.statemanager.send 'toggleHelpMode'

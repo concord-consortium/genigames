@@ -9,13 +9,20 @@
   font-weight: normal
   z-index: 2
   .goToTown
-    absolute: right 165px top 18px width 41px height 40px
+    absolute: right 215px top 18px width 41px height 40px
     background: top left no-repeat url('../images/button-town.png')
     cursor: pointer
   .goToWorld
-    absolute: right 115px top 19px width 41px height 40px
+    absolute: right 165px top 19px width 41px height 40px
     background: top left no-repeat url('../images/button-world.png')
     cursor: pointer
+  .questionmark-button
+    absolute: right 115px top 19px width 41px height 40px
+    background: top left no-repeat url('../images/questionmark-button.png')
+    background-size: 110%
+    cursor: pointer
+    &.active
+      background-position-y: 95%
   .logout
     absolute: right 30px top 25px width 75px height 25px
     font-size: 12pt

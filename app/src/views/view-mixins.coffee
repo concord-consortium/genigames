@@ -59,7 +59,7 @@ GG.PointsToolTip = Ember.Mixin.create
   attributeBindings: ['tooltip']
 
   tooltip: (->
-    if not @get 'showToolTip'
+    if not @get('showToolTip') or (not GG.tooltipController.get('show') and not @get('forceTooltip'))
       return ""
 
     costStr = ""
@@ -68,7 +68,7 @@ GG.PointsToolTip = Ember.Mixin.create
       cost = GG.actionCostsController.getCost costPropertyName
       costStr = if cost then "<br/><br/>Cost: $#{cost}." else ""
     return @get('toolTipText') + costStr
-  ).property('showToolTip', 'costPropertyName', 'toolTipText')
+  ).property('showToolTip', 'costPropertyName', 'toolTipText', 'GG.tooltipController.show')
 
   toggleToolTip: (->
     if @get('showToolTip') and @get('tooltip')

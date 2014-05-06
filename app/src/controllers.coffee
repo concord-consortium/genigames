@@ -1697,3 +1697,6 @@ GG.costCounterController = Ember.Object.create
   getPosition: (num) ->
     pos = num * 18
     "(0px -" + pos + "px)"
+
+GG.tooltipController = Ember.Object.create
+  show: false
