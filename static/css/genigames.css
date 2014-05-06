@@ -2369,7 +2369,9 @@ a:hover {
   filter: Alpha(30);
   border-radius: 8px;
 }
-#login {
+#login,
+#register,
+#registration-success {
   position: absolute;
   top: 250px;
   width: 700px;
@@ -2377,8 +2379,28 @@ a:hover {
   text-align: center;
   font-weight: bold;
 }
-#login div {
+#login div,
+#register div,
+#registration-success div {
   padding: 3px;
+}
+#login form,
+#register form,
+#registration-success form {
+  padding-left: 150px;
+}
+#login h2,
+#register h2,
+#registration-success h2 {
+  font-size: 1.3em;
+  padding: 5px;
+}
+#register {
+  display: none;
+  top: 225px;
+}
+#registration-success {
+  top: 135px;
 }
 #choose-class {
   position: absolute;
