@@ -53,6 +53,7 @@ GG.statemanager = Ember.StateManager.create
           firstName: user.get('first')
           lastName: user.get('last')
           group: user.get('group')
+      GG.sessionController.set 'registeredUsername', null
       if GG.sessionController.get('preloadingComplete')
         manager.send 'preloadedSuccessfulLogin'
       else
