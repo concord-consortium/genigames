@@ -517,6 +517,9 @@ GG.ValueCounter = Ember.View.extend GG.PointsToolTip,
   templateName: 'move-counter'
   classNames: ['value-counter']
   toolTipText: "This is the amount you're being offered for breeding the target drake"
+  toolTipConfigTarget: 'topMiddle'
+  toolTipConfigTooltip: 'bottomRight'
+  toolTipConfigTip: 'bottomRight'
 
 GG.MoveCounter = Ember.View.extend GG.PointsToolTip,
   templateName: 'move-counter'
@@ -887,6 +890,9 @@ GG.MeiosisSpeedSliderView = Ember.View.extend GG.PointsToolTip,
   tagName: 'div'
   elementId: 'meiosis-speed-slider-parent'
   toolTipText: "Use this slider to speed up or slow down meiosis"
+  toolTipConfigTooltip: 'bottomRight'
+  toolTipConfigTip: 'bottomRight'
+  toolTipConfigTarget: 'topMiddle'
   updateEnabled: (->
     disabled = !GG.powerUpController.hasPowerup("speed control")
     $('#meiosis-speed-slider').slider("option", "disabled", disabled);
