@@ -2371,7 +2371,7 @@ a:hover {
 }
 #login,
 #register,
-#registration-success {
+.login-info {
   position: absolute;
   top: 250px;
   width: 700px;
@@ -2381,26 +2381,77 @@ a:hover {
 }
 #login div,
 #register div,
-#registration-success div {
+.login-info div {
   padding: 3px;
-}
-#login form,
-#register form,
-#registration-success form {
-  padding-left: 150px;
 }
 #login h2,
 #register h2,
-#registration-success h2 {
+.login-info h2 {
   font-size: 1.3em;
   padding: 5px;
 }
+#login {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1000px;
+  height: 750px;
+  background: url("../images/login-screen.jpg") top left no-repeat;
+}
+#login .buttons {
+  position: absolute;
+  top: 366px;
+  left: 392px;
+  height: 34px;
+  overflow: hidden;
+}
+#login .buttons img {
+  position: relative;
+  cursor: pointer;
+  top: -2px;
+}
+#login .buttons img:hover {
+  top: -41px;
+}
+#login .buttons img:active {
+  top: -80px;
+}
+#username-field {
+  position: absolute;
+  top: 252px;
+  left: 388px;
+}
+#username-field input {
+  width: 172px;
+  height: 17px;
+}
+#password-field {
+  position: absolute;
+  top: 312px;
+  left: 388px;
+}
+#password-field input {
+  width: 172px;
+  height: 17px;
+}
 #register {
   display: none;
-  top: 225px;
+  position: absolute;
+  top: 219px;
+  left: 340px;
+  width: 290px;
+  height: 228px;
+  background-color: #fff;
 }
-#registration-success {
-  top: 135px;
+.login-info {
+  z-index: 100;
+  left: 368px;
+  top: 124px;
+  width: 236px;
+  height: 89px;
+  background-color: rgba(255,255,255,0.8);
+  border: #a9a9a9 2px solid;
+  border-radius: 9px;
 }
 #choose-class {
   position: absolute;
@@ -2417,12 +2468,18 @@ a:hover {
   width: 200px;
 }
 #login-error {
+  height: 50px;
+  top: 140px;
   color: #f00;
   font-weight: bold;
 }
+#login-status {
+  height: 50px;
+  top: 140px;
+}
 #loadingStatus {
   position: relative;
-  top: 170px;
+  top: 421px;
 }
 #login-permission-denied {
   display: none;
