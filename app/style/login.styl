@@ -5,23 +5,56 @@ login-style()
   text-align: center
 
 
-#login, #register, #registration-success
+#login, #register, .login-info
   login-style()
   font-weight: bold
   div
     padding: 3px
-  form
-    padding-left: 150px
   h2
     font-size: 1.3em
     padding: 5px
 
+#login
+  absolute: top left width 1000px height 750px
+  background: url('../images/login-screen.jpg') top left no-repeat;
+  .buttons
+    absolute: top 366px left 392px height 34px
+    overflow: hidden
+    img
+      position: relative
+      cursor: pointer
+      top: -2px
+      &:hover
+        top: -41px
+      &:active
+        top: -80px
+
+#username-field
+  absolute: top 252px left 388px
+  input
+    width: 172px
+    height: 17px
+
+#password-field
+  absolute: top 312px left 388px
+  input
+    width: 172px
+    height: 17px
+
 #register
   display: none
-  top: 225px
+  absolute: top 219px left 340px width 290px height 228px
+  background-color: white
 
-#registration-success
-  top: 135px
+.login-info
+  z-index: 100;
+  left: 368px
+  top: 124px
+  width: 236px
+  height: 89px
+  background-color: rgba(255,255,255,0.8)
+  border: darkgray 2px solid
+  border-radius: 9px
 
 #choose-class
   login-style()
@@ -32,11 +65,17 @@ login-style()
   width: 200px
 
 #login-error
+  height: 50px
+  top: 140px
   color: red
   font-weight: bold
 
+#login-status
+  height: 50px
+  top: 140px
+
 #loadingStatus
-  relative: top 170px
+  relative: top 421px
 
 #login-permission-denied
   display: none

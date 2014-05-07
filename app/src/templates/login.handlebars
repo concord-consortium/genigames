@@ -1,94 +1,86 @@
 {{#if view.registeredUsername}}
-<div id="registration-success">
+<div id="registration-success" class="login-info">
   <h2>Registration Successful!</h2>
   <div>
     Your new username is: <h2>{{view.registeredUsername}}</h2>
   </div>
-  <div>
-    Please log in below:
-  </div>
 </div>
 {{/if}}
 <div id="login">
-  <div id="loadingStatus"></div>
   {{#if view.loggingIn}}
-    <div id="login-status">
+    <div id="login-status" class="login-info" style="padding-top: 16px;">
       {{#if view.waitingForPreload}}
         Logged in! Waiting to finish pre-loading assets...
       {{else}}
         Logging in... please wait.
       {{/if}}
     </div>
-    <div id="login-permission-denied">
+    <div id="login-permission-denied" class="login-info">
       Permission denied. Loading portal...
     </div>
   {{else}}
     {{#unless view.firstTime}}
       {{#if view.error}}
-        <div id='login-error'>
+        <div id='login-error' class="login-info" style="padding-top: 16px;">
           Invalid username or password. Please try again.
         </div>
       {{/if}}
     {{/unless}}
-    <div>
-      <span id="username">Username:</span>
-      <span id="username-field">{{view Ember.TextField valueBinding="view.username"}}</span>
+    <div id="username-field">
+      {{view Ember.TextField valueBinding="view.username"}}
     </div>
-    <div>
-      <span id="password">Password:</span>
-      <span id="password-field">{{view GG.PasswordField valueBinding="view.password" loginViewBinding="view"}}</span>
+    <div id="password-field">
+      {{view GG.PasswordField valueBinding="view.password" loginViewBinding="view"}}
     </div>
-    <input type="submit" value="Login" {{action login}} />
-    {{#if view.registeredUsername}}
-    {{else}}
-      <div style="padding-top: 35px;">
-        Don't have an account?
-        <input style="margin: 13px;" type="submit" value="Register" {{action showRegistration  target="GG.statemanager"}} />
-      </div>
-    {{/if}}
+    <div class="buttons">
+      <span {{action login}}><img src="images/login-button.png"/></span>
+      <span {{action showRegistration  target="GG.statemanager"}}><img src="images/login-signup-button.png"/></span>
+    </div>
   {{/if}}
-</div>
-<div id="register">
-  <h2>Register a new account</h2>
-  <div>
-    <form id="new_portal_student"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /></div>
-      <table class='form'>
-      <tr>
-      <td><label for="user">First Name:</label></td>
-      <td>
-      <input id="user_first_name" live="false" name="user[first_name]" size="30" type="text" value="" />
-      </td>
-      </tr>
-      <tr>
-      <td><label for="user">Last Name:</label></td>
-      <td><input id="user_last_name" live="false" name="user[last_name]" size="30" type="text" value="" /></td>
-      </tr>
-      <tr>
-      <td><label for="user">Password:</label></td>
-      <td><input id="user_password" live="false" name="user[password]" size="30" type="password" /></td>
-      </tr>
-      <tr>
-      <td><label for="user">Password Again:</label></td>
-      <td><input id="user_password_confirmation" live="false" name="user[password_confirmation]" size="30" type="password" /></td>
-      </tr>
-      <tr style="display: none">
-      <td>
-      <label for="clazz">Class Word:</label>
-      <div class='tiny help'>(Not case sensitive)</div>
-      </td>
-      <td><input id="clazz_class_word" live="false" name="clazz[class_word]" size="30" type="text" value="default-class"/></td>
-      </tr>
-      <tr>
-      <td></td>
-      <td>
-      </td>
-      </tr>
-      </table>
-    </form>
+  <div id="loadingStatus"></div>
+  <div id="register">
+    <h2>Register a new account</h2>
+    <div>
+      <form id="new_portal_student"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /></div>
+        <table class='form'>
+        <tr>
+        <td><label for="user">First Name:</label></td>
+        <td>
+        <input id="user_first_name" live="false" name="user[first_name]" size="20" type="text" value="" />
+        </td>
+        </tr>
+        <tr>
+        <td><label for="user">Last Name:</label></td>
+        <td><input id="user_last_name" live="false" name="user[last_name]" size="20" type="text" value="" /></td>
+        </tr>
+        <tr>
+        <td><label for="user">Password:</label></td>
+        <td><input id="user_password" live="false" name="user[password]" size="20" type="password" /></td>
+        </tr>
+        <tr>
+        <td><label for="user">Password Again:</label></td>
+        <td><input id="user_password_confirmation" live="false" name="user[password_confirmation]" size="20" type="password" /></td>
+        </tr>
+        <tr style="display: none">
+        <td>
+        <label for="clazz">Class Word:</label>
+        <div class='tiny help'>(Not case sensitive)</div>
+        </td>
+        <td><input id="clazz_class_word" live="false" name="clazz[class_word]" size="30" type="text" value="default-class"/></td>
+        </tr>
+        <tr>
+        <td></td>
+        <td>
+        </td>
+        </tr>
+        </table>
+      </form>
+    </div>
+    <input type="submit" value="Register" {{action register}} />
+    <div style="padding-top: 35px;">
+      I already have an account.
+      <input style="margin: 13px;" type="submit" value="Log in" {{action returnToLogin  target="GG.statemanager"}} />
+    </div>
   </div>
-  <input type="submit" value="Register" {{action register}} />
-  <div style="padding-top: 35px;">
-    I already have an account.
-    <input style="margin: 13px;" type="submit" value="Log in" {{action returnToLogin  target="GG.statemanager"}} />
-  </div>
 </div>
+

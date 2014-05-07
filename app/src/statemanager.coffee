@@ -101,12 +101,10 @@ GG.statemanager = Ember.StateManager.create
       GG.statemanager.send 'nextStep'
 
     showRegistration: ->
-      $('#login').hide()
       $('#register').fadeIn()
 
     returnToLogin: ->
-      $('#register').hide()
-      $('#login').fadeIn()
+      $('#register').fadeOut()
       if username = GG.sessionController.get 'registeredUsername'
         $('#username-field input').attr 'value', username
 
