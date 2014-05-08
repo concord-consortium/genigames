@@ -297,7 +297,7 @@ GG.AlleleView = Ember.View.extend GG.PointsToolTip,
       null
   ).property('revealable')
 
-GG.ChromoView = Ember.View.extend
+GG.ChromoView = Ember.View.extend GG.PointsToolTip,
   templateName: 'chromosome'
   content: null
   chromo: '1'
@@ -458,7 +458,28 @@ GG.ChromoView = Ember.View.extend
   hidden: false
   classNames: ['chromosome']
   classNameBindings: ['chromoName', 'right', 'parent', 'sisterClass', 'hidden', 'cell', 'selectable', 'selected']
-
+  toolTipText: (->
+    name = @get('biologicaChromoName')
+    sex = @get('content.sex')
+    if name is "XY"
+      if sex
+        "These are the sex chromosomes. Females have two X chromosomes. This is what makes them female."
+      else
+        "These are the sex chromosomes. Males have an X and a Y chromosome. This is what makes them male."
+    else
+      gender = if sex then "female" else "male"
+      "These are the #{gender}'s chromosomes. All drakes have 3 pairs of chromosomes: pair 1, pair 2, and the sex chromosomes.
+      Chromosomes contain genes and are made of DNA and protein."
+  ).property()
+  toolTipConfigTarget: (->
+    if @get('content.sex') then "topMiddle" else "bottomMiddle"
+  ).property()
+  toolTipConfigTooltip: (->
+    if @get('content.sex') then "bottomRight" else "topRight"
+  ).property()
+  toolTipConfigTip: (->
+    if @get('content.sex') then "bottomRight" else "topRight"
+  ).property()
 GG.ChromosomePanelView = Ember.View.extend
   templateName: 'chromosome-panel'
   hiddenBinding: 'controller.hidden'
