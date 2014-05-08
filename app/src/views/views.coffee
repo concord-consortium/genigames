@@ -215,8 +215,6 @@ GG.MotherPoolView = GG.ParentPoolView.extend GG.PointsToolTip,
 
 GG.OffspringPoolView = Ember.View.extend
   drakeSelected: (evt) ->
-    drake = evt.context
-    GG.statemanager.send 'offspringSelected', drake
 
 GG.BreedButtonView = Ember.View.extend GG.PointsToolTip,
   tagName: 'div'

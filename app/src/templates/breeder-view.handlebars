@@ -63,9 +63,7 @@
         <div id="offspring-panel">
           {{#with GG.offspringController.content}}
             <div class="offspring">
-              <a href="#" {{action "drakeSelected" this}}>
-                {{view GG.DrakeView contentBinding="this"}}
-              </a>
+              {{view GG.DrakeView contentBinding="this"}}
               <div id="offspring-buttons">
                 {{view GG.OffspringBackButtonView}}
                 {{view GG.OffspringSaveButtonView}}
