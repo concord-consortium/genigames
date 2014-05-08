@@ -551,6 +551,7 @@ GG.OffspringSaveButtonView = Ember.View.extend GG.PointsToolTip,
     !GG.powerUpController.hasPowerup("backcrossing") or GG.breedingController.get('childSavedToParents')
   ).property('GG.breedingController.childSavedToParents')
   click: ->
+    return if @get 'disabled'
     @set 'disabled', true
     GG.statemanager.send('saveOffspring')
 
