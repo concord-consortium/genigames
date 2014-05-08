@@ -143,7 +143,7 @@ html body div {
   left: 3000px;
   width: 960px;
   height: 900px;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 #breeding-background {
   position: absolute;
@@ -153,7 +153,6 @@ html body div {
   height: 900px;
   background: top left no-repeat url("../images/background_meiosis.jpg");
   background-color: #000;
-  overflow: hidden;
 }
 #breeding-background.obstacle-course {
   background: top left no-repeat url("../images/background_meiosis_obstacle.jpg");
@@ -612,6 +611,15 @@ html body div {
   left: 14px;
   right: 14px;
   text-align: center;
+}
+#trait-tracker-title {
+  position: absolute;
+  top: -34px;
+  left: 388px;
+  width: 185px;
+  height: 58px;
+  background: top left no-repeat url("../images/trait-tracker-title.png");
+  z-index: 1000;
 }
 .trait-group {
   float: left;
