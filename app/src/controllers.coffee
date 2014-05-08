@@ -620,6 +620,10 @@ GG.sessionController = Ember.Object.create
     , "json").error =>
       @set('loggingIn', false)
       @set('error', true)
+      setTimeout ->
+        if username = GG.sessionController.get 'registeredUsername'
+          $('#username-field input').attr 'value', username
+      , 50
 
   logoutPortal: ->
     @set('firstTime', true)
