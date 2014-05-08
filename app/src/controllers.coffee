@@ -152,7 +152,18 @@ GG.townsController = Ember.ArrayController.create
       town.set('completed', true)
       town.set('locked', false)
       GG.tasksController.completeAllTasksForTown town
+    if town = @get("content.#{n+1}")
+      town.set('locked', false)
     GG.logController.logEvent GG.Events.COMPLETED_TOWN, name: ("Towns through #" + n)
+
+  # the total cost of all towns unlocked so far
+  unlockedTownsCost: (->
+    cost = 0
+    for town, i in @get('content')
+      if (nextTown = @get("content.#{i+1}")) and not nextTown.get('locked')
+        cost += town.get 'completionCost'
+    cost
+  ).property('currentTown')
 
 GG.tasksController = Ember.ArrayController.create
   content    : []
@@ -1667,6 +1678,7 @@ GG.leaderboardController = Ember.ArrayController.create
     userName   = GG.userController.get 'user.nameWithLearnerId'
     return unless userName?
     reputation = GG.userController.get 'user.reputation'
+    reputation += GG.townsController.get 'unlockedTownsCost'
     # set with priority: -rep to order with highest scores at top
     classRef.child(userName).setWithPriority(reputation, -reputation)
   ).observes('GG.userController.user.reputation')
