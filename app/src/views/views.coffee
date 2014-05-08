@@ -660,7 +660,8 @@ GG.NPCSpeechBubbleView = Ember.View.extend
   ).property('content.npc.speech.text', 'isShowingEndMessage', 'isShowingThanksMessage', 'isShowingFailMessage')
   text               : (->
     currentText = @get 'currentText'
-    text = currentText.replace(/\[(.*?)\]/g, "") # rm button text
+    text = currentText.replace("<name>", GG.userController.get('user.first'))
+    text = text.replace(/\[(.*?)\]/g, "") # rm button text
     return new Handlebars.SafeString(text)
   ).property('currentText')
   continueButtonText: "Continue"
