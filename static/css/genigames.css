@@ -3277,7 +3277,6 @@ a:hover {
   position: absolute;
   left: 30px;
   top: 75px;
-  cursor: pointer;
 }
 #level {
   position: absolute;
@@ -3285,6 +3284,18 @@ a:hover {
   top: 75px;
   width: 530px;
   text-align: right;
+}
+#leaderboard {
+  position: absolute;
+  top: 34px;
+  left: 362px;
+  width: 236px;
+  height: 34px;
+  background: top left no-repeat url("../images/leaderboard-button.png");
+  cursor: pointer;
+}
+#leaderboard:hover {
+  background-position-y: 100%;
 }
 #sky {
   position: absolute;
