@@ -733,7 +733,7 @@ GG.NPCFinalMessageBubbleView = Ember.View.extend
     $('.goToWorld').mouseover()
     setTimeout (-> $('.goToWorld').qtip("hide")), 2500
 
-GG.MeiosisView = Ember.View.extend
+GG.MeiosisView = Ember.View.extend GG.PointsToolTip,
   templateName: 'meiosis'
   tagName: 'div'
   content: null
@@ -928,6 +928,22 @@ GG.MeiosisView = Ember.View.extend
           return prev + "," + side + ":" + item
     return alleles.slice(1)
   ).property('chosenGamete')
+  tooltipTarget: ".tooltip-target-2"
+  toolTipText: (->
+    if @get('chromosomesSelectable') then return ''
+    gender = if @get('content.sex') is GG.MALE then ["male","sperm"] else ["female","egg"]
+    "This is a special kind of cell in the #{gender[0]} that is about to go through the process called meiosis.
+    In #{gender[0]}s, meiosis makes four #{gender[1]} cells, each with one chromosome from each pair. "
+  ).property('content', 'chromosomesSelectable')
+  toolTipConfigTarget:  (->
+    if @get('content.sex') is GG.MALE then 'bottomRight' else 'topRight'
+  ).property('content')
+  toolTipConfigTooltip:  (->
+    if @get('content.sex') is GG.MALE then 'topLeft' else 'bottomLeft'
+  ).property('content')
+  toolTipConfigTip   :  (->
+    if @get('content.sex') is GG.MALE then 'topLeft' else 'bottomLeft'
+  ).property('content')
 
 GG.MeiosisSpeedSliderView = Ember.View.extend GG.PointsToolTip,
   tagName: 'div'

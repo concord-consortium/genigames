@@ -55,6 +55,7 @@ GG.PointsToolTip = Ember.Mixin.create
   toolTipConfigTarget: 'bottomMiddle'
   toolTipConfigTooltip: 'topLeft'
   toolTipConfigTip: 'topLeft'
+  tooltipTarget: '.tooltip-target'
 
   attributeBindings: ['tooltip']
 
@@ -71,8 +72,9 @@ GG.PointsToolTip = Ember.Mixin.create
   ).property('showToolTip', 'costPropertyName', 'toolTipText', 'GG.tooltipController.show')
 
   toggleToolTip: (->
-    if @$().find('.tooltip-target').length
-      target = @$().find('.tooltip-target')
+    targetName = @get 'tooltipTarget'
+    if @$().find(targetName).length
+      target = @$().find(targetName)
     else
       target = @$()
     if @get('showToolTip') and @get('tooltip') and (GG.tooltipController.get('show') or  @get('forceTooltip'))
