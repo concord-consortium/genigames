@@ -1,5 +1,5 @@
 {{#if view.registeredUsername}}
-<div id="registration-success" class="login-info">
+<div id="registration-success" {{bindAttr class=":login-info view.firstTime:no-error"}}>
   <h2>Registration Successful!</h2>
   <div>
     Your new username is: <h2>{{view.registeredUsername}}</h2>
