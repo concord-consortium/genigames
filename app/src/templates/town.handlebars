@@ -1,10 +1,11 @@
 <div id="topBar">
+  <div id="leaderboard" {{action "showLeaderboard" target="GG.statemanager"}}></div>
   {{#with GG.userController.user}}
     <div id="greeting">
       Hi {{first}}!
     </div>
     {{#if GG.reputationController.showTotal}}
-      <div id="reputation" {{action "showLeaderboard" target="GG.statemanager"}}>
+      <div id="reputation">
         Bank: ${{reputation}}
       </div>
     {{/if}}
