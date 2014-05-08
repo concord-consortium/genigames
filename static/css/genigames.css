@@ -1499,6 +1499,10 @@ a:hover {
 #flash-buttons img:active {
   top: -122px;
 }
+.tooltip-target {
+  width: 100%;
+  height: 100%;
+}
 /* jQuery UI - v1.10.0 - 2013-02-13
 * http://jqueryui.com
 * Includes: jquery.ui.core.css, jquery.ui.slider.css
