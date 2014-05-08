@@ -260,6 +260,7 @@ GG.tasksController = Ember.ArrayController.create
     else
       if task
         id = ": " + task.get 'name'
+        id = id.replace("Task", "Drake")
     return id
   ).property('currentTask')
 
