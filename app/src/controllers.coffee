@@ -1200,8 +1200,7 @@ GG.tutorialMessageController = Ember.Object.create
     else if @get('isFirstMeiosisSpeedControlTask') and !@get('speedTutorialShown') and @get 'bothParentsSelected'
       @set 'speedTutorialShown', true
       GG.showInfoDialog $('#meiosis-speed-slider'),
-        "Use this to control the speed of meiosis. When it's down low,
-        it goes slow. At the top, it goes fast.",
+        "Use this to control the speed of meiosis.",
         target: "leftMiddle"
         tooltip: "rightMiddle"
 
