@@ -199,11 +199,19 @@ GG.ParentPoolView = Ember.View.extend
     drake = evt.context
     GG.statemanager.send 'parentRemoved', drake
 
-GG.FatherPoolView = GG.ParentPoolView.extend
+GG.FatherPoolView = GG.ParentPoolView.extend GG.PointsToolTip,
   controllerBinding: 'GG.fatherPoolController'
+  toolTipText: "Choose from these males for breeding the target drake"
+  toolTipConfigTarget: 'bottomMiddle'
+  toolTipConfigTooltip: 'topLeft'
+  toolTipConfigTip: 'topLeft'
 
-GG.MotherPoolView = GG.ParentPoolView.extend
+GG.MotherPoolView = GG.ParentPoolView.extend GG.PointsToolTip,
   controllerBinding: 'GG.motherPoolController'
+  toolTipText: "Choose from these females for breeding the target drake"
+  toolTipConfigTarget: 'bottomMiddle'
+  toolTipConfigTooltip: 'topLeft'
+  toolTipConfigTip: 'topLeft'
 
 GG.OffspringPoolView = Ember.View.extend
   drakeSelected: (evt) ->
@@ -273,9 +281,21 @@ GG.AlleleView = Ember.View.extend GG.PointsToolTip,
     if @get('hidden') then @get('hiddenValue') else @get('value')
   ).property('value','hidden')
 
-  showToolTipBinding: 'revealable'
-  toolTipText: "Reveal hidden allele."
-  costPropertyName: 'alleleRevealed'
+  forceTooltip: true
+  toolTipText: (->
+    text = ""
+    if @get('revealable') then text += "Reveal hidden allele.<br/>"
+    if GG.tooltipController.get('show') then text += "The orange circles show you which version, or
+                                allele, of a gene is on a particular chromosome. Every gene has different versions.
+                                Together, the letter and number in the allele circle show you the version of the gene."
+    text
+  ).property('revealable', 'GG.tooltipController.show')
+  costPropertyName: (->
+    if @get('revealable')
+      'alleleRevealed'
+    else
+      null
+  ).property('revealable')
 
 GG.ChromoView = Ember.View.extend
   templateName: 'chromosome'
