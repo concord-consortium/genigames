@@ -2457,6 +2457,12 @@ a:hover {
   border: #a9a9a9 2px solid;
   border-radius: 9px;
 }
+#registration-success {
+  top: 44px;
+}
+#registration-success.no-error {
+  top: 124px;
+}
 #choose-class {
   position: absolute;
   top: 250px;
