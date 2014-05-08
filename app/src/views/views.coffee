@@ -692,11 +692,12 @@ GG.NPCHeartBubbleView = Ember.View.extend GG.PointsToolTip,
   toolTipConfigTooltip: 'bottomRight'
   toolTipConfigTip   :  'bottomRight'
   toolTipText: (->
+    taskNo = GG.tasksController.indexOf(@get('content')) + 1
+    tip = "Replay Drake #{taskNo}: #{@get('content.targetDrake')}"
     if GG.tooltipController.get 'show'
-      "Replay: #{@get('content.targetDrake')}<br>Hearts show gratitude for a correctly bred drake.
+      tip += ".<br>Hearts show gratitude for a correctly bred drake.
       If the heart is not completely full, it means you can earn more by trying again and breeding more efficiently."
-    else
-      "Replay: " + @get('content.targetDrake')
+    tip
   ).property('content', 'GG.tooltipController.show')
   forceTooltip: true
   updateHeartFill: (->
