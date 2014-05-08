@@ -1127,6 +1127,10 @@ GG.tutorialMessageController = Ember.Object.create
     return (townId is 0 and taskId is 6)
   ).property('enabled', 'GG.townsController.currentTown', 'GG.tasksController.currentTask')
 
+  isFirstBackcrossTask: (->
+    GG.tasksController.get("currentTask.powerups.0.name") is "backcrossing"
+  ).property('enabled', 'GG.townsController.currentTown', 'GG.tasksController.currentTask')
+
   traitBarTutorialShown: false
   showTraitBarTutorial: ->
     if @get('isFirstTask')  and !@get 'traitBarTutorialShown'
@@ -1267,6 +1271,17 @@ GG.tutorialMessageController = Ember.Object.create
       GG.showInfoDialog $("#offspring-buttons .offspring-buttons-use"),
         "When you have a %@1 that matches the task, hit Ready to Sell to
         end breeding and sell the %@1 to Athena.".fmt(Ember.I18n.t('drake'))
+        target: "leftMiddle"
+        tooltip: "rightMiddle"
+
+  backcrossButtonTutorialShown: false
+  showBackcrossButtonTutorial: ->
+    if @get('isFirstBackcrossTask') and !@get('backcrossButtonTutorialShown')
+      @set 'backcrossButtonTutorialShown', true
+      GG.showInfoDialog $("#offspring-buttons .offspring-buttons-save"),
+        "You can now Backcross using any %@1 you breed. Click this button to
+        put the current offspring %@1 into a parent pool, then go back and
+        select it to breed.".fmt(Ember.I18n.t('drake'))
         target: "leftMiddle"
         tooltip: "rightMiddle"
 

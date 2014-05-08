@@ -408,6 +408,7 @@ GG.StateInTask = Ember.State.extend
         $('#offspring-panel').animate({left: -76},300,"easeOutCubic")
         setTimeout ->
           GG.tutorialMessageController.showFinishButtonTutorial()
+          GG.tutorialMessageController.showBackcrossButtonTutorial()
         , 1200
 
       submitOffspring: (manager) ->
