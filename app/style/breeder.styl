@@ -5,13 +5,12 @@ dark-text-color  = #333
 
 #breeding-apparatus
   absolute: top left 3000px width 960px height 900px
-  overflow: hidden
+  overflow-x: hidden
 
 #breeding-background
   absolute: top 120px left width 1300px height 900px
   background: top left no-repeat url('../images/background_meiosis.jpg')
   background-color: black
-  overflow: hidden
   &.obstacle-course
     background: top left no-repeat url('../images/background_meiosis_obstacle.jpg')
 
@@ -279,6 +278,11 @@ chromosome(toppx)
   .completion-buttons
     absolute: top 240px left 14px right 14px
     text-align: center
+
+#trait-tracker-title
+  absolute: top -34px left 388px width 185px height 58px
+  background: top left no-repeat url('../images/trait-tracker-title.png')
+  z-index: 1000
 
 .trait-group
   float: left
