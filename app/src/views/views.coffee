@@ -521,7 +521,7 @@ GG.EggView = Ember.View.extend GG.Animation,
 
 GG.OffspringBackButtonView = Ember.View.extend GG.PointsToolTip,
   tagName: 'div'
-  toolTipText: "Pick new parents"
+  toolTipText: "Go back and select different parents. This gives you a chance to get different alleles."
   classNames : 'offspring-buttons-back'
   click: ->
     GG.statemanager.send('selectParents')
