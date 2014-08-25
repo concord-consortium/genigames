@@ -3480,9 +3480,10 @@ a:hover {
 .leader-board {
   display: none;
   position: relative;
-  top: 30px;
+  top: 5px;
   width: 270px;
   padding: 10px;
+  margin-top: 25px;
   margin-left: auto;
   margin-right: auto;
   z-index: 1000;
@@ -3514,6 +3515,12 @@ a:hover {
 }
 .leader-board div .score {
   float: right;
+}
+.leader-board-notice {
+  width: 300px;
+}
+.leader-board-notice .name {
+  font-weight: bold;
 }
 #powerup-popup {
   display: none;
