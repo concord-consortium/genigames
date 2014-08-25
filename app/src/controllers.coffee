@@ -27,9 +27,13 @@ GG.userController = Ember.Object.create
       @set('state', data)
       @get('user').restoreState()
       @set('loaded', true)
+      if (@get('user.codeName') == null)
+        @get('user').set 'codeName', GG.codeNameGenerator.generate()
     ).error =>
       @set('state', null)
       @set('loaded', true)
+      if (@get('user.codeName') == null)
+        @get('user').set 'codeName', GG.codeNameGenerator.generate()
   ).observes('learnerId')
 
   addReputation: (amt) ->
@@ -1675,7 +1679,7 @@ GG.leaderboardController = Ember.ArrayController.create
     classRef = @get('fbClassRef')
     return unless classRef?
 
-    userName   = GG.userController.get 'user.nameWithLearnerId'
+    userName   = GG.userController.get 'user.codeNameWithLearnerId'
     return unless userName?
     reputation = GG.userController.get 'user.reputation'
     reputation += GG.townsController.get 'unlockedTownsCost'

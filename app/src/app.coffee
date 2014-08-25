@@ -23,6 +23,7 @@ GG.gamedWorld     = "game"
 GG.baselineWorld  = "baseline"
 GG.worldName      = GG.gamedWorld
 
+minispade.require 'genigames/codename'
 minispade.require 'genigames/helpers'
 minispade.require 'genigames/models'
 minispade.require 'genigames/controllers'

@@ -9,6 +9,7 @@ GG.User = Ember.Object.extend
   reputation: 0
   skipSave: false
   powerups: []
+  codeName: null
 
   _idBinding: 'login'
   name: (->
@@ -18,6 +19,10 @@ GG.User = Ember.Object.extend
   nameWithLearnerId: (->
     return "#{@get('name')} (#{GG.userController.get('learnerId')})"
   ).property('first', 'last', 'GG.userController.learnerId')
+
+  codeNameWithLearnerId: (->
+    return "#{@get('codeName')} (#{GG.userController.get('learnerId')})"
+  ).property('codeName', 'GG.userController.learnerId')
 
   hasCohort: (cohort)->
     @get('cohorts').indexOf(cohort) != -1
@@ -33,7 +38,7 @@ GG.User = Ember.Object.extend
     @set 'skipSave', false
 
   serialize: ->
-    {reputation: @get('reputation'), powerups: @get('powerups')}
+    {reputation: @get('reputation'), powerups: @get('powerups'), codeName: @get('codeName')}
 
   triggerSave: (->
     GG.userController.saveState('user', this) unless @get 'skipSave'
