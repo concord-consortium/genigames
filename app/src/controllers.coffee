@@ -32,8 +32,6 @@ GG.userController = Ember.Object.create
     ).error =>
       @set('state', null)
       @set('loaded', true)
-      if (@get('user.codeName') == null)
-        @get('user').set 'codeName', GG.codeNameGenerator.generate()
   ).observes('learnerId')
 
   addReputation: (amt) ->
