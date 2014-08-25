@@ -1678,7 +1678,7 @@ GG.leaderboardController = Ember.ArrayController.create
     return unless classRef?
 
     userName   = GG.userController.get 'user.codeNameWithLearnerId'
-    return unless userName?
+    return unless (userName? && !~userName.indexOf("null"))
     reputation = GG.userController.get 'user.reputation'
     reputation += GG.townsController.get 'unlockedTownsCost'
     # set with priority: -rep to order with highest scores at top
