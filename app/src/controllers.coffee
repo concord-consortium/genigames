@@ -1611,7 +1611,7 @@ GG.leaderboardController = Ember.ArrayController.create
   fbClassCreator: (->
     classWord  = GG.userController.get 'classWord'
     learnerId  = GG.userController.get 'learnerId'
-    userName   = GG.userController.get 'user.nameWithLearnerId'
+    userName   = GG.userController.get 'user.codeNameWithLearnerId'
 
     if (not (classWord? and learnerId? and userName?)) or ~userName.indexOf("(null)")
       @set 'fbClassRef', null
@@ -1642,7 +1642,7 @@ GG.leaderboardController = Ember.ArrayController.create
         GG.logController.logEvent "Using FireBase child node #{classWord}"
         fbRef.child(classWord).child(userName).setWithPriority(reputation, -reputation)
         @set 'fbClassRef', fbRef.child(classWord)
-  ).observes('GG.userController.classWord', 'GG.userController.learnerId', 'GG.userController.user.nameWithLearnerId')
+  ).observes('GG.userController.classWord', 'GG.userController.learnerId', 'GG.userController.user.codeNameWithLearnerId')
 
   fbClassObserver: (->
     changedCallback = (scoreSnapshot, prevScoreName) =>
