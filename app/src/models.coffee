@@ -42,7 +42,7 @@ GG.User = Ember.Object.extend
 
   triggerSave: (->
     GG.userController.saveState('user', this) unless @get 'skipSave'
-  ).observes('reputation', 'powerups.@each')
+  ).observes('reputation', 'powerups.@each', 'codeName')
 
 GG.Town = Ember.Object.extend
   _id: null
