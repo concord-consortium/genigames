@@ -66,6 +66,7 @@ git checkout $DEPLOY_BRANCH
 git pull origin $DEPLOY_BRANCH
 rm -rf static
 cp -r build static
+rm -f .git/index.lock
 
 git add -A static
 git commit -m "$COMMIT"
