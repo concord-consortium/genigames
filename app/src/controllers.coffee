@@ -165,7 +165,7 @@ GG.townsController = Ember.ArrayController.create
       if (nextTown = @get("content.#{i+1}")) and not nextTown.get('locked')
         cost += town.get 'completionCost'
     cost
-  ).property('currentTown')
+  ).property('currentTown', 'GG.userController.user')
 
 GG.tasksController = Ember.ArrayController.create
   content    : []
