@@ -290,6 +290,7 @@ GG.statemanager = Ember.StateManager.create
         target: "rightMiddle"
         tooltip: "leftMiddle"
         hideButton: true
+        maxWidth: 305
 
   hideLeaderboard: ->
     $('.leader-board').fadeOut()
