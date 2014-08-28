@@ -3516,12 +3516,6 @@ a:hover {
 .leader-board div .score {
   float: right;
 }
-.leader-board-notice {
-  width: 300px;
-}
-.leader-board-notice .name {
-  font-weight: bold;
-}
 #powerup-popup {
   display: none;
   position: relative;
