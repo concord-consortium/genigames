@@ -294,6 +294,7 @@ GG.statemanager = Ember.StateManager.create
 
   hideLeaderboard: ->
     $('.leader-board').fadeOut()
+    GG.hideInfoDialogs()
 
   toggleHelpMode: ->
     showing = GG.tooltipController.get 'show'
