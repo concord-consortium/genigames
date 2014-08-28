@@ -284,6 +284,12 @@ GG.statemanager = Ember.StateManager.create
 
   showLeaderboard: ->
     $('.leader-board').fadeToggle()
+    GG.showInfoDialog $('.is-user'),
+        "This is you!<br/><br/> The Dragon Breeder's Guild
+        has given you the code name <strong>%@1</strong>.".fmt(GG.userController.get('user.codeName')),
+        target: "rightMiddle"
+        tooltip: "leftMiddle"
+        hideButton: true
 
   hideLeaderboard: ->
     $('.leader-board').fadeOut()
