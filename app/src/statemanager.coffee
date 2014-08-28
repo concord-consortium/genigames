@@ -250,6 +250,7 @@ GG.statemanager = Ember.StateManager.create
 
   loggingOut: Ember.State.create
     enter: ->
+      GG.hideInfoDialogs()
       GG.sessionController.logoutPortal()
 
   inWorld: GG.StateInWorld,
