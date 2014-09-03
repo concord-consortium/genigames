@@ -8,7 +8,7 @@ GG.userController = Ember.Object.create
   learnerDataUrl: (->
     lid = @get('learnerId')
     if lid?
-      '/portal/dataservice/bucket_loggers/learner/' + lid + '/bucket_contents.bundle'
+      GG.PORTAL_URL + '/dataservice/bucket_loggers/learner/' + lid + '/bucket_contents.bundle'
     else
       null
   ).property('learnerId')
@@ -512,7 +512,7 @@ GG.logController = Ember.Object.create
   learnerLogUrl: (->
     lid = @get('learnerId')
     if lid?
-      '/portal/dataservice/bucket_loggers/learner/' + lid + '/bucket_log_items.bundle'
+      GG.PORTAL_URL + '/dataservice/bucket_loggers/learner/' + lid + '/bucket_log_items.bundle'
     else
       null
   ).property('learnerId')
@@ -522,7 +522,7 @@ GG.logController = Ember.Object.create
       @processEventQueue()
   ).observes('learnerLogUrl')
 
-  syncTime: new SyncTime('/portal/time')
+  syncTime: new SyncTime(GG.PORTAL_URL + '/time')
   session: null
   eventQueue: []
   eventQueueInProgress: []
@@ -588,9 +588,9 @@ GG.logController = Ember.Object.create
     S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4()
 
 GG.sessionController = Ember.Object.create
-  checkTokenUrl: '/portal/verify_cc_token'
-  loginUrl:      '/portal/remote_login'
-  logoutUrl:     '/portal/remote_logout'
+  checkTokenUrl: GG.PORTAL_URL + '/verify_cc_token'
+  loginUrl:      GG.PORTAL_URL + '/remote_login'
+  logoutUrl:     GG.PORTAL_URL + '/remote_logout'
   userBinding:   'GG.userController.user'
   loadedBinding: 'GG.userController.loaded'
   error: false

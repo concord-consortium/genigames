@@ -137,7 +137,7 @@ GG.statemanager = Ember.StateManager.create
             $('#login-permission-denied').show()
             setTimeout ->
               console.log("Forwarding to portal...")
-              window.location = "/portal/"
+              window.location = GG.PORTAL_URL
             , 3000
 
       if GG.userController.get('loaded')

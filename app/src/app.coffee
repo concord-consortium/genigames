@@ -19,6 +19,8 @@ GG.MALE   = 0
 GG.FEMALE = 1
 GG.imageNameStart = "/resources/drakes/images/"
 
+GG.PORTAL_URL = "http://learn.staging.concord.org"
+
 GG.gamedWorld     = "game"
 GG.baselineWorld  = "baseline"
 GG.worldName      = GG.gamedWorld
