@@ -615,29 +615,41 @@ GG.sessionController = Ember.Object.create
   ).property('user')
 
   checkCCAuthToken: ->
-    $.get(@checkTokenUrl, (data) =>
-      if data.error?
-        @set('error', true)
+    $.ajax
+      type: "GET"
+      url: @checkTokenUrl
+      xhrFields:
+        withCredentials: true
+      success: (data) =>
+        if data.error?
+          @set('error', true)
+          @set('loggingIn', false)
+        else
+          user = GG.User.create data
+          @set('user', user)
+          GG.statemanager.send 'successfulLogin'
+      error: =>
         @set('loggingIn', false)
-      else
-        user = GG.User.create data
-        @set('user', user)
-        GG.statemanager.send 'successfulLogin'
-    , "json").error =>
-      @set('loggingIn', false)
-      @set('error', true)
+        @set('error', true)
+        setTimeout ->
+          if username = GG.sessionController.get 'registeredUsername'
+            $('#username-field input').attr 'value', username
+        , 50
 
   loginPortal: (username, password)->
     @set('firstTime', false)
-    $.post(@loginUrl, {login: username, password: password}, (data) =>
-      @checkCCAuthToken()
-    , "json").error =>
-      @set('loggingIn', false)
-      @set('error', true)
-      setTimeout ->
-        if username = GG.sessionController.get 'registeredUsername'
-          $('#username-field input').attr 'value', username
-      , 50
+    $.ajax
+      type: "POST"
+      url: @loginUrl
+      data: "login=#{username}&password=#{password}"
+      dataType: "application/x-www-form-urlencoded"
+      xhrFields:
+        withCredentials: true
+      success: (data) =>
+        @checkCCAuthToken()
+      error: =>
+        # unsure why we get 'error' even when request returns 200
+        @checkCCAuthToken()
 
   logoutPortal: ->
     @set('firstTime', true)
