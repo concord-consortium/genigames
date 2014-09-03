@@ -661,8 +661,13 @@ GG.sessionController = Ember.Object.create
     GG.tasksController.set('content',[])
     GG.townsController.set('content',[])
     GG.leaderboardController.set('content',[])
-    $.post @logoutUrl, {}, (data) ->
-      GG.statemanager.transitionTo 'loggingIn'
+    $.ajax
+      type: "POST"
+      url: @logoutUrl
+      xhrFields:
+        withCredentials: true
+      complete: =>
+        GG.statemanager.transitionTo 'loggingIn'
 
 GG.actionCostsController = Ember.Object.create
   getCost: (action) ->
