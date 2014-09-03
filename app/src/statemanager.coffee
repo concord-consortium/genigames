@@ -149,14 +149,14 @@ GG.statemanager = Ember.StateManager.create
 
     checkCohorts: ->
       u = GG.sessionController.get('user')
-      if GG.worldName is "baseline"
-        if not u.hasCohort("baseline")
-          return {approved: false, reason: GG.Events.USER_DENIED_BASELINE}
-      else if GG.worldName is "tournament"
-        if not u.hasCohort("tournament")
-          return {approved: false, reason: GG.Events.USER_DENIED_TOURNAMENT}
-      else if not u.hasCohort("gamed")
-        return {approved: false, reason: GG.Events.USER_DENIED_GAME}
+      # if GG.worldName is "baseline"
+      #   if not u.hasCohort("baseline")
+      #     return {approved: false, reason: GG.Events.USER_DENIED_BASELINE}
+      # else if GG.worldName is "tournament"
+      #   if not u.hasCohort("tournament")
+      #     return {approved: false, reason: GG.Events.USER_DENIED_TOURNAMENT}
+      # else if not u.hasCohort("gamed")
+      #   return {approved: false, reason: GG.Events.USER_DENIED_GAME}
 
       return {approved: true}
 
