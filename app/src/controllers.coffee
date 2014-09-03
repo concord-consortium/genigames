@@ -568,8 +568,6 @@ GG.logController = Ember.Object.create
       event       : evt
       parameters  : params
 
-    # for a quick demo, use window.socket
-    # socket?.emit 'log', logData
     @persistEvent logData
 
   persistEvent: (evt)->

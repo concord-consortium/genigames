@@ -138,10 +138,3 @@ $ ->
   GG.universeView.appendTo('#container')
 
   GG.statemanager.transitionTo 'loggingIn'
-
-  # socket.io hello world stuff
-  try
-    socket = window.socket = io.connect "#{location.protocol}//#{location.host}/"
-    socket.on 'news', (data) ->
-      console.log data
-      socket.emit 'my other event', my: 'data'
