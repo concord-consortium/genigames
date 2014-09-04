@@ -2454,10 +2454,19 @@ a:hover {
   display: none;
   position: absolute;
   top: 219px;
-  left: 340px;
-  width: 290px;
-  height: 228px;
+  left: 315px;
+  width: 340px;
+  height: 250px;
   background-color: #fff;
+  border: 2px solid #808080;
+}
+#register td {
+  padding: 1px;
+  vertical-align: middle;
+}
+#register .register-button {
+  margin-top: 10px;
+  font-size: 1.5em;
 }
 .login-info {
   z-index: 100;
@@ -2490,6 +2499,12 @@ a:hover {
   width: 200px;
 }
 #login-error {
+  height: 50px;
+  top: 140px;
+  color: #f00;
+  font-weight: bold;
+}
+#registration-error {
   height: 50px;
   top: 140px;
   color: #f00;
