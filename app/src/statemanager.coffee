@@ -105,16 +105,42 @@ GG.statemanager = Ember.StateManager.create
 
     returnToLogin: ->
       $('#register').fadeOut()
+      $('#register .classWordButton').show()
+      $('#register .classWord').hide()
       if username = GG.sessionController.get 'registeredUsername'
         $('#username-field input').attr 'value', username
 
+    showClassWord: ->
+      $('#register .classWordButton').hide()
+      $('#register .classWord').fadeIn()
+
     register: (manager) ->
-      $.post('/portal/portal/students', $('#new_portal_student').serialize()).always (ret) ->
-        match = ret.responseText.match(/with the username <b>(.*)<\/b>/)
-        if match and match.length
-          username = match[1]
+      console.log("register!")
+      if $('#user_password').val().length < 6
+        GG.sessionController.set 'registrationErrorMessage', "Password must be at least 6 characters."
+        GG.sessionController.set 'registrationError', true
+        return
+      else if $('#user_password').val() != $('#password_confirmation').val()
+        GG.sessionController.set 'registrationErrorMessage', "Passwords do not match."
+        GG.sessionController.set 'registrationError', true
+        return
+      else
+        GG.sessionController.set 'registrationError', false
+
+      data = $('#new_portal_student').serializeObject()
+      if data.class_word == null or data.class_word == ""
+        data.class_word = GG.DEFAULT_CLASS_WORD
+      $.post(GG.PORTAL_URL + '/api/v1/students', data).always (ret) ->
+        if ret.login
+          username = ret.login
+          GG.sessionController.set 'error', false
           GG.sessionController.set 'registeredUsername', username
           manager.send 'returnToLogin'
+        else if ret.responseText && message = JSON.parse(ret.responseText).message
+          error = ""
+          error += (line + "<br/>") for line in message[section] for section of message
+          GG.sessionController.set 'registrationErrorMessage', error
+          GG.sessionController.set 'registrationError', true
 
 
     nextStep: ->

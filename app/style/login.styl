@@ -43,8 +43,15 @@ login-style()
 
 #register
   display: none
-  absolute: top 219px left 340px width 290px height 228px
+  absolute: top 219px left 315px width 340px height 250px
   background-color: white
+  border: 2px solid gray
+  td
+    padding: 1px
+    vertical-align: middle
+  .register-button
+    margin-top: 10px
+    font-size: 1.5em;
 
 .login-info
   z-index: 100;
@@ -70,6 +77,12 @@ login-style()
   width: 200px
 
 #login-error
+  height: 50px
+  top: 140px
+  color: red
+  font-weight: bold
+
+#registration-error
   height: 50px
   top: 140px
   color: red

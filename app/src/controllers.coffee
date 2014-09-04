@@ -594,6 +594,8 @@ GG.sessionController = Ember.Object.create
   error: false
   loggingIn: false
   firstTime: true
+  registrationError: false
+  registrationErrorMessage: null
   preloadingComplete: false
   waitingForPreload: false
   registeredUsername: null

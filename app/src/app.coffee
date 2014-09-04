@@ -21,6 +21,8 @@ GG.imageNameStart = "/resources/drakes/images/"
 
 GG.PORTAL_URL = "http://learn.staging.concord.org"
 
+GG.DEFAULT_CLASS_WORD = "default-class"
+
 GG.gamedWorld     = "game"
 GG.baselineWorld  = "baseline"
 GG.worldName      = GG.gamedWorld
@@ -56,6 +58,19 @@ minispade.require 'genigames/templates/trait-selection'
 # not just part
 $.expr[":"].onlyContains = (obj, index, meta, stack)->
   return (obj.textContent || obj.innerText || $(obj).text() || "").replace(/^\s+/, '').replace(/\s+$/,'') is meta[3]
+
+$.fn.serializeObject = ->
+  o = {}
+  a = this.serializeArray()
+  $.each(a, ->
+    if (o[this.name] != undefined)
+      if (!o[this.name].push)
+        o[this.name] = [o[this.name]]
+      o[this.name].push(this.value || '')
+    else
+      o[this.name] = this.value || ''
+  )
+  return o;
 
 Ember.Handlebars.registerHelper 'meiosisDefaults', (path, options) ->
   options.hash.gametesBinding = "view.gametes"
