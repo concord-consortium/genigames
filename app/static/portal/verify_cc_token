@@ -3,5 +3,6 @@
   "first": "student",
   "last": "user",
   "class_words": ["foobar"],
-  "teacher": false
+  "teacher": false,
+  "cohorts": ["gamed", "baseline", "tournament"]
 }
