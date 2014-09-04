@@ -154,10 +154,10 @@ GG.StateInTown = Ember.State.extend
       , 2500
 
       window.flashAnimationComplete = ->
-        $("#flash-buttons").fadeIn(2000)
+        $(".flash-buttons").fadeIn(2000)
 
     replay: ->
-      $("#flash-buttons").fadeOut()
+      $(".flash-buttons").fadeOut()
       document.getElementById('completionAnimation17-flash').replayFlashAnimation()
 
 

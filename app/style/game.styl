@@ -99,10 +99,13 @@
 #finalIFrame
   relative: top left width 100% height 100%
 
-#flash-buttons
+.flash-buttons
   absolute: top 409px left 287px height 60px
   overflow: hidden
   display: none
+  &.show
+    display: block
+    left: 365px
   img
     position: relative
     cursor: pointer

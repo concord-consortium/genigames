@@ -103,6 +103,10 @@
         <param name="salign" value="" />
         <param name="allowScriptAccess" value="sameDomain" />
       <!--<![endif]-->
+        <img src="/images/flash-ending-static.png" alt="Static ending image" style="width: 100%"/>
+        <div class="flash-buttons show">
+          <span class="flash-button-back-to-town" {{action "goToWorld" target="GG.statemanager"}}><img src="images/flash-button-back-to-town.png"/></span>
+        </div>
         <a href="http://www.adobe.com/go/getflash">
           <img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash player" />
         </a>
@@ -111,8 +115,8 @@
       <!--<![endif]-->
     </object>
   </div>
-  <div id="flash-buttons">
-    <span id="flash-button-back-to-town" {{action "goToWorld" target="GG.statemanager"}}><img src="images/flash-button-back-to-town.png"/></span>
-    <span id="flash-button-replay" {{action "replay" target="GG.statemanager"}}><img src="images/flash-button-replay.png"/></span>
+  <div class="flash-buttons">
+    <span class="flash-button-back-to-town" {{action "goToWorld" target="GG.statemanager"}}><img src="images/flash-button-back-to-town.png"/></span>
+    <span class="flash-button-replay" {{action "replay" target="GG.statemanager"}}><img src="images/flash-button-replay.png"/></span>
   </div>
 </div>
