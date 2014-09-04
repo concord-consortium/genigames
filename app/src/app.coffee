@@ -19,9 +19,9 @@ GG.MALE   = 0
 GG.FEMALE = 1
 GG.imageNameStart = "/resources/drakes/images/"
 
-GG.PORTAL_URL = "http://learn.staging.concord.org"
+GG.PORTAL_URL = "http://learn.concord.org"
 
-GG.DEFAULT_CLASS_WORD = "default-class"
+GG.DEFAULT_CLASS_WORD = "default-genigames-class"
 
 GG.gamedWorld     = "game"
 GG.baselineWorld  = "baseline"
