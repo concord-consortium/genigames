@@ -12,11 +12,15 @@ GG.StateInTown = Ember.State.extend
       @set 'justCompletedTask', null
       @set 'lastSuccess', null
 
-  enter: ->
+  enter: (manager) ->
     GG.universeView.setCurrentView 'town'
+    GG.hideInfoDialogs()
+    manager.send 'hideLeaderboard'
     $('#town').fadeIn(1000)
 
-  exit: ->
+  exit: (manager) ->
+    GG.hideInfoDialogs()
+    manager.send 'hideLeaderboard'
     $('#town').fadeOut(1000)
 
   goToWorld: (manager) ->
@@ -28,6 +32,7 @@ GG.StateInTown = Ember.State.extend
     # will not have been set yet. Note: "setup" method name may change in later v's of Ember
     setup: (manager) ->
       GG.tasksController.clearCurrentTask()
+      manager.send 'hideLeaderboard'
       task.set('showQuestionBubble', false) for task in GG.tasksController.content
       task.set('showSpeechBubble', false) for task in GG.tasksController.content
 
@@ -116,6 +121,7 @@ GG.StateInTown = Ember.State.extend
 
   npcShowingTask: Ember.State.create
     accept: (manager, task) ->
+      manager.send 'hideLeaderboard'
       GG.tasksController.taskAccepted task
     decline: (manager) ->
       manager.transitionTo 'npcsWaiting'

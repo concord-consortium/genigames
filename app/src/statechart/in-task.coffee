@@ -11,7 +11,9 @@ GG.StateInTask = Ember.State.extend
   showingBreeder: Ember.State.create
     initialState: 'powerUp'
 
-    enter: ->
+    enter: (manager) ->
+      manager.send 'hideLeaderboard'
+      GG.hideInfoDialogs()
       $('#task-list').hide()
       $(".characteristic").removeClass("selected")
       if not GG.baselineController.get 'isBaseline'
@@ -33,6 +35,7 @@ GG.StateInTask = Ember.State.extend
 
     exit: (manager) ->
       manager.send 'hideLeaderboard'
+      GG.hideInfoDialogs()
       GG.breedingController.set 'isShowingBreeder', false
       GG.breedingController.set 'isShowingBreeder2', false
       # clear offspring
@@ -486,6 +489,8 @@ GG.StateInTask = Ember.State.extend
         startObstacle()
 
       exit: (manager)->
+        GG.hideInfoDialogs()
+        manager.send 'hideLeaderboard'
         GG.obstacleCourseController.set('dialogVisible', false)
         $('#obstacle-course-dialog').hide()
         $('#modal-backdrop-fade').hide()
