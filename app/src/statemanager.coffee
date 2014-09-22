@@ -115,7 +115,6 @@ GG.statemanager = Ember.StateManager.create
       $('#register .classWord').fadeIn()
 
     register: (manager) ->
-      console.log("register!")
       if $('#user_password').val().length < 6
         GG.sessionController.set 'registrationErrorMessage', "Password must be at least 6 characters."
         GG.sessionController.set 'registrationError', true
@@ -127,10 +126,13 @@ GG.statemanager = Ember.StateManager.create
       else
         GG.sessionController.set 'registrationError', false
 
+      $('.register-button').prop('disabled', true)
+
       data = $('#new_portal_student').serializeObject()
       if data.class_word == null or data.class_word == ""
         data.class_word = GG.DEFAULT_CLASS_WORD
       $.post(GG.PORTAL_URL + '/api/v1/students', data).always (ret) ->
+        $('.register-button').prop('disabled', false)
         if ret.login
           username = ret.login
           GG.sessionController.set 'error', false
